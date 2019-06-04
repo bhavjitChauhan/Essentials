@@ -1,5 +1,5 @@
 // jshint ignore: start
-const VERSION = '0.0.4';
+const VERSION = '0.1.0';
 
 console.time('Import Essentials Library');
 // Variables {
@@ -18,50 +18,6 @@ const fonts = {
     'SECONDARY_FONT': createFont('sans-serif'),
     'MONO_FONT': createFont('Consolas')
 };
-// }
-// Events {
-const Mouse = {
-    pressed: false,
-    released: false,
-    dragged: false,
-    update: function() {
-        this.pressed = false;
-        this.released = false;
-    }
-};
-_.extend(Mouse, Backbone.Events)
-mousePressed = function() {
-	Mouse.trigger('mousepress');
-    Mouse.pressed = true;
-};
-mouseDragged = function() {
-	Mouse.trigger('mousedrag');
-    Mouse.dragged = true;
-};
-mouseReleased = function() {
-	Mouse.trigger('mouserelease');
-    Mouse.released = true;
-    Mouse.dragged = false;
-};
-const Key = {
-    pressed: false,
-    released: true,
-    code: null,
-    update: function() {
-        this.pressed = false;
-        this.released = false;
-    }
-};
-_.extend(Key, Backbone.Events)
-keyPressed = function() {
-	Key.trigger('keypress');
-    Key.pressed = true;
-    Key.code = keyCode;
-}
-keyReleased = function() {
-	Key.trigger('keyrelease');
-    Key.released = true;
-}
 // }
 // Functions {
 /**
@@ -263,6 +219,50 @@ const printHTML = function(data) {
     latestLog.innerHTML = data;
 };
 // }
+// Events {
+const Mouse = {
+    pressed: false,
+    released: false,
+    dragged: false,
+    update: function() {
+        this.pressed = false;
+        this.released = false;
+    }
+};
+_.extend(Mouse, Backbone.Events)
+mousePressed = function() {
+	Mouse.trigger('mousepress');
+    Mouse.pressed = true;
+};
+mouseDragged = function() {
+	Mouse.trigger('mousedrag');
+    Mouse.dragged = true;
+};
+mouseReleased = function() {
+	Mouse.trigger('mouserelease');
+    Mouse.released = true;
+    Mouse.dragged = false;
+};
+const Key = {
+    pressed: false,
+    released: true,
+    code: null,
+    update: function() {
+        this.pressed = false;
+        this.released = false;
+    }
+};
+_.extend(Key, Backbone.Events)
+keyPressed = function() {
+	Key.trigger('keypress');
+    Key.pressed = true;
+    Key.code = keyCode;
+}
+keyReleased = function() {
+	Key.trigger('keyrelease');
+    Key.released = true;
+}
+// }
 // Exporting {
 // Using BMS, see www.khanacademy.org/cs/i/6070976254115840
 const bootstrapper = function(callback) {
@@ -275,7 +275,7 @@ const bootstrapper = function(callback) {
             (this, callback);
     }.bind(this);
     jsonp.setAttribute('src',
-        'https://www.khanacademy.org/api/labs/scratchpads/5870919682981888?callback=document.BMS_bootstrap_loader'
+        'https://www.khanacademy.org/api/labs/scratchpads/5522928629252096?callback=document.BMS_bootstrap_loader'
     );
     doc.head.appendChild(jsonp);
 };
@@ -297,7 +297,7 @@ bootstrapper({
             fill(0);
             textAlign(CENTER);
             textFont(createFont('monospace'), 15);
-            text(NAME + '\nVersion ' + VERSION, width / 2, height / 2);
+            text('Essentials Library' + '\nVersion ' + VERSION, width / 2, height / 2);
         } else {
             // We don't need to define modules as we can just assign them to one object.
             // // Dynamically define imported functions
