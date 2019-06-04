@@ -78,7 +78,7 @@ const bootstrapper = function(callback) {
         delete doc.BMS_bootstrap_loader; jsonp.parentNode.removeChild(jsonp);
         Object.constructor('importer_context', 'export_module', data.revision.code)(this, callback);
     }.bind(this);
-    jsonp.setAttribute('src', 'https://www.khanacademy.org/api/labs/scratchpads/5870919682981888?callback=document.BMS_bootstrap_loader');
+    jsonp.setAttribute('src', 'https://www.khanacademy.org/api/labs/scratchpads/5522928629252096?callback=document.BMS_bootstrap_loader');
     doc.head.appendChild(jsonp);
 };
 
