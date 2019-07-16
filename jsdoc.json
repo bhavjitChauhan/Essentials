@@ -1,0 +1,11 @@
+{
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "opts": {
+        "template": "node_modules/docdash"
+    },
+    "docdash": {
+        "search": true
+    }
+}
