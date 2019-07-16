@@ -1,0 +1,26 @@
+{
+  "name": "essentials",
+  "version": "0.1.1",
+  "description": "JavaScript library for Khan Academy containing useful functions and variables.",
+  "main": "library.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "generate-docs": "node_modules\\.bin\\jsdoc -r src -R README.md -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhavjitChauhan/Essentials.git"
+  },
+  "author": "Bhavjit Chauhan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bhavjitChauhan/Essentials/issues"
+  },
+  "homepage": "https://github.com/bhavjitChauhan/Essentials#readme",
+  "devDependencies": {
+    "docdash": "^1.1.1",
+    "jsdoc": "^3.6.3"
+  }
+}
