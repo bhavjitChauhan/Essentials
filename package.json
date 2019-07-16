@@ -8,7 +8,7 @@
   },
   "scripts": {
     "doc": "node_modules/.bin/jsdoc -c jsdoc.json",
-    "docmd": "node_modules/.bin/jsdoc2md src/*.js src/ka_modules/*.js > docs/docs.md"
+    "docmd": "node_modules/.bin/jsdoc2md src/*.js src/ka_modules/*.js > Essentials.wiki/Essentials-Documentation.md"
   },
   "repository": {
     "type": "git",
