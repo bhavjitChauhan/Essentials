@@ -1,10 +1,11 @@
 // jshint ignore: start
+
 const VERSION = '0.1.1';
 
 // Variables {
 // Colors
 /**
- * Object containing basic color values
+ * Object containing common color values
  * 
  * @constant
  * @type {object}
