@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "generate-docs": "node_modules\\.bin\\jsdoc -r src -R README.md -c jsdoc.json"
+    "doc": "node_modules\\.bin\\jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
