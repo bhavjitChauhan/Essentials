@@ -5,10 +5,14 @@ const VERSION = '0.1.1';
 // Variables {
 // Colors
 /**
- * Object containing common color values
+ * Object containing common color values.
  * 
  * @constant
  * @type {object}
+ * 
+ * @example
+ * stroke(WHITE);
+ * fill(RED);
  */
 const colors = {
     'TRANSPARENT': color(0, 0),
@@ -20,10 +24,13 @@ const colors = {
 };
 // Fonts
 /**
- * Object containing basic fonts
+ * Object containing basic fonts.
  * 
  * @constant
  * @type {object}
+ * 
+ * @example
+ * textFont(MONO_FONT);
  */
 const fonts = {
     'PRIMARY_FONT': createFont('sans-serif'),
@@ -33,11 +40,20 @@ const fonts = {
 // }
 // Functions {
 /**
- * Capitalizes the first letter of each word of string
+ * @summary
+ * The `toUpperCase()` method returns the calling string value converted to title case.
+ * 
+ * @description
+ * The `toUpperCase()` method returns the value of the string converted to title case. This method does not affect the value of the string itself since JavaScript strings are immutable.
  * 
  * @param {string}  str  String to be converted
  * 
- * @returns {string}  String in title case convention
+ * @returns {string}  A new string representing the calling string converted to title case.
+ * 
+ * @example
+ * let title = 'essentials library';
+ * console.log(title.toTitleCase());
+ * // expected output: "Essentials Library"
  */
 String.prototype.toTitleCase = function() {
     return this.replace(/\w\S*/g, function(word) {
@@ -46,39 +62,71 @@ String.prototype.toTitleCase = function() {
     });
 };
 /**
- * Checks if condition passes is true or false
+ * Writes an error message to the console if the assertion is false. If the assertion is true, nothing happens.
  * 
- * @param {boolean}  condition  Condition to be tested
- * @param {string}   [message]    Error message to be thrown
+ * @param {boolean}  assertion                          Any boolean expression
+ * @param {string}   [message='Assertion failed']       If the assertion is false, this message is written to the console
  * 
- * @throws Will throw error is assertion is false
+ * @throws An error is the assertion is false.
+ * 
+ * @example
+ * const assertPrime = function(number) {
+ *     for(let i = 2, root = Math.sqrt(number); i <= root; i++) {
+ *         assert(number % i !== 0, number + ' is not a prime.');
+ *     }
+ * }
+ * assertPrime(36);
+ * // expected error: "36 is not a prime."
  */
-var assert = function(condition, message) {
-    if (!condition) {
+var assert = function(assertion, message) {
+    if (!assertion) {
         throw message || 'Assertion failed';
     }
 }
 /**
- * Tries to invoke function with arguments
+ * @summary
+ * Attempts to invoke a function with the provided arguments, returning either the result or the caught error.
  * 
- * @link https://github.com/30-seconds/30-seconds-of-code#attempt
+ * @description
+ * A more convinient alternative to a `try`/`catch` block. Silently logs error to browser console, should an exception be thrown.
  * 
  * @param {function}  fn  Function to be invoked
+ * 
+ * @returns {any} Return value of function.
  */
 const attempt = function(fn) {
     try {
         let args = _.rest(Array.from(arguments));
-        fn.apply(null, args);
+        return fn.apply(null, args);
     } catch (error) {
         console.error(error);
     }
 };
 /**
- * Runs multiple functions asynchronously
+ * Calls multiple functions asynchronously.
  * 
  * @link https://github.com/30-seconds/30-seconds-of-code#chainasync
  * 
- * @param {array}  fns  Contains functions
+ * @param {array}  fns  Array containing functions to call
+ * 
+ * @example
+ * let array;
+ * chainAsync([
+ *     function(next) {
+ *         console.log('Generating array...');
+ *         array = [];
+ *         for (let i = 0; i < 10000; i++) {
+ *             array.push(Math.random(0, 100));
+ *         }
+ *         next();
+ *     }, function(next) {
+ *         console.log('Sorting array...');
+ *         array.sort();
+ *         next();
+ *     }, function() {
+ *         console.log(array);
+ *     }
+ * ]);
  */
 const chainAsync = function(fns) {
     let current = 0;
@@ -90,13 +138,32 @@ const chainAsync = function(fns) {
     next();
 };
 /**
- * Removes Khan Academy's loop protection from functions
+ * @summary
+ * Removes Khan Academy's loop protection code from functions.
+ * 
+ * @description
+ * Khan Academy adds a few lines of code to every function created to prevent the webpage from freezing. This can be a hinderance when running more resource-intensive code.
  * 
  * @link https://khanacademy.org/cs/i/5594326276014080
  * 
  * @param {function}  fn  Function to be cleaned
  * 
- * @returns {function}  Cleaned function
+ * @returns {function}  Cleaned function.
+ * 
+ * @example
+ * const drawEllipses = function() {
+ *     for (let i = 0; i < 10000; i++) {
+ *         ellipse(Math.random(0, width), Math.random(0, height), 10, 10);
+ *     }
+ * };
+ * // expected error: "A for loop is taking too long to run."
+ * 
+ * @example
+ * const drawEllipses = clean(function() {
+ *     for (let i = 0; i < 10000; i++) {
+ *         ellipse(Math.random(0, width), Math.random(0, height), 10, 10);
+ *     }
+ * });
  */
 const clean = function(fn) {
     let string = fn.toString()
@@ -108,11 +175,16 @@ const clean = function(fn) {
         ';});')()(this);
 };
 /**
- * Copies data to clipboard
+ * Copies text to clipboard.
  * 
- * @param {string}  data  Data to be copied
+ * @param {string}  data  String to be copied
  * 
- * @todo Fix issue where canvas is shifted up when function is called
+ * @example
+ * mouseReleased = function() {
+ *     copyToClipboard('https://github.com/bhavjitChauhan/Essentials');
+ * };
+ * 
+ * @todo Fix issue where canvas is shifted up when function is called.
  */
 const copyToClipboard = function(data) {
     try {
@@ -135,39 +207,64 @@ const copyToClipboard = function(data) {
     doc.body.removeChild(textArea);
 };
 /**
- * Converts milliseconds to readable format
+ * Converts milliseconds to a readable format of duration.
  * 
  * @link https://github.com/30-seconds/30-seconds-of-code#attempt
  * 
  * @param {number}  ms  Duration in milliseconds
  * 
- * @returns {string}  Readable format of duration
+ * @returns {string}  Readable format of duration.
+ * 
+ * @example
+ * let martianDay = 88775244;
+ * console.log(formatDuration(martianDay));
+ * // expected output: "1 day, 39 minutes, 35 seconds, 244 milliseconds"
  */
-const formatDuration = function(ms) {
-    let time = {
-        day: Math.floor(ms / 86400000),
-        hour: Math.floor(ms / 3600000) % 24,
-        minute: Math.floor(ms / 60000) % 60,
-        second: Math.floor(ms / 1000) % 60,
-        millisecond: Math.floor(ms) % 1000
+    const formatDuration = function(ms) {
+        let time = {
+            day: Math.floor(ms / 86400000),
+            hour: Math.floor(ms / 3600000) % 24,
+            minute: Math.floor(ms / 60000) % 60,
+            second: Math.floor(ms / 1000) % 60,
+            millisecond: Math.floor(ms) % 1000
+        };
+        return Object.entries(time).filter(function(value) {
+            return value[1] !== 0;
+        }).map(function(entry) {
+            let key = entry[0],
+                value = entry[1];
+            return value + ' ' + key + (value !== 1 ? 's' : '');
+        }).join(', ');
     };
-    return Object.entries(time).filter(function(value) {
-        return value[1] !== 0;
-    }).map(function(entry) {
-        let key = entry[0],
-            value = entry[1];
-        return value + ' ' + key + (value !== 1 ? 's' : '');
-    }).join(', ');
-};
 /**
- * Calculates number of times function can run per second
+ * Calculates number of times function can run per second.
  * 
  * @link https://github.com/30-seconds/30-seconds-of-code#hz
  * 
  * @param {function}   fn               Function to be measured
  * @param {number}     [iterations=1e4] Number of times function should be invoked
  * 
- * @returns {number}  Function performance in hertz - cycles per second
+ * @returns {number}  Function performance in hertz - cycles per second.
+ * 
+ * @example
+ * // In this case we want to check if it is feasible to run a function inside 
+ * // a `draw` loop with minimal impact on the frame rate
+ * const letterB = '### \n#  #\n### \n#  #\n### ';
+ * const drawGrid = function(grid) {
+ *     grid = grid.split('\n');
+ *     for (let i in grid) {
+ *         for (let j in grid[i]) {
+ *             if (grid[i][j] == '#') rect(j * 10, i * 10, 10, 10);
+ *        }
+ *     }
+ * };
+ * 
+ * console.log(hertz(drawGrid));
+ * // expected output ≈ 6000
+ * // We can conclude from that it is feasible to run this function in a `draw`
+ * // loop because it can easily run 6000+ times per second
+ * 
+ * @see mostPerformant
  */
 const hertz = function(fn, iterations) {
     iterations = iterations || 10000;
@@ -178,10 +275,29 @@ const hertz = function(fn, iterations) {
     return Math.round(1000 * iterations / (performance.now() - before));
 };
 /**
- * Efficiently inherts properties from parent class to child class
+ * Efficiently inherts properties from parent class to child class.
  * 
  * @param {function}    subClass    Class to be inherited to
  * @param {function}    superClass  Class to inherit from
+ * 
+ * @example
+ * const Element = function(x, y, w, h) {
+ *     this.x = x;
+ *     this.y = y;
+ *     this.w = w;
+ *     this.h = h;
+ * };
+ * Element.prototype.draw = function() {
+ *     rect(this.x, this.y, this.w, this.h);
+ * };
+ * const Button = function(x, y, w, h) {
+ *     Element.call(this, x, y, w, h);
+ * };
+ * inherit(Button, Element);
+ * 
+ * let b = new Button(100, 100, 150, 50);
+ * b.draw();
+ * // expected image: rectangle with (100, 100, 150, 50) arguments
  */
 const inherit = function (subClass, superClass) {
     Object.setPrototypeOf(subClass.prototype, superClass.prototype);
@@ -190,17 +306,35 @@ const inherit = function (subClass, superClass) {
         superClass.prototype.constructor = superClass;
 };
 /**
- * Calculates fastest function
+ * @summary
+ * Calculates fastest function in terms of iterations.
+ * 
+ * @description
+ * The functions will be called x amount of times. Their times will be how long they took to run x amount of times. The more iterations, the more accurate the result.
+ * 
+ * Running resource-intensive function may result in a infinite loop error. You can bypass this using the {@link clean} function.
  * 
  * @link https://github.com/30-seconds/30-seconds-of-code#mostperformant
  * 
  * @param {array}      fns              Funtions to be compared
  * @param {number}     [iterations=1e4] Number of times function should be invoked
  * 
- * @returns {Object}  Index of function which performed fastest and times recorded
+ * @returns {Object}  Index of function which performed fastest and times recorded.
+ * 
+ * @example
+ * let testees = {
+ *     'debug': debug,
+ *     'console.log': console.log
+ * };
+ * let test = mostPerformant(Object.values(testees));
+ * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
+ * // expected output: "console.log performed faster."
+ * 
+ * @see hertz
+ * @see clean
  */
 const mostPerformant = function(fns, iterations) {
-    iterations = iterations || 10000;
+    iterations = iterations || 1e4;
     let times = fns.map(function(fn) {
         let before = performance.now();
         for (let i = 0; i < iterations; i++) {
@@ -214,11 +348,11 @@ const mostPerformant = function(fns, iterations) {
     };
 };
 /**
- * Literally does nothing
+ * Literally does nothing.
  */
 const noop = function() {};
 /**
- * Equivalent to using [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and [popStyle]{@link http://processingjs.org/reference/popStyle_/}
+ * Equivalent to using [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
  * 
  * @example
  * push();
@@ -236,9 +370,12 @@ const pop = function() {
     popMatrix();
 };
 /**
- * Prints HTML to canvas console
+ * Prints HTML to canvas console.
  * 
  * @param {string}  data  Text to be printed to canvas console
+ * 
+ * @example
+ * printHTML('<marquee>Hello World!</marquee>');
  */
 const printHTML = function(data) {
     println(data);
@@ -251,7 +388,7 @@ const printHTML = function(data) {
     latestLog.innerHTML = data;
 };
 /**
- * Equivalent to using [pushMatrix]{@link http://processingjs.org/reference/pushMatrix_/} and [pushStyle]{@link http://processingjs.org/reference/pushStyle_/}
+ * Equivalent to using [pushMatrix]{@link http://processingjs.org/reference/pushMatrix_/} and [pushStyle]{@link http://processingjs.org/reference/pushStyle_/}.
  * 
  * @example
  * push();
@@ -354,7 +491,7 @@ bootstrapper({
             textFont(createFont('monospace'), 15);
             text('Essentials Library' + '\nv' + VERSION, width / 2, height / 2);
         } else {
-            // We don't need to define modules as we can just assign them to one object .
+            // We don't need to define modules as we can just assign them to one object
             // // Dynamically define imported functions
             // for(module in modules) {
             //     window[module] = modules[module];
@@ -371,6 +508,7 @@ bootstrapper({
                 'keyPressed': keyPressed,
                 'keyReleased': keyReleased,
                 'String.prototype.toTitleCase': String.prototype.toTitleCase,
+                'assert': assert,
                 'attempt': attempt,
                 'chainAsync': chainAsync,
                 'clean': clean,

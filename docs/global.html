@@ -132,7 +132,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line13">line 13</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -172,7 +172,7 @@
 
 
 <div class="description">
-    <p>Object containing common color values</p>
+    <p>Object containing common color values.</p>
 </div>
 
 
@@ -189,6 +189,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>stroke(WHITE);fill(RED);</code></pre>
 
 
 
@@ -205,7 +210,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line28">line 28</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line35">line 35</a>
     </li></ul></dd>
     
 
@@ -245,7 +250,7 @@
 
 
 <div class="description">
-    <p>Object containing basic fonts</p>
+    <p>Object containing basic fonts.</p>
 </div>
 
 
@@ -264,6 +269,11 @@
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>textFont(MONO_FONT);</code></pre>
+
+
 
         
     
@@ -276,7 +286,7 @@
 
     
 
-    <h4 class="name" id="assert"><span class="type-signature"></span>assert<span class="signature">(condition, message<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="assert"><span class="type-signature"></span>assert<span class="signature">(assertion, message<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
 
     
 
@@ -288,7 +298,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line56">line 56</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -328,7 +338,7 @@
 
 
 <div class="description">
-    <p>Checks if condition passes is true or false</p>
+    <p>Writes an error message to the console if the assertion is false. If the assertion is true, nothing happens.</p>
 </div>
 
 
@@ -337,6 +347,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const assertPrime = function(number) {    for(let i = 2, root = Math.sqrt(number); i &lt;= root; i++) {        assert(number % i !== 0, number + ' is not a prime.');    }}assertPrime(36);// expected error: "36 is not a prime."</code></pre>
 
 
 
@@ -358,6 +373,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -368,7 +385,7 @@
 
         <tr>
             
-                <td class="name"><code>condition</code></td>
+                <td class="name"><code>assertion</code></td>
             
 
             <td class="type">
@@ -391,8 +408,12 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
-            <td class="description last"><p>Condition to be tested</p></td>
+            <td class="description last"><p>Any boolean expression</p></td>
         </tr>
 
     
@@ -424,8 +445,14 @@
             
 
             
+                <td class="default">
+                
+                    <code>'Assertion failed'</code>
+                
+                </td>
+            
 
-            <td class="description last"><p>Error message to be thrown</p></td>
+            <td class="description last"><p>If the assertion is false, this message is written to the console</p></td>
         </tr>
 
     
@@ -451,7 +478,7 @@
 
     <div class="param-desc">
     
-        <p>Will throw error is assertion is false</p>
+        <p>An error is the assertion is false.</p>
     
     </div>
 
@@ -467,8 +494,10 @@
 
     
 
-    <h4 class="name" id="attempt"><span class="type-signature"></span>attempt<span class="signature">(fn)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="attempt"><span class="type-signature"></span>attempt<span class="signature">(fn)</span><span class="type-signature"> &rarr; {any}</span></h4>
 
+    
+    <p class="summary"><p>Attempts to invoke a function with the provided arguments, returning either the result or the caught error.</p></p>
     
 
 
@@ -479,7 +508,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line68">line 68</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -519,7 +548,7 @@
 
 
 <div class="description">
-    <p>Tries to invoke function with arguments</p>
+    <p>A more convinient alternative to a <code>try</code>/<code>catch</code> block. Silently logs error to browser console, should an exception be thrown.</p>
 </div>
 
 
@@ -595,6 +624,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Return value of function.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -615,7 +666,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line83">line 83</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line131">line 131</a>
     </li></ul></dd>
     
 
@@ -655,7 +706,7 @@
 
 
 <div class="description">
-    <p>Runs multiple functions asynchronously</p>
+    <p>Calls multiple functions asynchronously.</p>
 </div>
 
 
@@ -664,6 +715,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let array;chainAsync([    function(next) {        console.log('Generating array...');        array = [];        for (let i = 0; i &lt; 10000; i++) {            array.push(Math.random(0, 100));        }        next();    }, function(next) {        console.log('Sorting array...');        array.sort();        next();    }, function() {        console.log(array);    }]);</code></pre>
 
 
 
@@ -709,7 +765,7 @@
 
             
 
-            <td class="description last"><p>Contains functions</p></td>
+            <td class="description last"><p>Array containing functions to call</p></td>
         </tr>
 
     
@@ -742,6 +798,8 @@
     <h4 class="name" id="clean"><span class="type-signature"></span>clean<span class="signature">(fn)</span><span class="type-signature"> &rarr; {function}</span></h4>
 
     
+    <p class="summary"><p>Removes Khan Academy's loop protection code from functions.</p></p>
+    
 
 
 
@@ -751,7 +809,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line101">line 101</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line168">line 168</a>
     </li></ul></dd>
     
 
@@ -791,7 +849,7 @@
 
 
 <div class="description">
-    <p>Removes Khan Academy's loop protection from functions</p>
+    <p>Khan Academy adds a few lines of code to every function created to prevent the webpage from freezing. This can be a hinderance when running more resource-intensive code.</p>
 </div>
 
 
@@ -800,6 +858,13 @@
 
 
 
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>const drawEllipses = function() {    for (let i = 0; i &lt; 10000; i++) {        ellipse(Math.random(0, width), Math.random(0, height), 10, 10);    }};// expected error: "A for loop is taking too long to run."</code></pre>
+
+    <pre class="prettyprint"><code>const drawEllipses = clean(function() {    for (let i = 0; i &lt; 10000; i++) {        ellipse(Math.random(0, width), Math.random(0, height), 10, 10);    }});</code></pre>
 
 
 
@@ -871,7 +936,7 @@
 
         
 <div class="param-desc">
-    <p>Cleaned function</p>
+    <p>Cleaned function.</p>
 </div>
 
 
@@ -909,7 +974,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line117">line 117</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line189">line 189</a>
     </li></ul></dd>
     
 
@@ -945,7 +1010,7 @@
     <dt class="tag-todo">To Do:</dt>
     <dd class="tag-todo">
         <ul>
-            <li>Fix issue where canvas is shifted up when function is called</li>
+            <li>Fix issue where canvas is shifted up when function is called.</li>
         </ul>
     </dd>
     
@@ -956,7 +1021,7 @@
 
 
 <div class="description">
-    <p>Copies data to clipboard</p>
+    <p>Copies text to clipboard.</p>
 </div>
 
 
@@ -965,6 +1030,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>mouseReleased = function() {    copyToClipboard('https://github.com/bhavjitChauhan/Essentials');};</code></pre>
 
 
 
@@ -1010,7 +1080,7 @@
 
             
 
-            <td class="description last"><p>Data to be copied</p></td>
+            <td class="description last"><p>String to be copied</p></td>
         </tr>
 
     
@@ -1052,7 +1122,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line146">line 146</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line223">line 223</a>
     </li></ul></dd>
     
 
@@ -1092,7 +1162,7 @@
 
 
 <div class="description">
-    <p>Converts milliseconds to readable format</p>
+    <p>Converts milliseconds to a readable format of duration.</p>
 </div>
 
 
@@ -1101,6 +1171,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let martianDay = 88775244;console.log(formatDuration(martianDay));// expected output: "1 day, 39 minutes, 35 seconds, 244 milliseconds"</code></pre>
 
 
 
@@ -1172,7 +1247,7 @@
 
         
 <div class="param-desc">
-    <p>Readable format of duration</p>
+    <p>Readable format of duration.</p>
 </div>
 
 
@@ -1210,7 +1285,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line172">line 172</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line269">line 269</a>
     </li></ul></dd>
     
 
@@ -1241,6 +1316,13 @@
     
 
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="global.html#mostPerformant">mostPerformant</a></li>
+        </ul>
+    </dd>
+    
 
     
 </dl>
@@ -1250,7 +1332,7 @@
 
 
 <div class="description">
-    <p>Calculates number of times function can run per second</p>
+    <p>Calculates number of times function can run per second.</p>
 </div>
 
 
@@ -1259,6 +1341,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// In this case we want to check if it is feasible to run a function inside // a `draw` loop with minimal impact on the frame rateconst letterB = '### \n#  #\n### \n#  #\n### ';const drawGrid = function(grid) {    grid = grid.split('\n');    for (let i in grid) {        for (let j in grid[i]) {            if (grid[i][j] == '#') rect(j * 10, i * 10, 10, 10);       }    }};console.log(hertz(drawGrid));// expected output ≈ 6000// We can conclude from that it is feasible to run this function in a `draw`// loop because it can easily run 6000+ times per second</code></pre>
 
 
 
@@ -1385,7 +1472,7 @@
 
         
 <div class="param-desc">
-    <p>Function performance in hertz - cycles per second</p>
+    <p>Function performance in hertz - cycles per second.</p>
 </div>
 
 
@@ -1423,7 +1510,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line186">line 186</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line302">line 302</a>
     </li></ul></dd>
     
 
@@ -1463,7 +1550,7 @@
 
 
 <div class="description">
-    <p>Efficiently inherts properties from parent class to child class</p>
+    <p>Efficiently inherts properties from parent class to child class.</p>
 </div>
 
 
@@ -1472,6 +1559,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const Element = function(x, y, w, h) {    this.x = x;    this.y = y;    this.w = w;    this.h = h;};Element.prototype.draw = function() {    rect(this.x, this.y, this.w, this.h);};const Button = function(x, y, w, h) {    Element.call(this, x, y, w, h);};inherit(Button, Element);let b = new Button(100, 100, 150, 50);b.draw();// expected image: rectangle with (100, 100, 150, 50) arguments</code></pre>
 
 
 
@@ -1573,6 +1665,8 @@
     <h4 class="name" id="mostPerformant"><span class="type-signature"></span>mostPerformant<span class="signature">(fns, iterations<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
+    <p class="summary"><p>Calculates fastest function in terms of iterations.</p></p>
+    
 
 
 
@@ -1582,7 +1676,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line202">line 202</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line336">line 336</a>
     </li></ul></dd>
     
 
@@ -1613,6 +1707,15 @@
     
 
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="global.html#hertz">hertz</a></li>
+        
+            <li><a href="global.html#clean">clean</a></li>
+        </ul>
+    </dd>
+    
 
     
 </dl>
@@ -1622,7 +1725,8 @@
 
 
 <div class="description">
-    <p>Calculates fastest function</p>
+    <p>The functions will be called x amount of times. Their times will be how long they took to run x amount of times. The more iterations, the more accurate the result.</p>
+<p>Running resource-intensive function may result in a infinite loop error. You can bypass this using the <a href="global.html#clean">clean</a> function.</p>
 </div>
 
 
@@ -1631,6 +1735,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let testees = {    'debug': debug,    'console.log': console.log};let test = mostPerformant(Object.values(testees));console.log(Object.keys(testees)[test.winner] + ' performed faster.');// expected output: "console.log performed faster."</code></pre>
 
 
 
@@ -1757,7 +1866,7 @@
 
         
 <div class="param-desc">
-    <p>Index of function which performed fastest and times recorded</p>
+    <p>Index of function which performed fastest and times recorded.</p>
 </div>
 
 
@@ -1795,7 +1904,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line219">line 219</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line353">line 353</a>
     </li></ul></dd>
     
 
@@ -1835,7 +1944,7 @@
 
 
 <div class="description">
-    <p>Literally does nothing</p>
+    <p>Literally does nothing.</p>
 </div>
 
 
@@ -1882,7 +1991,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line234">line 234</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line368">line 368</a>
     </li></ul></dd>
     
 
@@ -1929,7 +2038,7 @@
 
 
 <div class="description">
-    <p>Equivalent to using <a href="http://processingjs.org/reference/popMatrix_/">popMatrix</a> and <a href="http://processingjs.org/reference/popStyle_/">popStyle</a></p>
+    <p>Equivalent to using <a href="http://processingjs.org/reference/popMatrix_/">popMatrix</a> and <a href="http://processingjs.org/reference/popStyle_/">popStyle</a>.</p>
 </div>
 
 
@@ -1981,7 +2090,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line243">line 243</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line380">line 380</a>
     </li></ul></dd>
     
 
@@ -2021,7 +2130,7 @@
 
 
 <div class="description">
-    <p>Prints HTML to canvas console</p>
+    <p>Prints HTML to canvas console.</p>
 </div>
 
 
@@ -2030,6 +2139,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>printHTML('&lt;marquee>Hello World!&lt;/marquee>');</code></pre>
 
 
 
@@ -2117,7 +2231,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="library.js.html">library.js</a>, <a href="library.js.html#line267">line 267</a>
+        <a href="library.js.html">library.js</a>, <a href="library.js.html#line404">line 404</a>
     </li></ul></dd>
     
 
@@ -2164,7 +2278,7 @@
 
 
 <div class="description">
-    <p>Equivalent to using <a href="http://processingjs.org/reference/pushMatrix_/">pushMatrix</a> and <a href="http://processingjs.org/reference/pushStyle_/">pushStyle</a></p>
+    <p>Equivalent to using <a href="http://processingjs.org/reference/pushMatrix_/">pushMatrix</a> and <a href="http://processingjs.org/reference/pushStyle_/">pushStyle</a>.</p>
 </div>
 
 
@@ -2219,7 +2333,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Jul 16 2019 16:03:07 GMT-0700 (Pacific Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Jul 30 2019 21:21:44 GMT-0700 (Pacific Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
