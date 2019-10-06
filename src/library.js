@@ -1,6 +1,15 @@
+/**
+ * Documentation:
+ * https://bhavjitchauhan.github.io/Essentials/index.html
+ * Repository:
+ * https://github.com/bhavjitChauhan/Essentials
+ * Library Tests:
+ * https://khanacademy.org/cs/i/5508859300511744
+ */
+
 // jshint ignore: start
 
-const VERSION = '0.1.1';
+const VERSION = '0.1.2';
 
 // Variables {
 // Colors
@@ -187,11 +196,7 @@ const clean = function(fn) {
  * @todo Fix issue where canvas is shifted up when function is called.
  */
 const copyToClipboard = function(data) {
-    try {
-        if (ENV != 'development') throw 'error';
-    } catch (error) {
-        println('The copy to clipboard function is in development and may result in unintended behaviour.');
-    }
+    if (ENV != 'development') println('The copy to clipboard function is in development and may result in unintended behaviour.');
     let doc = eval('document');
     let textArea = doc['createElement']('textarea');
     textArea.value = data;
@@ -220,22 +225,22 @@ const copyToClipboard = function(data) {
  * console.log(formatDuration(martianDay));
  * // expected output: "1 day, 39 minutes, 35 seconds, 244 milliseconds"
  */
-    const formatDuration = function(ms) {
-        let time = {
-            day: Math.floor(ms / 86400000),
-            hour: Math.floor(ms / 3600000) % 24,
-            minute: Math.floor(ms / 60000) % 60,
-            second: Math.floor(ms / 1000) % 60,
-            millisecond: Math.floor(ms) % 1000
-        };
-        return Object.entries(time).filter(function(value) {
-            return value[1] !== 0;
-        }).map(function(entry) {
-            let key = entry[0],
-                value = entry[1];
-            return value + ' ' + key + (value !== 1 ? 's' : '');
-        }).join(', ');
+const formatDuration = function(ms) {
+    let time = {
+        day: Math.floor(ms / 86400000),
+        hour: Math.floor(ms / 3600000) % 24,
+        minute: Math.floor(ms / 60000) % 60,
+        second: Math.floor(ms / 1000) % 60,
+        millisecond: Math.floor(ms) % 1000
     };
+    return Object.entries(time).filter(function(value) {
+        return value[1] !== 0;
+    }).map(function(entry) {
+        let key = entry[0],
+            value = entry[1];
+        return value + ' ' + key + (value !== 1 ? 's' : '');
+    }).join(', ');
+};
 /**
  * Calculates number of times function can run per second.
  * 
@@ -471,11 +476,7 @@ const bootstrapper = function(callback) {
 };
 // Functions to be imported from other programs
 const __requirements__ = {
-    'centeredObjectText': '#5244695642996736',
-    'highlightText': '#6710182776242176',
-    'lightOrDarkText': '#4647647695962112',
-    'multiColoredText': '#6037261762265088',
-    'outlineText': '#4933300921925632'
+    'textEssentials': '#5025014050684928'
 };
 // Check if program is being imported or running by itself
 let importer_context;
@@ -526,7 +527,7 @@ bootstrapper({
             let exports = Object.assign({
                 // For testing if variables were defined properly in importer's context
                 'IMPORTED_ESSENTIALS': true,
-            }, modules, variables, functions);
+            }, modules.textEssentials, variables, functions);
             !module_context.NO_CONSOLE_OUTPUT && console.log('Defining library functions...');
             for (let i in exports) {
                 // Dynamically define functions in importer's context

@@ -29,7 +29,7 @@
     
     <input type="text" id="nav-search" placeholder="Search" />
     
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-centeredObjectText.html">centeredObjectText</a><ul class='methods'><li data-type='method'><a href="module-centeredObjectText.html#~centeredObjectText">centeredObjectText</a></li></ul></li><li><a href="module-highlightText.html">highlightText</a><ul class='methods'><li data-type='method'><a href="module-highlightText.html#~highlightText">highlightText</a></li></ul></li><li><a href="module-lightOrDarkText.html">lightOrDarkText</a><ul class='methods'><li data-type='method'><a href="module-lightOrDarkText.html#~lightOrDarkText">lightOrDarkText</a></li></ul></li><li><a href="module-multicoloredText.html">multicoloredText</a><ul class='methods'><li data-type='method'><a href="module-multicoloredText.html#~multicoloredText">multicoloredText</a></li></ul></li><li><a href="module-outlineText.html">outlineText</a><ul class='methods'><li data-type='method'><a href="module-outlineText.html#~outlineText">outlineText</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#assert">assert</a></li><li><a href="global.html#attempt">attempt</a></li><li><a href="global.html#chainAsync">chainAsync</a></li><li><a href="global.html#clean">clean</a></li><li><a href="global.html#colors">colors</a></li><li><a href="global.html#copyToClipboard">copyToClipboard</a></li><li><a href="global.html#fonts">fonts</a></li><li><a href="global.html#formatDuration">formatDuration</a></li><li><a href="global.html#hertz">hertz</a></li><li><a href="global.html#inherit">inherit</a></li><li><a href="global.html#mostPerformant">mostPerformant</a></li><li><a href="global.html#noop">noop</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#printHTML">printHTML</a></li><li><a href="global.html#push">push</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-textEssentials.html">textEssentials</a><ul class='methods'><li data-type='method'><a href="module-textEssentials.html#~centeredObjectText">centeredObjectText</a></li><li data-type='method'><a href="module-textEssentials.html#~highlightText">highlightText</a></li><li data-type='method'><a href="module-textEssentials.html#~lightOrDarkText">lightOrDarkText</a></li><li data-type='method'><a href="module-textEssentials.html#~multicoloredText">multicoloredText</a></li><li data-type='method'><a href="module-textEssentials.html#~outlineText">outlineText</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#assert">assert</a></li><li><a href="global.html#attempt">attempt</a></li><li><a href="global.html#chainAsync">chainAsync</a></li><li><a href="global.html#clean">clean</a></li><li><a href="global.html#colors">colors</a></li><li><a href="global.html#copyToClipboard">copyToClipboard</a></li><li><a href="global.html#fonts">fonts</a></li><li><a href="global.html#formatDuration">formatDuration</a></li><li><a href="global.html#hertz">hertz</a></li><li><a href="global.html#inherit">inherit</a></li><li><a href="global.html#mostPerformant">mostPerformant</a></li><li><a href="global.html#noop">noop</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#printHTML">printHTML</a></li><li><a href="global.html#push">push</a></li></ul>
 </nav>
 
 <div id="main">
@@ -63,6 +63,75 @@
 <p>JavaScript library for Khan Academy containing useful functions and variables.</p>
 <h2>Documentation</h2>
 <p>You can view the documentation for the library on <a href="https://bhavjitchauhan.github.io/Essentials/index.html">Github Pages</a> or the project <a href="https://github.com/bhavjitChauhan/Essentials/wiki">Wiki</a>.</p>
+<h2>Usage</h2>
+<p>The Essentials library was made for Khan Acadmey's unique Processing environment.</p>
+<p>To use the library in your program, you will need something similar to the following lines of code.</p>
+<p>First, we need to write out the following JSHint flag to enable what would otherwise be restricted functionality on Khan Academy.</p>
+<pre class="prettyprint source lang-js"><code>// jshint ignore: start
+</code></pre>
+<p>Next, we need to copy the <code>bootstrapper</code> function. You can view it's documentation <a href="https://www.khanacademy.org/cs/i/6070976254115840">here</a>.</p>
+<pre class="prettyprint source lang-js"><code>const bootstrapper = function(callback) {
+    let doc = Object.constructor('return this.document')();
+    let jsonp = doc[['createElement']]('script');
+    doc.BMS_bootstrap_loader = function(data) {
+        delete doc.BMS_bootstrap_loader; jsonp.parentNode.removeChild(jsonp);
+        Object.constructor('importer_context', 'export_module', data.revision.code)(this, callback);
+    }.bind(this);
+    jsonp.setAttribute('src', 'https://www.khanacademy.org/api/labs/scratchpads/5522928629252096?callback=document.BMS_bootstrap_loader');
+    doc.head.appendChild(jsonp);
+};
+</code></pre>
+<p>We also need to declare the <code>__requirements__</code> object that contains all the modules we will be importing.</p>
+<pre class="prettyprint source lang-js"><code>const __requirements__ = {
+    'Essentials': '#5219990839590912'
+};
+</code></pre>
+<p>Finally, we call the <code>bootstrapper</code> function to import the Essentials library.</p>
+<pre class="prettyprint source lang-js"><code>bootstrapper({
+    done: function(BMS, modules) {
+        // Check if imported variables from Essentials library were defined globally
+        if (typeof IMPORTED_ESSENTIALS == 'undefined') {
+            console.error('Essentials library variables not defined, restarting program...');
+            Program.restart();
+        }
+    }
+});
+</code></pre>
+<blockquote>
+<p>Note that due to an issue with BMS, sometimes globals are not defined so I've included a hacky workaround by restarting the program if globals are not defined</p>
+</blockquote>
+<details>
+  <summary>Boilerplate code</summary>
+<pre class="prettyprint source lang-js"><code>// jshint ignore: start
+const bootstrapper = function(callback) {
+    let doc = Object.constructor('return this.document')();
+    let jsonp = doc[['createElement']]('script');
+    doc.BMS_bootstrap_loader = function(data) {
+        delete doc.BMS_bootstrap_loader; jsonp.parentNode.removeChild(jsonp);
+        Object.constructor('importer_context', 'export_module', data.revision.code)(this, callback);
+    }.bind(this);
+    jsonp.setAttribute('src', 'https://www.khanacademy.org/api/labs/scratchpads/5522928629252096?callback=document.BMS_bootstrap_loader');
+    doc.head.appendChild(jsonp);
+};
+const __requirements__ = {
+    'Essentials': '#5219990839590912'
+};
+bootstrapper({
+    done: function(BMS, modules) {
+        // Check if imported variables from Essentials library were defined globally
+        if (typeof IMPORTED_ESSENTIALS == 'undefined') {
+            console.error('Essentials library variables not defined, restarting program...');
+            Program.restart();
+        }
+    }
+});
+</code></pre>
+</details>
+<h2>Built With</h2>
+<ul>
+<li><a href="https://www.khanacademy.org/cs/i/6070976254115840">Ben's Module System</a> - Module import/export system</li>
+<li><a href="https://underscorejs.org">underscore.js</a> - Useful JavaScript library</li>
+</ul>
 <h2>License</h2>
 <p>This project is licensed under the MIT License. See <a href="LICENSE">LICENSE</a> for details.</p></article>
     </section>
@@ -79,7 +148,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Jul 30 2019 21:21:44 GMT-0700 (Pacific Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Oct 05 2019 18:41:13 GMT-0700 (Pacific Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
