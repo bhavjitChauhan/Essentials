@@ -411,6 +411,225 @@ const push = function() {
     pushStyle();
 };
 // }
+// Conversions {
+/**
+ * Converts RGB to hex color type
+ * 
+ * @param {(number|color)}  r  Red value or color
+ * @param {number}  [g]  Green value
+ * @param {number}  [b]  Blue value
+ * 
+ * @returns {string}  Hex color value
+ * 
+ * @example
+ * println(rgbToHex(255, 0, 0));
+ * // expected output: #ff0000
+ * 
+ * let c = color(255, 0, 0);
+ * println(rgbToHex(c));
+ * // expected output: #ff0000
+ */
+const rgbToHex = function(r, g, b) {
+    if (arguments.length == 1) {
+        c = r;
+        r = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+    }
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+};
+/**
+ * Converts hex to RGB color type
+ * 
+ * @param {string}  hex  Hex color value, optional `#`, can be shorthand
+ * 
+ * @returns {color}  RGB color value
+ * 
+ * @example
+ * let c = hexToRgb('#fff');
+ * println(c);
+ * // expected output: -1
+ * background(c);
+ * // expected outcome: white background
+ */
+const hexToRgb = function(hex) {
+    let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+    
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    result = result ? result.splice(1).map(function(i) {
+        return parseInt(i, 16)
+    }) : null;
+    push();
+    colorMode(RGB);
+    result = color.apply(this, result);
+    pop();
+    return result;
+};
+/**
+ * Converts RGB to HSB color type
+ * 
+ * @param {(number|color)}  r  Red value or color
+ * @param {number}  [g]  Green value
+ * @param {number}  [b]  Blue value
+ * 
+ * @returns {string}  HSB color value
+ * 
+ * @example
+ * let c = rgbToHsb(255, 0, 0);
+ * println(c);
+ * // expected output: -65536
+ * colorMode(HSB);
+ * background(c);
+ * // expected outcome: red background
+ */
+const rgbToHsb = function(r, g, b) {
+    if (arguments.length == 1) {
+        c = r;
+        r = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+    }
+    
+    r /= 255, g /= 255, b /= 255;
+    
+    let maxValue = Math.max(r, g, b);
+    let minValue = Math.min(r, g, b);
+    let v = maxValue;
+
+    let d = maxValue - minValue;
+    let s = maxValue === 0 ? 0 : d / maxValue;
+
+    if (maxValue === minValue) {
+        h = 0;
+    } else {
+          switch (maxValue) {
+              case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+              case g: h = (b - r) / d + 2; break;
+              case b: h = (r - g) / d + 4; break;
+          }
+          h /= 6;
+    }
+    
+    let result = [h, s, v].map(function(i) {
+        return i * 255;
+    });
+    push();
+    colorMode(HSB);
+    result = color.apply(this, result);
+    pop();
+    return result;
+};
+/**
+ * Converts HSB to RGB color type
+ * 
+ * @param {(number|color)}  h  Hue value or color
+ * @param {number}  [s]  Saturation value
+ * @param {number}  [v]  Brightness value
+ * 
+ * @returns {string}  RGB color value
+ * 
+ * @example
+ * let c = hsbToRgb(85, 255, 255);
+ * println(c);
+ * // expected output: -16711936
+ * background(c);
+ * // expected outcome: green background
+ */
+const hsbToRgb = function(h, s, v) {
+    if (arguments.length == 1) {
+        c = h;
+        h = hue(c), s = saturation(c), v = brightness(c);
+    }
+    h /= 255, s /= 255, v /= 255;
+    
+    let i = Math.floor(h * 6);
+    let f = h * 6 - i;
+    let p = v * (1 - s);
+    let q = v * (1 - f * s);
+    let t = v * (1 - (1 - f) * s);
+    
+    let r, g, b;
+    switch (i % 6) {
+        case 0: r = v, g = t, b = p; break;
+        case 1: r = q, g = v, b = p; break;
+        case 2: r = p, g = v, b = t; break;
+        case 3: r = p, g = q, b = v; break;
+        case 4: r = t, g = p, b = v; break;
+        case 5: r = v, g = p, b = q; break;
+    }
+    
+    let result = [r, g, b].map(function(i) {
+        return i * 255;
+    });
+    
+    return color.apply(this, result);
+};
+/**
+ * Converts hex or HSB to RGB color value
+ * 
+ * @param {(string|color)}  x  Hex, hue or RGB color value
+ * @param {number}  [s]  Saturation value
+ * @param {number}  [v]  Brightness value
+ * 
+ * @returns {color|array}  RGB color value or RGB values array
+ * 
+ * @example
+ * background(rgb('fff'));
+ * // expected outcome: white background
+ * 
+ * background(rgb(0, 255, 255));
+ * // expected outcome: red background
+ * 
+ * println(rgb(-1))
+ * // expected output: [255, 255, 255]
+ */
+const rgb = function() {
+    let args = arguments;
+    if (args.length == 1) {
+        let c = args[0];
+        if (typeof c == "number") {
+            return [red(c), green(c), blue(c)];
+        } else {
+            return hexToRgb(c);
+        }
+    } else if (args.length == 3) {
+        return hsbToRgb.apply(this, args);
+    }
+};
+/**
+ * Converts hex or RGB to HSB color value
+ * 
+ * @param {(string|color)}  x  Hex, red or HSB color value
+ * @param {number}  [g]  Green value
+ * @param {number}  [b]  Blue value
+ * 
+ * @returns {color|array}  RGB color value or RGB values array
+ * 
+ * @example
+ * colorMode(HSB);
+ * 
+ * background(hsb('fff'));
+ * // expected outcome: white background
+ * 
+ * background(hsb(255, 0, 0));
+ * // expected outcome: red background
+ * 
+ * println(hsb(-1))
+ * // expected output: [0, 0, 255]
+ */
+const hsb = function() {
+    let args = arguments;
+    if (args.length == 1) {
+        let c = args[0];
+        if (typeof c == "number") {
+            return [hue(c), saturation(c), brightness(c)];
+        } else {
+            return rgbToHsb.apply(this, rgb(hexToRgb(c)));
+        }
+    } else if (args.length == 3) {
+        return rgbToHsb.apply(this, args);
+    }
+};
+// }
 // Events {
 const Mouse = {
     pressed: false,
@@ -523,11 +742,19 @@ bootstrapper({
                 'printHTML': printHTML,
                 'push': push
             };
+            let conversions = {
+                'rgbToHex': rgbToHex,
+                'hexToRgb': hexToRgb,
+                'rgbToHsb': rgbToHsb,
+                'hsbToRgb': hsbToRgb,
+                'rgb': rgb,
+                'hsb': hsb
+            };
             // All exports
             let exports = Object.assign({
                 // For testing if variables were defined properly in importer's context
                 'IMPORTED_ESSENTIALS': true,
-            }, modules.textEssentials, variables, functions);
+            }, modules.textEssentials, variables, functions, conversions);
             !module_context.NO_CONSOLE_OUTPUT && console.log('Defining library functions...');
             for (let i in exports) {
                 // Dynamically define functions in importer's context

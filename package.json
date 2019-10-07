@@ -1,6 +1,6 @@
 {
   "name": "essentials",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JavaScript library for Khan Academy containing useful functions and variables.",
   "main": "library.js",
   "directories": {
