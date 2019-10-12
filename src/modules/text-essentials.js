@@ -132,7 +132,6 @@ var multicoloredText = function(string, x, y) {
  * @param {number} [outlineColor=0] Color of outline
  */
 var outlineText = function(string, x, y, outlineColor) {
-    rgb();
     if(!(/\S/).test(string)) {
 		return;
 	}
