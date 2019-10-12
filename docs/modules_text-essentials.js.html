@@ -1,4 +1,56 @@
-/** @module textEssentials */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>modules/text-essentials.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-colorEssentials.html">colorEssentials</a><ul class='methods'><li data-type='method'><a href="module-colorEssentials.html#~hexToRgb">hexToRgb</a></li><li data-type='method'><a href="module-colorEssentials.html#~hsb">hsb</a></li><li data-type='method'><a href="module-colorEssentials.html#~hsbToRgb">hsbToRgb</a></li><li data-type='method'><a href="module-colorEssentials.html#~rgb">rgb</a></li><li data-type='method'><a href="module-colorEssentials.html#~rgbToHex">rgbToHex</a></li><li data-type='method'><a href="module-colorEssentials.html#~rgbToHsb">rgbToHsb</a></li></ul></li><li><a href="module-textEssentials.html">textEssentials</a><ul class='methods'><li data-type='method'><a href="module-textEssentials.html#~centeredObjectText">centeredObjectText</a></li><li data-type='method'><a href="module-textEssentials.html#~highlightText">highlightText</a></li><li data-type='method'><a href="module-textEssentials.html#~lightOrDarkText">lightOrDarkText</a></li><li data-type='method'><a href="module-textEssentials.html#~multicoloredText">multicoloredText</a></li><li data-type='method'><a href="module-textEssentials.html#~outlineText">outlineText</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#assert">assert</a></li><li><a href="global.html#attempt">attempt</a></li><li><a href="global.html#chainAsync">chainAsync</a></li><li><a href="global.html#clean">clean</a></li><li><a href="global.html#copyToClipboard">copyToClipboard</a></li><li><a href="global.html#fonts">fonts</a></li><li><a href="global.html#formatDuration">formatDuration</a></li><li><a href="global.html#hertz">hertz</a></li><li><a href="global.html#inherit">inherit</a></li><li><a href="global.html#mostPerformant">mostPerformant</a></li><li><a href="global.html#noop">noop</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#printHTML">printHTML</a></li><li><a href="global.html#push">push</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">modules/text-essentials.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module textEssentials */
+
+// jshint ignore: start
+
+const VERSION = '0.0.2';
+
+// Functions {
 /**
  * Returns string containing object values centered in a readable format
  * 
@@ -20,7 +72,7 @@ var centeredObjectText = function(object, margin) {
 	for(var key in object) {
 		if(typeof object[key] === "object") {
 			result += "\n" + (" ".repeat(margin - key.length) + key + " : " + object[key][0]);
-			for(var i = 1; i < object[key].length; i++) {
+			for(var i = 1; i &lt; object[key].length; i++) {
 				result += "\n" + " ".repeat(margin + 3) + object[key][i];
 			}
 		} else {
@@ -43,7 +95,7 @@ var highlightText = function(string, x, y, highlightColor) {
 	}
 	x = x || 0;
 	y = y || textAscent();
-	highlightColor = highlightColor || color(255, 255, 0);
+	highlightColor = highlightColor || YELLOW;
 	string = string.split("\n");
 	noStroke();
 	rectMode(CORNER);
@@ -76,10 +128,10 @@ var lightOrDarkText = function(backgroundColor) {
         g = green(backgroundColor);
         b = blue(backgroundColor);
     }
-	if ((r + b + g) / 3 < 225) {
-		return color(255);
+	if ((r + b + g) / 3 &lt; 225) {
+		return WHITE;
 	}
-	return color(0);
+	return BLACK;
 };
 /**
  * Displays a string with multiple colors that are passed in using special syntax
@@ -126,6 +178,7 @@ var multicoloredText = function(string, x, y) {
  * @param {number} [outlineColor=0] Color of outline
  */
 var outlineText = function(string, x, y, outlineColor) {
+    rgb();
     if(!(/\S/).test(string)) {
 		return;
 	}
@@ -134,8 +187,8 @@ var outlineText = function(string, x, y, outlineColor) {
 	outlineColor = outlineColor || (0);
     pushStyle();
     fill(outlineColor);
-    for(var i = -2; i < 3; i++){
-        for(var j = -1; j < 3; j++){
+    for(var i = -2; i &lt; 3; i++){
+        for(var j = -1; j &lt; 3; j++){
             text(string, x + i, y + j);
         }
         text(string, x + i, y);
@@ -144,8 +197,8 @@ var outlineText = function(string, x, y, outlineColor) {
     popStyle();
     text(string, x, y);
 };
-
-
+// }
+// Exporting {
 var export_module;
 if (export_module) {
 	export_module({
@@ -160,5 +213,33 @@ if (export_module) {
     fill(0);
     textAlign(CENTER);
     textFont(createFont('monospace'), 15);
-    text('Text Essentials', width / 2, height / 2);
+    text('Text Essentials' + '\nv' + VERSION, width / 2, height / 2);
 }
+// }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Fri Oct 11 2019 23:44:45 GMT-0700 (Pacific Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
