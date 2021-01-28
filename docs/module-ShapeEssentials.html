@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>TextEssentials - Documentation</title>
+    <title>ShapeEssentials - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">TextEssentials</h1>
+    <h1 class="page-title">ShapeEssentials</h1>
     
 
     
@@ -83,7 +83,7 @@
 
     
 
-    <h4 class="name" id="~font"><span class="type-signature">(inner) </span>font<span class="signature">(name, size<span class="signature-attributes">opt</span>, &hellip;properties)</span><span class="type-signature"> &rarr; {font}</span></h4>
+    <h4 class="name" id="~blurRect"><span class="type-signature">(inner) </span>blurRect<span class="signature">(x, y, width, height, size)</span><span class="type-signature"></span></h4>
 
     
 
@@ -95,7 +95,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1098">line 1098</a>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1590">line 1590</a>
     </li></ul></dd>
     
 
@@ -135,7 +135,7 @@
 
 
 <div class="description usertext">
-    <p>Sets font, size and other CSS font properties</p>
+    <p>Faster blur effect on a rectangular selection.</p>
 </div>
 
 
@@ -144,17 +144,6 @@
 
 
 
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>fill(BLACK);font('Arial', 30, 'bold');text('Hello World', 100, 100);// expected outcome: 'Hello World' in bold Arial font</code></pre>
-
-    <pre class="prettyprint"><code>let f = font('Arial', 'bold');textSize(30);text('Hello World', 100, 100);// expected outcome: 'Hello World' in normal Arial normal size font// `textSize()` should not be used with `font()`// Instead, use `font()`font(f, 30);text('Hello World', 100, 200);// expected outcome: 'Hello World' in bold Arial size 30 font</code></pre>
-
-    <pre class="prettyprint"><code>// Use the `-call` parameter to prevent the font automatically being set// This functionailty is useful when defining font variableslet f = font('serif', '-call');text('Hello World', 100, 100);// expected outcome: the text will still be in normal Arial fontfont(f);text('Hello World', 100, 200);// expected outcome: the text will be in serif font</code></pre>
-
-    <pre class="prettyprint"><code>let f = font('Arial', 'bold', 'italic');text('Hello World', 100, 100);// expected outcome: 'Hello World' in bold and italic Arial font// Use the negate syntax to remove properties from fontsfont(f, '-bold');text('Hello World', 100, 200);// expected outcome: 'Hello World' in italic Arial font</code></pre>
 
 
 
@@ -172,8 +161,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -186,34 +173,92 @@
 
         <tr>
             
-                <td class="name"><code>name</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
-|
-
-<span class="param-type">font</span>
+<span class="param-type">Number</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
 
-                
+            
 
+            <td class="description last"><p>x-coordinate of the rectangle</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
                 
-                </td>
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
             
 
             
 
-            <td class="description last"><p>Name of font or font</p></td>
+            <td class="description last"><p>y-coordinate of the rectangle</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>width or the rectangle</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>height of the rectangle</p></td>
         </tr>
 
     
@@ -226,60 +271,17 @@
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Number</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"><p>Font size</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>properties</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                    &lt;repeatable><br>
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>CSS font properties</p></td>
+            <td class="description last"><p>intensity of blur</p></td>
         </tr>
 
     
@@ -301,28 +303,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Created font</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">font</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -331,7 +311,7 @@
 
     
 
-    <h4 class="name" id="~formatDuration"><span class="type-signature">(inner) </span>formatDuration<span class="signature">(ms)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="~circle"><span class="type-signature">(inner) </span>circle<span class="signature">(x, y, radius)</span><span class="type-signature"></span></h4>
 
     
 
@@ -343,7 +323,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1197">line 1197</a>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1605">line 1605</a>
     </li></ul></dd>
     
 
@@ -383,7 +363,7 @@
 
 
 <div class="description usertext">
-    <p>Converts milliseconds to a readable format of duration.</p>
+    <p>Alias for <code>ellipse()</code> without the seperate <code>width</code> and <code>height</code> parameters.</p>
 </div>
 
 
@@ -392,11 +372,6 @@
 
 
 
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let martianDay = 88775244;console.log(formatDuration(martianDay));// expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'</code></pre>
 
 
 
@@ -426,13 +401,13 @@
 
         <tr>
             
-                <td class="name"><code>ms</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Number</span>
 
 
             
@@ -442,7 +417,53 @@
 
             
 
-            <td class="description last"><p>Duration in milliseconds</p></td>
+            <td class="description last"><p>x-coordinate of the circle</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>y-coordinate of the circle</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>radius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>redius of the circle</p></td>
         </tr>
 
     
@@ -464,28 +485,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Readable format of duration.</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -494,7 +493,7 @@
 
     
 
-    <h4 class="name" id="~highlightText"><span class="type-signature">(inner) </span>highlightText<span class="signature">(string, x<span class="signature-attributes">opt</span>, y<span class="signature-attributes">opt</span>, highlightColor<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~cylinder"><span class="type-signature">(inner) </span>cylinder<span class="signature">(x, y, width, height)</span><span class="type-signature"></span></h4>
 
     
 
@@ -506,7 +505,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1165">line 1165</a>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1620">line 1620</a>
     </li></ul></dd>
     
 
@@ -546,7 +545,427 @@
 
 
 <div class="description usertext">
-    <p>Draws a string with a highlight background</p>
+    <p>Draws a 2D cylinder.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>cylinder(100, 100, 100, 50);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>x-coordinate of cylinder</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>y-coordinate of cylinder</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~donut"><span class="type-signature">(inner) </span>donut<span class="signature">(x, y, majorDiameter, minorDiameter)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1658">line 1658</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Draws a donut.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>donut(100, 100, 100, 50);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>x-coordinate of the donut</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>y-coordinate of the donut</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>majorDiameter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Diameter of outer circle</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minorDiameter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Diameter of inner circle</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~drawShape"><span class="type-signature">(inner) </span>drawShape<span class="signature">(fn, close<span class="signature-attributes">opt</span>, mode<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1717">line 1717</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Alias for <code>beginShape()</code>/<code>endShape()</code>.</p>
 </div>
 
 
@@ -559,9 +978,9 @@
 
     <h5>Examples</h5>
     
-    <pre class="prettyprint"><code>let str = 'Highlighted\nText';fill(BLACK);highlightText(str, 25, 25);</code></pre>
+    <pre class="prettyprint"><code>drawShape(function() {    vertex(100, 100);    vertex(200, 100);    vertex(200, 200);    vertex(100, 200);}, CLOSE);// expected outcome: square</code></pre>
 
-    <pre class="prettyprint"><code>let str = 'Highlighted\nText';fill(LIGHTGREEN);highlightText(str, 25, 25, BLACK);</code></pre>
+    <pre class="prettyprint"><code>strokeWeight(5);drawShape(function() {    vertex(100, 100);    vertex(200, 100);    vertex(200, 200);    vertex(100, 200);}, false, POINTS);// expected outcome: points in a square formation</code></pre>
 
 
 
@@ -583,8 +1002,6 @@
         
 
         
-        <th>Default</th>
-        
 
         <th class="last">Description</th>
     </tr>
@@ -595,13 +1012,13 @@
 
         <tr>
             
-                <td class="name"><code>string</code></td>
+                <td class="name"><code>fn</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">function</span>
 
 
             
@@ -618,624 +1035,95 @@
             
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>String to be highlighted</p></td>
+            <td class="description last"><p>Shape function</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>x</code></td>
+                <td class="name"><code>close</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>0</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>x-coordinate value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>'text height'</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>y-coordinate value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>highlightColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>YELLOW</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>Color of highlight background</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~lightOrDarkText"><span class="type-signature">(inner) </span>lightOrDarkText<span class="signature">(backgroundColor)</span><span class="type-signature"> &rarr; {number}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1236">line 1236</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Determines if text should be black or white based on background color</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let h = 0,    s = 0,    b = 0;colorMode(HSB);textAlign(CENTER, CENTER);textSize(50);draw = function() {    h = frameCount % 255;    s = frameCount % 255;    b = frameCount % 255;    let TEST_COLOR = color(h, s, b);    background(TEST_COLOR);    fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));    text("TEXT", width / 2, height / 2);};</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>backgroundColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Color of background</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Color of text</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~multicoloredText"><span class="type-signature">(inner) </span>multicoloredText<span class="signature">(string, x, y)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1266">line 1266</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Draws text with multiple colors that are passed in using special syntax</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';fill(BLUE);multicoloredText(str, 25, 25);</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>string</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Input string</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>x-coordinate value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>y-coordinate value</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~ordinalSuffix"><span class="type-signature">(inner) </span>ordinalSuffix<span class="signature">(n)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1308">line 1308</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Takes a number and returns it as a string with the correct ordinal indicator
-suffix.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>println(ordinalSuffix(123));// expected output: '123rd'</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>n</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
+<span class="param-type">CLOSE</span>
 |
 
-<span class="param-type">string</span>
+<span class="param-type">boolean</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last"><p>Number</p></td>
+            <td class="description last"><p>Whether to close the shape</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">POINTS</span>
+|
+
+<span class="param-type">LINES</span>
+|
+
+<span class="param-type">TRIANGLES</span>
+|
+
+<span class="param-type">TRIANGLE_FAN</span>
+|
+
+<span class="param-type">TRIANGLE_STRIP</span>
+|
+
+<span class="param-type">QUADS</span>
+|
+
+<span class="param-type">QUAD_STRIP</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Shape mode</p></td>
         </tr>
 
     
@@ -1257,28 +1145,6 @@ suffix.</p>
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Number with ordinal suffix.</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -1287,7 +1153,7 @@ suffix.</p>
 
     
 
-    <h4 class="name" id="~outlineText"><span class="type-signature">(inner) </span>outlineText<span class="signature">(string, x, y, outlineColor<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~heart"><span class="type-signature">(inner) </span>heart<span class="signature">(x, y, radius)</span><span class="type-signature"></span></h4>
 
     
 
@@ -1299,7 +1165,7 @@ suffix.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1373">line 1373</a>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1736">line 1736</a>
     </li></ul></dd>
     
 
@@ -1339,7 +1205,7 @@ suffix.</p>
 
 
 <div class="description usertext">
-    <p>Draws text with an outline.</p>
+    <p>Draws a heart.</p>
 </div>
 
 
@@ -1350,11 +1216,9 @@ suffix.</p>
 
 
 
-    <h5>Examples</h5>
+    <h5>Example</h5>
     
-    <pre class="prettyprint"><code>let str = 'Outlined\nText';outlineText(str, 25, 25);</code></pre>
-
-    <pre class="prettyprint"><code>let str = 'Outlined\nText';fill(BLACK);outlineText(str, 25, 25, ORANGE);</code></pre>
+    <pre class="prettyprint"><code>heart(100, 100, 50);</code></pre>
 
 
 
@@ -1372,11 +1236,7 @@ suffix.</p>
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -1384,41 +1244,6 @@ suffix.</p>
     </thead>
 
     <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>string</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>String to be outlined</p></td>
-        </tr>
-
     
 
         <tr>
@@ -1436,22 +1261,10 @@ suffix.</p>
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>x-coordinate value</p></td>
+            <td class="description last"><p>x-coordinate of the heart</p></td>
         </tr>
 
     
@@ -1471,29 +1284,17 @@ suffix.</p>
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>y-coordinate value</p></td>
+            <td class="description last"><p>y-coordinate of the heart</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>outlineColor</code></td>
+                <td class="name"><code>radius</code></td>
             
 
             <td class="type">
@@ -1506,26 +1307,10 @@ suffix.</p>
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    <code>BLACK</code>
-                
-                </td>
-            
 
-            <td class="description last"><p>Color of outline</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -1555,7 +1340,7 @@ suffix.</p>
 
     
 
-    <h4 class="name" id="~pluralize"><span class="type-signature">(inner) </span>pluralize<span class="signature">(value, word, plural<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~parallelogram"><span class="type-signature">(inner) </span>parallelogram<span class="signature">(ax, ay, bx, by, cx, cy)</span><span class="type-signature"></span></h4>
 
     
 
@@ -1567,7 +1352,7 @@ suffix.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1348">line 1348</a>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1770">line 1770</a>
     </li></ul></dd>
     
 
@@ -1601,7 +1386,7 @@ suffix.</p>
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="global.html#printf">printf</a></li>
+            <li>rhombus</li>
         </ul>
     </dd>
     
@@ -1614,8 +1399,7 @@ suffix.</p>
 
 
 <div class="description usertext">
-    <p>Returns the singular or plural form of the word based on the input number,
-using an optional dictionary if supplied.</p>
+    <p>Draws a parallelogram.</p>
 </div>
 
 
@@ -1626,11 +1410,9 @@ using an optional dictionary if supplied.</p>
 
 
 
-    <h5>Examples</h5>
+    <h5>Example</h5>
     
-    <pre class="prettyprint"><code>let apples;const printApples = function() {    printf('% %.', apples, pluralize(apples, 'apple'));}apples = 2;printApples();// expected output: '2 apples.'apples = 1;printApples();// expected output: '1 apple.'</code></pre>
-
-    <pre class="prettyprint"><code>let people = 2;printf('% %.', people, pluralize(people, 'person', 'people'));// expected output: '2 people.'</code></pre>
+    <pre class="prettyprint"><code>parallelogram(50, 50, 200, 50, 100, 100);</code></pre>
 
 
 
@@ -1648,11 +1430,7 @@ using an optional dictionary if supplied.</p>
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -1664,7 +1442,7 @@ using an optional dictionary if supplied.</p>
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>ax</code></td>
             
 
             <td class="type">
@@ -1677,96 +1455,125 @@ using an optional dictionary if supplied.</p>
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>Number of items</p></td>
+            <td class="description last"><p>x-coordinate of the first vertex</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>word</code></td>
+                <td class="name"><code>ay</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>Word to pluralize</p></td>
+            <td class="description last"><p>y-coordinate of the first vertex</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>plural</code></td>
+                <td class="name"><code>bx</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
 
-                
+            
 
+            <td class="description last"><p>x-coordinate of the second vertex</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>by</code></td>
+            
+
+            <td class="type">
+            
                 
-                </td>
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
             
 
             
-                <td class="default">
-                
-                    <code>word+'s'</code>
-                
-                </td>
+
+            <td class="description last"><p>y-coordinate of the second vertex</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cx</code></td>
             
 
-            <td class="description last"><p>Custom pluralized form</p></td>
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>x-coordinate of the third vertex</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>y-coordinate of the third vertex</p></td>
         </tr>
 
     
@@ -1796,7 +1603,7 @@ using an optional dictionary if supplied.</p>
 
     
 
-    <h4 class="name" id="~underlineText"><span class="type-signature">(inner) </span>underlineText<span class="signature">(string, x, y, underlineColor<span class="signature-attributes">opt</span>, underlineWeight<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~polygon"><span class="type-signature">(inner) </span>polygon<span class="signature">(x, y, sides, radius, rotation<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
 
     
 
@@ -1808,7 +1615,7 @@ using an optional dictionary if supplied.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1524">line 1524</a>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1797">line 1797</a>
     </li></ul></dd>
     
 
@@ -1848,7 +1655,7 @@ using an optional dictionary if supplied.</p>
 
 
 <div class="description usertext">
-    <p>Draws text underlined.</p>
+    <p>Draws a polygon with <em>n</em> sides.</p>
 </div>
 
 
@@ -1861,9 +1668,9 @@ using an optional dictionary if supplied.</p>
 
     <h5>Examples</h5>
     
-    <pre class="prettyprint"><code>let str = 'Underlined\nText';fill(BLACK);underlineText(str, 25, 25);</code></pre>
+    <pre class="prettyprint"><code>polygon(100, 100, 5, 100);</code></pre>
 
-    <pre class="prettyprint"><code>let str = 'Underlined\nText';fill(BLACK);underlineText(str, 25, 25, RED, 5);</code></pre>
+    <pre class="prettyprint"><code>polygon(100, 100, 5, 100, 180);// Alternative methodangleMode = 'radians';polygon(100, 100, 5, 100, PI);</code></pre>
 
 
 
@@ -1897,41 +1704,6 @@ using an optional dictionary if supplied.</p>
 
         <tr>
             
-                <td class="name"><code>string</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Text to be underlined</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>x</code></td>
             
 
@@ -1960,7 +1732,7 @@ using an optional dictionary if supplied.</p>
                 </td>
             
 
-            <td class="description last"><p>x-coordinate value</p></td>
+            <td class="description last"><p>x-coordinate of polygon's circumcircle</p></td>
         </tr>
 
     
@@ -1995,20 +1767,20 @@ using an optional dictionary if supplied.</p>
                 </td>
             
 
-            <td class="description last"><p>y-coordinate value</p></td>
+            <td class="description last"><p>y-coordinate of polygon's circumcircle</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>underlineColor</code></td>
+                <td class="name"><code>sides</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">color</span>
+<span class="param-type">number</span>
 
 
             
@@ -2016,8 +1788,6 @@ using an optional dictionary if supplied.</p>
 
             
                 <td class="attributes">
-                
-                    &lt;optional><br>
                 
 
                 
@@ -2029,19 +1799,52 @@ using an optional dictionary if supplied.</p>
             
                 <td class="default">
                 
-                    <code>BLACK</code>
-                
                 </td>
             
 
-            <td class="description last"><p>Color of underline</p></td>
+            <td class="description last"><p>Number of sides</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>underlineWeight</code></td>
+                <td class="name"><code>radius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Radius of circumcircle</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rotation</code></td>
             
 
             <td class="type">
@@ -2068,10 +1871,12 @@ using an optional dictionary if supplied.</p>
             
                 <td class="default">
                 
+                    <code>0</code>
+                
                 </td>
             
 
-            <td class="description last"><p>Weight of underline</p></td>
+            <td class="description last"><p>Rotation of polygon in degrees or radians</p></td>
         </tr>
 
     
@@ -2101,7 +1906,7 @@ using an optional dictionary if supplied.</p>
 
     
 
-    <h4 class="name" id="~wordWrap"><span class="type-signature">(inner) </span>wordWrap<span class="signature">(str, max, br<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~rhombus"><span class="type-signature">(inner) </span>rhombus<span class="signature">(ax, ay, bx, by, cx, cy)</span><span class="type-signature"></span></h4>
 
     
 
@@ -2113,7 +1918,270 @@ using an optional dictionary if supplied.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1563">line 1563</a>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1827">line 1827</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>parallelogram</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Draws a rhombus.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>rhombus(50, 100, 100, 50, 100, 100);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ax</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>x-coordinate of the first vertex</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>y-coordinate of the first vertex</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>x-coordinate of the second vertex</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>by</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>y-coordinate of the second vertex</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>x-coordinate of the third vertex</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>y-coordinate of the third vertex</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~square"><span class="type-signature">(inner) </span>square<span class="signature">(x, y, side, radius<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1843">line 1843</a>
     </li></ul></dd>
     
 
@@ -2153,8 +2221,7 @@ using an optional dictionary if supplied.</p>
 
 
 <div class="description usertext">
-    <p>Wraps a string to a given number of characters using a string break
-character.</p>
+    <p>Alias for <code>rect()</code> without the seperate <code>width</code> and <code>height</code> parameters.</p>
 </div>
 
 
@@ -2163,11 +2230,6 @@ character.</p>
 
 
 
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let str = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus.';let wrappedStr = wordWrap(str, 32);println(wrappedStr);// expected output: // 'Lorem ipsum dolor sit amet,// consectetur adipiscing elit.// Fusce tempus.'let customWrappedStr = wordWrap(str, 32, '&lt;br>');println(customWrappedStr);// expected output: 'Lorem ipsum dolor sit amet,&lt;br>consectetur adipiscing elit.&lt;br>Fusce tempus.'</code></pre>
 
 
 
@@ -2201,13 +2263,13 @@ character.</p>
 
         <tr>
             
-                <td class="name"><code>str</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Number</span>
 
 
             
@@ -2229,14 +2291,247 @@ character.</p>
                 </td>
             
 
-            <td class="description last"><p>String to be wrapped</p></td>
+            <td class="description last"><p>x-coordinate of the square</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>max</code></td>
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>y-coordinate of the square</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>side</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>side size of the square</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>radius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>0</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>radius of corners</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~star"><span class="type-signature">(inner) </span>star<span class="signature">(x, y, externalRadius, spikes<span class="signature-attributes">opt</span>, rotation<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1862">line 1862</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Draws a star with <em>n</em> spikes.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>star(100, 100, 50);</code></pre>
+
+    <pre class="prettyprint"><code>star(100, 100, 50, 7, 10);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
@@ -2264,20 +2559,90 @@ character.</p>
                 </td>
             
 
-            <td class="description last"><p>Maximum number of characters per line</p></td>
+            <td class="description last"><p>x-coordinate of star</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>br</code></td>
+                <td class="name"><code>y</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>y-coordinate of star</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>externalRadius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>External radius</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>spikes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
 
 
             
@@ -2298,12 +2663,51 @@ character.</p>
             
                 <td class="default">
                 
-                    <code>'\n'</code>
+                    <code>5</code>
                 
                 </td>
             
 
-            <td class="description last"><p>Custom break character</p></td>
+            <td class="description last"><p>Number of spikes</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rotation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>0</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Rotation of star in degrees or radians</p></td>
         </tr>
 
     

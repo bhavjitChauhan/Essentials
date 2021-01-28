@@ -1,88 +1,67 @@
-# Essentials
-JavaScript library for Khan Academy containing useful functions and variables. 
+![Essentials Logo](https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png)
+---
 
-## Documentation
-You can view the documentation for the library on [Github Pages](https://bhavjitchauhan.github.io/Essentials/index.html) or the project [Wiki](https://github.com/bhavjitChauhan/Essentials/wiki).
+[GitHub Pages](https://bhavjitchauhan.github.io/Essentials) |
+[Wiki](https://github.com/bhavjitChauhan/Essentials/wiki) |
+[Khan Academy](https://www.khanacademy.org/profile/bhavjitChauhan/projects)
+
+[![](https://data.jsdelivr.com/v1/package/gh/bhavjitChauhan/Essentials/badge)](https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials)
+
+The Essentials library provides utility functions for the [Khan Academy
+Processing Environment](https://www.khanacademy.org/cs/new).
 
 ## Usage
-The Essentials library was made for Khan Acadmey's unique Processing environment.
+In a [New Program](https://www.khanacademy.org/cs/new):
 
-To use the library in your program, you will need something similar to the following lines of code.
-
-First, we need to write out the following JSHint flag to enable what would otherwise be restricted functionality on Khan Academy.
+Use the follwing [JSHint directive](https://jshint.com/docs/) to allow the use
+of otherwise restricted features.
 ```js
 // jshint ignore: start
 ```
 
-Next, we need to copy the `bootstrapper` function. You can view it's documentation [here](https://www.khanacademy.org/cs/i/6070976254115840).
+Use [jQuery](https://jquery.com/)'s
+[getScript](https://api.jquery.com/jQuery.getScript/) method to load the
+library.
 ```js
-const bootstrapper = function(callback) {
-    let doc = Object.constructor('return this.document')();
-    let jsonp = doc[['createElement']]('script');
-    doc.BMS_bootstrap_loader = function(data) {
-        delete doc.BMS_bootstrap_loader; jsonp.parentNode.removeChild(jsonp);
-        Object.constructor('importer_context', 'export_module', data.revision.code)(this, callback);
-    }.bind(this);
-    jsonp.setAttribute('src', 'https://www.khanacademy.org/api/labs/scratchpads/5522928629252096?callback=document.BMS_bootstrap_loader');
-    doc.head.appendChild(jsonp);
-};
-```
-
-We also need to declare the `__requirements__` object that contains all the modules we will be importing.
-```js
-const __requirements__ = {
-    'Essentials': '#5219990839590912'
-};
-```
-
-Finally, we call the `bootstrapper` function to import the Essentials library.
-```js
-bootstrapper({
-    done: function(BMS, modules) {
-        // Check if imported variables from Essentials library were defined globally
-        if (typeof IMPORTED_ESSENTIALS == 'undefined') {
-            console.error('Essentials library variables not defined, restarting program...');
-            Program.restart();
-        }
+$.ajaxSetup({ cache: true });
+$.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js',
+    function() {
+        // your code here
     }
-});
+);
 ```
-> Note that due to an issue with BMS, sometimes globals are not defined so I've included a hacky workaround by restarting the program if globals are not defined
+See the project Wiki page on [Custom
+Builds](https://github.com/bhavjitChauhan/Essentials/wiki/Custom-Builds) for
+alternative builds.
 
-<details>
-  <summary>Boilerplate code</summary>
-  
-  ```js
-  // jshint ignore: start
-  const bootstrapper = function(callback) {
-      let doc = Object.constructor('return this.document')();
-      let jsonp = doc[['createElement']]('script');
-      doc.BMS_bootstrap_loader = function(data) {
-          delete doc.BMS_bootstrap_loader; jsonp.parentNode.removeChild(jsonp);
-          Object.constructor('importer_context', 'export_module', data.revision.code)(this, callback);
-      }.bind(this);
-      jsonp.setAttribute('src', 'https://www.khanacademy.org/api/labs/scratchpads/5522928629252096?callback=document.BMS_bootstrap_loader');
-      doc.head.appendChild(jsonp);
-  };
-  const __requirements__ = {
-      'Essentials': '#5219990839590912'
-  };
-  bootstrapper({
-      done: function(BMS, modules) {
-          // Check if imported variables from Essentials library were defined globally
-          if (typeof IMPORTED_ESSENTIALS == 'undefined') {
-              console.error('Essentials library variables not defined, restarting program...');
-              Program.restart();
-          }
-      }
-  });
-  ```
-  
-</details>
+## Why Essentials?
+> A JavaScript library is a library of pre-written JavaScript that allows for
+easier development of JavaScript-based applications.
+*[Wikipedia](https://en.wikipedia.org/wiki/JavaScript_library)*
 
-## Built With
- - [Ben's Module System](https://www.khanacademy.org/cs/i/6070976254115840) - Module import/export system
- - [underscore.js](https://underscorejs.org) - Useful JavaScript library
+Khan Academy does not provide the equivalent of
+[ES6 Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+or [npm](https://www.npmjs.com/)
+for their platform. Users are forced to either reinvent the wheel for themselves
+or paste similar lines of code in each of their programs.
+
+The Essentials library solves this issue by providing utility functions and
+constants all packaged in an external file. It allows users to spend more time on their projects than working around Khan Academy's restrictions.
+
+## Documentation
+Documentation is availible on [Github
+Pages](https://bhavjitchauhan.github.io/Essentials) or in the project
+[Wiki](https://github.com/bhavjitChauhan/Essentials/wiki/Documentation).
+
+## Credits
+### Using
+ - [jQuery](https://github.com/jquery/jquery)
+ - [underscore.js](https://github.com/jashkenas/underscore)
+ - [30 seconds of code](https://github.com/30-seconds/30-seconds-of-code)
+
+### Inspirations
+ - [BMS](https://www.khanacademy.org/cs/-/6070976254115840)
+ - [lodash](https://github.com/lodash/lodash)
 
 ## License
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.

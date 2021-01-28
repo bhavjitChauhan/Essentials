@@ -3,7 +3,7 @@
         "plugins/markdown"
     ],
     "source": {
-        "include": ["src"]
+        "include": ["essentials.js"]
     },
     "opts": {
         "template": "node_modules/docdash",
