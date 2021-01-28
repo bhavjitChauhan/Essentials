@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>temp.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#attempt">attempt</a></li><li><a href="global.html#bind">bind</a></li><li><a href="global.html#chainAsync">chainAsync</a></li><li><a href="global.html#clean">clean</a></li><li><a href="global.html#clearLogs">clearLogs</a></li><li><a href="global.html#complement">complement</a></li><li><a href="global.html#formatDuration">formatDuration</a></li><li><a href="global.html#inherit">inherit</a></li><li><a href="global.html#memoize">memoize</a></li><li><a href="global.html#mostPerformant">mostPerformant</a></li><li><a href="global.html#noop">noop</a></li><li><a href="global.html#partial">partial</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">temp.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Khan Academy utility JavaScript library.
+ *
+ * The Essentials library is a utility JavaScript library for Khan Academy's Processing environment.
+ *
+ * @link   https://github.com/bhavjitChauhan/Essentials
+ * @file   Main file containing the Essentials library functions.
+ * @author Bhavjit Chauhan
+ */
+
+VERSION = '0.2.0-alpha1';
+
+__env__ = Processing.instances[0];
+
+/**
+ * @summary
+ * Clears canvas console.
+ * 
+ * @example
+ * printHTML('&lt;marquee>&lt;b>Hello&lt;/b> &lt;i>World&lt;/i>!&lt;/marquee>');
+ * clearLogs();
+ * // expected outcome: blank canvas console
+ */
+clearLogs = () => __env__._clearLogs();
+
+/**
+ * Literally does nothing.
+ * 
+ * @example
+ * // Prevents an error if a uneeded method may be called
+ * Element.init = noop;
+ */
+noop = _.noop;
+
+/**
+ * Attempts to invoke a function with the provided arguments, returning either
+ *      the result or an error.
+ * 
+ * @link https://www.30secondsofcode.org/js/s/attempt
+ * 
+ * @param {} fn Function to attempt.
+ * @param {...*} args Functions arguments.
+ */
+attempt = (fn, ...args) => {
+    try {
+        return fn(...args);
+    } catch (e) {
+        return e instanceof Error ? e : new Error(e);
+    }
+};
+
+/**
+ * @summary
+ * temp
+ * 
+ * @description
+ * Creates a function that invokes with a given context, optionally
+ *      prepending any additional supplied parameters to the arguments.
+ * 
+ * @link https://www.30secondsofcode.org/js/s/bind
+ * 
+ * @param {Function} fn Function to be bound
+ * @param {Object} context Object to be bound to
+ * @param {...*} [boundArgs] Prepending parameters
+ * 
+ * @returns {Function} Bound function
+ * 
+ * @example
+ * const greet = function(greeting) {
+ *     return greeting + ' ' + this.name;
+ * };
+ * const user = { name: 'foo' };
+ * const greetUser = bind(greet, user);
+ * println(greetUser('hi'));
+ * // expected output: "hi foo"
+ */
+bind = (fn, context, ...boundArgs) => (...args) =>
+    fn.apply(context, [...boundArgs, ...args]);
+
+/**
+ * Calls multiple functions asynchronously.
+ * 
+ * @link https://www.30secondsofcode.org/js/s/chain-async
+ * 
+ * @param {array}  fns  Array containing functions to call
+ * 
+ * @example
+ * let array;
+ * chainAsync([
+ *     function(next) {
+ *         console.log('Generating array...');
+ *         array = [];
+ *         for (let i = 0; i &lt; 10000; i++) {
+ *             array.push(Math.random(0, 100));
+ *         }
+ *         next();
+ *     }, function(next) {
+ *         console.log('Sorting array...');
+ *         array.sort();
+ *         next();
+ *     }, function() {
+ *         console.log(array);
+ *     }
+ * ]);
+ */
+chainAsync = fns => {
+    let i = 0;
+    const last = _.last(fns);
+    const next = () => {
+        const fn = fns[i++];
+        fn === last ? fn() : fn(next);
+    };
+    next();
+};
+
+/**
+ * @summary
+ * Removes Khan Academy's loop protection code from functions.
+ * 
+ * @description
+ * Khan Academy adds a few lines of code to every function created to prevent the webpage from freezing. This can be a hinderance when running more resource-intensive code.
+ * 
+ * @link https://khanacademy.org/cs/i/5594326276014080
+ * 
+ * @param {function} fn Function to be cleaned
+ * 
+ * @returns {function} Cleaned function.
+ * 
+ * @example
+ * const drawEllipses = function() {
+ *     for (let i = 0; i &lt; 1e4; i++) {
+ *         ellipse(Math.random(0, width), Math.random(0, height), 10, 10);
+ *     }
+ * };
+ * // possible error: "A for loop is taking too long to run."
+ * 
+ * @example
+ * const drawEllipses = clean(function() {
+ *     for (let i = 0; i &lt; 1e4; i++) {
+ *         ellipse(Math.random(0, width), Math.random(0, height), 10, 10);
+ *     }
+ * });
+ */
+clean = fn => {
+    const string = fn.toString()
+        .replace(/__env__\.KAInfiniteLoopCount\+\+;/g, '')
+        .replace(/if \(__env__\.KAInfiniteLoopCount > 1000\) {[\s]+__env__\.KAInfiniteLoopProtect\(\'[^']*'\);[^}]+}/g, '')
+        .replace(/__env__\.PJSOutput\.applyInstance\((__env__\.\S+), '\S+'\)/g,
+            'new $1');
+    return Object.constructor(`return (function(__env__) {return ${string};});`)()(__env__);
+};
+
+/**
+ * Returns a function that is the [negation]{@link https://en.wikipedia.org/wiki/Negation} of the given function
+ * 
+ * @link https://www.30secondsofcode.org/js/s/complement
+ * 
+ * @param {Function} fn Given function
+ * 
+ * @returns {Function} Complement function
+ * 
+ * @example
+ * const isEven = function(num) {
+ *     return num % 2 === 0;
+ * }
+ * const isOdd = complement(isEven);
+ */
+complement = fn => (...args) => !fn(...args);
+
+/**
+ * Converts milliseconds to a readable format of duration.
+ * 
+ * @link https://www.30secondsofcode.org/js/s/format-duration
+ * 
+ * @param {number}  ms  Duration in milliseconds
+ * 
+ * @returns {string}  Readable format of duration.
+ * 
+ * @example
+ * let martianDay = 88775244;
+ * console.log(formatDuration(martianDay));
+ * // expected output: "1 day, 39 minutes, 35 seconds, 244 milliseconds"
+ */
+formatDuration = ms => {
+    if (ms &lt; 0) ms = -ms;
+    const time = {
+        day: Math.floor(ms / 86400000),
+        hour: Math.floor(ms / 3600000) % 24,
+        minute: Math.floor(ms / 60000) % 60,
+        second: Math.floor(ms / 1000) % 60,
+        millisecond: Math.floor(ms) % 1000
+    };
+    return Object.entries(time)
+        .filter(val => val[1] !== 0)
+        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
+        .join(', ');
+};
+
+/**
+ * Efficiently inherts properties from the parent class to the child class.
+ * 
+ * @param {function} subClass Class to be inherited to
+ * @param {function} superClass Class to inherit from
+ * 
+ * @example
+ * const Element = function(x, y, w, h) {
+ *     this.x = x;
+ *     this.y = y;
+ *     this.w = w;
+ *     this.h = h;
+ * };
+ * Element.prototype.draw = function() {
+ *     rect(this.x, this.y, this.w, this.h);
+ * };
+ * const Button = function(x, y, w, h) {
+ *     Element.call(this, x, y, w, h);
+ * };
+ * inherit(Button, Element);
+ * 
+ * let b = new Button(100, 100, 150, 50);
+ * b.draw();
+ * // expected outcome: rectangle with arguments (100, 100, 150, 50)
+ */
+inherit = (subClass, superClass) => {
+    Object.setPrototypeOf(subClass.prototype, superClass.prototype);
+    subClass.prototype.constructor = subClass;
+    if (superClass.prototype.constructor === Object)
+        superClass.prototype.constructor = superClass;
+};
+
+/**
+ * Creates a cached ([memoized]{@link https://en.wikipedia.org/wiki/Memoization}) function
+ * 
+ * @param {Function} fn Function to be memoized
+ * 
+ * @returns {Function} Memoized function
+ * 
+ * @example
+ * temp
+ */
+memoize = fn => {
+    const cache = new Map();
+    const cached = function (val) {
+        return cache.has(val)
+            ? cache.get(val)
+            : cache.set(val, fn.call(this, val)) &amp;&amp; cache.get(val);
+    };
+    cached.cache = cache;
+    return cached;
+};
+
+/**
+ * @summary
+ * Calculates fastest function in terms of iterations.
+ * 
+ * @description
+ * The functions will be called x amount of times. Their times will be how long
+ *      they took to run x amount of times. The more iterations, the more
+ *      accurate the result.
+ * 
+ * Running resource-intensive function may result in a infinite loop error.
+ *      You can bypass this using the {@link clean} function.
+ * 
+ * @link https://www.30secondsofcode.org/js/s/most-performant
+ * 
+ * @param {array} fns Funtions to be compared
+ * @param {number} [iterations=1e4] Number of times function should be invoked
+ * 
+ * @returns {Object} Index of function which performed fastest and times recorded
+ * 
+ * @example
+ * let testees = {
+ *     'debug': debug,
+ *     'console.log': console.log
+ * };
+ * let test = mostPerformant(Object.values(testees));
+ * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
+ * // possible output: "console.log performed faster."
+ */
+mostPerformant = (fns, iterations = 10000) => {
+    const times = fns.map(fn => {
+        const before = performance.now();
+        for (let i = 0; i &lt; iterations; i++) fn();
+        return performance.now() - before;
+    });
+    return times.indexOf(Math.min(...times));
+};
+
+/**
+ * Creates a function that invokes with the given partial arguemnts prepended to it.
+ * 
+ * @link https://www.30secondsofcode.org/js/s/partial
+ * 
+ * @param {Function} fn Function
+ * @param {...*} partials Partial arguments
+ * 
+ * @returns {Function} Partial function
+ * 
+ * @example
+ * const greet = function(greeting, name) {
+ *     return greeting + ' ' + name;
+ * };
+ * const hello = partials(greet, 'Hello');
+ * println(hello('World'));
+ * // expected output: "Hello World"
+ */
+partial = (fn, ...partials) => (...args) => fn(...partials, ...args);
+
+timeTaken = callback => {
+    console.time('timeTaken');
+    const r = callback();
+    console.timeEnd('timeTaken');
+    return r;
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu Jan 07 2021 19:11:19 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
