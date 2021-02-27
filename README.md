@@ -4,7 +4,7 @@
 [GitHub Pages](https://bhavjitchauhan.github.io/Essentials) |
 [Wiki](https://github.com/bhavjitChauhan/Essentials/wiki) |
 [Khan Academy](https://www.khanacademy.org/profile/bhavjitChauhan/projects) |
-[Builder](https://bhavjitchauhan.github.io/Essentials/build.html)
+[Builder](https://bhavjitchauhan.github.io/Essentials/builder.html)
 
 [![](https://img.shields.io/github/package-json/v/bhavjitChauhan/Essentials?style=flat-square)](https://github.com/bhavjitChauhan/Essentials/releases)
 [![](https://img.shields.io/github/last-commit/bhavjitChauhan/Essentials?style=flat-square)](https://github.com/bhavjitChauhan/Essentials/commits)
@@ -36,7 +36,7 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
 ```
 
 ### Local
-Essentials is also availible to use without using jsDelivr. Copy and paste the source code directly into your program using the [Essentials Builder](https://bhavjitchauhan.github.io/Essentials/build.html) or the [essentials-ka.js](https://github.com/bhavjitChauhan/Essentials/blob/master/build/essentials-ka.js) file in the repository.
+Essentials is also availible to use without using jsDelivr. Copy and paste the source code directly into your program using the [Essentials Builder](https://bhavjitchauhan.github.io/Essentials/builder.html) or the [essentials-ka.js](https://github.com/bhavjitChauhan/Essentials/blob/master/build/essentials-ka.js) file in the repository.
 
 See the project Wiki page on [Custom
 Builds](https://github.com/bhavjitChauhan/Essentials/wiki/Custom-Builds) for

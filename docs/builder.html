@@ -337,7 +337,7 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
                         ',gh/bhavjitChauhan/Essentials@1/build/text-essentials.min.js',
                         ',gh/bhavjitChauhan/Essentials@1/build/shape-essentials.min.js'
                     ];
-                    options = options.filter(function (_, i) { components[i] });
+                    options = options.filter(function (_, i) { return components[i] });
                     URL += options.join('');
                     Prism.highlightElement(document.querySelector(".language-js"));
                 }
@@ -358,8 +358,8 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
                         ',gh/bhavjitChauhan/Essentials@1/build/text-essentials-ka.js',
                         ',gh/bhavjitChauhan/Essentials@1/build/shape-essential-kas.js'
                     ];
-                    options = options.filter(function (option, i) { components[i] });
-                    URL += options.join('')
+                    options = options.filter(function (_, i) { return components[i] });
+                    URL += options.join('');
                 }
             }
             $("#rawLink").attr("href", URL)
