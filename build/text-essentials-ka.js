@@ -32,40 +32,6 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 }
 
 /**
- * Converts milliseconds to a readable format of duration.
- * 
- * @link https://www.30secondsofcode.org/js/s/format-duration
- * 
- * @param {number}  ms  Duration in milliseconds
- * 
- * @returns {string}  Readable format of duration.
- * 
- * @example
- * let martianDay = 88775244;
- * console.log(formatDuration(martianDay));
- * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
- */
-formatDuration = function (ms) {
-  if (ms < 0) ms = -ms;
-  var time = {
-    day: Math.floor(ms / 86400000),
-    hour: Math.floor(ms / 3600000) % 24,
-    minute: Math.floor(ms / 60000) % 60,
-    second: Math.floor(ms / 1000) % 60,
-    millisecond: Math.floor(ms) % 1000
-  };
-  return Object.entries(time).filter(function (val) {
-    return val[1] !== 0;
-  }).map(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        key = _ref2[0],
-        val = _ref2[1];
-
-    return "".concat(val, " ").concat(key).concat(val !== 1 ? 's' : '');
-  }).join(', ');
-};
-
-/**
  * Sets font, size and other [CSS font properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
  * 
  * @param {(string|font)}  name  Name of font or font
@@ -158,6 +124,40 @@ font = function (family) {
 
   call && e.textFont(_font);
   return _font;
+};
+
+/**
+ * Converts milliseconds to a readable format of duration.
+ * 
+ * @link https://www.30secondsofcode.org/js/s/format-duration
+ * 
+ * @param {number}  ms  Duration in milliseconds
+ * 
+ * @returns {string}  Readable format of duration.
+ * 
+ * @example
+ * let martianDay = 88775244;
+ * console.log(formatDuration(martianDay));
+ * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
+ */
+formatDuration = function (ms) {
+  if (ms < 0) ms = -ms;
+  var time = {
+    day: Math.floor(ms / 86400000),
+    hour: Math.floor(ms / 3600000) % 24,
+    minute: Math.floor(ms / 60000) % 60,
+    second: Math.floor(ms / 1000) % 60,
+    millisecond: Math.floor(ms) % 1000
+  };
+  return Object.entries(time).filter(function (val) {
+    return val[1] !== 0;
+  }).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        key = _ref2[0],
+        val = _ref2[1];
+
+    return "".concat(val, " ").concat(key).concat(val !== 1 ? 's' : '');
+  }).join(', ');
 };
 
 /**
@@ -317,6 +317,48 @@ ordinalSuffix = function (n) {
       ordinals = ['st', 'nd', 'rd', 'th'],
       tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
   return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
+};
+
+/**
+ * Draws text with an outline.
+ * 
+ * @param {string} string String to be outlined
+ * @param {number} x x-coordinate value
+ * @param {number} y y-coordinate value
+ * @param {number} [outlineColor=BLACK] Color of outline
+ * 
+ * @example
+ * let str = 'Outlined\nText';
+ * outlineText(str, 25, 25);
+ * 
+ * @example
+ * let str = 'Outlined\nText';
+ * fill(BLACK);
+ * outlineText(str, 25, 25, ORANGE);
+ */
+outlineText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var outlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  push();
+  e.fill(outlineColor);
+
+  for (var i = -2; i < 3; i++) {
+    for (var j = -1; j < 3; j++) {
+      e.text(string, x + i, y + j);
+    }
+
+    e.text(string, x + i, y);
+    e.text(string, x, y + i);
+  }
+
+  pop();
+  e.text(string, x, y);
 };
 
 /**
@@ -507,48 +549,6 @@ String.prototype.toTitleCase = function () {
   return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.charAt(0).toUpperCase() + x.slice(1);
   }).join(' ');
-};
-
-/**
- * Draws text with an outline.
- * 
- * @param {string} string String to be outlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {number} [outlineColor=BLACK] Color of outline
- * 
- * @example
- * let str = 'Outlined\nText';
- * outlineText(str, 25, 25);
- * 
- * @example
- * let str = 'Outlined\nText';
- * fill(BLACK);
- * outlineText(str, 25, 25, ORANGE);
- */
-outlineText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var outlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
-
-  if (!/\S/.test(string)) {
-    return;
-  }
-
-  push();
-  e.fill(outlineColor);
-
-  for (var i = -2; i < 3; i++) {
-    for (var j = -1; j < 3; j++) {
-      e.text(string, x + i, y + j);
-    }
-
-    e.text(string, x + i, y);
-    e.text(string, x, y + i);
-  }
-
-  pop();
-  e.text(string, x, y);
 };
 
 /**

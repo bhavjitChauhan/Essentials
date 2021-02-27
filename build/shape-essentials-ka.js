@@ -25,18 +25,6 @@ blurRect = function (x, y, width, height, size) {
 };
 
 /**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
- * 
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
- * 
- */
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
-};
-
-/**
  * Draws a 2D cylinder.
  * 
  * @link https://www.khanacademy.org/cs/-/5157537806548992
@@ -122,6 +110,52 @@ donut = function (x, y, majorDiameter, minorDiameter) {
 };
 
 /**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ * 
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ * 
+ */
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
+};
+
+/**
+ * Alias for `beginShape()`/`endShape()`.
+ * 
+ * @param {Function} fn Shape function
+ * @param {CLOSE|boolean} [close] Whether to close the shape
+ * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
+ * [mode] Shape mode
+ * 
+ * @example
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, CLOSE);
+ * // expected outcome: square
+ * 
+ * @example
+ * strokeWeight(5);
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, false, POINTS);
+ * // expected outcome: points in a square formation
+ */
+drawShape = function (fn, close, mode) {
+  close = close && e.CLOSE;
+  e.beginShape(mode);
+  fn();
+  e.endShape(close);
+};
+
+/**
  * Draws a heart.
  * 
  * @link https://www.khanacademy.org/cs/-/2085250861
@@ -170,40 +204,6 @@ parallelogram = function (ax, ay, bx, by, cx, cy) {
   var dx = bx - ax;
   var dy = by - ay;
   e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
-};
-
-/**
- * Alias for `beginShape()`/`endShape()`.
- * 
- * @param {Function} fn Shape function
- * @param {CLOSE|boolean} [close] Whether to close the shape
- * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
- * [mode] Shape mode
- * 
- * @example
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, CLOSE);
- * // expected outcome: square
- * 
- * @example
- * strokeWeight(5);
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, false, POINTS);
- * // expected outcome: points in a square formation
- */
-drawShape = function (fn, close, mode) {
-  close = close && e.CLOSE;
-  e.beginShape(mode);
-  fn();
-  e.endShape(close);
 };
 
 /**
