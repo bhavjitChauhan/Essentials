@@ -8,7 +8,7 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     COLOR_ESSENTIALS = true;
     if (!_silent_ && !_color_initialized_) console.info(
         '%cColor Essentials',
-        'font-family:system-ui;font-size:0.75rem;color:lightgray;'
+        'font-family:system-ui;font-size:0.75rem;'
     );
 }
 
@@ -204,38 +204,7 @@ MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
 /**
- * Converts hex to RGB color type
- * 
- * @param {string} hex Hex color value, optional `#`; can be shorthand
- * 
- * @returns {color} RGB color value
- * 
- * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
- */
-hexToRGB = hex => {
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    result = result ? result.splice(1).map(function (i) {
-        return parseInt(i, 16);
-    }) : null;
-    push();
-    e.colorMode(e.RGB);
-    result = e.color.apply(e, result);
-    pop();
-    return result;
-};
-
-/**
- * Converts HSB to RGB color type
+ * Converts HSB to RGB color type.
  * 
  * @param {(number|color)} x Hue value or color
  * @param {number} [s] Saturation value
@@ -281,7 +250,38 @@ HSBToRGB = function(x, s, v) {
 };
 
 /**
- * Converts RGB to hex color type
+ * Converts hex to RGB color type.
+ * 
+ * @param {string} hex Hex color value, optional `#`; can be shorthand
+ * 
+ * @returns {color} RGB color value
+ * 
+ * @example
+ * let c = hexToRGB('#fff');
+ * println(c);
+ * // expected output: -1
+ * background(c);
+ * // expected outcome: white background
+ */
+hexToRGB = hex => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    result = result ? result.splice(1).map(function (i) {
+        return parseInt(i, 16);
+    }) : null;
+    push();
+    e.colorMode(e.RGB);
+    result = e.color.apply(e, result);
+    pop();
+    return result;
+};
+
+/**
+ * Converts RGB to hex color type.
  * 
  * @param {(number|color)} x Red value or color
  * @param {number} [g] Green value
@@ -307,7 +307,7 @@ RGBToHex = function(x, g, b) {
 };
 
 /**
- * Converts RGB to HSB color type
+ * Converts RGB to HSB color type.
  * 
  * @param {(number|color)} x Red value or color
  * @param {number} [g] Green value
@@ -360,7 +360,7 @@ RGBToHSB = function(x, g, b) {
 };
 
 /**
- * Converts hex or RGB to HSB color value
+ * Converts hex or RGB to HSB color value.
  * 
  * @param {(string|color)} x Hex, red or HSB color value
  * @param {number} [g] Green value
@@ -397,7 +397,7 @@ toHSB = function() {
 };
 
 /**
- * Converts hex or HSB to RGB color value
+ * Converts hex or HSB to RGB color value.
  * 
  * @param {(string|color)} x Hex, hue or RGB color value
  * @param {number} [s] Saturation value

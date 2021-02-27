@@ -13,7 +13,7 @@
  * // expected output: '123rd'
  */
 ordinalSuffix = n => {
-    const int = parseInt(n),
+    const int = parseInt(n, 10),
         digits = [int % 10, int % 100],
         oPattern = [1, 2, 3, 4],
         ordinals = ['st', 'nd', 'rd', 'th'],

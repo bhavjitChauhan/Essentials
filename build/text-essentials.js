@@ -10,7 +10,7 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     TEXT_ESSENTIALS = true;
     if (!_silent_ && !_text_initialized_) console.info(
         '%cText Essentials',
-        'font-family:system-ui;font-size:0.75rem;color:lightgray;'
+        'font-family:system-ui;font-size:0.75rem;'
     );
 }
 
@@ -44,49 +44,7 @@ formatDuration = ms => {
 };
 
 /**
- * Determines if text should be black or white based on background color
- * 
- * @param {number} backgroundColor Color of background
- * 
- * @returns {number} Color of text
- * 
- * @example
- * let h = 0,
- *     s = 0,
- *     b = 0;
- * colorMode(HSB);
- * textAlign(CENTER, CENTER);
- * textSize(50);
- * draw = function() {
- *     h = frameCount % 255;
- *     s = frameCount % 255;
- *     b = frameCount % 255;
- *     let TEST_COLOR = color(h, s, b);
- *     background(TEST_COLOR);
- *     fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));
- *     text("TEXT", width / 2, height / 2);
- * };
- */
-lightOrDarkText = backgroundColor => {
-    let r, g, b;
-    if (typeof backgroundColor === 'string') {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
-        r = parseInt(result[1], 16);
-        g = parseInt(result[2], 16);
-        b = parseInt(result[3], 16);
-    } else {
-        r = e.red(backgroundColor);
-        g = e.green(backgroundColor);
-        b = e.blue(backgroundColor);
-    }
-    if ((r + b + g) / 3 < 225) {
-        return WHITE;
-    }
-    return BLACK;
-};
-
-/**
- * Sets font, size and other CSS font properties
+ * Sets font, size and other [CSS font properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
  * 
  * @param {(string|font)}  name  Name of font or font
  * @param {number}  [size]  Font size
@@ -114,7 +72,7 @@ lightOrDarkText = backgroundColor => {
  * 
  * @example
  * // Use the `-call` parameter to prevent the font automatically being set
- * // This functionailty is useful when defining font variables
+ * // This functionality is useful when defining font variables
  * let f = font('serif', '-call');
  * text('Hello World', 100, 100);
  * // expected outcome: the text will still be in normal Arial font
@@ -182,7 +140,7 @@ font = function (family) {
 };
 
 /**
- * Draws a string with a highlight background
+ * Draws a string with a highlight background.
  * 
  * @param {string} string String to be highlighted
  * @param {number} [x=0] x-coordinate value
@@ -218,7 +176,49 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
 };
 
 /**
- * Draws text with multiple colors that are passed in using special syntax
+ * Determines if text should be black or white based on background color.
+ * 
+ * @param {number} backgroundColor Color of background
+ * 
+ * @returns {number} Color of text
+ * 
+ * @example
+ * let h = 0,
+ *     s = 0,
+ *     b = 0;
+ * colorMode(HSB);
+ * textAlign(CENTER, CENTER);
+ * textSize(50);
+ * draw = function() {
+ *     h = frameCount % 255;
+ *     s = frameCount % 255;
+ *     b = frameCount % 255;
+ *     let TEST_COLOR = color(h, s, b);
+ *     background(TEST_COLOR);
+ *     fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));
+ *     text("TEXT", width / 2, height / 2);
+ * };
+ */
+lightOrDarkText = backgroundColor => {
+    let r, g, b;
+    if (typeof backgroundColor === 'string') {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
+        r = parseInt(result[1], 16);
+        g = parseInt(result[2], 16);
+        b = parseInt(result[3], 16);
+    } else {
+        r = e.red(backgroundColor);
+        g = e.green(backgroundColor);
+        b = e.blue(backgroundColor);
+    }
+    if ((r + b + g) / 3 < 225) {
+        return WHITE;
+    }
+    return BLACK;
+};
+
+/**
+ * Draws text with multiple colors that are passed in using special syntax.
  * 
  * @param {string} string Input string
  * @param {number} x x-coordinate value
@@ -272,7 +272,7 @@ multicoloredText = (string, x = 0, y = e.textAscent()) => {
  * // expected output: '123rd'
  */
 ordinalSuffix = n => {
-    const int = parseInt(n),
+    const int = parseInt(n, 10),
         digits = [int % 10, int % 100],
         oPattern = [1, 2, 3, 4],
         ordinals = ['st', 'nd', 'rd', 'th'],
@@ -280,40 +280,6 @@ ordinalSuffix = n => {
     return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
         ? int + ordinals[digits[0] - 1]
         : int + ordinals[3];
-};
-
-/**
- * Draws text with an outline.
- * 
- * @param {string} string String to be outlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {number} [outlineColor=BLACK] Color of outline
- * 
- * @example
- * let str = 'Outlined\nText';
- * outlineText(str, 25, 25);
- * 
- * @example
- * let str = 'Outlined\nText';
- * fill(BLACK);
- * outlineText(str, 25, 25, ORANGE);
- */
-outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    push();
-    e.fill(outlineColor);
-    for (let i = -2; i < 3; i++) {
-        for (let j = -1; j < 3; j++) {
-            e.text(string, x + i, y + j);
-        }
-        e.text(string, x + i, y);
-        e.text(string, x, y + i);
-    }
-    pop();
-    e.text(string, x, y);
 };
 
 /**
@@ -496,6 +462,40 @@ String.prototype.toTitleCase = function () {
 };
 
 /**
+ * Draws text with an outline.
+ * 
+ * @param {string} string String to be outlined
+ * @param {number} x x-coordinate value
+ * @param {number} y y-coordinate value
+ * @param {number} [outlineColor=BLACK] Color of outline
+ * 
+ * @example
+ * let str = 'Outlined\nText';
+ * outlineText(str, 25, 25);
+ * 
+ * @example
+ * let str = 'Outlined\nText';
+ * fill(BLACK);
+ * outlineText(str, 25, 25, ORANGE);
+ */
+outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    push();
+    e.fill(outlineColor);
+    for (let i = -2; i < 3; i++) {
+        for (let j = -1; j < 3; j++) {
+            e.text(string, x + i, y + j);
+        }
+        e.text(string, x + i, y);
+        e.text(string, x, y + i);
+    }
+    pop();
+    e.text(string, x, y);
+};
+
+/**
  * Draws text underlined.
  * 
  * @param {string} string Text to be underlined
@@ -542,16 +542,16 @@ underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, unde
  * @param {string} [br='\n'] Custom break character
  *
  * @example
- * let str = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus.';
+ * let str = 'This string should have a maximum line length of thirty-two characters.';
  * let wrappedStr = wordWrap(str, 32);
  * println(wrappedStr);
  * // expected output: 
- * // 'Lorem ipsum dolor sit amet,
- * // consectetur adipiscing elit.
- * // Fusce tempus.'
+ * // 'This string should have a
+ * // maximum line length of
+ * // thirty-two characters.'
  * let customWrappedStr = wordWrap(str, 32, '<br>');
  * println(customWrappedStr);
- * // expected output: 'Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit.<br>Fusce tempus.'
+ * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
  */
 wordWrap = (str, max, br = '\n') => str.replace(
     new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br

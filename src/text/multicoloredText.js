@@ -1,5 +1,5 @@
 /**
- * Draws text with multiple colors that are passed in using special syntax
+ * Draws text with multiple colors that are passed in using special syntax.
  * 
  * @param {string} string Input string
  * @param {number} x x-coordinate value

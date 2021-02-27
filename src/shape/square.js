@@ -1,5 +1,5 @@
 /**
- * Alias for `rect()` without the seperate `width` and `height` parameters.
+ * Alias for `rect()` without the separate `width` and `height` parameters.
  * 
  * @param {number} x x-coordinate of the square
  * @param {number} y y-coordinate of the square

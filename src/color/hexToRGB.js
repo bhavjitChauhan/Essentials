@@ -1,5 +1,5 @@
 /**
- * Converts hex to RGB color type
+ * Converts hex to RGB color type.
  * 
  * @param {string} hex Hex color value, optional `#`; can be shorthand
  * 

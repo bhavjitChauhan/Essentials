@@ -1,7 +1,7 @@
 /**
  * Draws a rhombus.
  * 
- * @link khanacademy.org/cs/-/4747962019348480
+ * @link https://khanacademy.org/cs/-/4747962019348480
  * 
  * @param {number} ax x-coordinate of the first vertex
  * @param {number} ay y-coordinate of the first vertex

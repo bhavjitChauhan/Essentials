@@ -1,5 +1,5 @@
 /**
- * Converts HSB to RGB color type
+ * Converts HSB to RGB color type.
  * 
  * @param {(number|color)} x Hue value or color
  * @param {number} [s] Saturation value

@@ -5,7 +5,7 @@
  * @param {*} arguments Arguments
  * 
  * @example
- * printf('Hello %!', 'World');
+ * printf('Hello %', 'World');
  * // expected output: 'Hello World'
  * 
  * @example

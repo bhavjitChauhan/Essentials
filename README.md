@@ -1,19 +1,23 @@
-![Essentials Logo](https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png)
+![Essentials Logo](https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true)
 ---
 
 [GitHub Pages](https://bhavjitchauhan.github.io/Essentials) |
 [Wiki](https://github.com/bhavjitChauhan/Essentials/wiki) |
-[Khan Academy](https://www.khanacademy.org/profile/bhavjitChauhan/projects)
+[Khan Academy](https://www.khanacademy.org/profile/bhavjitChauhan/projects) |
+[Builder](https://bhavjitchauhan.github.io/Essentials/build.html)
 
+[![](https://img.shields.io/github/package-json/v/bhavjitChauhan/Essentials?style=flat-square)](https://github.com/bhavjitChauhan/Essentials/releases)
+[![](https://img.shields.io/github/last-commit/bhavjitChauhan/Essentials?style=flat-square)](https://github.com/bhavjitChauhan/Essentials/commits)
 [![](https://data.jsdelivr.com/v1/package/gh/bhavjitChauhan/Essentials/badge)](https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials)
 
 The Essentials library provides utility functions for the [Khan Academy
 Processing Environment](https://www.khanacademy.org/cs/new).
 
 ## Usage
-In a [New Program](https://www.khanacademy.org/cs/new):
+Create [New Program](https://www.khanacademy.org/cs/new) on Khan Academy or add to existing code.
 
-Use the follwing [JSHint directive](https://jshint.com/docs/) to allow the use
+### CDN
+Use the following [JSHint directive](https://jshint.com/docs/) to allow the use
 of otherwise restricted features.
 ```js
 // jshint ignore: start
@@ -30,15 +34,15 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
     }
 );
 ```
+
+### Local
+Essentials is also availible to use without using jsDelivr. Copy and paste the source code directly into your program using the [Essentials Builder](https://bhavjitchauhan.github.io/Essentials/build.html) or the [essentials-ka.js](https://github.com/bhavjitChauhan/Essentials/blob/master/build/essentials-ka.js) file in the repository.
+
 See the project Wiki page on [Custom
 Builds](https://github.com/bhavjitChauhan/Essentials/wiki/Custom-Builds) for
 alternative builds.
 
 ## Why Essentials?
-> A JavaScript library is a library of pre-written JavaScript that allows for
-easier development of JavaScript-based applications.
-*[Wikipedia](https://en.wikipedia.org/wiki/JavaScript_library)*
-
 Khan Academy does not provide the equivalent of
 [ES6 Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
 or [npm](https://www.npmjs.com/)
@@ -49,9 +53,10 @@ The Essentials library solves this issue by providing utility functions and
 constants all packaged in an external file. It allows users to spend more time on their projects than working around Khan Academy's restrictions.
 
 ## Documentation
-Documentation is availible on [Github
-Pages](https://bhavjitchauhan.github.io/Essentials) or in the project
-[Wiki](https://github.com/bhavjitChauhan/Essentials/wiki/Documentation).
+Documentation is available on [Github
+Pages](https://bhavjitchauhan.github.io/Essentials), the project
+[Wiki](https://github.com/bhavjitChauhan/Essentials/wiki/Documentation) or on
+[Khan Academy](https://www.khanacademy.org/cs/-/6460530077679616).
 
 ## Credits
 ### Using
@@ -64,4 +69,4 @@ Pages](https://bhavjitchauhan.github.io/Essentials) or in the project
  - [lodash](https://github.com/lodash/lodash)
 
 ## License
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+Essentials may be freely distributed under the MIT license. See [LICENSE](LICENSE) for details.

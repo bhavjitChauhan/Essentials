@@ -1,12 +1,16 @@
 {
   "name": "essentials",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Khan Academy utility library.",
   "main": "essentials.js",
   "scripts": {
-    "dochtml": "node_modules/.bin/jsdoc -c jsdoc.json",
-    "docmd": "node_modules/.bin/jsdoc2md essentials.js > Essentials.wiki/Essentials-Documentation.md",
-    "build": "./node_modules/.bin/rollup --config"
+    "build:cdn": "./node_modules/.bin/rollup --config",
+    "build:ka": "node ./scripts/babel.js",
+    "build": "npm run build:cdn && npm run build:ka",
+    "doc:html": "./node_modules/.bin/jsdoc -c jsdoc.json",
+    "doc:md": "./node_modules/.bin/jsdoc2md essentials.js > Essentials.wiki/Essentials-Documentation.md",
+    "doc:ka": "node ./scripts/showdown.js && node ./scripts/pretty.js",
+    "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka"
   },
   "repository": {
     "type": "git",
@@ -19,11 +23,22 @@
   },
   "homepage": "https://github.com/bhavjitChauhan/Essentials#readme",
   "devDependencies": {
+    "@babel/core": "^7.13.1",
+    "@babel/plugin-transform-arrow-functions": "^7.13.0",
+    "@babel/plugin-transform-block-scoping": "^7.12.13",
+    "@babel/plugin-transform-destructuring": "^7.13.0",
+    "@babel/plugin-transform-parameters": "^7.13.0",
+    "@babel/plugin-transform-spread": "^7.13.0",
+    "@babel/plugin-transform-template-literals": "^7.13.0",
     "@rollup/plugin-multi-entry": "^4.0.0",
+    "concurrently": "^6.0.0",
     "docdash": "^1.2.0",
-    "eslint": "^7.18.0",
+    "eslint": "^7.20.0",
     "jsdoc": "^3.6.6",
     "jsdoc-to-markdown": "^6.0.1",
-    "rollup": "^2.36.2"
+    "pretty": "^2.0.0",
+    "rollup": "^2.40.0",
+    "showdown": "^1.9.1",
+    "terser": "^5.6.0"
   }
 }

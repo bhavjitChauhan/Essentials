@@ -1,5 +1,5 @@
 /**
- * Draws a string with a highlight background
+ * Draws a string with a highlight background.
  * 
  * @param {string} string String to be highlighted
  * @param {number} [x=0] x-coordinate value

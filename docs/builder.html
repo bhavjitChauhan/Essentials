@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/css/bootstrap.min.css"
+        integrity="sha512-aqT9YD5gLuLBr6ipQAS+72o5yHKzgZbGxEh6iY8lW/r6gG14e2kBTAJb8XrxzZrMOgSmDqtLaF76T0Z6YY2IHg=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <style>
+        /* PrismJS 1.23.0
+https://prismjs.com/download.html#themes=prism-tomorrow&languages=clike+javascript */
+        /**
+         * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
+         * Based on https://github.com/chriskempson/tomorrow-theme
+         * @author Rose Pritchard
+         */
+
+        code[class*="language-"],
+        pre[class*="language-"] {
+            color: #ccc;
+            background: none;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            font-size: 1em;
+            text-align: left;
+            white-space: pre;
+            word-spacing: normal;
+            word-break: normal;
+            word-wrap: normal;
+            line-height: 1.5;
+
+            -moz-tab-size: 4;
+            -o-tab-size: 4;
+            tab-size: 4;
+
+            -webkit-hyphens: none;
+            -moz-hyphens: none;
+            -ms-hyphens: none;
+            hyphens: none;
+
+        }
+
+        /* Code blocks */
+        pre[class*="language-"] {
+            padding: 1em;
+            margin: .5em 0;
+            overflow: auto;
+        }
+
+        :not(pre)>code[class*="language-"],
+        pre[class*="language-"] {
+            background: #2d2d2d;
+        }
+
+        /* Inline code */
+        :not(pre)>code[class*="language-"] {
+            padding: .1em;
+            border-radius: .3em;
+            white-space: normal;
+        }
+
+        .token.comment,
+        .token.block-comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            color: #999;
+        }
+
+        .token.punctuation {
+            color: #ccc;
+        }
+
+        .token.tag,
+        .token.attr-name,
+        .token.namespace,
+        .token.deleted {
+            color: #e2777a;
+        }
+
+        .token.function-name {
+            color: #6196cc;
+        }
+
+        .token.boolean,
+        .token.number,
+        .token.function {
+            color: #f08d49;
+        }
+
+        .token.property,
+        .token.class-name,
+        .token.constant,
+        .token.symbol {
+            color: #f8c555;
+        }
+
+        .token.selector,
+        .token.important,
+        .token.atrule,
+        .token.keyword,
+        .token.builtin {
+            color: #cc99cd;
+        }
+
+        .token.string,
+        .token.char,
+        .token.attr-value,
+        .token.regex,
+        .token.variable {
+            color: #7ec699;
+        }
+
+        .token.operator,
+        .token.entity,
+        .token.url {
+            color: #67cdcc;
+        }
+
+        .token.important,
+        .token.bold {
+            font-weight: bold;
+        }
+
+        .token.italic {
+            font-style: italic;
+        }
+
+        .token.entity {
+            cursor: help;
+        }
+
+        .token.inserted {
+            color: green;
+        }
+    </style>
+    <title>Essentials Builder</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Essentials Builder</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/bhavjitChauhan/Essentials"
+                            target="_blank">GitHub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://bhavjitchauhan.github.io/Essentials/"
+                            target="_blank">Documentation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/bhavjitChauhan/Essentials/wiki"
+                            target="_blank">Wiki</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials"
+                            target="_blank">jsDelivr</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row mt-3">
+            <h2>
+                About
+            </h2>
+            <p>The Essentials library provides utility functions for the Khan Academy Processing Environment. Use the
+                navigation link above to explore relevant pages.</p>
+        </div>
+        <div class="row mt-3">
+            <h2>
+                Usage
+            </h2>
+            <p>Select the Build Type and what components of the Essentials library you need, then click the Submit
+                button for your generated code.</p>
+        </div>
+        <div class="row mt-3">
+            <div class="col-8 mt-4">
+                <form id="form">
+                    <div class="mb-3">
+                        <h3>Build Type</h3>
+                        <select class="form-select" aria-label="Default select example" id="buildTypeSelect">
+                            <option value="CDN" selected>CDN</option>
+                            <option value="Local">Local</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <h3>Components</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="coreCheckbox" checked disabled>
+                            <label class="form-check-label" for="coreCheckbox">
+                                Essentials Core
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="colorCheckbox" checked>
+                            <label class="form-check-label" for="colorCheckbox">
+                                Color Essentials
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="textCheckbox" checked>
+                            <label class="form-check-label" for="textCheckbox">
+                                Text Essentials
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="shapeCheckbox" checked>
+                            <label class="form-check-label" for="shapeCheckbox">
+                                Shape Essentials
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+
+                    </div>
+                    <button class="btn btn-primary" id="submitButton">Submit</button>
+                </form>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        Build
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Essentials via CDN</h5>
+                        <p id="directions" class="card-text">Paste the following code into your program.</p>
+                        <pre style="overflow: hidden;" id="code"><code class="language-js">$.ajaxSetup({ cache: true });
+$.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js',
+    function() {
+        // your code here
+    }
+);</code></pre>
+                        <div class="btn-group float-end" role="group">
+                            <a id="rawLink" class="btn btn-secondary btn-sm"
+                                href="https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js"
+                                target="_blank" role="button"><i class="bi bi-arrow-up-right"></i>
+                                Raw</a>
+                            <button type=" button" id="copyButton" class="btn btn-secondary btn-sm"><i
+                                    class="bi bi-clipboard"></i>
+                                Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+            The code has been copied to your clipboard.
+            <button type="button" class="btn-close" aria-label="Close" onclick="$('#alert').hide();"></button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"
+        integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg=="
+        crossorigin="anonymous"></script>
+    <script>
+        $('#alert').hide();
+        // $('#buildTypeSelect').change(function () {
+        //     if ($("#buildTypeSelect").val() == 'Select type...') {
+        //         $('#submitButton').prop('disabled', true);
+        //     } else {
+        //         $('#submitButton').prop('disabled', false);
+        //     }
+        //     console.log($("#buildTypeSelect").val());
+        // });
+        $('#colorCheckbox').change(function () {
+            if (!$('#colorCheckbox').is(":checked")) {
+                $('#textCheckbox').prop('checked', false);
+                $('#shapeCheckbox').prop('checked', false);
+            }
+        });
+        $('#textCheckbox').change(function () {
+            if ($('#textCheckbox').is(":checked")) {
+                $('#colorCheckbox').prop('checked', true);
+            }
+        })
+        $('#shapeCheckbox').change(function () {
+            if ($('#shapeCheckbox').is(":checked")) {
+                $('#colorCheckbox').prop('checked', true);
+            }
+        });
+
+        const copyToClipboard = function (str) {
+            const el = document.createElement('textarea');
+            el.value = str;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            $('#alert').show();
+        };
+
+        const generateCodeCDN = function () {
+            return "$.ajaxSetup({ cache: true });\n$.getScript('".concat(URL, "',\n    function() {\n        // your code here\n    }\n);");
+        }
+        let buildTypeSelected = 'CDN';
+        let URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js';
+        $("#form").submit(function (e) {
+            e.preventDefault();
+        });
+        $("#submitButton").click(function () {
+            buildTypeSelected = $("#buildTypeSelect").val();
+            const components = [
+                $('#colorCheckbox').is(":checked"),
+                $('#textCheckbox').is(":checked"),
+                $('#shapeCheckbox').is(":checked")
+            ]
+            if (buildTypeSelected == 'CDN') {
+                $('#directions').text('Paste the following code into your program.');
+                $('body > div > div:nth-child(2) > div.col-4 > div > div.card-body > h5').text('Essentials via CDN');
+                if (components.every(function (component) { component == true })) {
+                    URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js';
+                } else {
+                    URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/essentials-core.min.js';
+                    let options = [
+                        ',gh/bhavjitChauhan/Essentials@1/build/color-essentials.min.js',
+                        ',gh/bhavjitChauhan/Essentials@1/build/text-essentials.min.js',
+                        ',gh/bhavjitChauhan/Essentials@1/build/shape-essentials.min.js'
+                    ];
+                    options = options.filter(function (_, i) { components[i] });
+                    URL += options.join('');
+                    Prism.highlightElement(document.querySelector(".language-js"));
+                }
+                $('.language-js').text(generateCodeCDN());
+                $('#code').show();
+                $('#copyButton').show();
+            } else {
+                $('#directions').text('Paste the code into your program.');
+                $('#code').hide();
+                $('#copyButton').hide();
+                $('body > div > div:nth-child(2) > div.col-4 > div > div.card-body > h5').text('Essentials via Local');
+                if (components.every(function (component) { component == true })) {
+                    URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/build/essentials-ka.js';
+                } else {
+                    URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/build/essentials-core-ka.js';
+                    let options = [
+                        ',gh/bhavjitChauhan/Essentials@1/build/color-essentials-ka.js',
+                        ',gh/bhavjitChauhan/Essentials@1/build/text-essentials-ka.js',
+                        ',gh/bhavjitChauhan/Essentials@1/build/shape-essential-kas.js'
+                    ];
+                    options = options.filter(function (option, i) { components[i] });
+                    URL += options.join('')
+                }
+            }
+            $("#rawLink").attr("href", URL)
+        });
+
+        $("#copyButton").on("click", function () {
+            if (buildTypeSelected == 'CDN') {
+                copyToClipboard(generateCodeCDN());
+            } else {
+                fetch(URL)
+                    .then(function (data) { copyToClipboard(data.text()) })
+            }
+        });
+    </script>
+
+</body>
+
+</html>
