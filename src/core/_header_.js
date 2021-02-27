@@ -12,7 +12,14 @@
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 
 ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.0.0';
+ESSENTIALS_VERSION = '1.0.1';
+ESSENTIALS_ASCII = `/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\\\     /\\\\/\\\\\\ /\\\\\\\\\\\\/\\\\      /\\       /\\\\        /\\\\ \\\\  
+/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\ /\\\\   /\\\\     /\\\\    /\\\\     /\\ \\\\     /\\\\      /\\\\    /\\\\
+/\\\\       /\\\\       /\\\\      /\\\\      /\\\\ /\\\\  /\\\\     /\\\\    /\\\\    /\\  /\\\\    /\\\\       /\\\\      
+/\\\\\\\\\\\\     /\\\\       /\\\\    /\\\\\\\\\\\\  /\\\\  /\\\\ /\\\\     /\\\\    /\\\\   /\\\\   /\\\\   /\\\\         /\\\\    
+/\\\\            /\\\\       /\\\\ /\\\\      /\\\\   /\\ /\\\\     /\\\\    /\\\\  /\\\\\\\\\\\\ /\\\\  /\\\\            /\\\\ 
+/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\\\    /\\ \\\\     /\\\\    /\\\\ /\\\\       /\\\\ /\\\\      /\\\\    /\\\\
+/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\      /\\\\     /\\\\    /\\\\/\\\\         /\\\\/\\\\\\\\\\\\\\\\  /\\\\ \\\\`;
 
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
 if (!_silent_ && !_core_initialized_) console.info(
@@ -23,5 +30,5 @@ Version ${ESSENTIALS_VERSION}
 Copyright \xa9 2021 Bhavjit Chauhan
 https://github.com/bhavjitChauhan/Essentials`,
     'font-family:system-ui;font-size:1rem;',
-    'font-family:system-ui;font-size:0.75rem;color:lightgray;'
+    'font-family:system-ui;font-size:0.75rem;'
 );

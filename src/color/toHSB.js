@@ -1,5 +1,5 @@
 /**
- * Converts hex or RGB to HSB color value
+ * Converts hex or RGB to HSB color value.
  * 
  * @param {(string|color)} x Hex, red or HSB color value
  * @param {number} [g] Green value

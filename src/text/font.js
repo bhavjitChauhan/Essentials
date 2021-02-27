@@ -1,5 +1,5 @@
 /**
- * Sets font, size and other CSS font properties
+ * Sets font, size and other [CSS font properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
  * 
  * @param {(string|font)}  name  Name of font or font
  * @param {number}  [size]  Font size
@@ -27,7 +27,7 @@
  * 
  * @example
  * // Use the `-call` parameter to prevent the font automatically being set
- * // This functionailty is useful when defining font variables
+ * // This functionality is useful when defining font variables
  * let f = font('serif', '-call');
  * text('Hello World', 100, 100);
  * // expected outcome: the text will still be in normal Arial font

@@ -9,16 +9,16 @@
  * @param {string} [br='\n'] Custom break character
  *
  * @example
- * let str = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus.';
+ * let str = 'This string should have a maximum line length of thirty-two characters.';
  * let wrappedStr = wordWrap(str, 32);
  * println(wrappedStr);
  * // expected output: 
- * // 'Lorem ipsum dolor sit amet,
- * // consectetur adipiscing elit.
- * // Fusce tempus.'
+ * // 'This string should have a
+ * // maximum line length of
+ * // thirty-two characters.'
  * let customWrappedStr = wordWrap(str, 32, '<br>');
  * println(customWrappedStr);
- * // expected output: 'Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit.<br>Fusce tempus.'
+ * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
  */
 wordWrap = (str, max, br = '\n') => str.replace(
     new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br

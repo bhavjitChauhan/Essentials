@@ -10,83 +10,12 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     TEXT_ESSENTIALS = true;
     if (!_silent_ && !_text_initialized_) console.info(
         '%cText Essentials',
-        'font-family:system-ui;font-size:0.75rem;color:lightgray;'
+        'font-family:system-ui;font-size:0.75rem;'
     );
 }
 
 /**
- * Converts milliseconds to a readable format of duration.
- * 
- * @link https://www.30secondsofcode.org/js/s/format-duration
- * 
- * @param {number}  ms  Duration in milliseconds
- * 
- * @returns {string}  Readable format of duration.
- * 
- * @example
- * let martianDay = 88775244;
- * console.log(formatDuration(martianDay));
- * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
- */
-formatDuration = ms => {
-    if (ms < 0) ms = -ms;
-    const time = {
-        day: Math.floor(ms / 86400000),
-        hour: Math.floor(ms / 3600000) % 24,
-        minute: Math.floor(ms / 60000) % 60,
-        second: Math.floor(ms / 1000) % 60,
-        millisecond: Math.floor(ms) % 1000
-    };
-    return Object.entries(time)
-        .filter(val => val[1] !== 0)
-        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
-        .join(', ');
-};
-
-/**
- * Determines if text should be black or white based on background color
- * 
- * @param {number} backgroundColor Color of background
- * 
- * @returns {number} Color of text
- * 
- * @example
- * let h = 0,
- *     s = 0,
- *     b = 0;
- * colorMode(HSB);
- * textAlign(CENTER, CENTER);
- * textSize(50);
- * draw = function() {
- *     h = frameCount % 255;
- *     s = frameCount % 255;
- *     b = frameCount % 255;
- *     let TEST_COLOR = color(h, s, b);
- *     background(TEST_COLOR);
- *     fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));
- *     text("TEXT", width / 2, height / 2);
- * };
- */
-lightOrDarkText = backgroundColor => {
-    let r, g, b;
-    if (typeof backgroundColor === 'string') {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
-        r = parseInt(result[1], 16);
-        g = parseInt(result[2], 16);
-        b = parseInt(result[3], 16);
-    } else {
-        r = e.red(backgroundColor);
-        g = e.green(backgroundColor);
-        b = e.blue(backgroundColor);
-    }
-    if ((r + b + g) / 3 < 225) {
-        return WHITE;
-    }
-    return BLACK;
-};
-
-/**
- * Sets font, size and other CSS font properties
+ * Sets font, size and other [CSS font properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
  * 
  * @param {(string|font)}  name  Name of font or font
  * @param {number}  [size]  Font size
@@ -114,7 +43,7 @@ lightOrDarkText = backgroundColor => {
  * 
  * @example
  * // Use the `-call` parameter to prevent the font automatically being set
- * // This functionailty is useful when defining font variables
+ * // This functionality is useful when defining font variables
  * let f = font('serif', '-call');
  * text('Hello World', 100, 100);
  * // expected outcome: the text will still be in normal Arial font
@@ -182,7 +111,36 @@ font = function (family) {
 };
 
 /**
- * Draws a string with a highlight background
+ * Converts milliseconds to a readable format of duration.
+ * 
+ * @link https://www.30secondsofcode.org/js/s/format-duration
+ * 
+ * @param {number}  ms  Duration in milliseconds
+ * 
+ * @returns {string}  Readable format of duration.
+ * 
+ * @example
+ * let martianDay = 88775244;
+ * console.log(formatDuration(martianDay));
+ * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
+ */
+formatDuration = ms => {
+    if (ms < 0) ms = -ms;
+    const time = {
+        day: Math.floor(ms / 86400000),
+        hour: Math.floor(ms / 3600000) % 24,
+        minute: Math.floor(ms / 60000) % 60,
+        second: Math.floor(ms / 1000) % 60,
+        millisecond: Math.floor(ms) % 1000
+    };
+    return Object.entries(time)
+        .filter(val => val[1] !== 0)
+        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
+        .join(', ');
+};
+
+/**
+ * Draws a string with a highlight background.
  * 
  * @param {string} string String to be highlighted
  * @param {number} [x=0] x-coordinate value
@@ -218,7 +176,49 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
 };
 
 /**
- * Draws text with multiple colors that are passed in using special syntax
+ * Determines if text should be black or white based on background color.
+ * 
+ * @param {number} backgroundColor Color of background
+ * 
+ * @returns {number} Color of text
+ * 
+ * @example
+ * let h = 0,
+ *     s = 0,
+ *     b = 0;
+ * colorMode(HSB);
+ * textAlign(CENTER, CENTER);
+ * textSize(50);
+ * draw = function() {
+ *     h = frameCount % 255;
+ *     s = frameCount % 255;
+ *     b = frameCount % 255;
+ *     let TEST_COLOR = color(h, s, b);
+ *     background(TEST_COLOR);
+ *     fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));
+ *     text("TEXT", width / 2, height / 2);
+ * };
+ */
+lightOrDarkText = backgroundColor => {
+    let r, g, b;
+    if (typeof backgroundColor === 'string') {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
+        r = parseInt(result[1], 16);
+        g = parseInt(result[2], 16);
+        b = parseInt(result[3], 16);
+    } else {
+        r = e.red(backgroundColor);
+        g = e.green(backgroundColor);
+        b = e.blue(backgroundColor);
+    }
+    if ((r + b + g) / 3 < 225) {
+        return WHITE;
+    }
+    return BLACK;
+};
+
+/**
+ * Draws text with multiple colors that are passed in using special syntax.
  * 
  * @param {string} string Input string
  * @param {number} x x-coordinate value
@@ -272,7 +272,7 @@ multicoloredText = (string, x = 0, y = e.textAscent()) => {
  * // expected output: '123rd'
  */
 ordinalSuffix = n => {
-    const int = parseInt(n),
+    const int = parseInt(n, 10),
         digits = [int % 10, int % 100],
         oPattern = [1, 2, 3, 4],
         ordinals = ['st', 'nd', 'rd', 'th'],
@@ -542,16 +542,16 @@ underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, unde
  * @param {string} [br='\n'] Custom break character
  *
  * @example
- * let str = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus.';
+ * let str = 'This string should have a maximum line length of thirty-two characters.';
  * let wrappedStr = wordWrap(str, 32);
  * println(wrappedStr);
  * // expected output: 
- * // 'Lorem ipsum dolor sit amet,
- * // consectetur adipiscing elit.
- * // Fusce tempus.'
+ * // 'This string should have a
+ * // maximum line length of
+ * // thirty-two characters.'
  * let customWrappedStr = wordWrap(str, 32, '<br>');
  * println(customWrappedStr);
- * // expected output: 'Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit.<br>Fusce tempus.'
+ * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
  */
 wordWrap = (str, max, br = '\n') => str.replace(
     new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br

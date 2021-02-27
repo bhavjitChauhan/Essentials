@@ -23,14 +23,14 @@ cylinder = (x, y, width, height) => {
     } else {
         const r = height / 2;
         const z = (width - height) / 2;
-        const centeral = 4 / 3 * (Math.sqrt(2) - 1) * r;
+        const central = 4 / 3 * (Math.sqrt(2) - 1) * r;
         drawShape(() => {
             e.vertex(z, -r);
-            e.bezierVertex(z + centeral, -r, z + r, -centeral, z + r, 0);
-            e.bezierVertex(z + r, centeral, z + centeral, r, z, r);
+            e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
+            e.bezierVertex(z + r, central, z + central, r, z, r);
             e.vertex(-z, r);
-            e.bezierVertex(-z - centeral, r, -z - r, centeral, -z - r, 0);
-            e.bezierVertex(-z - r, -centeral, -z - centeral, -r, -z, -r);
+            e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
+            e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
         }, true);
     }
     pop();

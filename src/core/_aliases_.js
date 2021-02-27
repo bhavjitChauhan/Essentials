@@ -9,7 +9,7 @@ _eval = eval;
  * clearLogs();
  * // expected outcome: blank canvas console
  */
-clearLogs = () => e._clearLogs;
+clearLogs = () => e._clearLogs();
 
 /**
  * Literally does nothing.
@@ -23,7 +23,7 @@ noop = () => _.noop;
 /**
  * Alias for `Program.restart()`
  */
-restart = () => e.Program.restart;
+restart = () => e.Program.restart();
 
 /**
  * Alias for `width`.
@@ -50,7 +50,7 @@ HALF_HEIGHT = HEIGHT / 2;
  * 
  * @example
  * // Log canvas element style to browser console
- * console.log($(CANVAS).attr('style));
+ * console.log($(CANVAS).attr('style)');
  */
 CANVAS = '#output-canvas';
 

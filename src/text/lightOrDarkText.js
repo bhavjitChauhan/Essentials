@@ -1,5 +1,5 @@
 /**
- * Determines if text should be black or white based on background color
+ * Determines if text should be black or white based on background color.
  * 
  * @param {number} backgroundColor Color of background
  * 

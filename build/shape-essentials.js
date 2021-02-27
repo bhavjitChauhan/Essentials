@@ -8,7 +8,7 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     SHAPE_ESSENTIALS = true;
     if (!_silent_ && !_shape_initialized_) console.info(
         '%cShape Essentials',
-        'font-family:system-ui;font-size:0.75rem;color:lightgray;'
+        'font-family:system-ui;font-size:0.75rem;'
     );
 }
 
@@ -53,28 +53,18 @@ cylinder = (x, y, width, height) => {
     } else {
         const r = height / 2;
         const z = (width - height) / 2;
-        const centeral = 4 / 3 * (Math.sqrt(2) - 1) * r;
+        const central = 4 / 3 * (Math.sqrt(2) - 1) * r;
         drawShape(() => {
             e.vertex(z, -r);
-            e.bezierVertex(z + centeral, -r, z + r, -centeral, z + r, 0);
-            e.bezierVertex(z + r, centeral, z + centeral, r, z, r);
+            e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
+            e.bezierVertex(z + r, central, z + central, r, z, r);
             e.vertex(-z, r);
-            e.bezierVertex(-z - centeral, r, -z - r, centeral, -z - r, 0);
-            e.bezierVertex(-z - r, -centeral, -z - centeral, -r, -z, -r);
+            e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
+            e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
         }, true);
     }
     pop();
 };
-
-/**
- * Alias for `ellipse()` without the seperate `width` and `height` parameters.
- * 
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius redius of the circle
- * 
- */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
  * Draws a donut.
@@ -120,6 +110,16 @@ donut = (x, y, majorDiameter, minorDiameter) => {
     pop();
     pop();
 };
+
+/**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ * 
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ * 
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
  * Alias for `beginShape()`/`endShape()`.
@@ -242,20 +242,9 @@ polygon = (x, y, sides, radius, rotation) => {
 };
 
 /**
- * Alias for `rect()` without the seperate `width` and `height` parameters.
- * 
- * @param {number} x x-coordinate of the square
- * @param {number} y y-coordinate of the square
- * @param {number} side side size of the square
- * @param {number} [radius=0] radius of corners
- * 
- */
-square = (x, y, side, radius = 0) => e.rect(x, y, side, side, radius);
-
-/**
  * Draws a rhombus.
  * 
- * @link khanacademy.org/cs/-/4747962019348480
+ * @link https://khanacademy.org/cs/-/4747962019348480
  * 
  * @param {number} ax x-coordinate of the first vertex
  * @param {number} ay y-coordinate of the first vertex
@@ -275,6 +264,17 @@ rhombus = (ax, ay, bx, by, cx, cy) => {
     cy = ay + r * (cy - ay);
     parallelogram(ax, ay, bx, by, cx, cy);
 };
+
+/**
+ * Alias for `rect()` without the separate `width` and `height` parameters.
+ * 
+ * @param {number} x x-coordinate of the square
+ * @param {number} y y-coordinate of the square
+ * @param {number} side side size of the square
+ * @param {number} [radius=0] radius of corners
+ * 
+ */
+square = (x, y, side, radius = 0) => e.rect(x, y, side, side, radius);
 
 /**
  * Draws a star with _n_ spikes.

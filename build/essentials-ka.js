@@ -5,34 +5,51 @@
  * Processing Environment.
  *
  * @link https://github.com/bhavjitChauhan/Essentials
- * @file Khan Academy utility JavaScript library
+ * @file Local Khan Academy utility JavaScript library
  * @author Bhavjit Chauhan
  */
 
-_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
+//jshint ignore: start
+var e = eval('__env__');
 
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+/**
+ * The Khan Academy utility library.
+ *
+ * The Essentials library provides utility functions for the Khan Academy
+ * Processing Environment.
+ *
+ * @link https://github.com/bhavjitChauhan/Essentials
+ * @file Khan Academy utility JavaScript library
+ * @author Bhavjit Chauhan
+ */
+_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 ESSENTIALS_CORE = true;
 ESSENTIALS_VERSION = '1.0.1';
-ESSENTIALS_ASCII = `/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\\\     /\\\\/\\\\\\ /\\\\\\\\\\\\/\\\\      /\\       /\\\\        /\\\\ \\\\  
-/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\ /\\\\   /\\\\     /\\\\    /\\\\     /\\ \\\\     /\\\\      /\\\\    /\\\\
-/\\\\       /\\\\       /\\\\      /\\\\      /\\\\ /\\\\  /\\\\     /\\\\    /\\\\    /\\  /\\\\    /\\\\       /\\\\      
-/\\\\\\\\\\\\     /\\\\       /\\\\    /\\\\\\\\\\\\  /\\\\  /\\\\ /\\\\     /\\\\    /\\\\   /\\\\   /\\\\   /\\\\         /\\\\    
-/\\\\            /\\\\       /\\\\ /\\\\      /\\\\   /\\ /\\\\     /\\\\    /\\\\  /\\\\\\\\\\\\ /\\\\  /\\\\            /\\\\ 
-/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\\\    /\\ \\\\     /\\\\    /\\\\ /\\\\       /\\\\ /\\\\      /\\\\    /\\\\
-/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\      /\\\\     /\\\\    /\\\\/\\\\         /\\\\/\\\\\\\\\\\\\\\\  /\\\\ \\\\`;
-
+ESSENTIALS_ASCII = "/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\\\     /\\\\/\\\\\\ /\\\\\\\\\\\\/\\\\      /\\       /\\\\        /\\\\ \\\\  \n/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\ /\\\\   /\\\\     /\\\\    /\\\\     /\\ \\\\     /\\\\      /\\\\    /\\\\\n/\\\\       /\\\\       /\\\\      /\\\\      /\\\\ /\\\\  /\\\\     /\\\\    /\\\\    /\\  /\\\\    /\\\\       /\\\\      \n/\\\\\\\\\\\\     /\\\\       /\\\\    /\\\\\\\\\\\\  /\\\\  /\\\\ /\\\\     /\\\\    /\\\\   /\\\\   /\\\\   /\\\\         /\\\\    \n/\\\\            /\\\\       /\\\\ /\\\\      /\\\\   /\\ /\\\\     /\\\\    /\\\\  /\\\\\\\\\\\\ /\\\\  /\\\\            /\\\\ \n/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\\\    /\\ \\\\     /\\\\    /\\\\ /\\\\       /\\\\ /\\\\      /\\\\    /\\\\\n/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\      /\\\\     /\\\\    /\\\\/\\\\         /\\\\/\\\\\\\\\\\\\\\\  /\\\\ \\\\";
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info(
-    `%cEssentials Library
-%cThe Khan Academy utility library.
-
-Version ${ESSENTIALS_VERSION}
-Copyright \xa9 2021 Bhavjit Chauhan
-https://github.com/bhavjitChauhan/Essentials`,
-    'font-family:system-ui;font-size:1rem;',
-    'font-family:system-ui;font-size:0.75rem;'
-);
-
+if (!_silent_ && !_core_initialized_) console.info("%cEssentials Library\n%cThe Khan Academy utility library.\n\nVersion ".concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
 e = Processing.instances[0];
 _eval = eval;
 
@@ -44,7 +61,9 @@ _eval = eval;
  * clearLogs();
  * // expected outcome: blank canvas console
  */
-clearLogs = () => e._clearLogs();
+clearLogs = function () {
+  return e._clearLogs();
+};
 
 /**
  * Literally does nothing.
@@ -53,12 +72,16 @@ clearLogs = () => e._clearLogs();
  * // Prevents an error if an unneeded method is called
  * Element.init = noop;
  */
-noop = () => _.noop;
+noop = function () {
+  return _.noop;
+};
 
 /**
  * Alias for `Program.restart()`
  */
-restart = () => e.Program.restart();
+restart = function () {
+  return e.Program.restart();
+};
 
 /**
  * Alias for `width`.
@@ -107,12 +130,16 @@ CANVAS_LOG = 'body div:first div:nth-child(2) div div';
  * @param {} fn Function to attempt.
  * @param {...*} args Functions arguments.
  */
-attempt = (fn, ...args) => {
-    try {
-        return fn(...args);
-    } catch (e) {
-        return e instanceof Error ? e : new Error(e);
+attempt = function (fn) {
+  try {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
     }
+
+    return fn.apply(void 0, args);
+  } catch (e) {
+    return e instanceof Error ? e : new Error(e);
+  }
 };
 
 /**
@@ -141,14 +168,17 @@ attempt = (fn, ...args) => {
  *     }
  * ]);
  */
-chainAsync = fns => {
-    let i = 0;
-    const last = _.last(fns);
-    const next = () => {
-        const fn = fns[i++];
-        fn === last ? fn() : fn(next);
-    };
-    next();
+chainAsync = function (fns) {
+  var i = 0;
+
+  var last = _.last(fns);
+
+  var next = function () {
+    var fn = fns[i++];
+    fn === last ? fn() : fn(next);
+  };
+
+  next();
 };
 
 /**
@@ -181,13 +211,9 @@ chainAsync = fns => {
  *     }
  * });
  */
-clean = fn => {
-    const string = fn.toString()
-        .replace(/__env__\.KAInfiniteLoopCount\+\+;/g, '')
-        .replace(/if \(__env__\.KAInfiniteLoopCount > 1000\) {[\s]+__env__\.KAInfiniteLoopProtect\('[^']*'\);[^}]+}/g, '')
-        .replace(/__env__\.PJSOutput\.applyInstance\((__env__\.\S+), '\S+'\)/g,
-            'new $1');
-    return Object.constructor(`return (function(__env__) {return ${string};});`)()(e);
+clean = function (fn) {
+  var string = fn.toString().replace(/__env__\.KAInfiniteLoopCount\+\+;/g, '').replace(/if \(__env__\.KAInfiniteLoopCount > 1000\) {[\s]+__env__\.KAInfiniteLoopProtect\('[^']*'\);[^}]+}/g, '').replace(/__env__\.PJSOutput\.applyInstance\((__env__\.\S+), '\S+'\)/g, 'new $1');
+  return Object.constructor("return (function(__env__) {return ".concat(string, ";});"))()(e);
 };
 
 /**
@@ -207,20 +233,22 @@ clean = fn => {
  * }
  * const isOdd = complement(isEven);
  */
-complement = fn => (...args) => !fn(...args);
+complement = function (fn) {
+  return function () {
+    return !fn.apply(void 0, arguments);
+  };
+};
 
 /**
  * Generates a [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
  * 
  * @returns {string}
  */
-generateUUID = () =>
-    ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-        (
-            c ^
-            (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-        ).toString(16)
-    );
+generateUUID = function () {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, function (c) {
+    return (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
+  });
+};
 
 /**
  * Returns a string of the form `HH:MM:SS`.
@@ -234,7 +262,7 @@ generateUUID = () =>
  * // expected outcome: Time in the form of `HH:MM:SS`
  */
 getColonTime = function () {
-    return (new Date()).toTimeString().slice(0, 8);
+  return new Date().toTimeString().slice(0, 8);
 };
 
 /**
@@ -262,11 +290,10 @@ getColonTime = function () {
  * b.draw();
  * // expected outcome: rectangle with arguments (100, 100, 150, 50)
  */
-inherit = (subClass, superClass) => {
-    Object.setPrototypeOf(subClass.prototype, superClass.prototype);
-    subClass.prototype.constructor = subClass;
-    if (superClass.prototype.constructor === Object)
-        superClass.prototype.constructor = superClass;
+inherit = function (subClass, superClass) {
+  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
 };
 
 /**
@@ -286,11 +313,12 @@ inherit = (subClass, superClass) => {
  * 
  * @see font
  */
-isFont = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isFunction(obj.getCSSDefinition);
+isFont = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isFunction(obj.getCSSDefinition);
 };
 
 /**
@@ -303,11 +331,12 @@ isFont = obj => {
  * println(isImage(i));
  * // expected output: true
  */
-isImage = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.sourceImg);
+isImage = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isObject(obj.sourceImg);
 };
 
 /**
@@ -320,11 +349,12 @@ isImage = obj => {
  * println(isSound(s));
  * // expected output: true
  */
-isSound = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.audio);
+isSound = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isObject(obj.audio);
 };
 
 /**
@@ -356,13 +386,18 @@ isSound = obj => {
  * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
  * // possible output: 'console.log performed faster.'
  */
-mostPerformant = (fns, iterations = 1e4) => {
-    const times = fns.map(fn => {
-        const before = performance.now();
-        for (let i = 0; i < iterations; i++) fn();
-        return performance.now() - before;
-    });
-    return times.indexOf(Math.min(...times));
+mostPerformant = function (fns) {
+  var iterations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1e4;
+  var times = fns.map(function (fn) {
+    var before = performance.now();
+
+    for (var i = 0; i < iterations; i++) {
+      fn();
+    }
+
+    return performance.now() - before;
+  });
+  return times.indexOf(Math.min.apply(Math, _toConsumableArray(times)));
 };
 
 /**
@@ -381,9 +416,9 @@ mostPerformant = (fns, iterations = 1e4) => {
  *
  * @see push
  */
-pop = () => {
-    e.popStyle();
-    e.popMatrix();
+pop = function () {
+  e.popStyle();
+  e.popMatrix();
 };
 
 /**
@@ -401,14 +436,15 @@ pop = () => {
  * printf('% \\% %', 'A', 'B');
  * // expected output: 'A % B'
  */
-printf = function(string) {
-    const args = Array.from(arguments)
-        .slice(1);
-    for (const i in args) {
-        string = string.replace(/(?<!\\)%/, args[i]);
-    }
-    string = string.replaceAll(/\\%/g, '%');
-    e.println(string);
+printf = function (string) {
+  var args = Array.from(arguments).slice(1);
+
+  for (var i in args) {
+    string = string.replace(/(?<!\\)%/, args[i]);
+  }
+
+  string = string.replaceAll(/\\%/g, '%');
+  e.println(string);
 };
 
 /**
@@ -427,9 +463,9 @@ printf = function(string) {
  *
  * @see pop
  */
-push = () => {
-    e.pushMatrix();
-    e.pushStyle();
+push = function () {
+  e.pushMatrix();
+  e.pushStyle();
 };
 
 /**
@@ -446,7 +482,9 @@ push = () => {
  * @example
  * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
  */
-randomInt = (min, max) => _.random(min, max);
+randomInt = function (min, max) {
+  return _.random(min, max);
+};
 
 /**
  * Measures the time it takes for a function to execute and logs to browser
@@ -474,25 +512,22 @@ randomInt = (min, max) => _.random(min, max);
  * // possible output: 'timeTaken#100: 100.000000000000 ms'
  * 
  */
-timeTaken = (callback, id = 'default') => {
-    console.time(`timeTaken#${id}`);
-    const r = callback();
-    console.timeEnd(`timeTaken#${id}`);
-    return r;
+timeTaken = function (callback) {
+  var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'default';
+  console.time("timeTaken#".concat(id));
+  var r = callback();
+  console.timeEnd("timeTaken#".concat(id));
+  return r;
 };
 
 /** @module Color */
-
 _color_initialized_ = typeof COLOR_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {
-    console.error('Color Essentials depends on the Essentials Core.');
+  console.error('Color Essentials depends on the Essentials Core.');
 } else {
-    COLOR_ESSENTIALS = true;
-    if (!_silent_ && !_color_initialized_) console.info(
-        '%cColor Essentials',
-        'font-family:system-ui;font-size:0.75rem;'
-    );
+  COLOR_ESSENTIALS = true;
+  if (!_silent_ && !_color_initialized_) console.info('%cColor Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
 
 /**
@@ -548,8 +583,7 @@ GREEN = e.color(0, 128, 0);
  * square(25, 25, 25);
  */
 BLUE = e.color(0, 0, 255);
-LIGHTSALMON = e.color(255, 160, 122),
-SALMON = e.color(250, 128, 114);
+LIGHTSALMON = e.color(255, 160, 122), SALMON = e.color(250, 128, 114);
 DARKSALMON = e.color(233, 150, 122);
 LIGHTCORAL = e.color(240, 128, 128);
 INDIANRED = e.color(205, 92, 92);
@@ -700,21 +734,20 @@ TRANSPARENT = e.color(255, 0);
  * background(c);
  * // expected outcome: white background
  */
-hexToRGB = hex => {
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    result = result ? result.splice(1).map(function (i) {
-        return parseInt(i, 16);
-    }) : null;
-    push();
-    e.colorMode(e.RGB);
-    result = e.color.apply(e, result);
-    pop();
-    return result;
+hexToRGB = function (hex) {
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  result = result ? result.splice(1).map(function (i) {
+    return parseInt(i, 16);
+  }) : null;
+  push();
+  e.colorMode(e.RGB);
+  result = e.color.apply(e, result);
+  pop();
+  return result;
 };
 
 /**
@@ -733,34 +766,50 @@ hexToRGB = hex => {
  * background(c);
  * // expected outcome: green background
  */
-HSBToRGB = function(x, s, v) {
-    if (arguments.length == 1) {
-        c = x;
-        x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
-    }
-    x /= 255, s /= 255, v /= 255;
+HSBToRGB = function (x, s, v) {
+  if (arguments.length == 1) {
+    c = x;
+    x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
+  }
 
-    const i = Math.floor(x * 6),
-        f = x * 6 - i,
-        p = v * (1 - s),
-        q = v * (1 - f * s),
-        t = v * (1 - (1 - f) * s);
+  x /= 255, s /= 255, v /= 255;
+  var i = Math.floor(x * 6),
+      f = x * 6 - i,
+      p = v * (1 - s),
+      q = v * (1 - f * s),
+      t = v * (1 - (1 - f) * s);
+  var r, g, b;
 
-    let r, g, b;
-    switch (i % 6) {
-        case 0: r = v, g = t, b = p; break;
-        case 1: r = q, g = v, b = p; break;
-        case 2: r = p, g = v, b = t; break;
-        case 3: r = p, g = q, b = v; break;
-        case 4: r = t, g = p, b = v; break;
-        case 5: r = v, g = p, b = q; break;
-    }
+  switch (i % 6) {
+    case 0:
+      r = v, g = t, b = p;
+      break;
 
-    const result = [r, g, b].map(function (i) {
-        return i * 255;
-    });
+    case 1:
+      r = q, g = v, b = p;
+      break;
 
-    return e.color.apply(e, result);
+    case 2:
+      r = p, g = v, b = t;
+      break;
+
+    case 3:
+      r = p, g = q, b = v;
+      break;
+
+    case 4:
+      r = t, g = p, b = v;
+      break;
+
+    case 5:
+      r = v, g = p, b = q;
+      break;
+  }
+
+  var result = [r, g, b].map(function (i) {
+    return i * 255;
+  });
+  return e.color.apply(e, result);
 };
 
 /**
@@ -780,40 +829,47 @@ HSBToRGB = function(x, s, v) {
  * background(c);
  * // expected outcome: red background
  */
-RGBToHSB = function(x, g, b) {
-    if (arguments.length == 1) {
-        c = x;
-        x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+RGBToHSB = function (x, g, b) {
+  if (arguments.length == 1) {
+    c = x;
+    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+  }
+
+  x /= 255, g /= 255, b /= 255;
+  var maxValue = Math.max(x, g, b);
+  var minValue = Math.min(x, g, b);
+  var v = maxValue;
+  var d = maxValue - minValue;
+  var s = maxValue === 0 ? 0 : d / maxValue;
+
+  if (maxValue === minValue) {
+    h = 0;
+  } else {
+    switch (maxValue) {
+      case x:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+
+      case g:
+        h = (b - x) / d + 2;
+        break;
+
+      case b:
+        h = (x - g) / d + 4;
+        break;
     }
 
-    x /= 255, g /= 255, b /= 255;
+    h /= 6;
+  }
 
-    const maxValue = Math.max(x, g, b);
-    const minValue = Math.min(x, g, b);
-    const v = maxValue;
-
-    const d = maxValue - minValue;
-    const s = maxValue === 0 ? 0 : d / maxValue;
-
-    if (maxValue === minValue) {
-        h = 0;
-    } else {
-        switch (maxValue) {
-            case x: h = (g - b) / d + (g < b ? 6 : 0); break;
-            case g: h = (b - x) / d + 2; break;
-            case b: h = (x - g) / d + 4; break;
-        }
-        h /= 6;
-    }
-
-    let result = [h, s, v].map(function (i) {
-        return i * 255;
-    });
-    push();
-    e.colorMode(e.HSB);
-    result = e.color.apply(e, result);
-    pop();
-    return result;
+  var result = [h, s, v].map(function (i) {
+    return i * 255;
+  });
+  push();
+  e.colorMode(e.HSB);
+  result = e.color.apply(e, result);
+  pop();
+  return result;
 };
 
 /**
@@ -834,12 +890,13 @@ RGBToHSB = function(x, g, b) {
  * println(RGBToHex(c));
  * // expected output: #ff0000
  */
-RGBToHex = function(x, g, b) {
-    if (arguments.length == 1) {
-        c = x;
-        x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
-    }
-    return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
+RGBToHex = function (x, g, b) {
+  if (arguments.length == 1) {
+    c = x;
+    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+  }
+
+  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
 /**
@@ -865,18 +922,20 @@ RGBToHex = function(x, g, b) {
  * println(toHSB(-1))
  * // expected output: [0, 0, 255]
  */
-toHSB = function() {
-    const args = arguments;
-    if (args.length == 1) {
-        const c = args[0];
-        if (typeof c == 'number') {
-            return [e.hue(c), e.saturation(c), e.brightness(c)];
-        } else {
-            return RGBToHSB.apply(e, toRGB(hexToRGB(c)));
-        }
-    } else if (args.length == 3) {
-        return RGBToHSB.apply(e, args);
+toHSB = function () {
+  var args = arguments;
+
+  if (args.length == 1) {
+    var _c = args[0];
+
+    if (typeof _c == 'number') {
+      return [e.hue(_c), e.saturation(_c), e.brightness(_c)];
+    } else {
+      return RGBToHSB.apply(e, toRGB(hexToRGB(_c)));
     }
+  } else if (args.length == 3) {
+    return RGBToHSB.apply(e, args);
+  }
 };
 
 /**
@@ -900,34 +959,32 @@ toHSB = function() {
  * println(toRGB(-1))
  * // expected output: [255, 255, 255]
  */
-toRGB = function() {
-    const args = arguments;
-    if (args.length == 1) {
-        const c = args[0];
-        if (typeof c == 'number') {
-            return [e.red(c), e.green(c), e.blue(c)];
-        } else {
-            return hexToRGB(c);
-        }
-    } else if (args.length == 3) {
-        return HSBToRGB.apply(e, args);
+toRGB = function () {
+  var args = arguments;
+
+  if (args.length == 1) {
+    var _c2 = args[0];
+
+    if (typeof _c2 == 'number') {
+      return [e.red(_c2), e.green(_c2), e.blue(_c2)];
+    } else {
+      return hexToRGB(_c2);
     }
+  } else if (args.length == 3) {
+    return HSBToRGB.apply(e, args);
+  }
 };
 
 /** @module Text */
-
 _text_initialized_ = typeof TEXT_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {
-    console.error('Text Essentials depends on the Essentials Core.');
+  console.error('Text Essentials depends on the Essentials Core.');
 } else if (typeof COLOR_ESSENTIALS === 'undefined') {
-    console.error('Text Essentials depends on Color Essentials.');
+  console.error('Text Essentials depends on Color Essentials.');
 } else {
-    TEXT_ESSENTIALS = true;
-    if (!_silent_ && !_text_initialized_) console.info(
-        '%cText Essentials',
-        'font-family:system-ui;font-size:0.75rem;'
-    );
+  TEXT_ESSENTIALS = true;
+  if (!_silent_ && !_text_initialized_) console.info('%cText Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
 
 /**
@@ -978,52 +1035,51 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
  * // expected outcome: 'Hello World' in italic Arial font
  */
 font = function (family) {
-    let properties = Array.from(arguments)
-        .slice(1);
-    // Font size doesn't take effect unless `properties` array has at least one
-    properties.push('');
-    let call = properties.find(function (property) {
-        return _.isBoolean(property);
+  var properties = Array.from(arguments).slice(1); // Font size doesn't take effect unless `properties` array has at least one
+
+  properties.push('');
+  var call = properties.find(function (property) {
+    return _.isBoolean(property);
+  });
+  call = !_.isBoolean(call) && true;
+  properties = _.without(properties, true, false);
+
+  var _font;
+
+  var size = properties.find(function (property) {
+    return !isNaN(property);
+  });
+
+  if (isFont(family)) {
+    _font = family;
+    size = size || +_font.css.match(/\d+/)[0];
+    previousCSS = _font.css.split(' ');
+    previousProperties = previousCSS.slice(0, -2).filter(function (property) {
+      return property !== 'normal';
     });
-    call = !_.isBoolean(call) && true;
-    properties = _.without(properties, true, false);
-    let _font;
-    let size = properties.find(function (property) { return !isNaN(property); });
-    if (isFont(family)) {
-        _font = family;
-        size = size || +_font.css.match(/\d+/)[0];
-        previousCSS = _font.css.split(' ');
-        previousProperties = previousCSS
-            .slice(0, -2)
-            .filter(function (property) {
-                return property !== 'normal';
-            });
-        properties = _.union(properties, previousProperties);
-        let negates = properties.filter(function (property) {
-            if (!_.isString(property)) return false;
-            return property.charAt(0) == '-';
-        });
-        negates = negates.map(function (negate) {
-            return negate.substr(1);
-        });
-        properties = properties.filter(function (property) {
-            if (!_.isString(property)) return false;
-            return property.charAt(0) != '-';
-        });
-        properties = (
-            _.difference(properties, negates)
-                .join(' '));
-        _font.css = `${properties} ${size}px/${size + 2}px ${_.last(previousCSS)}`;
-        // font.css = properties + ' ' + size + 'px/' + (size + 2) + 'px ' + _.last(previousCSS);
-    } else {
-        size = size || 12;
-        _font = e.createFont(family, size);
-        properties = _.without(properties, size);
-        _font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + `${size}px/${size + 2}px ${family}`;
-        // font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + size + 'px/' + (size + 2) + 'px ' + family;
-    }
-    call && e.textFont(_font);
-    return _font;
+    properties = _.union(properties, previousProperties);
+    var negates = properties.filter(function (property) {
+      if (!_.isString(property)) return false;
+      return property.charAt(0) == '-';
+    });
+    negates = negates.map(function (negate) {
+      return negate.substr(1);
+    });
+    properties = properties.filter(function (property) {
+      if (!_.isString(property)) return false;
+      return property.charAt(0) != '-';
+    });
+    properties = _.difference(properties, negates).join(' ');
+    _font.css = "".concat(properties, " ").concat(size, "px/").concat(size + 2, "px ").concat(_.last(previousCSS)); // font.css = properties + ' ' + size + 'px/' + (size + 2) + 'px ' + _.last(previousCSS);
+  } else {
+    size = size || 12;
+    _font = e.createFont(family, size);
+    properties = _.without(properties, size);
+    _font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + "".concat(size, "px/").concat(size + 2, "px ").concat(family); // font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + size + 'px/' + (size + 2) + 'px ' + family;
+  }
+
+  call && e.textFont(_font);
+  return _font;
 };
 
 /**
@@ -1040,19 +1096,24 @@ font = function (family) {
  * console.log(formatDuration(martianDay));
  * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
  */
-formatDuration = ms => {
-    if (ms < 0) ms = -ms;
-    const time = {
-        day: Math.floor(ms / 86400000),
-        hour: Math.floor(ms / 3600000) % 24,
-        minute: Math.floor(ms / 60000) % 60,
-        second: Math.floor(ms / 1000) % 60,
-        millisecond: Math.floor(ms) % 1000
-    };
-    return Object.entries(time)
-        .filter(val => val[1] !== 0)
-        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
-        .join(', ');
+formatDuration = function (ms) {
+  if (ms < 0) ms = -ms;
+  var time = {
+    day: Math.floor(ms / 86400000),
+    hour: Math.floor(ms / 3600000) % 24,
+    minute: Math.floor(ms / 60000) % 60,
+    second: Math.floor(ms / 1000) % 60,
+    millisecond: Math.floor(ms) % 1000
+  };
+  return Object.entries(time).filter(function (val) {
+    return val[1] !== 0;
+  }).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        key = _ref2[0],
+        val = _ref2[1];
+
+    return "".concat(val, " ").concat(key).concat(val !== 1 ? 's' : '');
+  }).join(', ');
 };
 
 /**
@@ -1073,22 +1134,28 @@ formatDuration = ms => {
  * fill(LIGHTGREEN);
  * highlightText(str, 25, 25, BLACK);
  */
-highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    string = string.split('\n');
-    e.noStroke();
-    e.rectMode(e.CORNER);
-    e.textAlign(e.LEFT, e.TOP);
-    for (const i in string) {
-        string[i] = ` ${string[i]} `;
-        push();
-        e.fill(highlightColor);
-        e.rect(x, y + (i * e.textAscent() * 2), e.textWidth(string[i]), e.textAscent() * 1.75);
-        pop();
-        e.text(string[i], x, y + (i * e.textAscent() * 2));
-    }
+highlightText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var highlightColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : YELLOW;
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  string = string.split('\n');
+  e.noStroke();
+  e.rectMode(e.CORNER);
+  e.textAlign(e.LEFT, e.TOP);
+
+  for (var i in string) {
+    string[i] = " ".concat(string[i], " ");
+    push();
+    e.fill(highlightColor);
+    e.rect(x, y + i * e.textAscent() * 2, e.textWidth(string[i]), e.textAscent() * 1.75);
+    pop();
+    e.text(string[i], x, y + i * e.textAscent() * 2);
+  }
 };
 
 /**
@@ -1115,22 +1182,25 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
  *     text("TEXT", width / 2, height / 2);
  * };
  */
-lightOrDarkText = backgroundColor => {
-    let r, g, b;
-    if (typeof backgroundColor === 'string') {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
-        r = parseInt(result[1], 16);
-        g = parseInt(result[2], 16);
-        b = parseInt(result[3], 16);
-    } else {
-        r = e.red(backgroundColor);
-        g = e.green(backgroundColor);
-        b = e.blue(backgroundColor);
-    }
-    if ((r + b + g) / 3 < 225) {
-        return WHITE;
-    }
-    return BLACK;
+lightOrDarkText = function (backgroundColor) {
+  var r, g, b;
+
+  if (typeof backgroundColor === 'string') {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
+    r = parseInt(result[1], 16);
+    g = parseInt(result[2], 16);
+    b = parseInt(result[3], 16);
+  } else {
+    r = e.red(backgroundColor);
+    g = e.green(backgroundColor);
+    b = e.blue(backgroundColor);
+  }
+
+  if ((r + b + g) / 3 < 225) {
+    return WHITE;
+  }
+
+  return BLACK;
 };
 
 /**
@@ -1145,32 +1215,41 @@ lightOrDarkText = backgroundColor => {
  * fill(BLUE);
  * multicoloredText(str, 25, 25);
  */
-multicoloredText = (string, x = 0, y = e.textAscent()) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    string = string.split('\n');
-    push();
-    e.textAlign(e.LEFT, e.CORNER);
-    for (const i in string) {
-        string[i] = string[i].split(/\[|]/);
-        let splits = 0;
-        for (const j in string[i]) {
-            if (/\d+,\d+,\d+/.test(string[i][j])) {
-                const rgb = string[i][j].split(',');
-                e.fill.apply(e, rgb);
-                delete string[i][j];
-                if (splits === 0) {
-                    string[i][j - 1] += ' ';
-                }
-                splits += 1;
-            } else {
-                const w = e.textWidth(string[i].slice(0, j));
-                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
-            }
+multicoloredText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  string = string.split('\n');
+  push();
+  e.textAlign(e.LEFT, e.CORNER);
+
+  for (var i in string) {
+    string[i] = string[i].split(/\[|]/);
+    var splits = 0;
+
+    for (var j in string[i]) {
+      if (/\d+,\d+,\d+/.test(string[i][j])) {
+        var rgb = string[i][j].split(',');
+        e.fill.apply(e, rgb);
+        delete string[i][j];
+
+        if (splits === 0) {
+          string[i][j - 1] += ' ';
         }
+
+        splits += 1;
+      } else {
+        var w = e.textWidth(string[i].slice(0, j));
+        e.text(string[i][j], x + w - splits * 2 * e.textWidth(' '), y + i * e.textAscent() * 2);
+      }
     }
-    pop();
+  }
+
+  pop();
 };
 
 /**
@@ -1187,15 +1266,13 @@ multicoloredText = (string, x = 0, y = e.textAscent()) => {
  * println(ordinalSuffix(123));
  * // expected output: '123rd'
  */
-ordinalSuffix = n => {
-    const int = parseInt(n, 10),
-        digits = [int % 10, int % 100],
-        oPattern = [1, 2, 3, 4],
-        ordinals = ['st', 'nd', 'rd', 'th'],
-        tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-    return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
-        ? int + ordinals[digits[0] - 1]
-        : int + ordinals[3];
+ordinalSuffix = function (n) {
+  var int = parseInt(n, 10),
+      digits = [int % 10, int % 100],
+      oPattern = [1, 2, 3, 4],
+      ordinals = ['st', 'nd', 'rd', 'th'],
+      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
 };
 
 /**
@@ -1215,21 +1292,29 @@ ordinalSuffix = n => {
  * fill(BLACK);
  * outlineText(str, 25, 25, ORANGE);
  */
-outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
-    if (!(/\S/).test(string)) {
-        return;
+outlineText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var outlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  push();
+  e.fill(outlineColor);
+
+  for (var i = -2; i < 3; i++) {
+    for (var j = -1; j < 3; j++) {
+      e.text(string, x + i, y + j);
     }
-    push();
-    e.fill(outlineColor);
-    for (let i = -2; i < 3; i++) {
-        for (let j = -1; j < 3; j++) {
-            e.text(string, x + i, y + j);
-        }
-        e.text(string, x + i, y);
-        e.text(string, x, y + i);
-    }
-    pop();
-    e.text(string, x, y);
+
+    e.text(string, x + i, y);
+    e.text(string, x, y + i);
+  }
+
+  pop();
+  e.text(string, x, y);
 };
 
 /**
@@ -1261,12 +1346,18 @@ outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
  *
  * @see printf
  */
-pluralize = (value, word, plural = word + 's') => {
-    const _pluralize = (num, word, plural = word + 's') =>
-        [1, -1].includes(Number(num)) ? word : plural;
-    if (typeof value === 'object')
-        return (num, word) => _pluralize(num, word, value[word]);
-    return _pluralize(value, word, plural);
+pluralize = function (value, word) {
+  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+
+  var _pluralize = function (num, word) {
+    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+    return [1, -1].includes(Number(num)) ? word : plural;
+  };
+
+  if (typeof value === 'object') return function (num, word) {
+    return _pluralize(num, word, value[word]);
+  };
+  return _pluralize(value, word, plural);
 };
 
 /**
@@ -1279,21 +1370,28 @@ pluralize = (value, word, plural = word + 's') => {
  * // expected output: PI is 3.14
  */
 String.prototype.format = function () {
-    let string = this;
-    let match = _.first(string.match(/\${.*?}/));
-    while (match) {
-        let formatted;
-        try {
-            formatted = _eval(`\`${match}\``);
-        } catch (error) {
-            const head = match.match(/(\w+)\(/)[1];
-            const args = match.match(/\(([^)]+)\)/)[1].split(',');
-            formatted = e[head](...args);
-        }
-        string = string.replace(match, formatted);
-        match = _.first(string.match(/\${.*?}/));
+  var string = this;
+
+  var match = _.first(string.match(/\${.*?}/));
+
+  while (match) {
+    var formatted = void 0;
+
+    try {
+      formatted = _eval("`".concat(match, "`"));
+    } catch (error) {
+      var _e2;
+
+      var head = match.match(/(\w+)\(/)[1];
+      var args = match.match(/\(([^)]+)\)/)[1].split(',');
+      formatted = (_e2 = e)[head].apply(_e2, _toConsumableArray(args));
     }
-    return string;
+
+    string = string.replace(match, formatted);
+    match = _.first(string.match(/\${.*?}/));
+  }
+
+  return string;
 };
 
 /**
@@ -1310,22 +1408,27 @@ String.prototype.format = function () {
  * // expected output: Hello World
  */
 String.prototype.obfuscate = function () {
-    let str = '';
-    for (const i in _.range(this.length)) {
-        let curr = this.charCodeAt(i).toString(16);
-        if (curr.length <= 2) {
-            while (curr.length < 2) {
-                curr = '0' + curr;
-            }
-            str += '\\x' + curr;
-        } else {
-            while (curr.length < 4) {
-                curr = '0' + curr;
-            }
-            str += '\\u' + curr;
-        }
+  var str = '';
+
+  for (var i in _.range(this.length)) {
+    var curr = this.charCodeAt(i).toString(16);
+
+    if (curr.length <= 2) {
+      while (curr.length < 2) {
+        curr = '0' + curr;
+      }
+
+      str += '\\x' + curr;
+    } else {
+      while (curr.length < 4) {
+        curr = '0' + curr;
+      }
+
+      str += '\\u' + curr;
     }
-    return str;
+  }
+
+  return str;
 };
 
 /**
@@ -1340,7 +1443,7 @@ String.prototype.obfuscate = function () {
  * // expected output: 'Hello '
  */
 String.prototype.removeNonASCII = function () {
-    return this.replace(/[^\x20-\x7E]/g, '');
+  return this.replace(/[^\x20-\x7E]/g, '');
 };
 
 /**
@@ -1353,14 +1456,10 @@ String.prototype.removeNonASCII = function () {
  * // expected output: 'loremIpsum'
  */
 String.prototype.toCamelCase = function () {
-    const s =
-        this
-            .match(
-                /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
-            )
-            .map(x => x.slice(0, 1).toUpperCase() + x.slice(1).toLowerCase())
-            .join('');
-    return s.slice(0, 1).toLowerCase() + s.slice(1);
+  var s = this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
+    return x.slice(0, 1).toUpperCase() + x.slice(1).toLowerCase();
+  }).join('');
+  return s.slice(0, 1).toLowerCase() + s.slice(1);
 };
 
 /**
@@ -1373,10 +1472,9 @@ String.prototype.toCamelCase = function () {
  * // expected output: 'lorem-ipsum'
  */
 String.prototype.toKebabCase = function () {
-    return this
-        .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-        .map(x => x.toLowerCase())
-        .join('-');
+  return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
+    return x.toLowerCase();
+  }).join('-');
 };
 
 /**
@@ -1389,10 +1487,9 @@ String.prototype.toKebabCase = function () {
  * // expected output: 'lorem_ipsum'
  */
 String.prototype.toSnakeCase = function () {
-    return this
-        .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-        .map(x => x.toLowerCase())
-        .join('_');
+  return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
+    return x.toLowerCase();
+  }).join('_');
 };
 
 /**
@@ -1405,10 +1502,9 @@ String.prototype.toSnakeCase = function () {
  * // expected output: 'Lorem Ipsum'
  */
 String.prototype.toTitleCase = function () {
-    return this
-        .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-        .map(x => x.charAt(0).toUpperCase() + x.slice(1))
-        .join(' ');
+  return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
+    return x.charAt(0).toUpperCase() + x.slice(1);
+  }).join(' ');
 };
 
 /**
@@ -1430,21 +1526,29 @@ String.prototype.toTitleCase = function () {
  * fill(BLACK);
  * underlineText(str, 25, 25, RED, 5);
  */
-underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    strings = string.split('\n');
-    push();
-    e.strokeCap(e.SQUARE);
-    e.strokeWeight(underlineWeight);
-    e.stroke(underlineColor);
-    for (const i in strings) {
-        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
-    }
-    e.textAlign(e.LEFT, e.CORNER);
-    e.text(string, x, y);
-    pop();
+underlineText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
+  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  strings = string.split('\n');
+  push();
+  e.strokeCap(e.SQUARE);
+  e.strokeWeight(underlineWeight);
+  e.stroke(underlineColor);
+
+  for (var i in strings) {
+    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
+  }
+
+  e.textAlign(e.LEFT, e.CORNER);
+  e.text(string, x, y);
+  pop();
 };
 
 /**
@@ -1469,6 +1573,7 @@ underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, unde
  * println(customWrappedStr);
  * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
  */
-wordWrap = (str, max, br = '\n') => str.replace(
-    new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br
-);
+wordWrap = function (str, max) {
+  var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '\n';
+  return str.replace(new RegExp("(?![^\\n]{1,".concat(max, "}$)([^\\n]{1,").concat(max, "})\\s"), 'g'), '$1' + br);
+};

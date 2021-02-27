@@ -3,11 +3,11 @@
  * Calculates fastest function in terms of iterations.
  *
  * @description
- * The functions will be called x amount of times. Their times will be how long
- * they took to run x amount of times. The more iterations, the more accurate
+ * The functions will be called _x_ number of times. Their times will be how long
+ * they took to run _x_ number of times. The more iterations, the more accurate
  * the result.
  *
- * Running resource-intensive function may result in a infinite loop error. You
+ * Running resource-intensive function may result in an infinite loop error. You
  * can bypass this using the {@link clean} function.
  *
  * @link https://www.30secondsofcode.org/js/s/most-performant

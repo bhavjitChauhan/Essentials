@@ -1,5 +1,5 @@
 /**
- * Converts hex or HSB to RGB color value
+ * Converts hex or HSB to RGB color value.
  * 
  * @param {(string|color)} x Hex, hue or RGB color value
  * @param {number} [s] Saturation value

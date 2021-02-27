@@ -10,6 +10,6 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     TEXT_ESSENTIALS = true;
     if (!_silent_ && !_text_initialized_) console.info(
         '%cText Essentials',
-        'font-family:system-ui;font-size:0.75rem;color:lightgray;'
+        'font-family:system-ui;font-size:0.75rem;'
     );
 }

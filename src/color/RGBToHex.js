@@ -1,5 +1,5 @@
 /**
- * Converts RGB to hex color type
+ * Converts RGB to hex color type.
  * 
  * @param {(number|color)} x Red value or color
  * @param {number} [g] Green value

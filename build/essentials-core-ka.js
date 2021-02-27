@@ -5,27 +5,43 @@
  * Processing Environment.
  *
  * @link https://github.com/bhavjitChauhan/Essentials
- * @file Khan Academy utility JavaScript library
+ * @file Local Khan Academy utility JavaScript library
  * @author Bhavjit Chauhan
  */
 
+//jshint ignore: start
+var e = eval('__env__');
+
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+/**
+ * The Khan Academy utility library.
+ *
+ * The Essentials library provides utility functions for the Khan Academy
+ * Processing Environment.
+ *
+ * @link https://github.com/bhavjitChauhan/Essentials
+ * @file Khan Academy utility JavaScript library
+ * @author Bhavjit Chauhan
+ */
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
-
 ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.0.0';
-
+ESSENTIALS_VERSION = '1.0.1';
+ESSENTIALS_ASCII = "/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\\\     /\\\\/\\\\\\ /\\\\\\\\\\\\/\\\\      /\\       /\\\\        /\\\\ \\\\  \n/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\ /\\\\   /\\\\     /\\\\    /\\\\     /\\ \\\\     /\\\\      /\\\\    /\\\\\n/\\\\       /\\\\       /\\\\      /\\\\      /\\\\ /\\\\  /\\\\     /\\\\    /\\\\    /\\  /\\\\    /\\\\       /\\\\      \n/\\\\\\\\\\\\     /\\\\       /\\\\    /\\\\\\\\\\\\  /\\\\  /\\\\ /\\\\     /\\\\    /\\\\   /\\\\   /\\\\   /\\\\         /\\\\    \n/\\\\            /\\\\       /\\\\ /\\\\      /\\\\   /\\ /\\\\     /\\\\    /\\\\  /\\\\\\\\\\\\ /\\\\  /\\\\            /\\\\ \n/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\\\    /\\ \\\\     /\\\\    /\\\\ /\\\\       /\\\\ /\\\\      /\\\\    /\\\\\n/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\      /\\\\     /\\\\    /\\\\/\\\\         /\\\\/\\\\\\\\\\\\\\\\  /\\\\ \\\\";
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info(
-    `%cEssentials Library
-%cThe Khan Academy utility library.
-
-Version ${ESSENTIALS_VERSION}
-Copyright \xa9 2021 Bhavjit Chauhan
-https://github.com/bhavjitChauhan/Essentials`,
-    'font-family:system-ui;font-size:1rem;',
-    'font-family:system-ui;font-size:0.75rem;color:lightgray;'
-);
-
+if (!_silent_ && !_core_initialized_) console.info("%cEssentials Library\n%cThe Khan Academy utility library.\n\nVersion ".concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
 e = Processing.instances[0];
 _eval = eval;
 
@@ -37,7 +53,9 @@ _eval = eval;
  * clearLogs();
  * // expected outcome: blank canvas console
  */
-clearLogs = () => e._clearLogs;
+clearLogs = function () {
+  return e._clearLogs();
+};
 
 /**
  * Literally does nothing.
@@ -46,12 +64,16 @@ clearLogs = () => e._clearLogs;
  * // Prevents an error if an unneeded method is called
  * Element.init = noop;
  */
-noop = () => _.noop;
+noop = function () {
+  return _.noop;
+};
 
 /**
  * Alias for `Program.restart()`
  */
-restart = () => e.Program.restart;
+restart = function () {
+  return e.Program.restart();
+};
 
 /**
  * Alias for `width`.
@@ -78,7 +100,7 @@ HALF_HEIGHT = HEIGHT / 2;
  * 
  * @example
  * // Log canvas element style to browser console
- * console.log($(CANVAS).attr('style));
+ * console.log($(CANVAS).attr('style)');
  */
 CANVAS = '#output-canvas';
 
@@ -100,12 +122,16 @@ CANVAS_LOG = 'body div:first div:nth-child(2) div div';
  * @param {} fn Function to attempt.
  * @param {...*} args Functions arguments.
  */
-attempt = (fn, ...args) => {
-    try {
-        return fn(...args);
-    } catch (e) {
-        return e instanceof Error ? e : new Error(e);
+attempt = function (fn) {
+  try {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
     }
+
+    return fn.apply(void 0, args);
+  } catch (e) {
+    return e instanceof Error ? e : new Error(e);
+  }
 };
 
 /**
@@ -134,14 +160,17 @@ attempt = (fn, ...args) => {
  *     }
  * ]);
  */
-chainAsync = fns => {
-    let i = 0;
-    const last = _.last(fns);
-    const next = () => {
-        const fn = fns[i++];
-        fn === last ? fn() : fn(next);
-    };
-    next();
+chainAsync = function (fns) {
+  var i = 0;
+
+  var last = _.last(fns);
+
+  var next = function () {
+    var fn = fns[i++];
+    fn === last ? fn() : fn(next);
+  };
+
+  next();
 };
 
 /**
@@ -174,13 +203,9 @@ chainAsync = fns => {
  *     }
  * });
  */
-clean = fn => {
-    const string = fn.toString()
-        .replace(/__env__\.KAInfiniteLoopCount\+\+;/g, '')
-        .replace(/if \(__env__\.KAInfiniteLoopCount > 1000\) {[\s]+__env__\.KAInfiniteLoopProtect\('[^']*'\);[^}]+}/g, '')
-        .replace(/__env__\.PJSOutput\.applyInstance\((__env__\.\S+), '\S+'\)/g,
-            'new $1');
-    return Object.constructor(`return (function(__env__) {return ${string};});`)()(__env__);
+clean = function (fn) {
+  var string = fn.toString().replace(/__env__\.KAInfiniteLoopCount\+\+;/g, '').replace(/if \(__env__\.KAInfiniteLoopCount > 1000\) {[\s]+__env__\.KAInfiniteLoopProtect\('[^']*'\);[^}]+}/g, '').replace(/__env__\.PJSOutput\.applyInstance\((__env__\.\S+), '\S+'\)/g, 'new $1');
+  return Object.constructor("return (function(__env__) {return ".concat(string, ";});"))()(e);
 };
 
 /**
@@ -200,20 +225,22 @@ clean = fn => {
  * }
  * const isOdd = complement(isEven);
  */
-complement = fn => (...args) => !fn(...args);
+complement = function (fn) {
+  return function () {
+    return !fn.apply(void 0, arguments);
+  };
+};
 
 /**
  * Generates a [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
  * 
  * @returns {string}
  */
-generateUUID = () =>
-    ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-        (
-            c ^
-            (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-        ).toString(16)
-    );
+generateUUID = function () {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, function (c) {
+    return (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
+  });
+};
 
 /**
  * Returns a string of the form `HH:MM:SS`.
@@ -227,7 +254,7 @@ generateUUID = () =>
  * // expected outcome: Time in the form of `HH:MM:SS`
  */
 getColonTime = function () {
-    return (new Date()).toTimeString().slice(0, 8);
+  return new Date().toTimeString().slice(0, 8);
 };
 
 /**
@@ -255,11 +282,10 @@ getColonTime = function () {
  * b.draw();
  * // expected outcome: rectangle with arguments (100, 100, 150, 50)
  */
-inherit = (subClass, superClass) => {
-    Object.setPrototypeOf(subClass.prototype, superClass.prototype);
-    subClass.prototype.constructor = subClass;
-    if (superClass.prototype.constructor === Object)
-        superClass.prototype.constructor = superClass;
+inherit = function (subClass, superClass) {
+  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
 };
 
 /**
@@ -279,11 +305,12 @@ inherit = (subClass, superClass) => {
  * 
  * @see font
  */
-isFont = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isFunction(obj.getCSSDefinition);
+isFont = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isFunction(obj.getCSSDefinition);
 };
 
 /**
@@ -296,11 +323,12 @@ isFont = obj => {
  * println(isImage(i));
  * // expected output: true
  */
-isImage = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.sourceImg);
+isImage = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isObject(obj.sourceImg);
 };
 
 /**
@@ -313,11 +341,12 @@ isImage = obj => {
  * println(isSound(s));
  * // expected output: true
  */
-isSound = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.audio);
+isSound = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isObject(obj.audio);
 };
 
 /**
@@ -325,11 +354,11 @@ isSound = obj => {
  * Calculates fastest function in terms of iterations.
  *
  * @description
- * The functions will be called x amount of times. Their times will be how long
- * they took to run x amount of times. The more iterations, the more accurate
+ * The functions will be called _x_ number of times. Their times will be how long
+ * they took to run _x_ number of times. The more iterations, the more accurate
  * the result.
  *
- * Running resource-intensive function may result in a infinite loop error. You
+ * Running resource-intensive function may result in an infinite loop error. You
  * can bypass this using the {@link clean} function.
  *
  * @link https://www.30secondsofcode.org/js/s/most-performant
@@ -349,13 +378,18 @@ isSound = obj => {
  * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
  * // possible output: 'console.log performed faster.'
  */
-mostPerformant = (fns, iterations = 1e4) => {
-    const times = fns.map(fn => {
-        const before = performance.now();
-        for (let i = 0; i < iterations; i++) fn();
-        return performance.now() - before;
-    });
-    return times.indexOf(Math.min(...times));
+mostPerformant = function (fns) {
+  var iterations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1e4;
+  var times = fns.map(function (fn) {
+    var before = performance.now();
+
+    for (var i = 0; i < iterations; i++) {
+      fn();
+    }
+
+    return performance.now() - before;
+  });
+  return times.indexOf(Math.min.apply(Math, _toConsumableArray(times)));
 };
 
 /**
@@ -374,9 +408,9 @@ mostPerformant = (fns, iterations = 1e4) => {
  *
  * @see push
  */
-pop = () => {
-    e.popStyle();
-    e.popMatrix();
+pop = function () {
+  e.popStyle();
+  e.popMatrix();
 };
 
 /**
@@ -386,7 +420,7 @@ pop = () => {
  * @param {*} arguments Arguments
  * 
  * @example
- * printf('Hello %!', 'World');
+ * printf('Hello %', 'World');
  * // expected output: 'Hello World'
  * 
  * @example
@@ -394,14 +428,15 @@ pop = () => {
  * printf('% \\% %', 'A', 'B');
  * // expected output: 'A % B'
  */
-printf = function(string) {
-    const args = Array.from(arguments)
-        .slice(1);
-    for (const i in args) {
-        string = string.replace(/(?<!\\)%/, args[i]);
-    }
-    string = string.replaceAll(/\\%/g, '%');
-    e.println(string);
+printf = function (string) {
+  var args = Array.from(arguments).slice(1);
+
+  for (var i in args) {
+    string = string.replace(/(?<!\\)%/, args[i]);
+  }
+
+  string = string.replaceAll(/\\%/g, '%');
+  e.println(string);
 };
 
 /**
@@ -420,9 +455,9 @@ printf = function(string) {
  *
  * @see pop
  */
-push = () => {
-    e.pushMatrix();
-    e.pushStyle();
+push = function () {
+  e.pushMatrix();
+  e.pushStyle();
 };
 
 /**
@@ -439,14 +474,8 @@ push = () => {
  * @example
  * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
  */
-randomInt = (min, max) => {
-    if (max == null) {
-        max = min;
-        min = 0;
-    }
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+randomInt = function (min, max) {
+  return _.random(min, max);
 };
 
 /**
@@ -475,9 +504,10 @@ randomInt = (min, max) => {
  * // possible output: 'timeTaken#100: 100.000000000000 ms'
  * 
  */
-timeTaken = (callback, id = 'default') => {
-    console.time(`timeTaken#${id}`);
-    const r = callback();
-    console.timeEnd(`timeTaken#${id}`);
-    return r;
+timeTaken = function (callback) {
+  var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'default';
+  console.time("timeTaken#".concat(id));
+  var r = callback();
+  console.timeEnd("timeTaken#".concat(id));
+  return r;
 };

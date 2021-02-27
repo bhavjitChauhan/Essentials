@@ -8,7 +8,7 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     COLOR_ESSENTIALS = true;
     if (!_silent_ && !_color_initialized_) console.info(
         '%cColor Essentials',
-        'font-family:system-ui;font-size:0.75rem;color:lightgray;'
+        'font-family:system-ui;font-size:0.75rem;'
     );
 }
 
@@ -204,7 +204,7 @@ MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
 /**
- * Converts hex to RGB color type
+ * Converts hex to RGB color type.
  * 
  * @param {string} hex Hex color value, optional `#`; can be shorthand
  * 
@@ -235,7 +235,7 @@ hexToRGB = hex => {
 };
 
 /**
- * Converts HSB to RGB color type
+ * Converts HSB to RGB color type.
  * 
  * @param {(number|color)} x Hue value or color
  * @param {number} [s] Saturation value
@@ -281,33 +281,7 @@ HSBToRGB = function(x, s, v) {
 };
 
 /**
- * Converts RGB to hex color type
- * 
- * @param {(number|color)} x Red value or color
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {string}  Hex color value
- * 
- * @example
- * println(RGBToHex(255, 0, 0));
- * // expected output: #ff0000
- * 
- * @example
- * let c = RED;
- * println(RGBToHex(c));
- * // expected output: #ff0000
- */
-RGBToHex = function(x, g, b) {
-    if (arguments.length == 1) {
-        c = x;
-        x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
-    }
-    return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
-};
-
-/**
- * Converts RGB to HSB color type
+ * Converts RGB to HSB color type.
  * 
  * @param {(number|color)} x Red value or color
  * @param {number} [g] Green value
@@ -360,7 +334,33 @@ RGBToHSB = function(x, g, b) {
 };
 
 /**
- * Converts hex or RGB to HSB color value
+ * Converts RGB to hex color type.
+ * 
+ * @param {(number|color)} x Red value or color
+ * @param {number} [g] Green value
+ * @param {number} [b] Blue value
+ * 
+ * @returns {string}  Hex color value
+ * 
+ * @example
+ * println(RGBToHex(255, 0, 0));
+ * // expected output: #ff0000
+ * 
+ * @example
+ * let c = RED;
+ * println(RGBToHex(c));
+ * // expected output: #ff0000
+ */
+RGBToHex = function(x, g, b) {
+    if (arguments.length == 1) {
+        c = x;
+        x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+    }
+    return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
+};
+
+/**
+ * Converts hex or RGB to HSB color value.
  * 
  * @param {(string|color)} x Hex, red or HSB color value
  * @param {number} [g] Green value
@@ -397,7 +397,7 @@ toHSB = function() {
 };
 
 /**
- * Converts hex or HSB to RGB color value
+ * Converts hex or HSB to RGB color value.
  * 
  * @param {(string|color)} x Hex, hue or RGB color value
  * @param {number} [s] Saturation value
