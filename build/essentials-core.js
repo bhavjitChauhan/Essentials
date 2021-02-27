@@ -99,23 +99,6 @@ CANVAS = '#output-canvas';
 CANVAS_LOG = 'body div:first div:nth-child(2) div div';
 
 /**
- * Attempts to invoke a function with the provided arguments, returning either
- *      the result or an error.
- *
- * @link https://www.30secondsofcode.org/js/s/attempt
- *
- * @param {} fn Function to attempt.
- * @param {...*} args Functions arguments.
- */
-attempt = (fn, ...args) => {
-    try {
-        return fn(...args);
-    } catch (e) {
-        return e instanceof Error ? e : new Error(e);
-    }
-};
-
-/**
  * Calls multiple functions asynchronously.
  *
  * @link https://www.30secondsofcode.org/js/s/chain-async
@@ -149,6 +132,23 @@ chainAsync = fns => {
         fn === last ? fn() : fn(next);
     };
     next();
+};
+
+/**
+ * Attempts to invoke a function with the provided arguments, returning either
+ *      the result or an error.
+ *
+ * @link https://www.30secondsofcode.org/js/s/attempt
+ *
+ * @param {} fn Function to attempt.
+ * @param {...*} args Functions arguments.
+ */
+attempt = (fn, ...args) => {
+    try {
+        return fn(...args);
+    } catch (e) {
+        return e instanceof Error ? e : new Error(e);
+    }
 };
 
 /**
@@ -328,6 +328,27 @@ isSound = obj => {
 };
 
 /**
+ * Equivalent to using
+ * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
+ * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
+ *
+ * @example
+ * push();
+ * stroke(WHITE);
+ * rotate(90);
+ * rect(10, 10, 15, 15);
+ * pop();
+ * // This rectangle will not display the stroke or rotation
+ * rect(10, 10, 15, 15);
+ *
+ * @see push
+ */
+pop = () => {
+    e.popStyle();
+    e.popMatrix();
+};
+
+/**
  * @summary
  * Calculates fastest function in terms of iterations.
  *
@@ -363,27 +384,6 @@ mostPerformant = (fns, iterations = 1e4) => {
         return performance.now() - before;
     });
     return times.indexOf(Math.min(...times));
-};
-
-/**
- * Equivalent to using
- * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
- * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
- *
- * @example
- * push();
- * stroke(WHITE);
- * rotate(90);
- * rect(10, 10, 15, 15);
- * pop();
- * // This rectangle will not display the stroke or rotation
- * rect(10, 10, 15, 15);
- *
- * @see push
- */
-pop = () => {
-    e.popStyle();
-    e.popMatrix();
 };
 
 /**

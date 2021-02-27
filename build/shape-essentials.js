@@ -29,6 +29,16 @@ blurRect = (x, y, width, height, size) => {
 };
 
 /**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ * 
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ * 
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+
+/**
  * Draws a 2D cylinder.
  * 
  * @link https://www.khanacademy.org/cs/-/5157537806548992
@@ -112,14 +122,33 @@ donut = (x, y, majorDiameter, minorDiameter) => {
 };
 
 /**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ * Draws a heart.
  * 
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
+ * @link https://www.khanacademy.org/cs/-/2085250861
  * 
+ * @param {number} x x-coordinate of the heart
+ * @param {number} y y-coordinate of the heart
+ * @param {number} radius
+ * 
+ * @example
+ * heart(100, 100, 50);
  */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+heart = (x, y, radius) => {
+    const ay = y - 2 * radius / 5,
+        by = y + radius,
+        c1y = y - 6 * radius / 5,
+        c2y = y - 2 * radius / 5;
+    let c1x = x + radius / 2,
+        c2x = x + 9 * radius / 5;
+
+    drawShape(() => {
+        e.vertex(x, ay);
+        e.bezierVertex(c1x, c1y, c2x, c2y, x, by);
+        c1x = 2 * x - c1x;
+        c2x = 2 * x - c2x;
+        e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
+    }, true);
+};
 
 /**
  * Alias for `beginShape()`/`endShape()`.
@@ -153,35 +182,6 @@ drawShape = (fn, close, mode) => {
     e.beginShape(mode);
     fn();
     e.endShape(close);
-};
-
-/**
- * Draws a heart.
- * 
- * @link https://www.khanacademy.org/cs/-/2085250861
- * 
- * @param {number} x x-coordinate of the heart
- * @param {number} y y-coordinate of the heart
- * @param {number} radius
- * 
- * @example
- * heart(100, 100, 50);
- */
-heart = (x, y, radius) => {
-    const ay = y - 2 * radius / 5,
-        by = y + radius,
-        c1y = y - 6 * radius / 5,
-        c2y = y - 2 * radius / 5;
-    let c1x = x + radius / 2,
-        c2x = x + 9 * radius / 5;
-
-    drawShape(() => {
-        e.vertex(x, ay);
-        e.bezierVertex(c1x, c1y, c2x, c2y, x, by);
-        c1x = 2 * x - c1x;
-        c2x = 2 * x - c2x;
-        e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
-    }, true);
 };
 
 /**

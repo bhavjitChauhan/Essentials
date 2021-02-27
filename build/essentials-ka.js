@@ -122,27 +122,6 @@ CANVAS = '#output-canvas';
 CANVAS_LOG = 'body div:first div:nth-child(2) div div';
 
 /**
- * Attempts to invoke a function with the provided arguments, returning either
- *      the result or an error.
- *
- * @link https://www.30secondsofcode.org/js/s/attempt
- *
- * @param {} fn Function to attempt.
- * @param {...*} args Functions arguments.
- */
-attempt = function (fn) {
-  try {
-    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    return fn.apply(void 0, args);
-  } catch (e) {
-    return e instanceof Error ? e : new Error(e);
-  }
-};
-
-/**
  * Calls multiple functions asynchronously.
  *
  * @link https://www.30secondsofcode.org/js/s/chain-async
@@ -179,6 +158,27 @@ chainAsync = function (fns) {
   };
 
   next();
+};
+
+/**
+ * Attempts to invoke a function with the provided arguments, returning either
+ *      the result or an error.
+ *
+ * @link https://www.30secondsofcode.org/js/s/attempt
+ *
+ * @param {} fn Function to attempt.
+ * @param {...*} args Functions arguments.
+ */
+attempt = function (fn) {
+  try {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    return fn.apply(void 0, args);
+  } catch (e) {
+    return e instanceof Error ? e : new Error(e);
+  }
 };
 
 /**
@@ -358,6 +358,27 @@ isSound = function (obj) {
 };
 
 /**
+ * Equivalent to using
+ * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
+ * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
+ *
+ * @example
+ * push();
+ * stroke(WHITE);
+ * rotate(90);
+ * rect(10, 10, 15, 15);
+ * pop();
+ * // This rectangle will not display the stroke or rotation
+ * rect(10, 10, 15, 15);
+ *
+ * @see push
+ */
+pop = function () {
+  e.popStyle();
+  e.popMatrix();
+};
+
+/**
  * @summary
  * Calculates fastest function in terms of iterations.
  *
@@ -398,27 +419,6 @@ mostPerformant = function (fns) {
     return performance.now() - before;
   });
   return times.indexOf(Math.min.apply(Math, _toConsumableArray(times)));
-};
-
-/**
- * Equivalent to using
- * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
- * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
- *
- * @example
- * push();
- * stroke(WHITE);
- * rotate(90);
- * rect(10, 10, 15, 15);
- * pop();
- * // This rectangle will not display the stroke or rotation
- * rect(10, 10, 15, 15);
- *
- * @see push
- */
-pop = function () {
-  e.popStyle();
-  e.popMatrix();
 };
 
 /**
@@ -529,6 +529,36 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   COLOR_ESSENTIALS = true;
   if (!_silent_ && !_color_initialized_) console.info('%cColor Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
+
+/**
+ * Converts hex to RGB color type.
+ * 
+ * @param {string} hex Hex color value, optional `#`; can be shorthand
+ * 
+ * @returns {color} RGB color value
+ * 
+ * @example
+ * let c = hexToRGB('#fff');
+ * println(c);
+ * // expected output: -1
+ * background(c);
+ * // expected outcome: white background
+ */
+hexToRGB = function (hex) {
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  result = result ? result.splice(1).map(function (i) {
+    return parseInt(i, 16);
+  }) : null;
+  push();
+  e.colorMode(e.RGB);
+  result = e.color.apply(e, result);
+  pop();
+  return result;
+};
 
 /**
  * @summary
@@ -721,36 +751,6 @@ MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
 /**
- * Converts hex to RGB color type.
- * 
- * @param {string} hex Hex color value, optional `#`; can be shorthand
- * 
- * @returns {color} RGB color value
- * 
- * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
- */
-hexToRGB = function (hex) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  result = result ? result.splice(1).map(function (i) {
-    return parseInt(i, 16);
-  }) : null;
-  push();
-  e.colorMode(e.RGB);
-  result = e.color.apply(e, result);
-  pop();
-  return result;
-};
-
-/**
  * Converts HSB to RGB color type.
  * 
  * @param {(number|color)} x Hue value or color
@@ -813,6 +813,33 @@ HSBToRGB = function (x, s, v) {
 };
 
 /**
+ * Converts RGB to hex color type.
+ * 
+ * @param {(number|color)} x Red value or color
+ * @param {number} [g] Green value
+ * @param {number} [b] Blue value
+ * 
+ * @returns {string}  Hex color value
+ * 
+ * @example
+ * println(RGBToHex(255, 0, 0));
+ * // expected output: #ff0000
+ * 
+ * @example
+ * let c = RED;
+ * println(RGBToHex(c));
+ * // expected output: #ff0000
+ */
+RGBToHex = function (x, g, b) {
+  if (arguments.length == 1) {
+    c = x;
+    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+  }
+
+  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
+};
+
+/**
  * Converts RGB to HSB color type.
  * 
  * @param {(number|color)} x Red value or color
@@ -870,33 +897,6 @@ RGBToHSB = function (x, g, b) {
   result = e.color.apply(e, result);
   pop();
   return result;
-};
-
-/**
- * Converts RGB to hex color type.
- * 
- * @param {(number|color)} x Red value or color
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {string}  Hex color value
- * 
- * @example
- * println(RGBToHex(255, 0, 0));
- * // expected output: #ff0000
- * 
- * @example
- * let c = RED;
- * println(RGBToHex(c));
- * // expected output: #ff0000
- */
-RGBToHex = function (x, g, b) {
-  if (arguments.length == 1) {
-    c = x;
-    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
-  }
-
-  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
 /**
@@ -1508,6 +1508,33 @@ String.prototype.toTitleCase = function () {
 };
 
 /**
+ * Wraps a string to a given number of characters using a string break
+ * character.
+ *
+ * @link https://www.30secondsofcode.org/js/s/word-wrap
+ *
+ * @param {string} str String to be wrapped
+ * @param {number} max Maximum number of characters per line
+ * @param {string} [br='\n'] Custom break character
+ *
+ * @example
+ * let str = 'This string should have a maximum line length of thirty-two characters.';
+ * let wrappedStr = wordWrap(str, 32);
+ * println(wrappedStr);
+ * // expected output: 
+ * // 'This string should have a
+ * // maximum line length of
+ * // thirty-two characters.'
+ * let customWrappedStr = wordWrap(str, 32, '<br>');
+ * println(customWrappedStr);
+ * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
+ */
+wordWrap = function (str, max) {
+  var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '\n';
+  return str.replace(new RegExp("(?![^\\n]{1,".concat(max, "}$)([^\\n]{1,").concat(max, "})\\s"), 'g'), '$1' + br);
+};
+
+/**
  * Draws text underlined.
  * 
  * @param {string} string Text to be underlined
@@ -1549,31 +1576,4 @@ underlineText = function (string) {
   e.textAlign(e.LEFT, e.CORNER);
   e.text(string, x, y);
   pop();
-};
-
-/**
- * Wraps a string to a given number of characters using a string break
- * character.
- *
- * @link https://www.30secondsofcode.org/js/s/word-wrap
- *
- * @param {string} str String to be wrapped
- * @param {number} max Maximum number of characters per line
- * @param {string} [br='\n'] Custom break character
- *
- * @example
- * let str = 'This string should have a maximum line length of thirty-two characters.';
- * let wrappedStr = wordWrap(str, 32);
- * println(wrappedStr);
- * // expected output: 
- * // 'This string should have a
- * // maximum line length of
- * // thirty-two characters.'
- * let customWrappedStr = wordWrap(str, 32, '<br>');
- * println(customWrappedStr);
- * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
- */
-wordWrap = function (str, max) {
-  var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '\n';
-  return str.replace(new RegExp("(?![^\\n]{1,".concat(max, "}$)([^\\n]{1,").concat(max, "})\\s"), 'g'), '$1' + br);
 };

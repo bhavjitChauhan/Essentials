@@ -8,7 +8,7 @@
 
 [![](https://img.shields.io/github/package-json/v/bhavjitChauhan/Essentials?style=flat-square)](https://github.com/bhavjitChauhan/Essentials/releases)
 [![](https://img.shields.io/github/last-commit/bhavjitChauhan/Essentials?style=flat-square)](https://github.com/bhavjitChauhan/Essentials/commits)
-[![](https://data.jsdelivr.com/v1/package/gh/bhavjitChauhan/Essentials/badge)](https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials)
+[![](https://data.jsdelivr.com/v1/package/gh/bhavjitChauhan/Essentials/badge)](https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials?path=build)
 
 The Essentials library provides utility functions for the [Khan Academy
 Processing Environment](https://www.khanacademy.org/cs/new).

@@ -99,23 +99,6 @@ CANVAS = '#output-canvas';
 CANVAS_LOG = 'body div:first div:nth-child(2) div div';
 
 /**
- * Attempts to invoke a function with the provided arguments, returning either
- *      the result or an error.
- *
- * @link https://www.30secondsofcode.org/js/s/attempt
- *
- * @param {} fn Function to attempt.
- * @param {...*} args Functions arguments.
- */
-attempt = (fn, ...args) => {
-    try {
-        return fn(...args);
-    } catch (e) {
-        return e instanceof Error ? e : new Error(e);
-    }
-};
-
-/**
  * Calls multiple functions asynchronously.
  *
  * @link https://www.30secondsofcode.org/js/s/chain-async
@@ -149,6 +132,23 @@ chainAsync = fns => {
         fn === last ? fn() : fn(next);
     };
     next();
+};
+
+/**
+ * Attempts to invoke a function with the provided arguments, returning either
+ *      the result or an error.
+ *
+ * @link https://www.30secondsofcode.org/js/s/attempt
+ *
+ * @param {} fn Function to attempt.
+ * @param {...*} args Functions arguments.
+ */
+attempt = (fn, ...args) => {
+    try {
+        return fn(...args);
+    } catch (e) {
+        return e instanceof Error ? e : new Error(e);
+    }
 };
 
 /**
@@ -328,6 +328,27 @@ isSound = obj => {
 };
 
 /**
+ * Equivalent to using
+ * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
+ * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
+ *
+ * @example
+ * push();
+ * stroke(WHITE);
+ * rotate(90);
+ * rect(10, 10, 15, 15);
+ * pop();
+ * // This rectangle will not display the stroke or rotation
+ * rect(10, 10, 15, 15);
+ *
+ * @see push
+ */
+pop = () => {
+    e.popStyle();
+    e.popMatrix();
+};
+
+/**
  * @summary
  * Calculates fastest function in terms of iterations.
  *
@@ -363,27 +384,6 @@ mostPerformant = (fns, iterations = 1e4) => {
         return performance.now() - before;
     });
     return times.indexOf(Math.min(...times));
-};
-
-/**
- * Equivalent to using
- * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
- * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
- *
- * @example
- * push();
- * stroke(WHITE);
- * rotate(90);
- * rect(10, 10, 15, 15);
- * pop();
- * // This rectangle will not display the stroke or rotation
- * rect(10, 10, 15, 15);
- *
- * @see push
- */
-pop = () => {
-    e.popStyle();
-    e.popMatrix();
 };
 
 /**
@@ -494,6 +494,37 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
         'font-family:system-ui;font-size:0.75rem;'
     );
 }
+
+/**
+ * Converts hex to RGB color type.
+ * 
+ * @param {string} hex Hex color value, optional `#`; can be shorthand
+ * 
+ * @returns {color} RGB color value
+ * 
+ * @example
+ * let c = hexToRGB('#fff');
+ * println(c);
+ * // expected output: -1
+ * background(c);
+ * // expected outcome: white background
+ */
+hexToRGB = hex => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    result = result ? result.splice(1).map(function (i) {
+        return parseInt(i, 16);
+    }) : null;
+    push();
+    e.colorMode(e.RGB);
+    result = e.color.apply(e, result);
+    pop();
+    return result;
+};
 
 /**
  * @summary
@@ -687,37 +718,6 @@ MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
 /**
- * Converts hex to RGB color type.
- * 
- * @param {string} hex Hex color value, optional `#`; can be shorthand
- * 
- * @returns {color} RGB color value
- * 
- * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
- */
-hexToRGB = hex => {
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    result = result ? result.splice(1).map(function (i) {
-        return parseInt(i, 16);
-    }) : null;
-    push();
-    e.colorMode(e.RGB);
-    result = e.color.apply(e, result);
-    pop();
-    return result;
-};
-
-/**
  * Converts HSB to RGB color type.
  * 
  * @param {(number|color)} x Hue value or color
@@ -761,6 +761,32 @@ HSBToRGB = function(x, s, v) {
     });
 
     return e.color.apply(e, result);
+};
+
+/**
+ * Converts RGB to hex color type.
+ * 
+ * @param {(number|color)} x Red value or color
+ * @param {number} [g] Green value
+ * @param {number} [b] Blue value
+ * 
+ * @returns {string}  Hex color value
+ * 
+ * @example
+ * println(RGBToHex(255, 0, 0));
+ * // expected output: #ff0000
+ * 
+ * @example
+ * let c = RED;
+ * println(RGBToHex(c));
+ * // expected output: #ff0000
+ */
+RGBToHex = function(x, g, b) {
+    if (arguments.length == 1) {
+        c = x;
+        x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+    }
+    return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
 /**
@@ -814,32 +840,6 @@ RGBToHSB = function(x, g, b) {
     result = e.color.apply(e, result);
     pop();
     return result;
-};
-
-/**
- * Converts RGB to hex color type.
- * 
- * @param {(number|color)} x Red value or color
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {string}  Hex color value
- * 
- * @example
- * println(RGBToHex(255, 0, 0));
- * // expected output: #ff0000
- * 
- * @example
- * let c = RED;
- * println(RGBToHex(c));
- * // expected output: #ff0000
- */
-RGBToHex = function(x, g, b) {
-    if (arguments.length == 1) {
-        c = x;
-        x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
-    }
-    return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
 /**
@@ -1412,6 +1412,32 @@ String.prototype.toTitleCase = function () {
 };
 
 /**
+ * Wraps a string to a given number of characters using a string break
+ * character.
+ *
+ * @link https://www.30secondsofcode.org/js/s/word-wrap
+ *
+ * @param {string} str String to be wrapped
+ * @param {number} max Maximum number of characters per line
+ * @param {string} [br='\n'] Custom break character
+ *
+ * @example
+ * let str = 'This string should have a maximum line length of thirty-two characters.';
+ * let wrappedStr = wordWrap(str, 32);
+ * println(wrappedStr);
+ * // expected output: 
+ * // 'This string should have a
+ * // maximum line length of
+ * // thirty-two characters.'
+ * let customWrappedStr = wordWrap(str, 32, '<br>');
+ * println(customWrappedStr);
+ * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
+ */
+wordWrap = (str, max, br = '\n') => str.replace(
+    new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br
+);
+
+/**
  * Draws text underlined.
  * 
  * @param {string} string Text to be underlined
@@ -1446,29 +1472,3 @@ underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, unde
     e.text(string, x, y);
     pop();
 };
-
-/**
- * Wraps a string to a given number of characters using a string break
- * character.
- *
- * @link https://www.30secondsofcode.org/js/s/word-wrap
- *
- * @param {string} str String to be wrapped
- * @param {number} max Maximum number of characters per line
- * @param {string} [br='\n'] Custom break character
- *
- * @example
- * let str = 'This string should have a maximum line length of thirty-two characters.';
- * let wrappedStr = wordWrap(str, 32);
- * println(wrappedStr);
- * // expected output: 
- * // 'This string should have a
- * // maximum line length of
- * // thirty-two characters.'
- * let customWrappedStr = wordWrap(str, 32, '<br>');
- * println(customWrappedStr);
- * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
- */
-wordWrap = (str, max, br = '\n') => str.replace(
-    new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br
-);

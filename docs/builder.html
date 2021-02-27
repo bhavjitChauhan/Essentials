@@ -164,7 +164,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=clike+javascri
                             target="_blank">Wiki</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials"
+                        <a class="nav-link" href="https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials?path=build"
                             target="_blank">jsDelivr</a>
                     </li>
                 </ul>
@@ -328,7 +328,7 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
             if (buildTypeSelected == 'CDN') {
                 $('#directions').text('Paste the following code into your program.');
                 $('body > div > div:nth-child(2) > div.col-4 > div > div.card-body > h5').text('Essentials via CDN');
-                if (components.every(function (component) { component == true })) {
+                if (components.every(function (component) { return component == true })) {
                     URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js';
                 } else {
                     URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/essentials-core.min.js';
@@ -349,14 +349,14 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
                 $('#code').hide();
                 $('#copyButton').hide();
                 $('body > div > div:nth-child(2) > div.col-4 > div > div.card-body > h5').text('Essentials via Local');
-                if (components.every(function (component) { component == true })) {
+                if (components.every(function (component) { return component == true })) {
                     URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/build/essentials-ka.js';
                 } else {
                     URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/build/essentials-core-ka.js';
                     let options = [
                         ',gh/bhavjitChauhan/Essentials@1/build/color-essentials-ka.js',
                         ',gh/bhavjitChauhan/Essentials@1/build/text-essentials-ka.js',
-                        ',gh/bhavjitChauhan/Essentials@1/build/shape-essential-kas.js'
+                        ',gh/bhavjitChauhan/Essentials@1/build/shape-essential-ka.js'
                     ];
                     options = options.filter(function (_, i) { return components[i] });
                     URL += options.join('');
