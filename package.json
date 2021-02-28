@@ -33,7 +33,7 @@
     "@rollup/plugin-multi-entry": "^4.0.0",
     "concurrently": "^6.0.0",
     "docdash": "^1.2.0",
-    "eslint": "^7.20.0",
+    "eslint": "^7.21.0",
     "jsdoc": "^3.6.6",
     "jsdoc-to-markdown": "^6.0.1",
     "pretty": "^2.0.0",
