@@ -1,30 +1,31 @@
 /**
- * Sets font, size and other [CSS font properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
- * 
+ * Sets font, size and other [CSS font
+ * properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
+ *
  * @param {(string|font)}  name  Name of font or font
  * @param {number}  [size]  Font size
  * @param {...string}  properties  CSS font properties
- * 
+ *
  * @returns {font}  Created font
- * 
+ *
  * @example
  * fill(BLACK);
  * font('Arial', 30, 'bold');
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in bold Arial font
- * 
+ *
  * @example
  * let f = font('Arial', 'bold');
  * textSize(30);
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in normal Arial normal size font
  * // `textSize()` should not be used with `font()`
- * 
+ *
  * // Instead, use `font()`
  * font(f, 30);
  * text('Hello World', 100, 200);
  * // expected outcome: 'Hello World' in bold Arial size 30 font
- * 
+ *
  * @example
  * // Use the `-call` parameter to prevent the font automatically being set
  * // This functionality is useful when defining font variables
@@ -34,12 +35,12 @@
  * font(f);
  * text('Hello World', 100, 200);
  * // expected outcome: the text will be in serif font
- * 
+ *
  * @example
  * let f = font('Arial', 'bold', 'italic');
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in bold and italic Arial font
- * 
+ *
  * // Use the negate syntax to remove properties from fonts
  * font(f, '-bold');
  * text('Hello World', 100, 200);

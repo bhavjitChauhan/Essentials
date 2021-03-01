@@ -1,13 +1,13 @@
 /**
  * Draws a donut.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/4693526445719552
- * 
+ *
  * @param {number} x x-coordinate of the donut
  * @param {number} y y-coordinate of the donut
  * @param {number} majorDiameter Diameter of outer circle
  * @param {number} minorDiameter Diameter of inner circle
- * 
+ *
  * @example
  * donut(100, 100, 100, 50);
  */

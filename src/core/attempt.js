@@ -1,6 +1,6 @@
 /**
  * Attempts to invoke a function with the provided arguments, returning either
- *      the result or an error.
+ * the result or an error.
  *
  * @link https://www.30secondsofcode.org/js/s/attempt
  *

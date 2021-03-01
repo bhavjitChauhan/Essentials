@@ -1,4 +1,3 @@
-/** @module Color */
 _color_initialized_ = typeof COLOR_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {
@@ -8,88 +7,8 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_color_initialized_) console.info('%cColor Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
 
-/**
- * Converts hex to RGB color type.
- * 
- * @param {string} hex Hex color value, optional `#`; can be shorthand
- * 
- * @returns {color} RGB color value
- * 
- * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
- */
-hexToRGB = function (hex) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  result = result ? result.splice(1).map(function (i) {
-    return parseInt(i, 16);
-  }) : null;
-  push();
-  e.colorMode(e.RGB);
-  result = e.color.apply(e, result);
-  pop();
-  return result;
-};
-
-/**
- * @summary
- * Alias for `color(255, 0, 0)`.
- * 
- * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
- * @example
- * fill(RED);
- * text('Hello World', 25, 25);
- * 
- * @example
- * let c = color(RED, 50);
- * fill(c);
- * square(25, 25, 25);
- */
 RED = e.color(255, 0, 0);
-
-/**
- * @summary
- * Alias for `color(0, 128, 0)`.
- * 
- * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
- * @example
- * fill(GREEN);
- * text('Hello World', 25, 25);
- * 
- * @example
- * let c = color(GREEN, 50);
- * fill(c);
- * square(25, 25, 25);
- */
 GREEN = e.color(0, 128, 0);
-
-/**
- * @summary
- * Alias for `color(0, 0, 255)`.
- * 
- * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
- * @example
- * fill(BLUE);
- * text('Hello World', 25, 25);
- * 
- * @example
- * let c = color(BLUE, 50);
- * fill(c);
- * square(25, 25, 25);
- */
 BLUE = e.color(0, 0, 255);
 LIGHTSALMON = e.color(255, 160, 122), SALMON = e.color(250, 128, 114);
 DARKSALMON = e.color(233, 150, 122);
@@ -228,22 +147,22 @@ BROWN = e.color(165, 42, 42);
 MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
-/**
- * Converts HSB to RGB color type.
- * 
- * @param {(number|color)} x Hue value or color
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
- * 
- * @returns {string}  RGB color value
- * 
- * @example
- * let c = HSBToRGB(85, 255, 255);
- * println(c);
- * // expected output: -16711936
- * background(c);
- * // expected outcome: green background
- */
+hexToRGB = function (hex) {
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  result = result ? result.splice(1).map(function (i) {
+    return parseInt(i, 16);
+  }) : null;
+  push();
+  e.colorMode(e.RGB);
+  result = e.color.apply(e, result);
+  pop();
+  return result;
+};
+
 HSBToRGB = function (x, s, v) {
   if (arguments.length == 1) {
     c = x;
@@ -290,50 +209,155 @@ HSBToRGB = function (x, s, v) {
   return e.color.apply(e, result);
 };
 
-/**
- * Converts RGB to hex color type.
- * 
- * @param {(number|color)} x Red value or color
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {string}  Hex color value
- * 
- * @example
- * println(RGBToHex(255, 0, 0));
- * // expected output: #ff0000
- * 
- * @example
- * let c = RED;
- * println(RGBToHex(c));
- * // expected output: #ff0000
- */
-RGBToHex = function (x, g, b) {
-  if (arguments.length == 1) {
-    c = x;
-    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+linearGradient = function (x, y, width, height, startColor, endColor) {
+  var direction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : RIGHT;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
+  push();
+  e.strokeWeight(1);
+
+  switch (direction) {
+    case LEFT:
+    case RIGHT:
+      if (direction == LEFT) {
+        var _ref = [endColor, startColor];
+        startColor = _ref[0];
+        endColor = _ref[1];
+      }
+
+      if (step == 1) {
+        for (var i = 0; i < width; i++) {
+          e.stroke(e.lerpColor(startColor, endColor, i / width));
+          e.line(x + i, y, x + i, y + height);
+        }
+      } else {
+        e.noStroke();
+
+        for (var _i = 0; _i < width; _i += step) {
+          e.fill(e.lerpColor(startColor, endColor, _i / width));
+
+          if (_i + step > width) {
+            e.rect(x + _i, y, width - _i, height);
+          } else {
+            e.rect(x + _i, y, step, height);
+          }
+        }
+      }
+
+      break;
+
+    case TOP:
+    case UP:
+    case BOTTOM:
+    case DOWN:
+      if (direction == TOP || direction == UP) {
+        var _ref2 = [endColor, startColor];
+        startColor = _ref2[0];
+        endColor = _ref2[1];
+      }
+
+      if (step == 1) {
+        for (var _i2 = 0; _i2 < height; _i2++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i2 / height));
+          e.line(x, y + _i2, x + width, y + _i2);
+        }
+      } else {
+        e.noStroke();
+
+        for (var _i3 = 0; _i3 < height; _i3 += step) {
+          e.fill(e.lerpColor(startColor, endColor, _i3 / height));
+
+          if (_i3 + step > width) {
+            e.rect(x, y + _i3, width, height - _i3);
+          } else {
+            e.rect(x, y + _i3, width, step);
+          }
+        }
+      }
+
+      break;
+
+    case TOP_LEFT:
+    case BOTTOM_RIGHT:
+      if (direction == TOP_LEFT) {
+        var _ref3 = [endColor, startColor];
+        startColor = _ref3[0];
+        endColor = _ref3[1];
+      }
+
+      if (step == 1) {
+        for (var _i4 = 0; _i4 < width; _i4++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i4 / width / 2));
+          e.line(x + _i4, y, x, y + e.map(_i4, 0, width, 0, height));
+        }
+
+        for (var _i5 = 0; _i5 < width; _i5++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i5 / width / 2 + 0.5));
+          e.line(x + _i5, y + height, x + width, y + e.map(_i5, 0, width, 0, height));
+        }
+      } else {
+        var side = Math.max(width, height) * Math.sqrt(2);
+        showGraphics(x, y, width, height, function () {
+          this.angleMode = 'degrees';
+          this.rotate(-45);
+          this.noStroke();
+
+          for (var _i6 = 0; _i6 < side; _i6 += step) {
+            this.fill(this.lerpColor(startColor, endColor, _i6 / side));
+
+            if (_i6 + step > side) {
+              this.rect(-side / 2, _i6, side, side - _i6);
+            } else {
+              this.rect(-side / 2, _i6, side, step);
+            }
+          }
+        });
+      }
+
+      break;
+
+    case TOP_RIGHT:
+    case BOTTOM_LEFT:
+      if (direction == TOP_RIGHT) {
+        var _ref4 = [endColor, startColor];
+        startColor = _ref4[0];
+        endColor = _ref4[1];
+      }
+
+      if (step == 1) {
+        for (var _i7 = 0; _i7 < width; _i7++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i7 / width / 2));
+          e.line(x + width - _i7, y, x + width, y + e.map(_i7, 0, width, 0, height));
+        }
+
+        for (var _i8 = 0; _i8 < width; _i8++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i8 / width / 2 + 0.5));
+          e.line(x + width - _i8, y + height, x, y + e.map(_i8, 0, width, 0, height));
+        }
+      } else {
+        var _side = Math.max(width, height) * Math.sqrt(2);
+
+        showGraphics(x, y, width, height, function () {
+          this.angleMode = 'degrees';
+          this.rotate(45);
+          this.noStroke();
+
+          for (var _i9 = 0; _i9 < _side; _i9 += step) {
+            this.fill(this.lerpColor(startColor, endColor, _i9 / _side));
+
+            if (_i9 + step > _side) {
+              this.rect(0, _i9 - _side / 2, _side, _side - _i9);
+            } else {
+              this.rect(0, _i9 - _side / 2, _side, step);
+            }
+          }
+        });
+      }
+
   }
 
-  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
+  pop();
 };
 
-/**
- * Converts RGB to HSB color type.
- * 
- * @param {(number|color)} x Red value or color
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {string}  HSB color value
- * 
- * @example
- * let c = RGBToHSB(255, 0, 0);
- * println(c);
- * // expected output: -65536
- * colorMode(HSB);
- * background(c);
- * // expected outcome: red background
- */
 RGBToHSB = function (x, g, b) {
   if (arguments.length == 1) {
     c = x;
@@ -377,29 +401,15 @@ RGBToHSB = function (x, g, b) {
   return result;
 };
 
-/**
- * Converts hex or RGB to HSB color value.
- * 
- * @param {(string|color)} x Hex, red or HSB color value
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {color|array}  RGB color value or RGB values array
- * 
- * @example
- * colorMode(HSB);
- * background(toHSB('fff'));
- * // expected outcome: white background
- * 
- * @example
- * colorMode(HSB);
- * background(toHSB(255, 0, 0));
- * // expected outcome: red background
- * 
- * @example
- * println(toHSB(-1))
- * // expected output: [0, 0, 255]
- */
+RGBToHex = function (x, g, b) {
+  if (arguments.length == 1) {
+    c = x;
+    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+  }
+
+  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
+};
+
 toHSB = function () {
   var args = arguments;
 
@@ -416,27 +426,6 @@ toHSB = function () {
   }
 };
 
-/**
- * Converts hex or HSB to RGB color value.
- * 
- * @param {(string|color)} x Hex, hue or RGB color value
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
- * 
- * @returns {color|array}  RGB color value or RGB values array
- * 
- * @example
- * background(toRGB('fff'));
- * // expected outcome: white background
- * 
- * @example
- * background(toRGB(0, 255, 255));
- * // expected outcome: red background
- * 
- * @example
- * println(toRGB(-1))
- * // expected output: [255, 255, 255]
- */
 toRGB = function () {
   var args = arguments;
 

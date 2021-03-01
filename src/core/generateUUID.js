@@ -1,6 +1,7 @@
 /**
- * Generates a [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
- * 
+ * Generates a
+ * [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
+ *
  * @returns {string}
  */
 generateUUID = () =>

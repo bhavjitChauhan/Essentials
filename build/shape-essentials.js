@@ -17,7 +17,7 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
  *
  * @param {number} x x-coordinate of the rectangle
  * @param {number} y y-coordinate of the rectangle
- * @param {number} width width or the rectangle
+ * @param {number} width width of the rectangle
  * @param {number} height height of the rectangle
  * @param {number} size intensity of blur
  */
@@ -29,25 +29,15 @@ blurRect = (x, y, width, height, size) => {
 };
 
 /**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
- * 
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
- * 
- */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
-
-/**
  * Draws a 2D cylinder.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/5157537806548992
- * 
+ *
  * @param {number} x x-coordinate of cylinder
  * @param {number} y y-coordinate of cylinder
  * @param {number} width
  * @param {number} height
- * 
+ *
  * @example
  * cylinder(100, 100, 100, 50);
  */
@@ -77,15 +67,25 @@ cylinder = (x, y, width, height) => {
 };
 
 /**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ *
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ *
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+
+/**
  * Draws a donut.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/4693526445719552
- * 
+ *
  * @param {number} x x-coordinate of the donut
  * @param {number} y y-coordinate of the donut
  * @param {number} majorDiameter Diameter of outer circle
  * @param {number} minorDiameter Diameter of inner circle
- * 
+ *
  * @example
  * donut(100, 100, 100, 50);
  */
@@ -122,14 +122,48 @@ donut = (x, y, majorDiameter, minorDiameter) => {
 };
 
 /**
+ * Alias for `beginShape()`/`endShape()`.
+ *
+ * @param {Function} fn Shape function
+ * @param {CLOSE|boolean} [close] Whether to close the shape
+ * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
+ * [mode] Shape mode
+ *
+ * @example
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, CLOSE);
+ * // expected outcome: square
+ *
+ * @example
+ * strokeWeight(5);
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, false, POINTS);
+ * // expected outcome: points in a square formation
+ */
+drawShape = (fn, close, mode) => {
+    close = close && e.CLOSE;
+    e.beginShape(mode);
+    fn();
+    e.endShape(close);
+};
+
+/**
  * Draws a heart.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/2085250861
- * 
+ *
  * @param {number} x x-coordinate of the heart
  * @param {number} y y-coordinate of the heart
  * @param {number} radius
- * 
+ *
  * @example
  * heart(100, 100, 50);
  */
@@ -151,54 +185,20 @@ heart = (x, y, radius) => {
 };
 
 /**
- * Alias for `beginShape()`/`endShape()`.
- * 
- * @param {Function} fn Shape function
- * @param {CLOSE|boolean} [close] Whether to close the shape
- * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
- * [mode] Shape mode
- * 
- * @example
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, CLOSE);
- * // expected outcome: square
- * 
- * @example
- * strokeWeight(5);
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, false, POINTS);
- * // expected outcome: points in a square formation
- */
-drawShape = (fn, close, mode) => {
-    close = close && e.CLOSE;
-    e.beginShape(mode);
-    fn();
-    e.endShape(close);
-};
-
-/**
  * Draws a parallelogram.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/4747962019348480
- * 
+ *
  * @param {number} ax x-coordinate of the first vertex
  * @param {number} ay y-coordinate of the first vertex
  * @param {number} bx x-coordinate of the second vertex
  * @param {number} by y-coordinate of the second vertex
  * @param {number} cx x-coordinate of the third vertex
  * @param {number} cy y-coordinate of the third vertex
- * 
+ *
  * @example
  * parallelogram(50, 50, 200, 50, 100, 100);
- * 
+ *
  * @see rhombus
  */
 parallelogram = (ax, ay, bx, by, cx, cy) => {
@@ -209,21 +209,21 @@ parallelogram = (ax, ay, bx, by, cx, cy) => {
 
 /**
  * Draws a polygon with _n_ sides.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/1304459398
- * 
+ *
  * @param {number} x x-coordinate of polygon's circumcircle
  * @param {number} y y-coordinate of polygon's circumcircle
  * @param {number} sides Number of sides
  * @param {number} radius Radius of circumcircle
  * @param {number} [rotation=0] Rotation of polygon in degrees or radians
- * 
+ *
  * @example
  * polygon(100, 100, 5, 100);
- * 
+ *
  * @example
  * polygon(100, 100, 5, 100, 180);
- * 
+ *
  * // Alternative method
  * angleMode = 'radians';
  * polygon(100, 100, 5, 100, PI);
@@ -232,7 +232,7 @@ polygon = (x, y, sides, radius, rotation) => {
     const _TAU = (Math.cos(Math.PI) < 0) ? 2 * Math.PI : 360;
     push();
     e.translate(x, y);
-    e.rotate((rotation === undefined) ? -_TAU / 4 : rotation);
+    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
     drawShape(() => {
         for (let theta = 0; theta < _TAU; theta += _TAU / sides) {
             e.vertex(radius * Math.cos(theta), radius * Math.sin(theta));
@@ -242,20 +242,67 @@ polygon = (x, y, sides, radius, rotation) => {
 };
 
 /**
+ * @summary
+ * Alias for `rect` with smart radius parameter defaults.
+ *
+ * @description
+ * The rectangle will have a default corner radius of 0, if one argument is
+ * provided all corners are set to match that radius. If two arguments are
+ * provided, the top two corners' radius is set to the first parameter and the
+ * bottom two, the second. If three arguments are provided, the last
+ * argument--bottom-left corner--is defaulted to 0. If all four radius arguments
+ * are provided each corner will be set to it's corresponding parameter.
+ *
+ * @param {number} x x-coordinate of the rectangle
+ * @param {number} y y-coordinate of the rectangle
+ * @param {number} width width of the rectangle
+ * @param {number} height height of the rectangle
+ * @param {number} [tl=0] radius of top-left corner
+ * @param {number} [tr=0] radius of top-right corner
+ * @param {number} [br=0] radius of bottom-right corner
+ * @param {number} [bl=0] radius of bottom-left corner
+ *
+ * @example
+ * rectangle(50, 50, 100, 50);
+ * // expected outcome: Rectangle with side lengths 100 and 50
+ * @example
+ * rectangle(150, 50, 100, 50, 10);
+ * // expected outcome: Rectangle with radius 10 for all corners
+ * @example
+ * rectangle(250, 50, 100, 50, 10, 0);
+ * // expected outcome: Rectangle with radius 10 for top corners
+ * @example
+ * rectangle(50, 150, 100, 50, 10, 10, 10); 
+ * // expected outcome: Rectangle with radius 10 for all but bottom-left corner
+ * @example
+ * rectangle(150, 150, 100, 50, 10, 10, 0, 10);
+ * // expected outcome: Rectangle with radius 10 for all but bottom-right corner
+ *
+ * @see square
+ */
+rectangle = (x, y, width, height = width, tl, tr, br, bl) => {
+    if (tl == undefined) e.rect(x, y, width, height);
+    else if (tr == undefined) e.rect(x, y, width, height, tl);
+    else if (br == undefined) e.rect(x, y, width, height, tl, tl, tr, tr);
+    else if (bl == undefined) e.rect(x, y, width, height, tl, tr, br, 0);
+    else e.rect(x, y, width, height, tl, tr, br, bl);
+};
+
+/**
  * Draws a rhombus.
- * 
+ *
  * @link https://khanacademy.org/cs/-/4747962019348480
- * 
+ *
  * @param {number} ax x-coordinate of the first vertex
  * @param {number} ay y-coordinate of the first vertex
  * @param {number} bx x-coordinate of the second vertex
  * @param {number} by y-coordinate of the second vertex
  * @param {number} cx x-coordinate of the third vertex
  * @param {number} cy y-coordinate of the third vertex
- * 
+ *
  * @example
  * rhombus(50, 100, 100, 50, 100, 100);
- * 
+ *
  * @see parallelogram
  */
 rhombus = (ax, ay, bx, by, cx, cy) => {
@@ -266,30 +313,66 @@ rhombus = (ax, ay, bx, by, cx, cy) => {
 };
 
 /**
- * Alias for `rect()` without the separate `width` and `height` parameters.
- * 
+ * @summary
+ * Alias for `rect` with smart radius parameter defaults and one `side`
+ * parameter.
+ *
+ * @description
+ * The square will have a default corner radius of 0, if one argument is
+ * provided all corners are set to match that radius. If two arguments are
+ * provided, the top two corners' radius is set to the first parameter and the
+ * bottom two, the second. If three arguments are provided, the last
+ * argument--bottom-left corner--is defaulted to 0. If all four radius arguments
+ * are provided each corner will be set to it's corresponding parameter.
+ *
  * @param {number} x x-coordinate of the square
  * @param {number} y y-coordinate of the square
- * @param {number} side side size of the square
- * @param {number} [radius=0] radius of corners
- * 
+ * @param {number} side side length of the square
+ * @param {number} [tl=0] radius of top-left corner
+ * @param {number} [tr=0] radius of top-right corner
+ * @param {number} [br=0] radius of bottom-right corner
+ * @param {number} [bl=0] radius of bottom-left corner
+ *
+ * @example
+ * square(50, 50, 50);
+ * // expected outcome: Square with side length 50
+ * @example
+ * square(150, 50, 50, 10);
+ * // expected outcome: Square with radius 10 for all corners
+ * @example
+ * square(250, 50, 50, 10, 0);
+ * // expected outcome: Square with radius 10 for top corners
+ * @example
+ * square(50, 150, 50, 10, 10, 10);
+ * // expected outcome: Square with radius 10 for all but bottom-left corner
+ * @example
+ * square(150, 150, 50, 10, 10, 0, 10);
+ * // expected outcome: Square with radius 10 for all but bottom-right corner
+ *
+ * @see rectangle
  */
-square = (x, y, side, radius = 0) => e.rect(x, y, side, side, radius);
+square = (x, y, side, tl, tr, br, bl) => {
+    if (tl == undefined) e.rect(x, y, side, side);
+    else if (tr == undefined) e.rect(x, y, side, side, tl);
+    else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);
+    else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);
+    else e.rect(x, y, side, side, tl, tr, br, bl);
+};
 
 /**
  * Draws a star with _n_ spikes.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/1171581918
- * 
+ *
  * @param {number} x x-coordinate of star
  * @param {number} y y-coordinate of star
  * @param {number} externalRadius External radius
  * @param {number} [spikes=5] Number of spikes
  * @param {number} [rotation=0] Rotation of star in degrees or radians
- * 
+ *
  * @example
  * star(100, 100, 50);
- * 
+ *
  * @example
  * star(100, 100, 50, 7, 10);
  */
@@ -298,7 +381,7 @@ star = (x, y, externalRadius, spikes = 5, rotation) => {
     const interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
     push();
     e.translate(x, y);
-    e.rotate((rotation === undefined) ? -_TAU / 4 : rotation);
+    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
     drawShape(() => {
         let internalRadius;
         for (let theta = 0; theta < _TAU; theta += _TAU / (2 * spikes)) {

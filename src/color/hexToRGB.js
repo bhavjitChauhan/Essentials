@@ -1,10 +1,10 @@
 /**
  * Converts hex to RGB color type.
- * 
+ *
  * @param {string} hex Hex color value, optional `#`; can be shorthand
- * 
+ *
  * @returns {color} RGB color value
- * 
+ *
  * @example
  * let c = hexToRGB('#fff');
  * println(c);

@@ -1,20 +1,20 @@
 /**
  * Converts hex or HSB to RGB color value.
- * 
+ *
  * @param {(string|color)} x Hex, hue or RGB color value
  * @param {number} [s] Saturation value
  * @param {number} [v] Brightness value
- * 
+ *
  * @returns {color|array}  RGB color value or RGB values array
- * 
+ *
  * @example
  * background(toRGB('fff'));
  * // expected outcome: white background
- * 
+ *
  * @example
  * background(toRGB(0, 255, 255));
  * // expected outcome: red background
- * 
+ *
  * @example
  * println(toRGB(-1))
  * // expected output: [255, 255, 255]

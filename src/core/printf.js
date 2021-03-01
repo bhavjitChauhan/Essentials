@@ -1,13 +1,13 @@
 /**
  * Prints formatted string to canvas console.
- * 
+ *
  * @param {string} assertion String with format
  * @param {*} arguments Arguments
- * 
+ *
  * @example
  * printf('Hello %', 'World');
  * // expected output: 'Hello World'
- * 
+ *
  * @example
  * // To use the literal '%' character use double backslashes (\\)
  * printf('% \\% %', 'A', 'B');

@@ -27,7 +27,7 @@ export default [{
     },
     plugins: [multi()]
 }, {
-    input: [`${dir}/essentials-core.js`, `${dir}/color-essentials.js`, `${dir}/text-essentials.js`, `${dir}/hape-essentials.js`],
+    input: [`${dir}/essentials-core.js`, `${dir}/color-essentials.js`, `${dir}/text-essentials.js`, `${dir}/shape-essentials.js`],
     output: {
         file: 'essentials.js'
     },

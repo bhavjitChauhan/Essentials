@@ -3,17 +3,17 @@
  * Calculates fastest function in terms of iterations.
  *
  * @description
- * The functions will be called _x_ number of times. Their times will be how long
- * they took to run _x_ number of times. The more iterations, the more accurate
- * the result.
+ * The functions will be called _n_ number of times. Their times will be how
+ * long they took to run _n_ number of times. The more iterations, the more
+ * accurate the result.
  *
- * Running resource-intensive function may result in an infinite loop error. You
- * can bypass this using the {@link clean} function.
+ * Running resource-intensive function may result in an infinite loop error.
+ * This can be can bypassed using the {@link clean} function.
  *
  * @link https://www.30secondsofcode.org/js/s/most-performant
  *
  * @param {Array} fns Functions to be compared
- * @param {number} [iterations=1e4] Number of times function should be invoked
+ * @param {number} [iterations=1e4] Number of times function should be called
  *
  * @returns {Object} Index of function which performed fastest and times
  *  recorded

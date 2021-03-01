@@ -1,8 +1,10 @@
 /**
- * Formats string similar to [template literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals} in ES6
- * 
+ * Formats string similar to [template
+ * literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals}
+ * in ES6
+ *
  * @param {string} string Formatted string
- * 
+ *
  * @example
  * println('PI is ${Math.PI.toFixed(2)}'.format())
  * // expected output: PI is 3.14
@@ -27,9 +29,9 @@ String.prototype.format = function () {
 
 /**
  * Obfuscate strings as hexadecimal and unicode escape characters.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/4812748875104256
- * 
+ *
  * @example
  * let str = 'Hello World';
  * let obfuscated = str.obfuscate();
@@ -59,9 +61,9 @@ String.prototype.obfuscate = function () {
 
 /**
  * Removes non-ACII characters from string.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/remove-non-ascii
- * 
+ *
  * @example
  * let str = 'Hello 😀';
  * let strippedStr = str.removeNonASCII();
@@ -74,9 +76,9 @@ String.prototype.removeNonASCII = function () {
 
 /**
  * Converts string to camel case.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/to-camel-case
- * 
+ *
  * @example
  * println('lorem ipsum'.toCamelCase());
  * // expected output: 'loremIpsum'
@@ -94,9 +96,9 @@ String.prototype.toCamelCase = function () {
 
 /**
  * Converts string to kebab case.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/to-kebab-case
- * 
+ *
  * @example
  * println('lorem ipsum'.toKebabCase());
  * // expected output: 'lorem-ipsum'
@@ -110,9 +112,9 @@ String.prototype.toKebabCase = function () {
 
 /**
  * Converts string to snake case.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/to-snake-case
- * 
+ *
  * @example
  * println('lorem ipsum'.toSnakeCase());
  * // expected output: 'lorem_ipsum'

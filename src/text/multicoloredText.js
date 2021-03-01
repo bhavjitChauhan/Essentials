@@ -1,10 +1,10 @@
 /**
  * Draws text with multiple colors that are passed in using special syntax.
- * 
+ *
  * @param {string} string Input string
  * @param {number} x x-coordinate value
  * @param {number} y y-coordinate value
- * 
+ *
  * @example
  * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
  * fill(BLUE);

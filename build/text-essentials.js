@@ -15,32 +15,33 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 }
 
 /**
- * Sets font, size and other [CSS font properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
- * 
+ * Sets font, size and other [CSS font
+ * properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
+ *
  * @param {(string|font)}  name  Name of font or font
  * @param {number}  [size]  Font size
  * @param {...string}  properties  CSS font properties
- * 
+ *
  * @returns {font}  Created font
- * 
+ *
  * @example
  * fill(BLACK);
  * font('Arial', 30, 'bold');
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in bold Arial font
- * 
+ *
  * @example
  * let f = font('Arial', 'bold');
  * textSize(30);
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in normal Arial normal size font
  * // `textSize()` should not be used with `font()`
- * 
+ *
  * // Instead, use `font()`
  * font(f, 30);
  * text('Hello World', 100, 200);
  * // expected outcome: 'Hello World' in bold Arial size 30 font
- * 
+ *
  * @example
  * // Use the `-call` parameter to prevent the font automatically being set
  * // This functionality is useful when defining font variables
@@ -50,12 +51,12 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
  * font(f);
  * text('Hello World', 100, 200);
  * // expected outcome: the text will be in serif font
- * 
+ *
  * @example
  * let f = font('Arial', 'bold', 'italic');
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in bold and italic Arial font
- * 
+ *
  * // Use the negate syntax to remove properties from fonts
  * font(f, '-bold');
  * text('Hello World', 100, 200);
@@ -112,13 +113,13 @@ font = function (family) {
 
 /**
  * Converts milliseconds to a readable format of duration.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/format-duration
- * 
+ *
  * @param {number}  ms  Duration in milliseconds
- * 
+ *
  * @returns {string}  Readable format of duration.
- * 
+ *
  * @example
  * let martianDay = 88775244;
  * console.log(formatDuration(martianDay));
@@ -141,17 +142,17 @@ formatDuration = ms => {
 
 /**
  * Draws a string with a highlight background.
- * 
+ *
  * @param {string} string String to be highlighted
  * @param {number} [x=0] x-coordinate value
  * @param {number} [y='text height'] y-coordinate value
  * @param {number} [highlightColor=YELLOW] Color of highlight background
- * 
+ *
  * @example
  * let str = 'Highlighted\nText';
  * fill(BLACK);
  * highlightText(str, 25, 25);
- * 
+ *
  * @example
  * let str = 'Highlighted\nText';
  * fill(LIGHTGREEN);
@@ -177,11 +178,11 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
 
 /**
  * Determines if text should be black or white based on background color.
- * 
+ *
  * @param {number} backgroundColor Color of background
- * 
+ *
  * @returns {number} Color of text
- * 
+ *
  * @example
  * let h = 0,
  *     s = 0,
@@ -193,8 +194,8 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
  *     h = frameCount % 255;
  *     s = frameCount % 255;
  *     b = frameCount % 255;
- *     let TEST_COLOR = color(h, s, b);
- *     background(TEST_COLOR);
+ *     let c = color(h, s, b);
+ *     background(c);
  *     fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));
  *     text("TEXT", width / 2, height / 2);
  * };
@@ -219,11 +220,11 @@ lightOrDarkText = backgroundColor => {
 
 /**
  * Draws text with multiple colors that are passed in using special syntax.
- * 
+ *
  * @param {string} string Input string
  * @param {number} x x-coordinate value
  * @param {number} y y-coordinate value
- * 
+ *
  * @example
  * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
  * fill(BLUE);
@@ -258,6 +259,40 @@ multicoloredText = (string, x = 0, y = e.textAscent()) => {
 };
 
 /**
+ * Draws text with an outline.
+ *
+ * @param {string} string String to be outlined
+ * @param {number} x x-coordinate value
+ * @param {number} y y-coordinate value
+ * @param {number} [outlineColor=BLACK] Color of outline
+ *
+ * @example
+ * let str = 'Outlined\nText';
+ * outlineText(str, 25, 25);
+ *
+ * @example
+ * let str = 'Outlined\nText';
+ * fill(BLACK);
+ * outlineText(str, 25, 25, ORANGE);
+ */
+outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    push();
+    e.fill(outlineColor);
+    for (let i = -2; i < 3; i++) {
+        for (let j = -1; j < 3; j++) {
+            e.text(string, x + i, y + j);
+        }
+        e.text(string, x + i, y);
+        e.text(string, x, y + i);
+    }
+    pop();
+    e.text(string, x, y);
+};
+
+/**
  * Takes a number and returns it as a string with the correct ordinal indicator
  * suffix.
  *
@@ -280,40 +315,6 @@ ordinalSuffix = n => {
     return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
         ? int + ordinals[digits[0] - 1]
         : int + ordinals[3];
-};
-
-/**
- * Draws text with an outline.
- * 
- * @param {string} string String to be outlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {number} [outlineColor=BLACK] Color of outline
- * 
- * @example
- * let str = 'Outlined\nText';
- * outlineText(str, 25, 25);
- * 
- * @example
- * let str = 'Outlined\nText';
- * fill(BLACK);
- * outlineText(str, 25, 25, ORANGE);
- */
-outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    push();
-    e.fill(outlineColor);
-    for (let i = -2; i < 3; i++) {
-        for (let j = -1; j < 3; j++) {
-            e.text(string, x + i, y + j);
-        }
-        e.text(string, x + i, y);
-        e.text(string, x, y + i);
-    }
-    pop();
-    e.text(string, x, y);
 };
 
 /**
@@ -354,10 +355,48 @@ pluralize = (value, word, plural = word + 's') => {
 };
 
 /**
- * Formats string similar to [template literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals} in ES6
- * 
+ * Draws text underlined.
+ *
+ * @param {string} string Text to be underlined
+ * @param {number} x x-coordinate value
+ * @param {number} y y-coordinate value
+ * @param {color} [underlineColor=BLACK] Color of underline
+ * @param {number} [underlineWeight] Weight of underline
+ *
+ * @example
+ * let str = 'Underlined\nText';
+ * fill(BLACK);
+ * underlineText(str, 25, 25);
+ *
+ * @example
+ * let str = 'Underlined\nText';
+ * fill(BLACK);
+ * underlineText(str, 25, 25, RED, 5);
+ */
+underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    strings = string.split('\n');
+    push();
+    e.strokeCap(e.SQUARE);
+    e.strokeWeight(underlineWeight);
+    e.stroke(underlineColor);
+    for (const i in strings) {
+        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
+    }
+    e.textAlign(e.LEFT, e.CORNER);
+    e.text(string, x, y);
+    pop();
+};
+
+/**
+ * Formats string similar to [template
+ * literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals}
+ * in ES6
+ *
  * @param {string} string Formatted string
- * 
+ *
  * @example
  * println('PI is ${Math.PI.toFixed(2)}'.format())
  * // expected output: PI is 3.14
@@ -382,9 +421,9 @@ String.prototype.format = function () {
 
 /**
  * Obfuscate strings as hexadecimal and unicode escape characters.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/4812748875104256
- * 
+ *
  * @example
  * let str = 'Hello World';
  * let obfuscated = str.obfuscate();
@@ -414,9 +453,9 @@ String.prototype.obfuscate = function () {
 
 /**
  * Removes non-ACII characters from string.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/remove-non-ascii
- * 
+ *
  * @example
  * let str = 'Hello 😀';
  * let strippedStr = str.removeNonASCII();
@@ -429,9 +468,9 @@ String.prototype.removeNonASCII = function () {
 
 /**
  * Converts string to camel case.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/to-camel-case
- * 
+ *
  * @example
  * println('lorem ipsum'.toCamelCase());
  * // expected output: 'loremIpsum'
@@ -449,9 +488,9 @@ String.prototype.toCamelCase = function () {
 
 /**
  * Converts string to kebab case.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/to-kebab-case
- * 
+ *
  * @example
  * println('lorem ipsum'.toKebabCase());
  * // expected output: 'lorem-ipsum'
@@ -465,9 +504,9 @@ String.prototype.toKebabCase = function () {
 
 /**
  * Converts string to snake case.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/to-snake-case
- * 
+ *
  * @example
  * println('lorem ipsum'.toSnakeCase());
  * // expected output: 'lorem_ipsum'
@@ -520,39 +559,3 @@ String.prototype.toTitleCase = function () {
 wordWrap = (str, max, br = '\n') => str.replace(
     new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br
 );
-
-/**
- * Draws text underlined.
- * 
- * @param {string} string Text to be underlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {color} [underlineColor=BLACK] Color of underline
- * @param {number} [underlineWeight] Weight of underline
- * 
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25);
- * 
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25, RED, 5);
- */
-underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    strings = string.split('\n');
-    push();
-    e.strokeCap(e.SQUARE);
-    e.strokeWeight(underlineWeight);
-    e.stroke(underlineColor);
-    for (const i in strings) {
-        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
-    }
-    e.textAlign(e.LEFT, e.CORNER);
-    e.text(string, x, y);
-    pop();
-};
