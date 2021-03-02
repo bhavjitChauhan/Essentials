@@ -4,14 +4,14 @@
   "description": "The Khan Academy utility library.",
   "main": "essentials.js",
   "scripts": {
+    "lint": "npx eslint src/**",
     "build:cdn": "npx rollup --config",
     "build:ka": "node scripts/babel.js",
     "build": "npm run build:cdn && npm run build:ka",
     "doc:html": "npx jsdoc -c jsdoc.json",
     "doc:md": "npx jsdoc2md essentials.js > Essentials.wiki/Essentials-Documentation.md",
     "doc:ka": "node scripts/showdown.js && node scripts/pretty.js",
-    "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka",
-    "test": "npx mocha"
+    "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "@babel/plugin-transform-spread": "^7.13.0",
     "@babel/plugin-transform-template-literals": "^7.13.0",
     "@rollup/plugin-multi-entry": "^4.0.0",
+    "chalk": "^4.1.0",
     "concurrently": "^6.0.0",
     "docdash": "^1.2.0",
     "eslint": "^7.21.0",

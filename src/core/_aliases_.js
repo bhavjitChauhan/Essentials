@@ -1,11 +1,11 @@
-e = Processing.instances[0];
 _eval = eval;
+e = Processing.instances[0];
 
 [LEFT, RIGHT, TOP, BOTTOM, UP, DOWN] = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
 TOP_LEFT = 1,
-TOP_RIGHT = 2,
-BOTTOM_RIGHT = 3,
-BOTTOM_LEFT = 4;
+    TOP_RIGHT = 2,
+    BOTTOM_RIGHT = 3,
+    BOTTOM_LEFT = 4;
 
 /**
  * Alias for `width`.

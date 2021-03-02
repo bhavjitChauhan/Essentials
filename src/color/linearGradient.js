@@ -1,16 +1,17 @@
 /**
  * @summary
- * Draws a linear gradient from `startColor` to `endColor`.
+ * Draws a linear gradient from `startColor` to `endColor` in the form of a rectangle.
  *
  * @description
  * For a step size greater than 1, the function draws rectangles of width
  * `step`. Using a step size greater than 1 is faster for all but diagonal
- * gradients.
+ * gradients. It is highly advised to store drawn gradients in images using the
+ * `get` function for use in a draw loop.
  *
- * @param {number} x x-coordinate of gradient
- * @param {number} y y-coordinate of gradient
- * @param {number} width width of gradient
- * @param {number} height height of gradient
+ * @param {number} x x-coordinate of the gradient
+ * @param {number} y y-coordinate of the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
  * @param {color} startColor starting color
  * @param {color} endColor ending color
  * @param
@@ -43,9 +44,10 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
                     e.line(x + i, y, x + i, y + height);
                 }
             } else {
-                e.noStroke();
                 for (let i = 0; i < width; i += step) {
-                    e.fill(e.lerpColor(startColor, endColor, i / width));
+                    const c = e.lerpColor(startColor, endColor, i / width);
+                    e.stroke(c);
+                    e.fill(c);
                     if (i + step > width) { e.rect(x + i, y, width - i, height); }
                     else { e.rect(x + i, y, step, height); }
                 }
@@ -62,9 +64,10 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
                     e.line(x, y + i, x + width, y + i);
                 }
             } else {
-                e.noStroke();
                 for (let i = 0; i < height; i += step) {
-                    e.fill(e.lerpColor(startColor, endColor, i / height));
+                    const c = e.lerpColor(startColor, endColor, i / height);
+                    e.stroke(c);
+                    e.fill(c);
                     if (i + step > width) { e.rect(x, y + i, width, height - i); }
                     else { e.rect(x, y + i, width, step); }
                 }
@@ -87,9 +90,10 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
                 showGraphics(x, y, width, height, function () {
                     this.angleMode = 'degrees';
                     this.rotate(-45);
-                    this.noStroke();
                     for (let i = 0; i < side; i += step) {
-                        this.fill(this.lerpColor(startColor, endColor, i / side));
+                        const c = this.lerpColor(startColor, endColor, i / side);
+                        this.stroke(c);
+                        this.fill(c);
                         if (i + step > side) { this.rect(-side / 2, i, side, side - i); }
                         else { this.rect(-side / 2, i, side, step); }
                     }
@@ -113,9 +117,10 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
                 showGraphics(x, y, width, height, function () {
                     this.angleMode = 'degrees';
                     this.rotate(45);
-                    this.noStroke();
                     for (let i = 0; i < side; i += step) {
-                        this.fill(this.lerpColor(startColor, endColor, i / side));
+                        const c = this.lerpColor(startColor, endColor, i / side);
+                        this.stroke(c);
+                        this.fill(c);
                         if (i + step > side) { this.rect(0, i - side / 2, side, side - i); }
                         else { this.rect(0, i - side / 2, side, step); }
                     }

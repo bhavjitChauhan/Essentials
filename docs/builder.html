@@ -164,7 +164,8 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=clike+javascri
                             target="_blank">Wiki</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials?path=build"
+                        <a class="nav-link"
+                            href="https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials?path=build"
                             target="_blank">jsDelivr</a>
                     </li>
                 </ul>
@@ -178,6 +179,11 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=clike+javascri
             </h2>
             <p>The Essentials library provides utility functions for the Khan Academy Processing Environment. Use the
                 navigation link above to explore relevant pages.</p>
+            <p>For more information on build differences, see the <a
+                    href="https://github.com/bhavjitChauhan/Essentials/wiki/Custom-Builds" target="_blank">Custom
+                    Builds</a> page on the wiki. The wiki also includes <a
+                    href="https://github.com/bhavjitChauhan/Essentials/wiki/Usage" target="_blank">usage</a>
+                information.</p>
         </div>
         <div class="row mt-3">
             <h2>
@@ -222,6 +228,13 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=clike+javascri
                                 Shape Essentials
                             </label>
                         </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="minifiedCheckbox" checked>
+                            <label class="form-check-label" for="minifiedCheckbox">
+                                Minified
+                            </label>
+                        </div>
                     </div>
                     <div class="mb-3 form-check">
 
@@ -232,10 +245,10 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=clike+javascri
             <div class="col-4">
                 <div class="card">
                     <div class="card-header">
-                        Build
+                        Output
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Essentials via CDN</h5>
+                        <h5 class="card-title">CDN Build</h5>
                         <p id="directions" class="card-text">Paste the following code into your program.</p>
                         <pre style="overflow: hidden;" id="code"><code class="language-js">$.ajaxSetup({ cache: true });
 $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js',
@@ -314,12 +327,15 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
             return "$.ajaxSetup({ cache: true });\n$.getScript('".concat(URL, "',\n    function() {\n        // your code here\n    }\n);");
         }
         let buildTypeSelected = 'CDN';
+        let minifiedSelected = true;
         let URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js';
         $("#form").submit(function (e) {
             e.preventDefault();
         });
         $("#submitButton").click(function () {
             buildTypeSelected = $("#buildTypeSelect").val();
+            minifiedSelected = $('#minifiedCheckbox').is(":checked");
+            $('.card-title').text(`${buildTypeSelected} Build`)
             const components = [
                 $('#colorCheckbox').is(":checked"),
                 $('#textCheckbox').is(":checked"),
@@ -329,19 +345,30 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
                 $('#directions').text('Paste the following code into your program.');
                 $('body > div > div:nth-child(2) > div.col-4 > div > div.card-body > h5').text('Essentials via CDN');
                 if (components.every(function (component) { return component == true })) {
-                    URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js';
+                    if (minifiedSelected) URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js';
+                    else URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.js';
                 } else {
-                    URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/essentials-core.min.js';
-                    let options = [
-                        ',gh/bhavjitChauhan/Essentials@1/build/color-essentials.min.js',
-                        ',gh/bhavjitChauhan/Essentials@1/build/text-essentials.min.js',
-                        ',gh/bhavjitChauhan/Essentials@1/build/shape-essentials.min.js'
-                    ];
+                    if (minifiedSelected) URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/essentials-core.min.js';
+                    else URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/essentials-core.js';
+                    let options;
+                    if (minifiedSelected) {
+                        options = [
+                            ',gh/bhavjitChauhan/Essentials@1/build/color-essentials.min.js',
+                            ',gh/bhavjitChauhan/Essentials@1/build/text-essentials.min.js',
+                            ',gh/bhavjitChauhan/Essentials@1/build/shape-essentials.min.js'
+                        ];
+                    } else {
+                        options = [
+                            ',gh/bhavjitChauhan/Essentials@1/build/color-essentials.js',
+                            ',gh/bhavjitChauhan/Essentials@1/build/text-essentials.js',
+                            ',gh/bhavjitChauhan/Essentials@1/build/shape-essentials.js'
+                        ];
+                    }
                     options = options.filter(function (_, i) { return components[i] });
                     URL += options.join('');
-                    Prism.highlightElement(document.querySelector(".language-js"));
                 }
                 $('.language-js').text(generateCodeCDN());
+                Prism.highlightElement(document.querySelector(".language-js"));
                 $('#code').show();
                 $('#copyButton').show();
             } else {
@@ -350,14 +377,25 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
                 $('#copyButton').hide();
                 $('body > div > div:nth-child(2) > div.col-4 > div > div.card-body > h5').text('Essentials via Local');
                 if (components.every(function (component) { return component == true })) {
-                    URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/build/essentials-ka.js';
+                    if (minifiedSelected) URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/build/essentials-ka.min.js';
+                    else URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/build/essentials-ka.js';
                 } else {
-                    URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/build/essentials-core-ka.js';
-                    let options = [
-                        ',gh/bhavjitChauhan/Essentials@1/build/color-essentials-ka.js',
-                        ',gh/bhavjitChauhan/Essentials@1/build/text-essentials-ka.js',
-                        ',gh/bhavjitChauhan/Essentials@1/build/shape-essential-ka.js'
-                    ];
+                    if (minifiedSelected) URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/build/essentials-core-ka.min.js';
+                    else URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/build/essentials-core-ka.js';
+                    let options;
+                    if (minifiedSelected) {
+                        options = [
+                            ',gh/bhavjitChauhan/Essentials@1/build/color-essentials-ka.min.js',
+                            ',gh/bhavjitChauhan/Essentials@1/build/text-essentials-ka.min.js',
+                            ',gh/bhavjitChauhan/Essentials@1/build/shape-essential-ka.min.js'
+                        ];
+                    } else {
+                        options = [
+                            ',gh/bhavjitChauhan/Essentials@1/build/color-essentials-ka.js',
+                            ',gh/bhavjitChauhan/Essentials@1/build/text-essentials-ka.js',
+                            ',gh/bhavjitChauhan/Essentials@1/build/shape-essential-ka.js'
+                        ];
+                    }
                     options = options.filter(function (_, i) { return components[i] });
                     URL += options.join('');
                 }

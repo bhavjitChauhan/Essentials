@@ -29,6 +29,16 @@ blurRect = (x, y, width, height, size) => {
 };
 
 /**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ *
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ *
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+
+/**
  * Draws a 2D cylinder.
  *
  * @link https://www.khanacademy.org/cs/-/5157537806548992
@@ -67,14 +77,38 @@ cylinder = (x, y, width, height) => {
 };
 
 /**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ * Alias for `beginShape()`/`endShape()`.
  *
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
+ * @param {Function} fn Shape function
+ * @param {CLOSE|boolean} [close] Whether to close the shape
+ * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
+ * [mode] Shape mode
  *
+ * @example
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, CLOSE);
+ * // expected outcome: square
+ *
+ * @example
+ * strokeWeight(5);
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, false, POINTS);
+ * // expected outcome: points in a square formation
  */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+drawShape = (fn, close, mode) => {
+    close = close && e.CLOSE;
+    e.beginShape(mode);
+    fn();
+    e.endShape(close);
+};
 
 /**
  * Draws a donut.
@@ -122,40 +156,6 @@ donut = (x, y, majorDiameter, minorDiameter) => {
 };
 
 /**
- * Alias for `beginShape()`/`endShape()`.
- *
- * @param {Function} fn Shape function
- * @param {CLOSE|boolean} [close] Whether to close the shape
- * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
- * [mode] Shape mode
- *
- * @example
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, CLOSE);
- * // expected outcome: square
- *
- * @example
- * strokeWeight(5);
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, false, POINTS);
- * // expected outcome: points in a square formation
- */
-drawShape = (fn, close, mode) => {
-    close = close && e.CLOSE;
-    e.beginShape(mode);
-    fn();
-    e.endShape(close);
-};
-
-/**
  * Draws a heart.
  *
  * @link https://www.khanacademy.org/cs/-/2085250861
@@ -182,29 +182,6 @@ heart = (x, y, radius) => {
         c2x = 2 * x - c2x;
         e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
     }, true);
-};
-
-/**
- * Draws a parallelogram.
- *
- * @link https://www.khanacademy.org/cs/-/4747962019348480
- *
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- *
- * @example
- * parallelogram(50, 50, 200, 50, 100, 100);
- *
- * @see rhombus
- */
-parallelogram = (ax, ay, bx, by, cx, cy) => {
-    const dx = bx - ax;
-    const dy = by - ay;
-    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 /**
@@ -239,6 +216,29 @@ polygon = (x, y, sides, radius, rotation) => {
         }
     }, true);
     pop();
+};
+
+/**
+ * Draws a parallelogram.
+ *
+ * @link https://www.khanacademy.org/cs/-/4747962019348480
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * parallelogram(50, 50, 200, 50, 100, 100);
+ *
+ * @see rhombus
+ */
+parallelogram = (ax, ay, bx, by, cx, cy) => {
+    const dx = bx - ax;
+    const dy = by - ay;
+    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 /**
@@ -357,6 +357,27 @@ square = (x, y, side, tl, tr, br, bl) => {
     else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);
     else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);
     else e.rect(x, y, side, side, tl, tr, br, bl);
+};
+
+/**
+ * Draws a trapezoid.
+ * 
+ * @param {number} x x-coordinate of trapezoid
+ * @param {number} y y-coordinate of trapezoid
+ * @param {number} height height of trapezoid
+ * @param {number} topBase width of top base
+ * @param {number} bottomBase width of bottom base
+ * 
+ * @example
+ * trapezoid(100, 100, 100, 150, 200);
+ * // expected outcome: trapezoid 
+ */
+trapezoid = (x, y, height, topBase, bottomBase) => {
+    const maxBase = Math.max(topBase, bottomBase);
+    e.quad(x + (maxBase - topBase) / 2, y,
+        x + (maxBase - topBase) / 2 + topBase - 1, y,
+        x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1,
+        x + (maxBase - bottomBase) / 2, y + height - 1);
 };
 
 /**

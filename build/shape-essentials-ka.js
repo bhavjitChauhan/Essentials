@@ -14,6 +14,10 @@ blurRect = function (x, y, width, height, size) {
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
 };
 
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
+};
+
 cylinder = function (x, y, width, height) {
   width = Math.abs(width);
   height = Math.abs(height);
@@ -42,8 +46,11 @@ cylinder = function (x, y, width, height) {
   pop();
 };
 
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
+drawShape = function (fn, close, mode) {
+  close = close && e.CLOSE;
+  e.beginShape(mode);
+  fn();
+  e.endShape(close);
 };
 
 donut = function (x, y, majorDiameter, minorDiameter) {
@@ -77,13 +84,6 @@ donut = function (x, y, majorDiameter, minorDiameter) {
   pop();
 };
 
-drawShape = function (fn, close, mode) {
-  close = close && e.CLOSE;
-  e.beginShape(mode);
-  fn();
-  e.endShape(close);
-};
-
 heart = function (x, y, radius) {
   var ay = y - 2 * radius / 5,
       by = y + radius,
@@ -100,12 +100,6 @@ heart = function (x, y, radius) {
   }, true);
 };
 
-parallelogram = function (ax, ay, bx, by, cx, cy) {
-  var dx = bx - ax;
-  var dy = by - ay;
-  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
-};
-
 polygon = function (x, y, sides, radius, rotation) {
   var _TAU = Math.cos(Math.PI) < 0 ? 2 * Math.PI : 360;
 
@@ -118,6 +112,12 @@ polygon = function (x, y, sides, radius, rotation) {
     }
   }, true);
   pop();
+};
+
+parallelogram = function (ax, ay, bx, by, cx, cy) {
+  var dx = bx - ax;
+  var dy = by - ay;
+  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 rectangle = function (x, y, width) {
@@ -138,6 +138,11 @@ rhombus = function (ax, ay, bx, by, cx, cy) {
 
 square = function (x, y, side, tl, tr, br, bl) {
   if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
+};
+
+trapezoid = function (x, y, height, topBase, bottomBase) {
+  var maxBase = Math.max(topBase, bottomBase);
+  e.quad(x + (maxBase - topBase) / 2, y, x + (maxBase - topBase) / 2 + topBase - 1, y, x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1, x + (maxBase - bottomBase) / 2, y + height - 1);
 };
 
 star = function (x, y, externalRadius) {

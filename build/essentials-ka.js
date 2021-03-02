@@ -5,12 +5,11 @@
  * Processing Environment.
  *
  * @link https://github.com/bhavjitChauhan/Essentials
- * @file Local Khan Academy utility JavaScript library
+ * @file Local Essentials Build
  * @author Bhavjit Chauhan
  */
 
 //jshint ignore: start
-var e = eval('__env__');
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -34,13 +33,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
+_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
 ESSENTIALS_CORE = true;
 ESSENTIALS_VERSION = '1.0.2beta';
-ESSENTIALS_ASCII = "/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\\\     /\\\\/\\\\\\ /\\\\\\\\\\\\/\\\\      /\\       /\\\\        /\\\\ \\\\  \n/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\ /\\\\   /\\\\     /\\\\    /\\\\     /\\ \\\\     /\\\\      /\\\\    /\\\\\n/\\\\       /\\\\       /\\\\      /\\\\      /\\\\ /\\\\  /\\\\     /\\\\    /\\\\    /\\  /\\\\    /\\\\       /\\\\      \n/\\\\\\\\\\\\     /\\\\       /\\\\    /\\\\\\\\\\\\  /\\\\  /\\\\ /\\\\     /\\\\    /\\\\   /\\\\   /\\\\   /\\\\         /\\\\    \n/\\\\            /\\\\       /\\\\ /\\\\      /\\\\   /\\ /\\\\     /\\\\    /\\\\  /\\\\\\\\\\\\ /\\\\  /\\\\            /\\\\ \n/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\\\    /\\ \\\\     /\\\\    /\\\\ /\\\\       /\\\\ /\\\\      /\\\\    /\\\\\n/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\      /\\\\     /\\\\    /\\\\/\\\\         /\\\\/\\\\\\\\\\\\\\\\  /\\\\ \\\\";
+ESSENTIALS_ASCII = "\n    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/\n   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/\n  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/\n _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/\n_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/\n\n";
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info("%cEssentials Library\n%cThe Khan Academy utility library.\n\nVersion ".concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
-e = Processing.instances[0];
+if (!_silent_ && !_core_initialized_) console.info("%cEssentials Library\n%cThe Khan Academy utility library.\n\n".concat(_env_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
 _eval = eval;
+e = Processing.instances[0];
 var _ref = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
 LEFT = _ref[0];
 RIGHT = _ref[1];
@@ -206,6 +206,93 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   COLOR_ESSENTIALS = true;
   if (!_silent_ && !_color_initialized_) console.info('%cColor Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
+
+angularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
+  angle -= 90;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+  push();
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle; i < angle + 359; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i = angle; _i < angle + 359; _i += dTheta) {
+      var _c = e.lerpColor(startColor, endColor, (_i - angle) / 360);
+
+      e.stroke(_c);
+      e.fill(_c);
+      r1 = e.radians(_i);
+      r2 = e.radians(_i - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
+  pop();
+};
+
+circularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
+  angle = angle || 0;
+  step = step || 1;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+  push();
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle - 1; i < angle + 180; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+
+    for (var _i2 = angle - 1; _i2 > angle - 180; _i2 -= dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180)));
+      r = e.radians(_i2);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i3 = angle - 1; _i3 < angle + 180; _i3 += dTheta) {
+      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
+
+      e.stroke(_c2);
+      e.fill(_c2);
+      r1 = e.radians(_i3);
+      r2 = e.radians(_i3 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+
+    r1 = e.radians(angle - 180);
+    r2 = e.radians(angle - 180 - dTheta);
+    e.stroke(endColor);
+    e.fill(endColor);
+    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+
+    for (var _i4 = angle - 1; _i4 > angle - 180; _i4 -= dTheta) {
+      var _c3 = e.lerpColor(startColor, endColor, Math.abs((_i4 - angle) / 180));
+
+      e.stroke(_c3);
+      e.fill(_c3);
+      r1 = e.radians(_i4);
+      r2 = e.radians(_i4 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
+  pop();
+};
 
 RED = e.color(255, 0, 0);
 GREEN = e.color(0, 128, 0);
@@ -430,15 +517,16 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
           e.line(x + i, y, x + i, y + height);
         }
       } else {
-        e.noStroke();
+        for (var _i5 = 0; _i5 < width; _i5 += step) {
+          var _c4 = e.lerpColor(startColor, endColor, _i5 / width);
 
-        for (var _i = 0; _i < width; _i += step) {
-          e.fill(e.lerpColor(startColor, endColor, _i / width));
+          e.stroke(_c4);
+          e.fill(_c4);
 
-          if (_i + step > width) {
-            e.rect(x + _i, y, width - _i, height);
+          if (_i5 + step > width) {
+            e.rect(x + _i5, y, width - _i5, height);
           } else {
-            e.rect(x + _i, y, step, height);
+            e.rect(x + _i5, y, step, height);
           }
         }
       }
@@ -456,20 +544,21 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
       }
 
       if (step == 1) {
-        for (var _i2 = 0; _i2 < height; _i2++) {
-          e.stroke(e.lerpColor(startColor, endColor, _i2 / height));
-          e.line(x, y + _i2, x + width, y + _i2);
+        for (var _i6 = 0; _i6 < height; _i6++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i6 / height));
+          e.line(x, y + _i6, x + width, y + _i6);
         }
       } else {
-        e.noStroke();
+        for (var _i7 = 0; _i7 < height; _i7 += step) {
+          var _c5 = e.lerpColor(startColor, endColor, _i7 / height);
 
-        for (var _i3 = 0; _i3 < height; _i3 += step) {
-          e.fill(e.lerpColor(startColor, endColor, _i3 / height));
+          e.stroke(_c5);
+          e.fill(_c5);
 
-          if (_i3 + step > width) {
-            e.rect(x, y + _i3, width, height - _i3);
+          if (_i7 + step > width) {
+            e.rect(x, y + _i7, width, height - _i7);
           } else {
-            e.rect(x, y + _i3, width, step);
+            e.rect(x, y + _i7, width, step);
           }
         }
       }
@@ -485,29 +574,31 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
       }
 
       if (step == 1) {
-        for (var _i4 = 0; _i4 < width; _i4++) {
-          e.stroke(e.lerpColor(startColor, endColor, _i4 / width / 2));
-          e.line(x + _i4, y, x, y + e.map(_i4, 0, width, 0, height));
+        for (var _i8 = 0; _i8 < width; _i8++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i8 / width / 2));
+          e.line(x + _i8, y, x, y + e.map(_i8, 0, width, 0, height));
         }
 
-        for (var _i5 = 0; _i5 < width; _i5++) {
-          e.stroke(e.lerpColor(startColor, endColor, _i5 / width / 2 + 0.5));
-          e.line(x + _i5, y + height, x + width, y + e.map(_i5, 0, width, 0, height));
+        for (var _i9 = 0; _i9 < width; _i9++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i9 / width / 2 + 0.5));
+          e.line(x + _i9, y + height, x + width, y + e.map(_i9, 0, width, 0, height));
         }
       } else {
         var side = Math.max(width, height) * Math.sqrt(2);
         showGraphics(x, y, width, height, function () {
           this.angleMode = 'degrees';
           this.rotate(-45);
-          this.noStroke();
 
-          for (var _i6 = 0; _i6 < side; _i6 += step) {
-            this.fill(this.lerpColor(startColor, endColor, _i6 / side));
+          for (var _i10 = 0; _i10 < side; _i10 += step) {
+            var _c6 = this.lerpColor(startColor, endColor, _i10 / side);
 
-            if (_i6 + step > side) {
-              this.rect(-side / 2, _i6, side, side - _i6);
+            this.stroke(_c6);
+            this.fill(_c6);
+
+            if (_i10 + step > side) {
+              this.rect(-side / 2, _i10, side, side - _i10);
             } else {
-              this.rect(-side / 2, _i6, side, step);
+              this.rect(-side / 2, _i10, side, step);
             }
           }
         });
@@ -524,14 +615,14 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
       }
 
       if (step == 1) {
-        for (var _i7 = 0; _i7 < width; _i7++) {
-          e.stroke(e.lerpColor(startColor, endColor, _i7 / width / 2));
-          e.line(x + width - _i7, y, x + width, y + e.map(_i7, 0, width, 0, height));
+        for (var _i11 = 0; _i11 < width; _i11++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i11 / width / 2));
+          e.line(x + width - _i11, y, x + width, y + e.map(_i11, 0, width, 0, height));
         }
 
-        for (var _i8 = 0; _i8 < width; _i8++) {
-          e.stroke(e.lerpColor(startColor, endColor, _i8 / width / 2 + 0.5));
-          e.line(x + width - _i8, y + height, x, y + e.map(_i8, 0, width, 0, height));
+        for (var _i12 = 0; _i12 < width; _i12++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i12 / width / 2 + 0.5));
+          e.line(x + width - _i12, y + height, x, y + e.map(_i12, 0, width, 0, height));
         }
       } else {
         var _side = Math.max(width, height) * Math.sqrt(2);
@@ -539,15 +630,17 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
         showGraphics(x, y, width, height, function () {
           this.angleMode = 'degrees';
           this.rotate(45);
-          this.noStroke();
 
-          for (var _i9 = 0; _i9 < _side; _i9 += step) {
-            this.fill(this.lerpColor(startColor, endColor, _i9 / _side));
+          for (var _i13 = 0; _i13 < _side; _i13 += step) {
+            var _c7 = this.lerpColor(startColor, endColor, _i13 / _side);
 
-            if (_i9 + step > _side) {
-              this.rect(0, _i9 - _side / 2, _side, _side - _i9);
+            this.stroke(_c7);
+            this.fill(_c7);
+
+            if (_i13 + step > _side) {
+              this.rect(0, _i13 - _side / 2, _side, _side - _i13);
             } else {
-              this.rect(0, _i9 - _side / 2, _side, step);
+              this.rect(0, _i13 - _side / 2, _side, step);
             }
           }
         });
@@ -556,6 +649,41 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
   }
 
   pop();
+};
+
+radialGradient = function (x, y, width, height, startColor, endColor) {
+  var step = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 1;
+  push();
+  e.strokeWeight(1);
+  var maxRadius = Math.max(width, height);
+
+  if (step == 1) {
+    e.noFill();
+
+    for (var i = 0; i < maxRadius; i++) {
+      e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
+      e.arc(x, y, width - e.map(i, 0, maxRadius, 0, width), height - e.map(i, 0, maxRadius, 0, height), 0, 360);
+    }
+  } else {
+    for (var _i14 = 0; _i14 < maxRadius; _i14 += step) {
+      var _c8 = e.lerpColor(endColor, startColor, _i14 / maxRadius);
+
+      e.stroke(_c8);
+      e.fill(_c8);
+      e.ellipse(x, y, width - e.map(_i14, 0, maxRadius, 0, width), height - e.map(_i14, 0, maxRadius, 0, height));
+    }
+  }
+
+  pop();
+};
+
+RGBToHex = function (x, g, b) {
+  if (arguments.length == 1) {
+    c = x;
+    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+  }
+
+  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
 RGBToHSB = function (x, g, b) {
@@ -601,44 +729,35 @@ RGBToHSB = function (x, g, b) {
   return result;
 };
 
-RGBToHex = function (x, g, b) {
-  if (arguments.length == 1) {
-    c = x;
-    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
-  }
+toRGB = function () {
+  var args = arguments;
 
-  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
+  if (args.length == 1) {
+    var _c9 = args[0];
+
+    if (typeof _c9 == 'number') {
+      return [e.red(_c9), e.green(_c9), e.blue(_c9)];
+    } else {
+      return hexToRGB(_c9);
+    }
+  } else if (args.length == 3) {
+    return HSBToRGB.apply(e, args);
+  }
 };
 
 toHSB = function () {
   var args = arguments;
 
   if (args.length == 1) {
-    var _c = args[0];
+    var _c10 = args[0];
 
-    if (typeof _c == 'number') {
-      return [e.hue(_c), e.saturation(_c), e.brightness(_c)];
+    if (typeof _c10 == 'number') {
+      return [e.hue(_c10), e.saturation(_c10), e.brightness(_c10)];
     } else {
-      return RGBToHSB.apply(e, toRGB(hexToRGB(_c)));
+      return RGBToHSB.apply(e, toRGB(hexToRGB(_c10)));
     }
   } else if (args.length == 3) {
     return RGBToHSB.apply(e, args);
-  }
-};
-
-toRGB = function () {
-  var args = arguments;
-
-  if (args.length == 1) {
-    var _c2 = args[0];
-
-    if (typeof _c2 == 'number') {
-      return [e.red(_c2), e.green(_c2), e.blue(_c2)];
-    } else {
-      return hexToRGB(_c2);
-    }
-  } else if (args.length == 3) {
-    return HSBToRGB.apply(e, args);
   }
 };
 
@@ -652,6 +771,29 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   TEXT_ESSENTIALS = true;
   if (!_silent_ && !_text_initialized_) console.info('%cText Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
+
+fastGradientText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var startColor = arguments.length > 3 ? arguments[3] : undefined;
+  var endColor = arguments.length > 4 ? arguments[4] : undefined;
+  push();
+
+  if (!string.includes('\n')) {
+    for (var i = 0; i < string.length; i++) {
+      e.fill(e.lerpColor(startColor, endColor, i / string.length));
+      e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
+    }
+  } else {
+    var _strings = string.split('\n');
+
+    for (var _i15 in _strings) {
+      fastGradientText(_strings[_i15], x, y + _i15 * textAscent(), startColor, endColor);
+    }
+  }
+
+  pop();
+};
 
 font = function (family) {
   var properties = Array.from(arguments).slice(1);
@@ -802,6 +944,15 @@ multicoloredText = function (string) {
   pop();
 };
 
+ordinalSuffix = function (n) {
+  var int = parseInt(n, 10),
+      digits = [int % 10, int % 100],
+      oPattern = [1, 2, 3, 4],
+      ordinals = ['st', 'nd', 'rd', 'th'],
+      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
+};
+
 outlineText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -827,15 +978,6 @@ outlineText = function (string) {
   e.text(string, x, y);
 };
 
-ordinalSuffix = function (n) {
-  var int = parseInt(n, 10),
-      digits = [int % 10, int % 100],
-      oPattern = [1, 2, 3, 4],
-      ordinals = ['st', 'nd', 'rd', 'th'],
-      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
-};
-
 pluralize = function (value, word) {
   var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
 
@@ -848,31 +990,6 @@ pluralize = function (value, word) {
     return _pluralize(num, word, value[word]);
   };
   return _pluralize(value, word, plural);
-};
-
-underlineText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
-  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
-
-  if (!/\S/.test(string)) {
-    return;
-  }
-
-  strings = string.split('\n');
-  push();
-  e.strokeCap(e.SQUARE);
-  e.strokeWeight(underlineWeight);
-  e.stroke(underlineColor);
-
-  for (var i in strings) {
-    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
-  }
-
-  e.textAlign(e.LEFT, e.CORNER);
-  e.text(string, x, y);
-  pop();
 };
 
 String.prototype.format = function () {
@@ -953,6 +1070,31 @@ String.prototype.toTitleCase = function () {
   }).join(' ');
 };
 
+underlineText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
+  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  strings = string.split('\n');
+  push();
+  e.strokeCap(e.SQUARE);
+  e.strokeWeight(underlineWeight);
+  e.stroke(underlineColor);
+
+  for (var i in strings) {
+    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
+  }
+
+  e.textAlign(e.LEFT, e.CORNER);
+  e.text(string, x, y);
+  pop();
+};
+
 wordWrap = function (str, max) {
   var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '\n';
   return str.replace(new RegExp("(?![^\\n]{1,".concat(max, "}$)([^\\n]{1,").concat(max, "})\\s"), 'g'), '$1' + br);
@@ -974,6 +1116,10 @@ blurRect = function (x, y, width, height, size) {
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
 };
 
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
+};
+
 cylinder = function (x, y, width, height) {
   width = Math.abs(width);
   height = Math.abs(height);
@@ -986,24 +1132,30 @@ cylinder = function (x, y, width, height) {
     e.rotate(_TAU / 4);
     cylinder(0, 0, height, width);
   } else {
-    var r = height / 2;
+    var _r = height / 2;
+
     var z = (width - height) / 2;
-    var central = 4 / 3 * (Math.sqrt(2) - 1) * r;
+
+    var central = 4 / 3 * (Math.sqrt(2) - 1) * _r;
+
     drawShape(function () {
-      e.vertex(z, -r);
-      e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
-      e.bezierVertex(z + r, central, z + central, r, z, r);
-      e.vertex(-z, r);
-      e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
-      e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
+      e.vertex(z, -_r);
+      e.bezierVertex(z + central, -_r, z + _r, -central, z + _r, 0);
+      e.bezierVertex(z + _r, central, z + central, _r, z, _r);
+      e.vertex(-z, _r);
+      e.bezierVertex(-z - central, _r, -z - _r, central, -z - _r, 0);
+      e.bezierVertex(-z - _r, -central, -z - central, -_r, -z, -_r);
     }, true);
   }
 
   pop();
 };
 
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
+drawShape = function (fn, close, mode) {
+  close = close && e.CLOSE;
+  e.beginShape(mode);
+  fn();
+  e.endShape(close);
 };
 
 donut = function (x, y, majorDiameter, minorDiameter) {
@@ -1037,13 +1189,6 @@ donut = function (x, y, majorDiameter, minorDiameter) {
   pop();
 };
 
-drawShape = function (fn, close, mode) {
-  close = close && e.CLOSE;
-  e.beginShape(mode);
-  fn();
-  e.endShape(close);
-};
-
 heart = function (x, y, radius) {
   var ay = y - 2 * radius / 5,
       by = y + radius,
@@ -1060,12 +1205,6 @@ heart = function (x, y, radius) {
   }, true);
 };
 
-parallelogram = function (ax, ay, bx, by, cx, cy) {
-  var dx = bx - ax;
-  var dy = by - ay;
-  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
-};
-
 polygon = function (x, y, sides, radius, rotation) {
   var _TAU = Math.cos(Math.PI) < 0 ? 2 * Math.PI : 360;
 
@@ -1078,6 +1217,12 @@ polygon = function (x, y, sides, radius, rotation) {
     }
   }, true);
   pop();
+};
+
+parallelogram = function (ax, ay, bx, by, cx, cy) {
+  var dx = bx - ax;
+  var dy = by - ay;
+  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 rectangle = function (x, y, width) {
@@ -1098,6 +1243,11 @@ rhombus = function (ax, ay, bx, by, cx, cy) {
 
 square = function (x, y, side, tl, tr, br, bl) {
   if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
+};
+
+trapezoid = function (x, y, height, topBase, bottomBase) {
+  var maxBase = Math.max(topBase, bottomBase);
+  e.quad(x + (maxBase - topBase) / 2, y, x + (maxBase - topBase) / 2 + topBase - 1, y, x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1, x + (maxBase - bottomBase) / 2, y + height - 1);
 };
 
 star = function (x, y, externalRadius) {

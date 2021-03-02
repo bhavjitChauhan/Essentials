@@ -5,27 +5,30 @@
  * Processing Environment.
  *
  * @link https://github.com/bhavjitChauhan/Essentials
- * @file Khan Academy utility JavaScript library
+ * @file Essentials Build
  * @author Bhavjit Chauhan
  */
 
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
+_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
 
 ESSENTIALS_CORE = true;
 ESSENTIALS_VERSION = '1.0.2beta';
-ESSENTIALS_ASCII = `/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\\\     /\\\\/\\\\\\ /\\\\\\\\\\\\/\\\\      /\\       /\\\\        /\\\\ \\\\  
-/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\ /\\\\   /\\\\     /\\\\    /\\\\     /\\ \\\\     /\\\\      /\\\\    /\\\\
-/\\\\       /\\\\       /\\\\      /\\\\      /\\\\ /\\\\  /\\\\     /\\\\    /\\\\    /\\  /\\\\    /\\\\       /\\\\      
-/\\\\\\\\\\\\     /\\\\       /\\\\    /\\\\\\\\\\\\  /\\\\  /\\\\ /\\\\     /\\\\    /\\\\   /\\\\   /\\\\   /\\\\         /\\\\    
-/\\\\            /\\\\       /\\\\ /\\\\      /\\\\   /\\ /\\\\     /\\\\    /\\\\  /\\\\\\\\\\\\ /\\\\  /\\\\            /\\\\ 
-/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\\\    /\\ \\\\     /\\\\    /\\\\ /\\\\       /\\\\ /\\\\      /\\\\    /\\\\
-/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\      /\\\\     /\\\\    /\\\\/\\\\         /\\\\/\\\\\\\\\\\\\\\\  /\\\\ \\\\`;
+ESSENTIALS_ASCII = `
+    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
+   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/
+  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/
+ _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/
+_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/
+
+`;
 
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
 if (!_silent_ && !_core_initialized_) console.info(
     `%cEssentials Library
 %cThe Khan Academy utility library.
 
+${_env_} Build
 Version ${ESSENTIALS_VERSION}
 Copyright \xa9 2021 Bhavjit Chauhan
 https://github.com/bhavjitChauhan/Essentials`,
@@ -33,14 +36,14 @@ https://github.com/bhavjitChauhan/Essentials`,
     'font-family:system-ui;font-size:0.75rem;'
 );
 
-e = Processing.instances[0];
 _eval = eval;
+e = Processing.instances[0];
 
 [LEFT, RIGHT, TOP, BOTTOM, UP, DOWN] = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
 TOP_LEFT = 1,
-TOP_RIGHT = 2,
-BOTTOM_RIGHT = 3,
-BOTTOM_LEFT = 4;
+    TOP_RIGHT = 2,
+    BOTTOM_RIGHT = 3,
+    BOTTOM_LEFT = 4;
 
 /**
  * Alias for `width`.

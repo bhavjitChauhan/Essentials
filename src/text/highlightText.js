@@ -1,10 +1,10 @@
 /**
  * Draws a string with a highlight background.
  *
- * @param {string} string String to be highlighted
- * @param {number} [x=0] x-coordinate value
- * @param {number} [y='text height'] y-coordinate value
- * @param {number} [highlightColor=YELLOW] Color of highlight background
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ * @param {number} [highlightColor=YELLOW] color of highlight background
  *
  * @example
  * let str = 'Highlighted\nText';
