@@ -1268,41 +1268,6 @@ RGBToHSB = function(x, g, b) {
 };
 
 /**
- * Converts hex or HSB to RGB color value.
- *
- * @param {(string|color)} x Hex, hue or RGB color value
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
- *
- * @returns {color|array}  RGB color value or RGB values array
- *
- * @example
- * background(toRGB('fff'));
- * // expected outcome: white background
- *
- * @example
- * background(toRGB(0, 255, 255));
- * // expected outcome: red background
- *
- * @example
- * println(toRGB(-1))
- * // expected output: [255, 255, 255]
- */
-toRGB = function() {
-    const args = arguments;
-    if (args.length == 1) {
-        const c = args[0];
-        if (typeof c == 'number') {
-            return [e.red(c), e.green(c), e.blue(c)];
-        } else {
-            return hexToRGB(c);
-        }
-    } else if (args.length == 3) {
-        return HSBToRGB.apply(e, args);
-    }
-};
-
-/**
  * Converts hex or RGB to HSB color value.
  *
  * @param {(string|color)} x Hex, red or HSB color value
@@ -1336,6 +1301,41 @@ toHSB = function() {
         }
     } else if (args.length == 3) {
         return RGBToHSB.apply(e, args);
+    }
+};
+
+/**
+ * Converts hex or HSB to RGB color value.
+ *
+ * @param {(string|color)} x Hex, hue or RGB color value
+ * @param {number} [s] Saturation value
+ * @param {number} [v] Brightness value
+ *
+ * @returns {color|array}  RGB color value or RGB values array
+ *
+ * @example
+ * background(toRGB('fff'));
+ * // expected outcome: white background
+ *
+ * @example
+ * background(toRGB(0, 255, 255));
+ * // expected outcome: red background
+ *
+ * @example
+ * println(toRGB(-1))
+ * // expected output: [255, 255, 255]
+ */
+toRGB = function() {
+    const args = arguments;
+    if (args.length == 1) {
+        const c = args[0];
+        if (typeof c == 'number') {
+            return [e.red(c), e.green(c), e.blue(c)];
+        } else {
+            return hexToRGB(c);
+        }
+    } else if (args.length == 3) {
+        return HSBToRGB.apply(e, args);
     }
 };
 
@@ -1598,6 +1598,31 @@ lightOrDarkText = backgroundColor => {
 };
 
 /**
+ * Takes a number and returns it as a string with the correct ordinal indicator
+ * suffix.
+ *
+ * @link https://www.30secondsofcode.org/js/s/to-ordinal-suffix
+ *
+ * @param {(number|string)} n Number
+ *
+ * @returns {string} Number with ordinal suffix.
+ *
+ * @example
+ * println(ordinalSuffix(123));
+ * // expected output: '123rd'
+ */
+ordinalSuffix = n => {
+    const int = parseInt(n, 10),
+        digits = [int % 10, int % 100],
+        oPattern = [1, 2, 3, 4],
+        ordinals = ['st', 'nd', 'rd', 'th'],
+        tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+    return oPattern.includes(digits[0]) &amp;&amp; !tPattern.includes(digits[1])
+        ? int + ordinals[digits[0] - 1]
+        : int + ordinals[3];
+};
+
+/**
  * Draws text with multiple colors that are passed in using special syntax.
  *
  * @param {string} string
@@ -1635,31 +1660,6 @@ multicoloredText = (string, x = 0, y = e.textAscent()) => {
         }
     }
     pop();
-};
-
-/**
- * Takes a number and returns it as a string with the correct ordinal indicator
- * suffix.
- *
- * @link https://www.30secondsofcode.org/js/s/to-ordinal-suffix
- *
- * @param {(number|string)} n Number
- *
- * @returns {string} Number with ordinal suffix.
- *
- * @example
- * println(ordinalSuffix(123));
- * // expected output: '123rd'
- */
-ordinalSuffix = n => {
-    const int = parseInt(n, 10),
-        digits = [int % 10, int % 100],
-        oPattern = [1, 2, 3, 4],
-        ordinals = ['st', 'nd', 'rd', 'th'],
-        tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-    return oPattern.includes(digits[0]) &amp;&amp; !tPattern.includes(digits[1])
-        ? int + ordinals[digits[0] - 1]
-        : int + ordinals[3];
 };
 
 /**
@@ -2018,40 +2018,6 @@ cylinder = (x, y, width, height) => {
 };
 
 /**
- * Alias for `beginShape()`/`endShape()`.
- *
- * @param {Function} fn Shape function
- * @param {CLOSE|boolean} [close] Whether to close the shape
- * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
- * [mode] Shape mode
- *
- * @example
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, CLOSE);
- * // expected outcome: square
- *
- * @example
- * strokeWeight(5);
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, false, POINTS);
- * // expected outcome: points in a square formation
- */
-drawShape = (fn, close, mode) => {
-    close = close &amp;&amp; e.CLOSE;
-    e.beginShape(mode);
-    fn();
-    e.endShape(close);
-};
-
-/**
  * Draws a donut.
  *
  * @link https://www.khanacademy.org/cs/-/4693526445719552
@@ -2097,6 +2063,40 @@ donut = (x, y, majorDiameter, minorDiameter) => {
 };
 
 /**
+ * Alias for `beginShape()`/`endShape()`.
+ *
+ * @param {Function} fn Shape function
+ * @param {CLOSE|boolean} [close] Whether to close the shape
+ * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
+ * [mode] Shape mode
+ *
+ * @example
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, CLOSE);
+ * // expected outcome: square
+ *
+ * @example
+ * strokeWeight(5);
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, false, POINTS);
+ * // expected outcome: points in a square formation
+ */
+drawShape = (fn, close, mode) => {
+    close = close &amp;&amp; e.CLOSE;
+    e.beginShape(mode);
+    fn();
+    e.endShape(close);
+};
+
+/**
  * Draws a heart.
  *
  * @link https://www.khanacademy.org/cs/-/2085250861
@@ -2123,6 +2123,29 @@ heart = (x, y, radius) => {
         c2x = 2 * x - c2x;
         e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
     }, true);
+};
+
+/**
+ * Draws a parallelogram.
+ *
+ * @link https://www.khanacademy.org/cs/-/4747962019348480
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * parallelogram(50, 50, 200, 50, 100, 100);
+ *
+ * @see rhombus
+ */
+parallelogram = (ax, ay, bx, by, cx, cy) => {
+    const dx = bx - ax;
+    const dy = by - ay;
+    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 /**
@@ -2157,29 +2180,6 @@ polygon = (x, y, sides, radius, rotation) => {
         }
     }, true);
     pop();
-};
-
-/**
- * Draws a parallelogram.
- *
- * @link https://www.khanacademy.org/cs/-/4747962019348480
- *
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- *
- * @example
- * parallelogram(50, 50, 200, 50, 100, 100);
- *
- * @see rhombus
- */
-parallelogram = (ax, ay, bx, by, cx, cy) => {
-    const dx = bx - ax;
-    const dy = by - ay;
-    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 /**
@@ -2301,27 +2301,6 @@ square = (x, y, side, tl, tr, br, bl) => {
 };
 
 /**
- * Draws a trapezoid.
- * 
- * @param {number} x x-coordinate of trapezoid
- * @param {number} y y-coordinate of trapezoid
- * @param {number} height height of trapezoid
- * @param {number} topBase width of top base
- * @param {number} bottomBase width of bottom base
- * 
- * @example
- * trapezoid(100, 100, 100, 150, 200);
- * // expected outcome: trapezoid 
- */
-trapezoid = (x, y, height, topBase, bottomBase) => {
-    const maxBase = Math.max(topBase, bottomBase);
-    e.quad(x + (maxBase - topBase) / 2, y,
-        x + (maxBase - topBase) / 2 + topBase - 1, y,
-        x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1,
-        x + (maxBase - bottomBase) / 2, y + height - 1);
-};
-
-/**
  * Draws a star with _n_ spikes.
  *
  * @link https://www.khanacademy.org/cs/-/1171581918
@@ -2354,6 +2333,27 @@ star = (x, y, externalRadius, spikes = 5, rotation) => {
 
     pop();
 };
+
+/**
+ * Draws a trapezoid.
+ * 
+ * @param {number} x x-coordinate of trapezoid
+ * @param {number} y y-coordinate of trapezoid
+ * @param {number} height height of trapezoid
+ * @param {number} topBase width of top base
+ * @param {number} bottomBase width of bottom base
+ * 
+ * @example
+ * trapezoid(100, 100, 100, 150, 200);
+ * // expected outcome: trapezoid 
+ */
+trapezoid = (x, y, height, topBase, bottomBase) => {
+    const maxBase = Math.max(topBase, bottomBase);
+    e.quad(x + (maxBase - topBase) / 2, y,
+        x + (maxBase - topBase) / 2 + topBase - 1, y,
+        x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1,
+        x + (maxBase - bottomBase) / 2, y + height - 1);
+};
 </code></pre>
         </article>
     </section>
@@ -2368,7 +2368,7 @@ star = (x, y, externalRadius, spikes = 5, rotation) => {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Tue Mar 02 2021 15:40:12 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Mar 03 2021 19:49:12 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

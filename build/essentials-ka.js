@@ -5,7 +5,7 @@
  * Processing Environment.
  *
  * @link https://github.com/bhavjitChauhan/Essentials
- * @file Local Essentials Build
+ * @file KA Essentials Build
  * @author Bhavjit Chauhan
  */
 
@@ -729,35 +729,35 @@ RGBToHSB = function (x, g, b) {
   return result;
 };
 
-toRGB = function () {
+toHSB = function () {
   var args = arguments;
 
   if (args.length == 1) {
     var _c9 = args[0];
 
     if (typeof _c9 == 'number') {
-      return [e.red(_c9), e.green(_c9), e.blue(_c9)];
+      return [e.hue(_c9), e.saturation(_c9), e.brightness(_c9)];
     } else {
-      return hexToRGB(_c9);
+      return RGBToHSB.apply(e, toRGB(hexToRGB(_c9)));
     }
   } else if (args.length == 3) {
-    return HSBToRGB.apply(e, args);
+    return RGBToHSB.apply(e, args);
   }
 };
 
-toHSB = function () {
+toRGB = function () {
   var args = arguments;
 
   if (args.length == 1) {
     var _c10 = args[0];
 
     if (typeof _c10 == 'number') {
-      return [e.hue(_c10), e.saturation(_c10), e.brightness(_c10)];
+      return [e.red(_c10), e.green(_c10), e.blue(_c10)];
     } else {
-      return RGBToHSB.apply(e, toRGB(hexToRGB(_c10)));
+      return hexToRGB(_c10);
     }
   } else if (args.length == 3) {
-    return RGBToHSB.apply(e, args);
+    return HSBToRGB.apply(e, args);
   }
 };
 
@@ -907,6 +907,15 @@ lightOrDarkText = function (backgroundColor) {
   return BLACK;
 };
 
+ordinalSuffix = function (n) {
+  var int = parseInt(n, 10),
+      digits = [int % 10, int % 100],
+      oPattern = [1, 2, 3, 4],
+      ordinals = ['st', 'nd', 'rd', 'th'],
+      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
+};
+
 multicoloredText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -942,15 +951,6 @@ multicoloredText = function (string) {
   }
 
   pop();
-};
-
-ordinalSuffix = function (n) {
-  var int = parseInt(n, 10),
-      digits = [int % 10, int % 100],
-      oPattern = [1, 2, 3, 4],
-      ordinals = ['st', 'nd', 'rd', 'th'],
-      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
 };
 
 outlineText = function (string) {
@@ -1151,13 +1151,6 @@ cylinder = function (x, y, width, height) {
   pop();
 };
 
-drawShape = function (fn, close, mode) {
-  close = close && e.CLOSE;
-  e.beginShape(mode);
-  fn();
-  e.endShape(close);
-};
-
 donut = function (x, y, majorDiameter, minorDiameter) {
   var kappa = 4 / 3 * (Math.sqrt(2) - 1);
   push();
@@ -1189,6 +1182,13 @@ donut = function (x, y, majorDiameter, minorDiameter) {
   pop();
 };
 
+drawShape = function (fn, close, mode) {
+  close = close && e.CLOSE;
+  e.beginShape(mode);
+  fn();
+  e.endShape(close);
+};
+
 heart = function (x, y, radius) {
   var ay = y - 2 * radius / 5,
       by = y + radius,
@@ -1205,6 +1205,12 @@ heart = function (x, y, radius) {
   }, true);
 };
 
+parallelogram = function (ax, ay, bx, by, cx, cy) {
+  var dx = bx - ax;
+  var dy = by - ay;
+  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
+};
+
 polygon = function (x, y, sides, radius, rotation) {
   var _TAU = Math.cos(Math.PI) < 0 ? 2 * Math.PI : 360;
 
@@ -1217,12 +1223,6 @@ polygon = function (x, y, sides, radius, rotation) {
     }
   }, true);
   pop();
-};
-
-parallelogram = function (ax, ay, bx, by, cx, cy) {
-  var dx = bx - ax;
-  var dy = by - ay;
-  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 rectangle = function (x, y, width) {
@@ -1245,11 +1245,6 @@ square = function (x, y, side, tl, tr, br, bl) {
   if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
 };
 
-trapezoid = function (x, y, height, topBase, bottomBase) {
-  var maxBase = Math.max(topBase, bottomBase);
-  e.quad(x + (maxBase - topBase) / 2, y, x + (maxBase - topBase) / 2 + topBase - 1, y, x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1, x + (maxBase - bottomBase) / 2, y + height - 1);
-};
-
 star = function (x, y, externalRadius) {
   var spikes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 5;
   var rotation = arguments.length > 4 ? arguments[4] : undefined;
@@ -1269,4 +1264,9 @@ star = function (x, y, externalRadius) {
     }
   }, true);
   pop();
+};
+
+trapezoid = function (x, y, height, topBase, bottomBase) {
+  var maxBase = Math.max(topBase, bottomBase);
+  e.quad(x + (maxBase - topBase) / 2, y, x + (maxBase - topBase) / 2 + topBase - 1, y, x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1, x + (maxBase - bottomBase) / 2, y + height - 1);
 };

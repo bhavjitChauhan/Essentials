@@ -12,7 +12,7 @@ const header = `/**
  * Processing Environment.
  *
  * @link https://github.com/bhavjitChauhan/Essentials
- * @file Local Essentials Build
+ * @file KA Essentials Build
  * @author Bhavjit Chauhan
  */
 
@@ -58,7 +58,7 @@ for (const file of input) {
         }
         console.log(cyan(`${bold(filename)} minified at ${bold(Math.round(performance.now() - minifyStartTime) + 'ms')}`));
         let data = (file == 'essentials-core.js' || file == '../essentials.js' ? header.slice(0, -2) : '') + result.code + '\n';
-        data = data.replace('Local', 'Minified Local');
+        data = data.replace('KA', 'Minified KA');
         const writeStartTime = performance.now();
         writeFile(filename, data, err => {
             if (err) return console.error(err);

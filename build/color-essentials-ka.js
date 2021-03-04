@@ -529,34 +529,34 @@ RGBToHSB = function (x, g, b) {
   return result;
 };
 
-toRGB = function () {
+toHSB = function () {
   var args = arguments;
 
   if (args.length == 1) {
     var _c9 = args[0];
 
     if (typeof _c9 == 'number') {
-      return [e.red(_c9), e.green(_c9), e.blue(_c9)];
+      return [e.hue(_c9), e.saturation(_c9), e.brightness(_c9)];
     } else {
-      return hexToRGB(_c9);
+      return RGBToHSB.apply(e, toRGB(hexToRGB(_c9)));
     }
   } else if (args.length == 3) {
-    return HSBToRGB.apply(e, args);
+    return RGBToHSB.apply(e, args);
   }
 };
 
-toHSB = function () {
+toRGB = function () {
   var args = arguments;
 
   if (args.length == 1) {
     var _c10 = args[0];
 
     if (typeof _c10 == 'number') {
-      return [e.hue(_c10), e.saturation(_c10), e.brightness(_c10)];
+      return [e.red(_c10), e.green(_c10), e.blue(_c10)];
     } else {
-      return RGBToHSB.apply(e, toRGB(hexToRGB(_c10)));
+      return hexToRGB(_c10);
     }
   } else if (args.length == 3) {
-    return RGBToHSB.apply(e, args);
+    return HSBToRGB.apply(e, args);
   }
 };

@@ -181,9 +181,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=clike+javascri
                 navigation link above to explore relevant pages.</p>
             <p>For more information on build differences, see the <a
                     href="https://github.com/bhavjitChauhan/Essentials/wiki/Custom-Builds" target="_blank">Custom
-                    Builds</a> page on the wiki. The wiki also includes <a
-                    href="https://github.com/bhavjitChauhan/Essentials/wiki/Usage" target="_blank">usage</a>
-                information.</p>
+                    Builds</a> page on the wiki.</p>
         </div>
         <div class="row mt-3">
             <h2>
@@ -191,47 +189,58 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=clike+javascri
             </h2>
             <p>Select the Build Type and what components of the Essentials library you need, then click the Submit
                 button for your generated code.</p>
+            <p>The included JSHint directive must be present before any Essentials code, see the wiki on <a
+                    href="https://github.com/bhavjitChauhan/Essentials/wiki/Khan-Academy-and-JSHint"
+                    target="_blank">Khan Academy and JSHint</a> for more information.
         </div>
         <div class="row mt-3">
+            <h2>Build</h2>
             <div class="col-8 mt-4">
                 <form id="form">
                     <div class="mb-3">
                         <h3>Build Type</h3>
                         <select class="form-select" aria-label="Default select example" id="buildTypeSelect">
                             <option value="CDN" selected>CDN</option>
-                            <option value="Local">Local</option>
+                            <option value="Khan Academy">Khan Academy</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <h3>Components</h3>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="coreCheckbox" checked disabled>
-                            <label class="form-check-label" for="coreCheckbox">
+                            <label class="form-check-label" for="coreCheckbox" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" title="Core functionality. Required for other components.">
                                 Essentials Core
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="colorCheckbox" checked>
-                            <label class="form-check-label" for="colorCheckbox">
+                            <label class="form-check-label" for="colorCheckbox" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom"
+                                title="Color variables, conversion and gradient functions. Required by Text and Shape Essentials.">
                                 Color Essentials
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="textCheckbox" checked>
-                            <label class="form-check-label" for="textCheckbox">
+                            <label class="form-check-label" for="textCheckbox" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom"
+                                title="General string manipulation, various text draw functions and the font function.">
                                 Text Essentials
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="shapeCheckbox" checked>
-                            <label class="form-check-label" for="shapeCheckbox">
+                            <label class="form-check-label" for="shapeCheckbox" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" title="Additional shape functions.">
                                 Shape Essentials
                             </label>
                         </div>
                         <hr>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="minifiedCheckbox" checked>
-                            <label class="form-check-label" for="minifiedCheckbox">
+                            <label class="form-check-label" for="minifiedCheckbox" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" title="Lower file sizes, lower load times.">
                                 Minified
                             </label>
                         </div>
@@ -250,12 +259,15 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=clike+javascri
                     <div class="card-body">
                         <h5 class="card-title">CDN Build</h5>
                         <p id="directions" class="card-text">Paste the following code into your program.</p>
-                        <pre style="overflow: hidden;" id="code"><code class="language-js">$.ajaxSetup({ cache: true });
+                        <div id="code-container">
+                            <pre style="overflow: hidden;" id="code"><code class="language-js">// jshint ignore: start
+$.ajaxSetup({ cache: true });
 $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js',
     function() {
         // your code here
     }
 );</code></pre>
+                        </div>
                         <div class="btn-group float-end" role="group">
                             <a id="rawLink" class="btn btn-secondary btn-sm"
                                 href="https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js"
@@ -275,8 +287,8 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
         crossorigin="anonymous"></script>
@@ -284,6 +296,11 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
         integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg=="
         crossorigin="anonymous"></script>
     <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+
         $('#alert').hide();
         // $('#buildTypeSelect').change(function () {
         //     if ($("#buildTypeSelect").val() == 'Select type...') {
@@ -310,6 +327,8 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
             }
         });
 
+        const spinner = '<div class="d-flex justify-content-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+
         const copyToClipboard = function (str) {
             const el = document.createElement('textarea');
             el.value = str;
@@ -324,11 +343,13 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
         };
 
         const generateCodeCDN = function () {
-            return "$.ajaxSetup({ cache: true });\n$.getScript('".concat(URL, "',\n    function() {\n        // your code here\n    }\n);");
+            return "// jshint ignore: start\n$.ajaxSetup({ cache: true });\n$.getScript('".concat(URL, "',\n    function() {\n        // your code here\n    }\n);");
         }
+
         let buildTypeSelected = 'CDN';
         let minifiedSelected = true;
         let URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js';
+        let code = null;
         $("#form").submit(function (e) {
             e.preventDefault();
         });
@@ -342,14 +363,14 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
                 $('#shapeCheckbox').is(":checked")
             ]
             if (buildTypeSelected == 'CDN') {
-                $('#directions').text('Paste the following code into your program.');
+                // $('#directions').text('Paste the following code into your program.');
                 $('body > div > div:nth-child(2) > div.col-4 > div > div.card-body > h5').text('Essentials via CDN');
                 if (components.every(function (component) { return component == true })) {
                     if (minifiedSelected) URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js';
                     else URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.js';
                 } else {
-                    if (minifiedSelected) URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/essentials-core.min.js';
-                    else URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/essentials-core.js';
+                    if (minifiedSelected) URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/build/essentials-core.min.js';
+                    else URL = 'https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/build/essentials-core.js';
                     let options;
                     if (minifiedSelected) {
                         options = [
@@ -372,10 +393,12 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
                 $('#code').show();
                 $('#copyButton').show();
             } else {
-                $('#directions').text('Paste the code into your program.');
-                $('#code').hide();
-                $('#copyButton').hide();
-                $('body > div > div:nth-child(2) > div.col-4 > div > div.card-body > h5').text('Essentials via Local');
+                code = null;
+                // $('#directions').text('Paste the code into your program.');
+                $('.language-js').text('Loading...');
+                // $('#copyButton').hide();
+                // $('#code-container').html(spinner);
+                $('body > div > div:nth-child(2) > div.col-4 > div > div.card-body > h5').text('Essentials via KA');
                 if (components.every(function (component) { return component == true })) {
                     if (minifiedSelected) URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/build/essentials-ka.min.js';
                     else URL = 'https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/build/essentials-ka.js';
@@ -387,18 +410,23 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
                         options = [
                             ',gh/bhavjitChauhan/Essentials@1/build/color-essentials-ka.min.js',
                             ',gh/bhavjitChauhan/Essentials@1/build/text-essentials-ka.min.js',
-                            ',gh/bhavjitChauhan/Essentials@1/build/shape-essential-ka.min.js'
+                            ',gh/bhavjitChauhan/Essentials@1/build/shape-essentials-ka.min.js'
                         ];
                     } else {
                         options = [
                             ',gh/bhavjitChauhan/Essentials@1/build/color-essentials-ka.js',
                             ',gh/bhavjitChauhan/Essentials@1/build/text-essentials-ka.js',
-                            ',gh/bhavjitChauhan/Essentials@1/build/shape-essential-ka.js'
+                            ',gh/bhavjitChauhan/Essentials@1/build/shape-essentials-ka.js'
                         ];
                     }
                     options = options.filter(function (_, i) { return components[i] });
                     URL += options.join('');
                 }
+                $.get(URL, data => {
+                    code = data;
+                    const formattedData = /(.*?\n){6}/g.exec(data)[0] + '. . .';
+                    $('.language-js').text(formattedData);
+                });
             }
             $("#rawLink").attr("href", URL)
         });
@@ -407,8 +435,7 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
             if (buildTypeSelected == 'CDN') {
                 copyToClipboard(generateCodeCDN());
             } else {
-                fetch(URL)
-                    .then(function (data) { copyToClipboard(data.text()) })
+                copyToClipboard(code);
             }
         });
     </script>
