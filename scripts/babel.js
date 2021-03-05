@@ -6,7 +6,7 @@ const { cyan, green, bold } = require('chalk');
 const dir = 'build';
 const input = ['essentials-core.js', 'color-essentials.js', 'text-essentials.js', 'shape-essentials.js', '../essentials.js'];
 const header = `/**
- * The Khan Academy utility library.
+ * Essentials.
  *
  * The Essentials library provides utility functions for the Khan Academy
  * Processing Environment.
@@ -58,7 +58,7 @@ for (const file of input) {
         }
         console.log(cyan(`${bold(filename)} minified at ${bold(Math.round(performance.now() - minifyStartTime) + 'ms')}`));
         let data = (file == 'essentials-core.js' || file == '../essentials.js' ? header.slice(0, -2) : '') + result.code + '\n';
-        data = data.replace('KA', 'Minified KA');
+        data = data.replace('KA Essentials Build', 'Minified KA Essentials Build');
         const writeStartTime = performance.now();
         writeFile(filename, data, err => {
             if (err) return console.error(err);

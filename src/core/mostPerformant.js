@@ -15,8 +15,7 @@
  * @param {Array} fns Functions to be compared
  * @param {number} [iterations=1e4] Number of times function should be called
  *
- * @returns {Object} Index of function which performed fastest and times
- *  recorded
+ * @returns {Array} Index of function which performed fastest
  *
  * @example
  * let testees = {

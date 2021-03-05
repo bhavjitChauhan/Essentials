@@ -1,5 +1,5 @@
 /**
- * The Khan Academy utility library.
+ * Essentials.
  *
  * The Essentials library provides utility functions for the Khan Academy
  * Processing Environment.
@@ -27,10 +27,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 _env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
 ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.0.2beta';
+ESSENTIALS_VERSION = '1.1.0beta';
 ESSENTIALS_ASCII = "\n    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/\n   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/\n  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/\n _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/\n_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/\n\n";
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info("%cEssentials Library\n%cThe Khan Academy utility library.\n\n".concat(_env_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
+if (!_silent_ && !_core_initialized_) console.info("%cEssentials\n%cThe Khan Academy utility library.\n\n".concat(_env_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
 _eval = eval;
 e = Processing.instances[0];
 var _ref = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
@@ -173,13 +173,13 @@ printf = function (string) {
   e.println(string);
 };
 
+randomInt = function (min, max) {
+  return _.random(min, max);
+};
+
 push = function () {
   e.pushMatrix();
   e.pushStyle();
-};
-
-randomInt = function (min, max) {
-  return _.random(min, max);
 };
 
 timeTaken = function (callback) {

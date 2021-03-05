@@ -17,7 +17,7 @@
  * @param
  * {LEFT|RIGHT|TOP|UP|BOTTOM|DOWN|TOP_LEFT|TOP_RIGHT|BOTTOM_RIGHT|BOTTOM_LEFT}
  * [direction=RIGHT] direction of gradient
- * @param {number} [step=1] step size
+ * @param {number} [step=5] step size
  *
  * @example
  * linearGradient(25, 25, 100, 100, RED, YELLOW);
@@ -31,7 +31,7 @@
  * linearGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, BOTTOM_RIGHT, 10);
  * // expected outcome: linear gradient from top-left to bottom-right; green to light blue in strips of thickness 10
  */
-linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, step = 1) => {
+linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, step = 5) => {
     push();
     e.strokeWeight(1);
     switch (direction) {

@@ -164,15 +164,6 @@ lightOrDarkText = function (backgroundColor) {
   return BLACK;
 };
 
-ordinalSuffix = function (n) {
-  var int = parseInt(n, 10),
-      digits = [int % 10, int % 100],
-      oPattern = [1, 2, 3, 4],
-      ordinals = ['st', 'nd', 'rd', 'th'],
-      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
-};
-
 multicoloredText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -233,6 +224,15 @@ outlineText = function (string) {
 
   pop();
   e.text(string, x, y);
+};
+
+ordinalSuffix = function (n) {
+  var int = parseInt(n, 10),
+      digits = [int % 10, int % 100],
+      oPattern = [1, 2, 3, 4],
+      ordinals = ['st', 'nd', 'rd', 'th'],
+      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
 };
 
 pluralize = function (value, word) {

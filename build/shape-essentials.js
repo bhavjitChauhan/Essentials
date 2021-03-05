@@ -29,16 +29,6 @@ blurRect = (x, y, width, height, size) => {
 };
 
 /**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
- *
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
- *
- */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
-
-/**
  * Draws a 2D cylinder.
  *
  * @link https://www.khanacademy.org/cs/-/5157537806548992
@@ -74,6 +64,67 @@ cylinder = (x, y, width, height) => {
         }, true);
     }
     pop();
+};
+
+/**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ *
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ *
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+
+/**
+ * @summary
+ * Draws a dashed line.
+ *
+ * @description
+ * If `endDash` is true, a dash will be drawn of smaller length than defined by
+ * `dashLength` to finish the line. If `endPoint` is true, a point will be drawn
+ * at (x2, y2). Use the `smooth` function to prevent jagged dashes.
+ *
+ * @param {number} x1 x-coordinate of the start point
+ * @param {number} y1 y-coordinate of the start point
+ * @param {number} x2 x-coordinate of the end point
+ * @param {number} y2 y-coordinate of the end point
+ * @param {number} [dashLength=10] length of dash
+ * @param {number} [spacing=10] spacing between points
+ * @param {boolean} [endDash=true] draw dash at end
+ * @param {boolean} [endPoint=true] draw point at end point
+ *
+ * @example
+ * strokeWeight(3);
+ * dashedLine(50, 50, 350, 50);
+ * // expected outcome: straight dashed line
+ *
+ * @example
+ * dashedLine(50, 75, 350, 75, 5, 10);
+ * // expected outcome: straight dashed line with a dash length of 5 and spacing of 10
+ *
+ * @example
+ * dashedLine(50, 100, 350, 100, 5, 10, false, false);
+ * // expected outcome: straight dashed line and no end point
+ *
+ * @example
+ * dashedLine(50, 125, 352.5, 125, 10, 5);
+ * // expected outcome: straight dashed line and an end dash
+ *
+ * @example
+ * dashedLine(50, 150, 352.5, 150, 10, 5, false);
+ * // expected outcome: straight dashed line and no end dash
+ *
+ * @see dottedLine
+ */
+dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
+    const length = e.dist(x1, y1, x2, y2);
+    let i = 0;
+    for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
+        e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
+    }
+    if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
+    if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
 };
 
 /**
@@ -122,6 +173,44 @@ donut = (x, y, majorDiameter, minorDiameter) => {
 };
 
 /**
+ * @summary
+ * Draws a dotted line.
+ *
+ * @description
+ * If `endPoint` is true, a point will be drawn at (x2, y2). Use the `smooth`
+ * function to prevent jagged points.
+ *
+ * @param {number} x1 x-coordinate of the start point
+ * @param {number} y1 y-coordinate of the start point
+ * @param {number} x2 x-coordinate of the end point
+ * @param {number} y2 y-coordinate of the end point
+ * @param {number} [spacing=10] gap between points
+ * @param {boolean} [endPoint=true] draw point at end point
+ *
+ * @example
+ * strokeWeight(4);
+ * dottedLine(50, 50, 350, 50);
+ * // expected outcome: straight dotted line
+ *
+ * @example
+ * dottedLine(50, 75, 350, 75, 14);
+ * // expected outcome: straight dotted line with spacing of 14
+ *
+ * @example
+ * dottedLine(50, 100, 350, 100, 14, false);
+ * // expected outcome: straight dotted line with spacing of 14 and no end point
+ *
+ * @see dashedLine
+ */
+dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
+    const length = e.dist(x1, y1, x2, y2);
+    for (let i = 0; i < length; i += spacing) {
+        e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
+    }
+    if (endPoint) e.point(x2, y2);
+};
+
+/**
  * Alias for `beginShape()`/`endShape()`.
  *
  * @param {Function} fn Shape function
@@ -153,6 +242,35 @@ drawShape = (fn, close, mode) => {
     e.beginShape(mode);
     fn();
     e.endShape(close);
+};
+
+/**
+ * Draws a line of a given length and at a given angle.
+ *
+ * @param {number} x x-coordinate of start point
+ * @param {number} y y-coordinate of start point
+ * @param {number} length length of line
+ * @param {number} angle rotation of line
+ *
+ * @example
+ * angleMode = 'degrees';
+ * edge(50, 50, 300, 0);
+ * // expected outcome: horizontal line of length 300
+ *
+ * @example
+ * edge(50, 75, 100, 45);
+ * // expected outcome: line of length 100 rotated 45 degrees
+ *
+ * @example
+ * angleMode = 'radians';
+ * edge(200, 75, 100, PI / 4);
+ * // expected outcome: line of length 100 rotated 45 degrees
+ */
+edge = (x, y, length, angle) => {
+    if (angleMode == 'degrees') angle = e.radians(angle);
+    const x2 = x + length * Math.cos(angle);
+    const y2 = y + length * Math.sin(angle);
+    line(x, y, x2, y2);
 };
 
 /**
@@ -289,6 +407,40 @@ rectangle = (x, y, width, height = width, tl, tr, br, bl) => {
 };
 
 /**
+ * Draws a star with _n_ spikes.
+ *
+ * @link https://www.khanacademy.org/cs/-/1171581918
+ *
+ * @param {number} x x-coordinate of star
+ * @param {number} y y-coordinate of star
+ * @param {number} externalRadius External radius
+ * @param {number} [spikes=5] Number of spikes
+ * @param {number} [rotation=0] Rotation of star in degrees or radians
+ *
+ * @example
+ * star(100, 100, 50);
+ *
+ * @example
+ * star(100, 100, 50, 7, 10);
+ */
+star = (x, y, externalRadius, spikes = 5, rotation) => {
+    const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
+    const interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
+    push();
+    e.translate(x, y);
+    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
+    drawShape(() => {
+        let internalRadius;
+        for (let theta = 0; theta < _TAU; theta += _TAU / (2 * spikes)) {
+            internalRadius = (internalRadius === externalRadius) ? interior : externalRadius;
+            e.vertex(internalRadius * Math.cos(theta), internalRadius * Math.sin(theta));
+        }
+    }, true);
+
+    pop();
+};
+
+/**
  * Draws a rhombus.
  *
  * @link https://khanacademy.org/cs/-/4747962019348480
@@ -357,40 +509,6 @@ square = (x, y, side, tl, tr, br, bl) => {
     else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);
     else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);
     else e.rect(x, y, side, side, tl, tr, br, bl);
-};
-
-/**
- * Draws a star with _n_ spikes.
- *
- * @link https://www.khanacademy.org/cs/-/1171581918
- *
- * @param {number} x x-coordinate of star
- * @param {number} y y-coordinate of star
- * @param {number} externalRadius External radius
- * @param {number} [spikes=5] Number of spikes
- * @param {number} [rotation=0] Rotation of star in degrees or radians
- *
- * @example
- * star(100, 100, 50);
- *
- * @example
- * star(100, 100, 50, 7, 10);
- */
-star = (x, y, externalRadius, spikes = 5, rotation) => {
-    const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
-    const interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
-    push();
-    e.translate(x, y);
-    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
-    drawShape(() => {
-        let internalRadius;
-        for (let theta = 0; theta < _TAU; theta += _TAU / (2 * spikes)) {
-            internalRadius = (internalRadius === externalRadius) ? interior : externalRadius;
-            e.vertex(internalRadius * Math.cos(theta), internalRadius * Math.sin(theta));
-        }
-    }, true);
-
-    pop();
 };
 
 /**

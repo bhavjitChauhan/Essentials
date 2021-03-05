@@ -14,8 +14,8 @@
  * @param {number} height height of the gradient
  * @param {color} startColor starting color
  * @param {color} endColor ending color
- * @param {number} [angle=0] start angle of the gradient
- * @param {number} [step=1] step size
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
  *
  * @example
  * angularGradient(25, 25, 100, 100, RED, YELLOW);
@@ -29,7 +29,7 @@
  * angularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
  * // expected outcome: angular gradient from green to light blue in strips of thickness 25
  */
-angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 1) => {
+angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
     angle -= 90;
     // `atan` could be `asin`. See https://jsbench.me/mmklrhzgra/1 & https://www.khanacademy.org/cs/-/4713637410717696
     const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;

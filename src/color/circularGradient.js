@@ -14,8 +14,8 @@
  * @param {number} height height of the gradient
  * @param {color} startColor starting color
  * @param {color} endColor ending color
- * @param {number} [angle=0] start angle of the gradient
- * @param {number} [step=1] step size
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
  *
  * @example
  * circularGradient(25, 25, 100, 100, RED, YELLOW);
@@ -29,9 +29,7 @@
  * circularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
  * // expected outcome: circular gradient from green to light blue in strips of thickness 25
  */
-circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 1) => {
-    angle = angle || 0;
-    step = step || 1;
+circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
     const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
     push();
     if (step == 1) {

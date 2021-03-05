@@ -14,7 +14,7 @@
  * @param {number} height height of the gradient
  * @param {color} startColor starting color
  * @param {color} endColor ending color
- * @param {number} [step=1] step size
+ * @param {number} [step=5] step size
  *
  * @example
  * radialGradient(100, 100, 100, 100, RED, YELLOW);
@@ -24,7 +24,7 @@
  * radialGradient(250, 100, 100, 100, PURPLE, PINK, 10);
  * // expected outcome: radial gradient from purple to pink with step size 10
  */
-radialGradient = (x, y, width, height, startColor, endColor, step = 1) => {
+radialGradient = (x, y, width, height, startColor, endColor, step = 5) => {
     push();
     e.strokeWeight(1);
     const maxRadius = Math.max(width, height);

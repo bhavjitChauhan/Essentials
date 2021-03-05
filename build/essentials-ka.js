@@ -1,5 +1,5 @@
 /**
- * The Khan Academy utility library.
+ * Essentials.
  *
  * The Essentials library provides utility functions for the Khan Academy
  * Processing Environment.
@@ -35,10 +35,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 _env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
 ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.0.2beta';
+ESSENTIALS_VERSION = '1.1.0beta';
 ESSENTIALS_ASCII = "\n    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/\n   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/\n  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/\n _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/\n_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/\n\n";
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info("%cEssentials Library\n%cThe Khan Academy utility library.\n\n".concat(_env_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
+if (!_silent_ && !_core_initialized_) console.info("%cEssentials\n%cThe Khan Academy utility library.\n\n".concat(_env_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
 _eval = eval;
 e = Processing.instances[0];
 var _ref = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
@@ -181,13 +181,13 @@ printf = function (string) {
   e.println(string);
 };
 
+randomInt = function (min, max) {
+  return _.random(min, max);
+};
+
 push = function () {
   e.pushMatrix();
   e.pushStyle();
-};
-
-randomInt = function (min, max) {
-  return _.random(min, max);
 };
 
 timeTaken = function (callback) {
@@ -206,93 +206,6 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   COLOR_ESSENTIALS = true;
   if (!_silent_ && !_color_initialized_) console.info('%cColor Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
-
-angularGradient = function (x, y, width, height, startColor, endColor) {
-  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
-  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
-  angle -= 90;
-  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
-  push();
-
-  if (step == 1) {
-    e.strokeWeight(1.5);
-
-    for (var i = angle; i < angle + 359; i += dTheta) {
-      e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
-      r = e.radians(i);
-      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
-    }
-  } else {
-    e.strokeWeight(1);
-
-    for (var _i = angle; _i < angle + 359; _i += dTheta) {
-      var _c = e.lerpColor(startColor, endColor, (_i - angle) / 360);
-
-      e.stroke(_c);
-      e.fill(_c);
-      r1 = e.radians(_i);
-      r2 = e.radians(_i - dTheta);
-      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-    }
-  }
-
-  pop();
-};
-
-circularGradient = function (x, y, width, height, startColor, endColor) {
-  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
-  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
-  angle = angle || 0;
-  step = step || 1;
-  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
-  push();
-
-  if (step == 1) {
-    e.strokeWeight(1.5);
-
-    for (var i = angle - 1; i < angle + 180; i += dTheta) {
-      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
-      r = e.radians(i);
-      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
-    }
-
-    for (var _i2 = angle - 1; _i2 > angle - 180; _i2 -= dTheta) {
-      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180)));
-      r = e.radians(_i2);
-      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
-    }
-  } else {
-    e.strokeWeight(1);
-
-    for (var _i3 = angle - 1; _i3 < angle + 180; _i3 += dTheta) {
-      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
-
-      e.stroke(_c2);
-      e.fill(_c2);
-      r1 = e.radians(_i3);
-      r2 = e.radians(_i3 - dTheta);
-      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-    }
-
-    r1 = e.radians(angle - 180);
-    r2 = e.radians(angle - 180 - dTheta);
-    e.stroke(endColor);
-    e.fill(endColor);
-    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-
-    for (var _i4 = angle - 1; _i4 > angle - 180; _i4 -= dTheta) {
-      var _c3 = e.lerpColor(startColor, endColor, Math.abs((_i4 - angle) / 180));
-
-      e.stroke(_c3);
-      e.fill(_c3);
-      r1 = e.radians(_i4);
-      r2 = e.radians(_i4 - dTheta);
-      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-    }
-  }
-
-  pop();
-};
 
 RED = e.color(255, 0, 0);
 GREEN = e.color(0, 128, 0);
@@ -434,6 +347,91 @@ BROWN = e.color(165, 42, 42);
 MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
+angularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  angle -= 90;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+  push();
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle; i < angle + 359; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i = angle; _i < angle + 359; _i += dTheta) {
+      var _c = e.lerpColor(startColor, endColor, (_i - angle) / 360);
+
+      e.stroke(_c);
+      e.fill(_c);
+      r1 = e.radians(_i);
+      r2 = e.radians(_i - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
+  pop();
+};
+
+circularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+  push();
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle - 1; i < angle + 180; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+
+    for (var _i2 = angle - 1; _i2 > angle - 180; _i2 -= dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180)));
+      r = e.radians(_i2);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i3 = angle - 1; _i3 < angle + 180; _i3 += dTheta) {
+      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
+
+      e.stroke(_c2);
+      e.fill(_c2);
+      r1 = e.radians(_i3);
+      r2 = e.radians(_i3 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+
+    r1 = e.radians(angle - 180);
+    r2 = e.radians(angle - 180 - dTheta);
+    e.stroke(endColor);
+    e.fill(endColor);
+    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+
+    for (var _i4 = angle - 1; _i4 > angle - 180; _i4 -= dTheta) {
+      var _c3 = e.lerpColor(startColor, endColor, Math.abs((_i4 - angle) / 180));
+
+      e.stroke(_c3);
+      e.fill(_c3);
+      r1 = e.radians(_i4);
+      r2 = e.radians(_i4 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
+  pop();
+};
+
 hexToRGB = function (hex) {
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
@@ -498,7 +496,7 @@ HSBToRGB = function (x, s, v) {
 
 linearGradient = function (x, y, width, height, startColor, endColor) {
   var direction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : RIGHT;
-  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
   push();
   e.strokeWeight(1);
 
@@ -651,8 +649,17 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
   pop();
 };
 
+RGBToHex = function (x, g, b) {
+  if (arguments.length == 1) {
+    c = x;
+    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+  }
+
+  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
+};
+
 radialGradient = function (x, y, width, height, startColor, endColor) {
-  var step = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 1;
+  var step = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 5;
   push();
   e.strokeWeight(1);
   var maxRadius = Math.max(width, height);
@@ -675,15 +682,6 @@ radialGradient = function (x, y, width, height, startColor, endColor) {
   }
 
   pop();
-};
-
-RGBToHex = function (x, g, b) {
-  if (arguments.length == 1) {
-    c = x;
-    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
-  }
-
-  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
 RGBToHSB = function (x, g, b) {
@@ -907,15 +905,6 @@ lightOrDarkText = function (backgroundColor) {
   return BLACK;
 };
 
-ordinalSuffix = function (n) {
-  var int = parseInt(n, 10),
-      digits = [int % 10, int % 100],
-      oPattern = [1, 2, 3, 4],
-      ordinals = ['st', 'nd', 'rd', 'th'],
-      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
-};
-
 multicoloredText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -976,6 +965,15 @@ outlineText = function (string) {
 
   pop();
   e.text(string, x, y);
+};
+
+ordinalSuffix = function (n) {
+  var int = parseInt(n, 10),
+      digits = [int % 10, int % 100],
+      oPattern = [1, 2, 3, 4],
+      ordinals = ['st', 'nd', 'rd', 'th'],
+      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
 };
 
 pluralize = function (value, word) {
@@ -1116,10 +1114,6 @@ blurRect = function (x, y, width, height, size) {
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
 };
 
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
-};
-
 cylinder = function (x, y, width, height) {
   width = Math.abs(width);
   height = Math.abs(height);
@@ -1149,6 +1143,26 @@ cylinder = function (x, y, width, height) {
   }
 
   pop();
+};
+
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
+};
+
+dashedLine = function (x1, y1, x2, y2) {
+  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
+  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
+  var length = e.dist(x1, y1, x2, y2);
+  var i = 0;
+
+  for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
+    e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
+  }
+
+  if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
+  if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
 };
 
 donut = function (x, y, majorDiameter, minorDiameter) {
@@ -1182,11 +1196,30 @@ donut = function (x, y, majorDiameter, minorDiameter) {
   pop();
 };
 
+dottedLine = function (x1, y1, x2, y2) {
+  var spacing = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var endPoint = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+  var length = e.dist(x1, y1, x2, y2);
+
+  for (var i = 0; i < length; i += spacing) {
+    e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
+  }
+
+  if (endPoint) e.point(x2, y2);
+};
+
 drawShape = function (fn, close, mode) {
   close = close && e.CLOSE;
   e.beginShape(mode);
   fn();
   e.endShape(close);
+};
+
+edge = function (x, y, length, angle) {
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  line(x, y, x2, y2);
 };
 
 heart = function (x, y, radius) {
@@ -1234,17 +1267,6 @@ rectangle = function (x, y, width) {
   if (tl == undefined) e.rect(x, y, width, height);else if (tr == undefined) e.rect(x, y, width, height, tl);else if (br == undefined) e.rect(x, y, width, height, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, width, height, tl, tr, br, 0);else e.rect(x, y, width, height, tl, tr, br, bl);
 };
 
-rhombus = function (ax, ay, bx, by, cx, cy) {
-  var r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
-  cx = ax + r * (cx - ax);
-  cy = ay + r * (cy - ay);
-  parallelogram(ax, ay, bx, by, cx, cy);
-};
-
-square = function (x, y, side, tl, tr, br, bl) {
-  if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
-};
-
 star = function (x, y, externalRadius) {
   var spikes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 5;
   var rotation = arguments.length > 4 ? arguments[4] : undefined;
@@ -1264,6 +1286,17 @@ star = function (x, y, externalRadius) {
     }
   }, true);
   pop();
+};
+
+rhombus = function (ax, ay, bx, by, cx, cy) {
+  var r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
+  cx = ax + r * (cx - ax);
+  cy = ay + r * (cy - ay);
+  parallelogram(ax, ay, bx, by, cx, cy);
+};
+
+square = function (x, y, side, tl, tr, br, bl) {
+  if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
 };
 
 trapezoid = function (x, y, height, topBase, bottomBase) {

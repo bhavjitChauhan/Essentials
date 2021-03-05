@@ -14,10 +14,6 @@ blurRect = function (x, y, width, height, size) {
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
 };
 
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
-};
-
 cylinder = function (x, y, width, height) {
   width = Math.abs(width);
   height = Math.abs(height);
@@ -44,6 +40,26 @@ cylinder = function (x, y, width, height) {
   }
 
   pop();
+};
+
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
+};
+
+dashedLine = function (x1, y1, x2, y2) {
+  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
+  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
+  var length = e.dist(x1, y1, x2, y2);
+  var i = 0;
+
+  for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
+    e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
+  }
+
+  if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
+  if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
 };
 
 donut = function (x, y, majorDiameter, minorDiameter) {
@@ -77,11 +93,30 @@ donut = function (x, y, majorDiameter, minorDiameter) {
   pop();
 };
 
+dottedLine = function (x1, y1, x2, y2) {
+  var spacing = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var endPoint = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+  var length = e.dist(x1, y1, x2, y2);
+
+  for (var i = 0; i < length; i += spacing) {
+    e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
+  }
+
+  if (endPoint) e.point(x2, y2);
+};
+
 drawShape = function (fn, close, mode) {
   close = close && e.CLOSE;
   e.beginShape(mode);
   fn();
   e.endShape(close);
+};
+
+edge = function (x, y, length, angle) {
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  line(x, y, x2, y2);
 };
 
 heart = function (x, y, radius) {
@@ -129,17 +164,6 @@ rectangle = function (x, y, width) {
   if (tl == undefined) e.rect(x, y, width, height);else if (tr == undefined) e.rect(x, y, width, height, tl);else if (br == undefined) e.rect(x, y, width, height, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, width, height, tl, tr, br, 0);else e.rect(x, y, width, height, tl, tr, br, bl);
 };
 
-rhombus = function (ax, ay, bx, by, cx, cy) {
-  var r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
-  cx = ax + r * (cx - ax);
-  cy = ay + r * (cy - ay);
-  parallelogram(ax, ay, bx, by, cx, cy);
-};
-
-square = function (x, y, side, tl, tr, br, bl) {
-  if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
-};
-
 star = function (x, y, externalRadius) {
   var spikes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 5;
   var rotation = arguments.length > 4 ? arguments[4] : undefined;
@@ -159,6 +183,17 @@ star = function (x, y, externalRadius) {
     }
   }, true);
   pop();
+};
+
+rhombus = function (ax, ay, bx, by, cx, cy) {
+  var r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
+  cx = ax + r * (cx - ax);
+  cy = ay + r * (cy - ay);
+  parallelogram(ax, ay, bx, by, cx, cy);
+};
+
+square = function (x, y, side, tl, tr, br, bl) {
+  if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
 };
 
 trapezoid = function (x, y, height, topBase, bottomBase) {

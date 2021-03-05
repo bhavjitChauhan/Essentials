@@ -77,4 +77,4 @@ Project | Purpose
 Credit is given to authors of functions via links in the documentation on the [Wiki](https://github.com/bhavjitChauhan/Essentials/wiki/Documentation).
 
 ## License
-Essentials may be freely distributed under the MIT license. See [LICENSE](LICENSE) for details.
+The Essentials library may be freely distributed under the MIT license. See [LICENSE](LICENSE) for details.

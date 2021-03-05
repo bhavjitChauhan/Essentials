@@ -1,11 +1,11 @@
 /**
- * The Khan Academy utility library.
+ * Essentials.
  *
  * The Essentials library provides utility functions for the Khan Academy
  * Processing Environment.
  *
  * @link https://github.com/bhavjitChauhan/Essentials
- * @file Essentials Build
+ * @file CDN Essentials Build
  * @author Bhavjit Chauhan
  */
 
@@ -13,7 +13,7 @@ _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 _env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
 
 ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.0.2beta';
+ESSENTIALS_VERSION = '1.1.0beta';
 ESSENTIALS_ASCII = `
     _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
    _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/
@@ -25,7 +25,7 @@ _/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/
 
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
 if (!_silent_ && !_core_initialized_) console.info(
-    `%cEssentials Library
+    `%cEssentials
 %cThe Khan Academy utility library.
 
 ${_env_} Build
@@ -378,8 +378,7 @@ isSound = obj => {
  * @param {Array} fns Functions to be compared
  * @param {number} [iterations=1e4] Number of times function should be called
  *
- * @returns {Object} Index of function which performed fastest and times
- *  recorded
+ * @returns {Array} Index of function which performed fastest
  *
  * @example
  * let testees = {
@@ -446,6 +445,22 @@ printf = function(string) {
 };
 
 /**
+ * Generates a random integer in a given range.
+ *
+ * @param {number} [min=0] Minimum value
+ * @param {number} max Maximum value
+ *
+ * @returns {number} Generated integer
+ *
+ * @example
+ * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
+ *
+ * @example
+ * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
+ */
+randomInt = (min, max) => _.random(min, max);
+
+/**
  * Equivalent to using
  * [pushMatrix]{@link http://processingjs.org/reference/pushMatrix_/} and
  * [pushStyle]{@link http://processingjs.org/reference/pushStyle_/}.
@@ -465,22 +480,6 @@ push = () => {
     e.pushMatrix();
     e.pushStyle();
 };
-
-/**
- * Generates a random integer in a given range.
- *
- * @param {number} [min=0] Minimum value
- * @param {number} max Maximum value
- *
- * @returns {number} Generated integer
- *
- * @example
- * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
- *
- * @example
- * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
- */
-randomInt = (min, max) => _.random(min, max);
 
 /**
  * Measures the time it takes for a function to execute and logs to browser
