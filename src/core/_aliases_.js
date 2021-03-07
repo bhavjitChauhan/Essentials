@@ -2,10 +2,7 @@ _eval = eval;
 e = Processing.instances[0];
 
 [LEFT, RIGHT, TOP, BOTTOM, UP, DOWN] = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
-TOP_LEFT = 1,
-    TOP_RIGHT = 2,
-    BOTTOM_RIGHT = 3,
-    BOTTOM_LEFT = 4;
+TOP_LEFT = 1, TOP_RIGHT = 2, BOTTOM_RIGHT = 3, BOTTOM_LEFT = 4;
 
 /**
  * Alias for `width`.
@@ -56,7 +53,7 @@ CANVAS_LOG = 'body div:first div:nth-child(2) div div';
 clearLogs = () => e._clearLogs();
 
 /**
- * Literally does nothing.
+ * Literally does nothing. Useful as the default for optional callback arguments.
  *
  * @example
  * // Prevents an error if an unneeded method is called

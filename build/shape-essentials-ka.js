@@ -14,6 +14,10 @@ blurRect = function (x, y, width, height, size) {
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
 };
 
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
+};
+
 cylinder = function (x, y, width, height) {
   width = Math.abs(width);
   height = Math.abs(height);
@@ -40,10 +44,6 @@ cylinder = function (x, y, width, height) {
   }
 
   pop();
-};
-
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
 };
 
 dashedLine = function (x1, y1, x2, y2) {
@@ -164,6 +164,17 @@ rectangle = function (x, y, width) {
   if (tl == undefined) e.rect(x, y, width, height);else if (tr == undefined) e.rect(x, y, width, height, tl);else if (br == undefined) e.rect(x, y, width, height, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, width, height, tl, tr, br, 0);else e.rect(x, y, width, height, tl, tr, br, bl);
 };
 
+rhombus = function (ax, ay, bx, by, cx, cy) {
+  var r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
+  cx = ax + r * (cx - ax);
+  cy = ay + r * (cy - ay);
+  parallelogram(ax, ay, bx, by, cx, cy);
+};
+
+square = function (x, y, side, tl, tr, br, bl) {
+  if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
+};
+
 star = function (x, y, externalRadius) {
   var spikes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 5;
   var rotation = arguments.length > 4 ? arguments[4] : undefined;
@@ -183,17 +194,6 @@ star = function (x, y, externalRadius) {
     }
   }, true);
   pop();
-};
-
-rhombus = function (ax, ay, bx, by, cx, cy) {
-  var r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
-  cx = ax + r * (cx - ax);
-  cy = ay + r * (cy - ay);
-  parallelogram(ax, ay, bx, by, cx, cy);
-};
-
-square = function (x, y, side, tl, tr, br, bl) {
-  if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
 };
 
 trapezoid = function (x, y, height, topBase, bottomBase) {

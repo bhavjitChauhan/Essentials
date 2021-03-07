@@ -7,6 +7,7 @@
  * For a step size greater than 1, the function draws triangles of base `step`.
  * Using a step size greater than 1 is faster. It is highly advised to store
  * drawn gradients in images using the `get` function for use in a draw loop.
+ * Use the `smooth` function to prevent jagged edges.
  *
  * @param {number} x x-coordinate of the top-left corner the gradient
  * @param {number} y y-coordinate of the top-left corner the gradient
