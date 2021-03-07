@@ -1,16 +1,16 @@
 /**
  * Converts RGB to hex color type.
- * 
+ *
  * @param {(number|color)} x Red value or color
  * @param {number} [g] Green value
  * @param {number} [b] Blue value
- * 
+ *
  * @returns {string}  Hex color value
- * 
+ *
  * @example
  * println(RGBToHex(255, 0, 0));
  * // expected output: #ff0000
- * 
+ *
  * @example
  * let c = RED;
  * println(RGBToHex(c));

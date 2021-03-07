@@ -1,10 +1,10 @@
 /**
  * Determines if text should be black or white based on background color.
- * 
+ *
  * @param {number} backgroundColor Color of background
- * 
+ *
  * @returns {number} Color of text
- * 
+ *
  * @example
  * let h = 0,
  *     s = 0,
@@ -16,8 +16,8 @@
  *     h = frameCount % 255;
  *     s = frameCount % 255;
  *     b = frameCount % 255;
- *     let TEST_COLOR = color(h, s, b);
- *     background(TEST_COLOR);
+ *     let c = color(h, s, b);
+ *     background(c);
  *     fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));
  *     text("TEXT", width / 2, height / 2);
  * };

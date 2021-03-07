@@ -1,12 +1,12 @@
 /**
  * Converts HSB to RGB color type.
- * 
+ *
  * @param {(number|color)} x Hue value or color
  * @param {number} [s] Saturation value
  * @param {number} [v] Brightness value
- * 
+ *
  * @returns {string}  RGB color value
- * 
+ *
  * @example
  * let c = HSBToRGB(85, 255, 255);
  * println(c);

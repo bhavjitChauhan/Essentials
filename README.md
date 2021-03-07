@@ -14,9 +14,11 @@ The Essentials library provides utility functions for the [Khan Academy
 Processing Environment](https://www.khanacademy.org/cs/new).
 
 ## Usage
-Create [New Program](https://www.khanacademy.org/cs/new) on Khan Academy or add to existing code.
+In an existing or a [new program](https://www.khanacademy.org/cs/new) on Khan Academy, copy the code for the desired build type.
 
 ### CDN
+Essentials is available for use by loading it externally via the jsDelivr CDN.
+
 Use the following [JSHint directive](https://jshint.com/docs/) to allow the use
 of otherwise restricted features.
 ```js
@@ -24,7 +26,7 @@ of otherwise restricted features.
 ```
 
 Use [jQuery](https://jquery.com/)'s
-[getScript](https://api.jquery.com/jQuery.getScript/) method to load the
+[`getScript`](https://api.jquery.com/jQuery.getScript/) method to load the
 library.
 ```js
 $.ajaxSetup({ cache: true });
@@ -35,8 +37,8 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
 );
 ```
 
-### Local
-Essentials is also availible to use without using jsDelivr. Copy and paste the source code directly into your program using the [Essentials Builder](https://bhavjitchauhan.github.io/Essentials/builder.html) or the [essentials-ka.js](https://github.com/bhavjitChauhan/Essentials/blob/master/build/essentials-ka.js) file in the repository.
+### Khan Academy
+Essentials is also available for use without using jsDelivr's CDN. Copy and paste the source code directly into your program using the [Essentials Builder](https://bhavjitchauhan.github.io/Essentials/builder.html) or from the [essentials-ka.js](https://github.com/bhavjitChauhan/Essentials/blob/master/build/essentials-ka.js) file in the repository.
 
 See the project Wiki page on [Custom
 Builds](https://github.com/bhavjitChauhan/Essentials/wiki/Custom-Builds) for
@@ -60,13 +62,19 @@ Pages](https://bhavjitchauhan.github.io/Essentials), the project
 
 ## Credits
 ### Using
- - [jQuery](https://github.com/jquery/jquery)
- - [underscore.js](https://github.com/jashkenas/underscore)
- - [30 seconds of code](https://github.com/30-seconds/30-seconds-of-code)
+Project | Purpose
+--- | ---
+[jsDelivr](https://github.com/jsdelivr/jsdelivr) | CDN delivery
+[Babel](https://github.com/babel/babel) | Generating KA builds
+[Rollup](https://github.com/rollup/rollup) | Combining files
+[jQuery](https://github.com/jquery/jquery) | Ajax
+[Underscore.js](https://github.com/jashkenas/underscore) | Convenience
 
 ### Inspirations
  - [BMS](https://www.khanacademy.org/cs/-/6070976254115840)
  - [lodash](https://github.com/lodash/lodash)
 
+Credit is given to authors of functions via links in the documentation on the [Wiki](https://github.com/bhavjitChauhan/Essentials/wiki/Documentation).
+
 ## License
-Essentials may be freely distributed under the MIT license. See [LICENSE](LICENSE) for details.
+The Essentials library may be freely distributed under the MIT license. See [LICENSE](LICENSE) for details.

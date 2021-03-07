@@ -1,12 +1,12 @@
 /**
  * Draws a heart.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/2085250861
- * 
+ *
  * @param {number} x x-coordinate of the heart
  * @param {number} y y-coordinate of the heart
  * @param {number} radius
- * 
+ *
  * @example
  * heart(100, 100, 50);
  */

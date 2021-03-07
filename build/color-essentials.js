@@ -13,47 +13,173 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 }
 
 /**
- * Converts hex to RGB color type.
- * 
- * @param {string} hex Hex color value, optional `#`; can be shorthand
- * 
- * @returns {color} RGB color value
- * 
+ * @summary
+ * Draws an angular gradient from `startColor` to `endColor` in the form of an
+ * ellipse.
+ *
+ * @description
+ * For a step size greater than 1, the function draws triangles of base `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ * Use the `smooth` function to prevent jagged edges.
+ *
+ * @param {number} x x-coordinate of the top-left corner the gradient
+ * @param {number} y y-coordinate of the top-left corner the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
+ *
  * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
+ * angularGradient(25, 25, 100, 100, RED, YELLOW);
+ * // expected outcome: angular gradient from red to yellow
+ *
+ * @example
+ * angularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
+ * // expected outcome: angular gradient from purple to pink rotated 90 degrees
+ *
+ * @example
+ * angularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
+ * // expected outcome: angular gradient from green to light blue in strips of thickness 25
  */
-hexToRGB = hex => {
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    result = result ? result.splice(1).map(function (i) {
-        return parseInt(i, 16);
-    }) : null;
+angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
+    angle -= 90;
+    // `atan` could be `asin`. See https://jsbench.me/mmklrhzgra/1 & https://www.khanacademy.org/cs/-/4713637410717696
+    const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
     push();
-    e.colorMode(e.RGB);
-    result = e.color.apply(e, result);
+    if (step == 1) {
+        e.strokeWeight(1.5);
+        for (let i = angle; i < angle + 359; i += dTheta) {
+            e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
+            r = e.radians(i);
+            e.line(x + width / 2, y + height / 2,
+                e.map(Math.cos(r), -1, 1, x, x + width),
+                e.map(Math.sin(r), -1, 1, y, y + height));
+        }
+    } else {
+        e.strokeWeight(1);
+        for (let i = angle; i < angle + 359; i += dTheta) {
+            const c = e.lerpColor(startColor, endColor, (i - angle) / 360);
+            e.stroke(c);
+            e.fill(c);
+            r1 = e.radians(i);
+            r2 = e.radians(i - dTheta);
+            e.triangle(x + width / 2, y + height / 2,
+                e.map(Math.cos(r1), -1, 1, x, x + width),
+                e.map(Math.sin(r1), -1, 1, y, y + height),
+                e.map(Math.cos(r2), -1, 1, x, x + width),
+                e.map(Math.sin(r2), -1, 1, y, y + height));
+        }
+    }
     pop();
-    return result;
+};
+
+/**
+ * @summary
+ * Draws an circular gradient from `startColor` to `endColor` in the form of an
+ * ellipse.
+ *
+ * @description
+ * For a step size greater than 1, the function draws triangles of base `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ * Use the `smooth` function to prevent jagged edges.
+ *
+ * @param {number} x x-coordinate of the top-left corner the gradient
+ * @param {number} y y-coordinate of the top-left corner the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
+ *
+ * @example
+ * circularGradient(25, 25, 100, 100, RED, YELLOW);
+ * // expected outcome: circular gradient from red to yellow
+ *
+ * @example
+ * circularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
+ * // expected outcome: circular gradient from purple to pink rotated 90 degrees
+ *
+ * @example
+ * circularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
+ * // expected outcome: circular gradient from green to light blue in strips of thickness 25
+ */
+circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
+    const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+    push();
+    if (step == 1) {
+        e.strokeWeight(1.5);
+        for (let i = angle - 1; i < angle + 180; i += dTheta) {
+            e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+            r = e.radians(i);
+            e.line(x + width / 2, y + height / 2,
+                e.map(Math.cos(r), -1, 1, x, x + width),
+                e.map(Math.sin(r), -1, 1, y, y + height));
+        }
+        for (let i = angle - 1; i > angle - 180; i -= dTheta) {
+            e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+            r = e.radians(i);
+            e.line(x + width / 2, y + height / 2,
+                e.map(Math.cos(r), -1, 1, x, x + width),
+                e.map(Math.sin(r), -1, 1, y, y + height));
+        }
+    } else {
+        e.strokeWeight(1);
+        for (let i = angle - 1; i < angle + 180; i += dTheta) {
+            const c = e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180));
+            e.stroke(c);
+            e.fill(c);
+            r1 = e.radians(i);
+            r2 = e.radians(i - dTheta);
+            e.triangle(x + width / 2, y + height / 2,
+                e.map(Math.cos(r1), -1, 1, x, x + width),
+                e.map(Math.sin(r1), -1, 1, y, y + height),
+                e.map(Math.cos(r2), -1, 1, x, x + width),
+                e.map(Math.sin(r2), -1, 1, y, y + height));
+        }
+        // Temporary fix for missing triangle
+        r1 = e.radians(angle - 180);
+        r2 = e.radians(angle - 180 - dTheta);
+        e.stroke(endColor);
+        e.fill(endColor);
+        e.triangle(x + width / 2, y + height / 2,
+            e.map(Math.cos(r1), -1, 1, x, x + width),
+            e.map(Math.sin(r1), -1, 1, y, y + height),
+            e.map(Math.cos(r2), -1, 1, x, x + width),
+            e.map(Math.sin(r2), -1, 1, y, y + height));
+        for (let i = angle - 1; i > angle - 180; i -= dTheta) {
+            const c = e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180));
+            e.stroke(c);
+            e.fill(c);
+            r1 = e.radians(i);
+            r2 = e.radians(i - dTheta);
+            e.triangle(x + width / 2, y + height / 2,
+                e.map(Math.cos(r1), -1, 1, x, x + width),
+                e.map(Math.sin(r1), -1, 1, y, y + height),
+                e.map(Math.cos(r2), -1, 1, x, x + width),
+                e.map(Math.sin(r2), -1, 1, y, y + height));
+        }
+    }
+    pop();
 };
 
 /**
  * @summary
  * Alias for `color(255, 0, 0)`.
- * 
+ *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
+ * Essentials includes the [CSS color
+ * names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * `COLORNAME`.
+ *
  * @example
  * fill(RED);
  * text('Hello World', 25, 25);
- * 
+ *
  * @example
  * let c = color(RED, 50);
  * fill(c);
@@ -64,14 +190,16 @@ RED = e.color(255, 0, 0);
 /**
  * @summary
  * Alias for `color(0, 128, 0)`.
- * 
+ *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
+ * Essentials includes the [CSS color
+ * names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * `COLORNAME`.
+ *
  * @example
  * fill(GREEN);
  * text('Hello World', 25, 25);
- * 
+ *
  * @example
  * let c = color(GREEN, 50);
  * fill(c);
@@ -82,14 +210,16 @@ GREEN = e.color(0, 128, 0);
 /**
  * @summary
  * Alias for `color(0, 0, 255)`.
- * 
+ *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
+ * Essentials includes the [CSS color
+ * names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * `COLORNAME`.
+ *
  * @example
  * fill(BLUE);
  * text('Hello World', 25, 25);
- * 
+ *
  * @example
  * let c = color(BLUE, 50);
  * fill(c);
@@ -235,14 +365,45 @@ MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
 /**
+ * Converts hex to RGB color type.
+ *
+ * @param {string} hex Hex color value, optional `#`; can be shorthand
+ *
+ * @returns {color} RGB color value
+ *
+ * @example
+ * let c = hexToRGB('#fff');
+ * println(c);
+ * // expected output: -1
+ * background(c);
+ * // expected outcome: white background
+ */
+hexToRGB = hex => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    result = result ? result.splice(1).map(function (i) {
+        return parseInt(i, 16);
+    }) : null;
+    push();
+    e.colorMode(e.RGB);
+    result = e.color.apply(e, result);
+    pop();
+    return result;
+};
+
+/**
  * Converts HSB to RGB color type.
- * 
+ *
  * @param {(number|color)} x Hue value or color
  * @param {number} [s] Saturation value
  * @param {number} [v] Brightness value
- * 
+ *
  * @returns {string}  RGB color value
- * 
+ *
  * @example
  * let c = HSBToRGB(85, 255, 255);
  * println(c);
@@ -281,18 +442,202 @@ HSBToRGB = function(x, s, v) {
 };
 
 /**
+ * @summary
+ * Draws a linear gradient from `startColor` to `endColor` in the form of a rectangle.
+ *
+ * @description
+ * For a step size greater than 1, the function draws rectangles of width
+ * `step`. Using a step size greater than 1 is faster for all but diagonal
+ * gradients. It is highly advised to store drawn gradients in images using the
+ * `get` function for use in a draw loop.
+ *
+ * @param {number} x x-coordinate of the gradient
+ * @param {number} y y-coordinate of the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param
+ * {LEFT|RIGHT|TOP|UP|BOTTOM|DOWN|TOP_LEFT|TOP_RIGHT|BOTTOM_RIGHT|BOTTOM_LEFT}
+ * [direction=RIGHT] direction of gradient
+ * @param {number} [step=5] step size
+ *
+ * @example
+ * linearGradient(25, 25, 100, 100, RED, YELLOW);
+ * // expected outcome: linear gradient from left to right; red to yellow
+ *
+ * @example
+ * linearGradient(150, 25, 100, 100, PURPLE, PINK, TOP_RIGHT);
+ * // expected outcome: linear gradient from bottom-left to top-right; purple to pink
+ *
+ * @example
+ * linearGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, BOTTOM_RIGHT, 10);
+ * // expected outcome: linear gradient from top-left to bottom-right; green to light blue in strips of thickness 10
+ */
+linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, step = 5) => {
+    push();
+    e.strokeWeight(1);
+    switch (direction) {
+        case LEFT:
+        case RIGHT:
+            if (direction == LEFT) [startColor, endColor] = [endColor, startColor];
+            if (step == 1) {
+                for (let i = 0; i < width; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / width));
+                    e.line(x + i, y, x + i, y + height);
+                }
+            } else {
+                for (let i = 0; i < width; i += step) {
+                    const c = e.lerpColor(startColor, endColor, i / width);
+                    e.stroke(c);
+                    e.fill(c);
+                    if (i + step > width) { e.rect(x + i, y, width - i, height); }
+                    else { e.rect(x + i, y, step, height); }
+                }
+            }
+            break;
+        case TOP:
+        case UP:
+        case BOTTOM:
+        case DOWN:
+            if (direction == TOP || direction == UP) [startColor, endColor] = [endColor, startColor];
+            if (step == 1) {
+                for (let i = 0; i < height; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / height));
+                    e.line(x, y + i, x + width, y + i);
+                }
+            } else {
+                for (let i = 0; i < height; i += step) {
+                    const c = e.lerpColor(startColor, endColor, i / height);
+                    e.stroke(c);
+                    e.fill(c);
+                    if (i + step > width) { e.rect(x, y + i, width, height - i); }
+                    else { e.rect(x, y + i, width, step); }
+                }
+            }
+            break;
+        case TOP_LEFT:
+        case BOTTOM_RIGHT:
+            if (direction == TOP_LEFT) [startColor, endColor] = [endColor, startColor];
+            if (step == 1) {
+                for (let i = 0; i < width; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2));
+                    e.line(x + i, y, x, y + e.map(i, 0, width, 0, height));
+                }
+                for (let i = 0; i < width; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2 + 0.5));
+                    e.line(x + i, y + height, x + width, y + e.map(i, 0, width, 0, height));
+                }
+            } else {
+                const side = Math.max(width, height) * Math.sqrt(2);
+                showGraphics(x, y, width, height, function () {
+                    this.angleMode = 'degrees';
+                    this.rotate(-45);
+                    for (let i = 0; i < side; i += step) {
+                        const c = this.lerpColor(startColor, endColor, i / side);
+                        this.stroke(c);
+                        this.fill(c);
+                        if (i + step > side) { this.rect(-side / 2, i, side, side - i); }
+                        else { this.rect(-side / 2, i, side, step); }
+                    }
+                });
+            }
+            break;
+        case TOP_RIGHT:
+        case BOTTOM_LEFT:
+            if (direction == TOP_RIGHT) [startColor, endColor] = [endColor, startColor];
+            if (step == 1) {
+                for (let i = 0; i < width; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2));
+                    e.line(x + width - i, y, x + width, y + e.map(i, 0, width, 0, height));
+                }
+                for (let i = 0; i < width; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2 + 0.5));
+                    e.line(x + width - i, y + height, x, y + e.map(i, 0, width, 0, height));
+                }
+            } else {
+                const side = Math.max(width, height) * Math.sqrt(2);
+                showGraphics(x, y, width, height, function () {
+                    this.angleMode = 'degrees';
+                    this.rotate(45);
+                    for (let i = 0; i < side; i += step) {
+                        const c = this.lerpColor(startColor, endColor, i / side);
+                        this.stroke(c);
+                        this.fill(c);
+                        if (i + step > side) { this.rect(0, i - side / 2, side, side - i); }
+                        else { this.rect(0, i - side / 2, side, step); }
+                    }
+                });
+            }
+    }
+    pop();
+};
+
+/**
+ * @summary
+ * Draws a radial gradient from `startColor` to `endColor` in the form of an
+ * ellipse.
+ *
+ * @description
+ * For a step size greater than 1, the function draws ellipses of width `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ *
+ * @param {number} x x-coordinate of center of the gradient
+ * @param {number} y y-coordinate of center the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [step=5] step size
+ *
+ * @example
+ * radialGradient(100, 100, 100, 100, RED, YELLOW);
+ * // expected outcome: radial gradient from red to yellow
+ *
+ * @example
+ * radialGradient(250, 100, 100, 100, PURPLE, PINK, 10);
+ * // expected outcome: radial gradient from purple to pink with step size 10
+ */
+radialGradient = (x, y, width, height, startColor, endColor, step = 5) => {
+    push();
+    e.strokeWeight(1);
+    const maxRadius = Math.max(width, height);
+    if (step == 1) {
+        e.noFill();
+        for (let i = 0; i < maxRadius; i++) {
+            e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
+            e.arc(x, y,
+                width - e.map(i, 0, maxRadius, 0, width),
+                height - e.map(i, 0, maxRadius, 0, height),
+                0, 360);
+        }
+    } else {
+        for (let i = 0; i < maxRadius; i += step) {
+            const c = e.lerpColor(endColor, startColor, i / maxRadius);
+            e.stroke(c);
+            e.fill(c);
+            e.ellipse(x, y,
+                width - e.map(i, 0, maxRadius, 0, width),
+                height - e.map(i, 0, maxRadius, 0, height));
+        }
+    }
+    pop();
+};
+
+/**
  * Converts RGB to hex color type.
- * 
+ *
  * @param {(number|color)} x Red value or color
  * @param {number} [g] Green value
  * @param {number} [b] Blue value
- * 
+ *
  * @returns {string}  Hex color value
- * 
+ *
  * @example
  * println(RGBToHex(255, 0, 0));
  * // expected output: #ff0000
- * 
+ *
  * @example
  * let c = RED;
  * println(RGBToHex(c));
@@ -308,13 +653,13 @@ RGBToHex = function(x, g, b) {
 
 /**
  * Converts RGB to HSB color type.
- * 
+ *
  * @param {(number|color)} x Red value or color
  * @param {number} [g] Green value
  * @param {number} [b] Blue value
- * 
+ *
  * @returns {string}  HSB color value
- * 
+ *
  * @example
  * let c = RGBToHSB(255, 0, 0);
  * println(c);
@@ -361,23 +706,23 @@ RGBToHSB = function(x, g, b) {
 
 /**
  * Converts hex or RGB to HSB color value.
- * 
+ *
  * @param {(string|color)} x Hex, red or HSB color value
  * @param {number} [g] Green value
  * @param {number} [b] Blue value
- * 
+ *
  * @returns {color|array}  RGB color value or RGB values array
- * 
+ *
  * @example
  * colorMode(HSB);
  * background(toHSB('fff'));
  * // expected outcome: white background
- * 
+ *
  * @example
  * colorMode(HSB);
  * background(toHSB(255, 0, 0));
  * // expected outcome: red background
- * 
+ *
  * @example
  * println(toHSB(-1))
  * // expected output: [0, 0, 255]
@@ -398,21 +743,21 @@ toHSB = function() {
 
 /**
  * Converts hex or HSB to RGB color value.
- * 
+ *
  * @param {(string|color)} x Hex, hue or RGB color value
  * @param {number} [s] Saturation value
  * @param {number} [v] Brightness value
- * 
+ *
  * @returns {color|array}  RGB color value or RGB values array
- * 
+ *
  * @example
  * background(toRGB('fff'));
  * // expected outcome: white background
- * 
+ *
  * @example
  * background(toRGB(0, 255, 255));
  * // expected outcome: red background
- * 
+ *
  * @example
  * println(toRGB(-1))
  * // expected output: [255, 255, 255]

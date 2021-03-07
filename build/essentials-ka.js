@@ -1,16 +1,15 @@
 /**
- * The Khan Academy utility library.
+ * Essentials.
  *
  * The Essentials library provides utility functions for the Khan Academy
  * Processing Environment.
  *
  * @link https://github.com/bhavjitChauhan/Essentials
- * @file Local Khan Academy utility JavaScript library
+ * @file KA Essentials Build
  * @author Bhavjit Chauhan
  */
 
 //jshint ignore: start
-var e = eval('__env__');
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -33,120 +32,62 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-
-/**
- * The Khan Academy utility library.
- *
- * The Essentials library provides utility functions for the Khan Academy
- * Processing Environment.
- *
- * @link https://github.com/bhavjitChauhan/Essentials
- * @file Khan Academy utility JavaScript library
- * @author Bhavjit Chauhan
- */
-_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
-ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.0.1';
-ESSENTIALS_ASCII = "/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\\\     /\\\\/\\\\\\ /\\\\\\\\\\\\/\\\\      /\\       /\\\\        /\\\\ \\\\  \n/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\ /\\\\   /\\\\     /\\\\    /\\\\     /\\ \\\\     /\\\\      /\\\\    /\\\\\n/\\\\       /\\\\       /\\\\      /\\\\      /\\\\ /\\\\  /\\\\     /\\\\    /\\\\    /\\  /\\\\    /\\\\       /\\\\      \n/\\\\\\\\\\\\     /\\\\       /\\\\    /\\\\\\\\\\\\  /\\\\  /\\\\ /\\\\     /\\\\    /\\\\   /\\\\   /\\\\   /\\\\         /\\\\    \n/\\\\            /\\\\       /\\\\ /\\\\      /\\\\   /\\ /\\\\     /\\\\    /\\\\  /\\\\\\\\\\\\ /\\\\  /\\\\            /\\\\ \n/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\\\    /\\ \\\\     /\\\\    /\\\\ /\\\\       /\\\\ /\\\\      /\\\\    /\\\\\n/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\      /\\\\     /\\\\    /\\\\/\\\\         /\\\\/\\\\\\\\\\\\\\\\  /\\\\ \\\\";
-_silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info("%cEssentials Library\n%cThe Khan Academy utility library.\n\nVersion ".concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
-e = Processing.instances[0];
 _eval = eval;
+e = Processing.instances[0];
+var _ref = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
+LEFT = _ref[0];
+RIGHT = _ref[1];
+TOP = _ref[2];
+BOTTOM = _ref[3];
+UP = _ref[4];
+DOWN = _ref[5];
+TOP_LEFT = 1, TOP_RIGHT = 2, BOTTOM_RIGHT = 3, BOTTOM_LEFT = 4;
+WIDTH = e.width;
+HEIGHT = e.height;
+HALF_WIDTH = WIDTH / 2;
+HALF_HEIGHT = HEIGHT / 2;
+CANVAS = '#output-canvas';
+CANVAS_LOG = 'body div:first div:nth-child(2) div div';
 
-/**
- * Alias for `_clearLogs()`.
- *
- * @example
- * println('Hello World');
- * clearLogs();
- * // expected outcome: blank canvas console
- */
 clearLogs = function () {
   return e._clearLogs();
 };
 
-/**
- * Literally does nothing.
- * 
- * @example
- * // Prevents an error if an unneeded method is called
- * Element.init = noop;
- */
 noop = function () {
   return _.noop;
 };
 
-/**
- * Alias for `Program.restart()`
- */
 restart = function () {
   return e.Program.restart();
 };
 
-/**
- * Alias for `width`.
- */
-WIDTH = e.width;
+showGraphics = function (x, y, width, height, fn) {
+  var renderer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : e.P2D;
+  var g = e.createGraphics(width, height, renderer);
+  fn.call(g);
+  e.image(g, x, y);
+};
 
-/**
- * Alias for `height`.
- */
-HEIGHT = e.height;
+_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
+_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
+ESSENTIALS_CORE = true;
+ESSENTIALS_VERSION = '1.1.0beta';
+ESSENTIALS_ASCII = "\n    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/\n   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/\n  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/\n _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/\n_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/\n\n";
+_silent_ = typeof _silent_ !== 'undefined' && _silent_;
+if (!_silent_ && !_core_initialized_) console.info("%cEssentials\n%cThe Khan Academy utility library.\n\n".concat(_env_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
 
-/**
- * Alias for `WIDTH / 2`.
- */
-HALF_WIDTH = WIDTH / 2;
+attempt = function (fn) {
+  try {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
 
-/**
- * Alias for `HEIGHT / 2`.
- */
-HALF_HEIGHT = HEIGHT / 2;
+    return fn.apply(void 0, args);
+  } catch (e) {
+    return e instanceof Error ? e : new Error(e);
+  }
+};
 
-/**
- * Canvas jQuery selector.
- * 
- * @example
- * // Log canvas element style to browser console
- * console.log($(CANVAS).attr('style)');
- */
-CANVAS = '#output-canvas';
-
-/**
- * Canvas log jQuery selector.
- * 
- * @example
- * // Log canvas log text to browser console
- * console.log($(CANVAS_LOG).text());
- */
-CANVAS_LOG = 'body div:first div:nth-child(2) div div';
-
-/**
- * Calls multiple functions asynchronously.
- *
- * @link https://www.30secondsofcode.org/js/s/chain-async
- *
- * @param {Array}  fns  Array containing functions to call
- *
- * @example
- * let array;
- * chainAsync([
- *     function(next) {
- *         console.log('Generating array...');
- *         array = [];
- *         for (let i = 0; i < 10000; i++) {
- *             array.push(Math.random(0, 100));
- *         }
- *         next();
- *     }, function(next) {
- *         console.log('Sorting array...');
- *         array.sort();
- *         next();
- *     }, function() {
- *         console.log(array);
- *     }
- * ]);
- */
 chainAsync = function (fns) {
   var i = 0;
 
@@ -160,159 +101,33 @@ chainAsync = function (fns) {
   next();
 };
 
-/**
- * Attempts to invoke a function with the provided arguments, returning either
- *      the result or an error.
- *
- * @link https://www.30secondsofcode.org/js/s/attempt
- *
- * @param {} fn Function to attempt.
- * @param {...*} args Functions arguments.
- */
-attempt = function (fn) {
-  try {
-    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    return fn.apply(void 0, args);
-  } catch (e) {
-    return e instanceof Error ? e : new Error(e);
-  }
-};
-
-/**
- * @summary
- * Removes Khan Academy's loop protection code from functions.
- *
- * @description
- * Khan Academy adds a few lines of code to every function created to prevent
- * the webpage from freezing. This can be a hinderance when running more
- * resource-intensive code.
- *
- * @link https://khanacademy.org/cs/-/5594326276014080
- *
- * @param {Function} fn Function to be cleaned
- *
- * @returns {Function} Cleaned function.
- *
- * @example
- * const drawEllipses = function() {
- *     for (let i = 0; i < 1e4; i++) {
- *         ellipse(Math.random(0, width), Math.random(0, height), 10, 10);
- *     }
- * };
- * // possible error: 'A for loop is taking too long to run.'
- *
- * @example
- * const drawEllipses = clean(function() {
- *     for (let i = 0; i < 1e4; i++) {
- *         ellipse(Math.random(0, width), Math.random(0, height), 10, 10);
- *     }
- * });
- */
 clean = function (fn) {
   var string = fn.toString().replace(/__env__\.KAInfiniteLoopCount\+\+;/g, '').replace(/if \(__env__\.KAInfiniteLoopCount > 1000\) {[\s]+__env__\.KAInfiniteLoopProtect\('[^']*'\);[^}]+}/g, '').replace(/__env__\.PJSOutput\.applyInstance\((__env__\.\S+), '\S+'\)/g, 'new $1');
   return Object.constructor("return (function(__env__) {return ".concat(string, ";});"))()(e);
 };
 
-/**
- * Returns a function that is the
- * [negation]{@link https://en.wikipedia.org/wiki/Negation} of the given
- * function
- *
- * @link https://www.30secondsofcode.org/js/s/complement
- *
- * @param {Function} fn Given function
- *
- * @returns {Function} Complement function
- *
- * @example
- * const isEven = function(num) {
- *     return num % 2 === 0;
- * }
- * const isOdd = complement(isEven);
- */
 complement = function (fn) {
   return function () {
     return !fn.apply(void 0, arguments);
   };
 };
 
-/**
- * Generates a [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
- * 
- * @returns {string}
- */
 generateUUID = function () {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, function (c) {
     return (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
   });
 };
 
-/**
- * Returns a string of the form `HH:MM:SS`.
- * 
- * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
- * 
- * @returns {string} Formatted time
- * 
- * @example
- * println(getColorTime());
- * // expected outcome: Time in the form of `HH:MM:SS`
- */
 getColonTime = function () {
   return new Date().toTimeString().slice(0, 8);
 };
 
-/**
- * Efficiently inherits properties from the parent class to the child class.
- *
- * @param {Function} subClass Class to be inherited to
- * @param {Function} superClass Class to inherit from
- *
- * @example
- * const Element = function(x, y, w, h) {
- *     this.x = x;
- *     this.y = y;
- *     this.w = w;
- *     this.h = h;
- * };
- * Element.prototype.draw = function() {
- *     rect(this.x, this.y, this.w, this.h);
- * };
- * const Button = function(x, y, w, h) {
- *     Element.call(this, x, y, w, h);
- * };
- * inherit(Button, Element);
- *
- * let b = new Button(100, 100, 150, 50);
- * b.draw();
- * // expected outcome: rectangle with arguments (100, 100, 150, 50)
- */
 inherit = function (subClass, superClass) {
   Object.setPrototypeOf(subClass.prototype, superClass.prototype);
   subClass.prototype.constructor = subClass;
   if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
 };
 
-/**
- * Checks if object is a Khan Academy font object.
- * 
- * @param {Object} obj
- * 
- * @example
- * let f = createFont('Arial');
- * println(isFont(f));
- * // expected output: true 
- * 
- * @example
- * let f = font('monospace');
- * println(isFont(f));
- * // expected output: true
- * 
- * @see font
- */
 isFont = function (obj) {
   if (typeof obj != 'object') {
     return false;
@@ -321,34 +136,6 @@ isFont = function (obj) {
   return _.isFunction(obj.getCSSDefinition);
 };
 
-/**
- * Checks if object is a Khan Academy image object.
- * 
- * @param {Object} obj
- * 
- * @example
- * let i = getImage("avatars/leaf-green");
- * println(isImage(i));
- * // expected output: true
- */
-isImage = function (obj) {
-  if (typeof obj != 'object') {
-    return false;
-  }
-
-  return _.isObject(obj.sourceImg);
-};
-
-/**
- * Checks if object is a Khan Academy sound object.
- * 
- * @param {Object} obj
- * 
- * @example
- * let s = getSound("retro/boom1");
- * println(isSound(s));
- * // expected output: true
- */
 isSound = function (obj) {
   if (typeof obj != 'object') {
     return false;
@@ -357,56 +144,14 @@ isSound = function (obj) {
   return _.isObject(obj.audio);
 };
 
-/**
- * Equivalent to using
- * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
- * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
- *
- * @example
- * push();
- * stroke(WHITE);
- * rotate(90);
- * rect(10, 10, 15, 15);
- * pop();
- * // This rectangle will not display the stroke or rotation
- * rect(10, 10, 15, 15);
- *
- * @see push
- */
-pop = function () {
-  e.popStyle();
-  e.popMatrix();
+isImage = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isObject(obj.sourceImg);
 };
 
-/**
- * @summary
- * Calculates fastest function in terms of iterations.
- *
- * @description
- * The functions will be called _x_ number of times. Their times will be how long
- * they took to run _x_ number of times. The more iterations, the more accurate
- * the result.
- *
- * Running resource-intensive function may result in an infinite loop error. You
- * can bypass this using the {@link clean} function.
- *
- * @link https://www.30secondsofcode.org/js/s/most-performant
- *
- * @param {Array} fns Functions to be compared
- * @param {number} [iterations=1e4] Number of times function should be invoked
- *
- * @returns {Object} Index of function which performed fastest and times
- *  recorded
- *
- * @example
- * let testees = {
- *     'debug': debug,
- *     'console.log': console.log
- * };
- * let test = mostPerformant(Object.values(testees));
- * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
- * // possible output: 'console.log performed faster.'
- */
 mostPerformant = function (fns) {
   var iterations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1e4;
   var times = fns.map(function (fn) {
@@ -421,21 +166,11 @@ mostPerformant = function (fns) {
   return times.indexOf(Math.min.apply(Math, _toConsumableArray(times)));
 };
 
-/**
- * Prints formatted string to canvas console.
- * 
- * @param {string} assertion String with format
- * @param {*} arguments Arguments
- * 
- * @example
- * printf('Hello %', 'World');
- * // expected output: 'Hello World'
- * 
- * @example
- * // To use the literal '%' character use double backslashes (\\)
- * printf('% \\% %', 'A', 'B');
- * // expected output: 'A % B'
- */
+pop = function () {
+  e.popStyle();
+  e.popMatrix();
+};
+
 printf = function (string) {
   var args = Array.from(arguments).slice(1);
 
@@ -447,71 +182,15 @@ printf = function (string) {
   e.println(string);
 };
 
-/**
- * Equivalent to using
- * [pushMatrix]{@link http://processingjs.org/reference/pushMatrix_/} and
- * [pushStyle]{@link http://processingjs.org/reference/pushStyle_/}.
- *
- * @example
- * push();
- * stroke(WHITE);
- * rotate(90);
- * rect(10, 10, 15, 15);
- * pop();
- * // This rectangle will not display the stroke or rotation
- * rect(10, 10, 15, 15);
- *
- * @see pop
- */
 push = function () {
   e.pushMatrix();
   e.pushStyle();
 };
 
-/**
- * Generates a random integer in a given range.
- * 
- * @param {number} [min=0] Minimum value
- * @param {number} max Maximum value
- * 
- * @returns {number} Generated integer
- * 
- * @example
- * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
- * 
- * @example
- * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
- */
 randomInt = function (min, max) {
   return _.random(min, max);
 };
 
-/**
- * Measures the time it takes for a function to execute and logs to browser
- * console.
- *
- * @link https://www.30secondsofcode.org/js/s/time-taken
- *
- * @param {Function} callback Function to be measured
- * @param {string} [id] Custom ID for multiple consecutive tests
- *
- * @example
- * timeTaken(function() {
- *     for(let i = 0; i < 1e3; i++) { println(i); }
- * });
- * // possible output: 'timeTaken#default: 1000.000000000000 ms'
- * 
- * @example
- * timeTaken(function() {
- *     for(let i = 0; i < 1e3; i++) { println(i); }
- * }, '1000');
- * // possible output: 'timeTaken#1000: 1000.000000000000 ms'
- * timeTaken(function() {
- *     for(let i = 0; i < 1e2; i++) { println(i); }
- * }, '100');
- * // possible output: 'timeTaken#100: 100.000000000000 ms'
- * 
- */
 timeTaken = function (callback) {
   var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'default';
   console.time("timeTaken#".concat(id));
@@ -520,7 +199,6 @@ timeTaken = function (callback) {
   return r;
 };
 
-/** @module Color */
 _color_initialized_ = typeof COLOR_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {
@@ -530,88 +208,93 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_color_initialized_) console.info('%cColor Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
 
-/**
- * Converts hex to RGB color type.
- * 
- * @param {string} hex Hex color value, optional `#`; can be shorthand
- * 
- * @returns {color} RGB color value
- * 
- * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
- */
-hexToRGB = function (hex) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  result = result ? result.splice(1).map(function (i) {
-    return parseInt(i, 16);
-  }) : null;
+angularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  angle -= 90;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
   push();
-  e.colorMode(e.RGB);
-  result = e.color.apply(e, result);
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle; i < angle + 359; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i = angle; _i < angle + 359; _i += dTheta) {
+      var _c = e.lerpColor(startColor, endColor, (_i - angle) / 360);
+
+      e.stroke(_c);
+      e.fill(_c);
+      r1 = e.radians(_i);
+      r2 = e.radians(_i - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
   pop();
-  return result;
 };
 
-/**
- * @summary
- * Alias for `color(255, 0, 0)`.
- * 
- * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
- * @example
- * fill(RED);
- * text('Hello World', 25, 25);
- * 
- * @example
- * let c = color(RED, 50);
- * fill(c);
- * square(25, 25, 25);
- */
+circularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+  push();
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle - 1; i < angle + 180; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+
+    for (var _i2 = angle - 1; _i2 > angle - 180; _i2 -= dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180)));
+      r = e.radians(_i2);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i3 = angle - 1; _i3 < angle + 180; _i3 += dTheta) {
+      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
+
+      e.stroke(_c2);
+      e.fill(_c2);
+      r1 = e.radians(_i3);
+      r2 = e.radians(_i3 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+
+    r1 = e.radians(angle - 180);
+    r2 = e.radians(angle - 180 - dTheta);
+    e.stroke(endColor);
+    e.fill(endColor);
+    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+
+    for (var _i4 = angle - 1; _i4 > angle - 180; _i4 -= dTheta) {
+      var _c3 = e.lerpColor(startColor, endColor, Math.abs((_i4 - angle) / 180));
+
+      e.stroke(_c3);
+      e.fill(_c3);
+      r1 = e.radians(_i4);
+      r2 = e.radians(_i4 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
+  pop();
+};
+
 RED = e.color(255, 0, 0);
-
-/**
- * @summary
- * Alias for `color(0, 128, 0)`.
- * 
- * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
- * @example
- * fill(GREEN);
- * text('Hello World', 25, 25);
- * 
- * @example
- * let c = color(GREEN, 50);
- * fill(c);
- * square(25, 25, 25);
- */
 GREEN = e.color(0, 128, 0);
-
-/**
- * @summary
- * Alias for `color(0, 0, 255)`.
- * 
- * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
- * @example
- * fill(BLUE);
- * text('Hello World', 25, 25);
- * 
- * @example
- * let c = color(BLUE, 50);
- * fill(c);
- * square(25, 25, 25);
- */
 BLUE = e.color(0, 0, 255);
 LIGHTSALMON = e.color(255, 160, 122), SALMON = e.color(250, 128, 114);
 DARKSALMON = e.color(233, 150, 122);
@@ -750,22 +433,22 @@ BROWN = e.color(165, 42, 42);
 MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
-/**
- * Converts HSB to RGB color type.
- * 
- * @param {(number|color)} x Hue value or color
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
- * 
- * @returns {string}  RGB color value
- * 
- * @example
- * let c = HSBToRGB(85, 255, 255);
- * println(c);
- * // expected output: -16711936
- * background(c);
- * // expected outcome: green background
- */
+hexToRGB = function (hex) {
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  result = result ? result.splice(1).map(function (i) {
+    return parseInt(i, 16);
+  }) : null;
+  push();
+  e.colorMode(e.RGB);
+  result = e.color.apply(e, result);
+  pop();
+  return result;
+};
+
 HSBToRGB = function (x, s, v) {
   if (arguments.length == 1) {
     c = x;
@@ -812,24 +495,187 @@ HSBToRGB = function (x, s, v) {
   return e.color.apply(e, result);
 };
 
-/**
- * Converts RGB to hex color type.
- * 
- * @param {(number|color)} x Red value or color
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {string}  Hex color value
- * 
- * @example
- * println(RGBToHex(255, 0, 0));
- * // expected output: #ff0000
- * 
- * @example
- * let c = RED;
- * println(RGBToHex(c));
- * // expected output: #ff0000
- */
+linearGradient = function (x, y, width, height, startColor, endColor) {
+  var direction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : RIGHT;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  push();
+  e.strokeWeight(1);
+
+  switch (direction) {
+    case LEFT:
+    case RIGHT:
+      if (direction == LEFT) {
+        var _ref2 = [endColor, startColor];
+        startColor = _ref2[0];
+        endColor = _ref2[1];
+      }
+
+      if (step == 1) {
+        for (var i = 0; i < width; i++) {
+          e.stroke(e.lerpColor(startColor, endColor, i / width));
+          e.line(x + i, y, x + i, y + height);
+        }
+      } else {
+        for (var _i5 = 0; _i5 < width; _i5 += step) {
+          var _c4 = e.lerpColor(startColor, endColor, _i5 / width);
+
+          e.stroke(_c4);
+          e.fill(_c4);
+
+          if (_i5 + step > width) {
+            e.rect(x + _i5, y, width - _i5, height);
+          } else {
+            e.rect(x + _i5, y, step, height);
+          }
+        }
+      }
+
+      break;
+
+    case TOP:
+    case UP:
+    case BOTTOM:
+    case DOWN:
+      if (direction == TOP || direction == UP) {
+        var _ref3 = [endColor, startColor];
+        startColor = _ref3[0];
+        endColor = _ref3[1];
+      }
+
+      if (step == 1) {
+        for (var _i6 = 0; _i6 < height; _i6++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i6 / height));
+          e.line(x, y + _i6, x + width, y + _i6);
+        }
+      } else {
+        for (var _i7 = 0; _i7 < height; _i7 += step) {
+          var _c5 = e.lerpColor(startColor, endColor, _i7 / height);
+
+          e.stroke(_c5);
+          e.fill(_c5);
+
+          if (_i7 + step > width) {
+            e.rect(x, y + _i7, width, height - _i7);
+          } else {
+            e.rect(x, y + _i7, width, step);
+          }
+        }
+      }
+
+      break;
+
+    case TOP_LEFT:
+    case BOTTOM_RIGHT:
+      if (direction == TOP_LEFT) {
+        var _ref4 = [endColor, startColor];
+        startColor = _ref4[0];
+        endColor = _ref4[1];
+      }
+
+      if (step == 1) {
+        for (var _i8 = 0; _i8 < width; _i8++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i8 / width / 2));
+          e.line(x + _i8, y, x, y + e.map(_i8, 0, width, 0, height));
+        }
+
+        for (var _i9 = 0; _i9 < width; _i9++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i9 / width / 2 + 0.5));
+          e.line(x + _i9, y + height, x + width, y + e.map(_i9, 0, width, 0, height));
+        }
+      } else {
+        var side = Math.max(width, height) * Math.sqrt(2);
+        showGraphics(x, y, width, height, function () {
+          this.angleMode = 'degrees';
+          this.rotate(-45);
+
+          for (var _i10 = 0; _i10 < side; _i10 += step) {
+            var _c6 = this.lerpColor(startColor, endColor, _i10 / side);
+
+            this.stroke(_c6);
+            this.fill(_c6);
+
+            if (_i10 + step > side) {
+              this.rect(-side / 2, _i10, side, side - _i10);
+            } else {
+              this.rect(-side / 2, _i10, side, step);
+            }
+          }
+        });
+      }
+
+      break;
+
+    case TOP_RIGHT:
+    case BOTTOM_LEFT:
+      if (direction == TOP_RIGHT) {
+        var _ref5 = [endColor, startColor];
+        startColor = _ref5[0];
+        endColor = _ref5[1];
+      }
+
+      if (step == 1) {
+        for (var _i11 = 0; _i11 < width; _i11++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i11 / width / 2));
+          e.line(x + width - _i11, y, x + width, y + e.map(_i11, 0, width, 0, height));
+        }
+
+        for (var _i12 = 0; _i12 < width; _i12++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i12 / width / 2 + 0.5));
+          e.line(x + width - _i12, y + height, x, y + e.map(_i12, 0, width, 0, height));
+        }
+      } else {
+        var _side = Math.max(width, height) * Math.sqrt(2);
+
+        showGraphics(x, y, width, height, function () {
+          this.angleMode = 'degrees';
+          this.rotate(45);
+
+          for (var _i13 = 0; _i13 < _side; _i13 += step) {
+            var _c7 = this.lerpColor(startColor, endColor, _i13 / _side);
+
+            this.stroke(_c7);
+            this.fill(_c7);
+
+            if (_i13 + step > _side) {
+              this.rect(0, _i13 - _side / 2, _side, _side - _i13);
+            } else {
+              this.rect(0, _i13 - _side / 2, _side, step);
+            }
+          }
+        });
+      }
+
+  }
+
+  pop();
+};
+
+radialGradient = function (x, y, width, height, startColor, endColor) {
+  var step = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 5;
+  push();
+  e.strokeWeight(1);
+  var maxRadius = Math.max(width, height);
+
+  if (step == 1) {
+    e.noFill();
+
+    for (var i = 0; i < maxRadius; i++) {
+      e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
+      e.arc(x, y, width - e.map(i, 0, maxRadius, 0, width), height - e.map(i, 0, maxRadius, 0, height), 0, 360);
+    }
+  } else {
+    for (var _i14 = 0; _i14 < maxRadius; _i14 += step) {
+      var _c8 = e.lerpColor(endColor, startColor, _i14 / maxRadius);
+
+      e.stroke(_c8);
+      e.fill(_c8);
+      e.ellipse(x, y, width - e.map(_i14, 0, maxRadius, 0, width), height - e.map(_i14, 0, maxRadius, 0, height));
+    }
+  }
+
+  pop();
+};
+
 RGBToHex = function (x, g, b) {
   if (arguments.length == 1) {
     c = x;
@@ -839,23 +685,6 @@ RGBToHex = function (x, g, b) {
   return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
-/**
- * Converts RGB to HSB color type.
- * 
- * @param {(number|color)} x Red value or color
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {string}  HSB color value
- * 
- * @example
- * let c = RGBToHSB(255, 0, 0);
- * println(c);
- * // expected output: -65536
- * colorMode(HSB);
- * background(c);
- * // expected outcome: red background
- */
 RGBToHSB = function (x, g, b) {
   if (arguments.length == 1) {
     c = x;
@@ -899,83 +728,38 @@ RGBToHSB = function (x, g, b) {
   return result;
 };
 
-/**
- * Converts hex or RGB to HSB color value.
- * 
- * @param {(string|color)} x Hex, red or HSB color value
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {color|array}  RGB color value or RGB values array
- * 
- * @example
- * colorMode(HSB);
- * background(toHSB('fff'));
- * // expected outcome: white background
- * 
- * @example
- * colorMode(HSB);
- * background(toHSB(255, 0, 0));
- * // expected outcome: red background
- * 
- * @example
- * println(toHSB(-1))
- * // expected output: [0, 0, 255]
- */
 toHSB = function () {
   var args = arguments;
 
   if (args.length == 1) {
-    var _c = args[0];
+    var _c9 = args[0];
 
-    if (typeof _c == 'number') {
-      return [e.hue(_c), e.saturation(_c), e.brightness(_c)];
+    if (typeof _c9 == 'number') {
+      return [e.hue(_c9), e.saturation(_c9), e.brightness(_c9)];
     } else {
-      return RGBToHSB.apply(e, toRGB(hexToRGB(_c)));
+      return RGBToHSB.apply(e, toRGB(hexToRGB(_c9)));
     }
   } else if (args.length == 3) {
     return RGBToHSB.apply(e, args);
   }
 };
 
-/**
- * Converts hex or HSB to RGB color value.
- * 
- * @param {(string|color)} x Hex, hue or RGB color value
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
- * 
- * @returns {color|array}  RGB color value or RGB values array
- * 
- * @example
- * background(toRGB('fff'));
- * // expected outcome: white background
- * 
- * @example
- * background(toRGB(0, 255, 255));
- * // expected outcome: red background
- * 
- * @example
- * println(toRGB(-1))
- * // expected output: [255, 255, 255]
- */
 toRGB = function () {
   var args = arguments;
 
   if (args.length == 1) {
-    var _c2 = args[0];
+    var _c10 = args[0];
 
-    if (typeof _c2 == 'number') {
-      return [e.red(_c2), e.green(_c2), e.blue(_c2)];
+    if (typeof _c10 == 'number') {
+      return [e.red(_c10), e.green(_c10), e.blue(_c10)];
     } else {
-      return hexToRGB(_c2);
+      return hexToRGB(_c10);
     }
   } else if (args.length == 3) {
     return HSBToRGB.apply(e, args);
   }
 };
 
-/** @module Text */
 _text_initialized_ = typeof TEXT_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {
@@ -987,56 +771,8 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_text_initialized_) console.info('%cText Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
 
-/**
- * Sets font, size and other [CSS font properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
- * 
- * @param {(string|font)}  name  Name of font or font
- * @param {number}  [size]  Font size
- * @param {...string}  properties  CSS font properties
- * 
- * @returns {font}  Created font
- * 
- * @example
- * fill(BLACK);
- * font('Arial', 30, 'bold');
- * text('Hello World', 100, 100);
- * // expected outcome: 'Hello World' in bold Arial font
- * 
- * @example
- * let f = font('Arial', 'bold');
- * textSize(30);
- * text('Hello World', 100, 100);
- * // expected outcome: 'Hello World' in normal Arial normal size font
- * // `textSize()` should not be used with `font()`
- * 
- * // Instead, use `font()`
- * font(f, 30);
- * text('Hello World', 100, 200);
- * // expected outcome: 'Hello World' in bold Arial size 30 font
- * 
- * @example
- * // Use the `-call` parameter to prevent the font automatically being set
- * // This functionality is useful when defining font variables
- * let f = font('serif', '-call');
- * text('Hello World', 100, 100);
- * // expected outcome: the text will still be in normal Arial font
- * font(f);
- * text('Hello World', 100, 200);
- * // expected outcome: the text will be in serif font
- * 
- * @example
- * let f = font('Arial', 'bold', 'italic');
- * text('Hello World', 100, 100);
- * // expected outcome: 'Hello World' in bold and italic Arial font
- * 
- * // Use the negate syntax to remove properties from fonts
- * font(f, '-bold');
- * text('Hello World', 100, 200);
- * // expected outcome: 'Hello World' in italic Arial font
- */
 font = function (family) {
-  var properties = Array.from(arguments).slice(1); // Font size doesn't take effect unless `properties` array has at least one
-
+  var properties = Array.from(arguments).slice(1);
   properties.push('');
   var call = properties.find(function (property) {
     return _.isBoolean(property);
@@ -1070,32 +806,41 @@ font = function (family) {
       return property.charAt(0) != '-';
     });
     properties = _.difference(properties, negates).join(' ');
-    _font.css = "".concat(properties, " ").concat(size, "px/").concat(size + 2, "px ").concat(_.last(previousCSS)); // font.css = properties + ' ' + size + 'px/' + (size + 2) + 'px ' + _.last(previousCSS);
+    _font.css = "".concat(properties, " ").concat(size, "px/").concat(size + 2, "px ").concat(_.last(previousCSS));
   } else {
     size = size || 12;
     _font = e.createFont(family, size);
     properties = _.without(properties, size);
-    _font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + "".concat(size, "px/").concat(size + 2, "px ").concat(family); // font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + size + 'px/' + (size + 2) + 'px ' + family;
+    _font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + "".concat(size, "px/").concat(size + 2, "px ").concat(family);
   }
 
   call && e.textFont(_font);
   return _font;
 };
 
-/**
- * Converts milliseconds to a readable format of duration.
- * 
- * @link https://www.30secondsofcode.org/js/s/format-duration
- * 
- * @param {number}  ms  Duration in milliseconds
- * 
- * @returns {string}  Readable format of duration.
- * 
- * @example
- * let martianDay = 88775244;
- * console.log(formatDuration(martianDay));
- * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
- */
+fastGradientText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var startColor = arguments.length > 3 ? arguments[3] : undefined;
+  var endColor = arguments.length > 4 ? arguments[4] : undefined;
+  push();
+
+  if (!string.includes('\n')) {
+    for (var i = 0; i < string.length; i++) {
+      e.fill(e.lerpColor(startColor, endColor, i / string.length));
+      e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
+    }
+  } else {
+    var _strings = string.split('\n');
+
+    for (var _i15 in _strings) {
+      fastGradientText(_strings[_i15], x, y + _i15 * textAscent(), startColor, endColor);
+    }
+  }
+
+  pop();
+};
+
 formatDuration = function (ms) {
   if (ms < 0) ms = -ms;
   var time = {
@@ -1107,33 +852,15 @@ formatDuration = function (ms) {
   };
   return Object.entries(time).filter(function (val) {
     return val[1] !== 0;
-  }).map(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        key = _ref2[0],
-        val = _ref2[1];
+  }).map(function (_ref6) {
+    var _ref7 = _slicedToArray(_ref6, 2),
+        key = _ref7[0],
+        val = _ref7[1];
 
     return "".concat(val, " ").concat(key).concat(val !== 1 ? 's' : '');
   }).join(', ');
 };
 
-/**
- * Draws a string with a highlight background.
- * 
- * @param {string} string String to be highlighted
- * @param {number} [x=0] x-coordinate value
- * @param {number} [y='text height'] y-coordinate value
- * @param {number} [highlightColor=YELLOW] Color of highlight background
- * 
- * @example
- * let str = 'Highlighted\nText';
- * fill(BLACK);
- * highlightText(str, 25, 25);
- * 
- * @example
- * let str = 'Highlighted\nText';
- * fill(LIGHTGREEN);
- * highlightText(str, 25, 25, BLACK);
- */
 highlightText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -1158,30 +885,6 @@ highlightText = function (string) {
   }
 };
 
-/**
- * Determines if text should be black or white based on background color.
- * 
- * @param {number} backgroundColor Color of background
- * 
- * @returns {number} Color of text
- * 
- * @example
- * let h = 0,
- *     s = 0,
- *     b = 0;
- * colorMode(HSB);
- * textAlign(CENTER, CENTER);
- * textSize(50);
- * draw = function() {
- *     h = frameCount % 255;
- *     s = frameCount % 255;
- *     b = frameCount % 255;
- *     let TEST_COLOR = color(h, s, b);
- *     background(TEST_COLOR);
- *     fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));
- *     text("TEXT", width / 2, height / 2);
- * };
- */
 lightOrDarkText = function (backgroundColor) {
   var r, g, b;
 
@@ -1203,18 +906,6 @@ lightOrDarkText = function (backgroundColor) {
   return BLACK;
 };
 
-/**
- * Draws text with multiple colors that are passed in using special syntax.
- * 
- * @param {string} string Input string
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * 
- * @example
- * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
- * fill(BLUE);
- * multicoloredText(str, 25, 25);
- */
 multicoloredText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -1252,20 +943,6 @@ multicoloredText = function (string) {
   pop();
 };
 
-/**
- * Takes a number and returns it as a string with the correct ordinal indicator
- * suffix.
- *
- * @link https://www.30secondsofcode.org/js/s/to-ordinal-suffix
- *
- * @param {(number|string)} n Number
- *
- * @returns {string} Number with ordinal suffix.
- *
- * @example
- * println(ordinalSuffix(123));
- * // expected output: '123rd'
- */
 ordinalSuffix = function (n) {
   var int = parseInt(n, 10),
       digits = [int % 10, int % 100],
@@ -1275,23 +952,20 @@ ordinalSuffix = function (n) {
   return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
 };
 
-/**
- * Draws text with an outline.
- * 
- * @param {string} string String to be outlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {number} [outlineColor=BLACK] Color of outline
- * 
- * @example
- * let str = 'Outlined\nText';
- * outlineText(str, 25, 25);
- * 
- * @example
- * let str = 'Outlined\nText';
- * fill(BLACK);
- * outlineText(str, 25, 25, ORANGE);
- */
+pluralize = function (value, word) {
+  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+
+  var _pluralize = function (num, word) {
+    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+    return [1, -1].includes(Number(num)) ? word : plural;
+  };
+
+  if (typeof value === 'object') return function (num, word) {
+    return _pluralize(num, word, value[word]);
+  };
+  return _pluralize(value, word, plural);
+};
+
 outlineText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -1317,58 +991,6 @@ outlineText = function (string) {
   e.text(string, x, y);
 };
 
-/**
- * Returns the singular or plural form of the word based on the input number,
- * using an optional dictionary if supplied.
- *
- * @link https://www.30secondsofcode.org/js/s/pluralize
- *
- * @param {number} value Number of items
- * @param {string} word Word to pluralize
- * @param {string} [plural=word+'s'] Custom pluralized form
- *
- * @example
- * let apples;
- * const printApples = function() {
- *     printf('% %.', apples, pluralize(apples, 'apple'));
- * }
- * apples = 2;
- * printApples();
- * // expected output: '2 apples.'
- * apples = 1;
- * printApples();
- * // expected output: '1 apple.'
- *
- * @example
- * let people = 2;
- * printf('% %.', people, pluralize(people, 'person', 'people'));
- * // expected output: '2 people.'
- *
- * @see printf
- */
-pluralize = function (value, word) {
-  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
-
-  var _pluralize = function (num, word) {
-    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
-    return [1, -1].includes(Number(num)) ? word : plural;
-  };
-
-  if (typeof value === 'object') return function (num, word) {
-    return _pluralize(num, word, value[word]);
-  };
-  return _pluralize(value, word, plural);
-};
-
-/**
- * Formats string similar to [template literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals} in ES6
- * 
- * @param {string} string Formatted string
- * 
- * @example
- * println('PI is ${Math.PI.toFixed(2)}'.format())
- * // expected output: PI is 3.14
- */
 String.prototype.format = function () {
   var string = this;
 
@@ -1394,19 +1016,6 @@ String.prototype.format = function () {
   return string;
 };
 
-/**
- * Obfuscate strings as hexadecimal and unicode escape characters.
- * 
- * @link https://www.khanacademy.org/cs/-/4812748875104256
- * 
- * @example
- * let str = 'Hello World';
- * let obfuscated = str.obfuscate();
- * println(obfuscated);
- * // expected output: \x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64
- * println('\x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64');
- * // expected output: Hello World
- */
 String.prototype.obfuscate = function () {
   var str = '';
 
@@ -1431,30 +1040,10 @@ String.prototype.obfuscate = function () {
   return str;
 };
 
-/**
- * Removes non-ACII characters from string.
- * 
- * @link https://www.30secondsofcode.org/js/s/remove-non-ascii
- * 
- * @example
- * let str = 'Hello 😀';
- * let strippedStr = str.removeNonASCII();
- * println(strippedStr)
- * // expected output: 'Hello '
- */
 String.prototype.removeNonASCII = function () {
   return this.replace(/[^\x20-\x7E]/g, '');
 };
 
-/**
- * Converts string to camel case.
- * 
- * @link https://www.30secondsofcode.org/js/s/to-camel-case
- * 
- * @example
- * println('lorem ipsum'.toCamelCase());
- * // expected output: 'loremIpsum'
- */
 String.prototype.toCamelCase = function () {
   var s = this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.slice(0, 1).toUpperCase() + x.slice(1).toLowerCase();
@@ -1462,97 +1051,29 @@ String.prototype.toCamelCase = function () {
   return s.slice(0, 1).toLowerCase() + s.slice(1);
 };
 
-/**
- * Converts string to kebab case.
- * 
- * @link https://www.30secondsofcode.org/js/s/to-kebab-case
- * 
- * @example
- * println('lorem ipsum'.toKebabCase());
- * // expected output: 'lorem-ipsum'
- */
 String.prototype.toKebabCase = function () {
   return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.toLowerCase();
   }).join('-');
 };
 
-/**
- * Converts string to snake case.
- * 
- * @link https://www.30secondsofcode.org/js/s/to-snake-case
- * 
- * @example
- * println('lorem ipsum'.toSnakeCase());
- * // expected output: 'lorem_ipsum'
- */
 String.prototype.toSnakeCase = function () {
   return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.toLowerCase();
   }).join('_');
 };
 
-/**
- * Converts string to title case.
- *
- * @link https://www.30secondsofcode.org/js/s/to-title-case
- *
- * @example
- * println('lorem ipsum'.toTitleCase());
- * // expected output: 'Lorem Ipsum'
- */
 String.prototype.toTitleCase = function () {
   return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.charAt(0).toUpperCase() + x.slice(1);
   }).join(' ');
 };
 
-/**
- * Wraps a string to a given number of characters using a string break
- * character.
- *
- * @link https://www.30secondsofcode.org/js/s/word-wrap
- *
- * @param {string} str String to be wrapped
- * @param {number} max Maximum number of characters per line
- * @param {string} [br='\n'] Custom break character
- *
- * @example
- * let str = 'This string should have a maximum line length of thirty-two characters.';
- * let wrappedStr = wordWrap(str, 32);
- * println(wrappedStr);
- * // expected output: 
- * // 'This string should have a
- * // maximum line length of
- * // thirty-two characters.'
- * let customWrappedStr = wordWrap(str, 32, '<br>');
- * println(customWrappedStr);
- * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
- */
 wordWrap = function (str, max) {
   var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '\n';
   return str.replace(new RegExp("(?![^\\n]{1,".concat(max, "}$)([^\\n]{1,").concat(max, "})\\s"), 'g'), '$1' + br);
 };
 
-/**
- * Draws text underlined.
- * 
- * @param {string} string Text to be underlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {color} [underlineColor=BLACK] Color of underline
- * @param {number} [underlineWeight] Weight of underline
- * 
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25);
- * 
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25, RED, 5);
- */
 underlineText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -1576,4 +1097,210 @@ underlineText = function (string) {
   e.textAlign(e.LEFT, e.CORNER);
   e.text(string, x, y);
   pop();
+};
+
+_shape_initialized_ = typeof SHAPE_ESSENTIALS !== 'undefined';
+
+if (typeof ESSENTIALS_CORE === 'undefined') {
+  console.error('Shape Essentials depends on the Essentials Core.');
+} else {
+  SHAPE_ESSENTIALS = true;
+  if (!_silent_ && !_shape_initialized_) console.info('%cShape Essentials', 'font-family:system-ui;font-size:0.75rem;');
+}
+
+blurRect = function (x, y, width, height, size) {
+  if (size <= 0) return;
+  size = e.constrain(size, 0, Math.min(width, height));
+  e.image(e.get(x, y, width, height), x, y, width / size, height / size);
+  e.image(e.get(x, y, width / size, height / size), x, y, width, height);
+};
+
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
+};
+
+cylinder = function (x, y, width, height) {
+  width = Math.abs(width);
+  height = Math.abs(height);
+  push();
+  e.translate(x, y);
+
+  if (height > width) {
+    var _TAU = Math.cos(Math.PI) < 0 ? e.TWO_PI : 360;
+
+    e.rotate(_TAU / 4);
+    cylinder(0, 0, height, width);
+  } else {
+    var _r = height / 2;
+
+    var z = (width - height) / 2;
+
+    var central = 4 / 3 * (Math.sqrt(2) - 1) * _r;
+
+    drawShape(function () {
+      e.vertex(z, -_r);
+      e.bezierVertex(z + central, -_r, z + _r, -central, z + _r, 0);
+      e.bezierVertex(z + _r, central, z + central, _r, z, _r);
+      e.vertex(-z, _r);
+      e.bezierVertex(-z - central, _r, -z - _r, central, -z - _r, 0);
+      e.bezierVertex(-z - _r, -central, -z - central, -_r, -z, -_r);
+    }, true);
+  }
+
+  pop();
+};
+
+dashedLine = function (x1, y1, x2, y2) {
+  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
+  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
+  var length = e.dist(x1, y1, x2, y2);
+  var i = 0;
+
+  for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
+    e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
+  }
+
+  if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
+  if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
+};
+
+donut = function (x, y, majorDiameter, minorDiameter) {
+  var kappa = 4 / 3 * (Math.sqrt(2) - 1);
+  push();
+  e.translate(x, y);
+  push();
+  e.noStroke();
+  drawShape(function () {
+    var radius = minorDiameter / 2;
+    var central = kappa * radius;
+    e.vertex(radius, 0);
+    e.bezierVertex(radius, central, central, radius, 0, radius);
+    e.bezierVertex(-central, radius, -radius, central, -radius, 0);
+    e.bezierVertex(-radius, -central, -central, -radius, 0, -radius);
+    e.bezierVertex(central, -radius, radius, -central, radius, 0);
+    radius = majorDiameter / 2;
+    central = kappa * radius;
+    e.vertex(radius, 0);
+    e.bezierVertex(radius, -central, central, -radius, 0, -radius);
+    e.bezierVertex(-central, -radius, -radius, -central, -radius, 0);
+    e.bezierVertex(-radius, central, -central, radius, 0, radius);
+    e.bezierVertex(central, radius, radius, central, radius, 0);
+  }, true);
+  pop();
+  push();
+  e.noFill();
+  circle(0, 0, minorDiameter);
+  circle(0, 0, majorDiameter);
+  pop();
+  pop();
+};
+
+dottedLine = function (x1, y1, x2, y2) {
+  var spacing = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var endPoint = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+  var length = e.dist(x1, y1, x2, y2);
+
+  for (var i = 0; i < length; i += spacing) {
+    e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
+  }
+
+  if (endPoint) e.point(x2, y2);
+};
+
+drawShape = function (fn, close, mode) {
+  close = close && e.CLOSE;
+  e.beginShape(mode);
+  fn();
+  e.endShape(close);
+};
+
+edge = function (x, y, length, angle) {
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  line(x, y, x2, y2);
+};
+
+heart = function (x, y, radius) {
+  var ay = y - 2 * radius / 5,
+      by = y + radius,
+      c1y = y - 6 * radius / 5,
+      c2y = y - 2 * radius / 5;
+  var c1x = x + radius / 2,
+      c2x = x + 9 * radius / 5;
+  drawShape(function () {
+    e.vertex(x, ay);
+    e.bezierVertex(c1x, c1y, c2x, c2y, x, by);
+    c1x = 2 * x - c1x;
+    c2x = 2 * x - c2x;
+    e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
+  }, true);
+};
+
+parallelogram = function (ax, ay, bx, by, cx, cy) {
+  var dx = bx - ax;
+  var dy = by - ay;
+  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
+};
+
+polygon = function (x, y, sides, radius, rotation) {
+  var _TAU = Math.cos(Math.PI) < 0 ? 2 * Math.PI : 360;
+
+  push();
+  e.translate(x, y);
+  e.rotate(rotation == undefined ? -_TAU / 4 : rotation);
+  drawShape(function () {
+    for (var theta = 0; theta < _TAU; theta += _TAU / sides) {
+      e.vertex(radius * Math.cos(theta), radius * Math.sin(theta));
+    }
+  }, true);
+  pop();
+};
+
+rectangle = function (x, y, width) {
+  var height = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : width;
+  var tl = arguments.length > 4 ? arguments[4] : undefined;
+  var tr = arguments.length > 5 ? arguments[5] : undefined;
+  var br = arguments.length > 6 ? arguments[6] : undefined;
+  var bl = arguments.length > 7 ? arguments[7] : undefined;
+  if (tl == undefined) e.rect(x, y, width, height);else if (tr == undefined) e.rect(x, y, width, height, tl);else if (br == undefined) e.rect(x, y, width, height, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, width, height, tl, tr, br, 0);else e.rect(x, y, width, height, tl, tr, br, bl);
+};
+
+rhombus = function (ax, ay, bx, by, cx, cy) {
+  var r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
+  cx = ax + r * (cx - ax);
+  cy = ay + r * (cy - ay);
+  parallelogram(ax, ay, bx, by, cx, cy);
+};
+
+square = function (x, y, side, tl, tr, br, bl) {
+  if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
+};
+
+star = function (x, y, externalRadius) {
+  var spikes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 5;
+  var rotation = arguments.length > 4 ? arguments[4] : undefined;
+
+  var _TAU = Math.cos(Math.PI) < 0 ? e.TWO_PI : 360;
+
+  var interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
+  push();
+  e.translate(x, y);
+  e.rotate(rotation == undefined ? -_TAU / 4 : rotation);
+  drawShape(function () {
+    var internalRadius;
+
+    for (var theta = 0; theta < _TAU; theta += _TAU / (2 * spikes)) {
+      internalRadius = internalRadius === externalRadius ? interior : externalRadius;
+      e.vertex(internalRadius * Math.cos(theta), internalRadius * Math.sin(theta));
+    }
+  }, true);
+  pop();
+};
+
+trapezoid = function (x, y, height, topBase, bottomBase) {
+  var maxBase = Math.max(topBase, bottomBase);
+  e.quad(x + (maxBase - topBase) / 2, y, x + (maxBase - topBase) / 2 + topBase - 1, y, x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1, x + (maxBase - bottomBase) / 2, y + height - 1);
 };

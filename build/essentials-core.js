@@ -1,64 +1,8 @@
-/**
- * The Khan Academy utility library.
- *
- * The Essentials library provides utility functions for the Khan Academy
- * Processing Environment.
- *
- * @link https://github.com/bhavjitChauhan/Essentials
- * @file Khan Academy utility JavaScript library
- * @author Bhavjit Chauhan
- */
-
-_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
-
-ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.0.1';
-ESSENTIALS_ASCII = `/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\\\     /\\\\/\\\\\\ /\\\\\\\\\\\\/\\\\      /\\       /\\\\        /\\\\ \\\\  
-/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\ /\\\\   /\\\\     /\\\\    /\\\\     /\\ \\\\     /\\\\      /\\\\    /\\\\
-/\\\\       /\\\\       /\\\\      /\\\\      /\\\\ /\\\\  /\\\\     /\\\\    /\\\\    /\\  /\\\\    /\\\\       /\\\\      
-/\\\\\\\\\\\\     /\\\\       /\\\\    /\\\\\\\\\\\\  /\\\\  /\\\\ /\\\\     /\\\\    /\\\\   /\\\\   /\\\\   /\\\\         /\\\\    
-/\\\\            /\\\\       /\\\\ /\\\\      /\\\\   /\\ /\\\\     /\\\\    /\\\\  /\\\\\\\\\\\\ /\\\\  /\\\\            /\\\\ 
-/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\\\    /\\ \\\\     /\\\\    /\\\\ /\\\\       /\\\\ /\\\\      /\\\\    /\\\\
-/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\      /\\\\     /\\\\    /\\\\/\\\\         /\\\\/\\\\\\\\\\\\\\\\  /\\\\ \\\\`;
-
-_silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info(
-    `%cEssentials Library
-%cThe Khan Academy utility library.
-
-Version ${ESSENTIALS_VERSION}
-Copyright \xa9 2021 Bhavjit Chauhan
-https://github.com/bhavjitChauhan/Essentials`,
-    'font-family:system-ui;font-size:1rem;',
-    'font-family:system-ui;font-size:0.75rem;'
-);
-
-e = Processing.instances[0];
 _eval = eval;
+e = Processing.instances[0];
 
-/**
- * Alias for `_clearLogs()`.
- *
- * @example
- * println('Hello World');
- * clearLogs();
- * // expected outcome: blank canvas console
- */
-clearLogs = () => e._clearLogs();
-
-/**
- * Literally does nothing.
- * 
- * @example
- * // Prevents an error if an unneeded method is called
- * Element.init = noop;
- */
-noop = () => _.noop;
-
-/**
- * Alias for `Program.restart()`
- */
-restart = () => e.Program.restart();
+[LEFT, RIGHT, TOP, BOTTOM, UP, DOWN] = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
+TOP_LEFT = 1, TOP_RIGHT = 2, BOTTOM_RIGHT = 3, BOTTOM_LEFT = 4;
 
 /**
  * Alias for `width`.
@@ -82,7 +26,7 @@ HALF_HEIGHT = HEIGHT / 2;
 
 /**
  * Canvas jQuery selector.
- * 
+ *
  * @example
  * // Log canvas element style to browser console
  * console.log($(CANVAS).attr('style)');
@@ -91,12 +35,115 @@ CANVAS = '#output-canvas';
 
 /**
  * Canvas log jQuery selector.
- * 
+ *
  * @example
  * // Log canvas log text to browser console
  * console.log($(CANVAS_LOG).text());
  */
 CANVAS_LOG = 'body div:first div:nth-child(2) div div';
+
+/**
+ * Alias for `_clearLogs()`.
+ *
+ * @example
+ * println('Hello World');
+ * clearLogs();
+ * // expected outcome: blank canvas console
+ */
+clearLogs = () => e._clearLogs();
+
+/**
+ * Literally does nothing. Useful as the default for optional callback arguments.
+ *
+ * @example
+ * // Prevents an error if an unneeded method is called
+ * Element.init = noop;
+ */
+noop = () => _.noop;
+
+/**
+ * Alias for `Program.restart()`
+ */
+restart = () => e.Program.restart();
+
+/**
+ * Shows image of graphics created with `createGraphics`.
+ *
+ * @param {number} x x-coordinate of image
+ * @param {number} y y-coordinate of image
+ * @param {number} width width of image
+ * @param {number} height height of image
+ * @param {Function} fn draw code
+ * @param {P2D|P3D} [renderer=P2D]
+ *
+ * @example
+ * showGraphics(100, 100, 100, 100, function() {
+ *     this.background(0);
+ *     this.fill(RED);
+ *     this.rect(25, 25, 50, 50);
+ * });
+ * // expected outcome: red square embedded in black square
+ */
+showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
+    const g = e.createGraphics(width, height, renderer);
+    fn.call(g);
+    e.image(g, x, y);
+};
+
+/**
+ * Essentials.
+ *
+ * The Essentials library provides utility functions for the Khan Academy
+ * Processing Environment.
+ *
+ * @link https://github.com/bhavjitChauhan/Essentials
+ * @file CDN Essentials Build
+ * @author Bhavjit Chauhan
+ */
+
+_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
+_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
+
+ESSENTIALS_CORE = true;
+ESSENTIALS_VERSION = '1.1.0beta';
+ESSENTIALS_ASCII = `
+    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
+   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/
+  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/
+ _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/
+_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/
+
+`;
+
+_silent_ = typeof _silent_ !== 'undefined' && _silent_;
+if (!_silent_ && !_core_initialized_) console.info(
+    `%cEssentials
+%cThe Khan Academy utility library.
+
+${_env_} Build
+Version ${ESSENTIALS_VERSION}
+Copyright \xa9 2021 Bhavjit Chauhan
+https://github.com/bhavjitChauhan/Essentials`,
+    'font-family:system-ui;font-size:1rem;',
+    'font-family:system-ui;font-size:0.75rem;'
+);
+
+/**
+ * Attempts to invoke a function with the provided arguments, returning either
+ * the result or an error.
+ *
+ * @link https://www.30secondsofcode.org/js/s/attempt
+ *
+ * @param {} fn Function to attempt.
+ * @param {...*} args Functions arguments.
+ */
+attempt = (fn, ...args) => {
+    try {
+        return fn(...args);
+    } catch (e) {
+        return e instanceof Error ? e : new Error(e);
+    }
+};
 
 /**
  * Calls multiple functions asynchronously.
@@ -132,23 +179,6 @@ chainAsync = fns => {
         fn === last ? fn() : fn(next);
     };
     next();
-};
-
-/**
- * Attempts to invoke a function with the provided arguments, returning either
- *      the result or an error.
- *
- * @link https://www.30secondsofcode.org/js/s/attempt
- *
- * @param {} fn Function to attempt.
- * @param {...*} args Functions arguments.
- */
-attempt = (fn, ...args) => {
-    try {
-        return fn(...args);
-    } catch (e) {
-        return e instanceof Error ? e : new Error(e);
-    }
 };
 
 /**
@@ -210,8 +240,9 @@ clean = fn => {
 complement = fn => (...args) => !fn(...args);
 
 /**
- * Generates a [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
- * 
+ * Generates a
+ * [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
+ *
  * @returns {string}
  */
 generateUUID = () =>
@@ -224,11 +255,11 @@ generateUUID = () =>
 
 /**
  * Returns a string of the form `HH:MM:SS`.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
- * 
+ *
  * @returns {string} Formatted time
- * 
+ *
  * @example
  * println(getColorTime());
  * // expected outcome: Time in the form of `HH:MM:SS`
@@ -294,10 +325,27 @@ isFont = obj => {
 };
 
 /**
- * Checks if object is a Khan Academy image object.
- * 
+ * Checks if object is a Khan Academy sound object.
+ *
  * @param {Object} obj
- * 
+ *
+ * @example
+ * let s = getSound("retro/boom1");
+ * println(isSound(s));
+ * // expected output: true
+ */
+isSound = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isObject(obj.audio);
+};
+
+/**
+ * Checks if object is a Khan Academy image object.
+ *
+ * @param {Object} obj
+ *
  * @example
  * let i = getImage("avatars/leaf-green");
  * println(isImage(i));
@@ -311,20 +359,40 @@ isImage = obj => {
 };
 
 /**
- * Checks if object is a Khan Academy sound object.
- * 
- * @param {Object} obj
- * 
+ * @summary
+ * Calculates fastest function in terms of iterations.
+ *
+ * @description
+ * The functions will be called _n_ number of times. Their times will be how
+ * long they took to run _n_ number of times. The more iterations, the more
+ * accurate the result.
+ *
+ * Running resource-intensive function may result in an infinite loop error.
+ * This can be can bypassed using the {@link clean} function.
+ *
+ * @link https://www.30secondsofcode.org/js/s/most-performant
+ *
+ * @param {Array} fns Functions to be compared
+ * @param {number} [iterations=1e4] Number of times function should be called
+ *
+ * @returns {Array} Index of function which performed fastest
+ *
  * @example
- * let s = getSound("retro/boom1");
- * println(isSound(s));
- * // expected output: true
+ * let testees = {
+ *     'debug': debug,
+ *     'console.log': console.log
+ * };
+ * let test = mostPerformant(Object.values(testees));
+ * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
+ * // possible output: 'console.log performed faster.'
  */
-isSound = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.audio);
+mostPerformant = (fns, iterations = 1e4) => {
+    const times = fns.map(fn => {
+        const before = performance.now();
+        for (let i = 0; i < iterations; i++) fn();
+        return performance.now() - before;
+    });
+    return times.indexOf(Math.min(...times));
 };
 
 /**
@@ -349,53 +417,15 @@ pop = () => {
 };
 
 /**
- * @summary
- * Calculates fastest function in terms of iterations.
- *
- * @description
- * The functions will be called _x_ number of times. Their times will be how long
- * they took to run _x_ number of times. The more iterations, the more accurate
- * the result.
- *
- * Running resource-intensive function may result in an infinite loop error. You
- * can bypass this using the {@link clean} function.
- *
- * @link https://www.30secondsofcode.org/js/s/most-performant
- *
- * @param {Array} fns Functions to be compared
- * @param {number} [iterations=1e4] Number of times function should be invoked
- *
- * @returns {Object} Index of function which performed fastest and times
- *  recorded
- *
- * @example
- * let testees = {
- *     'debug': debug,
- *     'console.log': console.log
- * };
- * let test = mostPerformant(Object.values(testees));
- * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
- * // possible output: 'console.log performed faster.'
- */
-mostPerformant = (fns, iterations = 1e4) => {
-    const times = fns.map(fn => {
-        const before = performance.now();
-        for (let i = 0; i < iterations; i++) fn();
-        return performance.now() - before;
-    });
-    return times.indexOf(Math.min(...times));
-};
-
-/**
  * Prints formatted string to canvas console.
- * 
+ *
  * @param {string} assertion String with format
  * @param {*} arguments Arguments
- * 
+ *
  * @example
  * printf('Hello %', 'World');
  * // expected output: 'Hello World'
- * 
+ *
  * @example
  * // To use the literal '%' character use double backslashes (\\)
  * printf('% \\% %', 'A', 'B');
@@ -434,15 +464,15 @@ push = () => {
 
 /**
  * Generates a random integer in a given range.
- * 
+ *
  * @param {number} [min=0] Minimum value
  * @param {number} max Maximum value
- * 
+ *
  * @returns {number} Generated integer
- * 
+ *
  * @example
  * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
- * 
+ *
  * @example
  * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
  */
@@ -462,7 +492,7 @@ randomInt = (min, max) => _.random(min, max);
  *     for(let i = 0; i < 1e3; i++) { println(i); }
  * });
  * // possible output: 'timeTaken#default: 1000.000000000000 ms'
- * 
+ *
  * @example
  * timeTaken(function() {
  *     for(let i = 0; i < 1e3; i++) { println(i); }
@@ -472,7 +502,7 @@ randomInt = (min, max) => _.random(min, max);
  *     for(let i = 0; i < 1e2; i++) { println(i); }
  * }, '100');
  * // possible output: 'timeTaken#100: 100.000000000000 ms'
- * 
+ *
  */
 timeTaken = (callback, id = 'default') => {
     console.time(`timeTaken#${id}`);

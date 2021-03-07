@@ -1,4 +1,3 @@
-/** @module Shape */
 _shape_initialized_ = typeof SHAPE_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {
@@ -8,15 +7,6 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_shape_initialized_) console.info('%cShape Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
 
-/**
- * Faster blur effect on a rectangular selection.
- *
- * @param {number} x x-coordinate of the rectangle
- * @param {number} y y-coordinate of the rectangle
- * @param {number} width width or the rectangle
- * @param {number} height height of the rectangle
- * @param {number} size intensity of blur
- */
 blurRect = function (x, y, width, height, size) {
   if (size <= 0) return;
   size = e.constrain(size, 0, Math.min(width, height));
@@ -24,31 +14,10 @@ blurRect = function (x, y, width, height, size) {
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
 };
 
-/**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
- * 
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
- * 
- */
 circle = function (x, y, radius) {
   return e.ellipse(x, y, radius, radius);
 };
 
-/**
- * Draws a 2D cylinder.
- * 
- * @link https://www.khanacademy.org/cs/-/5157537806548992
- * 
- * @param {number} x x-coordinate of cylinder
- * @param {number} y y-coordinate of cylinder
- * @param {number} width
- * @param {number} height
- * 
- * @example
- * cylinder(100, 100, 100, 50);
- */
 cylinder = function (x, y, width, height) {
   width = Math.abs(width);
   height = Math.abs(height);
@@ -77,19 +46,22 @@ cylinder = function (x, y, width, height) {
   pop();
 };
 
-/**
- * Draws a donut.
- * 
- * @link https://www.khanacademy.org/cs/-/4693526445719552
- * 
- * @param {number} x x-coordinate of the donut
- * @param {number} y y-coordinate of the donut
- * @param {number} majorDiameter Diameter of outer circle
- * @param {number} minorDiameter Diameter of inner circle
- * 
- * @example
- * donut(100, 100, 100, 50);
- */
+dashedLine = function (x1, y1, x2, y2) {
+  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
+  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
+  var length = e.dist(x1, y1, x2, y2);
+  var i = 0;
+
+  for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
+    e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
+  }
+
+  if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
+  if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
+};
+
 donut = function (x, y, majorDiameter, minorDiameter) {
   var kappa = 4 / 3 * (Math.sqrt(2) - 1);
   push();
@@ -121,18 +93,32 @@ donut = function (x, y, majorDiameter, minorDiameter) {
   pop();
 };
 
-/**
- * Draws a heart.
- * 
- * @link https://www.khanacademy.org/cs/-/2085250861
- * 
- * @param {number} x x-coordinate of the heart
- * @param {number} y y-coordinate of the heart
- * @param {number} radius
- * 
- * @example
- * heart(100, 100, 50);
- */
+dottedLine = function (x1, y1, x2, y2) {
+  var spacing = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var endPoint = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+  var length = e.dist(x1, y1, x2, y2);
+
+  for (var i = 0; i < length; i += spacing) {
+    e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
+  }
+
+  if (endPoint) e.point(x2, y2);
+};
+
+drawShape = function (fn, close, mode) {
+  close = close && e.CLOSE;
+  e.beginShape(mode);
+  fn();
+  e.endShape(close);
+};
+
+edge = function (x, y, length, angle) {
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  line(x, y, x2, y2);
+};
+
 heart = function (x, y, radius) {
   var ay = y - 2 * radius / 5,
       by = y + radius,
@@ -149,90 +135,18 @@ heart = function (x, y, radius) {
   }, true);
 };
 
-/**
- * Alias for `beginShape()`/`endShape()`.
- * 
- * @param {Function} fn Shape function
- * @param {CLOSE|boolean} [close] Whether to close the shape
- * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
- * [mode] Shape mode
- * 
- * @example
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, CLOSE);
- * // expected outcome: square
- * 
- * @example
- * strokeWeight(5);
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, false, POINTS);
- * // expected outcome: points in a square formation
- */
-drawShape = function (fn, close, mode) {
-  close = close && e.CLOSE;
-  e.beginShape(mode);
-  fn();
-  e.endShape(close);
-};
-
-/**
- * Draws a parallelogram.
- * 
- * @link https://www.khanacademy.org/cs/-/4747962019348480
- * 
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- * 
- * @example
- * parallelogram(50, 50, 200, 50, 100, 100);
- * 
- * @see rhombus
- */
 parallelogram = function (ax, ay, bx, by, cx, cy) {
   var dx = bx - ax;
   var dy = by - ay;
   e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
-/**
- * Draws a polygon with _n_ sides.
- * 
- * @link https://www.khanacademy.org/cs/-/1304459398
- * 
- * @param {number} x x-coordinate of polygon's circumcircle
- * @param {number} y y-coordinate of polygon's circumcircle
- * @param {number} sides Number of sides
- * @param {number} radius Radius of circumcircle
- * @param {number} [rotation=0] Rotation of polygon in degrees or radians
- * 
- * @example
- * polygon(100, 100, 5, 100);
- * 
- * @example
- * polygon(100, 100, 5, 100, 180);
- * 
- * // Alternative method
- * angleMode = 'radians';
- * polygon(100, 100, 5, 100, PI);
- */
 polygon = function (x, y, sides, radius, rotation) {
   var _TAU = Math.cos(Math.PI) < 0 ? 2 * Math.PI : 360;
 
   push();
   e.translate(x, y);
-  e.rotate(rotation === undefined ? -_TAU / 4 : rotation);
+  e.rotate(rotation == undefined ? -_TAU / 4 : rotation);
   drawShape(function () {
     for (var theta = 0; theta < _TAU; theta += _TAU / sides) {
       e.vertex(radius * Math.cos(theta), radius * Math.sin(theta));
@@ -241,23 +155,15 @@ polygon = function (x, y, sides, radius, rotation) {
   pop();
 };
 
-/**
- * Draws a rhombus.
- * 
- * @link https://khanacademy.org/cs/-/4747962019348480
- * 
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- * 
- * @example
- * rhombus(50, 100, 100, 50, 100, 100);
- * 
- * @see parallelogram
- */
+rectangle = function (x, y, width) {
+  var height = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : width;
+  var tl = arguments.length > 4 ? arguments[4] : undefined;
+  var tr = arguments.length > 5 ? arguments[5] : undefined;
+  var br = arguments.length > 6 ? arguments[6] : undefined;
+  var bl = arguments.length > 7 ? arguments[7] : undefined;
+  if (tl == undefined) e.rect(x, y, width, height);else if (tr == undefined) e.rect(x, y, width, height, tl);else if (br == undefined) e.rect(x, y, width, height, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, width, height, tl, tr, br, 0);else e.rect(x, y, width, height, tl, tr, br, bl);
+};
+
 rhombus = function (ax, ay, bx, by, cx, cy) {
   var r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
   cx = ax + r * (cx - ax);
@@ -265,37 +171,10 @@ rhombus = function (ax, ay, bx, by, cx, cy) {
   parallelogram(ax, ay, bx, by, cx, cy);
 };
 
-/**
- * Alias for `rect()` without the separate `width` and `height` parameters.
- * 
- * @param {number} x x-coordinate of the square
- * @param {number} y y-coordinate of the square
- * @param {number} side side size of the square
- * @param {number} [radius=0] radius of corners
- * 
- */
-square = function (x, y, side) {
-  var radius = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-  return e.rect(x, y, side, side, radius);
+square = function (x, y, side, tl, tr, br, bl) {
+  if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
 };
 
-/**
- * Draws a star with _n_ spikes.
- * 
- * @link https://www.khanacademy.org/cs/-/1171581918
- * 
- * @param {number} x x-coordinate of star
- * @param {number} y y-coordinate of star
- * @param {number} externalRadius External radius
- * @param {number} [spikes=5] Number of spikes
- * @param {number} [rotation=0] Rotation of star in degrees or radians
- * 
- * @example
- * star(100, 100, 50);
- * 
- * @example
- * star(100, 100, 50, 7, 10);
- */
 star = function (x, y, externalRadius) {
   var spikes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 5;
   var rotation = arguments.length > 4 ? arguments[4] : undefined;
@@ -305,7 +184,7 @@ star = function (x, y, externalRadius) {
   var interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
   push();
   e.translate(x, y);
-  e.rotate(rotation === undefined ? -_TAU / 4 : rotation);
+  e.rotate(rotation == undefined ? -_TAU / 4 : rotation);
   drawShape(function () {
     var internalRadius;
 
@@ -315,4 +194,9 @@ star = function (x, y, externalRadius) {
     }
   }, true);
   pop();
+};
+
+trapezoid = function (x, y, height, topBase, bottomBase) {
+  var maxBase = Math.max(topBase, bottomBase);
+  e.quad(x + (maxBase - topBase) / 2, y, x + (maxBase - topBase) / 2 + topBase - 1, y, x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1, x + (maxBase - bottomBase) / 2, y + height - 1);
 };

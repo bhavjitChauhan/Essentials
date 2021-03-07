@@ -3,7 +3,7 @@
  *
  * @param {number} x x-coordinate of the rectangle
  * @param {number} y y-coordinate of the rectangle
- * @param {number} width width or the rectangle
+ * @param {number} width width of the rectangle
  * @param {number} height height of the rectangle
  * @param {number} size intensity of blur
  */

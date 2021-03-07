@@ -1,17 +1,17 @@
 /**
  * Draws text underlined.
- * 
+ *
  * @param {string} string Text to be underlined
  * @param {number} x x-coordinate value
  * @param {number} y y-coordinate value
  * @param {color} [underlineColor=BLACK] Color of underline
  * @param {number} [underlineWeight] Weight of underline
- * 
+ *
  * @example
  * let str = 'Underlined\nText';
  * fill(BLACK);
  * underlineText(str, 25, 25);
- * 
+ *
  * @example
  * let str = 'Underlined\nText';
  * fill(BLACK);

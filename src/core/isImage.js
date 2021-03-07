@@ -1,8 +1,8 @@
 /**
  * Checks if object is a Khan Academy image object.
- * 
+ *
  * @param {Object} obj
- * 
+ *
  * @example
  * let i = getImage("avatars/leaf-green");
  * println(isImage(i));

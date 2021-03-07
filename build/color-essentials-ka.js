@@ -1,4 +1,3 @@
-/** @module Color */
 _color_initialized_ = typeof COLOR_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {
@@ -8,88 +7,93 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_color_initialized_) console.info('%cColor Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
 
-/**
- * Converts hex to RGB color type.
- * 
- * @param {string} hex Hex color value, optional `#`; can be shorthand
- * 
- * @returns {color} RGB color value
- * 
- * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
- */
-hexToRGB = function (hex) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  result = result ? result.splice(1).map(function (i) {
-    return parseInt(i, 16);
-  }) : null;
+angularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  angle -= 90;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
   push();
-  e.colorMode(e.RGB);
-  result = e.color.apply(e, result);
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle; i < angle + 359; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i = angle; _i < angle + 359; _i += dTheta) {
+      var _c = e.lerpColor(startColor, endColor, (_i - angle) / 360);
+
+      e.stroke(_c);
+      e.fill(_c);
+      r1 = e.radians(_i);
+      r2 = e.radians(_i - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
   pop();
-  return result;
 };
 
-/**
- * @summary
- * Alias for `color(255, 0, 0)`.
- * 
- * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
- * @example
- * fill(RED);
- * text('Hello World', 25, 25);
- * 
- * @example
- * let c = color(RED, 50);
- * fill(c);
- * square(25, 25, 25);
- */
+circularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+  push();
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle - 1; i < angle + 180; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+
+    for (var _i2 = angle - 1; _i2 > angle - 180; _i2 -= dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180)));
+      r = e.radians(_i2);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i3 = angle - 1; _i3 < angle + 180; _i3 += dTheta) {
+      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
+
+      e.stroke(_c2);
+      e.fill(_c2);
+      r1 = e.radians(_i3);
+      r2 = e.radians(_i3 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+
+    r1 = e.radians(angle - 180);
+    r2 = e.radians(angle - 180 - dTheta);
+    e.stroke(endColor);
+    e.fill(endColor);
+    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+
+    for (var _i4 = angle - 1; _i4 > angle - 180; _i4 -= dTheta) {
+      var _c3 = e.lerpColor(startColor, endColor, Math.abs((_i4 - angle) / 180));
+
+      e.stroke(_c3);
+      e.fill(_c3);
+      r1 = e.radians(_i4);
+      r2 = e.radians(_i4 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
+  pop();
+};
+
 RED = e.color(255, 0, 0);
-
-/**
- * @summary
- * Alias for `color(0, 128, 0)`.
- * 
- * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
- * @example
- * fill(GREEN);
- * text('Hello World', 25, 25);
- * 
- * @example
- * let c = color(GREEN, 50);
- * fill(c);
- * square(25, 25, 25);
- */
 GREEN = e.color(0, 128, 0);
-
-/**
- * @summary
- * Alias for `color(0, 0, 255)`.
- * 
- * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
- * @example
- * fill(BLUE);
- * text('Hello World', 25, 25);
- * 
- * @example
- * let c = color(BLUE, 50);
- * fill(c);
- * square(25, 25, 25);
- */
 BLUE = e.color(0, 0, 255);
 LIGHTSALMON = e.color(255, 160, 122), SALMON = e.color(250, 128, 114);
 DARKSALMON = e.color(233, 150, 122);
@@ -228,22 +232,22 @@ BROWN = e.color(165, 42, 42);
 MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
-/**
- * Converts HSB to RGB color type.
- * 
- * @param {(number|color)} x Hue value or color
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
- * 
- * @returns {string}  RGB color value
- * 
- * @example
- * let c = HSBToRGB(85, 255, 255);
- * println(c);
- * // expected output: -16711936
- * background(c);
- * // expected outcome: green background
- */
+hexToRGB = function (hex) {
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  result = result ? result.splice(1).map(function (i) {
+    return parseInt(i, 16);
+  }) : null;
+  push();
+  e.colorMode(e.RGB);
+  result = e.color.apply(e, result);
+  pop();
+  return result;
+};
+
 HSBToRGB = function (x, s, v) {
   if (arguments.length == 1) {
     c = x;
@@ -290,24 +294,187 @@ HSBToRGB = function (x, s, v) {
   return e.color.apply(e, result);
 };
 
-/**
- * Converts RGB to hex color type.
- * 
- * @param {(number|color)} x Red value or color
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {string}  Hex color value
- * 
- * @example
- * println(RGBToHex(255, 0, 0));
- * // expected output: #ff0000
- * 
- * @example
- * let c = RED;
- * println(RGBToHex(c));
- * // expected output: #ff0000
- */
+linearGradient = function (x, y, width, height, startColor, endColor) {
+  var direction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : RIGHT;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  push();
+  e.strokeWeight(1);
+
+  switch (direction) {
+    case LEFT:
+    case RIGHT:
+      if (direction == LEFT) {
+        var _ref = [endColor, startColor];
+        startColor = _ref[0];
+        endColor = _ref[1];
+      }
+
+      if (step == 1) {
+        for (var i = 0; i < width; i++) {
+          e.stroke(e.lerpColor(startColor, endColor, i / width));
+          e.line(x + i, y, x + i, y + height);
+        }
+      } else {
+        for (var _i5 = 0; _i5 < width; _i5 += step) {
+          var _c4 = e.lerpColor(startColor, endColor, _i5 / width);
+
+          e.stroke(_c4);
+          e.fill(_c4);
+
+          if (_i5 + step > width) {
+            e.rect(x + _i5, y, width - _i5, height);
+          } else {
+            e.rect(x + _i5, y, step, height);
+          }
+        }
+      }
+
+      break;
+
+    case TOP:
+    case UP:
+    case BOTTOM:
+    case DOWN:
+      if (direction == TOP || direction == UP) {
+        var _ref2 = [endColor, startColor];
+        startColor = _ref2[0];
+        endColor = _ref2[1];
+      }
+
+      if (step == 1) {
+        for (var _i6 = 0; _i6 < height; _i6++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i6 / height));
+          e.line(x, y + _i6, x + width, y + _i6);
+        }
+      } else {
+        for (var _i7 = 0; _i7 < height; _i7 += step) {
+          var _c5 = e.lerpColor(startColor, endColor, _i7 / height);
+
+          e.stroke(_c5);
+          e.fill(_c5);
+
+          if (_i7 + step > width) {
+            e.rect(x, y + _i7, width, height - _i7);
+          } else {
+            e.rect(x, y + _i7, width, step);
+          }
+        }
+      }
+
+      break;
+
+    case TOP_LEFT:
+    case BOTTOM_RIGHT:
+      if (direction == TOP_LEFT) {
+        var _ref3 = [endColor, startColor];
+        startColor = _ref3[0];
+        endColor = _ref3[1];
+      }
+
+      if (step == 1) {
+        for (var _i8 = 0; _i8 < width; _i8++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i8 / width / 2));
+          e.line(x + _i8, y, x, y + e.map(_i8, 0, width, 0, height));
+        }
+
+        for (var _i9 = 0; _i9 < width; _i9++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i9 / width / 2 + 0.5));
+          e.line(x + _i9, y + height, x + width, y + e.map(_i9, 0, width, 0, height));
+        }
+      } else {
+        var side = Math.max(width, height) * Math.sqrt(2);
+        showGraphics(x, y, width, height, function () {
+          this.angleMode = 'degrees';
+          this.rotate(-45);
+
+          for (var _i10 = 0; _i10 < side; _i10 += step) {
+            var _c6 = this.lerpColor(startColor, endColor, _i10 / side);
+
+            this.stroke(_c6);
+            this.fill(_c6);
+
+            if (_i10 + step > side) {
+              this.rect(-side / 2, _i10, side, side - _i10);
+            } else {
+              this.rect(-side / 2, _i10, side, step);
+            }
+          }
+        });
+      }
+
+      break;
+
+    case TOP_RIGHT:
+    case BOTTOM_LEFT:
+      if (direction == TOP_RIGHT) {
+        var _ref4 = [endColor, startColor];
+        startColor = _ref4[0];
+        endColor = _ref4[1];
+      }
+
+      if (step == 1) {
+        for (var _i11 = 0; _i11 < width; _i11++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i11 / width / 2));
+          e.line(x + width - _i11, y, x + width, y + e.map(_i11, 0, width, 0, height));
+        }
+
+        for (var _i12 = 0; _i12 < width; _i12++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i12 / width / 2 + 0.5));
+          e.line(x + width - _i12, y + height, x, y + e.map(_i12, 0, width, 0, height));
+        }
+      } else {
+        var _side = Math.max(width, height) * Math.sqrt(2);
+
+        showGraphics(x, y, width, height, function () {
+          this.angleMode = 'degrees';
+          this.rotate(45);
+
+          for (var _i13 = 0; _i13 < _side; _i13 += step) {
+            var _c7 = this.lerpColor(startColor, endColor, _i13 / _side);
+
+            this.stroke(_c7);
+            this.fill(_c7);
+
+            if (_i13 + step > _side) {
+              this.rect(0, _i13 - _side / 2, _side, _side - _i13);
+            } else {
+              this.rect(0, _i13 - _side / 2, _side, step);
+            }
+          }
+        });
+      }
+
+  }
+
+  pop();
+};
+
+radialGradient = function (x, y, width, height, startColor, endColor) {
+  var step = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 5;
+  push();
+  e.strokeWeight(1);
+  var maxRadius = Math.max(width, height);
+
+  if (step == 1) {
+    e.noFill();
+
+    for (var i = 0; i < maxRadius; i++) {
+      e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
+      e.arc(x, y, width - e.map(i, 0, maxRadius, 0, width), height - e.map(i, 0, maxRadius, 0, height), 0, 360);
+    }
+  } else {
+    for (var _i14 = 0; _i14 < maxRadius; _i14 += step) {
+      var _c8 = e.lerpColor(endColor, startColor, _i14 / maxRadius);
+
+      e.stroke(_c8);
+      e.fill(_c8);
+      e.ellipse(x, y, width - e.map(_i14, 0, maxRadius, 0, width), height - e.map(_i14, 0, maxRadius, 0, height));
+    }
+  }
+
+  pop();
+};
+
 RGBToHex = function (x, g, b) {
   if (arguments.length == 1) {
     c = x;
@@ -317,23 +484,6 @@ RGBToHex = function (x, g, b) {
   return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
-/**
- * Converts RGB to HSB color type.
- * 
- * @param {(number|color)} x Red value or color
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {string}  HSB color value
- * 
- * @example
- * let c = RGBToHSB(255, 0, 0);
- * println(c);
- * // expected output: -65536
- * colorMode(HSB);
- * background(c);
- * // expected outcome: red background
- */
 RGBToHSB = function (x, g, b) {
   if (arguments.length == 1) {
     c = x;
@@ -377,76 +527,32 @@ RGBToHSB = function (x, g, b) {
   return result;
 };
 
-/**
- * Converts hex or RGB to HSB color value.
- * 
- * @param {(string|color)} x Hex, red or HSB color value
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- * 
- * @returns {color|array}  RGB color value or RGB values array
- * 
- * @example
- * colorMode(HSB);
- * background(toHSB('fff'));
- * // expected outcome: white background
- * 
- * @example
- * colorMode(HSB);
- * background(toHSB(255, 0, 0));
- * // expected outcome: red background
- * 
- * @example
- * println(toHSB(-1))
- * // expected output: [0, 0, 255]
- */
 toHSB = function () {
   var args = arguments;
 
   if (args.length == 1) {
-    var _c = args[0];
+    var _c9 = args[0];
 
-    if (typeof _c == 'number') {
-      return [e.hue(_c), e.saturation(_c), e.brightness(_c)];
+    if (typeof _c9 == 'number') {
+      return [e.hue(_c9), e.saturation(_c9), e.brightness(_c9)];
     } else {
-      return RGBToHSB.apply(e, toRGB(hexToRGB(_c)));
+      return RGBToHSB.apply(e, toRGB(hexToRGB(_c9)));
     }
   } else if (args.length == 3) {
     return RGBToHSB.apply(e, args);
   }
 };
 
-/**
- * Converts hex or HSB to RGB color value.
- * 
- * @param {(string|color)} x Hex, hue or RGB color value
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
- * 
- * @returns {color|array}  RGB color value or RGB values array
- * 
- * @example
- * background(toRGB('fff'));
- * // expected outcome: white background
- * 
- * @example
- * background(toRGB(0, 255, 255));
- * // expected outcome: red background
- * 
- * @example
- * println(toRGB(-1))
- * // expected output: [255, 255, 255]
- */
 toRGB = function () {
   var args = arguments;
 
   if (args.length == 1) {
-    var _c2 = args[0];
+    var _c10 = args[0];
 
-    if (typeof _c2 == 'number') {
-      return [e.red(_c2), e.green(_c2), e.blue(_c2)];
+    if (typeof _c10 == 'number') {
+      return [e.red(_c10), e.green(_c10), e.blue(_c10)];
     } else {
-      return hexToRGB(_c2);
+      return hexToRGB(_c10);
     }
   } else if (args.length == 3) {
     return HSBToRGB.apply(e, args);

@@ -1,12 +1,12 @@
 /**
  * Converts milliseconds to a readable format of duration.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/format-duration
- * 
+ *
  * @param {number}  ms  Duration in milliseconds
- * 
+ *
  * @returns {string}  Readable format of duration.
- * 
+ *
  * @example
  * let martianDay = 88775244;
  * console.log(formatDuration(martianDay));

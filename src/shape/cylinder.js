@@ -1,13 +1,13 @@
 /**
  * Draws a 2D cylinder.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/5157537806548992
- * 
+ *
  * @param {number} x x-coordinate of cylinder
  * @param {number} y y-coordinate of cylinder
  * @param {number} width
  * @param {number} height
- * 
+ *
  * @example
  * cylinder(100, 100, 100, 50);
  */

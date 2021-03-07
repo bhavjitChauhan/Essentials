@@ -12,7 +12,7 @@
  *     for(let i = 0; i < 1e3; i++) { println(i); }
  * });
  * // possible output: 'timeTaken#default: 1000.000000000000 ms'
- * 
+ *
  * @example
  * timeTaken(function() {
  *     for(let i = 0; i < 1e3; i++) { println(i); }
@@ -22,7 +22,7 @@
  *     for(let i = 0; i < 1e2; i++) { println(i); }
  * }, '100');
  * // possible output: 'timeTaken#100: 100.000000000000 ms'
- * 
+ *
  */
 timeTaken = (callback, id = 'default') => {
     console.time(`timeTaken#${id}`);

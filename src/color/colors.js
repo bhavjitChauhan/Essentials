@@ -1,14 +1,16 @@
 /**
  * @summary
  * Alias for `color(255, 0, 0)`.
- * 
+ *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
+ * Essentials includes the [CSS color
+ * names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * `COLORNAME`.
+ *
  * @example
  * fill(RED);
  * text('Hello World', 25, 25);
- * 
+ *
  * @example
  * let c = color(RED, 50);
  * fill(c);
@@ -19,14 +21,16 @@ RED = e.color(255, 0, 0);
 /**
  * @summary
  * Alias for `color(0, 128, 0)`.
- * 
+ *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
+ * Essentials includes the [CSS color
+ * names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * `COLORNAME`.
+ *
  * @example
  * fill(GREEN);
  * text('Hello World', 25, 25);
- * 
+ *
  * @example
  * let c = color(GREEN, 50);
  * fill(c);
@@ -37,14 +41,16 @@ GREEN = e.color(0, 128, 0);
 /**
  * @summary
  * Alias for `color(0, 0, 255)`.
- * 
+ *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
+ * Essentials includes the [CSS color
+ * names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * `COLORNAME`.
+ *
  * @example
  * fill(BLUE);
  * text('Hello World', 25, 25);
- * 
+ *
  * @example
  * let c = color(BLUE, 50);
  * fill(c);

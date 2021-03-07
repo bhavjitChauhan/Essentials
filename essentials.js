@@ -1,64 +1,8 @@
-/**
- * The Khan Academy utility library.
- *
- * The Essentials library provides utility functions for the Khan Academy
- * Processing Environment.
- *
- * @link https://github.com/bhavjitChauhan/Essentials
- * @file Khan Academy utility JavaScript library
- * @author Bhavjit Chauhan
- */
-
-_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
-
-ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.0.1';
-ESSENTIALS_ASCII = `/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\\\     /\\\\/\\\\\\ /\\\\\\\\\\\\/\\\\      /\\       /\\\\        /\\\\ \\\\  
-/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\ /\\\\   /\\\\     /\\\\    /\\\\     /\\ \\\\     /\\\\      /\\\\    /\\\\
-/\\\\       /\\\\       /\\\\      /\\\\      /\\\\ /\\\\  /\\\\     /\\\\    /\\\\    /\\  /\\\\    /\\\\       /\\\\      
-/\\\\\\\\\\\\     /\\\\       /\\\\    /\\\\\\\\\\\\  /\\\\  /\\\\ /\\\\     /\\\\    /\\\\   /\\\\   /\\\\   /\\\\         /\\\\    
-/\\\\            /\\\\       /\\\\ /\\\\      /\\\\   /\\ /\\\\     /\\\\    /\\\\  /\\\\\\\\\\\\ /\\\\  /\\\\            /\\\\ 
-/\\\\      /\\\\    /\\\\/\\\\    /\\\\/\\\\      /\\\\    /\\ \\\\     /\\\\    /\\\\ /\\\\       /\\\\ /\\\\      /\\\\    /\\\\
-/\\\\\\\\\\\\\\\\  /\\\\ \\\\    /\\\\ \\\\  /\\\\\\\\\\\\\\\\/\\\\      /\\\\     /\\\\    /\\\\/\\\\         /\\\\/\\\\\\\\\\\\\\\\  /\\\\ \\\\`;
-
-_silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info(
-    `%cEssentials Library
-%cThe Khan Academy utility library.
-
-Version ${ESSENTIALS_VERSION}
-Copyright \xa9 2021 Bhavjit Chauhan
-https://github.com/bhavjitChauhan/Essentials`,
-    'font-family:system-ui;font-size:1rem;',
-    'font-family:system-ui;font-size:0.75rem;'
-);
-
-e = Processing.instances[0];
 _eval = eval;
+e = Processing.instances[0];
 
-/**
- * Alias for `_clearLogs()`.
- *
- * @example
- * println('Hello World');
- * clearLogs();
- * // expected outcome: blank canvas console
- */
-clearLogs = () => e._clearLogs();
-
-/**
- * Literally does nothing.
- * 
- * @example
- * // Prevents an error if an unneeded method is called
- * Element.init = noop;
- */
-noop = () => _.noop;
-
-/**
- * Alias for `Program.restart()`
- */
-restart = () => e.Program.restart();
+[LEFT, RIGHT, TOP, BOTTOM, UP, DOWN] = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
+TOP_LEFT = 1, TOP_RIGHT = 2, BOTTOM_RIGHT = 3, BOTTOM_LEFT = 4;
 
 /**
  * Alias for `width`.
@@ -82,7 +26,7 @@ HALF_HEIGHT = HEIGHT / 2;
 
 /**
  * Canvas jQuery selector.
- * 
+ *
  * @example
  * // Log canvas element style to browser console
  * console.log($(CANVAS).attr('style)');
@@ -91,12 +35,115 @@ CANVAS = '#output-canvas';
 
 /**
  * Canvas log jQuery selector.
- * 
+ *
  * @example
  * // Log canvas log text to browser console
  * console.log($(CANVAS_LOG).text());
  */
 CANVAS_LOG = 'body div:first div:nth-child(2) div div';
+
+/**
+ * Alias for `_clearLogs()`.
+ *
+ * @example
+ * println('Hello World');
+ * clearLogs();
+ * // expected outcome: blank canvas console
+ */
+clearLogs = () => e._clearLogs();
+
+/**
+ * Literally does nothing. Useful as the default for optional callback arguments.
+ *
+ * @example
+ * // Prevents an error if an unneeded method is called
+ * Element.init = noop;
+ */
+noop = () => _.noop;
+
+/**
+ * Alias for `Program.restart()`
+ */
+restart = () => e.Program.restart();
+
+/**
+ * Shows image of graphics created with `createGraphics`.
+ *
+ * @param {number} x x-coordinate of image
+ * @param {number} y y-coordinate of image
+ * @param {number} width width of image
+ * @param {number} height height of image
+ * @param {Function} fn draw code
+ * @param {P2D|P3D} [renderer=P2D]
+ *
+ * @example
+ * showGraphics(100, 100, 100, 100, function() {
+ *     this.background(0);
+ *     this.fill(RED);
+ *     this.rect(25, 25, 50, 50);
+ * });
+ * // expected outcome: red square embedded in black square
+ */
+showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
+    const g = e.createGraphics(width, height, renderer);
+    fn.call(g);
+    e.image(g, x, y);
+};
+
+/**
+ * Essentials.
+ *
+ * The Essentials library provides utility functions for the Khan Academy
+ * Processing Environment.
+ *
+ * @link https://github.com/bhavjitChauhan/Essentials
+ * @file CDN Essentials Build
+ * @author Bhavjit Chauhan
+ */
+
+_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
+_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
+
+ESSENTIALS_CORE = true;
+ESSENTIALS_VERSION = '1.1.0beta';
+ESSENTIALS_ASCII = `
+    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
+   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/
+  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/
+ _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/
+_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/
+
+`;
+
+_silent_ = typeof _silent_ !== 'undefined' && _silent_;
+if (!_silent_ && !_core_initialized_) console.info(
+    `%cEssentials
+%cThe Khan Academy utility library.
+
+${_env_} Build
+Version ${ESSENTIALS_VERSION}
+Copyright \xa9 2021 Bhavjit Chauhan
+https://github.com/bhavjitChauhan/Essentials`,
+    'font-family:system-ui;font-size:1rem;',
+    'font-family:system-ui;font-size:0.75rem;'
+);
+
+/**
+ * Attempts to invoke a function with the provided arguments, returning either
+ * the result or an error.
+ *
+ * @link https://www.30secondsofcode.org/js/s/attempt
+ *
+ * @param {} fn Function to attempt.
+ * @param {...*} args Functions arguments.
+ */
+attempt = (fn, ...args) => {
+    try {
+        return fn(...args);
+    } catch (e) {
+        return e instanceof Error ? e : new Error(e);
+    }
+};
 
 /**
  * Calls multiple functions asynchronously.
@@ -132,23 +179,6 @@ chainAsync = fns => {
         fn === last ? fn() : fn(next);
     };
     next();
-};
-
-/**
- * Attempts to invoke a function with the provided arguments, returning either
- *      the result or an error.
- *
- * @link https://www.30secondsofcode.org/js/s/attempt
- *
- * @param {} fn Function to attempt.
- * @param {...*} args Functions arguments.
- */
-attempt = (fn, ...args) => {
-    try {
-        return fn(...args);
-    } catch (e) {
-        return e instanceof Error ? e : new Error(e);
-    }
 };
 
 /**
@@ -210,8 +240,9 @@ clean = fn => {
 complement = fn => (...args) => !fn(...args);
 
 /**
- * Generates a [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
- * 
+ * Generates a
+ * [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
+ *
  * @returns {string}
  */
 generateUUID = () =>
@@ -224,11 +255,11 @@ generateUUID = () =>
 
 /**
  * Returns a string of the form `HH:MM:SS`.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
- * 
+ *
  * @returns {string} Formatted time
- * 
+ *
  * @example
  * println(getColorTime());
  * // expected outcome: Time in the form of `HH:MM:SS`
@@ -294,10 +325,27 @@ isFont = obj => {
 };
 
 /**
- * Checks if object is a Khan Academy image object.
- * 
+ * Checks if object is a Khan Academy sound object.
+ *
  * @param {Object} obj
- * 
+ *
+ * @example
+ * let s = getSound("retro/boom1");
+ * println(isSound(s));
+ * // expected output: true
+ */
+isSound = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isObject(obj.audio);
+};
+
+/**
+ * Checks if object is a Khan Academy image object.
+ *
+ * @param {Object} obj
+ *
  * @example
  * let i = getImage("avatars/leaf-green");
  * println(isImage(i));
@@ -311,20 +359,40 @@ isImage = obj => {
 };
 
 /**
- * Checks if object is a Khan Academy sound object.
- * 
- * @param {Object} obj
- * 
+ * @summary
+ * Calculates fastest function in terms of iterations.
+ *
+ * @description
+ * The functions will be called _n_ number of times. Their times will be how
+ * long they took to run _n_ number of times. The more iterations, the more
+ * accurate the result.
+ *
+ * Running resource-intensive function may result in an infinite loop error.
+ * This can be can bypassed using the {@link clean} function.
+ *
+ * @link https://www.30secondsofcode.org/js/s/most-performant
+ *
+ * @param {Array} fns Functions to be compared
+ * @param {number} [iterations=1e4] Number of times function should be called
+ *
+ * @returns {Array} Index of function which performed fastest
+ *
  * @example
- * let s = getSound("retro/boom1");
- * println(isSound(s));
- * // expected output: true
+ * let testees = {
+ *     'debug': debug,
+ *     'console.log': console.log
+ * };
+ * let test = mostPerformant(Object.values(testees));
+ * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
+ * // possible output: 'console.log performed faster.'
  */
-isSound = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.audio);
+mostPerformant = (fns, iterations = 1e4) => {
+    const times = fns.map(fn => {
+        const before = performance.now();
+        for (let i = 0; i < iterations; i++) fn();
+        return performance.now() - before;
+    });
+    return times.indexOf(Math.min(...times));
 };
 
 /**
@@ -349,53 +417,15 @@ pop = () => {
 };
 
 /**
- * @summary
- * Calculates fastest function in terms of iterations.
- *
- * @description
- * The functions will be called _x_ number of times. Their times will be how long
- * they took to run _x_ number of times. The more iterations, the more accurate
- * the result.
- *
- * Running resource-intensive function may result in an infinite loop error. You
- * can bypass this using the {@link clean} function.
- *
- * @link https://www.30secondsofcode.org/js/s/most-performant
- *
- * @param {Array} fns Functions to be compared
- * @param {number} [iterations=1e4] Number of times function should be invoked
- *
- * @returns {Object} Index of function which performed fastest and times
- *  recorded
- *
- * @example
- * let testees = {
- *     'debug': debug,
- *     'console.log': console.log
- * };
- * let test = mostPerformant(Object.values(testees));
- * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
- * // possible output: 'console.log performed faster.'
- */
-mostPerformant = (fns, iterations = 1e4) => {
-    const times = fns.map(fn => {
-        const before = performance.now();
-        for (let i = 0; i < iterations; i++) fn();
-        return performance.now() - before;
-    });
-    return times.indexOf(Math.min(...times));
-};
-
-/**
  * Prints formatted string to canvas console.
- * 
+ *
  * @param {string} assertion String with format
  * @param {*} arguments Arguments
- * 
+ *
  * @example
  * printf('Hello %', 'World');
  * // expected output: 'Hello World'
- * 
+ *
  * @example
  * // To use the literal '%' character use double backslashes (\\)
  * printf('% \\% %', 'A', 'B');
@@ -434,15 +464,15 @@ push = () => {
 
 /**
  * Generates a random integer in a given range.
- * 
+ *
  * @param {number} [min=0] Minimum value
  * @param {number} max Maximum value
- * 
+ *
  * @returns {number} Generated integer
- * 
+ *
  * @example
  * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
- * 
+ *
  * @example
  * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
  */
@@ -462,7 +492,7 @@ randomInt = (min, max) => _.random(min, max);
  *     for(let i = 0; i < 1e3; i++) { println(i); }
  * });
  * // possible output: 'timeTaken#default: 1000.000000000000 ms'
- * 
+ *
  * @example
  * timeTaken(function() {
  *     for(let i = 0; i < 1e3; i++) { println(i); }
@@ -472,7 +502,7 @@ randomInt = (min, max) => _.random(min, max);
  *     for(let i = 0; i < 1e2; i++) { println(i); }
  * }, '100');
  * // possible output: 'timeTaken#100: 100.000000000000 ms'
- * 
+ *
  */
 timeTaken = (callback, id = 'default') => {
     console.time(`timeTaken#${id}`);
@@ -496,47 +526,173 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 }
 
 /**
- * Converts hex to RGB color type.
- * 
- * @param {string} hex Hex color value, optional `#`; can be shorthand
- * 
- * @returns {color} RGB color value
- * 
+ * @summary
+ * Draws an angular gradient from `startColor` to `endColor` in the form of an
+ * ellipse.
+ *
+ * @description
+ * For a step size greater than 1, the function draws triangles of base `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ * Use the `smooth` function to prevent jagged edges.
+ *
+ * @param {number} x x-coordinate of the top-left corner the gradient
+ * @param {number} y y-coordinate of the top-left corner the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
+ *
  * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
+ * angularGradient(25, 25, 100, 100, RED, YELLOW);
+ * // expected outcome: angular gradient from red to yellow
+ *
+ * @example
+ * angularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
+ * // expected outcome: angular gradient from purple to pink rotated 90 degrees
+ *
+ * @example
+ * angularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
+ * // expected outcome: angular gradient from green to light blue in strips of thickness 25
  */
-hexToRGB = hex => {
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    result = result ? result.splice(1).map(function (i) {
-        return parseInt(i, 16);
-    }) : null;
+angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
+    angle -= 90;
+    // `atan` could be `asin`. See https://jsbench.me/mmklrhzgra/1 & https://www.khanacademy.org/cs/-/4713637410717696
+    const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
     push();
-    e.colorMode(e.RGB);
-    result = e.color.apply(e, result);
+    if (step == 1) {
+        e.strokeWeight(1.5);
+        for (let i = angle; i < angle + 359; i += dTheta) {
+            e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
+            r = e.radians(i);
+            e.line(x + width / 2, y + height / 2,
+                e.map(Math.cos(r), -1, 1, x, x + width),
+                e.map(Math.sin(r), -1, 1, y, y + height));
+        }
+    } else {
+        e.strokeWeight(1);
+        for (let i = angle; i < angle + 359; i += dTheta) {
+            const c = e.lerpColor(startColor, endColor, (i - angle) / 360);
+            e.stroke(c);
+            e.fill(c);
+            r1 = e.radians(i);
+            r2 = e.radians(i - dTheta);
+            e.triangle(x + width / 2, y + height / 2,
+                e.map(Math.cos(r1), -1, 1, x, x + width),
+                e.map(Math.sin(r1), -1, 1, y, y + height),
+                e.map(Math.cos(r2), -1, 1, x, x + width),
+                e.map(Math.sin(r2), -1, 1, y, y + height));
+        }
+    }
     pop();
-    return result;
+};
+
+/**
+ * @summary
+ * Draws an circular gradient from `startColor` to `endColor` in the form of an
+ * ellipse.
+ *
+ * @description
+ * For a step size greater than 1, the function draws triangles of base `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ * Use the `smooth` function to prevent jagged edges.
+ *
+ * @param {number} x x-coordinate of the top-left corner the gradient
+ * @param {number} y y-coordinate of the top-left corner the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
+ *
+ * @example
+ * circularGradient(25, 25, 100, 100, RED, YELLOW);
+ * // expected outcome: circular gradient from red to yellow
+ *
+ * @example
+ * circularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
+ * // expected outcome: circular gradient from purple to pink rotated 90 degrees
+ *
+ * @example
+ * circularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
+ * // expected outcome: circular gradient from green to light blue in strips of thickness 25
+ */
+circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
+    const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+    push();
+    if (step == 1) {
+        e.strokeWeight(1.5);
+        for (let i = angle - 1; i < angle + 180; i += dTheta) {
+            e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+            r = e.radians(i);
+            e.line(x + width / 2, y + height / 2,
+                e.map(Math.cos(r), -1, 1, x, x + width),
+                e.map(Math.sin(r), -1, 1, y, y + height));
+        }
+        for (let i = angle - 1; i > angle - 180; i -= dTheta) {
+            e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+            r = e.radians(i);
+            e.line(x + width / 2, y + height / 2,
+                e.map(Math.cos(r), -1, 1, x, x + width),
+                e.map(Math.sin(r), -1, 1, y, y + height));
+        }
+    } else {
+        e.strokeWeight(1);
+        for (let i = angle - 1; i < angle + 180; i += dTheta) {
+            const c = e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180));
+            e.stroke(c);
+            e.fill(c);
+            r1 = e.radians(i);
+            r2 = e.radians(i - dTheta);
+            e.triangle(x + width / 2, y + height / 2,
+                e.map(Math.cos(r1), -1, 1, x, x + width),
+                e.map(Math.sin(r1), -1, 1, y, y + height),
+                e.map(Math.cos(r2), -1, 1, x, x + width),
+                e.map(Math.sin(r2), -1, 1, y, y + height));
+        }
+        // Temporary fix for missing triangle
+        r1 = e.radians(angle - 180);
+        r2 = e.radians(angle - 180 - dTheta);
+        e.stroke(endColor);
+        e.fill(endColor);
+        e.triangle(x + width / 2, y + height / 2,
+            e.map(Math.cos(r1), -1, 1, x, x + width),
+            e.map(Math.sin(r1), -1, 1, y, y + height),
+            e.map(Math.cos(r2), -1, 1, x, x + width),
+            e.map(Math.sin(r2), -1, 1, y, y + height));
+        for (let i = angle - 1; i > angle - 180; i -= dTheta) {
+            const c = e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180));
+            e.stroke(c);
+            e.fill(c);
+            r1 = e.radians(i);
+            r2 = e.radians(i - dTheta);
+            e.triangle(x + width / 2, y + height / 2,
+                e.map(Math.cos(r1), -1, 1, x, x + width),
+                e.map(Math.sin(r1), -1, 1, y, y + height),
+                e.map(Math.cos(r2), -1, 1, x, x + width),
+                e.map(Math.sin(r2), -1, 1, y, y + height));
+        }
+    }
+    pop();
 };
 
 /**
  * @summary
  * Alias for `color(255, 0, 0)`.
- * 
+ *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
+ * Essentials includes the [CSS color
+ * names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * `COLORNAME`.
+ *
  * @example
  * fill(RED);
  * text('Hello World', 25, 25);
- * 
+ *
  * @example
  * let c = color(RED, 50);
  * fill(c);
@@ -547,14 +703,16 @@ RED = e.color(255, 0, 0);
 /**
  * @summary
  * Alias for `color(0, 128, 0)`.
- * 
+ *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
+ * Essentials includes the [CSS color
+ * names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * `COLORNAME`.
+ *
  * @example
  * fill(GREEN);
  * text('Hello World', 25, 25);
- * 
+ *
  * @example
  * let c = color(GREEN, 50);
  * fill(c);
@@ -565,14 +723,16 @@ GREEN = e.color(0, 128, 0);
 /**
  * @summary
  * Alias for `color(0, 0, 255)`.
- * 
+ *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format `COLORNAME`.
- * 
+ * Essentials includes the [CSS color
+ * names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * `COLORNAME`.
+ *
  * @example
  * fill(BLUE);
  * text('Hello World', 25, 25);
- * 
+ *
  * @example
  * let c = color(BLUE, 50);
  * fill(c);
@@ -718,14 +878,45 @@ MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
 /**
+ * Converts hex to RGB color type.
+ *
+ * @param {string} hex Hex color value, optional `#`; can be shorthand
+ *
+ * @returns {color} RGB color value
+ *
+ * @example
+ * let c = hexToRGB('#fff');
+ * println(c);
+ * // expected output: -1
+ * background(c);
+ * // expected outcome: white background
+ */
+hexToRGB = hex => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    result = result ? result.splice(1).map(function (i) {
+        return parseInt(i, 16);
+    }) : null;
+    push();
+    e.colorMode(e.RGB);
+    result = e.color.apply(e, result);
+    pop();
+    return result;
+};
+
+/**
  * Converts HSB to RGB color type.
- * 
+ *
  * @param {(number|color)} x Hue value or color
  * @param {number} [s] Saturation value
  * @param {number} [v] Brightness value
- * 
+ *
  * @returns {string}  RGB color value
- * 
+ *
  * @example
  * let c = HSBToRGB(85, 255, 255);
  * println(c);
@@ -764,18 +955,202 @@ HSBToRGB = function(x, s, v) {
 };
 
 /**
+ * @summary
+ * Draws a linear gradient from `startColor` to `endColor` in the form of a rectangle.
+ *
+ * @description
+ * For a step size greater than 1, the function draws rectangles of width
+ * `step`. Using a step size greater than 1 is faster for all but diagonal
+ * gradients. It is highly advised to store drawn gradients in images using the
+ * `get` function for use in a draw loop.
+ *
+ * @param {number} x x-coordinate of the gradient
+ * @param {number} y y-coordinate of the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param
+ * {LEFT|RIGHT|TOP|UP|BOTTOM|DOWN|TOP_LEFT|TOP_RIGHT|BOTTOM_RIGHT|BOTTOM_LEFT}
+ * [direction=RIGHT] direction of gradient
+ * @param {number} [step=5] step size
+ *
+ * @example
+ * linearGradient(25, 25, 100, 100, RED, YELLOW);
+ * // expected outcome: linear gradient from left to right; red to yellow
+ *
+ * @example
+ * linearGradient(150, 25, 100, 100, PURPLE, PINK, TOP_RIGHT);
+ * // expected outcome: linear gradient from bottom-left to top-right; purple to pink
+ *
+ * @example
+ * linearGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, BOTTOM_RIGHT, 10);
+ * // expected outcome: linear gradient from top-left to bottom-right; green to light blue in strips of thickness 10
+ */
+linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, step = 5) => {
+    push();
+    e.strokeWeight(1);
+    switch (direction) {
+        case LEFT:
+        case RIGHT:
+            if (direction == LEFT) [startColor, endColor] = [endColor, startColor];
+            if (step == 1) {
+                for (let i = 0; i < width; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / width));
+                    e.line(x + i, y, x + i, y + height);
+                }
+            } else {
+                for (let i = 0; i < width; i += step) {
+                    const c = e.lerpColor(startColor, endColor, i / width);
+                    e.stroke(c);
+                    e.fill(c);
+                    if (i + step > width) { e.rect(x + i, y, width - i, height); }
+                    else { e.rect(x + i, y, step, height); }
+                }
+            }
+            break;
+        case TOP:
+        case UP:
+        case BOTTOM:
+        case DOWN:
+            if (direction == TOP || direction == UP) [startColor, endColor] = [endColor, startColor];
+            if (step == 1) {
+                for (let i = 0; i < height; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / height));
+                    e.line(x, y + i, x + width, y + i);
+                }
+            } else {
+                for (let i = 0; i < height; i += step) {
+                    const c = e.lerpColor(startColor, endColor, i / height);
+                    e.stroke(c);
+                    e.fill(c);
+                    if (i + step > width) { e.rect(x, y + i, width, height - i); }
+                    else { e.rect(x, y + i, width, step); }
+                }
+            }
+            break;
+        case TOP_LEFT:
+        case BOTTOM_RIGHT:
+            if (direction == TOP_LEFT) [startColor, endColor] = [endColor, startColor];
+            if (step == 1) {
+                for (let i = 0; i < width; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2));
+                    e.line(x + i, y, x, y + e.map(i, 0, width, 0, height));
+                }
+                for (let i = 0; i < width; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2 + 0.5));
+                    e.line(x + i, y + height, x + width, y + e.map(i, 0, width, 0, height));
+                }
+            } else {
+                const side = Math.max(width, height) * Math.sqrt(2);
+                showGraphics(x, y, width, height, function () {
+                    this.angleMode = 'degrees';
+                    this.rotate(-45);
+                    for (let i = 0; i < side; i += step) {
+                        const c = this.lerpColor(startColor, endColor, i / side);
+                        this.stroke(c);
+                        this.fill(c);
+                        if (i + step > side) { this.rect(-side / 2, i, side, side - i); }
+                        else { this.rect(-side / 2, i, side, step); }
+                    }
+                });
+            }
+            break;
+        case TOP_RIGHT:
+        case BOTTOM_LEFT:
+            if (direction == TOP_RIGHT) [startColor, endColor] = [endColor, startColor];
+            if (step == 1) {
+                for (let i = 0; i < width; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2));
+                    e.line(x + width - i, y, x + width, y + e.map(i, 0, width, 0, height));
+                }
+                for (let i = 0; i < width; i++) {
+                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2 + 0.5));
+                    e.line(x + width - i, y + height, x, y + e.map(i, 0, width, 0, height));
+                }
+            } else {
+                const side = Math.max(width, height) * Math.sqrt(2);
+                showGraphics(x, y, width, height, function () {
+                    this.angleMode = 'degrees';
+                    this.rotate(45);
+                    for (let i = 0; i < side; i += step) {
+                        const c = this.lerpColor(startColor, endColor, i / side);
+                        this.stroke(c);
+                        this.fill(c);
+                        if (i + step > side) { this.rect(0, i - side / 2, side, side - i); }
+                        else { this.rect(0, i - side / 2, side, step); }
+                    }
+                });
+            }
+    }
+    pop();
+};
+
+/**
+ * @summary
+ * Draws a radial gradient from `startColor` to `endColor` in the form of an
+ * ellipse.
+ *
+ * @description
+ * For a step size greater than 1, the function draws ellipses of width `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ *
+ * @param {number} x x-coordinate of center of the gradient
+ * @param {number} y y-coordinate of center the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [step=5] step size
+ *
+ * @example
+ * radialGradient(100, 100, 100, 100, RED, YELLOW);
+ * // expected outcome: radial gradient from red to yellow
+ *
+ * @example
+ * radialGradient(250, 100, 100, 100, PURPLE, PINK, 10);
+ * // expected outcome: radial gradient from purple to pink with step size 10
+ */
+radialGradient = (x, y, width, height, startColor, endColor, step = 5) => {
+    push();
+    e.strokeWeight(1);
+    const maxRadius = Math.max(width, height);
+    if (step == 1) {
+        e.noFill();
+        for (let i = 0; i < maxRadius; i++) {
+            e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
+            e.arc(x, y,
+                width - e.map(i, 0, maxRadius, 0, width),
+                height - e.map(i, 0, maxRadius, 0, height),
+                0, 360);
+        }
+    } else {
+        for (let i = 0; i < maxRadius; i += step) {
+            const c = e.lerpColor(endColor, startColor, i / maxRadius);
+            e.stroke(c);
+            e.fill(c);
+            e.ellipse(x, y,
+                width - e.map(i, 0, maxRadius, 0, width),
+                height - e.map(i, 0, maxRadius, 0, height));
+        }
+    }
+    pop();
+};
+
+/**
  * Converts RGB to hex color type.
- * 
+ *
  * @param {(number|color)} x Red value or color
  * @param {number} [g] Green value
  * @param {number} [b] Blue value
- * 
+ *
  * @returns {string}  Hex color value
- * 
+ *
  * @example
  * println(RGBToHex(255, 0, 0));
  * // expected output: #ff0000
- * 
+ *
  * @example
  * let c = RED;
  * println(RGBToHex(c));
@@ -791,13 +1166,13 @@ RGBToHex = function(x, g, b) {
 
 /**
  * Converts RGB to HSB color type.
- * 
+ *
  * @param {(number|color)} x Red value or color
  * @param {number} [g] Green value
  * @param {number} [b] Blue value
- * 
+ *
  * @returns {string}  HSB color value
- * 
+ *
  * @example
  * let c = RGBToHSB(255, 0, 0);
  * println(c);
@@ -844,23 +1219,23 @@ RGBToHSB = function(x, g, b) {
 
 /**
  * Converts hex or RGB to HSB color value.
- * 
+ *
  * @param {(string|color)} x Hex, red or HSB color value
  * @param {number} [g] Green value
  * @param {number} [b] Blue value
- * 
+ *
  * @returns {color|array}  RGB color value or RGB values array
- * 
+ *
  * @example
  * colorMode(HSB);
  * background(toHSB('fff'));
  * // expected outcome: white background
- * 
+ *
  * @example
  * colorMode(HSB);
  * background(toHSB(255, 0, 0));
  * // expected outcome: red background
- * 
+ *
  * @example
  * println(toHSB(-1))
  * // expected output: [0, 0, 255]
@@ -881,21 +1256,21 @@ toHSB = function() {
 
 /**
  * Converts hex or HSB to RGB color value.
- * 
+ *
  * @param {(string|color)} x Hex, hue or RGB color value
  * @param {number} [s] Saturation value
  * @param {number} [v] Brightness value
- * 
+ *
  * @returns {color|array}  RGB color value or RGB values array
- * 
+ *
  * @example
  * background(toRGB('fff'));
  * // expected outcome: white background
- * 
+ *
  * @example
  * background(toRGB(0, 255, 255));
  * // expected outcome: red background
- * 
+ *
  * @example
  * println(toRGB(-1))
  * // expected output: [255, 255, 255]
@@ -931,32 +1306,33 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 }
 
 /**
- * Sets font, size and other [CSS font properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
- * 
+ * Sets font, size and other [CSS font
+ * properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
+ *
  * @param {(string|font)}  name  Name of font or font
  * @param {number}  [size]  Font size
  * @param {...string}  properties  CSS font properties
- * 
+ *
  * @returns {font}  Created font
- * 
+ *
  * @example
  * fill(BLACK);
  * font('Arial', 30, 'bold');
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in bold Arial font
- * 
+ *
  * @example
  * let f = font('Arial', 'bold');
  * textSize(30);
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in normal Arial normal size font
  * // `textSize()` should not be used with `font()`
- * 
+ *
  * // Instead, use `font()`
  * font(f, 30);
  * text('Hello World', 100, 200);
  * // expected outcome: 'Hello World' in bold Arial size 30 font
- * 
+ *
  * @example
  * // Use the `-call` parameter to prevent the font automatically being set
  * // This functionality is useful when defining font variables
@@ -966,12 +1342,12 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
  * font(f);
  * text('Hello World', 100, 200);
  * // expected outcome: the text will be in serif font
- * 
+ *
  * @example
  * let f = font('Arial', 'bold', 'italic');
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in bold and italic Arial font
- * 
+ *
  * // Use the negate syntax to remove properties from fonts
  * font(f, '-bold');
  * text('Hello World', 100, 200);
@@ -1027,14 +1403,52 @@ font = function (family) {
 };
 
 /**
+ * Fast gradient by filling each character with a different color as opposed to
+ * masking the text with the gradient.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ *
+ * @example
+ * font('sans-serif', 25);
+ * fastGradientText('Hello World', 10, textAscent() * 2, RED, YELLOW);
+ * // expected outcome: 'Hello World' with gradient fill from red to yellow
+ *
+ * @example
+ * font('sans-serif', 25, 'bold');
+ * fastGradientText('Hello\nWorld', 10, textAscent() * 4, PURPLE, PINK);
+ * // expected outcome: 'Hello World', bold, with gradient fill from purple to pink in two lines
+ *
+ * @see font
+ */
+fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => {
+    push();
+    if (!string.includes('\n')) {
+        for (let i = 0; i < string.length; i++) {
+            e.fill(e.lerpColor(startColor, endColor, i / (string.length)));
+            e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
+        }
+    } else {
+        const strings = string.split('\n');
+        for (const i in strings) {
+            fastGradientText(strings[i], x, y + i * textAscent(), startColor, endColor);
+        }
+    }
+    pop();
+};
+
+/**
  * Converts milliseconds to a readable format of duration.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/format-duration
- * 
+ *
  * @param {number}  ms  Duration in milliseconds
- * 
+ *
  * @returns {string}  Readable format of duration.
- * 
+ *
  * @example
  * let martianDay = 88775244;
  * console.log(formatDuration(martianDay));
@@ -1057,17 +1471,17 @@ formatDuration = ms => {
 
 /**
  * Draws a string with a highlight background.
- * 
- * @param {string} string String to be highlighted
- * @param {number} [x=0] x-coordinate value
- * @param {number} [y='text height'] y-coordinate value
- * @param {number} [highlightColor=YELLOW] Color of highlight background
- * 
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ * @param {number} [highlightColor=YELLOW] color of highlight background
+ *
  * @example
  * let str = 'Highlighted\nText';
  * fill(BLACK);
  * highlightText(str, 25, 25);
- * 
+ *
  * @example
  * let str = 'Highlighted\nText';
  * fill(LIGHTGREEN);
@@ -1093,11 +1507,11 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
 
 /**
  * Determines if text should be black or white based on background color.
- * 
+ *
  * @param {number} backgroundColor Color of background
- * 
+ *
  * @returns {number} Color of text
- * 
+ *
  * @example
  * let h = 0,
  *     s = 0,
@@ -1109,8 +1523,8 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
  *     h = frameCount % 255;
  *     s = frameCount % 255;
  *     b = frameCount % 255;
- *     let TEST_COLOR = color(h, s, b);
- *     background(TEST_COLOR);
+ *     let c = color(h, s, b);
+ *     background(c);
  *     fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));
  *     text("TEXT", width / 2, height / 2);
  * };
@@ -1135,11 +1549,11 @@ lightOrDarkText = backgroundColor => {
 
 /**
  * Draws text with multiple colors that are passed in using special syntax.
- * 
- * @param {string} string Input string
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * 
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ *
  * @example
  * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
  * fill(BLUE);
@@ -1199,40 +1613,6 @@ ordinalSuffix = n => {
 };
 
 /**
- * Draws text with an outline.
- * 
- * @param {string} string String to be outlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {number} [outlineColor=BLACK] Color of outline
- * 
- * @example
- * let str = 'Outlined\nText';
- * outlineText(str, 25, 25);
- * 
- * @example
- * let str = 'Outlined\nText';
- * fill(BLACK);
- * outlineText(str, 25, 25, ORANGE);
- */
-outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    push();
-    e.fill(outlineColor);
-    for (let i = -2; i < 3; i++) {
-        for (let j = -1; j < 3; j++) {
-            e.text(string, x + i, y + j);
-        }
-        e.text(string, x + i, y);
-        e.text(string, x, y + i);
-    }
-    pop();
-    e.text(string, x, y);
-};
-
-/**
  * Returns the singular or plural form of the word based on the input number,
  * using an optional dictionary if supplied.
  *
@@ -1270,10 +1650,46 @@ pluralize = (value, word, plural = word + 's') => {
 };
 
 /**
- * Formats string similar to [template literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals} in ES6
- * 
+ * Draws text with an outline.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ * @param {color} [outlineColor=BLACK] color of outline
+ *
+ * @example
+ * let str = 'Outlined\nText';
+ * outlineText(str, 25, 25);
+ *
+ * @example
+ * let str = 'Outlined\nText';
+ * fill(BLACK);
+ * outlineText(str, 25, 25, ORANGE);
+ */
+outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    push();
+    e.fill(outlineColor);
+    for (let i = -2; i < 3; i++) {
+        for (let j = -1; j < 3; j++) {
+            e.text(string, x + i, y + j);
+        }
+        e.text(string, x + i, y);
+        e.text(string, x, y + i);
+    }
+    pop();
+    e.text(string, x, y);
+};
+
+/**
+ * Formats string similar to [template
+ * literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals}
+ * in ES6
+ *
  * @param {string} string Formatted string
- * 
+ *
  * @example
  * println('PI is ${Math.PI.toFixed(2)}'.format())
  * // expected output: PI is 3.14
@@ -1298,9 +1714,9 @@ String.prototype.format = function () {
 
 /**
  * Obfuscate strings as hexadecimal and unicode escape characters.
- * 
+ *
  * @link https://www.khanacademy.org/cs/-/4812748875104256
- * 
+ *
  * @example
  * let str = 'Hello World';
  * let obfuscated = str.obfuscate();
@@ -1330,9 +1746,9 @@ String.prototype.obfuscate = function () {
 
 /**
  * Removes non-ACII characters from string.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/remove-non-ascii
- * 
+ *
  * @example
  * let str = 'Hello 😀';
  * let strippedStr = str.removeNonASCII();
@@ -1345,9 +1761,9 @@ String.prototype.removeNonASCII = function () {
 
 /**
  * Converts string to camel case.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/to-camel-case
- * 
+ *
  * @example
  * println('lorem ipsum'.toCamelCase());
  * // expected output: 'loremIpsum'
@@ -1365,9 +1781,9 @@ String.prototype.toCamelCase = function () {
 
 /**
  * Converts string to kebab case.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/to-kebab-case
- * 
+ *
  * @example
  * println('lorem ipsum'.toKebabCase());
  * // expected output: 'lorem-ipsum'
@@ -1381,9 +1797,9 @@ String.prototype.toKebabCase = function () {
 
 /**
  * Converts string to snake case.
- * 
+ *
  * @link https://www.30secondsofcode.org/js/s/to-snake-case
- * 
+ *
  * @example
  * println('lorem ipsum'.toSnakeCase());
  * // expected output: 'lorem_ipsum'
@@ -1439,18 +1855,18 @@ wordWrap = (str, max, br = '\n') => str.replace(
 
 /**
  * Draws text underlined.
- * 
+ *
  * @param {string} string Text to be underlined
  * @param {number} x x-coordinate value
  * @param {number} y y-coordinate value
  * @param {color} [underlineColor=BLACK] Color of underline
  * @param {number} [underlineWeight] Weight of underline
- * 
+ *
  * @example
  * let str = 'Underlined\nText';
  * fill(BLACK);
  * underlineText(str, 25, 25);
- * 
+ *
  * @example
  * let str = 'Underlined\nText';
  * fill(BLACK);
@@ -1471,4 +1887,538 @@ underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, unde
     e.textAlign(e.LEFT, e.CORNER);
     e.text(string, x, y);
     pop();
+};
+
+/** @module Shape */
+
+_shape_initialized_ = typeof SHAPE_ESSENTIALS !== 'undefined';
+
+if (typeof ESSENTIALS_CORE === 'undefined') {
+    console.error('Shape Essentials depends on the Essentials Core.');
+} else {
+    SHAPE_ESSENTIALS = true;
+    if (!_silent_ && !_shape_initialized_) console.info(
+        '%cShape Essentials',
+        'font-family:system-ui;font-size:0.75rem;'
+    );
+}
+
+/**
+ * Faster blur effect on a rectangular selection.
+ *
+ * @param {number} x x-coordinate of the rectangle
+ * @param {number} y y-coordinate of the rectangle
+ * @param {number} width width of the rectangle
+ * @param {number} height height of the rectangle
+ * @param {number} size intensity of blur
+ */
+blurRect = (x, y, width, height, size) => {
+    if (size <= 0) return;
+    size = e.constrain(size, 0, Math.min(width, height));
+    e.image(e.get(x, y, width, height), x, y, width / size, height / size);
+    e.image(e.get(x, y, width / size, height / size), x, y, width, height);
+};
+
+/**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ *
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ *
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+
+/**
+ * Draws a 2D cylinder.
+ *
+ * @link https://www.khanacademy.org/cs/-/5157537806548992
+ *
+ * @param {number} x x-coordinate of cylinder
+ * @param {number} y y-coordinate of cylinder
+ * @param {number} width
+ * @param {number} height
+ *
+ * @example
+ * cylinder(100, 100, 100, 50);
+ */
+cylinder = (x, y, width, height) => {
+    width = Math.abs(width);
+    height = Math.abs(height);
+    push();
+    e.translate(x, y);
+    if (height > width) {
+        const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
+        e.rotate(_TAU / 4);
+        cylinder(0, 0, height, width);
+    } else {
+        const r = height / 2;
+        const z = (width - height) / 2;
+        const central = 4 / 3 * (Math.sqrt(2) - 1) * r;
+        drawShape(() => {
+            e.vertex(z, -r);
+            e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
+            e.bezierVertex(z + r, central, z + central, r, z, r);
+            e.vertex(-z, r);
+            e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
+            e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
+        }, true);
+    }
+    pop();
+};
+
+/**
+ * @summary
+ * Draws a dashed line.
+ *
+ * @description
+ * If `endDash` is true, a dash will be drawn of smaller length than defined by
+ * `dashLength` to finish the line. If `endPoint` is true, a point will be drawn
+ * at (x2, y2). Use the `smooth` function to prevent jagged dashes.
+ *
+ * @param {number} x1 x-coordinate of the start point
+ * @param {number} y1 y-coordinate of the start point
+ * @param {number} x2 x-coordinate of the end point
+ * @param {number} y2 y-coordinate of the end point
+ * @param {number} [dashLength=10] length of dash
+ * @param {number} [spacing=10] spacing between points
+ * @param {boolean} [endDash=true] draw dash at end
+ * @param {boolean} [endPoint=true] draw point at end point
+ *
+ * @example
+ * strokeWeight(3);
+ * dashedLine(50, 50, 350, 50);
+ * // expected outcome: straight dashed line
+ *
+ * @example
+ * dashedLine(50, 75, 350, 75, 5, 10);
+ * // expected outcome: straight dashed line with a dash length of 5 and spacing of 10
+ *
+ * @example
+ * dashedLine(50, 100, 350, 100, 5, 10, false, false);
+ * // expected outcome: straight dashed line and no end point
+ *
+ * @example
+ * dashedLine(50, 125, 352.5, 125, 10, 5);
+ * // expected outcome: straight dashed line and an end dash
+ *
+ * @example
+ * dashedLine(50, 150, 352.5, 150, 10, 5, false);
+ * // expected outcome: straight dashed line and no end dash
+ *
+ * @see dottedLine
+ */
+dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
+    const length = e.dist(x1, y1, x2, y2);
+    let i = 0;
+    for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
+        e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
+    }
+    if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
+    if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
+};
+
+/**
+ * Draws a donut.
+ *
+ * @link https://www.khanacademy.org/cs/-/4693526445719552
+ *
+ * @param {number} x x-coordinate of the donut
+ * @param {number} y y-coordinate of the donut
+ * @param {number} majorDiameter Diameter of outer circle
+ * @param {number} minorDiameter Diameter of inner circle
+ *
+ * @example
+ * donut(100, 100, 100, 50);
+ */
+donut = (x, y, majorDiameter, minorDiameter) => {
+    const kappa = 4 / 3 * (Math.sqrt(2) - 1);
+    push();
+    e.translate(x, y);
+    push();
+    e.noStroke();
+    drawShape(() => {
+        let radius = minorDiameter / 2;
+        let central = kappa * radius;
+        e.vertex(radius, 0);
+        e.bezierVertex(radius, central, central, radius, 0, radius);
+        e.bezierVertex(-central, radius, -radius, central, -radius, 0);
+        e.bezierVertex(-radius, -central, -central, -radius, 0, -radius);
+        e.bezierVertex(central, -radius, radius, -central, radius, 0);
+        radius = majorDiameter / 2;
+        central = kappa * radius;
+        e.vertex(radius, 0);
+        e.bezierVertex(radius, -central, central, -radius, 0, -radius);
+        e.bezierVertex(-central, -radius, -radius, -central, -radius, 0);
+        e.bezierVertex(-radius, central, -central, radius, 0, radius);
+        e.bezierVertex(central, radius, radius, central, radius, 0);
+    }, true);
+    pop();
+
+    push();
+    e.noFill();
+    circle(0, 0, minorDiameter);
+    circle(0, 0, majorDiameter);
+    pop();
+    pop();
+};
+
+/**
+ * @summary
+ * Draws a dotted line.
+ *
+ * @description
+ * If `endPoint` is true, a point will be drawn at (x2, y2). Use the `smooth`
+ * function to prevent jagged points.
+ *
+ * @param {number} x1 x-coordinate of the start point
+ * @param {number} y1 y-coordinate of the start point
+ * @param {number} x2 x-coordinate of the end point
+ * @param {number} y2 y-coordinate of the end point
+ * @param {number} [spacing=10] gap between points
+ * @param {boolean} [endPoint=true] draw point at end point
+ *
+ * @example
+ * strokeWeight(4);
+ * dottedLine(50, 50, 350, 50);
+ * // expected outcome: straight dotted line
+ *
+ * @example
+ * dottedLine(50, 75, 350, 75, 14);
+ * // expected outcome: straight dotted line with spacing of 14
+ *
+ * @example
+ * dottedLine(50, 100, 350, 100, 14, false);
+ * // expected outcome: straight dotted line with spacing of 14 and no end point
+ *
+ * @see dashedLine
+ */
+dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
+    const length = e.dist(x1, y1, x2, y2);
+    for (let i = 0; i < length; i += spacing) {
+        e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
+    }
+    if (endPoint) e.point(x2, y2);
+};
+
+/**
+ * Alias for `beginShape()`/`endShape()`.
+ *
+ * @param {Function} fn Shape function
+ * @param {CLOSE|boolean} [close] Whether to close the shape
+ * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
+ * [mode] Shape mode
+ *
+ * @example
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, CLOSE);
+ * // expected outcome: square
+ *
+ * @example
+ * strokeWeight(5);
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, false, POINTS);
+ * // expected outcome: points in a square formation
+ */
+drawShape = (fn, close, mode) => {
+    close = close && e.CLOSE;
+    e.beginShape(mode);
+    fn();
+    e.endShape(close);
+};
+
+/**
+ * Draws a line of a given length and at a given angle.
+ *
+ * @param {number} x x-coordinate of start point
+ * @param {number} y y-coordinate of start point
+ * @param {number} length length of line
+ * @param {number} angle rotation of line
+ *
+ * @example
+ * angleMode = 'degrees';
+ * edge(50, 50, 300, 0);
+ * // expected outcome: horizontal line of length 300
+ *
+ * @example
+ * edge(50, 75, 100, 45);
+ * // expected outcome: line of length 100 rotated 45 degrees
+ *
+ * @example
+ * angleMode = 'radians';
+ * edge(200, 75, 100, PI / 4);
+ * // expected outcome: line of length 100 rotated 45 degrees
+ */
+edge = (x, y, length, angle) => {
+    if (angleMode == 'degrees') angle = e.radians(angle);
+    const x2 = x + length * Math.cos(angle);
+    const y2 = y + length * Math.sin(angle);
+    line(x, y, x2, y2);
+};
+
+/**
+ * Draws a heart.
+ *
+ * @link https://www.khanacademy.org/cs/-/2085250861
+ *
+ * @param {number} x x-coordinate of the heart
+ * @param {number} y y-coordinate of the heart
+ * @param {number} radius
+ *
+ * @example
+ * heart(100, 100, 50);
+ */
+heart = (x, y, radius) => {
+    const ay = y - 2 * radius / 5,
+        by = y + radius,
+        c1y = y - 6 * radius / 5,
+        c2y = y - 2 * radius / 5;
+    let c1x = x + radius / 2,
+        c2x = x + 9 * radius / 5;
+
+    drawShape(() => {
+        e.vertex(x, ay);
+        e.bezierVertex(c1x, c1y, c2x, c2y, x, by);
+        c1x = 2 * x - c1x;
+        c2x = 2 * x - c2x;
+        e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
+    }, true);
+};
+
+/**
+ * Draws a parallelogram.
+ *
+ * @link https://www.khanacademy.org/cs/-/4747962019348480
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * parallelogram(50, 50, 200, 50, 100, 100);
+ *
+ * @see rhombus
+ */
+parallelogram = (ax, ay, bx, by, cx, cy) => {
+    const dx = bx - ax;
+    const dy = by - ay;
+    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
+};
+
+/**
+ * Draws a polygon with _n_ sides.
+ *
+ * @link https://www.khanacademy.org/cs/-/1304459398
+ *
+ * @param {number} x x-coordinate of polygon's circumcircle
+ * @param {number} y y-coordinate of polygon's circumcircle
+ * @param {number} sides Number of sides
+ * @param {number} radius Radius of circumcircle
+ * @param {number} [rotation=0] Rotation of polygon in degrees or radians
+ *
+ * @example
+ * polygon(100, 100, 5, 100);
+ *
+ * @example
+ * polygon(100, 100, 5, 100, 180);
+ *
+ * // Alternative method
+ * angleMode = 'radians';
+ * polygon(100, 100, 5, 100, PI);
+ */
+polygon = (x, y, sides, radius, rotation) => {
+    const _TAU = (Math.cos(Math.PI) < 0) ? 2 * Math.PI : 360;
+    push();
+    e.translate(x, y);
+    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
+    drawShape(() => {
+        for (let theta = 0; theta < _TAU; theta += _TAU / sides) {
+            e.vertex(radius * Math.cos(theta), radius * Math.sin(theta));
+        }
+    }, true);
+    pop();
+};
+
+/**
+ * @summary
+ * Alias for `rect` with smart radius parameter defaults.
+ *
+ * @description
+ * The rectangle will have a default corner radius of 0, if one argument is
+ * provided all corners are set to match that radius. If two arguments are
+ * provided, the top two corners' radius is set to the first parameter and the
+ * bottom two, the second. If three arguments are provided, the last
+ * argument--bottom-left corner--is defaulted to 0. If all four radius arguments
+ * are provided each corner will be set to it's corresponding parameter.
+ *
+ * @param {number} x x-coordinate of the rectangle
+ * @param {number} y y-coordinate of the rectangle
+ * @param {number} width width of the rectangle
+ * @param {number} height height of the rectangle
+ * @param {number} [tl=0] radius of top-left corner
+ * @param {number} [tr=0] radius of top-right corner
+ * @param {number} [br=0] radius of bottom-right corner
+ * @param {number} [bl=0] radius of bottom-left corner
+ *
+ * @example
+ * rectangle(50, 50, 100, 50);
+ * // expected outcome: Rectangle with side lengths 100 and 50
+ * @example
+ * rectangle(150, 50, 100, 50, 10);
+ * // expected outcome: Rectangle with radius 10 for all corners
+ * @example
+ * rectangle(250, 50, 100, 50, 10, 0);
+ * // expected outcome: Rectangle with radius 10 for top corners
+ * @example
+ * rectangle(50, 150, 100, 50, 10, 10, 10); 
+ * // expected outcome: Rectangle with radius 10 for all but bottom-left corner
+ * @example
+ * rectangle(150, 150, 100, 50, 10, 10, 0, 10);
+ * // expected outcome: Rectangle with radius 10 for all but bottom-right corner
+ *
+ * @see square
+ */
+rectangle = (x, y, width, height = width, tl, tr, br, bl) => {
+    if (tl == undefined) e.rect(x, y, width, height);
+    else if (tr == undefined) e.rect(x, y, width, height, tl);
+    else if (br == undefined) e.rect(x, y, width, height, tl, tl, tr, tr);
+    else if (bl == undefined) e.rect(x, y, width, height, tl, tr, br, 0);
+    else e.rect(x, y, width, height, tl, tr, br, bl);
+};
+
+/**
+ * Draws a rhombus.
+ *
+ * @link https://khanacademy.org/cs/-/4747962019348480
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * rhombus(50, 100, 100, 50, 100, 100);
+ *
+ * @see parallelogram
+ */
+rhombus = (ax, ay, bx, by, cx, cy) => {
+    const r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
+    cx = ax + r * (cx - ax);
+    cy = ay + r * (cy - ay);
+    parallelogram(ax, ay, bx, by, cx, cy);
+};
+
+/**
+ * @summary
+ * Alias for `rect` with smart radius parameter defaults and one `side`
+ * parameter.
+ *
+ * @description
+ * The square will have a default corner radius of 0, if one argument is
+ * provided all corners are set to match that radius. If two arguments are
+ * provided, the top two corners' radius is set to the first parameter and the
+ * bottom two, the second. If three arguments are provided, the last
+ * argument--bottom-left corner--is defaulted to 0. If all four radius arguments
+ * are provided each corner will be set to it's corresponding parameter.
+ *
+ * @param {number} x x-coordinate of the square
+ * @param {number} y y-coordinate of the square
+ * @param {number} side side length of the square
+ * @param {number} [tl=0] radius of top-left corner
+ * @param {number} [tr=0] radius of top-right corner
+ * @param {number} [br=0] radius of bottom-right corner
+ * @param {number} [bl=0] radius of bottom-left corner
+ *
+ * @example
+ * square(50, 50, 50);
+ * // expected outcome: Square with side length 50
+ * @example
+ * square(150, 50, 50, 10);
+ * // expected outcome: Square with radius 10 for all corners
+ * @example
+ * square(250, 50, 50, 10, 0);
+ * // expected outcome: Square with radius 10 for top corners
+ * @example
+ * square(50, 150, 50, 10, 10, 10);
+ * // expected outcome: Square with radius 10 for all but bottom-left corner
+ * @example
+ * square(150, 150, 50, 10, 10, 0, 10);
+ * // expected outcome: Square with radius 10 for all but bottom-right corner
+ *
+ * @see rectangle
+ */
+square = (x, y, side, tl, tr, br, bl) => {
+    if (tl == undefined) e.rect(x, y, side, side);
+    else if (tr == undefined) e.rect(x, y, side, side, tl);
+    else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);
+    else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);
+    else e.rect(x, y, side, side, tl, tr, br, bl);
+};
+
+/**
+ * Draws a star with _n_ spikes.
+ *
+ * @link https://www.khanacademy.org/cs/-/1171581918
+ *
+ * @param {number} x x-coordinate of star
+ * @param {number} y y-coordinate of star
+ * @param {number} externalRadius External radius
+ * @param {number} [spikes=5] Number of spikes
+ * @param {number} [rotation=0] Rotation of star in degrees or radians
+ *
+ * @example
+ * star(100, 100, 50);
+ *
+ * @example
+ * star(100, 100, 50, 7, 10);
+ */
+star = (x, y, externalRadius, spikes = 5, rotation) => {
+    const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
+    const interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
+    push();
+    e.translate(x, y);
+    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
+    drawShape(() => {
+        let internalRadius;
+        for (let theta = 0; theta < _TAU; theta += _TAU / (2 * spikes)) {
+            internalRadius = (internalRadius === externalRadius) ? interior : externalRadius;
+            e.vertex(internalRadius * Math.cos(theta), internalRadius * Math.sin(theta));
+        }
+    }, true);
+
+    pop();
+};
+
+/**
+ * Draws a trapezoid.
+ * 
+ * @param {number} x x-coordinate of trapezoid
+ * @param {number} y y-coordinate of trapezoid
+ * @param {number} height height of trapezoid
+ * @param {number} topBase width of top base
+ * @param {number} bottomBase width of bottom base
+ * 
+ * @example
+ * trapezoid(100, 100, 100, 150, 200);
+ * // expected outcome: trapezoid 
+ */
+trapezoid = (x, y, height, topBase, bottomBase) => {
+    const maxBase = Math.max(topBase, bottomBase);
+    e.quad(x + (maxBase - topBase) / 2, y,
+        x + (maxBase - topBase) / 2 + topBase - 1, y,
+        x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1,
+        x + (maxBase - bottomBase) / 2, y + height - 1);
 };
