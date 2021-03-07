@@ -1,3 +1,41 @@
+/**
+ * Essentials.
+ *
+ * The Essentials library provides utility functions for the Khan Academy
+ * Processing Environment.
+ *
+ * @link https://github.com/bhavjitChauhan/Essentials
+ * @file CDN Essentials Build
+ * @author Bhavjit Chauhan
+ */
+
+_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
+_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
+
+ESSENTIALS_CORE = true;
+ESSENTIALS_VERSION = '1.1.0';
+ESSENTIALS_ASCII = `
+    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
+   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/
+  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/
+ _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/
+_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/
+
+`;
+
+_silent_ = typeof _silent_ !== 'undefined' && _silent_;
+if (!_silent_ && !_core_initialized_) console.info(
+    `%cEssentials
+%cThe Khan Academy utility library.
+
+${_env_} Build
+Version ${ESSENTIALS_VERSION}
+Copyright \xa9 2021 Bhavjit Chauhan
+https://github.com/bhavjitChauhan/Essentials`,
+    'font-family:system-ui;font-size:1rem;',
+    'font-family:system-ui;font-size:0.75rem;'
+);
+
 _eval = eval;
 e = Processing.instances[0];
 
@@ -89,44 +127,6 @@ showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
     fn.call(g);
     e.image(g, x, y);
 };
-
-/**
- * Essentials.
- *
- * The Essentials library provides utility functions for the Khan Academy
- * Processing Environment.
- *
- * @link https://github.com/bhavjitChauhan/Essentials
- * @file CDN Essentials Build
- * @author Bhavjit Chauhan
- */
-
-_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
-_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
-
-ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.1.0beta';
-ESSENTIALS_ASCII = `
-    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
-   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/
-  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/
- _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/
-_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/
-
-`;
-
-_silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info(
-    `%cEssentials
-%cThe Khan Academy utility library.
-
-${_env_} Build
-Version ${ESSENTIALS_VERSION}
-Copyright \xa9 2021 Bhavjit Chauhan
-https://github.com/bhavjitChauhan/Essentials`,
-    'font-family:system-ui;font-size:1rem;',
-    'font-family:system-ui;font-size:0.75rem;'
-);
 
 /**
  * Attempts to invoke a function with the provided arguments, returning either
@@ -325,23 +325,6 @@ isFont = obj => {
 };
 
 /**
- * Checks if object is a Khan Academy sound object.
- *
- * @param {Object} obj
- *
- * @example
- * let s = getSound("retro/boom1");
- * println(isSound(s));
- * // expected output: true
- */
-isSound = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.audio);
-};
-
-/**
  * Checks if object is a Khan Academy image object.
  *
  * @param {Object} obj
@@ -356,6 +339,23 @@ isImage = obj => {
         return false;
     }
     return _.isObject(obj.sourceImg);
+};
+
+/**
+ * Checks if object is a Khan Academy sound object.
+ *
+ * @param {Object} obj
+ *
+ * @example
+ * let s = getSound("retro/boom1");
+ * println(isSound(s));
+ * // expected output: true
+ */
+isSound = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isObject(obj.audio);
 };
 
 /**
@@ -527,70 +527,6 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 
 /**
  * @summary
- * Draws an angular gradient from `startColor` to `endColor` in the form of an
- * ellipse.
- *
- * @description
- * For a step size greater than 1, the function draws triangles of base `step`.
- * Using a step size greater than 1 is faster. It is highly advised to store
- * drawn gradients in images using the `get` function for use in a draw loop.
- * Use the `smooth` function to prevent jagged edges.
- *
- * @param {number} x x-coordinate of the top-left corner the gradient
- * @param {number} y y-coordinate of the top-left corner the gradient
- * @param {number} width width of the gradient
- * @param {number} height height of the gradient
- * @param {color} startColor starting color
- * @param {color} endColor ending color
- * @param {number} [angle=0] start angle of the gradient in degrees
- * @param {number} [step=5] step size
- *
- * @example
- * angularGradient(25, 25, 100, 100, RED, YELLOW);
- * // expected outcome: angular gradient from red to yellow
- *
- * @example
- * angularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
- * // expected outcome: angular gradient from purple to pink rotated 90 degrees
- *
- * @example
- * angularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
- * // expected outcome: angular gradient from green to light blue in strips of thickness 25
- */
-angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
-    angle -= 90;
-    // `atan` could be `asin`. See https://jsbench.me/mmklrhzgra/1 & https://www.khanacademy.org/cs/-/4713637410717696
-    const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
-    push();
-    if (step == 1) {
-        e.strokeWeight(1.5);
-        for (let i = angle; i < angle + 359; i += dTheta) {
-            e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
-            r = e.radians(i);
-            e.line(x + width / 2, y + height / 2,
-                e.map(Math.cos(r), -1, 1, x, x + width),
-                e.map(Math.sin(r), -1, 1, y, y + height));
-        }
-    } else {
-        e.strokeWeight(1);
-        for (let i = angle; i < angle + 359; i += dTheta) {
-            const c = e.lerpColor(startColor, endColor, (i - angle) / 360);
-            e.stroke(c);
-            e.fill(c);
-            r1 = e.radians(i);
-            r2 = e.radians(i - dTheta);
-            e.triangle(x + width / 2, y + height / 2,
-                e.map(Math.cos(r1), -1, 1, x, x + width),
-                e.map(Math.sin(r1), -1, 1, y, y + height),
-                e.map(Math.cos(r2), -1, 1, x, x + width),
-                e.map(Math.sin(r2), -1, 1, y, y + height));
-        }
-    }
-    pop();
-};
-
-/**
- * @summary
  * Draws an circular gradient from `startColor` to `endColor` in the form of an
  * ellipse.
  *
@@ -678,6 +614,101 @@ circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step =
         }
     }
     pop();
+};
+
+/**
+ * @summary
+ * Draws an angular gradient from `startColor` to `endColor` in the form of an
+ * ellipse.
+ *
+ * @description
+ * For a step size greater than 1, the function draws triangles of base `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ * Use the `smooth` function to prevent jagged edges.
+ *
+ * @param {number} x x-coordinate of the top-left corner the gradient
+ * @param {number} y y-coordinate of the top-left corner the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
+ *
+ * @example
+ * angularGradient(25, 25, 100, 100, RED, YELLOW);
+ * // expected outcome: angular gradient from red to yellow
+ *
+ * @example
+ * angularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
+ * // expected outcome: angular gradient from purple to pink rotated 90 degrees
+ *
+ * @example
+ * angularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
+ * // expected outcome: angular gradient from green to light blue in strips of thickness 25
+ */
+angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
+    angle -= 90;
+    // `atan` could be `asin`. See https://jsbench.me/mmklrhzgra/1 & https://www.khanacademy.org/cs/-/4713637410717696
+    const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+    push();
+    if (step == 1) {
+        e.strokeWeight(1.5);
+        for (let i = angle; i < angle + 359; i += dTheta) {
+            e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
+            r = e.radians(i);
+            e.line(x + width / 2, y + height / 2,
+                e.map(Math.cos(r), -1, 1, x, x + width),
+                e.map(Math.sin(r), -1, 1, y, y + height));
+        }
+    } else {
+        e.strokeWeight(1);
+        for (let i = angle; i < angle + 359; i += dTheta) {
+            const c = e.lerpColor(startColor, endColor, (i - angle) / 360);
+            e.stroke(c);
+            e.fill(c);
+            r1 = e.radians(i);
+            r2 = e.radians(i - dTheta);
+            e.triangle(x + width / 2, y + height / 2,
+                e.map(Math.cos(r1), -1, 1, x, x + width),
+                e.map(Math.sin(r1), -1, 1, y, y + height),
+                e.map(Math.cos(r2), -1, 1, x, x + width),
+                e.map(Math.sin(r2), -1, 1, y, y + height));
+        }
+    }
+    pop();
+};
+
+/**
+ * Converts hex to RGB color type.
+ *
+ * @param {string} hex Hex color value, optional `#`; can be shorthand
+ *
+ * @returns {color} RGB color value
+ *
+ * @example
+ * let c = hexToRGB('#fff');
+ * println(c);
+ * // expected output: -1
+ * background(c);
+ * // expected outcome: white background
+ */
+hexToRGB = hex => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    result = result ? result.splice(1).map(function (i) {
+        return parseInt(i, 16);
+    }) : null;
+    push();
+    e.colorMode(e.RGB);
+    result = e.color.apply(e, result);
+    pop();
+    return result;
 };
 
 /**
@@ -878,37 +909,6 @@ MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
 /**
- * Converts hex to RGB color type.
- *
- * @param {string} hex Hex color value, optional `#`; can be shorthand
- *
- * @returns {color} RGB color value
- *
- * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
- */
-hexToRGB = hex => {
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    result = result ? result.splice(1).map(function (i) {
-        return parseInt(i, 16);
-    }) : null;
-    push();
-    e.colorMode(e.RGB);
-    result = e.color.apply(e, result);
-    pop();
-    return result;
-};
-
-/**
  * Converts HSB to RGB color type.
  *
  * @param {(number|color)} x Hue value or color
@@ -952,6 +952,58 @@ HSBToRGB = function(x, s, v) {
     });
 
     return e.color.apply(e, result);
+};
+
+/**
+ * @summary
+ * Draws a radial gradient from `startColor` to `endColor` in the form of an
+ * ellipse.
+ *
+ * @description
+ * For a step size greater than 1, the function draws ellipses of width `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ *
+ * @param {number} x x-coordinate of center of the gradient
+ * @param {number} y y-coordinate of center the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [step=5] step size
+ *
+ * @example
+ * radialGradient(100, 100, 100, 100, RED, YELLOW);
+ * // expected outcome: radial gradient from red to yellow
+ *
+ * @example
+ * radialGradient(250, 100, 100, 100, PURPLE, PINK, 10);
+ * // expected outcome: radial gradient from purple to pink with step size 10
+ */
+radialGradient = (x, y, width, height, startColor, endColor, step = 5) => {
+    push();
+    e.strokeWeight(1);
+    const maxRadius = Math.max(width, height);
+    if (step == 1) {
+        e.noFill();
+        for (let i = 0; i < maxRadius; i++) {
+            e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
+            e.arc(x, y,
+                width - e.map(i, 0, maxRadius, 0, width),
+                height - e.map(i, 0, maxRadius, 0, height),
+                0, 360);
+        }
+    } else {
+        for (let i = 0; i < maxRadius; i += step) {
+            const c = e.lerpColor(endColor, startColor, i / maxRadius);
+            e.stroke(c);
+            e.fill(c);
+            e.ellipse(x, y,
+                width - e.map(i, 0, maxRadius, 0, width),
+                height - e.map(i, 0, maxRadius, 0, height));
+        }
+    }
+    pop();
 };
 
 /**
@@ -1082,58 +1134,6 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
                     }
                 });
             }
-    }
-    pop();
-};
-
-/**
- * @summary
- * Draws a radial gradient from `startColor` to `endColor` in the form of an
- * ellipse.
- *
- * @description
- * For a step size greater than 1, the function draws ellipses of width `step`.
- * Using a step size greater than 1 is faster. It is highly advised to store
- * drawn gradients in images using the `get` function for use in a draw loop.
- *
- * @param {number} x x-coordinate of center of the gradient
- * @param {number} y y-coordinate of center the gradient
- * @param {number} width width of the gradient
- * @param {number} height height of the gradient
- * @param {color} startColor starting color
- * @param {color} endColor ending color
- * @param {number} [step=5] step size
- *
- * @example
- * radialGradient(100, 100, 100, 100, RED, YELLOW);
- * // expected outcome: radial gradient from red to yellow
- *
- * @example
- * radialGradient(250, 100, 100, 100, PURPLE, PINK, 10);
- * // expected outcome: radial gradient from purple to pink with step size 10
- */
-radialGradient = (x, y, width, height, startColor, endColor, step = 5) => {
-    push();
-    e.strokeWeight(1);
-    const maxRadius = Math.max(width, height);
-    if (step == 1) {
-        e.noFill();
-        for (let i = 0; i < maxRadius; i++) {
-            e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
-            e.arc(x, y,
-                width - e.map(i, 0, maxRadius, 0, width),
-                height - e.map(i, 0, maxRadius, 0, height),
-                0, 360);
-        }
-    } else {
-        for (let i = 0; i < maxRadius; i += step) {
-            const c = e.lerpColor(endColor, startColor, i / maxRadius);
-            e.stroke(c);
-            e.fill(c);
-            e.ellipse(x, y,
-                width - e.map(i, 0, maxRadius, 0, width),
-                height - e.map(i, 0, maxRadius, 0, height));
-        }
     }
     pop();
 };
@@ -1613,6 +1613,40 @@ ordinalSuffix = n => {
 };
 
 /**
+ * Draws text with an outline.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ * @param {color} [outlineColor=BLACK] color of outline
+ *
+ * @example
+ * let str = 'Outlined\nText';
+ * outlineText(str, 25, 25);
+ *
+ * @example
+ * let str = 'Outlined\nText';
+ * fill(BLACK);
+ * outlineText(str, 25, 25, ORANGE);
+ */
+outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    push();
+    e.fill(outlineColor);
+    for (let i = -2; i < 3; i++) {
+        for (let j = -1; j < 3; j++) {
+            e.text(string, x + i, y + j);
+        }
+        e.text(string, x + i, y);
+        e.text(string, x, y + i);
+    }
+    pop();
+    e.text(string, x, y);
+};
+
+/**
  * Returns the singular or plural form of the word based on the input number,
  * using an optional dictionary if supplied.
  *
@@ -1647,40 +1681,6 @@ pluralize = (value, word, plural = word + 's') => {
     if (typeof value === 'object')
         return (num, word) => _pluralize(num, word, value[word]);
     return _pluralize(value, word, plural);
-};
-
-/**
- * Draws text with an outline.
- *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
- * @param {color} [outlineColor=BLACK] color of outline
- *
- * @example
- * let str = 'Outlined\nText';
- * outlineText(str, 25, 25);
- *
- * @example
- * let str = 'Outlined\nText';
- * fill(BLACK);
- * outlineText(str, 25, 25, ORANGE);
- */
-outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    push();
-    e.fill(outlineColor);
-    for (let i = -2; i < 3; i++) {
-        for (let j = -1; j < 3; j++) {
-            e.text(string, x + i, y + j);
-        }
-        e.text(string, x + i, y);
-        e.text(string, x, y + i);
-    }
-    pop();
-    e.text(string, x, y);
 };
 
 /**
@@ -1828,32 +1828,6 @@ String.prototype.toTitleCase = function () {
 };
 
 /**
- * Wraps a string to a given number of characters using a string break
- * character.
- *
- * @link https://www.30secondsofcode.org/js/s/word-wrap
- *
- * @param {string} str String to be wrapped
- * @param {number} max Maximum number of characters per line
- * @param {string} [br='\n'] Custom break character
- *
- * @example
- * let str = 'This string should have a maximum line length of thirty-two characters.';
- * let wrappedStr = wordWrap(str, 32);
- * println(wrappedStr);
- * // expected output: 
- * // 'This string should have a
- * // maximum line length of
- * // thirty-two characters.'
- * let customWrappedStr = wordWrap(str, 32, '<br>');
- * println(customWrappedStr);
- * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
- */
-wordWrap = (str, max, br = '\n') => str.replace(
-    new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br
-);
-
-/**
  * Draws text underlined.
  *
  * @param {string} string Text to be underlined
@@ -1888,6 +1862,32 @@ underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, unde
     e.text(string, x, y);
     pop();
 };
+
+/**
+ * Wraps a string to a given number of characters using a string break
+ * character.
+ *
+ * @link https://www.30secondsofcode.org/js/s/word-wrap
+ *
+ * @param {string} str String to be wrapped
+ * @param {number} max Maximum number of characters per line
+ * @param {string} [br='\n'] Custom break character
+ *
+ * @example
+ * let str = 'This string should have a maximum line length of thirty-two characters.';
+ * let wrappedStr = wordWrap(str, 32);
+ * println(wrappedStr);
+ * // expected output: 
+ * // 'This string should have a
+ * // maximum line length of
+ * // thirty-two characters.'
+ * let customWrappedStr = wordWrap(str, 32, '<br>');
+ * println(customWrappedStr);
+ * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
+ */
+wordWrap = (str, max, br = '\n') => str.replace(
+    new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br
+);
 
 /** @module Shape */
 
@@ -2322,6 +2322,40 @@ rhombus = (ax, ay, bx, by, cx, cy) => {
 };
 
 /**
+ * Draws a star with _n_ spikes.
+ *
+ * @link https://www.khanacademy.org/cs/-/1171581918
+ *
+ * @param {number} x x-coordinate of star
+ * @param {number} y y-coordinate of star
+ * @param {number} externalRadius External radius
+ * @param {number} [spikes=5] Number of spikes
+ * @param {number} [rotation=0] Rotation of star in degrees or radians
+ *
+ * @example
+ * star(100, 100, 50);
+ *
+ * @example
+ * star(100, 100, 50, 7, 10);
+ */
+star = (x, y, externalRadius, spikes = 5, rotation) => {
+    const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
+    const interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
+    push();
+    e.translate(x, y);
+    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
+    drawShape(() => {
+        let internalRadius;
+        for (let theta = 0; theta < _TAU; theta += _TAU / (2 * spikes)) {
+            internalRadius = (internalRadius === externalRadius) ? interior : externalRadius;
+            e.vertex(internalRadius * Math.cos(theta), internalRadius * Math.sin(theta));
+        }
+    }, true);
+
+    pop();
+};
+
+/**
  * @summary
  * Alias for `rect` with smart radius parameter defaults and one `side`
  * parameter.
@@ -2366,40 +2400,6 @@ square = (x, y, side, tl, tr, br, bl) => {
     else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);
     else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);
     else e.rect(x, y, side, side, tl, tr, br, bl);
-};
-
-/**
- * Draws a star with _n_ spikes.
- *
- * @link https://www.khanacademy.org/cs/-/1171581918
- *
- * @param {number} x x-coordinate of star
- * @param {number} y y-coordinate of star
- * @param {number} externalRadius External radius
- * @param {number} [spikes=5] Number of spikes
- * @param {number} [rotation=0] Rotation of star in degrees or radians
- *
- * @example
- * star(100, 100, 50);
- *
- * @example
- * star(100, 100, 50, 7, 10);
- */
-star = (x, y, externalRadius, spikes = 5, rotation) => {
-    const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
-    const interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
-    push();
-    e.translate(x, y);
-    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
-    drawShape(() => {
-        let internalRadius;
-        for (let theta = 0; theta < _TAU; theta += _TAU / (2 * spikes)) {
-            internalRadius = (internalRadius === externalRadius) ? interior : externalRadius;
-            e.vertex(internalRadius * Math.cos(theta), internalRadius * Math.sin(theta));
-        }
-    }, true);
-
-    pop();
 };
 
 /**

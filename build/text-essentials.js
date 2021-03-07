@@ -322,6 +322,40 @@ ordinalSuffix = n => {
 };
 
 /**
+ * Draws text with an outline.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ * @param {color} [outlineColor=BLACK] color of outline
+ *
+ * @example
+ * let str = 'Outlined\nText';
+ * outlineText(str, 25, 25);
+ *
+ * @example
+ * let str = 'Outlined\nText';
+ * fill(BLACK);
+ * outlineText(str, 25, 25, ORANGE);
+ */
+outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    push();
+    e.fill(outlineColor);
+    for (let i = -2; i < 3; i++) {
+        for (let j = -1; j < 3; j++) {
+            e.text(string, x + i, y + j);
+        }
+        e.text(string, x + i, y);
+        e.text(string, x, y + i);
+    }
+    pop();
+    e.text(string, x, y);
+};
+
+/**
  * Returns the singular or plural form of the word based on the input number,
  * using an optional dictionary if supplied.
  *
@@ -356,40 +390,6 @@ pluralize = (value, word, plural = word + 's') => {
     if (typeof value === 'object')
         return (num, word) => _pluralize(num, word, value[word]);
     return _pluralize(value, word, plural);
-};
-
-/**
- * Draws text with an outline.
- *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
- * @param {color} [outlineColor=BLACK] color of outline
- *
- * @example
- * let str = 'Outlined\nText';
- * outlineText(str, 25, 25);
- *
- * @example
- * let str = 'Outlined\nText';
- * fill(BLACK);
- * outlineText(str, 25, 25, ORANGE);
- */
-outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    push();
-    e.fill(outlineColor);
-    for (let i = -2; i < 3; i++) {
-        for (let j = -1; j < 3; j++) {
-            e.text(string, x + i, y + j);
-        }
-        e.text(string, x + i, y);
-        e.text(string, x, y + i);
-    }
-    pop();
-    e.text(string, x, y);
 };
 
 /**
@@ -537,32 +537,6 @@ String.prototype.toTitleCase = function () {
 };
 
 /**
- * Wraps a string to a given number of characters using a string break
- * character.
- *
- * @link https://www.30secondsofcode.org/js/s/word-wrap
- *
- * @param {string} str String to be wrapped
- * @param {number} max Maximum number of characters per line
- * @param {string} [br='\n'] Custom break character
- *
- * @example
- * let str = 'This string should have a maximum line length of thirty-two characters.';
- * let wrappedStr = wordWrap(str, 32);
- * println(wrappedStr);
- * // expected output: 
- * // 'This string should have a
- * // maximum line length of
- * // thirty-two characters.'
- * let customWrappedStr = wordWrap(str, 32, '<br>');
- * println(customWrappedStr);
- * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
- */
-wordWrap = (str, max, br = '\n') => str.replace(
-    new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br
-);
-
-/**
  * Draws text underlined.
  *
  * @param {string} string Text to be underlined
@@ -597,3 +571,29 @@ underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, unde
     e.text(string, x, y);
     pop();
 };
+
+/**
+ * Wraps a string to a given number of characters using a string break
+ * character.
+ *
+ * @link https://www.30secondsofcode.org/js/s/word-wrap
+ *
+ * @param {string} str String to be wrapped
+ * @param {number} max Maximum number of characters per line
+ * @param {string} [br='\n'] Custom break character
+ *
+ * @example
+ * let str = 'This string should have a maximum line length of thirty-two characters.';
+ * let wrappedStr = wordWrap(str, 32);
+ * println(wrappedStr);
+ * // expected output: 
+ * // 'This string should have a
+ * // maximum line length of
+ * // thirty-two characters.'
+ * let customWrappedStr = wordWrap(str, 32, '<br>');
+ * println(customWrappedStr);
+ * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
+ */
+wordWrap = (str, max, br = '\n') => str.replace(
+    new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br
+);

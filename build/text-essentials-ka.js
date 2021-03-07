@@ -210,20 +210,6 @@ ordinalSuffix = function (n) {
   return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
 };
 
-pluralize = function (value, word) {
-  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
-
-  var _pluralize = function (num, word) {
-    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
-    return [1, -1].includes(Number(num)) ? word : plural;
-  };
-
-  if (typeof value === 'object') return function (num, word) {
-    return _pluralize(num, word, value[word]);
-  };
-  return _pluralize(value, word, plural);
-};
-
 outlineText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -247,6 +233,20 @@ outlineText = function (string) {
 
   pop();
   e.text(string, x, y);
+};
+
+pluralize = function (value, word) {
+  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+
+  var _pluralize = function (num, word) {
+    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+    return [1, -1].includes(Number(num)) ? word : plural;
+  };
+
+  if (typeof value === 'object') return function (num, word) {
+    return _pluralize(num, word, value[word]);
+  };
+  return _pluralize(value, word, plural);
 };
 
 String.prototype.format = function () {
@@ -327,11 +327,6 @@ String.prototype.toTitleCase = function () {
   }).join(' ');
 };
 
-wordWrap = function (str, max) {
-  var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '\n';
-  return str.replace(new RegExp("(?![^\\n]{1,".concat(max, "}$)([^\\n]{1,").concat(max, "})\\s"), 'g'), '$1' + br);
-};
-
 underlineText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -355,4 +350,9 @@ underlineText = function (string) {
   e.textAlign(e.LEFT, e.CORNER);
   e.text(string, x, y);
   pop();
+};
+
+wordWrap = function (str, max) {
+  var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '\n';
+  return str.replace(new RegExp("(?![^\\n]{1,".concat(max, "}$)([^\\n]{1,").concat(max, "})\\s"), 'g'), '$1' + br);
 };

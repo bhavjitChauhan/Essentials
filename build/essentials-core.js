@@ -1,3 +1,41 @@
+/**
+ * Essentials.
+ *
+ * The Essentials library provides utility functions for the Khan Academy
+ * Processing Environment.
+ *
+ * @link https://github.com/bhavjitChauhan/Essentials
+ * @file CDN Essentials Build
+ * @author Bhavjit Chauhan
+ */
+
+_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
+_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
+
+ESSENTIALS_CORE = true;
+ESSENTIALS_VERSION = '1.1.0';
+ESSENTIALS_ASCII = `
+    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
+   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/
+  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/
+ _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/
+_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/
+
+`;
+
+_silent_ = typeof _silent_ !== 'undefined' && _silent_;
+if (!_silent_ && !_core_initialized_) console.info(
+    `%cEssentials
+%cThe Khan Academy utility library.
+
+${_env_} Build
+Version ${ESSENTIALS_VERSION}
+Copyright \xa9 2021 Bhavjit Chauhan
+https://github.com/bhavjitChauhan/Essentials`,
+    'font-family:system-ui;font-size:1rem;',
+    'font-family:system-ui;font-size:0.75rem;'
+);
+
 _eval = eval;
 e = Processing.instances[0];
 
@@ -89,44 +127,6 @@ showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
     fn.call(g);
     e.image(g, x, y);
 };
-
-/**
- * Essentials.
- *
- * The Essentials library provides utility functions for the Khan Academy
- * Processing Environment.
- *
- * @link https://github.com/bhavjitChauhan/Essentials
- * @file CDN Essentials Build
- * @author Bhavjit Chauhan
- */
-
-_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
-_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
-
-ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.1.0beta';
-ESSENTIALS_ASCII = `
-    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
-   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/
-  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/
- _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/
-_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/
-
-`;
-
-_silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info(
-    `%cEssentials
-%cThe Khan Academy utility library.
-
-${_env_} Build
-Version ${ESSENTIALS_VERSION}
-Copyright \xa9 2021 Bhavjit Chauhan
-https://github.com/bhavjitChauhan/Essentials`,
-    'font-family:system-ui;font-size:1rem;',
-    'font-family:system-ui;font-size:0.75rem;'
-);
 
 /**
  * Attempts to invoke a function with the provided arguments, returning either
@@ -325,23 +325,6 @@ isFont = obj => {
 };
 
 /**
- * Checks if object is a Khan Academy sound object.
- *
- * @param {Object} obj
- *
- * @example
- * let s = getSound("retro/boom1");
- * println(isSound(s));
- * // expected output: true
- */
-isSound = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.audio);
-};
-
-/**
  * Checks if object is a Khan Academy image object.
  *
  * @param {Object} obj
@@ -356,6 +339,23 @@ isImage = obj => {
         return false;
     }
     return _.isObject(obj.sourceImg);
+};
+
+/**
+ * Checks if object is a Khan Academy sound object.
+ *
+ * @param {Object} obj
+ *
+ * @example
+ * let s = getSound("retro/boom1");
+ * println(isSound(s));
+ * // expected output: true
+ */
+isSound = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isObject(obj.audio);
 };
 
 /**

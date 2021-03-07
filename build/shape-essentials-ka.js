@@ -171,10 +171,6 @@ rhombus = function (ax, ay, bx, by, cx, cy) {
   parallelogram(ax, ay, bx, by, cx, cy);
 };
 
-square = function (x, y, side, tl, tr, br, bl) {
-  if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
-};
-
 star = function (x, y, externalRadius) {
   var spikes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 5;
   var rotation = arguments.length > 4 ? arguments[4] : undefined;
@@ -194,6 +190,10 @@ star = function (x, y, externalRadius) {
     }
   }, true);
   pop();
+};
+
+square = function (x, y, side, tl, tr, br, bl) {
+  if (tl == undefined) e.rect(x, y, side, side);else if (tr == undefined) e.rect(x, y, side, side, tl);else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);else e.rect(x, y, side, side, tl, tr, br, bl);
 };
 
 trapezoid = function (x, y, height, topBase, bottomBase) {

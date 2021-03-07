@@ -13,7 +13,7 @@ _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 _env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
 
 ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.1.0beta';
+ESSENTIALS_VERSION = '1.1.0';
 ESSENTIALS_ASCII = `
     _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
    _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/

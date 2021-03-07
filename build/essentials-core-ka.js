@@ -24,6 +24,13 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
+_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
+ESSENTIALS_CORE = true;
+ESSENTIALS_VERSION = '1.1.0';
+ESSENTIALS_ASCII = "\n    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/\n   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/\n  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/\n _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/\n_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/\n\n";
+_silent_ = typeof _silent_ !== 'undefined' && _silent_;
+if (!_silent_ && !_core_initialized_) console.info("%cEssentials\n%cThe Khan Academy utility library.\n\n".concat(_env_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
 _eval = eval;
 e = Processing.instances[0];
 var _ref = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
@@ -59,14 +66,6 @@ showGraphics = function (x, y, width, height, fn) {
   fn.call(g);
   e.image(g, x, y);
 };
-
-_core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
-_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
-ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.1.0beta';
-ESSENTIALS_ASCII = "\n    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/\n   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/\n  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/\n _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/\n_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/\n\n";
-_silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info("%cEssentials\n%cThe Khan Academy utility library.\n\n".concat(_env_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), 'font-family:system-ui;font-size:1rem;', 'font-family:system-ui;font-size:0.75rem;');
 
 attempt = function (fn) {
   try {
@@ -128,20 +127,20 @@ isFont = function (obj) {
   return _.isFunction(obj.getCSSDefinition);
 };
 
-isSound = function (obj) {
-  if (typeof obj != 'object') {
-    return false;
-  }
-
-  return _.isObject(obj.audio);
-};
-
 isImage = function (obj) {
   if (typeof obj != 'object') {
     return false;
   }
 
   return _.isObject(obj.sourceImg);
+};
+
+isSound = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isObject(obj.audio);
 };
 
 mostPerformant = function (fns) {
