@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/bhavjitChauhan/Essentials#readme",
   "devDependencies": {
-    "@babel/core": "^7.13.8",
+    "@babel/core": "^7.13.10",
     "@babel/plugin-transform-arrow-functions": "^7.13.0",
     "@babel/plugin-transform-block-scoping": "^7.12.13",
     "@babel/plugin-transform-destructuring": "^7.13.0",
