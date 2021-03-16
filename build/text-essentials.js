@@ -15,6 +15,73 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 }
 
 /**
+ * Fast gradient by filling each character with a different color as opposed to
+ * masking the text with the gradient.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ *
+ * @example
+ * font('sans-serif', 25);
+ * fastGradientText('Hello World', 10, textAscent() * 2, RED, YELLOW);
+ * // expected outcome: 'Hello World' with gradient fill from red to yellow
+ *
+ * @example
+ * font('sans-serif', 25, 'bold');
+ * fastGradientText('Hello\nWorld', 10, textAscent() * 4, PURPLE, PINK);
+ * // expected outcome: 'Hello World', bold, with gradient fill from purple to pink in two lines
+ *
+ * @see font
+ */
+fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => {
+    push();
+    if (!string.includes('\n')) {
+        for (let i = 0; i < string.length; i++) {
+            e.fill(e.lerpColor(startColor, endColor, i / (string.length)));
+            e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
+        }
+    } else {
+        const strings = string.split('\n');
+        for (const i in strings) {
+            fastGradientText(strings[i], x, y + i * textAscent(), startColor, endColor);
+        }
+    }
+    pop();
+};
+
+/**
+ * Converts milliseconds to a readable format of duration.
+ *
+ * @link https://www.30secondsofcode.org/js/s/format-duration
+ *
+ * @param {number}  ms  Duration in milliseconds
+ *
+ * @returns {string}  Readable format of duration.
+ *
+ * @example
+ * let martianDay = 88775244;
+ * console.log(formatDuration(martianDay));
+ * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
+ */
+formatDuration = ms => {
+    if (ms < 0) ms = -ms;
+    const time = {
+        day: Math.floor(ms / 86400000),
+        hour: Math.floor(ms / 3600000) % 24,
+        minute: Math.floor(ms / 60000) % 60,
+        second: Math.floor(ms / 1000) % 60,
+        millisecond: Math.floor(ms) % 1000
+    };
+    return Object.entries(time)
+        .filter(val => val[1] !== 0)
+        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
+        .join(', ');
+};
+
+/**
  * Sets font, size and other [CSS font
  * properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
  *
@@ -112,73 +179,6 @@ font = function (family) {
 };
 
 /**
- * Fast gradient by filling each character with a different color as opposed to
- * masking the text with the gradient.
- *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
- * @param {color} startColor starting color
- * @param {color} endColor ending color
- *
- * @example
- * font('sans-serif', 25);
- * fastGradientText('Hello World', 10, textAscent() * 2, RED, YELLOW);
- * // expected outcome: 'Hello World' with gradient fill from red to yellow
- *
- * @example
- * font('sans-serif', 25, 'bold');
- * fastGradientText('Hello\nWorld', 10, textAscent() * 4, PURPLE, PINK);
- * // expected outcome: 'Hello World', bold, with gradient fill from purple to pink in two lines
- *
- * @see font
- */
-fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => {
-    push();
-    if (!string.includes('\n')) {
-        for (let i = 0; i < string.length; i++) {
-            e.fill(e.lerpColor(startColor, endColor, i / (string.length)));
-            e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
-        }
-    } else {
-        const strings = string.split('\n');
-        for (const i in strings) {
-            fastGradientText(strings[i], x, y + i * textAscent(), startColor, endColor);
-        }
-    }
-    pop();
-};
-
-/**
- * Converts milliseconds to a readable format of duration.
- *
- * @link https://www.30secondsofcode.org/js/s/format-duration
- *
- * @param {number}  ms  Duration in milliseconds
- *
- * @returns {string}  Readable format of duration.
- *
- * @example
- * let martianDay = 88775244;
- * console.log(formatDuration(martianDay));
- * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
- */
-formatDuration = ms => {
-    if (ms < 0) ms = -ms;
-    const time = {
-        day: Math.floor(ms / 86400000),
-        hour: Math.floor(ms / 3600000) % 24,
-        minute: Math.floor(ms / 60000) % 60,
-        second: Math.floor(ms / 1000) % 60,
-        millisecond: Math.floor(ms) % 1000
-    };
-    return Object.entries(time)
-        .filter(val => val[1] !== 0)
-        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
-        .join(', ');
-};
-
-/**
  * Draws a string with a highlight background.
  *
  * @param {string} string
@@ -212,6 +212,46 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
         pop();
         e.text(string[i], x, y + (i * e.textAscent() * 2));
     }
+};
+
+/**
+ * Draws text with multiple colors that are passed in using special syntax.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ *
+ * @example
+ * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
+ * fill(BLUE);
+ * multicoloredText(str, 25, 25);
+ */
+multicoloredText = (string, x = 0, y = e.textAscent()) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    string = string.split('\n');
+    push();
+    e.textAlign(e.LEFT, e.CORNER);
+    for (const i in string) {
+        string[i] = string[i].split(/\[|]/);
+        let splits = 0;
+        for (const j in string[i]) {
+            if (/\d+,\d+,\d+/.test(string[i][j])) {
+                const rgb = string[i][j].split(',');
+                e.fill.apply(e, rgb);
+                delete string[i][j];
+                if (splits === 0) {
+                    string[i][j - 1] += ' ';
+                }
+                splits += 1;
+            } else {
+                const w = e.textWidth(string[i].slice(0, j));
+                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
+            }
+        }
+    }
+    pop();
 };
 
 /**
@@ -254,46 +294,6 @@ lightOrDarkText = backgroundColor => {
         return WHITE;
     }
     return BLACK;
-};
-
-/**
- * Draws text with multiple colors that are passed in using special syntax.
- *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
- *
- * @example
- * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
- * fill(BLUE);
- * multicoloredText(str, 25, 25);
- */
-multicoloredText = (string, x = 0, y = e.textAscent()) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    string = string.split('\n');
-    push();
-    e.textAlign(e.LEFT, e.CORNER);
-    for (const i in string) {
-        string[i] = string[i].split(/\[|]/);
-        let splits = 0;
-        for (const j in string[i]) {
-            if (/\d+,\d+,\d+/.test(string[i][j])) {
-                const rgb = string[i][j].split(',');
-                e.fill.apply(e, rgb);
-                delete string[i][j];
-                if (splits === 0) {
-                    string[i][j - 1] += ' ';
-                }
-                splits += 1;
-            } else {
-                const w = e.textWidth(string[i].slice(0, j));
-                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
-            }
-        }
-    }
-    pop();
 };
 
 /**

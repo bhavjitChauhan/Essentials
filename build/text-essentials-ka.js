@@ -29,6 +29,49 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_text_initialized_) console.info('%cText Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
 
+fastGradientText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var startColor = arguments.length > 3 ? arguments[3] : undefined;
+  var endColor = arguments.length > 4 ? arguments[4] : undefined;
+  push();
+
+  if (!string.includes('\n')) {
+    for (var i = 0; i < string.length; i++) {
+      e.fill(e.lerpColor(startColor, endColor, i / string.length));
+      e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
+    }
+  } else {
+    var _strings = string.split('\n');
+
+    for (var _i in _strings) {
+      fastGradientText(_strings[_i], x, y + _i * textAscent(), startColor, endColor);
+    }
+  }
+
+  pop();
+};
+
+formatDuration = function (ms) {
+  if (ms < 0) ms = -ms;
+  var time = {
+    day: Math.floor(ms / 86400000),
+    hour: Math.floor(ms / 3600000) % 24,
+    minute: Math.floor(ms / 60000) % 60,
+    second: Math.floor(ms / 1000) % 60,
+    millisecond: Math.floor(ms) % 1000
+  };
+  return Object.entries(time).filter(function (val) {
+    return val[1] !== 0;
+  }).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        key = _ref2[0],
+        val = _ref2[1];
+
+    return "".concat(val, " ").concat(key).concat(val !== 1 ? 's' : '');
+  }).join(', ');
+};
+
 font = function (family) {
   var properties = Array.from(arguments).slice(1);
   properties.push('');
@@ -76,49 +119,6 @@ font = function (family) {
   return _font;
 };
 
-fastGradientText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var startColor = arguments.length > 3 ? arguments[3] : undefined;
-  var endColor = arguments.length > 4 ? arguments[4] : undefined;
-  push();
-
-  if (!string.includes('\n')) {
-    for (var i = 0; i < string.length; i++) {
-      e.fill(e.lerpColor(startColor, endColor, i / string.length));
-      e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
-    }
-  } else {
-    var _strings = string.split('\n');
-
-    for (var _i in _strings) {
-      fastGradientText(_strings[_i], x, y + _i * textAscent(), startColor, endColor);
-    }
-  }
-
-  pop();
-};
-
-formatDuration = function (ms) {
-  if (ms < 0) ms = -ms;
-  var time = {
-    day: Math.floor(ms / 86400000),
-    hour: Math.floor(ms / 3600000) % 24,
-    minute: Math.floor(ms / 60000) % 60,
-    second: Math.floor(ms / 1000) % 60,
-    millisecond: Math.floor(ms) % 1000
-  };
-  return Object.entries(time).filter(function (val) {
-    return val[1] !== 0;
-  }).map(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        key = _ref2[0],
-        val = _ref2[1];
-
-    return "".concat(val, " ").concat(key).concat(val !== 1 ? 's' : '');
-  }).join(', ');
-};
-
 highlightText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -141,27 +141,6 @@ highlightText = function (string) {
     pop();
     e.text(string[i], x, y + i * e.textAscent() * 2);
   }
-};
-
-lightOrDarkText = function (backgroundColor) {
-  var r, g, b;
-
-  if (typeof backgroundColor === 'string') {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
-    r = parseInt(result[1], 16);
-    g = parseInt(result[2], 16);
-    b = parseInt(result[3], 16);
-  } else {
-    r = e.red(backgroundColor);
-    g = e.green(backgroundColor);
-    b = e.blue(backgroundColor);
-  }
-
-  if ((r + b + g) / 3 < 225) {
-    return WHITE;
-  }
-
-  return BLACK;
 };
 
 multicoloredText = function (string) {
@@ -199,6 +178,27 @@ multicoloredText = function (string) {
   }
 
   pop();
+};
+
+lightOrDarkText = function (backgroundColor) {
+  var r, g, b;
+
+  if (typeof backgroundColor === 'string') {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
+    r = parseInt(result[1], 16);
+    g = parseInt(result[2], 16);
+    b = parseInt(result[3], 16);
+  } else {
+    r = e.red(backgroundColor);
+    g = e.green(backgroundColor);
+    b = e.blue(backgroundColor);
+  }
+
+  if ((r + b + g) / 3 < 225) {
+    return WHITE;
+  }
+
+  return BLACK;
 };
 
 ordinalSuffix = function (n) {

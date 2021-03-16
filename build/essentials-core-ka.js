@@ -60,13 +60,6 @@ restart = function () {
   return e.Program.restart();
 };
 
-showGraphics = function (x, y, width, height, fn) {
-  var renderer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : e.P2D;
-  var g = e.createGraphics(width, height, renderer);
-  fn.call(g);
-  e.image(g, x, y);
-};
-
 attempt = function (fn) {
   try {
     for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -180,6 +173,13 @@ push = function () {
 
 randomInt = function (min, max) {
   return _.random(min, max);
+};
+
+showGraphics = function (x, y, width, height, fn) {
+  var renderer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : e.P2D;
+  var g = e.createGraphics(width, height, renderer);
+  fn.call(g);
+  e.image(g, x, y);
 };
 
 timeTaken = function (callback) {

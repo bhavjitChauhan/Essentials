@@ -105,30 +105,6 @@ noop = () => _.noop;
 restart = () => e.Program.restart();
 
 /**
- * Shows image of graphics created with `createGraphics`.
- *
- * @param {number} x x-coordinate of image
- * @param {number} y y-coordinate of image
- * @param {number} width width of image
- * @param {number} height height of image
- * @param {Function} fn draw code
- * @param {P2D|P3D} [renderer=P2D]
- *
- * @example
- * showGraphics(100, 100, 100, 100, function() {
- *     this.background(0);
- *     this.fill(RED);
- *     this.rect(25, 25, 50, 50);
- * });
- * // expected outcome: red square embedded in black square
- */
-showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
-    const g = e.createGraphics(width, height, renderer);
-    fn.call(g);
-    e.image(g, x, y);
-};
-
-/**
  * Attempts to invoke a function with the provided arguments, returning either
  * the result or an error.
  *
@@ -479,6 +455,30 @@ push = () => {
 randomInt = (min, max) => _.random(min, max);
 
 /**
+ * Shows image of graphics created with `createGraphics`.
+ *
+ * @param {number} x x-coordinate of image
+ * @param {number} y y-coordinate of image
+ * @param {number} width width of image
+ * @param {number} height height of image
+ * @param {Function} fn draw code
+ * @param {P2D|P3D} [renderer=P2D]
+ *
+ * @example
+ * showGraphics(100, 100, 100, 100, function() {
+ *     this.background(0);
+ *     this.fill(RED);
+ *     this.rect(25, 25, 50, 50);
+ * });
+ * // expected outcome: red square embedded in black square
+ */
+showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
+    const g = e.createGraphics(width, height, renderer);
+    fn.call(g);
+    e.image(g, x, y);
+};
+
+/**
  * Measures the time it takes for a function to execute and logs to browser
  * console.
  *
@@ -524,97 +524,6 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
         'font-family:system-ui;font-size:0.75rem;'
     );
 }
-
-/**
- * @summary
- * Draws an circular gradient from `startColor` to `endColor` in the form of an
- * ellipse.
- *
- * @description
- * For a step size greater than 1, the function draws triangles of base `step`.
- * Using a step size greater than 1 is faster. It is highly advised to store
- * drawn gradients in images using the `get` function for use in a draw loop.
- * Use the `smooth` function to prevent jagged edges.
- *
- * @param {number} x x-coordinate of the top-left corner the gradient
- * @param {number} y y-coordinate of the top-left corner the gradient
- * @param {number} width width of the gradient
- * @param {number} height height of the gradient
- * @param {color} startColor starting color
- * @param {color} endColor ending color
- * @param {number} [angle=0] start angle of the gradient in degrees
- * @param {number} [step=5] step size
- *
- * @example
- * circularGradient(25, 25, 100, 100, RED, YELLOW);
- * // expected outcome: circular gradient from red to yellow
- *
- * @example
- * circularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
- * // expected outcome: circular gradient from purple to pink rotated 90 degrees
- *
- * @example
- * circularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
- * // expected outcome: circular gradient from green to light blue in strips of thickness 25
- */
-circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
-    const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
-    push();
-    if (step == 1) {
-        e.strokeWeight(1.5);
-        for (let i = angle - 1; i < angle + 180; i += dTheta) {
-            e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
-            r = e.radians(i);
-            e.line(x + width / 2, y + height / 2,
-                e.map(Math.cos(r), -1, 1, x, x + width),
-                e.map(Math.sin(r), -1, 1, y, y + height));
-        }
-        for (let i = angle - 1; i > angle - 180; i -= dTheta) {
-            e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
-            r = e.radians(i);
-            e.line(x + width / 2, y + height / 2,
-                e.map(Math.cos(r), -1, 1, x, x + width),
-                e.map(Math.sin(r), -1, 1, y, y + height));
-        }
-    } else {
-        e.strokeWeight(1);
-        for (let i = angle - 1; i < angle + 180; i += dTheta) {
-            const c = e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180));
-            e.stroke(c);
-            e.fill(c);
-            r1 = e.radians(i);
-            r2 = e.radians(i - dTheta);
-            e.triangle(x + width / 2, y + height / 2,
-                e.map(Math.cos(r1), -1, 1, x, x + width),
-                e.map(Math.sin(r1), -1, 1, y, y + height),
-                e.map(Math.cos(r2), -1, 1, x, x + width),
-                e.map(Math.sin(r2), -1, 1, y, y + height));
-        }
-        // Temporary fix for missing triangle
-        r1 = e.radians(angle - 180);
-        r2 = e.radians(angle - 180 - dTheta);
-        e.stroke(endColor);
-        e.fill(endColor);
-        e.triangle(x + width / 2, y + height / 2,
-            e.map(Math.cos(r1), -1, 1, x, x + width),
-            e.map(Math.sin(r1), -1, 1, y, y + height),
-            e.map(Math.cos(r2), -1, 1, x, x + width),
-            e.map(Math.sin(r2), -1, 1, y, y + height));
-        for (let i = angle - 1; i > angle - 180; i -= dTheta) {
-            const c = e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180));
-            e.stroke(c);
-            e.fill(c);
-            r1 = e.radians(i);
-            r2 = e.radians(i - dTheta);
-            e.triangle(x + width / 2, y + height / 2,
-                e.map(Math.cos(r1), -1, 1, x, x + width),
-                e.map(Math.sin(r1), -1, 1, y, y + height),
-                e.map(Math.cos(r2), -1, 1, x, x + width),
-                e.map(Math.sin(r2), -1, 1, y, y + height));
-        }
-    }
-    pop();
-};
 
 /**
  * @summary
@@ -678,37 +587,6 @@ angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 
         }
     }
     pop();
-};
-
-/**
- * Converts hex to RGB color type.
- *
- * @param {string} hex Hex color value, optional `#`; can be shorthand
- *
- * @returns {color} RGB color value
- *
- * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
- */
-hexToRGB = hex => {
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    result = result ? result.splice(1).map(function (i) {
-        return parseInt(i, 16);
-    }) : null;
-    push();
-    e.colorMode(e.RGB);
-    result = e.color.apply(e, result);
-    pop();
-    return result;
 };
 
 /**
@@ -907,6 +785,128 @@ SIENNA = e.color(160, 82, 45);
 BROWN = e.color(165, 42, 42);
 MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
+
+/**
+ * @summary
+ * Draws an circular gradient from `startColor` to `endColor` in the form of an
+ * ellipse.
+ *
+ * @description
+ * For a step size greater than 1, the function draws triangles of base `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ * Use the `smooth` function to prevent jagged edges.
+ *
+ * @param {number} x x-coordinate of the top-left corner the gradient
+ * @param {number} y y-coordinate of the top-left corner the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
+ *
+ * @example
+ * circularGradient(25, 25, 100, 100, RED, YELLOW);
+ * // expected outcome: circular gradient from red to yellow
+ *
+ * @example
+ * circularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
+ * // expected outcome: circular gradient from purple to pink rotated 90 degrees
+ *
+ * @example
+ * circularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
+ * // expected outcome: circular gradient from green to light blue in strips of thickness 25
+ */
+circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
+    const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+    push();
+    if (step == 1) {
+        e.strokeWeight(1.5);
+        for (let i = angle - 1; i < angle + 180; i += dTheta) {
+            e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+            r = e.radians(i);
+            e.line(x + width / 2, y + height / 2,
+                e.map(Math.cos(r), -1, 1, x, x + width),
+                e.map(Math.sin(r), -1, 1, y, y + height));
+        }
+        for (let i = angle - 1; i > angle - 180; i -= dTheta) {
+            e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+            r = e.radians(i);
+            e.line(x + width / 2, y + height / 2,
+                e.map(Math.cos(r), -1, 1, x, x + width),
+                e.map(Math.sin(r), -1, 1, y, y + height));
+        }
+    } else {
+        e.strokeWeight(1);
+        for (let i = angle - 1; i < angle + 180; i += dTheta) {
+            const c = e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180));
+            e.stroke(c);
+            e.fill(c);
+            r1 = e.radians(i);
+            r2 = e.radians(i - dTheta);
+            e.triangle(x + width / 2, y + height / 2,
+                e.map(Math.cos(r1), -1, 1, x, x + width),
+                e.map(Math.sin(r1), -1, 1, y, y + height),
+                e.map(Math.cos(r2), -1, 1, x, x + width),
+                e.map(Math.sin(r2), -1, 1, y, y + height));
+        }
+        // Temporary fix for missing triangle
+        r1 = e.radians(angle - 180);
+        r2 = e.radians(angle - 180 - dTheta);
+        e.stroke(endColor);
+        e.fill(endColor);
+        e.triangle(x + width / 2, y + height / 2,
+            e.map(Math.cos(r1), -1, 1, x, x + width),
+            e.map(Math.sin(r1), -1, 1, y, y + height),
+            e.map(Math.cos(r2), -1, 1, x, x + width),
+            e.map(Math.sin(r2), -1, 1, y, y + height));
+        for (let i = angle - 1; i > angle - 180; i -= dTheta) {
+            const c = e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180));
+            e.stroke(c);
+            e.fill(c);
+            r1 = e.radians(i);
+            r2 = e.radians(i - dTheta);
+            e.triangle(x + width / 2, y + height / 2,
+                e.map(Math.cos(r1), -1, 1, x, x + width),
+                e.map(Math.sin(r1), -1, 1, y, y + height),
+                e.map(Math.cos(r2), -1, 1, x, x + width),
+                e.map(Math.sin(r2), -1, 1, y, y + height));
+        }
+    }
+    pop();
+};
+
+/**
+ * Converts hex to RGB color type.
+ *
+ * @param {string} hex Hex color value, optional `#`; can be shorthand
+ *
+ * @returns {color} RGB color value
+ *
+ * @example
+ * let c = hexToRGB('#fff');
+ * println(c);
+ * // expected output: -1
+ * background(c);
+ * // expected outcome: white background
+ */
+hexToRGB = hex => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    result = result ? result.splice(1).map(function (i) {
+        return parseInt(i, 16);
+    }) : null;
+    push();
+    e.colorMode(e.RGB);
+    result = e.color.apply(e, result);
+    pop();
+    return result;
+};
 
 /**
  * Converts HSB to RGB color type.
@@ -1306,6 +1306,73 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 }
 
 /**
+ * Fast gradient by filling each character with a different color as opposed to
+ * masking the text with the gradient.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ *
+ * @example
+ * font('sans-serif', 25);
+ * fastGradientText('Hello World', 10, textAscent() * 2, RED, YELLOW);
+ * // expected outcome: 'Hello World' with gradient fill from red to yellow
+ *
+ * @example
+ * font('sans-serif', 25, 'bold');
+ * fastGradientText('Hello\nWorld', 10, textAscent() * 4, PURPLE, PINK);
+ * // expected outcome: 'Hello World', bold, with gradient fill from purple to pink in two lines
+ *
+ * @see font
+ */
+fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => {
+    push();
+    if (!string.includes('\n')) {
+        for (let i = 0; i < string.length; i++) {
+            e.fill(e.lerpColor(startColor, endColor, i / (string.length)));
+            e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
+        }
+    } else {
+        const strings = string.split('\n');
+        for (const i in strings) {
+            fastGradientText(strings[i], x, y + i * textAscent(), startColor, endColor);
+        }
+    }
+    pop();
+};
+
+/**
+ * Converts milliseconds to a readable format of duration.
+ *
+ * @link https://www.30secondsofcode.org/js/s/format-duration
+ *
+ * @param {number}  ms  Duration in milliseconds
+ *
+ * @returns {string}  Readable format of duration.
+ *
+ * @example
+ * let martianDay = 88775244;
+ * console.log(formatDuration(martianDay));
+ * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
+ */
+formatDuration = ms => {
+    if (ms < 0) ms = -ms;
+    const time = {
+        day: Math.floor(ms / 86400000),
+        hour: Math.floor(ms / 3600000) % 24,
+        minute: Math.floor(ms / 60000) % 60,
+        second: Math.floor(ms / 1000) % 60,
+        millisecond: Math.floor(ms) % 1000
+    };
+    return Object.entries(time)
+        .filter(val => val[1] !== 0)
+        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
+        .join(', ');
+};
+
+/**
  * Sets font, size and other [CSS font
  * properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
  *
@@ -1403,73 +1470,6 @@ font = function (family) {
 };
 
 /**
- * Fast gradient by filling each character with a different color as opposed to
- * masking the text with the gradient.
- *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
- * @param {color} startColor starting color
- * @param {color} endColor ending color
- *
- * @example
- * font('sans-serif', 25);
- * fastGradientText('Hello World', 10, textAscent() * 2, RED, YELLOW);
- * // expected outcome: 'Hello World' with gradient fill from red to yellow
- *
- * @example
- * font('sans-serif', 25, 'bold');
- * fastGradientText('Hello\nWorld', 10, textAscent() * 4, PURPLE, PINK);
- * // expected outcome: 'Hello World', bold, with gradient fill from purple to pink in two lines
- *
- * @see font
- */
-fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => {
-    push();
-    if (!string.includes('\n')) {
-        for (let i = 0; i < string.length; i++) {
-            e.fill(e.lerpColor(startColor, endColor, i / (string.length)));
-            e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
-        }
-    } else {
-        const strings = string.split('\n');
-        for (const i in strings) {
-            fastGradientText(strings[i], x, y + i * textAscent(), startColor, endColor);
-        }
-    }
-    pop();
-};
-
-/**
- * Converts milliseconds to a readable format of duration.
- *
- * @link https://www.30secondsofcode.org/js/s/format-duration
- *
- * @param {number}  ms  Duration in milliseconds
- *
- * @returns {string}  Readable format of duration.
- *
- * @example
- * let martianDay = 88775244;
- * console.log(formatDuration(martianDay));
- * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
- */
-formatDuration = ms => {
-    if (ms < 0) ms = -ms;
-    const time = {
-        day: Math.floor(ms / 86400000),
-        hour: Math.floor(ms / 3600000) % 24,
-        minute: Math.floor(ms / 60000) % 60,
-        second: Math.floor(ms / 1000) % 60,
-        millisecond: Math.floor(ms) % 1000
-    };
-    return Object.entries(time)
-        .filter(val => val[1] !== 0)
-        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
-        .join(', ');
-};
-
-/**
  * Draws a string with a highlight background.
  *
  * @param {string} string
@@ -1503,6 +1503,46 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
         pop();
         e.text(string[i], x, y + (i * e.textAscent() * 2));
     }
+};
+
+/**
+ * Draws text with multiple colors that are passed in using special syntax.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ *
+ * @example
+ * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
+ * fill(BLUE);
+ * multicoloredText(str, 25, 25);
+ */
+multicoloredText = (string, x = 0, y = e.textAscent()) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    string = string.split('\n');
+    push();
+    e.textAlign(e.LEFT, e.CORNER);
+    for (const i in string) {
+        string[i] = string[i].split(/\[|]/);
+        let splits = 0;
+        for (const j in string[i]) {
+            if (/\d+,\d+,\d+/.test(string[i][j])) {
+                const rgb = string[i][j].split(',');
+                e.fill.apply(e, rgb);
+                delete string[i][j];
+                if (splits === 0) {
+                    string[i][j - 1] += ' ';
+                }
+                splits += 1;
+            } else {
+                const w = e.textWidth(string[i].slice(0, j));
+                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
+            }
+        }
+    }
+    pop();
 };
 
 /**
@@ -1545,46 +1585,6 @@ lightOrDarkText = backgroundColor => {
         return WHITE;
     }
     return BLACK;
-};
-
-/**
- * Draws text with multiple colors that are passed in using special syntax.
- *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
- *
- * @example
- * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
- * fill(BLUE);
- * multicoloredText(str, 25, 25);
- */
-multicoloredText = (string, x = 0, y = e.textAscent()) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    string = string.split('\n');
-    push();
-    e.textAlign(e.LEFT, e.CORNER);
-    for (const i in string) {
-        string[i] = string[i].split(/\[|]/);
-        let splits = 0;
-        for (const j in string[i]) {
-            if (/\d+,\d+,\d+/.test(string[i][j])) {
-                const rgb = string[i][j].split(',');
-                e.fill.apply(e, rgb);
-                delete string[i][j];
-                if (splits === 0) {
-                    string[i][j - 1] += ' ';
-                }
-                splits += 1;
-            } else {
-                const w = e.textWidth(string[i].slice(0, j));
-                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
-            }
-        }
-    }
-    pop();
 };
 
 /**
@@ -1920,16 +1920,6 @@ blurRect = (x, y, width, height, size) => {
 };
 
 /**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
- *
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
- *
- */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
-
-/**
  * Draws a 2D cylinder.
  *
  * @link https://www.khanacademy.org/cs/-/5157537806548992
@@ -1966,6 +1956,16 @@ cylinder = (x, y, width, height) => {
     }
     pop();
 };
+
+/**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ *
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ *
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
  * @summary
@@ -2019,6 +2019,44 @@ dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, end
 };
 
 /**
+ * @summary
+ * Draws a dotted line.
+ *
+ * @description
+ * If `endPoint` is true, a point will be drawn at (x2, y2). Use the `smooth`
+ * function to prevent jagged points.
+ *
+ * @param {number} x1 x-coordinate of the start point
+ * @param {number} y1 y-coordinate of the start point
+ * @param {number} x2 x-coordinate of the end point
+ * @param {number} y2 y-coordinate of the end point
+ * @param {number} [spacing=10] gap between points
+ * @param {boolean} [endPoint=true] draw point at end point
+ *
+ * @example
+ * strokeWeight(4);
+ * dottedLine(50, 50, 350, 50);
+ * // expected outcome: straight dotted line
+ *
+ * @example
+ * dottedLine(50, 75, 350, 75, 14);
+ * // expected outcome: straight dotted line with spacing of 14
+ *
+ * @example
+ * dottedLine(50, 100, 350, 100, 14, false);
+ * // expected outcome: straight dotted line with spacing of 14 and no end point
+ *
+ * @see dashedLine
+ */
+dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
+    const length = e.dist(x1, y1, x2, y2);
+    for (let i = 0; i < length; i += spacing) {
+        e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
+    }
+    if (endPoint) e.point(x2, y2);
+};
+
+/**
  * Draws a donut.
  *
  * @link https://www.khanacademy.org/cs/-/4693526445719552
@@ -2061,44 +2099,6 @@ donut = (x, y, majorDiameter, minorDiameter) => {
     circle(0, 0, majorDiameter);
     pop();
     pop();
-};
-
-/**
- * @summary
- * Draws a dotted line.
- *
- * @description
- * If `endPoint` is true, a point will be drawn at (x2, y2). Use the `smooth`
- * function to prevent jagged points.
- *
- * @param {number} x1 x-coordinate of the start point
- * @param {number} y1 y-coordinate of the start point
- * @param {number} x2 x-coordinate of the end point
- * @param {number} y2 y-coordinate of the end point
- * @param {number} [spacing=10] gap between points
- * @param {boolean} [endPoint=true] draw point at end point
- *
- * @example
- * strokeWeight(4);
- * dottedLine(50, 50, 350, 50);
- * // expected outcome: straight dotted line
- *
- * @example
- * dottedLine(50, 75, 350, 75, 14);
- * // expected outcome: straight dotted line with spacing of 14
- *
- * @example
- * dottedLine(50, 100, 350, 100, 14, false);
- * // expected outcome: straight dotted line with spacing of 14 and no end point
- *
- * @see dashedLine
- */
-dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
-    const length = e.dist(x1, y1, x2, y2);
-    for (let i = 0; i < length; i += spacing) {
-        e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
-    }
-    if (endPoint) e.point(x2, y2);
 };
 
 /**
@@ -2322,40 +2322,6 @@ rhombus = (ax, ay, bx, by, cx, cy) => {
 };
 
 /**
- * Draws a star with _n_ spikes.
- *
- * @link https://www.khanacademy.org/cs/-/1171581918
- *
- * @param {number} x x-coordinate of star
- * @param {number} y y-coordinate of star
- * @param {number} externalRadius External radius
- * @param {number} [spikes=5] Number of spikes
- * @param {number} [rotation=0] Rotation of star in degrees or radians
- *
- * @example
- * star(100, 100, 50);
- *
- * @example
- * star(100, 100, 50, 7, 10);
- */
-star = (x, y, externalRadius, spikes = 5, rotation) => {
-    const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
-    const interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
-    push();
-    e.translate(x, y);
-    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
-    drawShape(() => {
-        let internalRadius;
-        for (let theta = 0; theta < _TAU; theta += _TAU / (2 * spikes)) {
-            internalRadius = (internalRadius === externalRadius) ? interior : externalRadius;
-            e.vertex(internalRadius * Math.cos(theta), internalRadius * Math.sin(theta));
-        }
-    }, true);
-
-    pop();
-};
-
-/**
  * @summary
  * Alias for `rect` with smart radius parameter defaults and one `side`
  * parameter.
@@ -2400,6 +2366,40 @@ square = (x, y, side, tl, tr, br, bl) => {
     else if (br == undefined) e.rect(x, y, side, side, tl, tl, tr, tr);
     else if (bl == undefined) e.rect(x, y, side, side, tl, tr, br, 0);
     else e.rect(x, y, side, side, tl, tr, br, bl);
+};
+
+/**
+ * Draws a star with _n_ spikes.
+ *
+ * @link https://www.khanacademy.org/cs/-/1171581918
+ *
+ * @param {number} x x-coordinate of star
+ * @param {number} y y-coordinate of star
+ * @param {number} externalRadius External radius
+ * @param {number} [spikes=5] Number of spikes
+ * @param {number} [rotation=0] Rotation of star in degrees or radians
+ *
+ * @example
+ * star(100, 100, 50);
+ *
+ * @example
+ * star(100, 100, 50, 7, 10);
+ */
+star = (x, y, externalRadius, spikes = 5, rotation) => {
+    const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
+    const interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
+    push();
+    e.translate(x, y);
+    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
+    drawShape(() => {
+        let internalRadius;
+        for (let theta = 0; theta < _TAU; theta += _TAU / (2 * spikes)) {
+            internalRadius = (internalRadius === externalRadius) ? interior : externalRadius;
+            e.vertex(internalRadius * Math.cos(theta), internalRadius * Math.sin(theta));
+        }
+    }, true);
+
+    pop();
 };
 
 /**
