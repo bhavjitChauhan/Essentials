@@ -9,7 +9,7 @@
     "build:ka": "node scripts/babel.js",
     "build": "npm run build:cdn && npm run build:ka",
     "doc:html": "npx jsdoc -c jsdoc.json",
-    "doc:md": "concurrently \"npx jsdoc2md essentials.js > Essentials.wiki/Essentials-Documentation.md\" \"node scripts/wiki.js\"",
+    "doc:md": "concurrently \"npx jsdoc2md essentials.js > internal/Essentials-Documentation.md\" \"node scripts/wiki.js\"",
     "doc:ka": "node scripts/showdown.js && node scripts/pretty.js",
     "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka"
   },

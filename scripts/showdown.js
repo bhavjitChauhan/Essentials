@@ -16,7 +16,7 @@ const body = `<body>
 <p>A cleaner version of the documentation can be viewed on <a
         href="https://bhavjitchauhan.github.io/Essentials">GitHub Pages</a>.</p>`;
 
-readFile('Essentials.wiki/Essentials-Documentation.md', 'utf8', (err, data) => {
+readFile('internal/Essentials-Documentation.md', 'utf8', (err, data) => {
     if (err) console.error(err);
     const converter = new Converter();
     let html = converter.makeHtml(data);
@@ -24,7 +24,7 @@ readFile('Essentials.wiki/Essentials-Documentation.md', 'utf8', (err, data) => {
     readFile('docs/styles/jsdoc-default.css', 'utf8', (err, data) => {
         const css = data;
         html = header + '\n<style>\n' + css + '</style>\n' + body + html + '\n</body>\n</html>';
-        writeFile('Essentials.wiki/Essentials-Documentation.html', html, err => {
+        writeFile('internal/Essentials-Documentation.html', html, err => {
             if (err) return console.error(err);
         });
     });

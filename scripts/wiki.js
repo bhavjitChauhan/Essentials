@@ -1,5 +1,9 @@
 const { readdir, writeFile } = require('fs');
 
+if (!fs.existsSync('internal')) {
+    fs.mkdirSync('internal');
+}
+
 const tree = {};
 
 readdir('src', (err, dirs) => {
@@ -32,7 +36,7 @@ function write() {
         data = data.slice(0, -2);
         data += '.\n';
     }
-    writeFile('Essentials.wiki/Custom Builds Tree.md', data, err => {
+    writeFile('internal/Custom Builds Tree.md', data, err => {
         if (err) console.error(err);
     });
 }
