@@ -37,7 +37,7 @@
     "docdash": "^1.2.0",
     "eslint": "^7.22.0",
     "jsdoc": "^3.6.6",
-    "jsdoc-to-markdown": "^7.0.0",
+    "jsdoc-to-markdown": "^7.0.1",
     "pretty": "^2.0.0",
     "rollup": "^2.42.3",
     "showdown": "^1.9.1",
