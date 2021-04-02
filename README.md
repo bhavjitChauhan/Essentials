@@ -70,15 +70,14 @@ The Essentials library uses the following open-source projects:
  - [Rollup](https://rollupjs.org/)
  - [Terser](https://terser.org/)
 
-
 ## Getting Started
 Create a [new program](https://www.khanacademy.org/cs/new/) on Khan Academy or use an existing project.
 
 ### Builder
-The recommended method to generate any boilerplate code for the Essentials library is to use the [Essentials Builder](https://bhavjitchauhan.github.io/Essentials/builder.html). Usage information is availible on the web application itself.
+The recommended method to generate any boilerplate code for the Essentials library is to use the [Essentials Builder](https://bhavjitchauhan.github.io/Essentials/builder.html). Usage information is available on the web application itself.
 
 ### Content Delivery Network
-Essentials is available via the jsDelivr CDN. This option does not increase your program size on Khan Academy at the expense of slight increase in load times.
+Essentials is available via the jsDelivr CDN. This option does not increase your program size on Khan Academy at the expense of a slight increase in load times.
 
 Use the following [JSHint directive](https://jshint.com/docs/) to allow the use
 of otherwise restricted functionality. See the project Wiki on [Khan Academy and JSHint](https://github.com/bhavjitChauhan/Essentials/wiki/Khan-Academy-and-JSHint) for more information.
@@ -101,7 +100,7 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
 See alternative integration methods on the project Wiki page on [Usage](https://github.com/bhavjitChauhan/Essentials/wiki/Usage).
 
 ### Khan Academy
-Essentials is also available locally via the KA build. This code will run as fast as any Khan Academy code. It is recommended to use the [Essentials Builder](#builder) to generate the boilerplate code but alternatively you may also copy and paste directly from the [essentials-ka.min.js](https://raw.githubusercontent.com/bhavjitChauhan/Essentials/master/build/essentials-ka.min.js) file.
+Essentials is also available locally via the KA build. This code will run as fast as any Khan Academy code. It is recommended to use the [Essentials Builder](#builder) to generate the boilerplate code but alternatively, you may also copy and paste directly from the [essentials-ka.min.js](https://raw.githubusercontent.com/bhavjitChauhan/Essentials/master/build/essentials-ka.min.js) file.
 
 Wrapping the Essentials library code in `// {` and `// }` allows you to fold the code into one line for aesthetic purposes.
 

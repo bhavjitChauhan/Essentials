@@ -59,22 +59,82 @@
 
 
     <section class="readme usertext">
-        <article><h2><img src="https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true" alt="Essentials Logo"></h2>
-<p><a href="https://bhavjitchauhan.github.io/Essentials">GitHub Pages</a> |
-<a href="https://github.com/bhavjitChauhan/Essentials/wiki">Wiki</a> |
-<a href="https://www.khanacademy.org/profile/bhavjitChauhan/projects">Khan Academy</a> |
-<a href="https://bhavjitchauhan.github.io/Essentials/builder.html">Builder</a></p>
-<p><a href="https://github.com/bhavjitChauhan/Essentials/releases"><img src="https://img.shields.io/github/package-json/v/bhavjitChauhan/Essentials?style=flat-square" alt=""></a>
-<a href="https://github.com/bhavjitChauhan/Essentials/commits"><img src="https://img.shields.io/github/last-commit/bhavjitChauhan/Essentials?style=flat-square" alt=""></a>
-<a href="https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials?path=build"><img src="https://data.jsdelivr.com/v1/package/gh/bhavjitChauhan/Essentials/badge" alt=""></a></p>
+        <article><p><a href="https://github.com/bhavjitChauhan/Essentials/releases"><img src="https://img.shields.io/github/package-json/v/bhavjitChauhan/Essentials?style=flat-square" alt="Version"></a>
+<a href="https://cdn.jsdelivr.net/gh/bhavjitChauhan/Essentials@1/essentials.min.js"><img src="https://img.shields.io/badge/minified%20size-21.19%20kB-blue?style=flat-square" alt="Size"></a>
+<a href="https://github.com/bhavjitChauhan/Essentials/pulls"><img src="https://img.shields.io/github/issues-pr/bhavjitChauhan/Essentials?style=flat-square" alt="Pull Requests"></a>
+<a href="https://github.com/bhavjitChauhan/Essentials/commits"><img src="https://img.shields.io/github/last-commit/bhavjitChauhan/Essentials?style=flat-square" alt="Last Commit"></a>
+<a href="https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials?path=build"><img src="https://data.jsdelivr.com/v1/package/gh/bhavjitChauhan/Essentials/badge" alt="jsDelivr"></a></p>
+<br>
+<p align="center">
+    <a href="https://github.com/bhavjitChauhan/Essentials">
+        <img src="https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true"
+          alt="Logo"
+          height="50">
+    </a>
+</p>
+<p align="center">
+    The Khan Academy utility library.
+    <br>
+    <a href="https://bhavjitchauhan.github.io/Essentials/"><strong>Explore the docs »</strong></a>
+    <br>
+    <br>
+    <a href="https://github.com/bhavjitChauhan/Essentials/wiki/">Wiki</a>
+    &#183;
+    <a href="https://bhavjitchauhan.github.io/Essentials/builder.html/">Builder</a>
+    &#183;
+    <a href="https://github.com/bhavjitChauhan/Essentials/projects/1">Roadmap</a>
+</p>
+<hr>
+<br>
+<details open="open">
+    <summary>Table of Contents</summary>
+    <ol>
+        <li>
+            <a href="#about">About</a>
+        </li>
+        <li>
+            <a href="#getting-started">Getting Started</a>
+            <ul>
+                <li><a href="#builder">Builder</a></li>
+                <li><a href="#content-delivery-network">Content Delivery Network</a></li>
+                <li><a href="#khan-academy">Khan Academy</a></li>
+                <li><a href="#custom-builds">Custom Builds</a></li>
+            </ul>
+        </li>
+        <li><a href="#usage">Usage</a></li>
+        <li><a href="#documentation">Documentation</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#license">License</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#acknowledgements">Acknowledgements</a></li>
+    </ol>
+</details>
+<h2>About</h2>
 <p>The Essentials library provides utility functions for the <a href="https://www.khanacademy.org/cs/new">Khan Academy
 Processing Environment</a>.</p>
-<h2>Usage</h2>
-<p>In an existing or a <a href="https://www.khanacademy.org/cs/new">new program</a> on Khan Academy, copy the code for the desired build type.</p>
-<h3>CDN</h3>
-<p>Essentials is available for use by loading it externally via the jsDelivr CDN.</p>
+<p>Khan Academy does not provide the equivalent of
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">ES6 Modules</a>
+or <a href="https://www.npmjs.com/">npm</a>
+for their platform. Users are forced to either reinvent the wheel for themselves
+or rewrite code in each of their programs.</p>
+<p>The Essentials library solves this issue by providing utility functions and
+constants all packaged in an external file. It allows users to spend more time on their projects than working around Khan Academy's restrictions.</p>
+<h3>Built With</h3>
+<p>The Essentials library uses the following open-source projects:</p>
+<ul>
+<li><a href="https://www.jsdelivr.com/">jsDelivr</a></li>
+<li><a href="https://babeljs.io/">Babel</a></li>
+<li><a href="https://rollupjs.org/">Rollup</a></li>
+<li><a href="https://terser.org/">Terser</a></li>
+</ul>
+<h2>Getting Started</h2>
+<p>Create a <a href="https://www.khanacademy.org/cs/new/">new program</a> on Khan Academy or use an existing project.</p>
+<h3>Builder</h3>
+<p>The recommended method to generate any boilerplate code for the Essentials library is to use the <a href="https://bhavjitchauhan.github.io/Essentials/builder.html">Essentials Builder</a>. Usage information is available on the web application itself.</p>
+<h3>Content Delivery Network</h3>
+<p>Essentials is available via the jsDelivr CDN. This option does not increase your program size on Khan Academy at the expense of a slight increase in load times.</p>
 <p>Use the following <a href="https://jshint.com/docs/">JSHint directive</a> to allow the use
-of otherwise restricted features.</p>
+of otherwise restricted functionality. See the project Wiki on <a href="https://github.com/bhavjitChauhan/Essentials/wiki/Khan-Academy-and-JSHint">Khan Academy and JSHint</a> for more information.</p>
 <pre class="prettyprint source lang-js"><code>// jshint ignore: start
 </code></pre>
 <p>Use <a href="https://jquery.com/">jQuery</a>'s
@@ -87,64 +147,41 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
     }
 );
 </code></pre>
+<p>See alternative integration methods on the project Wiki page on <a href="https://github.com/bhavjitChauhan/Essentials/wiki/Usage">Usage</a>.</p>
 <h3>Khan Academy</h3>
-<p>Essentials is also available for use without using jsDelivr's CDN. Copy and paste the source code directly into your program using the <a href="https://bhavjitchauhan.github.io/Essentials/builder.html">Essentials Builder</a> or from the <a href="https://github.com/bhavjitChauhan/Essentials/blob/master/build/essentials-ka.js">essentials-ka.js</a> file in the repository.</p>
+<p>Essentials is also available locally via the KA build. This code will run as fast as any Khan Academy code. It is recommended to use the <a href="#builder">Essentials Builder</a> to generate the boilerplate code but alternatively, you may also copy and paste directly from the <a href="https://raw.githubusercontent.com/bhavjitChauhan/Essentials/master/build/essentials-ka.min.js">essentials-ka.min.js</a> file.</p>
+<p>Wrapping the Essentials library code in <code>// {</code> and <code>// }</code> allows you to fold the code into one line for aesthetic purposes.</p>
+<h3>Custom Builds</h3>
 <p>See the project Wiki page on <a href="https://github.com/bhavjitChauhan/Essentials/wiki/Custom-Builds">Custom
-Builds</a> for
-alternative builds.</p>
-<h2>Why Essentials?</h2>
-<p>Khan Academy does not provide the equivalent of
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">ES6 Modules</a>
-or <a href="https://www.npmjs.com/">npm</a>
-for their platform. Users are forced to either reinvent the wheel for themselves
-or paste similar lines of code in each of their programs.</p>
-<p>The Essentials library solves this issue by providing utility functions and
-constants all packaged in an external file. It allows users to spend more time on their projects than working around Khan Academy's restrictions.</p>
+Builds</a> for customization options to reduce size.</p>
+<h2>Usage</h2>
+<p>After loading the Essentials library its functions and constants are defined in the global scope, they can be called directly.</p>
+<p>For live examples, please refer to the project Wiki page on <a href="https://github.com/bhavjitChauhan/Essentials/wiki/Usage">Usage</a>.</p>
 <h2>Documentation</h2>
-<p>Documentation is available on <a href="https://bhavjitchauhan.github.io/Essentials">Github
-Pages</a>, the project
-<a href="https://github.com/bhavjitChauhan/Essentials/wiki/Documentation">Wiki</a> or on
-<a href="https://www.khanacademy.org/cs/-/6460530077679616">Khan Academy</a>.</p>
-<h2>Credits</h2>
-<h3>Using</h3>
-<table>
-<thead>
-<tr>
-<th>Project</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/jsdelivr/jsdelivr">jsDelivr</a></td>
-<td>CDN delivery</td>
-</tr>
-<tr>
-<td><a href="https://github.com/babel/babel">Babel</a></td>
-<td>Generating KA builds</td>
-</tr>
-<tr>
-<td><a href="https://github.com/rollup/rollup">Rollup</a></td>
-<td>Combining files</td>
-</tr>
-<tr>
-<td><a href="https://github.com/jquery/jquery">jQuery</a></td>
-<td>Ajax</td>
-</tr>
-<tr>
-<td><a href="https://github.com/jashkenas/underscore">Underscore.js</a></td>
-<td>Convenience</td>
-</tr>
-</tbody>
-</table>
-<h3>Inspirations</h3>
+<p>Documentation is available on:</p>
 <ul>
-<li><a href="https://www.khanacademy.org/cs/-/6070976254115840">BMS</a></li>
-<li><a href="https://github.com/lodash/lodash">lodash</a></li>
+<li><a href="https://bhavjitchauhan.github.io/Essentials">Github Pages</a></li>
+<li><a href="https://github.com/bhavjitChauhan/Essentials/wiki/Documentation">Wiki</a></li>
+<li><a href="https://www.khanacademy.org/cs/-/6460530077679616">Khan Academy</a></li>
 </ul>
-<p>Credit is given to authors of functions via links in the documentation on the <a href="https://github.com/bhavjitChauhan/Essentials/wiki/Documentation">Wiki</a>.</p>
+<h2>Roadmap</h2>
+<p>See the <a href="https://github.com/bhavjitChauhan/Essentials/projects/1">Features</a> project on GitHub for planned features.</p>
 <h2>License</h2>
-<p>The Essentials library may be freely distributed under the MIT license. See <a href="LICENSE">LICENSE</a> for details.</p></article>
+<p>Distributed under the MIT License. See <a href="https://github.com/bhavjitChauhan/Essentials/blob/master/LICENSE">LICENSE</a> for more information.</p>
+<h2>Contact</h2>
+<ul>
+<li><a href="https://github.com/bhavjitChauhan">GitHub</a></li>
+<li><a href="https://www.khanacademy.org/profile/bhavjitChauhan/projects">Khan Academy</a></li>
+</ul>
+<h2>Acknowledgements</h2>
+<ul>
+<li><a href="https://www.30secondsofcode.org/js">30 seconds of code</a></li>
+<li><a href="https://www.khanacademy.org/profile/BobLyon/">Bob Lyon</a></li>
+<li><a href="https://github.com/lodash/lodash">lodash</a></li>
+<li><a href="https://underscorejs.org/">Underscore.js</a></li>
+<li><a href="https://www.khanacademy.org/cs/-/6070976254115840">BMS</a></li>
+</ul>
+<p>Credit is given to the original authors of functions via links on the documentation on the project <a href="https://github.com/bhavjitChauhan/Essentials/wiki/Documentation">Wiki</a>.</p></article>
     </section>
 
 
@@ -264,7 +301,7 @@ Pages</a>, the project
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon Mar 15 2021 22:11:21 GMT-0700 (Pacific Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Fri Apr 02 2021 14:54:03 GMT-0700 (Pacific Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
