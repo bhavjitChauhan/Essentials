@@ -3,17 +3,19 @@ name: Node.js CI
 on: [push]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [15.x]
 
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: "15.x"
+          node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run lint
-      - run: npm run build:cdn
-      - run: npm run build:ka
-      - run: npm run doc:html
