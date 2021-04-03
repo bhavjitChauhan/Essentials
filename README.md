@@ -20,7 +20,7 @@
     <br>
     <a href="https://github.com/bhavjitChauhan/Essentials/wiki/">Wiki</a>
     &#183;
-    <a href="https://bhavjitchauhan.github.io/Essentials/builder.html/">Builder</a>
+    <a href="https://bhavjitchauhan.github.io/Essentials/builder">Builder</a>
     &#183;
     <a href="https://github.com/bhavjitChauhan/Essentials/projects/1">Roadmap</a>
 </p>
@@ -74,7 +74,7 @@ The Essentials library uses the following open-source projects:
 Create a [new program](https://www.khanacademy.org/cs/new/) on Khan Academy or use an existing project.
 
 ### Builder
-The recommended method to generate any boilerplate code for the Essentials library is to use the [Essentials Builder](https://bhavjitchauhan.github.io/Essentials/builder.html). Usage information is available on the web application itself.
+The recommended method to generate any boilerplate code for the Essentials library is to use the [Essentials Builder](https://bhavjitchauhan.github.io/Essentials/builder). Usage information is available on the web application itself.
 
 ### Content Delivery Network
 Essentials is available via the jsDelivr CDN. This option does not increase your program size on Khan Academy at the expense of a slight increase in load times.
