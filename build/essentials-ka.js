@@ -104,14 +104,14 @@ complement = function (fn) {
   };
 };
 
+getColonTime = function () {
+  return new Date().toTimeString().slice(0, 8);
+};
+
 generateUUID = function () {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, function (c) {
     return (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
   });
-};
-
-getColonTime = function () {
-  return new Date().toTimeString().slice(0, 8);
 };
 
 inherit = function (subClass, superClass) {
@@ -237,6 +237,121 @@ angularGradient = function (x, y, width, height, startColor, endColor) {
   }
 
   pop();
+};
+
+circularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+  push();
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle - 1; i < angle + 180; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+
+    for (var _i2 = angle - 1; _i2 > angle - 180; _i2 -= dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180)));
+      r = e.radians(_i2);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i3 = angle - 1; _i3 < angle + 180; _i3 += dTheta) {
+      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
+
+      e.stroke(_c2);
+      e.fill(_c2);
+      r1 = e.radians(_i3);
+      r2 = e.radians(_i3 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+
+    r1 = e.radians(angle - 180);
+    r2 = e.radians(angle - 180 - dTheta);
+    e.stroke(endColor);
+    e.fill(endColor);
+    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+
+    for (var _i4 = angle - 1; _i4 > angle - 180; _i4 -= dTheta) {
+      var _c3 = e.lerpColor(startColor, endColor, Math.abs((_i4 - angle) / 180));
+
+      e.stroke(_c3);
+      e.fill(_c3);
+      r1 = e.radians(_i4);
+      r2 = e.radians(_i4 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
+  pop();
+};
+
+hexToRGB = function (hex) {
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  result = result ? result.splice(1).map(function (i) {
+    return parseInt(i, 16);
+  }) : null;
+  push();
+  e.colorMode(e.RGB);
+  result = e.color.apply(e, result);
+  pop();
+  return result;
+};
+
+HSBToRGB = function (x, s, v) {
+  if (arguments.length == 1) {
+    c = x;
+    x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
+  }
+
+  x /= 255, s /= 255, v /= 255;
+  var i = Math.floor(x * 6),
+      f = x * 6 - i,
+      p = v * (1 - s),
+      q = v * (1 - f * s),
+      t = v * (1 - (1 - f) * s);
+  var r, g, b;
+
+  switch (i % 6) {
+    case 0:
+      r = v, g = t, b = p;
+      break;
+
+    case 1:
+      r = q, g = v, b = p;
+      break;
+
+    case 2:
+      r = p, g = v, b = t;
+      break;
+
+    case 3:
+      r = p, g = q, b = v;
+      break;
+
+    case 4:
+      r = t, g = p, b = v;
+      break;
+
+    case 5:
+      r = v, g = p, b = q;
+      break;
+  }
+
+  var result = [r, g, b].map(function (i) {
+    return i * 255;
+  });
+  return e.color.apply(e, result);
 };
 
 RED = e.color(255, 0, 0);
@@ -379,147 +494,6 @@ BROWN = e.color(165, 42, 42);
 MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
-circularGradient = function (x, y, width, height, startColor, endColor) {
-  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
-  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
-  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
-  push();
-
-  if (step == 1) {
-    e.strokeWeight(1.5);
-
-    for (var i = angle - 1; i < angle + 180; i += dTheta) {
-      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
-      r = e.radians(i);
-      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
-    }
-
-    for (var _i2 = angle - 1; _i2 > angle - 180; _i2 -= dTheta) {
-      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180)));
-      r = e.radians(_i2);
-      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
-    }
-  } else {
-    e.strokeWeight(1);
-
-    for (var _i3 = angle - 1; _i3 < angle + 180; _i3 += dTheta) {
-      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
-
-      e.stroke(_c2);
-      e.fill(_c2);
-      r1 = e.radians(_i3);
-      r2 = e.radians(_i3 - dTheta);
-      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-    }
-
-    r1 = e.radians(angle - 180);
-    r2 = e.radians(angle - 180 - dTheta);
-    e.stroke(endColor);
-    e.fill(endColor);
-    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-
-    for (var _i4 = angle - 1; _i4 > angle - 180; _i4 -= dTheta) {
-      var _c3 = e.lerpColor(startColor, endColor, Math.abs((_i4 - angle) / 180));
-
-      e.stroke(_c3);
-      e.fill(_c3);
-      r1 = e.radians(_i4);
-      r2 = e.radians(_i4 - dTheta);
-      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-    }
-  }
-
-  pop();
-};
-
-hexToRGB = function (hex) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  result = result ? result.splice(1).map(function (i) {
-    return parseInt(i, 16);
-  }) : null;
-  push();
-  e.colorMode(e.RGB);
-  result = e.color.apply(e, result);
-  pop();
-  return result;
-};
-
-HSBToRGB = function (x, s, v) {
-  if (arguments.length == 1) {
-    c = x;
-    x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
-  }
-
-  x /= 255, s /= 255, v /= 255;
-  var i = Math.floor(x * 6),
-      f = x * 6 - i,
-      p = v * (1 - s),
-      q = v * (1 - f * s),
-      t = v * (1 - (1 - f) * s);
-  var r, g, b;
-
-  switch (i % 6) {
-    case 0:
-      r = v, g = t, b = p;
-      break;
-
-    case 1:
-      r = q, g = v, b = p;
-      break;
-
-    case 2:
-      r = p, g = v, b = t;
-      break;
-
-    case 3:
-      r = p, g = q, b = v;
-      break;
-
-    case 4:
-      r = t, g = p, b = v;
-      break;
-
-    case 5:
-      r = v, g = p, b = q;
-      break;
-  }
-
-  var result = [r, g, b].map(function (i) {
-    return i * 255;
-  });
-  return e.color.apply(e, result);
-};
-
-radialGradient = function (x, y, width, height, startColor, endColor) {
-  var step = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 5;
-  push();
-  e.strokeWeight(1);
-  var maxRadius = Math.max(width, height);
-
-  if (step == 1) {
-    e.noFill();
-
-    for (var i = 0; i < maxRadius; i++) {
-      e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
-      e.arc(x, y, width - e.map(i, 0, maxRadius, 0, width), height - e.map(i, 0, maxRadius, 0, height), 0, 360);
-    }
-  } else {
-    for (var _i5 = 0; _i5 < maxRadius; _i5 += step) {
-      var _c4 = e.lerpColor(endColor, startColor, _i5 / maxRadius);
-
-      e.stroke(_c4);
-      e.fill(_c4);
-      e.ellipse(x, y, width - e.map(_i5, 0, maxRadius, 0, width), height - e.map(_i5, 0, maxRadius, 0, height));
-    }
-  }
-
-  pop();
-};
-
 linearGradient = function (x, y, width, height, startColor, endColor) {
   var direction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : RIGHT;
   var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
@@ -541,16 +515,16 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
           e.line(x + i, y, x + i, y + height);
         }
       } else {
-        for (var _i6 = 0; _i6 < width; _i6 += step) {
-          var _c5 = e.lerpColor(startColor, endColor, _i6 / width);
+        for (var _i5 = 0; _i5 < width; _i5 += step) {
+          var _c4 = e.lerpColor(startColor, endColor, _i5 / width);
 
-          e.stroke(_c5);
-          e.fill(_c5);
+          e.stroke(_c4);
+          e.fill(_c4);
 
-          if (_i6 + step > width) {
-            e.rect(x + _i6, y, width - _i6, height);
+          if (_i5 + step > width) {
+            e.rect(x + _i5, y, width - _i5, height);
           } else {
-            e.rect(x + _i6, y, step, height);
+            e.rect(x + _i5, y, step, height);
           }
         }
       }
@@ -568,21 +542,21 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
       }
 
       if (step == 1) {
-        for (var _i7 = 0; _i7 < height; _i7++) {
-          e.stroke(e.lerpColor(startColor, endColor, _i7 / height));
-          e.line(x, y + _i7, x + width, y + _i7);
+        for (var _i6 = 0; _i6 < height; _i6++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i6 / height));
+          e.line(x, y + _i6, x + width, y + _i6);
         }
       } else {
-        for (var _i8 = 0; _i8 < height; _i8 += step) {
-          var _c6 = e.lerpColor(startColor, endColor, _i8 / height);
+        for (var _i7 = 0; _i7 < height; _i7 += step) {
+          var _c5 = e.lerpColor(startColor, endColor, _i7 / height);
 
-          e.stroke(_c6);
-          e.fill(_c6);
+          e.stroke(_c5);
+          e.fill(_c5);
 
-          if (_i8 + step > width) {
-            e.rect(x, y + _i8, width, height - _i8);
+          if (_i7 + step > width) {
+            e.rect(x, y + _i7, width, height - _i7);
           } else {
-            e.rect(x, y + _i8, width, step);
+            e.rect(x, y + _i7, width, step);
           }
         }
       }
@@ -598,14 +572,14 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
       }
 
       if (step == 1) {
-        for (var _i9 = 0; _i9 < width; _i9++) {
-          e.stroke(e.lerpColor(startColor, endColor, _i9 / width / 2));
-          e.line(x + _i9, y, x, y + e.map(_i9, 0, width, 0, height));
+        for (var _i8 = 0; _i8 < width; _i8++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i8 / width / 2));
+          e.line(x + _i8, y, x, y + e.map(_i8, 0, width, 0, height));
         }
 
-        for (var _i10 = 0; _i10 < width; _i10++) {
-          e.stroke(e.lerpColor(startColor, endColor, _i10 / width / 2 + 0.5));
-          e.line(x + _i10, y + height, x + width, y + e.map(_i10, 0, width, 0, height));
+        for (var _i9 = 0; _i9 < width; _i9++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i9 / width / 2 + 0.5));
+          e.line(x + _i9, y + height, x + width, y + e.map(_i9, 0, width, 0, height));
         }
       } else {
         var side = Math.max(width, height) * Math.sqrt(2);
@@ -613,16 +587,16 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
           this.angleMode = 'degrees';
           this.rotate(-45);
 
-          for (var _i11 = 0; _i11 < side; _i11 += step) {
-            var _c7 = this.lerpColor(startColor, endColor, _i11 / side);
+          for (var _i10 = 0; _i10 < side; _i10 += step) {
+            var _c6 = this.lerpColor(startColor, endColor, _i10 / side);
 
-            this.stroke(_c7);
-            this.fill(_c7);
+            this.stroke(_c6);
+            this.fill(_c6);
 
-            if (_i11 + step > side) {
-              this.rect(-side / 2, _i11, side, side - _i11);
+            if (_i10 + step > side) {
+              this.rect(-side / 2, _i10, side, side - _i10);
             } else {
-              this.rect(-side / 2, _i11, side, step);
+              this.rect(-side / 2, _i10, side, step);
             }
           }
         });
@@ -639,14 +613,14 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
       }
 
       if (step == 1) {
-        for (var _i12 = 0; _i12 < width; _i12++) {
-          e.stroke(e.lerpColor(startColor, endColor, _i12 / width / 2));
-          e.line(x + width - _i12, y, x + width, y + e.map(_i12, 0, width, 0, height));
+        for (var _i11 = 0; _i11 < width; _i11++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i11 / width / 2));
+          e.line(x + width - _i11, y, x + width, y + e.map(_i11, 0, width, 0, height));
         }
 
-        for (var _i13 = 0; _i13 < width; _i13++) {
-          e.stroke(e.lerpColor(startColor, endColor, _i13 / width / 2 + 0.5));
-          e.line(x + width - _i13, y + height, x, y + e.map(_i13, 0, width, 0, height));
+        for (var _i12 = 0; _i12 < width; _i12++) {
+          e.stroke(e.lerpColor(startColor, endColor, _i12 / width / 2 + 0.5));
+          e.line(x + width - _i12, y + height, x, y + e.map(_i12, 0, width, 0, height));
         }
       } else {
         var _side = Math.max(width, height) * Math.sqrt(2);
@@ -655,16 +629,16 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
           this.angleMode = 'degrees';
           this.rotate(45);
 
-          for (var _i14 = 0; _i14 < _side; _i14 += step) {
-            var _c8 = this.lerpColor(startColor, endColor, _i14 / _side);
+          for (var _i13 = 0; _i13 < _side; _i13 += step) {
+            var _c7 = this.lerpColor(startColor, endColor, _i13 / _side);
 
-            this.stroke(_c8);
-            this.fill(_c8);
+            this.stroke(_c7);
+            this.fill(_c7);
 
-            if (_i14 + step > _side) {
-              this.rect(0, _i14 - _side / 2, _side, _side - _i14);
+            if (_i13 + step > _side) {
+              this.rect(0, _i13 - _side / 2, _side, _side - _i13);
             } else {
-              this.rect(0, _i14 - _side / 2, _side, step);
+              this.rect(0, _i13 - _side / 2, _side, step);
             }
           }
         });
@@ -675,13 +649,30 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
   pop();
 };
 
-RGBToHex = function (x, g, b) {
-  if (arguments.length == 1) {
-    c = x;
-    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
+radialGradient = function (x, y, width, height, startColor, endColor) {
+  var step = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 5;
+  push();
+  e.strokeWeight(1);
+  var maxRadius = Math.max(width, height);
+
+  if (step == 1) {
+    e.noFill();
+
+    for (var i = 0; i < maxRadius; i++) {
+      e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
+      e.arc(x, y, width - e.map(i, 0, maxRadius, 0, width), height - e.map(i, 0, maxRadius, 0, height), 0, 360);
+    }
+  } else {
+    for (var _i14 = 0; _i14 < maxRadius; _i14 += step) {
+      var _c8 = e.lerpColor(endColor, startColor, _i14 / maxRadius);
+
+      e.stroke(_c8);
+      e.fill(_c8);
+      e.ellipse(x, y, width - e.map(_i14, 0, maxRadius, 0, width), height - e.map(_i14, 0, maxRadius, 0, height));
+    }
   }
 
-  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
+  pop();
 };
 
 RGBToHSB = function (x, g, b) {
@@ -727,35 +718,44 @@ RGBToHSB = function (x, g, b) {
   return result;
 };
 
-toHSB = function () {
-  var args = arguments;
-
-  if (args.length == 1) {
-    var _c9 = args[0];
-
-    if (typeof _c9 == 'number') {
-      return [e.hue(_c9), e.saturation(_c9), e.brightness(_c9)];
-    } else {
-      return RGBToHSB.apply(e, toRGB(hexToRGB(_c9)));
-    }
-  } else if (args.length == 3) {
-    return RGBToHSB.apply(e, args);
+RGBToHex = function (x, g, b) {
+  if (arguments.length == 1) {
+    c = x;
+    x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
   }
+
+  return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
 toRGB = function () {
   var args = arguments;
 
   if (args.length == 1) {
-    var _c10 = args[0];
+    var _c9 = args[0];
 
-    if (typeof _c10 == 'number') {
-      return [e.red(_c10), e.green(_c10), e.blue(_c10)];
+    if (typeof _c9 == 'number') {
+      return [e.red(_c9), e.green(_c9), e.blue(_c9)];
     } else {
-      return hexToRGB(_c10);
+      return hexToRGB(_c9);
     }
   } else if (args.length == 3) {
     return HSBToRGB.apply(e, args);
+  }
+};
+
+toHSB = function () {
+  var args = arguments;
+
+  if (args.length == 1) {
+    var _c10 = args[0];
+
+    if (typeof _c10 == 'number') {
+      return [e.hue(_c10), e.saturation(_c10), e.brightness(_c10)];
+    } else {
+      return RGBToHSB.apply(e, toRGB(hexToRGB(_c10)));
+    }
+  } else if (args.length == 3) {
+    return RGBToHSB.apply(e, args);
   }
 };
 
@@ -791,26 +791,6 @@ fastGradientText = function (string) {
   }
 
   pop();
-};
-
-formatDuration = function (ms) {
-  if (ms < 0) ms = -ms;
-  var time = {
-    day: Math.floor(ms / 86400000),
-    hour: Math.floor(ms / 3600000) % 24,
-    minute: Math.floor(ms / 60000) % 60,
-    second: Math.floor(ms / 1000) % 60,
-    millisecond: Math.floor(ms) % 1000
-  };
-  return Object.entries(time).filter(function (val) {
-    return val[1] !== 0;
-  }).map(function (_ref6) {
-    var _ref7 = _slicedToArray(_ref6, 2),
-        key = _ref7[0],
-        val = _ref7[1];
-
-    return "".concat(val, " ").concat(key).concat(val !== 1 ? 's' : '');
-  }).join(', ');
 };
 
 font = function (family) {
@@ -884,6 +864,47 @@ highlightText = function (string) {
   }
 };
 
+formatDuration = function (ms) {
+  if (ms < 0) ms = -ms;
+  var time = {
+    day: Math.floor(ms / 86400000),
+    hour: Math.floor(ms / 3600000) % 24,
+    minute: Math.floor(ms / 60000) % 60,
+    second: Math.floor(ms / 1000) % 60,
+    millisecond: Math.floor(ms) % 1000
+  };
+  return Object.entries(time).filter(function (val) {
+    return val[1] !== 0;
+  }).map(function (_ref6) {
+    var _ref7 = _slicedToArray(_ref6, 2),
+        key = _ref7[0],
+        val = _ref7[1];
+
+    return "".concat(val, " ").concat(key).concat(val !== 1 ? 's' : '');
+  }).join(', ');
+};
+
+lightOrDarkText = function (backgroundColor) {
+  var r, g, b;
+
+  if (typeof backgroundColor === 'string') {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
+    r = parseInt(result[1], 16);
+    g = parseInt(result[2], 16);
+    b = parseInt(result[3], 16);
+  } else {
+    r = e.red(backgroundColor);
+    g = e.green(backgroundColor);
+    b = e.blue(backgroundColor);
+  }
+
+  if ((r + b + g) / 3 < 225) {
+    return WHITE;
+  }
+
+  return BLACK;
+};
+
 multicoloredText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -919,27 +940,6 @@ multicoloredText = function (string) {
   }
 
   pop();
-};
-
-lightOrDarkText = function (backgroundColor) {
-  var r, g, b;
-
-  if (typeof backgroundColor === 'string') {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
-    r = parseInt(result[1], 16);
-    g = parseInt(result[2], 16);
-    b = parseInt(result[3], 16);
-  } else {
-    r = e.red(backgroundColor);
-    g = e.green(backgroundColor);
-    b = e.blue(backgroundColor);
-  }
-
-  if ((r + b + g) / 3 < 225) {
-    return WHITE;
-  }
-
-  return BLACK;
 };
 
 ordinalSuffix = function (n) {
@@ -988,6 +988,31 @@ pluralize = function (value, word) {
     return _pluralize(num, word, value[word]);
   };
   return _pluralize(value, word, plural);
+};
+
+underlineText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
+  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  strings = string.split('\n');
+  push();
+  e.strokeCap(e.SQUARE);
+  e.strokeWeight(underlineWeight);
+  e.stroke(underlineColor);
+
+  for (var i in strings) {
+    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
+  }
+
+  e.textAlign(e.LEFT, e.CORNER);
+  e.text(string, x, y);
+  pop();
 };
 
 String.prototype.format = function () {
@@ -1068,31 +1093,6 @@ String.prototype.toTitleCase = function () {
   }).join(' ');
 };
 
-underlineText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
-  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
-
-  if (!/\S/.test(string)) {
-    return;
-  }
-
-  strings = string.split('\n');
-  push();
-  e.strokeCap(e.SQUARE);
-  e.strokeWeight(underlineWeight);
-  e.stroke(underlineColor);
-
-  for (var i in strings) {
-    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
-  }
-
-  e.textAlign(e.LEFT, e.CORNER);
-  e.text(string, x, y);
-  pop();
-};
-
 wordWrap = function (str, max) {
   var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '\n';
   return str.replace(new RegExp("(?![^\\n]{1,".concat(max, "}$)([^\\n]{1,").concat(max, "})\\s"), 'g'), '$1' + br);
@@ -1112,6 +1112,10 @@ blurRect = function (x, y, width, height, size) {
   size = e.constrain(size, 0, Math.min(width, height));
   e.image(e.get(x, y, width, height), x, y, width / size, height / size);
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
+};
+
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
 };
 
 cylinder = function (x, y, width, height) {
@@ -1145,10 +1149,6 @@ cylinder = function (x, y, width, height) {
   pop();
 };
 
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
-};
-
 dashedLine = function (x1, y1, x2, y2) {
   var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
   var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
@@ -1163,18 +1163,6 @@ dashedLine = function (x1, y1, x2, y2) {
 
   if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
   if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
-};
-
-dottedLine = function (x1, y1, x2, y2) {
-  var spacing = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
-  var endPoint = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-  var length = e.dist(x1, y1, x2, y2);
-
-  for (var i = 0; i < length; i += spacing) {
-    e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
-  }
-
-  if (endPoint) e.point(x2, y2);
 };
 
 donut = function (x, y, majorDiameter, minorDiameter) {
@@ -1208,6 +1196,18 @@ donut = function (x, y, majorDiameter, minorDiameter) {
   pop();
 };
 
+dottedLine = function (x1, y1, x2, y2) {
+  var spacing = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var endPoint = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+  var length = e.dist(x1, y1, x2, y2);
+
+  for (var i = 0; i < length; i += spacing) {
+    e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
+  }
+
+  if (endPoint) e.point(x2, y2);
+};
+
 drawShape = function (fn, close, mode) {
   close = close && e.CLOSE;
   e.beginShape(mode);
@@ -1220,6 +1220,12 @@ edge = function (x, y, length, angle) {
   var x2 = x + length * Math.cos(angle);
   var y2 = y + length * Math.sin(angle);
   line(x, y, x2, y2);
+};
+
+parallelogram = function (ax, ay, bx, by, cx, cy) {
+  var dx = bx - ax;
+  var dy = by - ay;
+  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 heart = function (x, y, radius) {
@@ -1236,12 +1242,6 @@ heart = function (x, y, radius) {
     c2x = 2 * x - c2x;
     e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
   }, true);
-};
-
-parallelogram = function (ax, ay, bx, by, cx, cy) {
-  var dx = bx - ax;
-  var dy = by - ay;
-  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 polygon = function (x, y, sides, radius, rotation) {

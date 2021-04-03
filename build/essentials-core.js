@@ -216,20 +216,6 @@ clean = fn => {
 complement = fn => (...args) => !fn(...args);
 
 /**
- * Generates a
- * [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
- *
- * @returns {string}
- */
-generateUUID = () =>
-    ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-        (
-            c ^
-            (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-        ).toString(16)
-    );
-
-/**
  * Returns a string of the form `HH:MM:SS`.
  *
  * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
@@ -243,6 +229,20 @@ generateUUID = () =>
 getColonTime = function () {
     return (new Date()).toTimeString().slice(0, 8);
 };
+
+/**
+ * Generates a
+ * [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
+ *
+ * @returns {string}
+ */
+generateUUID = () =>
+    ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (
+            c ^
+            (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+        ).toString(16)
+    );
 
 /**
  * Efficiently inherits properties from the parent class to the child class.

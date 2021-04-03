@@ -52,26 +52,6 @@ fastGradientText = function (string) {
   pop();
 };
 
-formatDuration = function (ms) {
-  if (ms < 0) ms = -ms;
-  var time = {
-    day: Math.floor(ms / 86400000),
-    hour: Math.floor(ms / 3600000) % 24,
-    minute: Math.floor(ms / 60000) % 60,
-    second: Math.floor(ms / 1000) % 60,
-    millisecond: Math.floor(ms) % 1000
-  };
-  return Object.entries(time).filter(function (val) {
-    return val[1] !== 0;
-  }).map(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        key = _ref2[0],
-        val = _ref2[1];
-
-    return "".concat(val, " ").concat(key).concat(val !== 1 ? 's' : '');
-  }).join(', ');
-};
-
 font = function (family) {
   var properties = Array.from(arguments).slice(1);
   properties.push('');
@@ -143,6 +123,47 @@ highlightText = function (string) {
   }
 };
 
+formatDuration = function (ms) {
+  if (ms < 0) ms = -ms;
+  var time = {
+    day: Math.floor(ms / 86400000),
+    hour: Math.floor(ms / 3600000) % 24,
+    minute: Math.floor(ms / 60000) % 60,
+    second: Math.floor(ms / 1000) % 60,
+    millisecond: Math.floor(ms) % 1000
+  };
+  return Object.entries(time).filter(function (val) {
+    return val[1] !== 0;
+  }).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        key = _ref2[0],
+        val = _ref2[1];
+
+    return "".concat(val, " ").concat(key).concat(val !== 1 ? 's' : '');
+  }).join(', ');
+};
+
+lightOrDarkText = function (backgroundColor) {
+  var r, g, b;
+
+  if (typeof backgroundColor === 'string') {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
+    r = parseInt(result[1], 16);
+    g = parseInt(result[2], 16);
+    b = parseInt(result[3], 16);
+  } else {
+    r = e.red(backgroundColor);
+    g = e.green(backgroundColor);
+    b = e.blue(backgroundColor);
+  }
+
+  if ((r + b + g) / 3 < 225) {
+    return WHITE;
+  }
+
+  return BLACK;
+};
+
 multicoloredText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -178,27 +199,6 @@ multicoloredText = function (string) {
   }
 
   pop();
-};
-
-lightOrDarkText = function (backgroundColor) {
-  var r, g, b;
-
-  if (typeof backgroundColor === 'string') {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
-    r = parseInt(result[1], 16);
-    g = parseInt(result[2], 16);
-    b = parseInt(result[3], 16);
-  } else {
-    r = e.red(backgroundColor);
-    g = e.green(backgroundColor);
-    b = e.blue(backgroundColor);
-  }
-
-  if ((r + b + g) / 3 < 225) {
-    return WHITE;
-  }
-
-  return BLACK;
 };
 
 ordinalSuffix = function (n) {
@@ -247,6 +247,31 @@ pluralize = function (value, word) {
     return _pluralize(num, word, value[word]);
   };
   return _pluralize(value, word, plural);
+};
+
+underlineText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
+  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  strings = string.split('\n');
+  push();
+  e.strokeCap(e.SQUARE);
+  e.strokeWeight(underlineWeight);
+  e.stroke(underlineColor);
+
+  for (var i in strings) {
+    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
+  }
+
+  e.textAlign(e.LEFT, e.CORNER);
+  e.text(string, x, y);
+  pop();
 };
 
 String.prototype.format = function () {
@@ -325,31 +350,6 @@ String.prototype.toTitleCase = function () {
   return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.charAt(0).toUpperCase() + x.slice(1);
   }).join(' ');
-};
-
-underlineText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
-  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
-
-  if (!/\S/.test(string)) {
-    return;
-  }
-
-  strings = string.split('\n');
-  push();
-  e.strokeCap(e.SQUARE);
-  e.strokeWeight(underlineWeight);
-  e.stroke(underlineColor);
-
-  for (var i in strings) {
-    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
-  }
-
-  e.textAlign(e.LEFT, e.CORNER);
-  e.text(string, x, y);
-  pop();
 };
 
 wordWrap = function (str, max) {

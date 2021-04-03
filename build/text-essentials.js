@@ -53,35 +53,6 @@ fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => 
 };
 
 /**
- * Converts milliseconds to a readable format of duration.
- *
- * @link https://www.30secondsofcode.org/js/s/format-duration
- *
- * @param {number}  ms  Duration in milliseconds
- *
- * @returns {string}  Readable format of duration.
- *
- * @example
- * let martianDay = 88775244;
- * console.log(formatDuration(martianDay));
- * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
- */
-formatDuration = ms => {
-    if (ms < 0) ms = -ms;
-    const time = {
-        day: Math.floor(ms / 86400000),
-        hour: Math.floor(ms / 3600000) % 24,
-        minute: Math.floor(ms / 60000) % 60,
-        second: Math.floor(ms / 1000) % 60,
-        millisecond: Math.floor(ms) % 1000
-    };
-    return Object.entries(time)
-        .filter(val => val[1] !== 0)
-        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
-        .join(', ');
-};
-
-/**
  * Sets font, size and other [CSS font
  * properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
  *
@@ -215,43 +186,32 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
 };
 
 /**
- * Draws text with multiple colors that are passed in using special syntax.
+ * Converts milliseconds to a readable format of duration.
  *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
+ * @link https://www.30secondsofcode.org/js/s/format-duration
+ *
+ * @param {number}  ms  Duration in milliseconds
+ *
+ * @returns {string}  Readable format of duration.
  *
  * @example
- * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
- * fill(BLUE);
- * multicoloredText(str, 25, 25);
+ * let martianDay = 88775244;
+ * console.log(formatDuration(martianDay));
+ * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
  */
-multicoloredText = (string, x = 0, y = e.textAscent()) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    string = string.split('\n');
-    push();
-    e.textAlign(e.LEFT, e.CORNER);
-    for (const i in string) {
-        string[i] = string[i].split(/\[|]/);
-        let splits = 0;
-        for (const j in string[i]) {
-            if (/\d+,\d+,\d+/.test(string[i][j])) {
-                const rgb = string[i][j].split(',');
-                e.fill.apply(e, rgb);
-                delete string[i][j];
-                if (splits === 0) {
-                    string[i][j - 1] += ' ';
-                }
-                splits += 1;
-            } else {
-                const w = e.textWidth(string[i].slice(0, j));
-                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
-            }
-        }
-    }
-    pop();
+formatDuration = ms => {
+    if (ms < 0) ms = -ms;
+    const time = {
+        day: Math.floor(ms / 86400000),
+        hour: Math.floor(ms / 3600000) % 24,
+        minute: Math.floor(ms / 60000) % 60,
+        second: Math.floor(ms / 1000) % 60,
+        millisecond: Math.floor(ms) % 1000
+    };
+    return Object.entries(time)
+        .filter(val => val[1] !== 0)
+        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
+        .join(', ');
 };
 
 /**
@@ -294,6 +254,46 @@ lightOrDarkText = backgroundColor => {
         return WHITE;
     }
     return BLACK;
+};
+
+/**
+ * Draws text with multiple colors that are passed in using special syntax.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ *
+ * @example
+ * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
+ * fill(BLUE);
+ * multicoloredText(str, 25, 25);
+ */
+multicoloredText = (string, x = 0, y = e.textAscent()) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    string = string.split('\n');
+    push();
+    e.textAlign(e.LEFT, e.CORNER);
+    for (const i in string) {
+        string[i] = string[i].split(/\[|]/);
+        let splits = 0;
+        for (const j in string[i]) {
+            if (/\d+,\d+,\d+/.test(string[i][j])) {
+                const rgb = string[i][j].split(',');
+                e.fill.apply(e, rgb);
+                delete string[i][j];
+                if (splits === 0) {
+                    string[i][j - 1] += ' ';
+                }
+                splits += 1;
+            } else {
+                const w = e.textWidth(string[i].slice(0, j));
+                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
+            }
+        }
+    }
+    pop();
 };
 
 /**
@@ -390,6 +390,42 @@ pluralize = (value, word, plural = word + 's') => {
     if (typeof value === 'object')
         return (num, word) => _pluralize(num, word, value[word]);
     return _pluralize(value, word, plural);
+};
+
+/**
+ * Draws text underlined.
+ *
+ * @param {string} string Text to be underlined
+ * @param {number} x x-coordinate value
+ * @param {number} y y-coordinate value
+ * @param {color} [underlineColor=BLACK] Color of underline
+ * @param {number} [underlineWeight] Weight of underline
+ *
+ * @example
+ * let str = 'Underlined\nText';
+ * fill(BLACK);
+ * underlineText(str, 25, 25);
+ *
+ * @example
+ * let str = 'Underlined\nText';
+ * fill(BLACK);
+ * underlineText(str, 25, 25, RED, 5);
+ */
+underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    strings = string.split('\n');
+    push();
+    e.strokeCap(e.SQUARE);
+    e.strokeWeight(underlineWeight);
+    e.stroke(underlineColor);
+    for (const i in strings) {
+        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
+    }
+    e.textAlign(e.LEFT, e.CORNER);
+    e.text(string, x, y);
+    pop();
 };
 
 /**
@@ -534,42 +570,6 @@ String.prototype.toTitleCase = function () {
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map(x => x.charAt(0).toUpperCase() + x.slice(1))
         .join(' ');
-};
-
-/**
- * Draws text underlined.
- *
- * @param {string} string Text to be underlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {color} [underlineColor=BLACK] Color of underline
- * @param {number} [underlineWeight] Weight of underline
- *
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25);
- *
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25, RED, 5);
- */
-underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    strings = string.split('\n');
-    push();
-    e.strokeCap(e.SQUARE);
-    e.strokeWeight(underlineWeight);
-    e.stroke(underlineColor);
-    for (const i in strings) {
-        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
-    }
-    e.textAlign(e.LEFT, e.CORNER);
-    e.text(string, x, y);
-    pop();
 };
 
 /**

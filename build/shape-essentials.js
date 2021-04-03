@@ -29,6 +29,16 @@ blurRect = (x, y, width, height, size) => {
 };
 
 /**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ *
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ *
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+
+/**
  * Draws a 2D cylinder.
  *
  * @link https://www.khanacademy.org/cs/-/5157537806548992
@@ -65,16 +75,6 @@ cylinder = (x, y, width, height) => {
     }
     pop();
 };
-
-/**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
- *
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
- *
- */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
  * @summary
@@ -128,44 +128,6 @@ dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, end
 };
 
 /**
- * @summary
- * Draws a dotted line.
- *
- * @description
- * If `endPoint` is true, a point will be drawn at (x2, y2). Use the `smooth`
- * function to prevent jagged points.
- *
- * @param {number} x1 x-coordinate of the start point
- * @param {number} y1 y-coordinate of the start point
- * @param {number} x2 x-coordinate of the end point
- * @param {number} y2 y-coordinate of the end point
- * @param {number} [spacing=10] gap between points
- * @param {boolean} [endPoint=true] draw point at end point
- *
- * @example
- * strokeWeight(4);
- * dottedLine(50, 50, 350, 50);
- * // expected outcome: straight dotted line
- *
- * @example
- * dottedLine(50, 75, 350, 75, 14);
- * // expected outcome: straight dotted line with spacing of 14
- *
- * @example
- * dottedLine(50, 100, 350, 100, 14, false);
- * // expected outcome: straight dotted line with spacing of 14 and no end point
- *
- * @see dashedLine
- */
-dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
-    const length = e.dist(x1, y1, x2, y2);
-    for (let i = 0; i < length; i += spacing) {
-        e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
-    }
-    if (endPoint) e.point(x2, y2);
-};
-
-/**
  * Draws a donut.
  *
  * @link https://www.khanacademy.org/cs/-/4693526445719552
@@ -208,6 +170,44 @@ donut = (x, y, majorDiameter, minorDiameter) => {
     circle(0, 0, majorDiameter);
     pop();
     pop();
+};
+
+/**
+ * @summary
+ * Draws a dotted line.
+ *
+ * @description
+ * If `endPoint` is true, a point will be drawn at (x2, y2). Use the `smooth`
+ * function to prevent jagged points.
+ *
+ * @param {number} x1 x-coordinate of the start point
+ * @param {number} y1 y-coordinate of the start point
+ * @param {number} x2 x-coordinate of the end point
+ * @param {number} y2 y-coordinate of the end point
+ * @param {number} [spacing=10] gap between points
+ * @param {boolean} [endPoint=true] draw point at end point
+ *
+ * @example
+ * strokeWeight(4);
+ * dottedLine(50, 50, 350, 50);
+ * // expected outcome: straight dotted line
+ *
+ * @example
+ * dottedLine(50, 75, 350, 75, 14);
+ * // expected outcome: straight dotted line with spacing of 14
+ *
+ * @example
+ * dottedLine(50, 100, 350, 100, 14, false);
+ * // expected outcome: straight dotted line with spacing of 14 and no end point
+ *
+ * @see dashedLine
+ */
+dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
+    const length = e.dist(x1, y1, x2, y2);
+    for (let i = 0; i < length; i += spacing) {
+        e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
+    }
+    if (endPoint) e.point(x2, y2);
 };
 
 /**
@@ -274,6 +274,29 @@ edge = (x, y, length, angle) => {
 };
 
 /**
+ * Draws a parallelogram.
+ *
+ * @link https://www.khanacademy.org/cs/-/4747962019348480
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * parallelogram(50, 50, 200, 50, 100, 100);
+ *
+ * @see rhombus
+ */
+parallelogram = (ax, ay, bx, by, cx, cy) => {
+    const dx = bx - ax;
+    const dy = by - ay;
+    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
+};
+
+/**
  * Draws a heart.
  *
  * @link https://www.khanacademy.org/cs/-/2085250861
@@ -300,29 +323,6 @@ heart = (x, y, radius) => {
         c2x = 2 * x - c2x;
         e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
     }, true);
-};
-
-/**
- * Draws a parallelogram.
- *
- * @link https://www.khanacademy.org/cs/-/4747962019348480
- *
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- *
- * @example
- * parallelogram(50, 50, 200, 50, 100, 100);
- *
- * @see rhombus
- */
-parallelogram = (ax, ay, bx, by, cx, cy) => {
-    const dx = bx - ax;
-    const dy = by - ay;
-    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 /**
