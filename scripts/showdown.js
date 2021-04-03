@@ -18,7 +18,7 @@ const body = `<body>
 
 readFile('internal/Essentials-Documentation.md', 'utf8', (err, data) => {
     if (err) console.error(err);
-    const converter = new Converter();
+    const converter = new Converter({ tables: true });
     let html = converter.makeHtml(data);
 
     readFile('docs/styles/jsdoc-default.css', 'utf8', (err, data) => {

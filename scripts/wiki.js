@@ -1,7 +1,7 @@
-const { readdir, writeFile } = require('fs');
+const { existsSync, readdir, writeFile } = require('fs');
 
-if (!fs.existsSync('internal')) {
-    fs.mkdirSync('internal');
+if (!existsSync('internal')) {
+    mkdirSync('internal');
 }
 
 const tree = {};
