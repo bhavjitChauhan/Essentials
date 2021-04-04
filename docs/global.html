@@ -1,3623 +1,1902 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
-    <meta charset="utf-8">
-    <title>Global - Documentation</title>
-    
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+    <head>
+        <meta charset="utf-8" />
+        <title>Global - Documentation</title>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
+        <script src="scripts/prettify/prettify.js"></script>
+        <script src="scripts/prettify/lang-css.js"></script>
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link type="text/css" rel="stylesheet" href="styles/prettify.css" />
+        <link type="text/css" rel="stylesheet" href="styles/jsdoc.css" />
+        <script src="scripts/nav.js" defer></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger" class="navicon-button x">
+            <div class="navicon"></div>
+        </label>
 
-<label for="nav-trigger" class="overlay"></label>
+        <label for="nav-trigger" class="overlay"></label>
 
-<nav >
-    
-    <input type="text" id="nav-search" placeholder="Search" />
-    
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Color.html">Color</a><ul class='methods'><li data-type='method'><a href="module-Color.html#~angularGradient">angularGradient</a></li><li data-type='method'><a href="module-Color.html#~circularGradient">circularGradient</a></li><li data-type='method'><a href="module-Color.html#~hexToRGB">hexToRGB</a></li><li data-type='method'><a href="module-Color.html#~HSBToRGB">HSBToRGB</a></li><li data-type='method'><a href="module-Color.html#~linearGradient">linearGradient</a></li><li data-type='method'><a href="module-Color.html#~radialGradient">radialGradient</a></li><li data-type='method'><a href="module-Color.html#~RGBToHex">RGBToHex</a></li><li data-type='method'><a href="module-Color.html#~RGBToHSB">RGBToHSB</a></li><li data-type='method'><a href="module-Color.html#~toHSB">toHSB</a></li><li data-type='method'><a href="module-Color.html#~toRGB">toRGB</a></li></ul></li><li><a href="module-Shape.html">Shape</a><ul class='methods'><li data-type='method'><a href="module-Shape.html#~blurRect">blurRect</a></li><li data-type='method'><a href="module-Shape.html#~circle">circle</a></li><li data-type='method'><a href="module-Shape.html#~cylinder">cylinder</a></li><li data-type='method'><a href="module-Shape.html#~dashedLine">dashedLine</a></li><li data-type='method'><a href="module-Shape.html#~donut">donut</a></li><li data-type='method'><a href="module-Shape.html#~dottedLine">dottedLine</a></li><li data-type='method'><a href="module-Shape.html#~drawShape">drawShape</a></li><li data-type='method'><a href="module-Shape.html#~edge">edge</a></li><li data-type='method'><a href="module-Shape.html#~heart">heart</a></li><li data-type='method'><a href="module-Shape.html#~parallelogram">parallelogram</a></li><li data-type='method'><a href="module-Shape.html#~polygon">polygon</a></li><li data-type='method'><a href="module-Shape.html#~rectangle">rectangle</a></li><li data-type='method'><a href="module-Shape.html#~rhombus">rhombus</a></li><li data-type='method'><a href="module-Shape.html#~square">square</a></li><li data-type='method'><a href="module-Shape.html#~star">star</a></li><li data-type='method'><a href="module-Shape.html#~trapezoid">trapezoid</a></li></ul></li><li><a href="module-Text.html">Text</a><ul class='methods'><li data-type='method'><a href="module-Text.html#~fastGradientText">fastGradientText</a></li><li data-type='method'><a href="module-Text.html#~font">font</a></li><li data-type='method'><a href="module-Text.html#~formatDuration">formatDuration</a></li><li data-type='method'><a href="module-Text.html#~highlightText">highlightText</a></li><li data-type='method'><a href="module-Text.html#~lightOrDarkText">lightOrDarkText</a></li><li data-type='method'><a href="module-Text.html#~multicoloredText">multicoloredText</a></li><li data-type='method'><a href="module-Text.html#~ordinalSuffix">ordinalSuffix</a></li><li data-type='method'><a href="module-Text.html#~outlineText">outlineText</a></li><li data-type='method'><a href="module-Text.html#~pluralize">pluralize</a></li><li data-type='method'><a href="module-Text.html#~underlineText">underlineText</a></li><li data-type='method'><a href="module-Text.html#~wordWrap">wordWrap</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#attempt">attempt</a></li><li><a href="global.html#CANVAS">CANVAS</a></li><li><a href="global.html#CANVAS_LOG">CANVAS_LOG</a></li><li><a href="global.html#chainAsync">chainAsync</a></li><li><a href="global.html#clean">clean</a></li><li><a href="global.html#clearLogs">clearLogs</a></li><li><a href="global.html#complement">complement</a></li><li><a href="global.html#generateUUID">generateUUID</a></li><li><a href="global.html#getColonTime">getColonTime</a></li><li><a href="global.html#HALF_HEIGHT">HALF_HEIGHT</a></li><li><a href="global.html#HALF_WIDTH">HALF_WIDTH</a></li><li><a href="global.html#HEIGHT">HEIGHT</a></li><li><a href="global.html#inherit">inherit</a></li><li><a href="global.html#isFont">isFont</a></li><li><a href="global.html#isImage">isImage</a></li><li><a href="global.html#isSound">isSound</a></li><li><a href="global.html#mostPerformant">mostPerformant</a></li><li><a href="global.html#noop">noop</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#printf">printf</a></li><li><a href="global.html#push">push</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#restart">restart</a></li><li><a href="global.html#showGraphics">showGraphics</a></li><li><a href="global.html#timeTaken">timeTaken</a></li><li><a href="global.html#WIDTH">WIDTH</a></li></ul>
-</nav>
+        <nav>
+            <input type="text" id="nav-search" placeholder="Search" />
 
-<div id="main">
-    
-    <h1 class="page-title">Global</h1>
-    
+            <h2><a href="index.html">Home</a></h2>
+            <h3>Modules</h3>
+            <ul>
+                <li>
+                    <a href="module-Color.html">Color</a>
+                    <ul class="methods">
+                        <li data-type="method">
+                            <a href="module-Color.html#~angularGradient"
+                                >angularGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~circularGradient"
+                                >circularGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~hexToRGB">hexToRGB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~HSBToRGB">HSBToRGB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~linearGradient"
+                                >linearGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~radialGradient"
+                                >radialGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~RGBToHex">RGBToHex</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~RGBToHSB">RGBToHSB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~toHSB">toHSB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~toRGB">toRGB</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="module-Shape.html">Shape</a>
+                    <ul class="methods">
+                        <li data-type="method">
+                            <a href="module-Shape.html#~blurRect">blurRect</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~circle">circle</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~cylinder">cylinder</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~dashedLine"
+                                >dashedLine</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~donut">donut</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~dottedLine"
+                                >dottedLine</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~drawShape">drawShape</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~edge">edge</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~heart">heart</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~parallelogram"
+                                >parallelogram</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~polygon">polygon</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~rectangle">rectangle</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~rhombus">rhombus</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~square">square</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~star">star</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~trapezoid">trapezoid</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="module-Text.html">Text</a>
+                    <ul class="methods">
+                        <li data-type="method">
+                            <a href="module-Text.html#~fastGradientText"
+                                >fastGradientText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~font">font</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~formatDuration"
+                                >formatDuration</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~highlightText"
+                                >highlightText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~lightOrDarkText"
+                                >lightOrDarkText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~multicoloredText"
+                                >multicoloredText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~ordinalSuffix"
+                                >ordinalSuffix</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~outlineText"
+                                >outlineText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~pluralize">pluralize</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~underlineText"
+                                >underlineText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~wordWrap">wordWrap</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>Global</h3>
+            <ul>
+                <li><a href="global.html#attempt">attempt</a></li>
+                <li><a href="global.html#CANVAS">CANVAS</a></li>
+                <li><a href="global.html#CANVAS_LOG">CANVAS_LOG</a></li>
+                <li><a href="global.html#chainAsync">chainAsync</a></li>
+                <li><a href="global.html#clean">clean</a></li>
+                <li><a href="global.html#clearLogs">clearLogs</a></li>
+                <li><a href="global.html#complement">complement</a></li>
+                <li><a href="global.html#generateUUID">generateUUID</a></li>
+                <li><a href="global.html#getColonTime">getColonTime</a></li>
+                <li><a href="global.html#HALF_HEIGHT">HALF_HEIGHT</a></li>
+                <li><a href="global.html#HALF_WIDTH">HALF_WIDTH</a></li>
+                <li><a href="global.html#HEIGHT">HEIGHT</a></li>
+                <li><a href="global.html#inherit">inherit</a></li>
+                <li><a href="global.html#isFont">isFont</a></li>
+                <li><a href="global.html#isImage">isImage</a></li>
+                <li><a href="global.html#isSound">isSound</a></li>
+                <li><a href="global.html#mostPerformant">mostPerformant</a></li>
+                <li><a href="global.html#noop">noop</a></li>
+                <li><a href="global.html#pop">pop</a></li>
+                <li><a href="global.html#printf">printf</a></li>
+                <li><a href="global.html#push">push</a></li>
+                <li><a href="global.html#randomInt">randomInt</a></li>
+                <li><a href="global.html#restart">restart</a></li>
+                <li><a href="global.html#showGraphics">showGraphics</a></li>
+                <li><a href="global.html#timeTaken">timeTaken</a></li>
+                <li><a href="global.html#WIDTH">WIDTH</a></li>
+            </ul>
+        </nav>
 
-    
+        <div id="main">
+            <h1 class="page-title">Global</h1>
 
+            <section>
+                <header>
+                    <h2></h2>
+                </header>
 
+                <article>
+                    <div class="container-overview">
+                        <dl class="details"></dl>
+                    </div>
 
+                    <h3 class="subsection-title">Members</h3>
 
-<section>
+                    <h4 class="name" id="CANVAS">
+                        <span class="type-signature"></span>CANVAS<span
+                            class="type-signature"
+                        ></span>
+                    </h4>
 
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line72"
+                                        >line 72</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
 
-<article>
-    
-        <div class="container-overview">
-        
-            
+                    <div class="description usertext">
+                        <p>Canvas jQuery selector.</p>
+                    </div>
 
-<dl class="details">
+                    <h5>Example</h5>
 
-    
+                    <pre
+                        class="prettyprint"
+                    ><code>// Log canvas element style to browser console
+console.log($(CANVAS).attr('style)');</code></pre>
 
-    
+                    <h4 class="name" id="CANVAS_LOG">
+                        <span class="type-signature"></span>CANVAS_LOG<span
+                            class="type-signature"
+                        ></span>
+                    </h4>
 
-    
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line81"
+                                        >line 81</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
 
-    
+                    <div class="description usertext">
+                        <p>Canvas log jQuery selector.</p>
+                    </div>
 
-    
+                    <h5>Example</h5>
 
-    
+                    <pre
+                        class="prettyprint"
+                    ><code>// Log canvas log text to browser console
+console.log($(CANVAS_LOG).text());</code></pre>
 
-    
+                    <h4 class="name" id="HALF_HEIGHT">
+                        <span class="type-signature"></span>HALF_HEIGHT<span
+                            class="type-signature"
+                        ></span>
+                    </h4>
 
-    
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line63"
+                                        >line 63</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
 
-    
+                    <div class="description usertext">
+                        <p>Alias for <code>HEIGHT / 2</code>.</p>
+                    </div>
 
-    
+                    <h4 class="name" id="HALF_WIDTH">
+                        <span class="type-signature"></span>HALF_WIDTH<span
+                            class="type-signature"
+                        ></span>
+                    </h4>
 
-    
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line58"
+                                        >line 58</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
 
-    
+                    <div class="description usertext">
+                        <p>Alias for <code>WIDTH / 2</code>.</p>
+                    </div>
 
-    
+                    <h4 class="name" id="HEIGHT">
+                        <span class="type-signature"></span>HEIGHT<span
+                            class="type-signature"
+                        ></span>
+                    </h4>
 
-    
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line53"
+                                        >line 53</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
 
-    
+                    <div class="description usertext">
+                        <p>Alias for <code>height</code>.</p>
+                    </div>
 
-    
-</dl>
+                    <h4 class="name" id="WIDTH">
+                        <span class="type-signature"></span>WIDTH<span
+                            class="type-signature"
+                        ></span>
+                    </h4>
 
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line48"
+                                        >line 48</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
 
+                    <div class="description usertext">
+                        <p>Alias for <code>width</code>.</p>
+                    </div>
 
+                    <h3 class="subsection-title">Methods</h3>
 
-            
+                    <h4 class="name" id="attempt">
+                        <span class="type-signature"></span>attempt<span
+                            class="signature"
+                            >(fn, &hellip;args)</span
+                        ><span class="type-signature"></span>
+                    </h4>
 
-            
-        
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line116"
+                                        >line 116</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Attempts to invoke a function with the provided
+                            arguments, returning either the result or an error.
+                        </p>
+                    </div>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>fn</code></td>
+
+                                <td class="type"></td>
+
+                                <td class="attributes"></td>
+
+                                <td class="description last">
+                                    <p>Function to attempt.</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>args</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">*</span>
+                                </td>
+
+                                <td class="attributes">
+                                    &lt;repeatable><br />
+                                </td>
+
+                                <td class="description last">
+                                    <p>Functions arguments.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="chainAsync">
+                        <span class="type-signature"></span>chainAsync<span
+                            class="signature"
+                            >(fns)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line150"
+                                        >line 150</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Calls multiple functions asynchronously.</p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>let array;
+chainAsync([
+    function(next) {
+        console.log('Generating array...');
+        array = [];
+        for (let i = 0; i &lt; 10000; i++) {
+            array.push(Math.random(0, 100));
+        }
+        next();
+    }, function(next) {
+        console.log('Sorting array...');
+        array.sort();
+        next();
+    }, function() {
+        console.log(array);
+    }
+]);</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>fns</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">Array</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Array containing functions to call</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="clean">
+                        <span class="type-signature"></span>clean<span
+                            class="signature"
+                            >(fn)</span
+                        ><span class="type-signature"> &rarr; {function}</span>
+                    </h4>
+
+                    <p class="summary usertext"></p>
+                    <p>
+                        Removes Khan Academy's loop protection code from
+                        functions.
+                    </p>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line209"
+                                        >line 209</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Khan Academy adds a few lines of code to every
+                            function created to prevent the webpage from
+                            freezing. This can be a hinderance when running more
+                            resource-intensive code.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>const drawEllipses = function() {
+    for (let i = 0; i &lt; 1e4; i++) {
+        ellipse(Math.random(0, width), Math.random(0, height), 10, 10);
+    }
+};
+// possible error: 'A for loop is taking too long to run.'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>const drawEllipses = clean(function() {
+    for (let i = 0; i &lt; 1e4; i++) {
+        ellipse(Math.random(0, width), Math.random(0, height), 10, 10);
+    }
+});</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>fn</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">function</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Function to be cleaned</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>Cleaned function.</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">function</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="clearLogs">
+                        <span class="type-signature"></span>clearLogs<span
+                            class="signature"
+                            >()</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line91"
+                                        >line 91</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Alias for <code>_clearLogs()</code>.</p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>println('Hello World');
+clearLogs();
+// expected outcome: blank canvas console</code></pre>
+
+                    <h4 class="name" id="complement">
+                        <span class="type-signature"></span>complement<span
+                            class="signature"
+                            >(fn)</span
+                        ><span class="type-signature"> &rarr; {function}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line177"
+                                        >line 177</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Returns a function that is the
+                            <a href="https://en.wikipedia.org/wiki/Negation"
+                                >negation</a
+                            >
+                            of the given function
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>const isEven = function(num) {
+    return num % 2 === 0;
+}
+const isOdd = complement(isEven);</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>fn</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">function</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Given function</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>Complement function</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">function</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="generateUUID">
+                        <span class="type-signature"></span>generateUUID<span
+                            class="signature"
+                            >()</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line224"
+                                        >line 224</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Generates a
+                            <a
+                                href="https://en.wikipedia.org/wiki/Universally_unique_identifier"
+                                >UUID</a
+                            >.
+                        </p>
+                    </div>
+
+                    <h5>Returns:</h5>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="getColonTime">
+                        <span class="type-signature"></span>getColonTime<span
+                            class="signature"
+                            >()</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line275"
+                                        >line 275</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Returns a string of the form <code>HH:MM:SS</code>.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>println(getColorTime());
+// expected outcome: Time in the form of `HH:MM:SS`</code></pre>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>Formatted time</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="inherit">
+                        <span class="type-signature"></span>inherit<span
+                            class="signature"
+                            >(subClass, superClass)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line257"
+                                        >line 257</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Efficiently inherits properties from the parent
+                            class to the child class.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>const Element = function(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+};
+Element.prototype.draw = function() {
+    rect(this.x, this.y, this.w, this.h);
+};
+const Button = function(x, y, w, h) {
+    Element.call(this, x, y, w, h);
+};
+inherit(Button, Element);
+
+let b = new Button(100, 100, 150, 50);
+b.draw();
+// expected outcome: rectangle with arguments (100, 100, 150, 50)</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>subClass</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">function</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Class to be inherited to</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>superClass</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">function</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Class to inherit from</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="isFont">
+                        <span class="type-signature"></span>isFont<span
+                            class="signature"
+                            >(obj)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line296"
+                                        >line 296</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+
+                        <dt class="tag-see">See:</dt>
+                        <dd class="tag-see">
+                            <ul>
+                                <li>font</li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Checks if object is a Khan Academy font object.</p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>let f = createFont('Arial');
+println(isFont(f));
+// expected output: true </code></pre>
+
+                    <pre class="prettyprint"><code>let f = font('monospace');
+println(isFont(f));
+// expected output: true</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>obj</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">Object</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="isImage">
+                        <span class="type-signature"></span>isImage<span
+                            class="signature"
+                            >(obj)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line313"
+                                        >line 313</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Checks if object is a Khan Academy image object.</p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>let i = getImage("avatars/leaf-green");
+println(isImage(i));
+// expected output: true</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>obj</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">Object</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="isSound">
+                        <span class="type-signature"></span>isSound<span
+                            class="signature"
+                            >(obj)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line330"
+                                        >line 330</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Checks if object is a Khan Academy sound object.</p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>let s = getSound("retro/boom1");
+println(isSound(s));
+// expected output: true</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>obj</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">Object</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="mostPerformant">
+                        <span class="type-signature"></span>mostPerformant<span
+                            class="signature"
+                            >(fns, iterations<span class="signature-attributes"
+                                >opt</span
+                            >)</span
+                        ><span class="type-signature"> &rarr; {Array}</span>
+                    </h4>
+
+                    <p class="summary usertext"></p>
+                    <p>Calculates fastest function in terms of iterations.</p>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line365"
+                                        >line 365</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            The functions will be called <em>n</em> number of
+                            times. Their times will be how long they took to run
+                            <em>n</em> number of times. The more iterations, the
+                            more accurate the result.
+                        </p>
+                        <p>
+                            Running resource-intensive function may result in an
+                            infinite loop error. This can be can bypassed using
+                            the <a href="global.html#clean">clean</a> function.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>let testees = {
+    'debug': debug,
+    'console.log': console.log
+};
+let test = mostPerformant(Object.values(testees));
+console.log(Object.keys(testees)[test.winner] + ' performed faster.');
+// possible output: 'console.log performed faster.'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>fns</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">Array</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>Functions to be compared</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>iterations</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>1e4</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>
+                                        Number of times function should be
+                                        called
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>Index of function which performed fastest</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">Array</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="noop">
+                        <span class="type-signature"></span>noop<span
+                            class="signature"
+                            >()</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line100"
+                                        >line 100</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Literally does nothing. Useful as the default for
+                            optional callback arguments.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>// Prevents an error if an unneeded method is called
+Element.init = noop;</code></pre>
+
+                    <h4 class="name" id="pop">
+                        <span class="type-signature"></span>pop<span
+                            class="signature"
+                            >()</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line390"
+                                        >line 390</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+
+                        <dt class="tag-see">See:</dt>
+                        <dd class="tag-see">
+                            <ul>
+                                <li><a href="global.html#push">push</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Equivalent to using
+                            <a
+                                href="http://processingjs.org/reference/popMatrix_/"
+                                >popMatrix</a
+                            >
+                            and
+                            <a
+                                href="http://processingjs.org/reference/popStyle_/"
+                                >popStyle</a
+                            >.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>push();
+stroke(WHITE);
+rotate(90);
+rect(10, 10, 15, 15);
+pop();
+// This rectangle will not display the stroke or rotation
+rect(10, 10, 15, 15);</code></pre>
+
+                    <h4 class="name" id="printf">
+                        <span class="type-signature"></span>printf<span
+                            class="signature"
+                            >(assertion, arguments)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line431"
+                                        >line 431</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Prints formatted string to canvas console.</p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>printf('Hello %', 'World');
+// expected output: 'Hello World'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>// To use the literal '%' character use double backslashes (\\)
+printf('% \\% %', 'A', 'B');
+// expected output: 'A % B'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>assertion</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>String with format</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>arguments</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">*</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Arguments</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="push">
+                        <span class="type-signature"></span>push<span
+                            class="signature"
+                            >()</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line411"
+                                        >line 411</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+
+                        <dt class="tag-see">See:</dt>
+                        <dd class="tag-see">
+                            <ul>
+                                <li><a href="global.html#pop">pop</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Equivalent to using
+                            <a
+                                href="http://processingjs.org/reference/pushMatrix_/"
+                                >pushMatrix</a
+                            >
+                            and
+                            <a
+                                href="http://processingjs.org/reference/pushStyle_/"
+                                >pushStyle</a
+                            >.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>push();
+stroke(WHITE);
+rotate(90);
+rect(10, 10, 15, 15);
+pop();
+// This rectangle will not display the stroke or rotation
+rect(10, 10, 15, 15);</code></pre>
+
+                    <h4 class="name" id="randomInt">
+                        <span class="type-signature"></span>randomInt<span
+                            class="signature"
+                            >(min<span class="signature-attributes">opt</span>,
+                            max)</span
+                        ><span class="type-signature"> &rarr; {number}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line455"
+                                        >line 455</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Generates a random integer in a given range.</p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>min</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>0</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Minimum value</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>max</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>Maximum value</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>Generated integer</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">number</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="restart">
+                        <span class="type-signature"></span>restart<span
+                            class="signature"
+                            >()</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line105"
+                                        >line 105</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Alias for <code>Program.restart()</code></p>
+                    </div>
+
+                    <h4 class="name" id="showGraphics">
+                        <span class="type-signature"></span>showGraphics<span
+                            class="signature"
+                            >(x, y, width, height, fn, renderer<span
+                                class="signature-attributes"
+                                >opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line475"
+                                        >line 475</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Shows image of graphics created with
+                            <code>createGraphics</code>.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>showGraphics(100, 100, 100, 100, function() {
+    this.background(0);
+    this.fill(RED);
+    this.rect(25, 25, 50, 50);
+});
+// expected outcome: red square embedded in black square</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>x-coordinate of image</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>y-coordinate of image</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>width</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>width of image</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>height</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>height of image</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>fn</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">function</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>draw code</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>renderer</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">P2D</span>
+                                    |
+
+                                    <span class="param-type">P3D</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>P2D</code>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="timeTaken">
+                        <span class="type-signature"></span>timeTaken<span
+                            class="signature"
+                            >(callback, id<span class="signature-attributes"
+                                >opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line507"
+                                        >line 507</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Measures the time it takes for a function to execute
+                            and logs to browser console.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>timeTaken(function() {
+    for(let i = 0; i &lt; 1e3; i++) { println(i); }
+});
+// possible output: 'timeTaken#default: 1000.000000000000 ms'</code></pre>
+
+                    <pre class="prettyprint"><code>timeTaken(function() {
+    for(let i = 0; i &lt; 1e3; i++) { println(i); }
+}, '1000');
+// possible output: 'timeTaken#1000: 1000.000000000000 ms'
+timeTaken(function() {
+    for(let i = 0; i &lt; 1e2; i++) { println(i); }
+}, '100');
+// possible output: 'timeTaken#100: 100.000000000000 ms'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>callback</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">function</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="description last">
+                                    <p>Function to be measured</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>id</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>
+                                        Custom ID for multiple consecutive tests
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+            </section>
         </div>
-    
 
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="CANVAS"><span class="type-signature"></span>CANVAS<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line72">line 72</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Canvas jQuery selector.</p>
-</div>
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>// Log canvas element style to browser consoleconsole.log($(CANVAS).attr('style)');</code></pre>
-
-
-
-        
-            
-<h4 class="name" id="CANVAS_LOG"><span class="type-signature"></span>CANVAS_LOG<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line81">line 81</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Canvas log jQuery selector.</p>
-</div>
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>// Log canvas log text to browser consoleconsole.log($(CANVAS_LOG).text());</code></pre>
-
-
-
-        
-            
-<h4 class="name" id="HALF_HEIGHT"><span class="type-signature"></span>HALF_HEIGHT<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line63">line 63</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Alias for <code>HEIGHT / 2</code>.</p>
-</div>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="HALF_WIDTH"><span class="type-signature"></span>HALF_WIDTH<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line58">line 58</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Alias for <code>WIDTH / 2</code>.</p>
-</div>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="HEIGHT"><span class="type-signature"></span>HEIGHT<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line53">line 53</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Alias for <code>height</code>.</p>
-</div>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="WIDTH"><span class="type-signature"></span>WIDTH<span class="type-signature"></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line48">line 48</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Alias for <code>width</code>.</p>
-</div>
-
-
-
-
-
-
-
-
-        
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="attempt"><span class="type-signature"></span>attempt<span class="signature">(fn, &hellip;args)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line116">line 116</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Attempts to invoke a function with the provided arguments, returning either
-the result or an error.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>fn</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Function to attempt.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>args</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                    &lt;repeatable><br>
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Functions arguments.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="chainAsync"><span class="type-signature"></span>chainAsync<span class="signature">(fns)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line150">line 150</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Calls multiple functions asynchronously.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let array;chainAsync([    function(next) {        console.log('Generating array...');        array = [];        for (let i = 0; i &lt; 10000; i++) {            array.push(Math.random(0, 100));        }        next();    }, function(next) {        console.log('Sorting array...');        array.sort();        next();    }, function() {        console.log(array);    }]);</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>fns</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Array containing functions to call</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="clean"><span class="type-signature"></span>clean<span class="signature">(fn)</span><span class="type-signature"> &rarr; {function}</span></h4>
-
-    
-    <p class="summary usertext"><p>Removes Khan Academy's loop protection code from functions.</p></p>
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line190">line 190</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Khan Academy adds a few lines of code to every function created to prevent
-the webpage from freezing. This can be a hinderance when running more
-resource-intensive code.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>const drawEllipses = function() {    for (let i = 0; i &lt; 1e4; i++) {        ellipse(Math.random(0, width), Math.random(0, height), 10, 10);    }};// possible error: 'A for loop is taking too long to run.'</code></pre>
-
-    <pre class="prettyprint"><code>const drawEllipses = clean(function() {    for (let i = 0; i &lt; 1e4; i++) {        ellipse(Math.random(0, width), Math.random(0, height), 10, 10);    }});</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>fn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Function to be cleaned</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Cleaned function.</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">function</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="clearLogs"><span class="type-signature"></span>clearLogs<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line91">line 91</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Alias for <code>_clearLogs()</code>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>println('Hello World');clearLogs();// expected outcome: blank canvas console</code></pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="complement"><span class="type-signature"></span>complement<span class="signature">(fn)</span><span class="type-signature"> &rarr; {function}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line216">line 216</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Returns a function that is the
-<a href="https://en.wikipedia.org/wiki/Negation">negation</a> of the given
-function</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>const isEven = function(num) {    return num % 2 === 0;}const isOdd = complement(isEven);</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>fn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Given function</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Complement function</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">function</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="generateUUID"><span class="type-signature"></span>generateUUID<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line239">line 239</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Generates a
-<a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="getColonTime"><span class="type-signature"></span>getColonTime<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line229">line 229</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Returns a string of the form <code>HH:MM:SS</code>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>println(getColorTime());// expected outcome: Time in the form of `HH:MM:SS`</code></pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Formatted time</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="inherit"><span class="type-signature"></span>inherit<span class="signature">(subClass, superClass)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line272">line 272</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Efficiently inherits properties from the parent class to the child class.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>const Element = function(x, y, w, h) {    this.x = x;    this.y = y;    this.w = w;    this.h = h;};Element.prototype.draw = function() {    rect(this.x, this.y, this.w, this.h);};const Button = function(x, y, w, h) {    Element.call(this, x, y, w, h);};inherit(Button, Element);let b = new Button(100, 100, 150, 50);b.draw();// expected outcome: rectangle with arguments (100, 100, 150, 50)</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>subClass</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Class to be inherited to</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>superClass</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Class to inherit from</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="isFont"><span class="type-signature"></span>isFont<span class="signature">(obj)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line296">line 296</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li>font</li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Checks if object is a Khan Academy font object.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>let f = createFont('Arial');println(isFont(f));// expected output: true </code></pre>
-
-    <pre class="prettyprint"><code>let f = font('monospace');println(isFont(f));// expected output: true</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>obj</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="isImage"><span class="type-signature"></span>isImage<span class="signature">(obj)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line313">line 313</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Checks if object is a Khan Academy image object.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let i = getImage("avatars/leaf-green");println(isImage(i));// expected output: true</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>obj</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="isSound"><span class="type-signature"></span>isSound<span class="signature">(obj)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line330">line 330</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Checks if object is a Khan Academy sound object.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let s = getSound("retro/boom1");println(isSound(s));// expected output: true</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>obj</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="mostPerformant"><span class="type-signature"></span>mostPerformant<span class="signature">(fns, iterations<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array}</span></h4>
-
-    
-    <p class="summary usertext"><p>Calculates fastest function in terms of iterations.</p></p>
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line365">line 365</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>The functions will be called <em>n</em> number of times. Their times will be how
-long they took to run <em>n</em> number of times. The more iterations, the more
-accurate the result.</p>
-<p>Running resource-intensive function may result in an infinite loop error.
-This can be can bypassed using the <a href="global.html#clean">clean</a> function.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let testees = {    'debug': debug,    'console.log': console.log};let test = mostPerformant(Object.values(testees));console.log(Object.keys(testees)[test.winner] + ' performed faster.');// possible output: 'console.log performed faster.'</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>fns</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Functions to be compared</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>iterations</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>1e4</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>Number of times function should be called</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Index of function which performed fastest</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="noop"><span class="type-signature"></span>noop<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line100">line 100</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Literally does nothing. Useful as the default for optional callback arguments.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>// Prevents an error if an unneeded method is calledElement.init = noop;</code></pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="pop"><span class="type-signature"></span>pop<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line390">line 390</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="global.html#push">push</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Equivalent to using
-<a href="http://processingjs.org/reference/popMatrix_/">popMatrix</a> and
-<a href="http://processingjs.org/reference/popStyle_/">popStyle</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>push();stroke(WHITE);rotate(90);rect(10, 10, 15, 15);pop();// This rectangle will not display the stroke or rotationrect(10, 10, 15, 15);</code></pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="printf"><span class="type-signature"></span>printf<span class="signature">(assertion, arguments)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line410">line 410</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Prints formatted string to canvas console.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>printf('Hello %', 'World');// expected output: 'Hello World'</code></pre>
-
-    <pre class="prettyprint"><code>// To use the literal '%' character use double backslashes (\\)printf('% \\% %', 'A', 'B');// expected output: 'A % B'</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>assertion</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>String with format</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>arguments</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Arguments</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="push"><span class="type-signature"></span>push<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line436">line 436</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="global.html#pop">pop</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Equivalent to using
-<a href="http://processingjs.org/reference/pushMatrix_/">pushMatrix</a> and
-<a href="http://processingjs.org/reference/pushStyle_/">pushStyle</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>push();stroke(WHITE);rotate(90);rect(10, 10, 15, 15);pop();// This rectangle will not display the stroke or rotationrect(10, 10, 15, 15);</code></pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="randomInt"><span class="type-signature"></span>randomInt<span class="signature">(min<span class="signature-attributes">opt</span>, max)</span><span class="type-signature"> &rarr; {number}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line455">line 455</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Generates a random integer in a given range.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));</code></pre>
-
-    <pre class="prettyprint"><code>printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>min</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>0</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>Minimum value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>max</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Maximum value</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Generated integer</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="restart"><span class="type-signature"></span>restart<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line105">line 105</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Alias for <code>Program.restart()</code></p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="showGraphics"><span class="type-signature"></span>showGraphics<span class="signature">(x, y, width, height, fn, renderer<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line475">line 475</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Shows image of graphics created with <code>createGraphics</code>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>showGraphics(100, 100, 100, 100, function() {    this.background(0);    this.fill(RED);    this.rect(25, 25, 50, 50);});// expected outcome: red square embedded in black square</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>x-coordinate of image</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>y-coordinate of image</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>width</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>width of image</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>height of image</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>fn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>draw code</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>renderer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">P2D</span>
-|
-
-<span class="param-type">P3D</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>P2D</code>
-                
-                </td>
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="timeTaken"><span class="type-signature"></span>timeTaken<span class="signature">(callback, id<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line507">line 507</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Measures the time it takes for a function to execute and logs to browser
-console.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>timeTaken(function() {    for(let i = 0; i &lt; 1e3; i++) { println(i); }});// possible output: 'timeTaken#default: 1000.000000000000 ms'</code></pre>
-
-    <pre class="prettyprint"><code>timeTaken(function() {    for(let i = 0; i &lt; 1e3; i++) { println(i); }}, '1000');// possible output: 'timeTaken#1000: 1000.000000000000 ms'timeTaken(function() {    for(let i = 0; i &lt; 1e2; i++) { println(i); }}, '100');// possible output: 'timeTaken#100: 100.000000000000 ms'</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Function to be measured</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Custom ID for multiple consecutive tests</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-    
-    
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Apr 03 2021 15:44:32 GMT-0700 (Pacific Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
-<script src="scripts/search.js" defer></script>
-
-
-
-</body>
+        <br class="clear" />
+
+        <footer>
+            Documentation generated by
+            <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Apr
+            03 2021 17:07:17 GMT-0700 (Pacific Daylight Time) using the
+            <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+        </footer>
+
+        <script>
+            prettyPrint();
+        </script>
+        <script src="scripts/polyfill.js"></script>
+        <script src="scripts/linenumber.js"></script>
+
+        <script src="scripts/search.js" defer></script>
+    </body>
 </html>

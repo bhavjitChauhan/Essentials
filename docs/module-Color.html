@@ -1,3392 +1,1918 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
-    <meta charset="utf-8">
-    <title>Color - Documentation</title>
-    
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+    <head>
+        <meta charset="utf-8" />
+        <title>Color - Documentation</title>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
+        <script src="scripts/prettify/prettify.js"></script>
+        <script src="scripts/prettify/lang-css.js"></script>
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link type="text/css" rel="stylesheet" href="styles/prettify.css" />
+        <link type="text/css" rel="stylesheet" href="styles/jsdoc.css" />
+        <script src="scripts/nav.js" defer></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger" class="navicon-button x">
+            <div class="navicon"></div>
+        </label>
 
-<label for="nav-trigger" class="overlay"></label>
+        <label for="nav-trigger" class="overlay"></label>
 
-<nav >
-    
-    <input type="text" id="nav-search" placeholder="Search" />
-    
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Color.html">Color</a><ul class='methods'><li data-type='method'><a href="module-Color.html#~angularGradient">angularGradient</a></li><li data-type='method'><a href="module-Color.html#~circularGradient">circularGradient</a></li><li data-type='method'><a href="module-Color.html#~hexToRGB">hexToRGB</a></li><li data-type='method'><a href="module-Color.html#~HSBToRGB">HSBToRGB</a></li><li data-type='method'><a href="module-Color.html#~linearGradient">linearGradient</a></li><li data-type='method'><a href="module-Color.html#~radialGradient">radialGradient</a></li><li data-type='method'><a href="module-Color.html#~RGBToHex">RGBToHex</a></li><li data-type='method'><a href="module-Color.html#~RGBToHSB">RGBToHSB</a></li><li data-type='method'><a href="module-Color.html#~toHSB">toHSB</a></li><li data-type='method'><a href="module-Color.html#~toRGB">toRGB</a></li></ul></li><li><a href="module-Shape.html">Shape</a><ul class='methods'><li data-type='method'><a href="module-Shape.html#~blurRect">blurRect</a></li><li data-type='method'><a href="module-Shape.html#~circle">circle</a></li><li data-type='method'><a href="module-Shape.html#~cylinder">cylinder</a></li><li data-type='method'><a href="module-Shape.html#~dashedLine">dashedLine</a></li><li data-type='method'><a href="module-Shape.html#~donut">donut</a></li><li data-type='method'><a href="module-Shape.html#~dottedLine">dottedLine</a></li><li data-type='method'><a href="module-Shape.html#~drawShape">drawShape</a></li><li data-type='method'><a href="module-Shape.html#~edge">edge</a></li><li data-type='method'><a href="module-Shape.html#~heart">heart</a></li><li data-type='method'><a href="module-Shape.html#~parallelogram">parallelogram</a></li><li data-type='method'><a href="module-Shape.html#~polygon">polygon</a></li><li data-type='method'><a href="module-Shape.html#~rectangle">rectangle</a></li><li data-type='method'><a href="module-Shape.html#~rhombus">rhombus</a></li><li data-type='method'><a href="module-Shape.html#~square">square</a></li><li data-type='method'><a href="module-Shape.html#~star">star</a></li><li data-type='method'><a href="module-Shape.html#~trapezoid">trapezoid</a></li></ul></li><li><a href="module-Text.html">Text</a><ul class='methods'><li data-type='method'><a href="module-Text.html#~fastGradientText">fastGradientText</a></li><li data-type='method'><a href="module-Text.html#~font">font</a></li><li data-type='method'><a href="module-Text.html#~formatDuration">formatDuration</a></li><li data-type='method'><a href="module-Text.html#~highlightText">highlightText</a></li><li data-type='method'><a href="module-Text.html#~lightOrDarkText">lightOrDarkText</a></li><li data-type='method'><a href="module-Text.html#~multicoloredText">multicoloredText</a></li><li data-type='method'><a href="module-Text.html#~ordinalSuffix">ordinalSuffix</a></li><li data-type='method'><a href="module-Text.html#~outlineText">outlineText</a></li><li data-type='method'><a href="module-Text.html#~pluralize">pluralize</a></li><li data-type='method'><a href="module-Text.html#~underlineText">underlineText</a></li><li data-type='method'><a href="module-Text.html#~wordWrap">wordWrap</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#attempt">attempt</a></li><li><a href="global.html#CANVAS">CANVAS</a></li><li><a href="global.html#CANVAS_LOG">CANVAS_LOG</a></li><li><a href="global.html#chainAsync">chainAsync</a></li><li><a href="global.html#clean">clean</a></li><li><a href="global.html#clearLogs">clearLogs</a></li><li><a href="global.html#complement">complement</a></li><li><a href="global.html#generateUUID">generateUUID</a></li><li><a href="global.html#getColonTime">getColonTime</a></li><li><a href="global.html#HALF_HEIGHT">HALF_HEIGHT</a></li><li><a href="global.html#HALF_WIDTH">HALF_WIDTH</a></li><li><a href="global.html#HEIGHT">HEIGHT</a></li><li><a href="global.html#inherit">inherit</a></li><li><a href="global.html#isFont">isFont</a></li><li><a href="global.html#isImage">isImage</a></li><li><a href="global.html#isSound">isSound</a></li><li><a href="global.html#mostPerformant">mostPerformant</a></li><li><a href="global.html#noop">noop</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#printf">printf</a></li><li><a href="global.html#push">push</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#restart">restart</a></li><li><a href="global.html#showGraphics">showGraphics</a></li><li><a href="global.html#timeTaken">timeTaken</a></li><li><a href="global.html#WIDTH">WIDTH</a></li></ul>
-</nav>
+        <nav>
+            <input type="text" id="nav-search" placeholder="Search" />
 
-<div id="main">
-    
-    <h1 class="page-title">Color</h1>
-    
+            <h2><a href="index.html">Home</a></h2>
+            <h3>Modules</h3>
+            <ul>
+                <li>
+                    <a href="module-Color.html">Color</a>
+                    <ul class="methods">
+                        <li data-type="method">
+                            <a href="module-Color.html#~angularGradient"
+                                >angularGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~circularGradient"
+                                >circularGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~hexToRGB">hexToRGB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~HSBToRGB">HSBToRGB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~linearGradient"
+                                >linearGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~radialGradient"
+                                >radialGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~RGBToHex">RGBToHex</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~RGBToHSB">RGBToHSB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~toHSB">toHSB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~toRGB">toRGB</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="module-Shape.html">Shape</a>
+                    <ul class="methods">
+                        <li data-type="method">
+                            <a href="module-Shape.html#~blurRect">blurRect</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~circle">circle</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~cylinder">cylinder</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~dashedLine"
+                                >dashedLine</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~donut">donut</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~dottedLine"
+                                >dottedLine</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~drawShape">drawShape</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~edge">edge</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~heart">heart</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~parallelogram"
+                                >parallelogram</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~polygon">polygon</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~rectangle">rectangle</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~rhombus">rhombus</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~square">square</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~star">star</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~trapezoid">trapezoid</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="module-Text.html">Text</a>
+                    <ul class="methods">
+                        <li data-type="method">
+                            <a href="module-Text.html#~fastGradientText"
+                                >fastGradientText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~font">font</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~formatDuration"
+                                >formatDuration</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~highlightText"
+                                >highlightText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~lightOrDarkText"
+                                >lightOrDarkText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~multicoloredText"
+                                >multicoloredText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~ordinalSuffix"
+                                >ordinalSuffix</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~outlineText"
+                                >outlineText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~pluralize">pluralize</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~underlineText"
+                                >underlineText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~wordWrap">wordWrap</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>Global</h3>
+            <ul>
+                <li><a href="global.html#attempt">attempt</a></li>
+                <li><a href="global.html#CANVAS">CANVAS</a></li>
+                <li><a href="global.html#CANVAS_LOG">CANVAS_LOG</a></li>
+                <li><a href="global.html#chainAsync">chainAsync</a></li>
+                <li><a href="global.html#clean">clean</a></li>
+                <li><a href="global.html#clearLogs">clearLogs</a></li>
+                <li><a href="global.html#complement">complement</a></li>
+                <li><a href="global.html#generateUUID">generateUUID</a></li>
+                <li><a href="global.html#getColonTime">getColonTime</a></li>
+                <li><a href="global.html#HALF_HEIGHT">HALF_HEIGHT</a></li>
+                <li><a href="global.html#HALF_WIDTH">HALF_WIDTH</a></li>
+                <li><a href="global.html#HEIGHT">HEIGHT</a></li>
+                <li><a href="global.html#inherit">inherit</a></li>
+                <li><a href="global.html#isFont">isFont</a></li>
+                <li><a href="global.html#isImage">isImage</a></li>
+                <li><a href="global.html#isSound">isSound</a></li>
+                <li><a href="global.html#mostPerformant">mostPerformant</a></li>
+                <li><a href="global.html#noop">noop</a></li>
+                <li><a href="global.html#pop">pop</a></li>
+                <li><a href="global.html#printf">printf</a></li>
+                <li><a href="global.html#push">push</a></li>
+                <li><a href="global.html#randomInt">randomInt</a></li>
+                <li><a href="global.html#restart">restart</a></li>
+                <li><a href="global.html#showGraphics">showGraphics</a></li>
+                <li><a href="global.html#timeTaken">timeTaken</a></li>
+                <li><a href="global.html#WIDTH">WIDTH</a></li>
+            </ul>
+        </nav>
 
-    
+        <div id="main">
+            <h1 class="page-title">Color</h1>
 
+            <section>
+                <header></header>
 
+                <article>
+                    <div class="container-overview"></div>
 
+                    <h3 class="subsection-title">Members</h3>
 
-<section>
+                    <h4 class="name" id="~BLUE">
+                        <span class="type-signature">(inner) </span>BLUE<span
+                            class="type-signature"
+                        ></span>
+                    </h4>
 
-<header>
-    
-        
-    
-</header>
+                    <p class="summary"></p>
+                    <p>Alias for <code>color(0, 0, 255)</code>.</p>
 
-<article>
-    
-        <div class="container-overview">
-        
-            
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line586"
+                                        >line 586</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
 
-            
-        
+                    <div class="description usertext">
+                        <p>
+                            Essentials includes the [CSS color
+                            names]w3schools.com/colors/colors_names.asp in the
+                            format <code>COLORNAME</code>.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>fill(BLUE);
+text('Hello World', 25, 25);</code></pre>
+
+                    <pre class="prettyprint"><code>let c = color(BLUE, 50);
+fill(c);
+square(25, 25, 25);</code></pre>
+
+                    <h4 class="name" id="~GREEN">
+                        <span class="type-signature">(inner) </span>GREEN<span
+                            class="type-signature"
+                        ></span>
+                    </h4>
+
+                    <p class="summary"></p>
+                    <p>Alias for <code>color(0, 128, 0)</code>.</p>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line566"
+                                        >line 566</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Essentials includes the [CSS color
+                            names]w3schools.com/colors/colors_names.asp in the
+                            format <code>COLORNAME</code>.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>fill(GREEN);
+text('Hello World', 25, 25);</code></pre>
+
+                    <pre class="prettyprint"><code>let c = color(GREEN, 50);
+fill(c);
+square(25, 25, 25);</code></pre>
+
+                    <h4 class="name" id="~RED">
+                        <span class="type-signature">(inner) </span>RED<span
+                            class="type-signature"
+                        ></span>
+                    </h4>
+
+                    <p class="summary"></p>
+                    <p>Alias for <code>color(255, 0, 0)</code>.</p>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line546"
+                                        >line 546</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Essentials includes the [CSS color
+                            names]w3schools.com/colors/colors_names.asp in the
+                            format <code>COLORNAME</code>.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>fill(RED);
+text('Hello World', 25, 25);</code></pre>
+
+                    <pre class="prettyprint"><code>let c = color(RED, 50);
+fill(c);
+square(25, 25, 25);</code></pre>
+
+                    <h3 class="subsection-title">Methods</h3>
+
+                    <h4 class="name" id="~angularGradient">
+                        <span class="type-signature">(inner) </span
+                        >angularGradient<span class="signature"
+                            >(x, y, width, height, startColor, endColor,
+                            angle<span class="signature-attributes">opt</span>,
+                            step<span class="signature-attributes">opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <p class="summary usertext"></p>
+                    <p>
+                        Draws an angular gradient from
+                        <code>startColor</code> to <code>endColor</code> in the
+                        form of an ellipse.
+                    </p>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line757"
+                                        >line 757</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            For a step size greater than 1, the function draws
+                            triangles of base <code>step</code>. Using a step
+                            size greater than 1 is faster. It is highly advised
+                            to store drawn gradients in images using the
+                            <code>get</code> function for use in a draw loop.
+                            Use the <code>smooth</code> function to prevent
+                            jagged edges.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>angularGradient(25, 25, 100, 100, RED, YELLOW);
+// expected outcome: angular gradient from red to yellow</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>angularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
+// expected outcome: angular gradient from purple to pink rotated 90 degrees</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>angularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
+// expected outcome: angular gradient from green to light blue in strips of thickness 25</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>
+                                        x-coordinate of the top-left corner the
+                                        gradient
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>
+                                        y-coordinate of the top-left corner the
+                                        gradient
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>width</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>width of the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>height</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>height of the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>startColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>starting color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>endColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>ending color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>angle</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>0</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>
+                                        start angle of the gradient in degrees
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>step</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>5</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>step size</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="~circularGradient">
+                        <span class="type-signature">(inner) </span
+                        >circularGradient<span class="signature"
+                            >(x, y, width, height, startColor, endColor,
+                            angle<span class="signature-attributes">opt</span>,
+                            step<span class="signature-attributes">opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <p class="summary usertext"></p>
+                    <p>
+                        Draws an circular gradient from
+                        <code>startColor</code> to <code>endColor</code> in the
+                        form of an ellipse.
+                    </p>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line821"
+                                        >line 821</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            For a step size greater than 1, the function draws
+                            triangles of base <code>step</code>. Using a step
+                            size greater than 1 is faster. It is highly advised
+                            to store drawn gradients in images using the
+                            <code>get</code> function for use in a draw loop.
+                            Use the <code>smooth</code> function to prevent
+                            jagged edges.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>circularGradient(25, 25, 100, 100, RED, YELLOW);
+// expected outcome: circular gradient from red to yellow</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>circularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
+// expected outcome: circular gradient from purple to pink rotated 90 degrees</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>circularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
+// expected outcome: circular gradient from green to light blue in strips of thickness 25</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>
+                                        x-coordinate of the top-left corner the
+                                        gradient
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>
+                                        y-coordinate of the top-left corner the
+                                        gradient
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>width</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>width of the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>height</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>height of the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>startColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>starting color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>endColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>ending color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>angle</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>0</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>
+                                        start angle of the gradient in degrees
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>step</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>5</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>step size</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="~hexToRGB">
+                        <span class="type-signature">(inner) </span
+                        >hexToRGB<span class="signature">(hex)</span
+                        ><span class="type-signature"> &rarr; {color}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line940"
+                                        >line 940</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Converts hex to RGB color type.</p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>let c = hexToRGB('#fff');
+println(c);
+// expected output: -1
+background(c);
+// expected outcome: white background</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>hex</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>
+                                        Hex color value, optional
+                                        <code>#</code>; can be shorthand
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>RGB color value</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">color</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~HSBToRGB">
+                        <span class="type-signature">(inner) </span
+                        >HSBToRGB<span class="signature"
+                            >(x, s<span class="signature-attributes">opt</span>,
+                            v<span class="signature-attributes">opt</span
+                            >)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line896"
+                                        >line 896</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Converts HSB to RGB color type.</p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>let c = HSBToRGB(85, 255, 255);
+println(c);
+// expected output: -16711936
+background(c);
+// expected outcome: green background</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                    |
+
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="description last">
+                                    <p>Hue value or color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>s</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Saturation value</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>v</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Brightness value</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>RGB color value</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~linearGradient">
+                        <span class="type-signature">(inner) </span
+                        >linearGradient<span class="signature"
+                            >(x, y, width, height, startColor, endColor,
+                            direction<span class="signature-attributes"
+                                >opt</span
+                            >, step<span class="signature-attributes">opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <p class="summary usertext"></p>
+                    <p>
+                        Draws a linear gradient from <code>startColor</code> to
+                        <code>endColor</code> in the form of a rectangle.
+                    </p>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line990"
+                                        >line 990</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            For a step size greater than 1, the function draws
+                            rectangles of width <code>step</code>. Using a step
+                            size greater than 1 is faster for all but diagonal
+                            gradients. It is highly advised to store drawn
+                            gradients in images using the
+                            <code>get</code> function for use in a draw loop.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>linearGradient(25, 25, 100, 100, RED, YELLOW);
+// expected outcome: linear gradient from left to right; red to yellow</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>linearGradient(150, 25, 100, 100, PURPLE, PINK, TOP_RIGHT);
+// expected outcome: linear gradient from bottom-left to top-right; purple to pink</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>linearGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, BOTTOM_RIGHT, 10);
+// expected outcome: linear gradient from top-left to bottom-right; green to light blue in strips of thickness 10</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>x-coordinate of the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>y-coordinate of the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>width</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>width of the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>height</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>height of the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>startColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>starting color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>endColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>ending color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>direction</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">LEFT</span>
+                                    |
+
+                                    <span class="param-type">RIGHT</span>
+                                    |
+
+                                    <span class="param-type">TOP</span>
+                                    |
+
+                                    <span class="param-type">UP</span>
+                                    |
+
+                                    <span class="param-type">BOTTOM</span>
+                                    |
+
+                                    <span class="param-type">DOWN</span>
+                                    |
+
+                                    <span class="param-type">TOP_LEFT</span>
+                                    |
+
+                                    <span class="param-type">TOP_RIGHT</span>
+                                    |
+
+                                    <span class="param-type">BOTTOM_RIGHT</span>
+                                    |
+
+                                    <span class="param-type">BOTTOM_LEFT</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>RIGHT</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>direction of gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>step</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>5</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>step size</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="~radialGradient">
+                        <span class="type-signature">(inner) </span
+                        >radialGradient<span class="signature"
+                            >(x, y, width, height, startColor, endColor,
+                            step<span class="signature-attributes">opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <p class="summary usertext"></p>
+                    <p>
+                        Draws a radial gradient from <code>startColor</code> to
+                        <code>endColor</code> in the form of an ellipse.
+                    </p>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1115"
+                                        >line 1115</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            For a step size greater than 1, the function draws
+                            ellipses of width <code>step</code>. Using a step
+                            size greater than 1 is faster. It is highly advised
+                            to store drawn gradients in images using the
+                            <code>get</code> function for use in a draw loop.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>radialGradient(100, 100, 100, 100, RED, YELLOW);
+// expected outcome: radial gradient from red to yellow</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>radialGradient(250, 100, 100, 100, PURPLE, PINK, 10);
+// expected outcome: radial gradient from purple to pink with step size 10</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>
+                                        x-coordinate of center of the gradient
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>y-coordinate of center the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>width</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>width of the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>height</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>height of the gradient</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>startColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>starting color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>endColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>ending color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>step</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>5</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>step size</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="~RGBToHex">
+                        <span class="type-signature">(inner) </span
+                        >RGBToHex<span class="signature"
+                            >(x, g<span class="signature-attributes">opt</span>,
+                            b<span class="signature-attributes">opt</span
+                            >)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1159"
+                                        >line 1159</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Converts RGB to hex color type.</p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>println(RGBToHex(255, 0, 0));
+// expected output: #ff0000</code></pre>
+
+                    <pre class="prettyprint"><code>let c = RED;
+println(RGBToHex(c));
+// expected output: #ff0000</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                    |
+
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="description last">
+                                    <p>Red value or color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>g</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Green value</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>b</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Blue value</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>Hex color value</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~RGBToHSB">
+                        <span class="type-signature">(inner) </span
+                        >RGBToHSB<span class="signature"
+                            >(x, g<span class="signature-attributes">opt</span>,
+                            b<span class="signature-attributes">opt</span
+                            >)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1184"
+                                        >line 1184</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Converts RGB to HSB color type.</p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>let c = RGBToHSB(255, 0, 0);
+println(c);
+// expected output: -65536
+colorMode(HSB);
+background(c);
+// expected outcome: red background</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                    |
+
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="description last">
+                                    <p>Red value or color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>g</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Green value</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>b</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Blue value</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>HSB color value</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~toHSB">
+                        <span class="type-signature">(inner) </span>toHSB<span
+                            class="signature"
+                            >(x, g<span class="signature-attributes">opt</span>,
+                            b<span class="signature-attributes">opt</span
+                            >)</span
+                        ><span class="type-signature">
+                            &rarr; {color|array}</span
+                        >
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1243"
+                                        >line 1243</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Converts hex or RGB to HSB color value.</p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>colorMode(HSB);
+background(toHSB('fff'));
+// expected outcome: white background</code></pre>
+
+                    <pre class="prettyprint"><code>colorMode(HSB);
+background(toHSB(255, 0, 0));
+// expected outcome: red background</code></pre>
+
+                    <pre class="prettyprint"><code>println(toHSB(-1))
+// expected output: [0, 0, 255]</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                    |
+
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="description last">
+                                    <p>Hex, red or HSB color value</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>g</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Green value</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>b</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Blue value</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>RGB color value or RGB values array</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">color</span>
+                            |
+
+                            <span class="param-type">array</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~toRGB">
+                        <span class="type-signature">(inner) </span>toRGB<span
+                            class="signature"
+                            >(x, s<span class="signature-attributes">opt</span>,
+                            v<span class="signature-attributes">opt</span
+                            >)</span
+                        ><span class="type-signature">
+                            &rarr; {color|array}</span
+                        >
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1278"
+                                        >line 1278</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Converts hex or HSB to RGB color value.</p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>background(toRGB('fff'));
+// expected outcome: white background</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>background(toRGB(0, 255, 255));
+// expected outcome: red background</code></pre>
+
+                    <pre class="prettyprint"><code>println(toRGB(-1))
+// expected output: [255, 255, 255]</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                    |
+
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="description last">
+                                    <p>Hex, hue or RGB color value</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>s</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Saturation value</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>v</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Brightness value</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>RGB color value or RGB values array</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">color</span>
+                            |
+
+                            <span class="param-type">array</span>
+                        </dd>
+                    </dl>
+                </article>
+            </section>
         </div>
-    
 
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="~BLUE"><span class="type-signature">(inner) </span>BLUE<span class="type-signature"></span></h4>
-
-
-<p class="summary"><p>Alias for <code>color(0, 0, 255)</code>.</p></p>
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line818">line 818</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Essentials includes the [CSS color
-names]w3schools.com/colors/colors_names.asp in the format
-<code>COLORNAME</code>.</p>
-</div>
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>fill(BLUE);text('Hello World', 25, 25);</code></pre>
-
-    <pre class="prettyprint"><code>let c = color(BLUE, 50);fill(c);square(25, 25, 25);</code></pre>
-
-
-
-        
-            
-<h4 class="name" id="~GREEN"><span class="type-signature">(inner) </span>GREEN<span class="type-signature"></span></h4>
-
-
-<p class="summary"><p>Alias for <code>color(0, 128, 0)</code>.</p></p>
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line798">line 798</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Essentials includes the [CSS color
-names]w3schools.com/colors/colors_names.asp in the format
-<code>COLORNAME</code>.</p>
-</div>
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>fill(GREEN);text('Hello World', 25, 25);</code></pre>
-
-    <pre class="prettyprint"><code>let c = color(GREEN, 50);fill(c);square(25, 25, 25);</code></pre>
-
-
-
-        
-            
-<h4 class="name" id="~RED"><span class="type-signature">(inner) </span>RED<span class="type-signature"></span></h4>
-
-
-<p class="summary"><p>Alias for <code>color(255, 0, 0)</code>.</p></p>
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line778">line 778</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Essentials includes the [CSS color
-names]w3schools.com/colors/colors_names.asp in the format
-<code>COLORNAME</code>.</p>
-</div>
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>fill(RED);text('Hello World', 25, 25);</code></pre>
-
-    <pre class="prettyprint"><code>let c = color(RED, 50);fill(c);square(25, 25, 25);</code></pre>
-
-
-
-        
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="~angularGradient"><span class="type-signature">(inner) </span>angularGradient<span class="signature">(x, y, width, height, startColor, endColor, angle<span class="signature-attributes">opt</span>, step<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-    <p class="summary usertext"><p>Draws an angular gradient from <code>startColor</code> to <code>endColor</code> in the form of an
-ellipse.</p></p>
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line560">line 560</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>For a step size greater than 1, the function draws triangles of base <code>step</code>.
-Using a step size greater than 1 is faster. It is highly advised to store
-drawn gradients in images using the <code>get</code> function for use in a draw loop.
-Use the <code>smooth</code> function to prevent jagged edges.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>angularGradient(25, 25, 100, 100, RED, YELLOW);// expected outcome: angular gradient from red to yellow</code></pre>
-
-    <pre class="prettyprint"><code>angularGradient(150, 25, 100, 100, PURPLE, PINK, 90);// expected outcome: angular gradient from purple to pink rotated 90 degrees</code></pre>
-
-    <pre class="prettyprint"><code>angularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);// expected outcome: angular gradient from green to light blue in strips of thickness 25</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>x-coordinate of the top-left corner the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>y-coordinate of the top-left corner the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>width</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>width of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>height of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>startColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>starting color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>endColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>ending color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>angle</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>0</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>start angle of the gradient in degrees</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>step</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>5</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>step size</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~circularGradient"><span class="type-signature">(inner) </span>circularGradient<span class="signature">(x, y, width, height, startColor, endColor, angle<span class="signature-attributes">opt</span>, step<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-    <p class="summary usertext"><p>Draws an circular gradient from <code>startColor</code> to <code>endColor</code> in the form of an
-ellipse.</p></p>
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line624">line 624</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>For a step size greater than 1, the function draws triangles of base <code>step</code>.
-Using a step size greater than 1 is faster. It is highly advised to store
-drawn gradients in images using the <code>get</code> function for use in a draw loop.
-Use the <code>smooth</code> function to prevent jagged edges.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>circularGradient(25, 25, 100, 100, RED, YELLOW);// expected outcome: circular gradient from red to yellow</code></pre>
-
-    <pre class="prettyprint"><code>circularGradient(150, 25, 100, 100, PURPLE, PINK, 90);// expected outcome: circular gradient from purple to pink rotated 90 degrees</code></pre>
-
-    <pre class="prettyprint"><code>circularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);// expected outcome: circular gradient from green to light blue in strips of thickness 25</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>x-coordinate of the top-left corner the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>y-coordinate of the top-left corner the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>width</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>width of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>height of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>startColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>starting color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>endColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>ending color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>angle</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>0</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>start angle of the gradient in degrees</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>step</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>5</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>step size</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~hexToRGB"><span class="type-signature">(inner) </span>hexToRGB<span class="signature">(hex)</span><span class="type-signature"> &rarr; {color}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line697">line 697</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Converts hex to RGB color type.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let c = hexToRGB('#fff');println(c);// expected output: -1background(c);// expected outcome: white background</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>hex</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Hex color value, optional <code>#</code>; can be shorthand</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>RGB color value</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">color</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~HSBToRGB"><span class="type-signature">(inner) </span>HSBToRGB<span class="signature">(x, s<span class="signature-attributes">opt</span>, v<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line730">line 730</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Converts HSB to RGB color type.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let c = HSBToRGB(85, 255, 255);println(c);// expected output: -16711936background(c);// expected outcome: green background</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Hue value or color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>s</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Saturation value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>v</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Brightness value</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>RGB color value</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~linearGradient"><span class="type-signature">(inner) </span>linearGradient<span class="signature">(x, y, width, height, startColor, endColor, direction<span class="signature-attributes">opt</span>, step<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-    <p class="summary usertext"><p>Draws a linear gradient from <code>startColor</code> to <code>endColor</code> in the form of a rectangle.</p></p>
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line990">line 990</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>For a step size greater than 1, the function draws rectangles of width
-<code>step</code>. Using a step size greater than 1 is faster for all but diagonal
-gradients. It is highly advised to store drawn gradients in images using the
-<code>get</code> function for use in a draw loop.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>linearGradient(25, 25, 100, 100, RED, YELLOW);// expected outcome: linear gradient from left to right; red to yellow</code></pre>
-
-    <pre class="prettyprint"><code>linearGradient(150, 25, 100, 100, PURPLE, PINK, TOP_RIGHT);// expected outcome: linear gradient from bottom-left to top-right; purple to pink</code></pre>
-
-    <pre class="prettyprint"><code>linearGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, BOTTOM_RIGHT, 10);// expected outcome: linear gradient from top-left to bottom-right; green to light blue in strips of thickness 10</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>x-coordinate of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>y-coordinate of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>width</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>width of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>height of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>startColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>starting color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>endColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>ending color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>direction</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">LEFT</span>
-|
-
-<span class="param-type">RIGHT</span>
-|
-
-<span class="param-type">TOP</span>
-|
-
-<span class="param-type">UP</span>
-|
-
-<span class="param-type">BOTTOM</span>
-|
-
-<span class="param-type">DOWN</span>
-|
-
-<span class="param-type">TOP_LEFT</span>
-|
-
-<span class="param-type">TOP_RIGHT</span>
-|
-
-<span class="param-type">BOTTOM_RIGHT</span>
-|
-
-<span class="param-type">BOTTOM_LEFT</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>RIGHT</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>direction of gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>step</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>5</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>step size</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~radialGradient"><span class="type-signature">(inner) </span>radialGradient<span class="signature">(x, y, width, height, startColor, endColor, step<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-    <p class="summary usertext"><p>Draws a radial gradient from <code>startColor</code> to <code>endColor</code> in the form of an
-ellipse.</p></p>
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1115">line 1115</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>For a step size greater than 1, the function draws ellipses of width <code>step</code>.
-Using a step size greater than 1 is faster. It is highly advised to store
-drawn gradients in images using the <code>get</code> function for use in a draw loop.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>radialGradient(100, 100, 100, 100, RED, YELLOW);// expected outcome: radial gradient from red to yellow</code></pre>
-
-    <pre class="prettyprint"><code>radialGradient(250, 100, 100, 100, PURPLE, PINK, 10);// expected outcome: radial gradient from purple to pink with step size 10</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>x-coordinate of center of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>y-coordinate of center the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>width</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>width of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>height of the gradient</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>startColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>starting color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>endColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>ending color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>step</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>5</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>step size</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~RGBToHex"><span class="type-signature">(inner) </span>RGBToHex<span class="signature">(x, g<span class="signature-attributes">opt</span>, b<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1212">line 1212</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Converts RGB to hex color type.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>println(RGBToHex(255, 0, 0));// expected output: #ff0000</code></pre>
-
-    <pre class="prettyprint"><code>let c = RED;println(RGBToHex(c));// expected output: #ff0000</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Red value or color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>g</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Green value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>b</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Blue value</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Hex color value</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~RGBToHSB"><span class="type-signature">(inner) </span>RGBToHSB<span class="signature">(x, g<span class="signature-attributes">opt</span>, b<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1158">line 1158</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Converts RGB to HSB color type.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let c = RGBToHSB(255, 0, 0);println(c);// expected output: -65536colorMode(HSB);background(c);// expected outcome: red background</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Red value or color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>g</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Green value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>b</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Blue value</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>HSB color value</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~toHSB"><span class="type-signature">(inner) </span>toHSB<span class="signature">(x, g<span class="signature-attributes">opt</span>, b<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {color|array}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1278">line 1278</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Converts hex or RGB to HSB color value.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>colorMode(HSB);background(toHSB('fff'));// expected outcome: white background</code></pre>
-
-    <pre class="prettyprint"><code>colorMode(HSB);background(toHSB(255, 0, 0));// expected outcome: red background</code></pre>
-
-    <pre class="prettyprint"><code>println(toHSB(-1))// expected output: [0, 0, 255]</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Hex, red or HSB color value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>g</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Green value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>b</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Blue value</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>RGB color value or RGB values array</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">color</span>
-|
-
-<span class="param-type">array</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~toRGB"><span class="type-signature">(inner) </span>toRGB<span class="signature">(x, s<span class="signature-attributes">opt</span>, v<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {color|array}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1241">line 1241</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Converts hex or HSB to RGB color value.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>background(toRGB('fff'));// expected outcome: white background</code></pre>
-
-    <pre class="prettyprint"><code>background(toRGB(0, 255, 255));// expected outcome: red background</code></pre>
-
-    <pre class="prettyprint"><code>println(toRGB(-1))// expected output: [255, 255, 255]</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Hex, hue or RGB color value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>s</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Saturation value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>v</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Brightness value</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>RGB color value or RGB values array</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">color</span>
-|
-
-<span class="param-type">array</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-    
-    
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Apr 03 2021 15:44:32 GMT-0700 (Pacific Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
-<script src="scripts/search.js" defer></script>
-
-
-
-</body>
+        <br class="clear" />
+
+        <footer>
+            Documentation generated by
+            <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Apr
+            03 2021 17:07:17 GMT-0700 (Pacific Daylight Time) using the
+            <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+        </footer>
+
+        <script>
+            prettyPrint();
+        </script>
+        <script src="scripts/polyfill.js"></script>
+        <script src="scripts/linenumber.js"></script>
+
+        <script src="scripts/search.js" defer></script>
+    </body>
 </html>

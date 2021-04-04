@@ -1,2599 +1,1505 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
-    <meta charset="utf-8">
-    <title>Text - Documentation</title>
-    
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+    <head>
+        <meta charset="utf-8" />
+        <title>Text - Documentation</title>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
+        <script src="scripts/prettify/prettify.js"></script>
+        <script src="scripts/prettify/lang-css.js"></script>
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link type="text/css" rel="stylesheet" href="styles/prettify.css" />
+        <link type="text/css" rel="stylesheet" href="styles/jsdoc.css" />
+        <script src="scripts/nav.js" defer></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger" class="navicon-button x">
+            <div class="navicon"></div>
+        </label>
 
-<label for="nav-trigger" class="overlay"></label>
+        <label for="nav-trigger" class="overlay"></label>
 
-<nav >
-    
-    <input type="text" id="nav-search" placeholder="Search" />
-    
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Color.html">Color</a><ul class='methods'><li data-type='method'><a href="module-Color.html#~angularGradient">angularGradient</a></li><li data-type='method'><a href="module-Color.html#~circularGradient">circularGradient</a></li><li data-type='method'><a href="module-Color.html#~hexToRGB">hexToRGB</a></li><li data-type='method'><a href="module-Color.html#~HSBToRGB">HSBToRGB</a></li><li data-type='method'><a href="module-Color.html#~linearGradient">linearGradient</a></li><li data-type='method'><a href="module-Color.html#~radialGradient">radialGradient</a></li><li data-type='method'><a href="module-Color.html#~RGBToHex">RGBToHex</a></li><li data-type='method'><a href="module-Color.html#~RGBToHSB">RGBToHSB</a></li><li data-type='method'><a href="module-Color.html#~toHSB">toHSB</a></li><li data-type='method'><a href="module-Color.html#~toRGB">toRGB</a></li></ul></li><li><a href="module-Shape.html">Shape</a><ul class='methods'><li data-type='method'><a href="module-Shape.html#~blurRect">blurRect</a></li><li data-type='method'><a href="module-Shape.html#~circle">circle</a></li><li data-type='method'><a href="module-Shape.html#~cylinder">cylinder</a></li><li data-type='method'><a href="module-Shape.html#~dashedLine">dashedLine</a></li><li data-type='method'><a href="module-Shape.html#~donut">donut</a></li><li data-type='method'><a href="module-Shape.html#~dottedLine">dottedLine</a></li><li data-type='method'><a href="module-Shape.html#~drawShape">drawShape</a></li><li data-type='method'><a href="module-Shape.html#~edge">edge</a></li><li data-type='method'><a href="module-Shape.html#~heart">heart</a></li><li data-type='method'><a href="module-Shape.html#~parallelogram">parallelogram</a></li><li data-type='method'><a href="module-Shape.html#~polygon">polygon</a></li><li data-type='method'><a href="module-Shape.html#~rectangle">rectangle</a></li><li data-type='method'><a href="module-Shape.html#~rhombus">rhombus</a></li><li data-type='method'><a href="module-Shape.html#~square">square</a></li><li data-type='method'><a href="module-Shape.html#~star">star</a></li><li data-type='method'><a href="module-Shape.html#~trapezoid">trapezoid</a></li></ul></li><li><a href="module-Text.html">Text</a><ul class='methods'><li data-type='method'><a href="module-Text.html#~fastGradientText">fastGradientText</a></li><li data-type='method'><a href="module-Text.html#~font">font</a></li><li data-type='method'><a href="module-Text.html#~formatDuration">formatDuration</a></li><li data-type='method'><a href="module-Text.html#~highlightText">highlightText</a></li><li data-type='method'><a href="module-Text.html#~lightOrDarkText">lightOrDarkText</a></li><li data-type='method'><a href="module-Text.html#~multicoloredText">multicoloredText</a></li><li data-type='method'><a href="module-Text.html#~ordinalSuffix">ordinalSuffix</a></li><li data-type='method'><a href="module-Text.html#~outlineText">outlineText</a></li><li data-type='method'><a href="module-Text.html#~pluralize">pluralize</a></li><li data-type='method'><a href="module-Text.html#~underlineText">underlineText</a></li><li data-type='method'><a href="module-Text.html#~wordWrap">wordWrap</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#attempt">attempt</a></li><li><a href="global.html#CANVAS">CANVAS</a></li><li><a href="global.html#CANVAS_LOG">CANVAS_LOG</a></li><li><a href="global.html#chainAsync">chainAsync</a></li><li><a href="global.html#clean">clean</a></li><li><a href="global.html#clearLogs">clearLogs</a></li><li><a href="global.html#complement">complement</a></li><li><a href="global.html#generateUUID">generateUUID</a></li><li><a href="global.html#getColonTime">getColonTime</a></li><li><a href="global.html#HALF_HEIGHT">HALF_HEIGHT</a></li><li><a href="global.html#HALF_WIDTH">HALF_WIDTH</a></li><li><a href="global.html#HEIGHT">HEIGHT</a></li><li><a href="global.html#inherit">inherit</a></li><li><a href="global.html#isFont">isFont</a></li><li><a href="global.html#isImage">isImage</a></li><li><a href="global.html#isSound">isSound</a></li><li><a href="global.html#mostPerformant">mostPerformant</a></li><li><a href="global.html#noop">noop</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#printf">printf</a></li><li><a href="global.html#push">push</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#restart">restart</a></li><li><a href="global.html#showGraphics">showGraphics</a></li><li><a href="global.html#timeTaken">timeTaken</a></li><li><a href="global.html#WIDTH">WIDTH</a></li></ul>
-</nav>
+        <nav>
+            <input type="text" id="nav-search" placeholder="Search" />
 
-<div id="main">
-    
-    <h1 class="page-title">Text</h1>
-    
+            <h2><a href="index.html">Home</a></h2>
+            <h3>Modules</h3>
+            <ul>
+                <li>
+                    <a href="module-Color.html">Color</a>
+                    <ul class="methods">
+                        <li data-type="method">
+                            <a href="module-Color.html#~angularGradient"
+                                >angularGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~circularGradient"
+                                >circularGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~hexToRGB">hexToRGB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~HSBToRGB">HSBToRGB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~linearGradient"
+                                >linearGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~radialGradient"
+                                >radialGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~RGBToHex">RGBToHex</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~RGBToHSB">RGBToHSB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~toHSB">toHSB</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Color.html#~toRGB">toRGB</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="module-Shape.html">Shape</a>
+                    <ul class="methods">
+                        <li data-type="method">
+                            <a href="module-Shape.html#~blurRect">blurRect</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~circle">circle</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~cylinder">cylinder</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~dashedLine"
+                                >dashedLine</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~donut">donut</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~dottedLine"
+                                >dottedLine</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~drawShape">drawShape</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~edge">edge</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~heart">heart</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~parallelogram"
+                                >parallelogram</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~polygon">polygon</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~rectangle">rectangle</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~rhombus">rhombus</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~square">square</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~star">star</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~trapezoid">trapezoid</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="module-Text.html">Text</a>
+                    <ul class="methods">
+                        <li data-type="method">
+                            <a href="module-Text.html#~fastGradientText"
+                                >fastGradientText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~font">font</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~formatDuration"
+                                >formatDuration</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~highlightText"
+                                >highlightText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~lightOrDarkText"
+                                >lightOrDarkText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~multicoloredText"
+                                >multicoloredText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~ordinalSuffix"
+                                >ordinalSuffix</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~outlineText"
+                                >outlineText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~pluralize">pluralize</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~underlineText"
+                                >underlineText</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~wordWrap">wordWrap</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>Global</h3>
+            <ul>
+                <li><a href="global.html#attempt">attempt</a></li>
+                <li><a href="global.html#CANVAS">CANVAS</a></li>
+                <li><a href="global.html#CANVAS_LOG">CANVAS_LOG</a></li>
+                <li><a href="global.html#chainAsync">chainAsync</a></li>
+                <li><a href="global.html#clean">clean</a></li>
+                <li><a href="global.html#clearLogs">clearLogs</a></li>
+                <li><a href="global.html#complement">complement</a></li>
+                <li><a href="global.html#generateUUID">generateUUID</a></li>
+                <li><a href="global.html#getColonTime">getColonTime</a></li>
+                <li><a href="global.html#HALF_HEIGHT">HALF_HEIGHT</a></li>
+                <li><a href="global.html#HALF_WIDTH">HALF_WIDTH</a></li>
+                <li><a href="global.html#HEIGHT">HEIGHT</a></li>
+                <li><a href="global.html#inherit">inherit</a></li>
+                <li><a href="global.html#isFont">isFont</a></li>
+                <li><a href="global.html#isImage">isImage</a></li>
+                <li><a href="global.html#isSound">isSound</a></li>
+                <li><a href="global.html#mostPerformant">mostPerformant</a></li>
+                <li><a href="global.html#noop">noop</a></li>
+                <li><a href="global.html#pop">pop</a></li>
+                <li><a href="global.html#printf">printf</a></li>
+                <li><a href="global.html#push">push</a></li>
+                <li><a href="global.html#randomInt">randomInt</a></li>
+                <li><a href="global.html#restart">restart</a></li>
+                <li><a href="global.html#showGraphics">showGraphics</a></li>
+                <li><a href="global.html#timeTaken">timeTaken</a></li>
+                <li><a href="global.html#WIDTH">WIDTH</a></li>
+            </ul>
+        </nav>
 
-    
+        <div id="main">
+            <h1 class="page-title">Text</h1>
 
+            <section>
+                <header></header>
 
+                <article>
+                    <div class="container-overview"></div>
 
+                    <h3 class="subsection-title">Methods</h3>
 
-<section>
+                    <h4 class="name" id="~fastGradientText">
+                        <span class="type-signature">(inner) </span
+                        >fastGradientText<span class="signature"
+                            >(string, x, y, startColor, endColor)</span
+                        ><span class="type-signature"></span>
+                    </h4>
 
-<header>
-    
-        
-    
-</header>
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1427"
+                                        >line 1427</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
 
-<article>
-    
-        <div class="container-overview">
-        
-            
+                        <dt class="tag-see">See:</dt>
+                        <dd class="tag-see">
+                            <ul>
+                                <li>font</li>
+                            </ul>
+                        </dd>
+                    </dl>
 
-            
-        
+                    <div class="description usertext">
+                        <p>
+                            Fast gradient by filling each character with a
+                            different color as opposed to masking the text with
+                            the gradient.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>font('sans-serif', 25);
+fastGradientText('Hello World', 10, textAscent() * 2, RED, YELLOW);
+// expected outcome: 'Hello World' with gradient fill from red to yellow</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>font('sans-serif', 25, 'bold');
+fastGradientText('Hello\nWorld', 10, textAscent() * 4, PURPLE, PINK);
+// expected outcome: 'Hello World', bold, with gradient fill from purple to pink in two lines</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>string</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>x-coordinate of text</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>y-coordinate of text</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>startColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>starting color</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>endColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>ending color</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="~font">
+                        <span class="type-signature">(inner) </span>font<span
+                            class="signature"
+                            >(name, size<span class="signature-attributes"
+                                >opt</span
+                            >, &hellip;properties)</span
+                        ><span class="type-signature"> &rarr; {font}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1356"
+                                        >line 1356</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Sets font, size and other [CSS font properties]<a
+                                href="https://developer.mozilla.org/en-US/docs/Web/CSS/font"
+                                >https://developer.mozilla.org/en-US/docs/Web/CSS/font</a
+                            >.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>fill(BLACK);
+font('Arial', 30, 'bold');
+text('Hello World', 100, 100);
+// expected outcome: 'Hello World' in bold Arial font</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>let f = font('Arial', 'bold');
+textSize(30);
+text('Hello World', 100, 100);
+// expected outcome: 'Hello World' in normal Arial normal size font
+// `textSize()` should not be used with `font()`
+
+// Instead, use `font()`
+font(f, 30);
+text('Hello World', 100, 200);
+// expected outcome: 'Hello World' in bold Arial size 30 font</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>// Use the `-call` parameter to prevent the font automatically being set
+// This functionality is useful when defining font variables
+let f = font('serif', '-call');
+text('Hello World', 100, 100);
+// expected outcome: the text will still be in normal Arial font
+font(f);
+text('Hello World', 100, 200);
+// expected outcome: the text will be in serif font</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>let f = font('Arial', 'bold', 'italic');
+text('Hello World', 100, 100);
+// expected outcome: 'Hello World' in bold and italic Arial font
+
+// Use the negate syntax to remove properties from fonts
+font(f, '-bold');
+text('Hello World', 100, 200);
+// expected outcome: 'Hello World' in italic Arial font</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>name</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                    |
+
+                                    <span class="param-type">font</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="description last">
+                                    <p>Name of font or font</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>size</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="description last">
+                                    <p>Font size</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>properties</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="attributes">
+                                    &lt;repeatable><br />
+                                </td>
+
+                                <td class="description last">
+                                    <p>CSS font properties</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>Created font</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">font</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~formatDuration">
+                        <span class="type-signature">(inner) </span
+                        >formatDuration<span class="signature">(ms)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1457"
+                                        >line 1457</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Converts milliseconds to a readable format of
+                            duration.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>let martianDay = 88775244;
+console.log(formatDuration(martianDay));
+// expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>ms</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Duration in milliseconds</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>Readable format of duration.</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~highlightText">
+                        <span class="type-signature">(inner) </span
+                        >highlightText<span class="signature"
+                            >(string, x, y, highlightColor<span
+                                class="signature-attributes"
+                                >opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1490"
+                                        >line 1490</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Draws a string with a highlight background.</p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>let str = 'Highlighted\nText';
+fill(BLACK);
+highlightText(str, 25, 25);</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>let str = 'Highlighted\nText';
+fill(LIGHTGREEN);
+highlightText(str, 25, 25, BLACK);</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>string</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>x-coordinate of text</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>y-coordinate of text</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name">
+                                    <code>highlightColor</code>
+                                </td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>YELLOW</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>color of highlight background</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="~lightOrDarkText">
+                        <span class="type-signature">(inner) </span
+                        >lightOrDarkText<span class="signature"
+                            >(backgroundColor)</span
+                        ><span class="type-signature"> &rarr; {number}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1532"
+                                        >line 1532</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Determines if text should be black or white based on
+                            background color.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>let h = 0,
+    s = 0,
+    b = 0;
+colorMode(HSB);
+textAlign(CENTER, CENTER);
+textSize(50);
+draw = function() {
+    h = frameCount % 255;
+    s = frameCount % 255;
+    b = frameCount % 255;
+    let c = color(h, s, b);
+    background(c);
+    fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));
+    text("TEXT", width / 2, height / 2);
+};</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name">
+                                    <code>backgroundColor</code>
+                                </td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Color of background</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>Color of text</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">number</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~multicoloredText">
+                        <span class="type-signature">(inner) </span
+                        >multicoloredText<span class="signature"
+                            >(string, x, y)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1587"
+                                        >line 1587</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Draws text with multiple colors that are passed in
+                            using special syntax.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
+fill(BLUE);
+multicoloredText(str, 25, 25);</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>string</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>x-coordinate of text</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="description last">
+                                    <p>y-coordinate of text</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="~ordinalSuffix">
+                        <span class="type-signature">(inner) </span
+                        >ordinalSuffix<span class="signature">(n)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1564"
+                                        >line 1564</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Takes a number and returns it as a string with the
+                            correct ordinal indicator suffix.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre class="prettyprint"><code>println(ordinalSuffix(123));
+// expected output: '123rd'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>n</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                    |
+
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last"><p>Number</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>Number with ordinal suffix.</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~outlineText">
+                        <span class="type-signature">(inner) </span
+                        >outlineText<span class="signature"
+                            >(string, x, y, outlineColor<span
+                                class="signature-attributes"
+                                >opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1632"
+                                        >line 1632</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Draws text with an outline.</p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>let str = 'Outlined\nText';
+outlineText(str, 25, 25);</code></pre>
+
+                    <pre class="prettyprint"><code>let str = 'Outlined\nText';
+fill(BLACK);
+outlineText(str, 25, 25, ORANGE);</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>string</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>x-coordinate of text</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>y-coordinate of text</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>outlineColor</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>BLACK</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>color of outline</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="~pluralize">
+                        <span class="type-signature">(inner) </span
+                        >pluralize<span class="signature"
+                            >(value, word, plural<span
+                                class="signature-attributes"
+                                >opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1678"
+                                        >line 1678</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+
+                        <dt class="tag-see">See:</dt>
+                        <dd class="tag-see">
+                            <ul>
+                                <li><a href="global.html#printf">printf</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Returns the singular or plural form of the word
+                            based on the input number, using an optional
+                            dictionary if supplied.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>let apples;
+const printApples = function() {
+    printf('% %.', apples, pluralize(apples, 'apple'));
+}
+apples = 2;
+printApples();
+// expected output: '2 apples.'
+apples = 1;
+printApples();
+// expected output: '1 apple.'</code></pre>
+
+                    <pre class="prettyprint"><code>let people = 2;
+printf('% %.', people, pluralize(people, 'person', 'people'));
+// expected output: '2 people.'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>value</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>Number of items</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>word</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>Word to pluralize</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>plural</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>word+'s'</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Custom pluralized form</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="~underlineText">
+                        <span class="type-signature">(inner) </span
+                        >underlineText<span class="signature"
+                            >(string, x, y, underlineColor<span
+                                class="signature-attributes"
+                                >opt</span
+                            >, underlineWeight<span class="signature-attributes"
+                                >opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1849"
+                                        >line 1849</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Draws text underlined.</p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>let str = 'Underlined\nText';
+fill(BLACK);
+underlineText(str, 25, 25);</code></pre>
+
+                    <pre class="prettyprint"><code>let str = 'Underlined\nText';
+fill(BLACK);
+underlineText(str, 25, 25, RED, 5);</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>string</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>Text to be underlined</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>x-coordinate value</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>y-coordinate value</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name">
+                                    <code>underlineColor</code>
+                                </td>
+
+                                <td class="type">
+                                    <span class="param-type">color</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>BLACK</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Color of underline</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name">
+                                    <code>underlineWeight</code>
+                                </td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>Weight of underline</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="name" id="~wordWrap">
+                        <span class="type-signature">(inner) </span
+                        >wordWrap<span class="signature"
+                            >(str, max, br<span class="signature-attributes"
+                                >opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1888"
+                                        >line 1888</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Wraps a string to a given number of characters using
+                            a string break character.
+                        </p>
+                    </div>
+
+                    <h5>Example</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>let str = 'This string should have a maximum line length of thirty-two characters.';
+let wrappedStr = wordWrap(str, 32);
+println(wrappedStr);
+// expected output: 
+// 'This string should have a
+// maximum line length of
+// thirty-two characters.'
+let customWrappedStr = wordWrap(str, 32, '&lt;br>');
+println(customWrappedStr);
+// expected output: 'This string should have a&lt;br>maximum line length of&lt;br>thirty-two characters.'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>str</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>String to be wrapped</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>max</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>Maximum number of characters per line</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>br</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>'\n'</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>Custom break character</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+            </section>
         </div>
-    
 
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="~fastGradientText"><span class="type-signature">(inner) </span>fastGradientText<span class="signature">(string, x, y, startColor, endColor)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1330">line 1330</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li>font</li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Fast gradient by filling each character with a different color as opposed to
-masking the text with the gradient.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>font('sans-serif', 25);fastGradientText('Hello World', 10, textAscent() * 2, RED, YELLOW);// expected outcome: 'Hello World' with gradient fill from red to yellow</code></pre>
-
-    <pre class="prettyprint"><code>font('sans-serif', 25, 'bold');fastGradientText('Hello\nWorld', 10, textAscent() * 4, PURPLE, PINK);// expected outcome: 'Hello World', bold, with gradient fill from purple to pink in two lines</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>string</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>x-coordinate of text</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>y-coordinate of text</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>startColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>starting color</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>endColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>ending color</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~font"><span class="type-signature">(inner) </span>font<span class="signature">(name, size<span class="signature-attributes">opt</span>, &hellip;properties)</span><span class="type-signature"> &rarr; {font}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1394">line 1394</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Sets font, size and other [CSS font
-properties]<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font">https://developer.mozilla.org/en-US/docs/Web/CSS/font</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>fill(BLACK);font('Arial', 30, 'bold');text('Hello World', 100, 100);// expected outcome: 'Hello World' in bold Arial font</code></pre>
-
-    <pre class="prettyprint"><code>let f = font('Arial', 'bold');textSize(30);text('Hello World', 100, 100);// expected outcome: 'Hello World' in normal Arial normal size font// `textSize()` should not be used with `font()`// Instead, use `font()`font(f, 30);text('Hello World', 100, 200);// expected outcome: 'Hello World' in bold Arial size 30 font</code></pre>
-
-    <pre class="prettyprint"><code>// Use the `-call` parameter to prevent the font automatically being set// This functionality is useful when defining font variableslet f = font('serif', '-call');text('Hello World', 100, 100);// expected outcome: the text will still be in normal Arial fontfont(f);text('Hello World', 100, 200);// expected outcome: the text will be in serif font</code></pre>
-
-    <pre class="prettyprint"><code>let f = font('Arial', 'bold', 'italic');text('Hello World', 100, 100);// expected outcome: 'Hello World' in bold and italic Arial font// Use the negate syntax to remove properties from fontsfont(f, '-bold');text('Hello World', 100, 200);// expected outcome: 'Hello World' in italic Arial font</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">font</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Name of font or font</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>size</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Font size</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>properties</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                    &lt;repeatable><br>
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>CSS font properties</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Created font</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">font</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~formatDuration"><span class="type-signature">(inner) </span>formatDuration<span class="signature">(ms)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1493">line 1493</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Converts milliseconds to a readable format of duration.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let martianDay = 88775244;console.log(formatDuration(martianDay));// expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>ms</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Duration in milliseconds</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Readable format of duration.</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~highlightText"><span class="type-signature">(inner) </span>highlightText<span class="signature">(string, x, y, highlightColor<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1461">line 1461</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Draws a string with a highlight background.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>let str = 'Highlighted\nText';fill(BLACK);highlightText(str, 25, 25);</code></pre>
-
-    <pre class="prettyprint"><code>let str = 'Highlighted\nText';fill(LIGHTGREEN);highlightText(str, 25, 25, BLACK);</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>string</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>x-coordinate of text</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>y-coordinate of text</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>highlightColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>YELLOW</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>color of highlight background</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~lightOrDarkText"><span class="type-signature">(inner) </span>lightOrDarkText<span class="signature">(backgroundColor)</span><span class="type-signature"> &rarr; {number}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1532">line 1532</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Determines if text should be black or white based on background color.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let h = 0,    s = 0,    b = 0;colorMode(HSB);textAlign(CENTER, CENTER);textSize(50);draw = function() {    h = frameCount % 255;    s = frameCount % 255;    b = frameCount % 255;    let c = color(h, s, b);    background(c);    fill(lightOrDarkText(hex(h, 2) + hex(s, 2) + hex(b, 2)));    text("TEXT", width / 2, height / 2);};</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>backgroundColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Color of background</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Color of text</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~multicoloredText"><span class="type-signature">(inner) </span>multicoloredText<span class="signature">(string, x, y)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1562">line 1562</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Draws text with multiple colors that are passed in using special syntax.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';fill(BLUE);multicoloredText(str, 25, 25);</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>string</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>x-coordinate of text</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>y-coordinate of text</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~ordinalSuffix"><span class="type-signature">(inner) </span>ordinalSuffix<span class="signature">(n)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1604">line 1604</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Takes a number and returns it as a string with the correct ordinal indicator
-suffix.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>println(ordinalSuffix(123));// expected output: '123rd'</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>n</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Number</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Number with ordinal suffix.</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~outlineText"><span class="type-signature">(inner) </span>outlineText<span class="signature">(string, x, y, outlineColor<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1632">line 1632</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Draws text with an outline.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>let str = 'Outlined\nText';outlineText(str, 25, 25);</code></pre>
-
-    <pre class="prettyprint"><code>let str = 'Outlined\nText';fill(BLACK);outlineText(str, 25, 25, ORANGE);</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>string</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>x-coordinate of text</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>y-coordinate of text</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>outlineColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>BLACK</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>color of outline</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~pluralize"><span class="type-signature">(inner) </span>pluralize<span class="signature">(value, word, plural<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1678">line 1678</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="global.html#printf">printf</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Returns the singular or plural form of the word based on the input number,
-using an optional dictionary if supplied.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>let apples;const printApples = function() {    printf('% %.', apples, pluralize(apples, 'apple'));}apples = 2;printApples();// expected output: '2 apples.'apples = 1;printApples();// expected output: '1 apple.'</code></pre>
-
-    <pre class="prettyprint"><code>let people = 2;printf('% %.', people, pluralize(people, 'person', 'people'));// expected output: '2 people.'</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Number of items</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>word</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Word to pluralize</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>plural</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>word+'s'</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>Custom pluralized form</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~underlineText"><span class="type-signature">(inner) </span>underlineText<span class="signature">(string, x, y, underlineColor<span class="signature-attributes">opt</span>, underlineWeight<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1705">line 1705</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Draws text underlined.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>let str = 'Underlined\nText';fill(BLACK);underlineText(str, 25, 25);</code></pre>
-
-    <pre class="prettyprint"><code>let str = 'Underlined\nText';fill(BLACK);underlineText(str, 25, 25, RED, 5);</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>string</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Text to be underlined</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>x-coordinate value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>y-coordinate value</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>underlineColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">color</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>BLACK</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>Color of underline</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>underlineWeight</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Weight of underline</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~wordWrap"><span class="type-signature">(inner) </span>wordWrap<span class="signature">(str, max, br<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="essentials.js.html">essentials.js</a>, <a href="essentials.js.html#line1888">line 1888</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Wraps a string to a given number of characters using a string break
-character.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let str = 'This string should have a maximum line length of thirty-two characters.';let wrappedStr = wordWrap(str, 32);println(wrappedStr);// expected output: // 'This string should have a// maximum line length of// thirty-two characters.'let customWrappedStr = wordWrap(str, 32, '&lt;br>');println(customWrappedStr);// expected output: 'This string should have a&lt;br>maximum line length of&lt;br>thirty-two characters.'</code></pre>
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>str</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>String to be wrapped</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>max</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Maximum number of characters per line</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>br</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>'\n'</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>Custom break character</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-    
-    
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Apr 03 2021 15:44:32 GMT-0700 (Pacific Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
-<script src="scripts/search.js" defer></script>
-
-
-
-</body>
+        <br class="clear" />
+
+        <footer>
+            Documentation generated by
+            <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Apr
+            03 2021 17:07:17 GMT-0700 (Pacific Daylight Time) using the
+            <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+        </footer>
+
+        <script>
+            prettyPrint();
+        </script>
+        <script src="scripts/polyfill.js"></script>
+        <script src="scripts/linenumber.js"></script>
+
+        <script src="scripts/search.js" defer></script>
+    </body>
 </html>

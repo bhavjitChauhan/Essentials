@@ -85,19 +85,15 @@ chainAsync = function (fns) {
   next();
 };
 
-clean = function (fn) {
-  var string = fn.toString().replace(/__env__\.KAInfiniteLoopCount\+\+;/g, '').replace(/if \(__env__\.KAInfiniteLoopCount > 1000\) {[\s]+__env__\.KAInfiniteLoopProtect\('[^']*'\);[^}]+}/g, '').replace(/__env__\.PJSOutput\.applyInstance\((__env__\.\S+), '\S+'\)/g, 'new $1');
-  return Object.constructor("return (function(__env__) {return ".concat(string, ";});"))()(e);
-};
-
 complement = function (fn) {
   return function () {
     return !fn.apply(void 0, arguments);
   };
 };
 
-getColonTime = function () {
-  return new Date().toTimeString().slice(0, 8);
+clean = function (fn) {
+  var string = fn.toString().replace(/__env__\.KAInfiniteLoopCount\+\+;/g, '').replace(/if \(__env__\.KAInfiniteLoopCount > 1000\) {[\s]+__env__\.KAInfiniteLoopProtect\('[^']*'\);[^}]+}/g, '').replace(/__env__\.PJSOutput\.applyInstance\((__env__\.\S+), '\S+'\)/g, 'new $1');
+  return Object.constructor("return (function(__env__) {return ".concat(string, ";});"))()(e);
 };
 
 generateUUID = function () {
@@ -110,6 +106,10 @@ inherit = function (subClass, superClass) {
   Object.setPrototypeOf(subClass.prototype, superClass.prototype);
   subClass.prototype.constructor = subClass;
   if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
+};
+
+getColonTime = function () {
+  return new Date().toTimeString().slice(0, 8);
 };
 
 isFont = function (obj) {
@@ -155,6 +155,11 @@ pop = function () {
   e.popMatrix();
 };
 
+push = function () {
+  e.pushMatrix();
+  e.pushStyle();
+};
+
 printf = function (string) {
   var args = Array.from(arguments).slice(1);
 
@@ -164,11 +169,6 @@ printf = function (string) {
 
   string = string.replaceAll(/\\%/g, '%');
   e.println(string);
-};
-
-push = function () {
-  e.pushMatrix();
-  e.pushStyle();
 };
 
 randomInt = function (min, max) {

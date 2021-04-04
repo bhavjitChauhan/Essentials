@@ -10,8 +10,9 @@
     "build": "npm run build:cdn && npm run build:ka",
     "doc:html": "npx jsdoc -c jsdoc.json",
     "doc:md": "concurrently \"npx jsdoc2md essentials.js > internal/Essentials-Documentation.md\" \"node scripts/wiki.js\"",
-    "doc:ka": "node scripts/showdown.js && node scripts/pretty.js",
-    "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka",
+    "doc:ka": "node scripts/showdown.js",
+    "doc:format": "node scripts/prettier.js",
+    "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka && npm run doc:format",
     "prepare": "husky install"
   },
   "repository": {
@@ -40,7 +41,7 @@
     "husky": "^6.0.0",
     "jsdoc": "^3.6.6",
     "jsdoc-to-markdown": "^7.0.1",
-    "pretty": "^2.0.0",
+    "prettier": "^2.2.1",
     "rollup": "^2.44.0",
     "showdown": "^1.9.1",
     "terser": "^5.6.1"

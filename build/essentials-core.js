@@ -158,6 +158,25 @@ chainAsync = fns => {
 };
 
 /**
+ * Returns a function that is the
+ * [negation]{@link https://en.wikipedia.org/wiki/Negation} of the given
+ * function
+ *
+ * @link https://www.30secondsofcode.org/js/s/complement
+ *
+ * @param {Function} fn Given function
+ *
+ * @returns {Function} Complement function
+ *
+ * @example
+ * const isEven = function(num) {
+ *     return num % 2 === 0;
+ * }
+ * const isOdd = complement(isEven);
+ */
+complement = fn => (...args) => !fn(...args);
+
+/**
  * @summary
  * Removes Khan Academy's loop protection code from functions.
  *
@@ -194,40 +213,6 @@ clean = fn => {
         .replace(/__env__\.PJSOutput\.applyInstance\((__env__\.\S+), '\S+'\)/g,
             'new $1');
     return Object.constructor(`return (function(__env__) {return ${string};});`)()(e);
-};
-
-/**
- * Returns a function that is the
- * [negation]{@link https://en.wikipedia.org/wiki/Negation} of the given
- * function
- *
- * @link https://www.30secondsofcode.org/js/s/complement
- *
- * @param {Function} fn Given function
- *
- * @returns {Function} Complement function
- *
- * @example
- * const isEven = function(num) {
- *     return num % 2 === 0;
- * }
- * const isOdd = complement(isEven);
- */
-complement = fn => (...args) => !fn(...args);
-
-/**
- * Returns a string of the form `HH:MM:SS`.
- *
- * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
- *
- * @returns {string} Formatted time
- *
- * @example
- * println(getColorTime());
- * // expected outcome: Time in the form of `HH:MM:SS`
- */
-getColonTime = function () {
-    return (new Date()).toTimeString().slice(0, 8);
 };
 
 /**
@@ -274,6 +259,21 @@ inherit = (subClass, superClass) => {
     subClass.prototype.constructor = subClass;
     if (superClass.prototype.constructor === Object)
         superClass.prototype.constructor = superClass;
+};
+
+/**
+ * Returns a string of the form `HH:MM:SS`.
+ *
+ * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
+ *
+ * @returns {string} Formatted time
+ *
+ * @example
+ * println(getColorTime());
+ * // expected outcome: Time in the form of `HH:MM:SS`
+ */
+getColonTime = function () {
+    return (new Date()).toTimeString().slice(0, 8);
 };
 
 /**
@@ -393,6 +393,27 @@ pop = () => {
 };
 
 /**
+ * Equivalent to using
+ * [pushMatrix]{@link http://processingjs.org/reference/pushMatrix_/} and
+ * [pushStyle]{@link http://processingjs.org/reference/pushStyle_/}.
+ *
+ * @example
+ * push();
+ * stroke(WHITE);
+ * rotate(90);
+ * rect(10, 10, 15, 15);
+ * pop();
+ * // This rectangle will not display the stroke or rotation
+ * rect(10, 10, 15, 15);
+ *
+ * @see pop
+ */
+push = () => {
+    e.pushMatrix();
+    e.pushStyle();
+};
+
+/**
  * Prints formatted string to canvas console.
  *
  * @param {string} assertion String with format
@@ -415,27 +436,6 @@ printf = function(string) {
     }
     string = string.replaceAll(/\\%/g, '%');
     e.println(string);
-};
-
-/**
- * Equivalent to using
- * [pushMatrix]{@link http://processingjs.org/reference/pushMatrix_/} and
- * [pushStyle]{@link http://processingjs.org/reference/pushStyle_/}.
- *
- * @example
- * push();
- * stroke(WHITE);
- * rotate(90);
- * rect(10, 10, 15, 15);
- * pop();
- * // This rectangle will not display the stroke or rotation
- * rect(10, 10, 15, 15);
- *
- * @see pop
- */
-push = () => {
-    e.pushMatrix();
-    e.pushStyle();
 };
 
 /**
