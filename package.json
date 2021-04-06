@@ -35,7 +35,7 @@
     "@babel/plugin-transform-template-literals": "^7.13.0",
     "@rollup/plugin-multi-entry": "^4.0.0",
     "chalk": "^4.1.0",
-    "concurrently": "^6.0.0",
+    "concurrently": "^6.0.1",
     "docdash": "^1.2.0",
     "eslint": "^7.23.0",
     "husky": "^6.0.0",
