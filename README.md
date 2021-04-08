@@ -70,6 +70,8 @@ The Essentials library uses the following open-source projects:
  - [Rollup](https://rollupjs.org/)
  - [Terser](https://terser.org/)
 
+A list of all dependencies defined in [package.json](https://github.com/bhavjitChauhan/Essentials/blob/master/package.json) and [package-lock.json](https://github.com/bhavjitChauhan/Essentials/blob/master/package-lock.json) is availible in the [Dependency graph](https://github.com/bhavjitChauhan/Essentials/network/dependencies).
+
 ## Getting Started
 Create a [new program](https://www.khanacademy.org/cs/new/) on Khan Academy or use an existing project.
 

@@ -10,7 +10,7 @@
  *
  * @example
  * showGraphics(100, 100, 100, 100, function() {
- *     this.background(0);
+ *     this.background(BLACK);
  *     this.fill(RED);
  *     this.rect(25, 25, 50, 50);
  * });

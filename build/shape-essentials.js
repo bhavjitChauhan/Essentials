@@ -13,6 +13,16 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 }
 
 /**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ *
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ *
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+
+/**
  * Faster blur effect on a rectangular selection.
  *
  * @param {number} x x-coordinate of the rectangle
@@ -27,16 +37,6 @@ blurRect = (x, y, width, height, size) => {
     e.image(e.get(x, y, width, height), x, y, width / size, height / size);
     e.image(e.get(x, y, width / size, height / size), x, y, width, height);
 };
-
-/**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
- *
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
- *
- */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
  * Draws a 2D cylinder.
@@ -303,29 +303,6 @@ heart = (x, y, radius) => {
 };
 
 /**
- * Draws a parallelogram.
- *
- * @link https://www.khanacademy.org/cs/-/4747962019348480
- *
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- *
- * @example
- * parallelogram(50, 50, 200, 50, 100, 100);
- *
- * @see rhombus
- */
-parallelogram = (ax, ay, bx, by, cx, cy) => {
-    const dx = bx - ax;
-    const dy = by - ay;
-    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
-};
-
-/**
  * Draws a polygon with _n_ sides.
  *
  * @link https://www.khanacademy.org/cs/-/1304459398
@@ -360,9 +337,9 @@ polygon = (x, y, sides, radius, rotation) => {
 };
 
 /**
- * Draws a rhombus.
+ * Draws a parallelogram.
  *
- * @link https://khanacademy.org/cs/-/4747962019348480
+ * @link https://www.khanacademy.org/cs/-/4747962019348480
  *
  * @param {number} ax x-coordinate of the first vertex
  * @param {number} ay y-coordinate of the first vertex
@@ -372,15 +349,14 @@ polygon = (x, y, sides, radius, rotation) => {
  * @param {number} cy y-coordinate of the third vertex
  *
  * @example
- * rhombus(50, 100, 100, 50, 100, 100);
+ * parallelogram(50, 50, 200, 50, 100, 100);
  *
- * @see parallelogram
+ * @see rhombus
  */
-rhombus = (ax, ay, bx, by, cx, cy) => {
-    const r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
-    cx = ax + r * (cx - ax);
-    cy = ay + r * (cy - ay);
-    parallelogram(ax, ay, bx, by, cx, cy);
+parallelogram = (ax, ay, bx, by, cx, cy) => {
+    const dx = bx - ax;
+    const dy = by - ay;
+    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 /**
@@ -428,6 +404,30 @@ rectangle = (x, y, width, height = width, tl, tr, br, bl) => {
     else if (br == undefined) e.rect(x, y, width, height, tl, tl, tr, tr);
     else if (bl == undefined) e.rect(x, y, width, height, tl, tr, br, 0);
     else e.rect(x, y, width, height, tl, tr, br, bl);
+};
+
+/**
+ * Draws a rhombus.
+ *
+ * @link https://khanacademy.org/cs/-/4747962019348480
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * rhombus(50, 100, 100, 50, 100, 100);
+ *
+ * @see parallelogram
+ */
+rhombus = (ax, ay, bx, by, cx, cy) => {
+    const r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
+    cx = ax + r * (cx - ax);
+    cy = ay + r * (cy - ay);
+    parallelogram(ax, ay, bx, by, cx, cy);
 };
 
 /**

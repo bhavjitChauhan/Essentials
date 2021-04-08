@@ -158,25 +158,6 @@ chainAsync = fns => {
 };
 
 /**
- * Returns a function that is the
- * [negation]{@link https://en.wikipedia.org/wiki/Negation} of the given
- * function
- *
- * @link https://www.30secondsofcode.org/js/s/complement
- *
- * @param {Function} fn Given function
- *
- * @returns {Function} Complement function
- *
- * @example
- * const isEven = function(num) {
- *     return num % 2 === 0;
- * }
- * const isOdd = complement(isEven);
- */
-complement = fn => (...args) => !fn(...args);
-
-/**
  * @summary
  * Removes Khan Academy's loop protection code from functions.
  *
@@ -216,6 +197,25 @@ clean = fn => {
 };
 
 /**
+ * Returns a function that is the
+ * [negation]{@link https://en.wikipedia.org/wiki/Negation} of the given
+ * function
+ *
+ * @link https://www.30secondsofcode.org/js/s/complement
+ *
+ * @param {Function} fn Given function
+ *
+ * @returns {Function} Complement function
+ *
+ * @example
+ * const isEven = function(num) {
+ *     return num % 2 === 0;
+ * };
+ * const isOdd = complement(isEven);
+ */
+complement = fn => (...args) => !fn(...args);
+
+/**
  * Generates a
  * [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
  *
@@ -228,6 +228,21 @@ generateUUID = () =>
             (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
         ).toString(16)
     );
+
+/**
+ * Returns a string of the form `HH:MM:SS`.
+ *
+ * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
+ *
+ * @returns {string} Formatted time
+ *
+ * @example
+ * println(getColorTime());
+ * // expected outcome: Time in the form of `HH:MM:SS`
+ */
+getColonTime = function () {
+    return (new Date()).toTimeString().slice(0, 8);
+};
 
 /**
  * Efficiently inherits properties from the parent class to the child class.
@@ -259,21 +274,6 @@ inherit = (subClass, superClass) => {
     subClass.prototype.constructor = subClass;
     if (superClass.prototype.constructor === Object)
         superClass.prototype.constructor = superClass;
-};
-
-/**
- * Returns a string of the form `HH:MM:SS`.
- *
- * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
- *
- * @returns {string} Formatted time
- *
- * @example
- * println(getColorTime());
- * // expected outcome: Time in the form of `HH:MM:SS`
- */
-getColonTime = function () {
-    return (new Date()).toTimeString().slice(0, 8);
 };
 
 /**
@@ -354,12 +354,12 @@ isSound = obj => {
  * @returns {Array} Index of function which performed fastest
  *
  * @example
- * let testees = {
+ * const testees = {
  *     'debug': debug,
  *     'console.log': console.log
  * };
- * let test = mostPerformant(Object.values(testees));
- * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
+ * const result = mostPerformant(Object.values(testees));
+ * console.log(Object.keys(testees)[test] + ' performed faster.');
  * // possible output: 'console.log performed faster.'
  */
 mostPerformant = (fns, iterations = 1e4) => {
@@ -393,27 +393,6 @@ pop = () => {
 };
 
 /**
- * Equivalent to using
- * [pushMatrix]{@link http://processingjs.org/reference/pushMatrix_/} and
- * [pushStyle]{@link http://processingjs.org/reference/pushStyle_/}.
- *
- * @example
- * push();
- * stroke(WHITE);
- * rotate(90);
- * rect(10, 10, 15, 15);
- * pop();
- * // This rectangle will not display the stroke or rotation
- * rect(10, 10, 15, 15);
- *
- * @see pop
- */
-push = () => {
-    e.pushMatrix();
-    e.pushStyle();
-};
-
-/**
  * Prints formatted string to canvas console.
  *
  * @param {string} assertion String with format
@@ -436,6 +415,27 @@ printf = function(string) {
     }
     string = string.replaceAll(/\\%/g, '%');
     e.println(string);
+};
+
+/**
+ * Equivalent to using
+ * [pushMatrix]{@link http://processingjs.org/reference/pushMatrix_/} and
+ * [pushStyle]{@link http://processingjs.org/reference/pushStyle_/}.
+ *
+ * @example
+ * push();
+ * stroke(WHITE);
+ * rotate(90);
+ * rect(10, 10, 15, 15);
+ * pop();
+ * // This rectangle will not display the stroke or rotation
+ * rect(10, 10, 15, 15);
+ *
+ * @see pop
+ */
+push = () => {
+    e.pushMatrix();
+    e.pushStyle();
 };
 
 /**
@@ -466,7 +466,7 @@ randomInt = (min, max) => _.random(min, max);
  *
  * @example
  * showGraphics(100, 100, 100, 100, function() {
- *     this.background(0);
+ *     this.background(BLACK);
  *     this.fill(RED);
  *     this.rect(25, 25, 50, 50);
  * });

@@ -18,12 +18,12 @@
  * @returns {Array} Index of function which performed fastest
  *
  * @example
- * let testees = {
+ * const testees = {
  *     'debug': debug,
  *     'console.log': console.log
  * };
- * let test = mostPerformant(Object.values(testees));
- * console.log(Object.keys(testees)[test.winner] + ' performed faster.');
+ * const result = mostPerformant(Object.values(testees));
+ * console.log(Object.keys(testees)[test] + ' performed faster.');
  * // possible output: 'console.log performed faster.'
  */
 mostPerformant = (fns, iterations = 1e4) => {

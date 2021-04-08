@@ -12,7 +12,7 @@
  * @example
  * const isEven = function(num) {
  *     return num % 2 === 0;
- * }
+ * };
  * const isOdd = complement(isEven);
  */
 complement = fn => (...args) => !fn(...args);

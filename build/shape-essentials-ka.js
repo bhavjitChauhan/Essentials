@@ -7,15 +7,15 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_shape_initialized_) console.info('%cShape Essentials', 'font-family:system-ui;font-size:0.75rem;');
 }
 
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
+};
+
 blurRect = function (x, y, width, height, size) {
   if (size <= 0) return;
   size = e.constrain(size, 0, Math.min(width, height));
   e.image(e.get(x, y, width, height), x, y, width / size, height / size);
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
-};
-
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
 };
 
 cylinder = function (x, y, width, height) {
@@ -135,12 +135,6 @@ heart = function (x, y, radius) {
   }, true);
 };
 
-parallelogram = function (ax, ay, bx, by, cx, cy) {
-  var dx = bx - ax;
-  var dy = by - ay;
-  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
-};
-
 polygon = function (x, y, sides, radius, rotation) {
   var _TAU = Math.cos(Math.PI) < 0 ? 2 * Math.PI : 360;
 
@@ -155,11 +149,10 @@ polygon = function (x, y, sides, radius, rotation) {
   pop();
 };
 
-rhombus = function (ax, ay, bx, by, cx, cy) {
-  var r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
-  cx = ax + r * (cx - ax);
-  cy = ay + r * (cy - ay);
-  parallelogram(ax, ay, bx, by, cx, cy);
+parallelogram = function (ax, ay, bx, by, cx, cy) {
+  var dx = bx - ax;
+  var dy = by - ay;
+  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 rectangle = function (x, y, width) {
@@ -169,6 +162,13 @@ rectangle = function (x, y, width) {
   var br = arguments.length > 6 ? arguments[6] : undefined;
   var bl = arguments.length > 7 ? arguments[7] : undefined;
   if (tl == undefined) e.rect(x, y, width, height);else if (tr == undefined) e.rect(x, y, width, height, tl);else if (br == undefined) e.rect(x, y, width, height, tl, tl, tr, tr);else if (bl == undefined) e.rect(x, y, width, height, tl, tr, br, 0);else e.rect(x, y, width, height, tl, tr, br, bl);
+};
+
+rhombus = function (ax, ay, bx, by, cx, cy) {
+  var r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
+  cx = ax + r * (cx - ax);
+  cy = ay + r * (cy - ay);
+  parallelogram(ax, ay, bx, by, cx, cy);
 };
 
 square = function (x, y, side, tl, tr, br, bl) {
