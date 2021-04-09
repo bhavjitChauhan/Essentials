@@ -9,7 +9,7 @@
  * @author Bhavjit Chauhan
  */
 
-_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
+_environment_ = undefined instanceof Processing ? 'CDN' : 'KA';
 _console_style_ = 'font-family:system-ui;font-size:0.75rem;';
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 
@@ -29,7 +29,7 @@ if (!_silent_ && !_core_initialized_) console.info(
     `%cESSENTIALS
 %cThe Khan Academy utility library.
 
-${_env_} Build
+${_environment_} Build
 Version ${ESSENTIALS_VERSION}
 Copyright \xa9 2021 Bhavjit Chauhan
 https://github.com/bhavjitChauhan/Essentials`,
@@ -251,6 +251,30 @@ getColonTime = function () {
 };
 
 /**
+ * Checks if object is a Khan Academy font object.
+ * 
+ * @param {Object} obj
+ * 
+ * @example
+ * let f = createFont('Arial');
+ * println(isFont(f));
+ * // expected output: true 
+ * 
+ * @example
+ * let f = font('monospace');
+ * println(isFont(f));
+ * // expected output: true
+ * 
+ * @see font
+ */
+isFont = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isFunction(obj.getCSSDefinition);
+};
+
+/**
  * Efficiently inherits properties from the parent class to the child class.
  *
  * @param {Function} subClass Class to be inherited to
@@ -283,30 +307,6 @@ inherit = (subClass, superClass) => {
 };
 
 /**
- * Checks if object is a Khan Academy font object.
- * 
- * @param {Object} obj
- * 
- * @example
- * let f = createFont('Arial');
- * println(isFont(f));
- * // expected output: true 
- * 
- * @example
- * let f = font('monospace');
- * println(isFont(f));
- * // expected output: true
- * 
- * @see font
- */
-isFont = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isFunction(obj.getCSSDefinition);
-};
-
-/**
  * Checks if object is a Khan Academy sound object.
  *
  * @param {Object} obj
@@ -321,27 +321,6 @@ isSound = obj => {
         return false;
     }
     return _.isObject(obj.audio);
-};
-
-/**
- * Equivalent to using
- * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
- * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
- *
- * @example
- * push();
- * stroke(WHITE);
- * rotate(90);
- * rect(10, 10, 15, 15);
- * pop();
- * // This rectangle will not display the stroke or rotation
- * rect(10, 10, 15, 15);
- *
- * @see push
- */
-pop = () => {
-    e.popStyle();
-    e.popMatrix();
 };
 
 /**
@@ -396,6 +375,27 @@ mostPerformant = (fns, iterations = 1e4) => {
         return performance.now() - before;
     });
     return times.indexOf(Math.min(...times));
+};
+
+/**
+ * Equivalent to using
+ * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
+ * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
+ *
+ * @example
+ * push();
+ * stroke(WHITE);
+ * rotate(90);
+ * rect(10, 10, 15, 15);
+ * pop();
+ * // This rectangle will not display the stroke or rotation
+ * rect(10, 10, 15, 15);
+ *
+ * @see push
+ */
+pop = () => {
+    e.popStyle();
+    e.popMatrix();
 };
 
 /**
@@ -461,6 +461,30 @@ push = () => {
 randomInt = (min, max) => _.random(min, max);
 
 /**
+ * Shows image of graphics created with `createGraphics`.
+ *
+ * @param {number} x x-coordinate of image
+ * @param {number} y y-coordinate of image
+ * @param {number} width width of image
+ * @param {number} height height of image
+ * @param {Function} fn draw code
+ * @param {P2D|P3D} [renderer=P2D]
+ *
+ * @example
+ * showGraphics(100, 100, 100, 100, function() {
+ *     this.background(BLACK);
+ *     this.fill(RED);
+ *     this.rect(25, 25, 50, 50);
+ * });
+ * // expected outcome: red square embedded in black square
+ */
+showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
+    const g = e.createGraphics(width, height, renderer);
+    fn.call(g);
+    e.image(g, x, y);
+};
+
+/**
  * Measures the time it takes for a function to execute and logs to browser
  * console.
  *
@@ -491,28 +515,4 @@ timeTaken = (callback, id = 'default') => {
     const r = callback();
     console.timeEnd(`timeTaken#${id}`);
     return r;
-};
-
-/**
- * Shows image of graphics created with `createGraphics`.
- *
- * @param {number} x x-coordinate of image
- * @param {number} y y-coordinate of image
- * @param {number} width width of image
- * @param {number} height height of image
- * @param {Function} fn draw code
- * @param {P2D|P3D} [renderer=P2D]
- *
- * @example
- * showGraphics(100, 100, 100, 100, function() {
- *     this.background(BLACK);
- *     this.fill(RED);
- *     this.rect(25, 25, 50, 50);
- * });
- * // expected outcome: red square embedded in black square
- */
-showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
-    const g = e.createGraphics(width, height, renderer);
-    fn.call(g);
-    e.image(g, x, y);
 };

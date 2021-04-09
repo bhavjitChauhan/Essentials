@@ -179,46 +179,6 @@ formatDuration = ms => {
 };
 
 /**
- * Draws text with multiple colors that are passed in using special syntax.
- *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
- *
- * @example
- * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
- * fill(BLUE);
- * multicoloredText(str, 25, 25);
- */
-multicoloredText = (string, x = 0, y = e.textAscent()) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    string = string.split('\n');
-    push();
-    e.textAlign(e.LEFT, e.CORNER);
-    for (const i in string) {
-        string[i] = string[i].split(/\[|]/);
-        let splits = 0;
-        for (const j in string[i]) {
-            if (/\d+,\d+,\d+/.test(string[i][j])) {
-                const rgb = string[i][j].split(',');
-                e.fill.apply(e, rgb);
-                delete string[i][j];
-                if (splits === 0) {
-                    string[i][j - 1] += ' ';
-                }
-                splits += 1;
-            } else {
-                const w = e.textWidth(string[i].slice(0, j));
-                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
-            }
-        }
-    }
-    pop();
-};
-
-/**
  * Draws a string with a highlight background.
  *
  * @param {string} string
@@ -252,6 +212,31 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
         pop();
         e.text(string[i], x, y + (i * e.textAscent() * 2));
     }
+};
+
+/**
+ * Takes a number and returns it as a string with the correct ordinal indicator
+ * suffix.
+ *
+ * @link https://www.30secondsofcode.org/js/s/to-ordinal-suffix
+ *
+ * @param {(number|string)} n Number
+ *
+ * @returns {string} Number with ordinal suffix.
+ *
+ * @example
+ * println(ordinalSuffix(123));
+ * // expected output: '123rd'
+ */
+ordinalSuffix = n => {
+    const int = parseInt(n, 10),
+        digits = [int % 10, int % 100],
+        oPattern = [1, 2, 3, 4],
+        ordinals = ['st', 'nd', 'rd', 'th'],
+        tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+    return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
+        ? int + ordinals[digits[0] - 1]
+        : int + ordinals[3];
 };
 
 /**
@@ -297,28 +282,80 @@ lightOrDarkText = backgroundColor => {
 };
 
 /**
- * Takes a number and returns it as a string with the correct ordinal indicator
- * suffix.
+ * Returns the singular or plural form of the word based on the input number,
+ * using an optional dictionary if supplied.
  *
- * @link https://www.30secondsofcode.org/js/s/to-ordinal-suffix
+ * @link https://www.30secondsofcode.org/js/s/pluralize
  *
- * @param {(number|string)} n Number
- *
- * @returns {string} Number with ordinal suffix.
+ * @param {number} value Number of items
+ * @param {string} word Word to pluralize
+ * @param {string} [plural=word+'s'] Custom pluralized form
  *
  * @example
- * println(ordinalSuffix(123));
- * // expected output: '123rd'
+ * let apples;
+ * const printApples = function() {
+ *     printf('% %.', apples, pluralize(apples, 'apple'));
+ * }
+ * apples = 2;
+ * printApples();
+ * // expected output: '2 apples.'
+ * apples = 1;
+ * printApples();
+ * // expected output: '1 apple.'
+ *
+ * @example
+ * let people = 2;
+ * printf('% %.', people, pluralize(people, 'person', 'people'));
+ * // expected output: '2 people.'
+ *
+ * @see printf
  */
-ordinalSuffix = n => {
-    const int = parseInt(n, 10),
-        digits = [int % 10, int % 100],
-        oPattern = [1, 2, 3, 4],
-        ordinals = ['st', 'nd', 'rd', 'th'],
-        tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-    return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
-        ? int + ordinals[digits[0] - 1]
-        : int + ordinals[3];
+pluralize = (value, word, plural = word + 's') => {
+    const _pluralize = (num, word, plural = word + 's') =>
+        [1, -1].includes(Number(num)) ? word : plural;
+    if (typeof value === 'object')
+        return (num, word) => _pluralize(num, word, value[word]);
+    return _pluralize(value, word, plural);
+};
+
+/**
+ * Draws text with multiple colors that are passed in using special syntax.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ *
+ * @example
+ * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
+ * fill(BLUE);
+ * multicoloredText(str, 25, 25);
+ */
+multicoloredText = (string, x = 0, y = e.textAscent()) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    string = string.split('\n');
+    push();
+    e.textAlign(e.LEFT, e.CORNER);
+    for (const i in string) {
+        string[i] = string[i].split(/\[|]/);
+        let splits = 0;
+        for (const j in string[i]) {
+            if (/\d+,\d+,\d+/.test(string[i][j])) {
+                const rgb = string[i][j].split(',');
+                e.fill.apply(e, rgb);
+                delete string[i][j];
+                if (splits === 0) {
+                    string[i][j - 1] += ' ';
+                }
+                splits += 1;
+            } else {
+                const w = e.textWidth(string[i].slice(0, j));
+                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
+            }
+        }
+    }
+    pop();
 };
 
 /**
@@ -356,40 +393,39 @@ outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
 };
 
 /**
- * Returns the singular or plural form of the word based on the input number,
- * using an optional dictionary if supplied.
+ * Draws text underlined.
  *
- * @link https://www.30secondsofcode.org/js/s/pluralize
- *
- * @param {number} value Number of items
- * @param {string} word Word to pluralize
- * @param {string} [plural=word+'s'] Custom pluralized form
- *
- * @example
- * let apples;
- * const printApples = function() {
- *     printf('% %.', apples, pluralize(apples, 'apple'));
- * }
- * apples = 2;
- * printApples();
- * // expected output: '2 apples.'
- * apples = 1;
- * printApples();
- * // expected output: '1 apple.'
+ * @param {string} string Text to be underlined
+ * @param {number} x x-coordinate value
+ * @param {number} y y-coordinate value
+ * @param {color} [underlineColor=BLACK] Color of underline
+ * @param {number} [underlineWeight] Weight of underline
  *
  * @example
- * let people = 2;
- * printf('% %.', people, pluralize(people, 'person', 'people'));
- * // expected output: '2 people.'
+ * let str = 'Underlined\nText';
+ * fill(BLACK);
+ * underlineText(str, 25, 25);
  *
- * @see printf
+ * @example
+ * let str = 'Underlined\nText';
+ * fill(BLACK);
+ * underlineText(str, 25, 25, RED, 5);
  */
-pluralize = (value, word, plural = word + 's') => {
-    const _pluralize = (num, word, plural = word + 's') =>
-        [1, -1].includes(Number(num)) ? word : plural;
-    if (typeof value === 'object')
-        return (num, word) => _pluralize(num, word, value[word]);
-    return _pluralize(value, word, plural);
+underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    strings = string.split('\n');
+    push();
+    e.strokeCap(e.SQUARE);
+    e.strokeWeight(underlineWeight);
+    e.stroke(underlineColor);
+    for (const i in strings) {
+        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
+    }
+    e.textAlign(e.LEFT, e.CORNER);
+    e.text(string, x, y);
+    pop();
 };
 
 /**
@@ -534,42 +570,6 @@ String.prototype.toTitleCase = function () {
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map(x => x.charAt(0).toUpperCase() + x.slice(1))
         .join(' ');
-};
-
-/**
- * Draws text underlined.
- *
- * @param {string} string Text to be underlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {color} [underlineColor=BLACK] Color of underline
- * @param {number} [underlineWeight] Weight of underline
- *
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25);
- *
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25, RED, 5);
- */
-underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    strings = string.split('\n');
-    push();
-    e.strokeCap(e.SQUARE);
-    e.strokeWeight(underlineWeight);
-    e.stroke(underlineColor);
-    for (const i in strings) {
-        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
-    }
-    e.textAlign(e.LEFT, e.CORNER);
-    e.text(string, x, y);
-    pop();
 };
 
 /**

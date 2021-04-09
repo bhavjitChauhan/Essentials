@@ -18,6 +18,22 @@ circle = function (x, y, radius) {
   return e.ellipse(x, y, radius, radius);
 };
 
+dashedLine = function (x1, y1, x2, y2) {
+  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
+  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
+  var length = e.dist(x1, y1, x2, y2);
+  var i = 0;
+
+  for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
+    e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
+  }
+
+  if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
+  if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
+};
+
 cylinder = function (x, y, width, height) {
   width = Math.abs(width);
   height = Math.abs(height);
@@ -44,22 +60,6 @@ cylinder = function (x, y, width, height) {
   }
 
   pop();
-};
-
-dashedLine = function (x1, y1, x2, y2) {
-  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
-  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
-  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
-  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-  var length = e.dist(x1, y1, x2, y2);
-  var i = 0;
-
-  for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
-    e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
-  }
-
-  if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
-  if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
 };
 
 donut = function (x, y, majorDiameter, minorDiameter) {
@@ -105,13 +105,6 @@ dottedLine = function (x1, y1, x2, y2) {
   if (endPoint) e.point(x2, y2);
 };
 
-edge = function (x, y, length, angle) {
-  if (angleMode == 'degrees') angle = e.radians(angle);
-  var x2 = x + length * Math.cos(angle);
-  var y2 = y + length * Math.sin(angle);
-  line(x, y, x2, y2);
-};
-
 drawShape = function (fn, close, mode) {
   close = close && e.CLOSE;
   e.beginShape(mode);
@@ -133,6 +126,13 @@ heart = function (x, y, radius) {
     c2x = 2 * x - c2x;
     e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
   }, true);
+};
+
+edge = function (x, y, length, angle) {
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  line(x, y, x2, y2);
 };
 
 parallelogram = function (ax, ay, bx, by, cx, cy) {

@@ -39,44 +39,6 @@ blurRect = (x, y, width, height, size) => {
 circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
- * Draws a 2D cylinder.
- *
- * @link https://www.khanacademy.org/cs/-/5157537806548992
- *
- * @param {number} x x-coordinate of cylinder
- * @param {number} y y-coordinate of cylinder
- * @param {number} width
- * @param {number} height
- *
- * @example
- * cylinder(100, 100, 100, 50);
- */
-cylinder = (x, y, width, height) => {
-    width = Math.abs(width);
-    height = Math.abs(height);
-    push();
-    e.translate(x, y);
-    if (height > width) {
-        const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
-        e.rotate(_TAU / 4);
-        cylinder(0, 0, height, width);
-    } else {
-        const r = height / 2;
-        const z = (width - height) / 2;
-        const central = 4 / 3 * (Math.sqrt(2) - 1) * r;
-        drawShape(() => {
-            e.vertex(z, -r);
-            e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
-            e.bezierVertex(z + r, central, z + central, r, z, r);
-            e.vertex(-z, r);
-            e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
-            e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
-        }, true);
-    }
-    pop();
-};
-
-/**
  * @summary
  * Draws a dashed line.
  *
@@ -125,6 +87,44 @@ dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, end
     }
     if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
     if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
+};
+
+/**
+ * Draws a 2D cylinder.
+ *
+ * @link https://www.khanacademy.org/cs/-/5157537806548992
+ *
+ * @param {number} x x-coordinate of cylinder
+ * @param {number} y y-coordinate of cylinder
+ * @param {number} width
+ * @param {number} height
+ *
+ * @example
+ * cylinder(100, 100, 100, 50);
+ */
+cylinder = (x, y, width, height) => {
+    width = Math.abs(width);
+    height = Math.abs(height);
+    push();
+    e.translate(x, y);
+    if (height > width) {
+        const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
+        e.rotate(_TAU / 4);
+        cylinder(0, 0, height, width);
+    } else {
+        const r = height / 2;
+        const z = (width - height) / 2;
+        const central = 4 / 3 * (Math.sqrt(2) - 1) * r;
+        drawShape(() => {
+            e.vertex(z, -r);
+            e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
+            e.bezierVertex(z + r, central, z + central, r, z, r);
+            e.vertex(-z, r);
+            e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
+            e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
+        }, true);
+    }
+    pop();
 };
 
 /**
@@ -211,35 +211,6 @@ dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
 };
 
 /**
- * Draws a line of a given length and at a given angle.
- *
- * @param {number} x x-coordinate of start point
- * @param {number} y y-coordinate of start point
- * @param {number} length length of line
- * @param {number} angle rotation of line
- *
- * @example
- * angleMode = 'degrees';
- * edge(50, 50, 300, 0);
- * // expected outcome: horizontal line of length 300
- *
- * @example
- * edge(50, 75, 100, 45);
- * // expected outcome: line of length 100 rotated 45 degrees
- *
- * @example
- * angleMode = 'radians';
- * edge(200, 75, 100, PI / 4);
- * // expected outcome: line of length 100 rotated 45 degrees
- */
-edge = (x, y, length, angle) => {
-    if (angleMode == 'degrees') angle = e.radians(angle);
-    const x2 = x + length * Math.cos(angle);
-    const y2 = y + length * Math.sin(angle);
-    line(x, y, x2, y2);
-};
-
-/**
  * Alias for `beginShape()`/`endShape()`.
  *
  * @param {Function} fn Shape function
@@ -300,6 +271,35 @@ heart = (x, y, radius) => {
         c2x = 2 * x - c2x;
         e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
     }, true);
+};
+
+/**
+ * Draws a line of a given length and at a given angle.
+ *
+ * @param {number} x x-coordinate of start point
+ * @param {number} y y-coordinate of start point
+ * @param {number} length length of line
+ * @param {number} angle rotation of line
+ *
+ * @example
+ * angleMode = 'degrees';
+ * edge(50, 50, 300, 0);
+ * // expected outcome: horizontal line of length 300
+ *
+ * @example
+ * edge(50, 75, 100, 45);
+ * // expected outcome: line of length 100 rotated 45 degrees
+ *
+ * @example
+ * angleMode = 'radians';
+ * edge(200, 75, 100, PI / 4);
+ * // expected outcome: line of length 100 rotated 45 degrees
+ */
+edge = (x, y, length, angle) => {
+    if (angleMode == 'degrees') angle = e.radians(angle);
+    const x2 = x + length * Math.cos(angle);
+    const y2 = y + length * Math.sin(angle);
+    line(x, y, x2, y2);
 };
 
 /**

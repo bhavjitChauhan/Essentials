@@ -248,6 +248,52 @@ hexToRGB = function (hex) {
   return result;
 };
 
+HSBToRGB = function (x, s, v) {
+  if (arguments.length == 1) {
+    c = x;
+    x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
+  }
+
+  x /= 255, s /= 255, v /= 255;
+  var i = Math.floor(x * 6),
+      f = x * 6 - i,
+      p = v * (1 - s),
+      q = v * (1 - f * s),
+      t = v * (1 - (1 - f) * s);
+  var r, g, b;
+
+  switch (i % 6) {
+    case 0:
+      r = v, g = t, b = p;
+      break;
+
+    case 1:
+      r = q, g = v, b = p;
+      break;
+
+    case 2:
+      r = p, g = v, b = t;
+      break;
+
+    case 3:
+      r = p, g = q, b = v;
+      break;
+
+    case 4:
+      r = t, g = p, b = v;
+      break;
+
+    case 5:
+      r = v, g = p, b = q;
+      break;
+  }
+
+  var result = [r, g, b].map(function (i) {
+    return i * 255;
+  });
+  return e.color.apply(e, result);
+};
+
 linearGradient = function (x, y, width, height, startColor, endColor) {
   var direction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : RIGHT;
   var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
@@ -403,52 +449,6 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
   pop();
 };
 
-HSBToRGB = function (x, s, v) {
-  if (arguments.length == 1) {
-    c = x;
-    x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
-  }
-
-  x /= 255, s /= 255, v /= 255;
-  var i = Math.floor(x * 6),
-      f = x * 6 - i,
-      p = v * (1 - s),
-      q = v * (1 - f * s),
-      t = v * (1 - (1 - f) * s);
-  var r, g, b;
-
-  switch (i % 6) {
-    case 0:
-      r = v, g = t, b = p;
-      break;
-
-    case 1:
-      r = q, g = v, b = p;
-      break;
-
-    case 2:
-      r = p, g = v, b = t;
-      break;
-
-    case 3:
-      r = p, g = q, b = v;
-      break;
-
-    case 4:
-      r = t, g = p, b = v;
-      break;
-
-    case 5:
-      r = v, g = p, b = q;
-      break;
-  }
-
-  var result = [r, g, b].map(function (i) {
-    return i * 255;
-  });
-  return e.color.apply(e, result);
-};
-
 radialGradient = function (x, y, width, height, startColor, endColor) {
   var step = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 5;
   push();
@@ -482,22 +482,6 @@ RGBToHex = function (x, g, b) {
   }
 
   return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
-};
-
-toHSB = function () {
-  var args = arguments;
-
-  if (args.length == 1) {
-    var _c9 = args[0];
-
-    if (typeof _c9 == 'number') {
-      return [e.hue(_c9), e.saturation(_c9), e.brightness(_c9)];
-    } else {
-      return RGBToHSB.apply(e, toRGB(hexToRGB(_c9)));
-    }
-  } else if (args.length == 3) {
-    return RGBToHSB.apply(e, args);
-  }
 };
 
 RGBToHSB = function (x, g, b) {
@@ -541,6 +525,22 @@ RGBToHSB = function (x, g, b) {
   result = e.color.apply(e, result);
   pop();
   return result;
+};
+
+toHSB = function () {
+  var args = arguments;
+
+  if (args.length == 1) {
+    var _c9 = args[0];
+
+    if (typeof _c9 == 'number') {
+      return [e.hue(_c9), e.saturation(_c9), e.brightness(_c9)];
+    } else {
+      return RGBToHSB.apply(e, toRGB(hexToRGB(_c9)));
+    }
+  } else if (args.length == 3) {
+    return RGBToHSB.apply(e, args);
+  }
 };
 
 toRGB = function () {

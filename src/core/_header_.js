@@ -9,7 +9,7 @@
  * @author Bhavjit Chauhan
  */
 
-_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
+_environment_ = this instanceof Processing ? 'CDN' : 'KA';
 _console_style_ = 'font-family:system-ui;font-size:0.75rem;';
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 
@@ -29,7 +29,7 @@ if (!_silent_ && !_core_initialized_) console.info(
     `%cESSENTIALS
 %cThe Khan Academy utility library.
 
-${_env_} Build
+${_environment_} Build
 Version ${ESSENTIALS_VERSION}
 Copyright \xa9 2021 Bhavjit Chauhan
 https://github.com/bhavjitChauhan/Essentials`,

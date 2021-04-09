@@ -9,7 +9,7 @@
  * @author Bhavjit Chauhan
  */
 
-_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
+_environment_ = undefined instanceof Processing ? 'CDN' : 'KA';
 _console_style_ = 'font-family:system-ui;font-size:0.75rem;';
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 
@@ -29,7 +29,7 @@ if (!_silent_ && !_core_initialized_) console.info(
     `%cESSENTIALS
 %cThe Khan Academy utility library.
 
-${_env_} Build
+${_environment_} Build
 Version ${ESSENTIALS_VERSION}
 Copyright \xa9 2021 Bhavjit Chauhan
 https://github.com/bhavjitChauhan/Essentials`,
@@ -251,6 +251,30 @@ getColonTime = function () {
 };
 
 /**
+ * Checks if object is a Khan Academy font object.
+ * 
+ * @param {Object} obj
+ * 
+ * @example
+ * let f = createFont('Arial');
+ * println(isFont(f));
+ * // expected output: true 
+ * 
+ * @example
+ * let f = font('monospace');
+ * println(isFont(f));
+ * // expected output: true
+ * 
+ * @see font
+ */
+isFont = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isFunction(obj.getCSSDefinition);
+};
+
+/**
  * Efficiently inherits properties from the parent class to the child class.
  *
  * @param {Function} subClass Class to be inherited to
@@ -283,30 +307,6 @@ inherit = (subClass, superClass) => {
 };
 
 /**
- * Checks if object is a Khan Academy font object.
- * 
- * @param {Object} obj
- * 
- * @example
- * let f = createFont('Arial');
- * println(isFont(f));
- * // expected output: true 
- * 
- * @example
- * let f = font('monospace');
- * println(isFont(f));
- * // expected output: true
- * 
- * @see font
- */
-isFont = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isFunction(obj.getCSSDefinition);
-};
-
-/**
  * Checks if object is a Khan Academy sound object.
  *
  * @param {Object} obj
@@ -321,27 +321,6 @@ isSound = obj => {
         return false;
     }
     return _.isObject(obj.audio);
-};
-
-/**
- * Equivalent to using
- * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
- * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
- *
- * @example
- * push();
- * stroke(WHITE);
- * rotate(90);
- * rect(10, 10, 15, 15);
- * pop();
- * // This rectangle will not display the stroke or rotation
- * rect(10, 10, 15, 15);
- *
- * @see push
- */
-pop = () => {
-    e.popStyle();
-    e.popMatrix();
 };
 
 /**
@@ -396,6 +375,27 @@ mostPerformant = (fns, iterations = 1e4) => {
         return performance.now() - before;
     });
     return times.indexOf(Math.min(...times));
+};
+
+/**
+ * Equivalent to using
+ * [popMatrix]{@link http://processingjs.org/reference/popMatrix_/} and
+ * [popStyle]{@link http://processingjs.org/reference/popStyle_/}.
+ *
+ * @example
+ * push();
+ * stroke(WHITE);
+ * rotate(90);
+ * rect(10, 10, 15, 15);
+ * pop();
+ * // This rectangle will not display the stroke or rotation
+ * rect(10, 10, 15, 15);
+ *
+ * @see push
+ */
+pop = () => {
+    e.popStyle();
+    e.popMatrix();
 };
 
 /**
@@ -461,6 +461,30 @@ push = () => {
 randomInt = (min, max) => _.random(min, max);
 
 /**
+ * Shows image of graphics created with `createGraphics`.
+ *
+ * @param {number} x x-coordinate of image
+ * @param {number} y y-coordinate of image
+ * @param {number} width width of image
+ * @param {number} height height of image
+ * @param {Function} fn draw code
+ * @param {P2D|P3D} [renderer=P2D]
+ *
+ * @example
+ * showGraphics(100, 100, 100, 100, function() {
+ *     this.background(BLACK);
+ *     this.fill(RED);
+ *     this.rect(25, 25, 50, 50);
+ * });
+ * // expected outcome: red square embedded in black square
+ */
+showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
+    const g = e.createGraphics(width, height, renderer);
+    fn.call(g);
+    e.image(g, x, y);
+};
+
+/**
  * Measures the time it takes for a function to execute and logs to browser
  * console.
  *
@@ -491,30 +515,6 @@ timeTaken = (callback, id = 'default') => {
     const r = callback();
     console.timeEnd(`timeTaken#${id}`);
     return r;
-};
-
-/**
- * Shows image of graphics created with `createGraphics`.
- *
- * @param {number} x x-coordinate of image
- * @param {number} y y-coordinate of image
- * @param {number} width width of image
- * @param {number} height height of image
- * @param {Function} fn draw code
- * @param {P2D|P3D} [renderer=P2D]
- *
- * @example
- * showGraphics(100, 100, 100, 100, function() {
- *     this.background(BLACK);
- *     this.fill(RED);
- *     this.rect(25, 25, 50, 50);
- * });
- * // expected outcome: red square embedded in black square
- */
-showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
-    const g = e.createGraphics(width, height, renderer);
-    fn.call(g);
-    e.image(g, x, y);
 };
 
 /** @module Color */
@@ -915,6 +915,52 @@ hexToRGB = hex => {
 };
 
 /**
+ * Converts HSB to RGB color type.
+ *
+ * @param {(number|color)} x Hue value or color
+ * @param {number} [s] Saturation value
+ * @param {number} [v] Brightness value
+ *
+ * @returns {string}  RGB color value
+ *
+ * @example
+ * let c = HSBToRGB(85, 255, 255);
+ * println(c);
+ * // expected output: -16711936
+ * background(c);
+ * // expected outcome: green background
+ */
+HSBToRGB = function(x, s, v) {
+    if (arguments.length == 1) {
+        c = x;
+        x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
+    }
+    x /= 255, s /= 255, v /= 255;
+
+    const i = Math.floor(x * 6),
+        f = x * 6 - i,
+        p = v * (1 - s),
+        q = v * (1 - f * s),
+        t = v * (1 - (1 - f) * s);
+
+    let r, g, b;
+    switch (i % 6) {
+        case 0: r = v, g = t, b = p; break;
+        case 1: r = q, g = v, b = p; break;
+        case 2: r = p, g = v, b = t; break;
+        case 3: r = p, g = q, b = v; break;
+        case 4: r = t, g = p, b = v; break;
+        case 5: r = v, g = p, b = q; break;
+    }
+
+    const result = [r, g, b].map(function (i) {
+        return i * 255;
+    });
+
+    return e.color.apply(e, result);
+};
+
+/**
  * @summary
  * Draws a linear gradient from `startColor` to `endColor` in the form of a rectangle.
  *
@@ -1047,52 +1093,6 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
 };
 
 /**
- * Converts HSB to RGB color type.
- *
- * @param {(number|color)} x Hue value or color
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
- *
- * @returns {string}  RGB color value
- *
- * @example
- * let c = HSBToRGB(85, 255, 255);
- * println(c);
- * // expected output: -16711936
- * background(c);
- * // expected outcome: green background
- */
-HSBToRGB = function(x, s, v) {
-    if (arguments.length == 1) {
-        c = x;
-        x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
-    }
-    x /= 255, s /= 255, v /= 255;
-
-    const i = Math.floor(x * 6),
-        f = x * 6 - i,
-        p = v * (1 - s),
-        q = v * (1 - f * s),
-        t = v * (1 - (1 - f) * s);
-
-    let r, g, b;
-    switch (i % 6) {
-        case 0: r = v, g = t, b = p; break;
-        case 1: r = q, g = v, b = p; break;
-        case 2: r = p, g = v, b = t; break;
-        case 3: r = p, g = q, b = v; break;
-        case 4: r = t, g = p, b = v; break;
-        case 5: r = v, g = p, b = q; break;
-    }
-
-    const result = [r, g, b].map(function (i) {
-        return i * 255;
-    });
-
-    return e.color.apply(e, result);
-};
-
-/**
  * @summary
  * Draws a radial gradient from `startColor` to `endColor` in the form of an
  * ellipse.
@@ -1171,43 +1171,6 @@ RGBToHex = function(x, g, b) {
 };
 
 /**
- * Converts hex or RGB to HSB color value.
- *
- * @param {(string|color)} x Hex, red or HSB color value
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- *
- * @returns {color|array}  RGB color value or RGB values array
- *
- * @example
- * colorMode(HSB);
- * background(toHSB('fff'));
- * // expected outcome: white background
- *
- * @example
- * colorMode(HSB);
- * background(toHSB(255, 0, 0));
- * // expected outcome: red background
- *
- * @example
- * println(toHSB(-1))
- * // expected output: [0, 0, 255]
- */
-toHSB = function() {
-    const args = arguments;
-    if (args.length == 1) {
-        const c = args[0];
-        if (typeof c == 'number') {
-            return [e.hue(c), e.saturation(c), e.brightness(c)];
-        } else {
-            return RGBToHSB.apply(e, toRGB(hexToRGB(c)));
-        }
-    } else if (args.length == 3) {
-        return RGBToHSB.apply(e, args);
-    }
-};
-
-/**
  * Converts RGB to HSB color type.
  *
  * @param {(number|color)} x Red value or color
@@ -1258,6 +1221,43 @@ RGBToHSB = function(x, g, b) {
     result = e.color.apply(e, result);
     pop();
     return result;
+};
+
+/**
+ * Converts hex or RGB to HSB color value.
+ *
+ * @param {(string|color)} x Hex, red or HSB color value
+ * @param {number} [g] Green value
+ * @param {number} [b] Blue value
+ *
+ * @returns {color|array}  RGB color value or RGB values array
+ *
+ * @example
+ * colorMode(HSB);
+ * background(toHSB('fff'));
+ * // expected outcome: white background
+ *
+ * @example
+ * colorMode(HSB);
+ * background(toHSB(255, 0, 0));
+ * // expected outcome: red background
+ *
+ * @example
+ * println(toHSB(-1))
+ * // expected output: [0, 0, 255]
+ */
+toHSB = function() {
+    const args = arguments;
+    if (args.length == 1) {
+        const c = args[0];
+        if (typeof c == 'number') {
+            return [e.hue(c), e.saturation(c), e.brightness(c)];
+        } else {
+            return RGBToHSB.apply(e, toRGB(hexToRGB(c)));
+        }
+    } else if (args.length == 3) {
+        return RGBToHSB.apply(e, args);
+    }
 };
 
 /**
@@ -1476,46 +1476,6 @@ formatDuration = ms => {
 };
 
 /**
- * Draws text with multiple colors that are passed in using special syntax.
- *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
- *
- * @example
- * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
- * fill(BLUE);
- * multicoloredText(str, 25, 25);
- */
-multicoloredText = (string, x = 0, y = e.textAscent()) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    string = string.split('\n');
-    push();
-    e.textAlign(e.LEFT, e.CORNER);
-    for (const i in string) {
-        string[i] = string[i].split(/\[|]/);
-        let splits = 0;
-        for (const j in string[i]) {
-            if (/\d+,\d+,\d+/.test(string[i][j])) {
-                const rgb = string[i][j].split(',');
-                e.fill.apply(e, rgb);
-                delete string[i][j];
-                if (splits === 0) {
-                    string[i][j - 1] += ' ';
-                }
-                splits += 1;
-            } else {
-                const w = e.textWidth(string[i].slice(0, j));
-                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
-            }
-        }
-    }
-    pop();
-};
-
-/**
  * Draws a string with a highlight background.
  *
  * @param {string} string
@@ -1549,6 +1509,31 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
         pop();
         e.text(string[i], x, y + (i * e.textAscent() * 2));
     }
+};
+
+/**
+ * Takes a number and returns it as a string with the correct ordinal indicator
+ * suffix.
+ *
+ * @link https://www.30secondsofcode.org/js/s/to-ordinal-suffix
+ *
+ * @param {(number|string)} n Number
+ *
+ * @returns {string} Number with ordinal suffix.
+ *
+ * @example
+ * println(ordinalSuffix(123));
+ * // expected output: '123rd'
+ */
+ordinalSuffix = n => {
+    const int = parseInt(n, 10),
+        digits = [int % 10, int % 100],
+        oPattern = [1, 2, 3, 4],
+        ordinals = ['st', 'nd', 'rd', 'th'],
+        tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+    return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
+        ? int + ordinals[digits[0] - 1]
+        : int + ordinals[3];
 };
 
 /**
@@ -1594,28 +1579,80 @@ lightOrDarkText = backgroundColor => {
 };
 
 /**
- * Takes a number and returns it as a string with the correct ordinal indicator
- * suffix.
+ * Returns the singular or plural form of the word based on the input number,
+ * using an optional dictionary if supplied.
  *
- * @link https://www.30secondsofcode.org/js/s/to-ordinal-suffix
+ * @link https://www.30secondsofcode.org/js/s/pluralize
  *
- * @param {(number|string)} n Number
- *
- * @returns {string} Number with ordinal suffix.
+ * @param {number} value Number of items
+ * @param {string} word Word to pluralize
+ * @param {string} [plural=word+'s'] Custom pluralized form
  *
  * @example
- * println(ordinalSuffix(123));
- * // expected output: '123rd'
+ * let apples;
+ * const printApples = function() {
+ *     printf('% %.', apples, pluralize(apples, 'apple'));
+ * }
+ * apples = 2;
+ * printApples();
+ * // expected output: '2 apples.'
+ * apples = 1;
+ * printApples();
+ * // expected output: '1 apple.'
+ *
+ * @example
+ * let people = 2;
+ * printf('% %.', people, pluralize(people, 'person', 'people'));
+ * // expected output: '2 people.'
+ *
+ * @see printf
  */
-ordinalSuffix = n => {
-    const int = parseInt(n, 10),
-        digits = [int % 10, int % 100],
-        oPattern = [1, 2, 3, 4],
-        ordinals = ['st', 'nd', 'rd', 'th'],
-        tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-    return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
-        ? int + ordinals[digits[0] - 1]
-        : int + ordinals[3];
+pluralize = (value, word, plural = word + 's') => {
+    const _pluralize = (num, word, plural = word + 's') =>
+        [1, -1].includes(Number(num)) ? word : plural;
+    if (typeof value === 'object')
+        return (num, word) => _pluralize(num, word, value[word]);
+    return _pluralize(value, word, plural);
+};
+
+/**
+ * Draws text with multiple colors that are passed in using special syntax.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ *
+ * @example
+ * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
+ * fill(BLUE);
+ * multicoloredText(str, 25, 25);
+ */
+multicoloredText = (string, x = 0, y = e.textAscent()) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    string = string.split('\n');
+    push();
+    e.textAlign(e.LEFT, e.CORNER);
+    for (const i in string) {
+        string[i] = string[i].split(/\[|]/);
+        let splits = 0;
+        for (const j in string[i]) {
+            if (/\d+,\d+,\d+/.test(string[i][j])) {
+                const rgb = string[i][j].split(',');
+                e.fill.apply(e, rgb);
+                delete string[i][j];
+                if (splits === 0) {
+                    string[i][j - 1] += ' ';
+                }
+                splits += 1;
+            } else {
+                const w = e.textWidth(string[i].slice(0, j));
+                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
+            }
+        }
+    }
+    pop();
 };
 
 /**
@@ -1653,40 +1690,39 @@ outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
 };
 
 /**
- * Returns the singular or plural form of the word based on the input number,
- * using an optional dictionary if supplied.
+ * Draws text underlined.
  *
- * @link https://www.30secondsofcode.org/js/s/pluralize
- *
- * @param {number} value Number of items
- * @param {string} word Word to pluralize
- * @param {string} [plural=word+'s'] Custom pluralized form
- *
- * @example
- * let apples;
- * const printApples = function() {
- *     printf('% %.', apples, pluralize(apples, 'apple'));
- * }
- * apples = 2;
- * printApples();
- * // expected output: '2 apples.'
- * apples = 1;
- * printApples();
- * // expected output: '1 apple.'
+ * @param {string} string Text to be underlined
+ * @param {number} x x-coordinate value
+ * @param {number} y y-coordinate value
+ * @param {color} [underlineColor=BLACK] Color of underline
+ * @param {number} [underlineWeight] Weight of underline
  *
  * @example
- * let people = 2;
- * printf('% %.', people, pluralize(people, 'person', 'people'));
- * // expected output: '2 people.'
+ * let str = 'Underlined\nText';
+ * fill(BLACK);
+ * underlineText(str, 25, 25);
  *
- * @see printf
+ * @example
+ * let str = 'Underlined\nText';
+ * fill(BLACK);
+ * underlineText(str, 25, 25, RED, 5);
  */
-pluralize = (value, word, plural = word + 's') => {
-    const _pluralize = (num, word, plural = word + 's') =>
-        [1, -1].includes(Number(num)) ? word : plural;
-    if (typeof value === 'object')
-        return (num, word) => _pluralize(num, word, value[word]);
-    return _pluralize(value, word, plural);
+underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    strings = string.split('\n');
+    push();
+    e.strokeCap(e.SQUARE);
+    e.strokeWeight(underlineWeight);
+    e.stroke(underlineColor);
+    for (const i in strings) {
+        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
+    }
+    e.textAlign(e.LEFT, e.CORNER);
+    e.text(string, x, y);
+    pop();
 };
 
 /**
@@ -1834,42 +1870,6 @@ String.prototype.toTitleCase = function () {
 };
 
 /**
- * Draws text underlined.
- *
- * @param {string} string Text to be underlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {color} [underlineColor=BLACK] Color of underline
- * @param {number} [underlineWeight] Weight of underline
- *
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25);
- *
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25, RED, 5);
- */
-underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    strings = string.split('\n');
-    push();
-    e.strokeCap(e.SQUARE);
-    e.strokeWeight(underlineWeight);
-    e.stroke(underlineColor);
-    for (const i in strings) {
-        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
-    }
-    e.textAlign(e.LEFT, e.CORNER);
-    e.text(string, x, y);
-    pop();
-};
-
-/**
  * Wraps a string to a given number of characters using a string break
  * character.
  *
@@ -1936,44 +1936,6 @@ blurRect = (x, y, width, height, size) => {
 circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
- * Draws a 2D cylinder.
- *
- * @link https://www.khanacademy.org/cs/-/5157537806548992
- *
- * @param {number} x x-coordinate of cylinder
- * @param {number} y y-coordinate of cylinder
- * @param {number} width
- * @param {number} height
- *
- * @example
- * cylinder(100, 100, 100, 50);
- */
-cylinder = (x, y, width, height) => {
-    width = Math.abs(width);
-    height = Math.abs(height);
-    push();
-    e.translate(x, y);
-    if (height > width) {
-        const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
-        e.rotate(_TAU / 4);
-        cylinder(0, 0, height, width);
-    } else {
-        const r = height / 2;
-        const z = (width - height) / 2;
-        const central = 4 / 3 * (Math.sqrt(2) - 1) * r;
-        drawShape(() => {
-            e.vertex(z, -r);
-            e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
-            e.bezierVertex(z + r, central, z + central, r, z, r);
-            e.vertex(-z, r);
-            e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
-            e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
-        }, true);
-    }
-    pop();
-};
-
-/**
  * @summary
  * Draws a dashed line.
  *
@@ -2022,6 +1984,44 @@ dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, end
     }
     if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
     if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
+};
+
+/**
+ * Draws a 2D cylinder.
+ *
+ * @link https://www.khanacademy.org/cs/-/5157537806548992
+ *
+ * @param {number} x x-coordinate of cylinder
+ * @param {number} y y-coordinate of cylinder
+ * @param {number} width
+ * @param {number} height
+ *
+ * @example
+ * cylinder(100, 100, 100, 50);
+ */
+cylinder = (x, y, width, height) => {
+    width = Math.abs(width);
+    height = Math.abs(height);
+    push();
+    e.translate(x, y);
+    if (height > width) {
+        const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
+        e.rotate(_TAU / 4);
+        cylinder(0, 0, height, width);
+    } else {
+        const r = height / 2;
+        const z = (width - height) / 2;
+        const central = 4 / 3 * (Math.sqrt(2) - 1) * r;
+        drawShape(() => {
+            e.vertex(z, -r);
+            e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
+            e.bezierVertex(z + r, central, z + central, r, z, r);
+            e.vertex(-z, r);
+            e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
+            e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
+        }, true);
+    }
+    pop();
 };
 
 /**
@@ -2108,35 +2108,6 @@ dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
 };
 
 /**
- * Draws a line of a given length and at a given angle.
- *
- * @param {number} x x-coordinate of start point
- * @param {number} y y-coordinate of start point
- * @param {number} length length of line
- * @param {number} angle rotation of line
- *
- * @example
- * angleMode = 'degrees';
- * edge(50, 50, 300, 0);
- * // expected outcome: horizontal line of length 300
- *
- * @example
- * edge(50, 75, 100, 45);
- * // expected outcome: line of length 100 rotated 45 degrees
- *
- * @example
- * angleMode = 'radians';
- * edge(200, 75, 100, PI / 4);
- * // expected outcome: line of length 100 rotated 45 degrees
- */
-edge = (x, y, length, angle) => {
-    if (angleMode == 'degrees') angle = e.radians(angle);
-    const x2 = x + length * Math.cos(angle);
-    const y2 = y + length * Math.sin(angle);
-    line(x, y, x2, y2);
-};
-
-/**
  * Alias for `beginShape()`/`endShape()`.
  *
  * @param {Function} fn Shape function
@@ -2197,6 +2168,35 @@ heart = (x, y, radius) => {
         c2x = 2 * x - c2x;
         e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
     }, true);
+};
+
+/**
+ * Draws a line of a given length and at a given angle.
+ *
+ * @param {number} x x-coordinate of start point
+ * @param {number} y y-coordinate of start point
+ * @param {number} length length of line
+ * @param {number} angle rotation of line
+ *
+ * @example
+ * angleMode = 'degrees';
+ * edge(50, 50, 300, 0);
+ * // expected outcome: horizontal line of length 300
+ *
+ * @example
+ * edge(50, 75, 100, 45);
+ * // expected outcome: line of length 100 rotated 45 degrees
+ *
+ * @example
+ * angleMode = 'radians';
+ * edge(200, 75, 100, PI / 4);
+ * // expected outcome: line of length 100 rotated 45 degrees
+ */
+edge = (x, y, length, angle) => {
+    if (angleMode == 'degrees') angle = e.radians(angle);
+    const x2 = x + length * Math.cos(angle);
+    const y2 = y + length * Math.sin(angle);
+    line(x, y, x2, y2);
 };
 
 /**

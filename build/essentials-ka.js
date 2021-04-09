@@ -32,14 +32,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-_env_ = typeof PI == 'undefined' ? 'CDN' : 'KA';
+_environment_ = undefined instanceof Processing ? 'CDN' : 'KA';
 _console_style_ = 'font-family:system-ui;font-size:0.75rem;';
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 ESSENTIALS_CORE = true;
 ESSENTIALS_VERSION = '1.1.0';
 ESSENTIALS_ASCII = "\n    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/\n   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/\n  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/\n _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/\n_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/\n\n";
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info("%cESSENTIALS\n%cThe Khan Academy utility library.\n\n".concat(_env_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), "color:transparent;\nfont-size:3rem;\nbackground-image: url(\"https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true\");\nbackground-position:center;\nbackground-repeat: no-repeat;\nbackground-size:contain;", _console_style_);
+if (!_silent_ && !_core_initialized_) console.info("%cESSENTIALS\n%cThe Khan Academy utility library.\n\n".concat(_environment_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), "color:transparent;\nfont-size:3rem;\nbackground-image: url(\"https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true\");\nbackground-position:center;\nbackground-repeat: no-repeat;\nbackground-size:contain;", _console_style_);
 _eval = eval;
 e = Processing.instances[0];
 var _ref = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
@@ -115,12 +115,6 @@ getColonTime = function () {
   return new Date().toTimeString().slice(0, 8);
 };
 
-inherit = function (subClass, superClass) {
-  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
-};
-
 isFont = function (obj) {
   if (typeof obj != 'object') {
     return false;
@@ -129,17 +123,18 @@ isFont = function (obj) {
   return _.isFunction(obj.getCSSDefinition);
 };
 
+inherit = function (subClass, superClass) {
+  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
+};
+
 isSound = function (obj) {
   if (typeof obj != 'object') {
     return false;
   }
 
   return _.isObject(obj.audio);
-};
-
-pop = function () {
-  e.popStyle();
-  e.popMatrix();
 };
 
 isImage = function (obj) {
@@ -164,6 +159,11 @@ mostPerformant = function (fns) {
   return times.indexOf(Math.min.apply(Math, _toConsumableArray(times)));
 };
 
+pop = function () {
+  e.popStyle();
+  e.popMatrix();
+};
+
 printf = function (string) {
   var args = Array.from(arguments).slice(1);
 
@@ -184,19 +184,19 @@ randomInt = function (min, max) {
   return _.random(min, max);
 };
 
+showGraphics = function (x, y, width, height, fn) {
+  var renderer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : e.P2D;
+  var g = e.createGraphics(width, height, renderer);
+  fn.call(g);
+  e.image(g, x, y);
+};
+
 timeTaken = function (callback) {
   var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'default';
   console.time("timeTaken#".concat(id));
   var r = callback();
   console.timeEnd("timeTaken#".concat(id));
   return r;
-};
-
-showGraphics = function (x, y, width, height, fn) {
-  var renderer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : e.P2D;
-  var g = e.createGraphics(width, height, renderer);
-  fn.call(g);
-  e.image(g, x, y);
 };
 
 _color_initialized_ = typeof COLOR_ESSENTIALS !== 'undefined';
@@ -449,6 +449,52 @@ hexToRGB = function (hex) {
   return result;
 };
 
+HSBToRGB = function (x, s, v) {
+  if (arguments.length == 1) {
+    c = x;
+    x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
+  }
+
+  x /= 255, s /= 255, v /= 255;
+  var i = Math.floor(x * 6),
+      f = x * 6 - i,
+      p = v * (1 - s),
+      q = v * (1 - f * s),
+      t = v * (1 - (1 - f) * s);
+  var r, g, b;
+
+  switch (i % 6) {
+    case 0:
+      r = v, g = t, b = p;
+      break;
+
+    case 1:
+      r = q, g = v, b = p;
+      break;
+
+    case 2:
+      r = p, g = v, b = t;
+      break;
+
+    case 3:
+      r = p, g = q, b = v;
+      break;
+
+    case 4:
+      r = t, g = p, b = v;
+      break;
+
+    case 5:
+      r = v, g = p, b = q;
+      break;
+  }
+
+  var result = [r, g, b].map(function (i) {
+    return i * 255;
+  });
+  return e.color.apply(e, result);
+};
+
 linearGradient = function (x, y, width, height, startColor, endColor) {
   var direction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : RIGHT;
   var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
@@ -604,52 +650,6 @@ linearGradient = function (x, y, width, height, startColor, endColor) {
   pop();
 };
 
-HSBToRGB = function (x, s, v) {
-  if (arguments.length == 1) {
-    c = x;
-    x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
-  }
-
-  x /= 255, s /= 255, v /= 255;
-  var i = Math.floor(x * 6),
-      f = x * 6 - i,
-      p = v * (1 - s),
-      q = v * (1 - f * s),
-      t = v * (1 - (1 - f) * s);
-  var r, g, b;
-
-  switch (i % 6) {
-    case 0:
-      r = v, g = t, b = p;
-      break;
-
-    case 1:
-      r = q, g = v, b = p;
-      break;
-
-    case 2:
-      r = p, g = v, b = t;
-      break;
-
-    case 3:
-      r = p, g = q, b = v;
-      break;
-
-    case 4:
-      r = t, g = p, b = v;
-      break;
-
-    case 5:
-      r = v, g = p, b = q;
-      break;
-  }
-
-  var result = [r, g, b].map(function (i) {
-    return i * 255;
-  });
-  return e.color.apply(e, result);
-};
-
 radialGradient = function (x, y, width, height, startColor, endColor) {
   var step = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 5;
   push();
@@ -683,22 +683,6 @@ RGBToHex = function (x, g, b) {
   }
 
   return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
-};
-
-toHSB = function () {
-  var args = arguments;
-
-  if (args.length == 1) {
-    var _c9 = args[0];
-
-    if (typeof _c9 == 'number') {
-      return [e.hue(_c9), e.saturation(_c9), e.brightness(_c9)];
-    } else {
-      return RGBToHSB.apply(e, toRGB(hexToRGB(_c9)));
-    }
-  } else if (args.length == 3) {
-    return RGBToHSB.apply(e, args);
-  }
 };
 
 RGBToHSB = function (x, g, b) {
@@ -742,6 +726,22 @@ RGBToHSB = function (x, g, b) {
   result = e.color.apply(e, result);
   pop();
   return result;
+};
+
+toHSB = function () {
+  var args = arguments;
+
+  if (args.length == 1) {
+    var _c9 = args[0];
+
+    if (typeof _c9 == 'number') {
+      return [e.hue(_c9), e.saturation(_c9), e.brightness(_c9)];
+    } else {
+      return RGBToHSB.apply(e, toRGB(hexToRGB(_c9)));
+    }
+  } else if (args.length == 3) {
+    return RGBToHSB.apply(e, args);
+  }
 };
 
 toRGB = function () {
@@ -861,6 +861,74 @@ formatDuration = function (ms) {
   }).join(', ');
 };
 
+highlightText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var highlightColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : YELLOW;
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  string = string.split('\n');
+  e.noStroke();
+  e.rectMode(e.CORNER);
+  e.textAlign(e.LEFT, e.TOP);
+
+  for (var i in string) {
+    string[i] = " ".concat(string[i], " ");
+    push();
+    e.fill(highlightColor);
+    e.rect(x, y + i * e.textAscent() * 2, e.textWidth(string[i]), e.textAscent() * 1.75);
+    pop();
+    e.text(string[i], x, y + i * e.textAscent() * 2);
+  }
+};
+
+ordinalSuffix = function (n) {
+  var int = parseInt(n, 10),
+      digits = [int % 10, int % 100],
+      oPattern = [1, 2, 3, 4],
+      ordinals = ['st', 'nd', 'rd', 'th'],
+      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
+};
+
+lightOrDarkText = function (backgroundColor) {
+  var r, g, b;
+
+  if (typeof backgroundColor === 'string') {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
+    r = parseInt(result[1], 16);
+    g = parseInt(result[2], 16);
+    b = parseInt(result[3], 16);
+  } else {
+    r = e.red(backgroundColor);
+    g = e.green(backgroundColor);
+    b = e.blue(backgroundColor);
+  }
+
+  if ((r + b + g) / 3 < 225) {
+    return WHITE;
+  }
+
+  return BLACK;
+};
+
+pluralize = function (value, word) {
+  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+
+  var _pluralize = function (num, word) {
+    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+    return [1, -1].includes(Number(num)) ? word : plural;
+  };
+
+  if (typeof value === 'object') return function (num, word) {
+    return _pluralize(num, word, value[word]);
+  };
+  return _pluralize(value, word, plural);
+};
+
 multicoloredText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -898,60 +966,6 @@ multicoloredText = function (string) {
   pop();
 };
 
-highlightText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var highlightColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : YELLOW;
-
-  if (!/\S/.test(string)) {
-    return;
-  }
-
-  string = string.split('\n');
-  e.noStroke();
-  e.rectMode(e.CORNER);
-  e.textAlign(e.LEFT, e.TOP);
-
-  for (var i in string) {
-    string[i] = " ".concat(string[i], " ");
-    push();
-    e.fill(highlightColor);
-    e.rect(x, y + i * e.textAscent() * 2, e.textWidth(string[i]), e.textAscent() * 1.75);
-    pop();
-    e.text(string[i], x, y + i * e.textAscent() * 2);
-  }
-};
-
-lightOrDarkText = function (backgroundColor) {
-  var r, g, b;
-
-  if (typeof backgroundColor === 'string') {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(backgroundColor);
-    r = parseInt(result[1], 16);
-    g = parseInt(result[2], 16);
-    b = parseInt(result[3], 16);
-  } else {
-    r = e.red(backgroundColor);
-    g = e.green(backgroundColor);
-    b = e.blue(backgroundColor);
-  }
-
-  if ((r + b + g) / 3 < 225) {
-    return WHITE;
-  }
-
-  return BLACK;
-};
-
-ordinalSuffix = function (n) {
-  var int = parseInt(n, 10),
-      digits = [int % 10, int % 100],
-      oPattern = [1, 2, 3, 4],
-      ordinals = ['st', 'nd', 'rd', 'th'],
-      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
-};
-
 outlineText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -977,18 +991,29 @@ outlineText = function (string) {
   e.text(string, x, y);
 };
 
-pluralize = function (value, word) {
-  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+underlineText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
+  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
 
-  var _pluralize = function (num, word) {
-    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
-    return [1, -1].includes(Number(num)) ? word : plural;
-  };
+  if (!/\S/.test(string)) {
+    return;
+  }
 
-  if (typeof value === 'object') return function (num, word) {
-    return _pluralize(num, word, value[word]);
-  };
-  return _pluralize(value, word, plural);
+  strings = string.split('\n');
+  push();
+  e.strokeCap(e.SQUARE);
+  e.strokeWeight(underlineWeight);
+  e.stroke(underlineColor);
+
+  for (var i in strings) {
+    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
+  }
+
+  e.textAlign(e.LEFT, e.CORNER);
+  e.text(string, x, y);
+  pop();
 };
 
 String.prototype.format = function () {
@@ -1069,31 +1094,6 @@ String.prototype.toTitleCase = function () {
   }).join(' ');
 };
 
-underlineText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
-  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
-
-  if (!/\S/.test(string)) {
-    return;
-  }
-
-  strings = string.split('\n');
-  push();
-  e.strokeCap(e.SQUARE);
-  e.strokeWeight(underlineWeight);
-  e.stroke(underlineColor);
-
-  for (var i in strings) {
-    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
-  }
-
-  e.textAlign(e.LEFT, e.CORNER);
-  e.text(string, x, y);
-  pop();
-};
-
 wordWrap = function (str, max) {
   var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '\n';
   return str.replace(new RegExp("(?![^\\n]{1,".concat(max, "}$)([^\\n]{1,").concat(max, "})\\s"), 'g'), '$1' + br);
@@ -1117,6 +1117,22 @@ blurRect = function (x, y, width, height, size) {
 
 circle = function (x, y, radius) {
   return e.ellipse(x, y, radius, radius);
+};
+
+dashedLine = function (x1, y1, x2, y2) {
+  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
+  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
+  var length = e.dist(x1, y1, x2, y2);
+  var i = 0;
+
+  for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
+    e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
+  }
+
+  if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
+  if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
 };
 
 cylinder = function (x, y, width, height) {
@@ -1148,22 +1164,6 @@ cylinder = function (x, y, width, height) {
   }
 
   pop();
-};
-
-dashedLine = function (x1, y1, x2, y2) {
-  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
-  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
-  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
-  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-  var length = e.dist(x1, y1, x2, y2);
-  var i = 0;
-
-  for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
-    e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
-  }
-
-  if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
-  if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
 };
 
 donut = function (x, y, majorDiameter, minorDiameter) {
@@ -1209,13 +1209,6 @@ dottedLine = function (x1, y1, x2, y2) {
   if (endPoint) e.point(x2, y2);
 };
 
-edge = function (x, y, length, angle) {
-  if (angleMode == 'degrees') angle = e.radians(angle);
-  var x2 = x + length * Math.cos(angle);
-  var y2 = y + length * Math.sin(angle);
-  line(x, y, x2, y2);
-};
-
 drawShape = function (fn, close, mode) {
   close = close && e.CLOSE;
   e.beginShape(mode);
@@ -1237,6 +1230,13 @@ heart = function (x, y, radius) {
     c2x = 2 * x - c2x;
     e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
   }, true);
+};
+
+edge = function (x, y, length, angle) {
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  line(x, y, x2, y2);
 };
 
 parallelogram = function (ax, ay, bx, by, cx, cy) {

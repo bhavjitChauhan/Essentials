@@ -396,6 +396,52 @@ hexToRGB = hex => {
 };
 
 /**
+ * Converts HSB to RGB color type.
+ *
+ * @param {(number|color)} x Hue value or color
+ * @param {number} [s] Saturation value
+ * @param {number} [v] Brightness value
+ *
+ * @returns {string}  RGB color value
+ *
+ * @example
+ * let c = HSBToRGB(85, 255, 255);
+ * println(c);
+ * // expected output: -16711936
+ * background(c);
+ * // expected outcome: green background
+ */
+HSBToRGB = function(x, s, v) {
+    if (arguments.length == 1) {
+        c = x;
+        x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
+    }
+    x /= 255, s /= 255, v /= 255;
+
+    const i = Math.floor(x * 6),
+        f = x * 6 - i,
+        p = v * (1 - s),
+        q = v * (1 - f * s),
+        t = v * (1 - (1 - f) * s);
+
+    let r, g, b;
+    switch (i % 6) {
+        case 0: r = v, g = t, b = p; break;
+        case 1: r = q, g = v, b = p; break;
+        case 2: r = p, g = v, b = t; break;
+        case 3: r = p, g = q, b = v; break;
+        case 4: r = t, g = p, b = v; break;
+        case 5: r = v, g = p, b = q; break;
+    }
+
+    const result = [r, g, b].map(function (i) {
+        return i * 255;
+    });
+
+    return e.color.apply(e, result);
+};
+
+/**
  * @summary
  * Draws a linear gradient from `startColor` to `endColor` in the form of a rectangle.
  *
@@ -528,52 +574,6 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
 };
 
 /**
- * Converts HSB to RGB color type.
- *
- * @param {(number|color)} x Hue value or color
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
- *
- * @returns {string}  RGB color value
- *
- * @example
- * let c = HSBToRGB(85, 255, 255);
- * println(c);
- * // expected output: -16711936
- * background(c);
- * // expected outcome: green background
- */
-HSBToRGB = function(x, s, v) {
-    if (arguments.length == 1) {
-        c = x;
-        x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
-    }
-    x /= 255, s /= 255, v /= 255;
-
-    const i = Math.floor(x * 6),
-        f = x * 6 - i,
-        p = v * (1 - s),
-        q = v * (1 - f * s),
-        t = v * (1 - (1 - f) * s);
-
-    let r, g, b;
-    switch (i % 6) {
-        case 0: r = v, g = t, b = p; break;
-        case 1: r = q, g = v, b = p; break;
-        case 2: r = p, g = v, b = t; break;
-        case 3: r = p, g = q, b = v; break;
-        case 4: r = t, g = p, b = v; break;
-        case 5: r = v, g = p, b = q; break;
-    }
-
-    const result = [r, g, b].map(function (i) {
-        return i * 255;
-    });
-
-    return e.color.apply(e, result);
-};
-
-/**
  * @summary
  * Draws a radial gradient from `startColor` to `endColor` in the form of an
  * ellipse.
@@ -652,43 +652,6 @@ RGBToHex = function(x, g, b) {
 };
 
 /**
- * Converts hex or RGB to HSB color value.
- *
- * @param {(string|color)} x Hex, red or HSB color value
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- *
- * @returns {color|array}  RGB color value or RGB values array
- *
- * @example
- * colorMode(HSB);
- * background(toHSB('fff'));
- * // expected outcome: white background
- *
- * @example
- * colorMode(HSB);
- * background(toHSB(255, 0, 0));
- * // expected outcome: red background
- *
- * @example
- * println(toHSB(-1))
- * // expected output: [0, 0, 255]
- */
-toHSB = function() {
-    const args = arguments;
-    if (args.length == 1) {
-        const c = args[0];
-        if (typeof c == 'number') {
-            return [e.hue(c), e.saturation(c), e.brightness(c)];
-        } else {
-            return RGBToHSB.apply(e, toRGB(hexToRGB(c)));
-        }
-    } else if (args.length == 3) {
-        return RGBToHSB.apply(e, args);
-    }
-};
-
-/**
  * Converts RGB to HSB color type.
  *
  * @param {(number|color)} x Red value or color
@@ -739,6 +702,43 @@ RGBToHSB = function(x, g, b) {
     result = e.color.apply(e, result);
     pop();
     return result;
+};
+
+/**
+ * Converts hex or RGB to HSB color value.
+ *
+ * @param {(string|color)} x Hex, red or HSB color value
+ * @param {number} [g] Green value
+ * @param {number} [b] Blue value
+ *
+ * @returns {color|array}  RGB color value or RGB values array
+ *
+ * @example
+ * colorMode(HSB);
+ * background(toHSB('fff'));
+ * // expected outcome: white background
+ *
+ * @example
+ * colorMode(HSB);
+ * background(toHSB(255, 0, 0));
+ * // expected outcome: red background
+ *
+ * @example
+ * println(toHSB(-1))
+ * // expected output: [0, 0, 255]
+ */
+toHSB = function() {
+    const args = arguments;
+    if (args.length == 1) {
+        const c = args[0];
+        if (typeof c == 'number') {
+            return [e.hue(c), e.saturation(c), e.brightness(c)];
+        } else {
+            return RGBToHSB.apply(e, toRGB(hexToRGB(c)));
+        }
+    } else if (args.length == 3) {
+        return RGBToHSB.apply(e, args);
+    }
 };
 
 /**
