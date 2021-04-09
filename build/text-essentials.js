@@ -10,47 +10,9 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     TEXT_ESSENTIALS = true;
     if (!_silent_ && !_text_initialized_) console.info(
         '%cText Essentials',
-        'font-family:system-ui;font-size:0.75rem;'
+        _console_style_
     );
 }
-
-/**
- * Fast gradient by filling each character with a different color as opposed to
- * masking the text with the gradient.
- *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
- * @param {color} startColor starting color
- * @param {color} endColor ending color
- *
- * @example
- * font('sans-serif', 25);
- * fastGradientText('Hello World', 10, textAscent() * 2, RED, YELLOW);
- * // expected outcome: 'Hello World' with gradient fill from red to yellow
- *
- * @example
- * font('sans-serif', 25, 'bold');
- * fastGradientText('Hello\nWorld', 10, textAscent() * 4, PURPLE, PINK);
- * // expected outcome: 'Hello World', bold, with gradient fill from purple to pink in two lines
- *
- * @see font
- */
-fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => {
-    push();
-    if (!string.includes('\n')) {
-        for (let i = 0; i < string.length; i++) {
-            e.fill(e.lerpColor(startColor, endColor, i / (string.length)));
-            e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
-        }
-    } else {
-        const strings = string.split('\n');
-        for (const i in strings) {
-            fastGradientText(strings[i], x, y + i * textAscent(), startColor, endColor);
-        }
-    }
-    pop();
-};
 
 /**
  * Sets font, size and other [CSS font
@@ -150,6 +112,113 @@ font = function (family) {
 };
 
 /**
+ * Fast gradient by filling each character with a different color as opposed to
+ * masking the text with the gradient.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ *
+ * @example
+ * font('sans-serif', 25);
+ * fastGradientText('Hello World', 10, textAscent() * 2, RED, YELLOW);
+ * // expected outcome: 'Hello World' with gradient fill from red to yellow
+ *
+ * @example
+ * font('sans-serif', 25, 'bold');
+ * fastGradientText('Hello\nWorld', 10, textAscent() * 4, PURPLE, PINK);
+ * // expected outcome: 'Hello World', bold, with gradient fill from purple to pink in two lines
+ *
+ * @see font
+ */
+fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => {
+    push();
+    if (!string.includes('\n')) {
+        for (let i = 0; i < string.length; i++) {
+            e.fill(e.lerpColor(startColor, endColor, i / (string.length)));
+            e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
+        }
+    } else {
+        const strings = string.split('\n');
+        for (const i in strings) {
+            fastGradientText(strings[i], x, y + i * textAscent(), startColor, endColor);
+        }
+    }
+    pop();
+};
+
+/**
+ * Converts milliseconds to a readable format of duration.
+ *
+ * @link https://www.30secondsofcode.org/js/s/format-duration
+ *
+ * @param {number}  ms  Duration in milliseconds
+ *
+ * @returns {string}  Readable format of duration.
+ *
+ * @example
+ * let martianDay = 88775244;
+ * console.log(formatDuration(martianDay));
+ * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
+ */
+formatDuration = ms => {
+    if (ms < 0) ms = -ms;
+    const time = {
+        day: Math.floor(ms / 86400000),
+        hour: Math.floor(ms / 3600000) % 24,
+        minute: Math.floor(ms / 60000) % 60,
+        second: Math.floor(ms / 1000) % 60,
+        millisecond: Math.floor(ms) % 1000
+    };
+    return Object.entries(time)
+        .filter(val => val[1] !== 0)
+        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
+        .join(', ');
+};
+
+/**
+ * Draws text with multiple colors that are passed in using special syntax.
+ *
+ * @param {string} string
+ * @param {number} x x-coordinate of text
+ * @param {number} y y-coordinate of text
+ *
+ * @example
+ * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
+ * fill(BLUE);
+ * multicoloredText(str, 25, 25);
+ */
+multicoloredText = (string, x = 0, y = e.textAscent()) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    string = string.split('\n');
+    push();
+    e.textAlign(e.LEFT, e.CORNER);
+    for (const i in string) {
+        string[i] = string[i].split(/\[|]/);
+        let splits = 0;
+        for (const j in string[i]) {
+            if (/\d+,\d+,\d+/.test(string[i][j])) {
+                const rgb = string[i][j].split(',');
+                e.fill.apply(e, rgb);
+                delete string[i][j];
+                if (splits === 0) {
+                    string[i][j - 1] += ' ';
+                }
+                splits += 1;
+            } else {
+                const w = e.textWidth(string[i].slice(0, j));
+                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
+            }
+        }
+    }
+    pop();
+};
+
+/**
  * Draws a string with a highlight background.
  *
  * @param {string} string
@@ -228,112 +297,6 @@ lightOrDarkText = backgroundColor => {
 };
 
 /**
- * Converts milliseconds to a readable format of duration.
- *
- * @link https://www.30secondsofcode.org/js/s/format-duration
- *
- * @param {number}  ms  Duration in milliseconds
- *
- * @returns {string}  Readable format of duration.
- *
- * @example
- * let martianDay = 88775244;
- * console.log(formatDuration(martianDay));
- * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
- */
-formatDuration = ms => {
-    if (ms < 0) ms = -ms;
-    const time = {
-        day: Math.floor(ms / 86400000),
-        hour: Math.floor(ms / 3600000) % 24,
-        minute: Math.floor(ms / 60000) % 60,
-        second: Math.floor(ms / 1000) % 60,
-        millisecond: Math.floor(ms) % 1000
-    };
-    return Object.entries(time)
-        .filter(val => val[1] !== 0)
-        .map(([key, val]) => `${val} ${key}${val !== 1 ? 's' : ''}`)
-        .join(', ');
-};
-
-/**
- * Draws text with multiple colors that are passed in using special syntax.
- *
- * @param {string} string
- * @param {number} x x-coordinate of text
- * @param {number} y y-coordinate of text
- *
- * @example
- * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
- * fill(BLUE);
- * multicoloredText(str, 25, 25);
- */
-multicoloredText = (string, x = 0, y = e.textAscent()) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    string = string.split('\n');
-    push();
-    e.textAlign(e.LEFT, e.CORNER);
-    for (const i in string) {
-        string[i] = string[i].split(/\[|]/);
-        let splits = 0;
-        for (const j in string[i]) {
-            if (/\d+,\d+,\d+/.test(string[i][j])) {
-                const rgb = string[i][j].split(',');
-                e.fill.apply(e, rgb);
-                delete string[i][j];
-                if (splits === 0) {
-                    string[i][j - 1] += ' ';
-                }
-                splits += 1;
-            } else {
-                const w = e.textWidth(string[i].slice(0, j));
-                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
-            }
-        }
-    }
-    pop();
-};
-
-/**
- * Returns the singular or plural form of the word based on the input number,
- * using an optional dictionary if supplied.
- *
- * @link https://www.30secondsofcode.org/js/s/pluralize
- *
- * @param {number} value Number of items
- * @param {string} word Word to pluralize
- * @param {string} [plural=word+'s'] Custom pluralized form
- *
- * @example
- * let apples;
- * const printApples = function() {
- *     printf('% %.', apples, pluralize(apples, 'apple'));
- * }
- * apples = 2;
- * printApples();
- * // expected output: '2 apples.'
- * apples = 1;
- * printApples();
- * // expected output: '1 apple.'
- *
- * @example
- * let people = 2;
- * printf('% %.', people, pluralize(people, 'person', 'people'));
- * // expected output: '2 people.'
- *
- * @see printf
- */
-pluralize = (value, word, plural = word + 's') => {
-    const _pluralize = (num, word, plural = word + 's') =>
-        [1, -1].includes(Number(num)) ? word : plural;
-    if (typeof value === 'object')
-        return (num, word) => _pluralize(num, word, value[word]);
-    return _pluralize(value, word, plural);
-};
-
-/**
  * Takes a number and returns it as a string with the correct ordinal indicator
  * suffix.
  *
@@ -393,39 +356,40 @@ outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
 };
 
 /**
- * Draws text underlined.
+ * Returns the singular or plural form of the word based on the input number,
+ * using an optional dictionary if supplied.
  *
- * @param {string} string Text to be underlined
- * @param {number} x x-coordinate value
- * @param {number} y y-coordinate value
- * @param {color} [underlineColor=BLACK] Color of underline
- * @param {number} [underlineWeight] Weight of underline
+ * @link https://www.30secondsofcode.org/js/s/pluralize
  *
- * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25);
+ * @param {number} value Number of items
+ * @param {string} word Word to pluralize
+ * @param {string} [plural=word+'s'] Custom pluralized form
  *
  * @example
- * let str = 'Underlined\nText';
- * fill(BLACK);
- * underlineText(str, 25, 25, RED, 5);
+ * let apples;
+ * const printApples = function() {
+ *     printf('% %.', apples, pluralize(apples, 'apple'));
+ * }
+ * apples = 2;
+ * printApples();
+ * // expected output: '2 apples.'
+ * apples = 1;
+ * printApples();
+ * // expected output: '1 apple.'
+ *
+ * @example
+ * let people = 2;
+ * printf('% %.', people, pluralize(people, 'person', 'people'));
+ * // expected output: '2 people.'
+ *
+ * @see printf
  */
-underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    strings = string.split('\n');
-    push();
-    e.strokeCap(e.SQUARE);
-    e.strokeWeight(underlineWeight);
-    e.stroke(underlineColor);
-    for (const i in strings) {
-        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
-    }
-    e.textAlign(e.LEFT, e.CORNER);
-    e.text(string, x, y);
-    pop();
+pluralize = (value, word, plural = word + 's') => {
+    const _pluralize = (num, word, plural = word + 's') =>
+        [1, -1].includes(Number(num)) ? word : plural;
+    if (typeof value === 'object')
+        return (num, word) => _pluralize(num, word, value[word]);
+    return _pluralize(value, word, plural);
 };
 
 /**
@@ -570,6 +534,42 @@ String.prototype.toTitleCase = function () {
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map(x => x.charAt(0).toUpperCase() + x.slice(1))
         .join(' ');
+};
+
+/**
+ * Draws text underlined.
+ *
+ * @param {string} string Text to be underlined
+ * @param {number} x x-coordinate value
+ * @param {number} y y-coordinate value
+ * @param {color} [underlineColor=BLACK] Color of underline
+ * @param {number} [underlineWeight] Weight of underline
+ *
+ * @example
+ * let str = 'Underlined\nText';
+ * fill(BLACK);
+ * underlineText(str, 25, 25);
+ *
+ * @example
+ * let str = 'Underlined\nText';
+ * fill(BLACK);
+ * underlineText(str, 25, 25, RED, 5);
+ */
+underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, underlineWeight = e.externals.context.font.match(/\d+/)[0] / 12) => {
+    if (!(/\S/).test(string)) {
+        return;
+    }
+    strings = string.split('\n');
+    push();
+    e.strokeCap(e.SQUARE);
+    e.strokeWeight(underlineWeight);
+    e.stroke(underlineColor);
+    for (const i in strings) {
+        e.line(x, y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55), x + e.textWidth(strings[i]), y + (e.textAscent() / 4) + (e.textAscent() * i * 1.55));
+    }
+    e.textAlign(e.LEFT, e.CORNER);
+    e.text(string, x, y);
+    pop();
 };
 
 /**

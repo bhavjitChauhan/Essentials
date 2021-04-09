@@ -8,6 +8,6 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     SHAPE_ESSENTIALS = true;
     if (!_silent_ && !_shape_initialized_) console.info(
         '%cShape Essentials',
-        'font-family:system-ui;font-size:0.75rem;'
+        _console_style_
     );
 }

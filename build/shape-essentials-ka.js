@@ -4,18 +4,18 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   console.error('Shape Essentials depends on the Essentials Core.');
 } else {
   SHAPE_ESSENTIALS = true;
-  if (!_silent_ && !_shape_initialized_) console.info('%cShape Essentials', 'font-family:system-ui;font-size:0.75rem;');
+  if (!_silent_ && !_shape_initialized_) console.info('%cShape Essentials', _console_style_);
 }
-
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
-};
 
 blurRect = function (x, y, width, height, size) {
   if (size <= 0) return;
   size = e.constrain(size, 0, Math.min(width, height));
   e.image(e.get(x, y, width, height), x, y, width / size, height / size);
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
+};
+
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
 };
 
 cylinder = function (x, y, width, height) {
@@ -105,18 +105,18 @@ dottedLine = function (x1, y1, x2, y2) {
   if (endPoint) e.point(x2, y2);
 };
 
-drawShape = function (fn, close, mode) {
-  close = close && e.CLOSE;
-  e.beginShape(mode);
-  fn();
-  e.endShape(close);
-};
-
 edge = function (x, y, length, angle) {
   if (angleMode == 'degrees') angle = e.radians(angle);
   var x2 = x + length * Math.cos(angle);
   var y2 = y + length * Math.sin(angle);
   line(x, y, x2, y2);
+};
+
+drawShape = function (fn, close, mode) {
+  close = close && e.CLOSE;
+  e.beginShape(mode);
+  fn();
+  e.endShape(close);
 };
 
 heart = function (x, y, radius) {
@@ -135,6 +135,12 @@ heart = function (x, y, radius) {
   }, true);
 };
 
+parallelogram = function (ax, ay, bx, by, cx, cy) {
+  var dx = bx - ax;
+  var dy = by - ay;
+  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
+};
+
 polygon = function (x, y, sides, radius, rotation) {
   var _TAU = Math.cos(Math.PI) < 0 ? 2 * Math.PI : 360;
 
@@ -147,12 +153,6 @@ polygon = function (x, y, sides, radius, rotation) {
     }
   }, true);
   pop();
-};
-
-parallelogram = function (ax, ay, bx, by, cx, cy) {
-  var dx = bx - ax;
-  var dy = by - ay;
-  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 rectangle = function (x, y, width) {

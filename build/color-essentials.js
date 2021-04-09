@@ -8,73 +8,9 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     COLOR_ESSENTIALS = true;
     if (!_silent_ && !_color_initialized_) console.info(
         '%cColor Essentials',
-        'font-family:system-ui;font-size:0.75rem;'
+        _console_style_
     );
 }
-
-/**
- * @summary
- * Draws an angular gradient from `startColor` to `endColor` in the form of an
- * ellipse.
- *
- * @description
- * For a step size greater than 1, the function draws triangles of base `step`.
- * Using a step size greater than 1 is faster. It is highly advised to store
- * drawn gradients in images using the `get` function for use in a draw loop.
- * Use the `smooth` function to prevent jagged edges.
- *
- * @param {number} x x-coordinate of the top-left corner the gradient
- * @param {number} y y-coordinate of the top-left corner the gradient
- * @param {number} width width of the gradient
- * @param {number} height height of the gradient
- * @param {color} startColor starting color
- * @param {color} endColor ending color
- * @param {number} [angle=0] start angle of the gradient in degrees
- * @param {number} [step=5] step size
- *
- * @example
- * angularGradient(25, 25, 100, 100, RED, YELLOW);
- * // expected outcome: angular gradient from red to yellow
- *
- * @example
- * angularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
- * // expected outcome: angular gradient from purple to pink rotated 90 degrees
- *
- * @example
- * angularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
- * // expected outcome: angular gradient from green to light blue in strips of thickness 25
- */
-angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
-    angle -= 90;
-    // `atan` could be `asin`. See https://jsbench.me/mmklrhzgra/1 & https://www.khanacademy.org/cs/-/4713637410717696
-    const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
-    push();
-    if (step == 1) {
-        e.strokeWeight(1.5);
-        for (let i = angle; i < angle + 359; i += dTheta) {
-            e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
-            r = e.radians(i);
-            e.line(x + width / 2, y + height / 2,
-                e.map(Math.cos(r), -1, 1, x, x + width),
-                e.map(Math.sin(r), -1, 1, y, y + height));
-        }
-    } else {
-        e.strokeWeight(1);
-        for (let i = angle; i < angle + 359; i += dTheta) {
-            const c = e.lerpColor(startColor, endColor, (i - angle) / 360);
-            e.stroke(c);
-            e.fill(c);
-            r1 = e.radians(i);
-            r2 = e.radians(i - dTheta);
-            e.triangle(x + width / 2, y + height / 2,
-                e.map(Math.cos(r1), -1, 1, x, x + width),
-                e.map(Math.sin(r1), -1, 1, y, y + height),
-                e.map(Math.cos(r2), -1, 1, x, x + width),
-                e.map(Math.sin(r2), -1, 1, y, y + height));
-        }
-    }
-    pop();
-};
 
 /**
  * @summary
@@ -168,34 +104,67 @@ circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step =
 };
 
 /**
- * Converts hex to RGB color type.
+ * @summary
+ * Draws an angular gradient from `startColor` to `endColor` in the form of an
+ * ellipse.
  *
- * @param {string} hex Hex color value, optional `#`; can be shorthand
+ * @description
+ * For a step size greater than 1, the function draws triangles of base `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ * Use the `smooth` function to prevent jagged edges.
  *
- * @returns {color} RGB color value
+ * @param {number} x x-coordinate of the top-left corner the gradient
+ * @param {number} y y-coordinate of the top-left corner the gradient
+ * @param {number} width width of the gradient
+ * @param {number} height height of the gradient
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
  *
  * @example
- * let c = hexToRGB('#fff');
- * println(c);
- * // expected output: -1
- * background(c);
- * // expected outcome: white background
+ * angularGradient(25, 25, 100, 100, RED, YELLOW);
+ * // expected outcome: angular gradient from red to yellow
+ *
+ * @example
+ * angularGradient(150, 25, 100, 100, PURPLE, PINK, 90);
+ * // expected outcome: angular gradient from purple to pink rotated 90 degrees
+ *
+ * @example
+ * angularGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, 0, 25);
+ * // expected outcome: angular gradient from green to light blue in strips of thickness 25
  */
-hexToRGB = hex => {
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    result = result ? result.splice(1).map(function (i) {
-        return parseInt(i, 16);
-    }) : null;
+angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
+    angle -= 90;
+    // `atan` could be `asin`. See https://jsbench.me/mmklrhzgra/1 & https://www.khanacademy.org/cs/-/4713637410717696
+    const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
     push();
-    e.colorMode(e.RGB);
-    result = e.color.apply(e, result);
+    if (step == 1) {
+        e.strokeWeight(1.5);
+        for (let i = angle; i < angle + 359; i += dTheta) {
+            e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
+            r = e.radians(i);
+            e.line(x + width / 2, y + height / 2,
+                e.map(Math.cos(r), -1, 1, x, x + width),
+                e.map(Math.sin(r), -1, 1, y, y + height));
+        }
+    } else {
+        e.strokeWeight(1);
+        for (let i = angle; i < angle + 359; i += dTheta) {
+            const c = e.lerpColor(startColor, endColor, (i - angle) / 360);
+            e.stroke(c);
+            e.fill(c);
+            r1 = e.radians(i);
+            r2 = e.radians(i - dTheta);
+            e.triangle(x + width / 2, y + height / 2,
+                e.map(Math.cos(r1), -1, 1, x, x + width),
+                e.map(Math.sin(r1), -1, 1, y, y + height),
+                e.map(Math.cos(r2), -1, 1, x, x + width),
+                e.map(Math.sin(r2), -1, 1, y, y + height));
+        }
+    }
     pop();
-    return result;
 };
 
 /**
@@ -396,49 +365,34 @@ MAROON = e.color(128, 0, 0);
 TRANSPARENT = e.color(255, 0);
 
 /**
- * Converts HSB to RGB color type.
+ * Converts hex to RGB color type.
  *
- * @param {(number|color)} x Hue value or color
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
+ * @param {string} hex Hex color value, optional `#`; can be shorthand
  *
- * @returns {string}  RGB color value
+ * @returns {color} RGB color value
  *
  * @example
- * let c = HSBToRGB(85, 255, 255);
+ * let c = hexToRGB('#fff');
  * println(c);
- * // expected output: -16711936
+ * // expected output: -1
  * background(c);
- * // expected outcome: green background
+ * // expected outcome: white background
  */
-HSBToRGB = function(x, s, v) {
-    if (arguments.length == 1) {
-        c = x;
-        x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
-    }
-    x /= 255, s /= 255, v /= 255;
-
-    const i = Math.floor(x * 6),
-        f = x * 6 - i,
-        p = v * (1 - s),
-        q = v * (1 - f * s),
-        t = v * (1 - (1 - f) * s);
-
-    let r, g, b;
-    switch (i % 6) {
-        case 0: r = v, g = t, b = p; break;
-        case 1: r = q, g = v, b = p; break;
-        case 2: r = p, g = v, b = t; break;
-        case 3: r = p, g = q, b = v; break;
-        case 4: r = t, g = p, b = v; break;
-        case 5: r = v, g = p, b = q; break;
-    }
-
-    const result = [r, g, b].map(function (i) {
-        return i * 255;
+hexToRGB = hex => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
+        return r + r + g + g + b + b;
     });
 
-    return e.color.apply(e, result);
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    result = result ? result.splice(1).map(function (i) {
+        return parseInt(i, 16);
+    }) : null;
+    push();
+    e.colorMode(e.RGB);
+    result = e.color.apply(e, result);
+    pop();
+    return result;
 };
 
 /**
@@ -574,6 +528,52 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
 };
 
 /**
+ * Converts HSB to RGB color type.
+ *
+ * @param {(number|color)} x Hue value or color
+ * @param {number} [s] Saturation value
+ * @param {number} [v] Brightness value
+ *
+ * @returns {string}  RGB color value
+ *
+ * @example
+ * let c = HSBToRGB(85, 255, 255);
+ * println(c);
+ * // expected output: -16711936
+ * background(c);
+ * // expected outcome: green background
+ */
+HSBToRGB = function(x, s, v) {
+    if (arguments.length == 1) {
+        c = x;
+        x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
+    }
+    x /= 255, s /= 255, v /= 255;
+
+    const i = Math.floor(x * 6),
+        f = x * 6 - i,
+        p = v * (1 - s),
+        q = v * (1 - f * s),
+        t = v * (1 - (1 - f) * s);
+
+    let r, g, b;
+    switch (i % 6) {
+        case 0: r = v, g = t, b = p; break;
+        case 1: r = q, g = v, b = p; break;
+        case 2: r = p, g = v, b = t; break;
+        case 3: r = p, g = q, b = v; break;
+        case 4: r = t, g = p, b = v; break;
+        case 5: r = v, g = p, b = q; break;
+    }
+
+    const result = [r, g, b].map(function (i) {
+        return i * 255;
+    });
+
+    return e.color.apply(e, result);
+};
+
+/**
  * @summary
  * Draws a radial gradient from `startColor` to `endColor` in the form of an
  * ellipse.
@@ -652,6 +652,43 @@ RGBToHex = function(x, g, b) {
 };
 
 /**
+ * Converts hex or RGB to HSB color value.
+ *
+ * @param {(string|color)} x Hex, red or HSB color value
+ * @param {number} [g] Green value
+ * @param {number} [b] Blue value
+ *
+ * @returns {color|array}  RGB color value or RGB values array
+ *
+ * @example
+ * colorMode(HSB);
+ * background(toHSB('fff'));
+ * // expected outcome: white background
+ *
+ * @example
+ * colorMode(HSB);
+ * background(toHSB(255, 0, 0));
+ * // expected outcome: red background
+ *
+ * @example
+ * println(toHSB(-1))
+ * // expected output: [0, 0, 255]
+ */
+toHSB = function() {
+    const args = arguments;
+    if (args.length == 1) {
+        const c = args[0];
+        if (typeof c == 'number') {
+            return [e.hue(c), e.saturation(c), e.brightness(c)];
+        } else {
+            return RGBToHSB.apply(e, toRGB(hexToRGB(c)));
+        }
+    } else if (args.length == 3) {
+        return RGBToHSB.apply(e, args);
+    }
+};
+
+/**
  * Converts RGB to HSB color type.
  *
  * @param {(number|color)} x Red value or color
@@ -702,43 +739,6 @@ RGBToHSB = function(x, g, b) {
     result = e.color.apply(e, result);
     pop();
     return result;
-};
-
-/**
- * Converts hex or RGB to HSB color value.
- *
- * @param {(string|color)} x Hex, red or HSB color value
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
- *
- * @returns {color|array}  RGB color value or RGB values array
- *
- * @example
- * colorMode(HSB);
- * background(toHSB('fff'));
- * // expected outcome: white background
- *
- * @example
- * colorMode(HSB);
- * background(toHSB(255, 0, 0));
- * // expected outcome: red background
- *
- * @example
- * println(toHSB(-1))
- * // expected output: [0, 0, 255]
- */
-toHSB = function() {
-    const args = arguments;
-    if (args.length == 1) {
-        const c = args[0];
-        if (typeof c == 'number') {
-            return [e.hue(c), e.saturation(c), e.brightness(c)];
-        } else {
-            return RGBToHSB.apply(e, toRGB(hexToRGB(c)));
-        }
-    } else if (args.length == 3) {
-        return RGBToHSB.apply(e, args);
-    }
 };
 
 /**

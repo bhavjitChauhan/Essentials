@@ -8,6 +8,6 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     COLOR_ESSENTIALS = true;
     if (!_silent_ && !_color_initialized_) console.info(
         '%cColor Essentials',
-        'font-family:system-ui;font-size:0.75rem;'
+        _console_style_
     );
 }

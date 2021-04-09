@@ -8,19 +8,9 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     SHAPE_ESSENTIALS = true;
     if (!_silent_ && !_shape_initialized_) console.info(
         '%cShape Essentials',
-        'font-family:system-ui;font-size:0.75rem;'
+        _console_style_
     );
 }
-
-/**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
- *
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
- *
- */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
  * Faster blur effect on a rectangular selection.
@@ -37,6 +27,16 @@ blurRect = (x, y, width, height, size) => {
     e.image(e.get(x, y, width, height), x, y, width / size, height / size);
     e.image(e.get(x, y, width / size, height / size), x, y, width, height);
 };
+
+/**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ *
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ *
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
  * Draws a 2D cylinder.
@@ -211,6 +211,35 @@ dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
 };
 
 /**
+ * Draws a line of a given length and at a given angle.
+ *
+ * @param {number} x x-coordinate of start point
+ * @param {number} y y-coordinate of start point
+ * @param {number} length length of line
+ * @param {number} angle rotation of line
+ *
+ * @example
+ * angleMode = 'degrees';
+ * edge(50, 50, 300, 0);
+ * // expected outcome: horizontal line of length 300
+ *
+ * @example
+ * edge(50, 75, 100, 45);
+ * // expected outcome: line of length 100 rotated 45 degrees
+ *
+ * @example
+ * angleMode = 'radians';
+ * edge(200, 75, 100, PI / 4);
+ * // expected outcome: line of length 100 rotated 45 degrees
+ */
+edge = (x, y, length, angle) => {
+    if (angleMode == 'degrees') angle = e.radians(angle);
+    const x2 = x + length * Math.cos(angle);
+    const y2 = y + length * Math.sin(angle);
+    line(x, y, x2, y2);
+};
+
+/**
  * Alias for `beginShape()`/`endShape()`.
  *
  * @param {Function} fn Shape function
@@ -245,35 +274,6 @@ drawShape = (fn, close, mode) => {
 };
 
 /**
- * Draws a line of a given length and at a given angle.
- *
- * @param {number} x x-coordinate of start point
- * @param {number} y y-coordinate of start point
- * @param {number} length length of line
- * @param {number} angle rotation of line
- *
- * @example
- * angleMode = 'degrees';
- * edge(50, 50, 300, 0);
- * // expected outcome: horizontal line of length 300
- *
- * @example
- * edge(50, 75, 100, 45);
- * // expected outcome: line of length 100 rotated 45 degrees
- *
- * @example
- * angleMode = 'radians';
- * edge(200, 75, 100, PI / 4);
- * // expected outcome: line of length 100 rotated 45 degrees
- */
-edge = (x, y, length, angle) => {
-    if (angleMode == 'degrees') angle = e.radians(angle);
-    const x2 = x + length * Math.cos(angle);
-    const y2 = y + length * Math.sin(angle);
-    line(x, y, x2, y2);
-};
-
-/**
  * Draws a heart.
  *
  * @link https://www.khanacademy.org/cs/-/2085250861
@@ -300,6 +300,29 @@ heart = (x, y, radius) => {
         c2x = 2 * x - c2x;
         e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
     }, true);
+};
+
+/**
+ * Draws a parallelogram.
+ *
+ * @link https://www.khanacademy.org/cs/-/4747962019348480
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * parallelogram(50, 50, 200, 50, 100, 100);
+ *
+ * @see rhombus
+ */
+parallelogram = (ax, ay, bx, by, cx, cy) => {
+    const dx = bx - ax;
+    const dy = by - ay;
+    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 /**
@@ -334,29 +357,6 @@ polygon = (x, y, sides, radius, rotation) => {
         }
     }, true);
     pop();
-};
-
-/**
- * Draws a parallelogram.
- *
- * @link https://www.khanacademy.org/cs/-/4747962019348480
- *
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- *
- * @example
- * parallelogram(50, 50, 200, 50, 100, 100);
- *
- * @see rhombus
- */
-parallelogram = (ax, ay, bx, by, cx, cy) => {
-    const dx = bx - ax;
-    const dy = by - ay;
-    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 /**
