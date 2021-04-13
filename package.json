@@ -37,7 +37,7 @@
     "@rollup/plugin-multi-entry": "^4.0.0",
     "chai": "^4.3.4",
     "chalk": "^4.1.0",
-    "concurrently": "^6.0.1",
+    "concurrently": "^6.0.2",
     "docdash": "^1.2.0",
     "eslint": "^7.24.0",
     "husky": "^6.0.0",
