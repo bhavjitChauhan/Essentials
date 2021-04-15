@@ -6,9 +6,9 @@
   "scripts": {
     "lint": "npx eslint src/**",
     "test": "npx karma start karma.config.js",
-    "build:cdn": "npx rollup --config",
+    "build:cdn": "npx rollup --config && node scripts/terser.js",
     "build:ka": "node scripts/babel.js",
-    "build": "npm run build:cdn && npm run build:ka",
+    "build": "npx rollup --config && concurrently \"npm:build:ka\" \"node scripts/terser.js\"",
     "doc:html": "npx jsdoc -c jsdoc.json",
     "doc:md": "concurrently \"npx jsdoc2md essentials.js > internal/Essentials-Documentation.md\" \"node scripts/wiki.js\"",
     "doc:ka": "node scripts/showdown.js",

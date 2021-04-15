@@ -32,14 +32,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-_environment_ = undefined instanceof Processing ? 'CDN' : 'KA';
+_environment_ = this instanceof Processing ? 'CDN' : 'KA';
 _console_style_ = 'font-family:system-ui;font-size:0.75rem;';
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 ESSENTIALS_CORE = true;
 ESSENTIALS_VERSION = '1.1.0';
 ESSENTIALS_ASCII = "\n    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/\n   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/\n  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/\n _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/\n_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/\n\n";
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info("%cESSENTIALS\n%cThe Khan Academy utility library.\n\n".concat(_environment_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), "color:transparent;\nfont-size:3rem;\nbackground-image: url(\"https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true\");\nbackground-position:center;\nbackground-repeat: no-repeat;\nbackground-size:contain;", _console_style_);
+if (!_silent_ && !_core_initialized_) console.info("%cESSENTIALS\n%cThe Khan Academy utility library.\n\n".concat(_environment_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), "color:transparent;\nfont-size:3rem;\nbackground-image: url('https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true');\nbackground-position:center;\nbackground-repeat: no-repeat;\nbackground-size:contain;", _console_style_);
 _eval = eval;
 e = Processing.instances[0];
 var _ref = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
@@ -115,6 +115,12 @@ getColonTime = function () {
   return new Date().toTimeString().slice(0, 8);
 };
 
+inherit = function (subClass, superClass) {
+  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
+};
+
 isFont = function (obj) {
   if (typeof obj != 'object') {
     return false;
@@ -123,10 +129,12 @@ isFont = function (obj) {
   return _.isFunction(obj.getCSSDefinition);
 };
 
-inherit = function (subClass, superClass) {
-  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
+isImage = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isObject(obj.sourceImg);
 };
 
 isSound = function (obj) {
@@ -135,14 +143,6 @@ isSound = function (obj) {
   }
 
   return _.isObject(obj.audio);
-};
-
-isImage = function (obj) {
-  if (typeof obj != 'object') {
-    return false;
-  }
-
-  return _.isObject(obj.sourceImg);
 };
 
 mostPerformant = function (fns) {
@@ -208,59 +208,6 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_color_initialized_) console.info('%cColor Essentials', _console_style_);
 }
 
-circularGradient = function (x, y, width, height, startColor, endColor) {
-  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
-  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
-  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
-  push();
-
-  if (step == 1) {
-    e.strokeWeight(1.5);
-
-    for (var i = angle - 1; i < angle + 180; i += dTheta) {
-      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
-      r = e.radians(i);
-      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
-    }
-
-    for (var _i = angle - 1; _i > angle - 180; _i -= dTheta) {
-      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i - angle) / 180)));
-      r = e.radians(_i);
-      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
-    }
-  } else {
-    e.strokeWeight(1);
-
-    for (var _i2 = angle - 1; _i2 < angle + 180; _i2 += dTheta) {
-      var _c = e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180));
-
-      e.stroke(_c);
-      e.fill(_c);
-      r1 = e.radians(_i2);
-      r2 = e.radians(_i2 - dTheta);
-      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-    }
-
-    r1 = e.radians(angle - 180);
-    r2 = e.radians(angle - 180 - dTheta);
-    e.stroke(endColor);
-    e.fill(endColor);
-    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-
-    for (var _i3 = angle - 1; _i3 > angle - 180; _i3 -= dTheta) {
-      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
-
-      e.stroke(_c2);
-      e.fill(_c2);
-      r1 = e.radians(_i3);
-      r2 = e.radians(_i3 - dTheta);
-      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-    }
-  }
-
-  pop();
-};
-
 angularGradient = function (x, y, width, height, startColor, endColor) {
   var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
   var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
@@ -279,8 +226,61 @@ angularGradient = function (x, y, width, height, startColor, endColor) {
   } else {
     e.strokeWeight(1);
 
-    for (var _i4 = angle; _i4 < angle + 359; _i4 += dTheta) {
-      var _c3 = e.lerpColor(startColor, endColor, (_i4 - angle) / 360);
+    for (var _i = angle; _i < angle + 359; _i += dTheta) {
+      var _c = e.lerpColor(startColor, endColor, (_i - angle) / 360);
+
+      e.stroke(_c);
+      e.fill(_c);
+      r1 = e.radians(_i);
+      r2 = e.radians(_i - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
+  pop();
+};
+
+circularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+  push();
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle - 1; i < angle + 180; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+
+    for (var _i2 = angle - 1; _i2 > angle - 180; _i2 -= dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180)));
+      r = e.radians(_i2);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i3 = angle - 1; _i3 < angle + 180; _i3 += dTheta) {
+      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
+
+      e.stroke(_c2);
+      e.fill(_c2);
+      r1 = e.radians(_i3);
+      r2 = e.radians(_i3 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+
+    r1 = e.radians(angle - 180);
+    r2 = e.radians(angle - 180 - dTheta);
+    e.stroke(endColor);
+    e.fill(endColor);
+    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+
+    for (var _i4 = angle - 1; _i4 > angle - 180; _i4 -= dTheta) {
+      var _c3 = e.lerpColor(startColor, endColor, Math.abs((_i4 - angle) / 180));
 
       e.stroke(_c3);
       e.fill(_c3);
@@ -771,6 +771,29 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_text_initialized_) console.info('%cText Essentials', _console_style_);
 }
 
+fastGradientText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var startColor = arguments.length > 3 ? arguments[3] : undefined;
+  var endColor = arguments.length > 4 ? arguments[4] : undefined;
+  push();
+
+  if (!string.includes('\n')) {
+    for (var i = 0; i < string.length; i++) {
+      e.fill(e.lerpColor(startColor, endColor, i / string.length));
+      e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
+    }
+  } else {
+    var _strings = string.split('\n');
+
+    for (var _i15 in _strings) {
+      fastGradientText(_strings[_i15], x, y + _i15 * textAscent(), startColor, endColor);
+    }
+  }
+
+  pop();
+};
+
 font = function (family) {
   var properties = Array.from(arguments).slice(1);
   properties.push('');
@@ -818,29 +841,6 @@ font = function (family) {
   return _font;
 };
 
-fastGradientText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var startColor = arguments.length > 3 ? arguments[3] : undefined;
-  var endColor = arguments.length > 4 ? arguments[4] : undefined;
-  push();
-
-  if (!string.includes('\n')) {
-    for (var i = 0; i < string.length; i++) {
-      e.fill(e.lerpColor(startColor, endColor, i / string.length));
-      e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
-    }
-  } else {
-    var _strings = string.split('\n');
-
-    for (var _i15 in _strings) {
-      fastGradientText(_strings[_i15], x, y + _i15 * textAscent(), startColor, endColor);
-    }
-  }
-
-  pop();
-};
-
 formatDuration = function (ms) {
   if (ms < 0) ms = -ms;
   var time = {
@@ -885,15 +885,6 @@ highlightText = function (string) {
   }
 };
 
-ordinalSuffix = function (n) {
-  var int = parseInt(n, 10),
-      digits = [int % 10, int % 100],
-      oPattern = [1, 2, 3, 4],
-      ordinals = ['st', 'nd', 'rd', 'th'],
-      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
-};
-
 lightOrDarkText = function (backgroundColor) {
   var r, g, b;
 
@@ -913,20 +904,6 @@ lightOrDarkText = function (backgroundColor) {
   }
 
   return BLACK;
-};
-
-pluralize = function (value, word) {
-  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
-
-  var _pluralize = function (num, word) {
-    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
-    return [1, -1].includes(Number(num)) ? word : plural;
-  };
-
-  if (typeof value === 'object') return function (num, word) {
-    return _pluralize(num, word, value[word]);
-  };
-  return _pluralize(value, word, plural);
 };
 
 multicoloredText = function (string) {
@@ -966,6 +943,15 @@ multicoloredText = function (string) {
   pop();
 };
 
+ordinalSuffix = function (n) {
+  var int = parseInt(n, 10),
+      digits = [int % 10, int % 100],
+      oPattern = [1, 2, 3, 4],
+      ordinals = ['st', 'nd', 'rd', 'th'],
+      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
+};
+
 outlineText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -991,29 +977,18 @@ outlineText = function (string) {
   e.text(string, x, y);
 };
 
-underlineText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
-  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
+pluralize = function (value, word) {
+  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
 
-  if (!/\S/.test(string)) {
-    return;
-  }
+  var _pluralize = function (num, word) {
+    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+    return [1, -1].includes(Number(num)) ? word : plural;
+  };
 
-  strings = string.split('\n');
-  push();
-  e.strokeCap(e.SQUARE);
-  e.strokeWeight(underlineWeight);
-  e.stroke(underlineColor);
-
-  for (var i in strings) {
-    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
-  }
-
-  e.textAlign(e.LEFT, e.CORNER);
-  e.text(string, x, y);
-  pop();
+  if (typeof value === 'object') return function (num, word) {
+    return _pluralize(num, word, value[word]);
+  };
+  return _pluralize(value, word, plural);
 };
 
 String.prototype.format = function () {
@@ -1094,6 +1069,31 @@ String.prototype.toTitleCase = function () {
   }).join(' ');
 };
 
+underlineText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
+  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  strings = string.split('\n');
+  push();
+  e.strokeCap(e.SQUARE);
+  e.strokeWeight(underlineWeight);
+  e.stroke(underlineColor);
+
+  for (var i in strings) {
+    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
+  }
+
+  e.textAlign(e.LEFT, e.CORNER);
+  e.text(string, x, y);
+  pop();
+};
+
 wordWrap = function (str, max) {
   var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '\n';
   return str.replace(new RegExp("(?![^\\n]{1,".concat(max, "}$)([^\\n]{1,").concat(max, "})\\s"), 'g'), '$1' + br);
@@ -1117,22 +1117,6 @@ blurRect = function (x, y, width, height, size) {
 
 circle = function (x, y, radius) {
   return e.ellipse(x, y, radius, radius);
-};
-
-dashedLine = function (x1, y1, x2, y2) {
-  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
-  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
-  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
-  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-  var length = e.dist(x1, y1, x2, y2);
-  var i = 0;
-
-  for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
-    e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
-  }
-
-  if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
-  if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
 };
 
 cylinder = function (x, y, width, height) {
@@ -1164,6 +1148,22 @@ cylinder = function (x, y, width, height) {
   }
 
   pop();
+};
+
+dashedLine = function (x1, y1, x2, y2) {
+  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
+  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
+  var length = e.dist(x1, y1, x2, y2);
+  var i = 0;
+
+  for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
+    e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
+  }
+
+  if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
+  if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
 };
 
 donut = function (x, y, majorDiameter, minorDiameter) {
@@ -1216,6 +1216,13 @@ drawShape = function (fn, close, mode) {
   e.endShape(close);
 };
 
+edge = function (x, y, length, angle) {
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  line(x, y, x2, y2);
+};
+
 heart = function (x, y, radius) {
   var ay = y - 2 * radius / 5,
       by = y + radius,
@@ -1230,13 +1237,6 @@ heart = function (x, y, radius) {
     c2x = 2 * x - c2x;
     e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
   }, true);
-};
-
-edge = function (x, y, length, angle) {
-  if (angleMode == 'degrees') angle = e.radians(angle);
-  var x2 = x + length * Math.cos(angle);
-  var y2 = y + length * Math.sin(angle);
-  line(x, y, x2, y2);
 };
 
 parallelogram = function (ax, ay, bx, by, cx, cy) {

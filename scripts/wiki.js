@@ -1,4 +1,4 @@
-const { existsSync, readdir, writeFile } = require('fs');
+const { existsSync, mkdirSync, readdir, writeFile } = require('fs');
 
 if (!existsSync('internal')) {
     mkdirSync('internal');

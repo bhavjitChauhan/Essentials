@@ -39,6 +39,44 @@ blurRect = (x, y, width, height, size) => {
 circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
+ * Draws a 2D cylinder.
+ *
+ * @link https://www.khanacademy.org/cs/-/5157537806548992
+ *
+ * @param {number} x x-coordinate of cylinder
+ * @param {number} y y-coordinate of cylinder
+ * @param {number} width
+ * @param {number} height
+ *
+ * @example
+ * cylinder(100, 100, 100, 50);
+ */
+cylinder = (x, y, width, height) => {
+    width = Math.abs(width);
+    height = Math.abs(height);
+    push();
+    e.translate(x, y);
+    if (height > width) {
+        const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
+        e.rotate(_TAU / 4);
+        cylinder(0, 0, height, width);
+    } else {
+        const r = height / 2;
+        const z = (width - height) / 2;
+        const central = 4 / 3 * (Math.sqrt(2) - 1) * r;
+        drawShape(() => {
+            e.vertex(z, -r);
+            e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
+            e.bezierVertex(z + r, central, z + central, r, z, r);
+            e.vertex(-z, r);
+            e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
+            e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
+        }, true);
+    }
+    pop();
+};
+
+/**
  * @summary
  * Draws a dashed line.
  *
@@ -87,44 +125,6 @@ dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, end
     }
     if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
     if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
-};
-
-/**
- * Draws a 2D cylinder.
- *
- * @link https://www.khanacademy.org/cs/-/5157537806548992
- *
- * @param {number} x x-coordinate of cylinder
- * @param {number} y y-coordinate of cylinder
- * @param {number} width
- * @param {number} height
- *
- * @example
- * cylinder(100, 100, 100, 50);
- */
-cylinder = (x, y, width, height) => {
-    width = Math.abs(width);
-    height = Math.abs(height);
-    push();
-    e.translate(x, y);
-    if (height > width) {
-        const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
-        e.rotate(_TAU / 4);
-        cylinder(0, 0, height, width);
-    } else {
-        const r = height / 2;
-        const z = (width - height) / 2;
-        const central = 4 / 3 * (Math.sqrt(2) - 1) * r;
-        drawShape(() => {
-            e.vertex(z, -r);
-            e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
-            e.bezierVertex(z + r, central, z + central, r, z, r);
-            e.vertex(-z, r);
-            e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
-            e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
-        }, true);
-    }
-    pop();
 };
 
 /**
@@ -245,35 +245,6 @@ drawShape = (fn, close, mode) => {
 };
 
 /**
- * Draws a heart.
- *
- * @link https://www.khanacademy.org/cs/-/2085250861
- *
- * @param {number} x x-coordinate of the heart
- * @param {number} y y-coordinate of the heart
- * @param {number} radius
- *
- * @example
- * heart(100, 100, 50);
- */
-heart = (x, y, radius) => {
-    const ay = y - 2 * radius / 5,
-        by = y + radius,
-        c1y = y - 6 * radius / 5,
-        c2y = y - 2 * radius / 5;
-    let c1x = x + radius / 2,
-        c2x = x + 9 * radius / 5;
-
-    drawShape(() => {
-        e.vertex(x, ay);
-        e.bezierVertex(c1x, c1y, c2x, c2y, x, by);
-        c1x = 2 * x - c1x;
-        c2x = 2 * x - c2x;
-        e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
-    }, true);
-};
-
-/**
  * Draws a line of a given length and at a given angle.
  *
  * @param {number} x x-coordinate of start point
@@ -300,6 +271,35 @@ edge = (x, y, length, angle) => {
     const x2 = x + length * Math.cos(angle);
     const y2 = y + length * Math.sin(angle);
     line(x, y, x2, y2);
+};
+
+/**
+ * Draws a heart.
+ *
+ * @link https://www.khanacademy.org/cs/-/2085250861
+ *
+ * @param {number} x x-coordinate of the heart
+ * @param {number} y y-coordinate of the heart
+ * @param {number} radius
+ *
+ * @example
+ * heart(100, 100, 50);
+ */
+heart = (x, y, radius) => {
+    const ay = y - 2 * radius / 5,
+        by = y + radius,
+        c1y = y - 6 * radius / 5,
+        c2y = y - 2 * radius / 5;
+    let c1x = x + radius / 2,
+        c2x = x + 9 * radius / 5;
+
+    drawShape(() => {
+        e.vertex(x, ay);
+        e.bezierVertex(c1x, c1y, c2x, c2y, x, by);
+        c1x = 2 * x - c1x;
+        c2x = 2 * x - c2x;
+        e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
+    }, true);
 };
 
 /**

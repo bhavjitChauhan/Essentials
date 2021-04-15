@@ -24,14 +24,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-_environment_ = undefined instanceof Processing ? 'CDN' : 'KA';
+_environment_ = this instanceof Processing ? 'CDN' : 'KA';
 _console_style_ = 'font-family:system-ui;font-size:0.75rem;';
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 ESSENTIALS_CORE = true;
 ESSENTIALS_VERSION = '1.1.0';
 ESSENTIALS_ASCII = "\n    _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/\n   _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/\n  _/_/_/      _/_/      _/_/    _/_/_/    _/  _/  _/      _/        _/    _/_/_/_/  _/          _/_/\n _/              _/        _/  _/        _/    _/_/      _/        _/    _/    _/  _/              _/\n_/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/  _/_/_/_/  _/_/_/\n\n";
 _silent_ = typeof _silent_ !== 'undefined' && _silent_;
-if (!_silent_ && !_core_initialized_) console.info("%cESSENTIALS\n%cThe Khan Academy utility library.\n\n".concat(_environment_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), "color:transparent;\nfont-size:3rem;\nbackground-image: url(\"https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true\");\nbackground-position:center;\nbackground-repeat: no-repeat;\nbackground-size:contain;", _console_style_);
+if (!_silent_ && !_core_initialized_) console.info("%cESSENTIALS\n%cThe Khan Academy utility library.\n\n".concat(_environment_, " Build\nVersion ").concat(ESSENTIALS_VERSION, "\nCopyright \xA9 2021 Bhavjit Chauhan\nhttps://github.com/bhavjitChauhan/Essentials"), "color:transparent;\nfont-size:3rem;\nbackground-image: url('https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true');\nbackground-position:center;\nbackground-repeat: no-repeat;\nbackground-size:contain;", _console_style_);
 _eval = eval;
 e = Processing.instances[0];
 var _ref = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
@@ -107,6 +107,12 @@ getColonTime = function () {
   return new Date().toTimeString().slice(0, 8);
 };
 
+inherit = function (subClass, superClass) {
+  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
+};
+
 isFont = function (obj) {
   if (typeof obj != 'object') {
     return false;
@@ -115,10 +121,12 @@ isFont = function (obj) {
   return _.isFunction(obj.getCSSDefinition);
 };
 
-inherit = function (subClass, superClass) {
-  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
+isImage = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isObject(obj.sourceImg);
 };
 
 isSound = function (obj) {
@@ -127,14 +135,6 @@ isSound = function (obj) {
   }
 
   return _.isObject(obj.audio);
-};
-
-isImage = function (obj) {
-  if (typeof obj != 'object') {
-    return false;
-  }
-
-  return _.isObject(obj.sourceImg);
 };
 
 mostPerformant = function (fns) {

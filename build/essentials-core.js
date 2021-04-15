@@ -9,7 +9,7 @@
  * @author Bhavjit Chauhan
  */
 
-_environment_ = undefined instanceof Processing ? 'CDN' : 'KA';
+_environment_ = this instanceof Processing ? 'CDN' : 'KA';
 _console_style_ = 'font-family:system-ui;font-size:0.75rem;';
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 
@@ -35,7 +35,7 @@ Copyright \xa9 2021 Bhavjit Chauhan
 https://github.com/bhavjitChauhan/Essentials`,
     `color:transparent;
 font-size:3rem;
-background-image: url("https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true");
+background-image: url('https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true');
 background-position:center;
 background-repeat: no-repeat;
 background-size:contain;`,
@@ -251,30 +251,6 @@ getColonTime = function () {
 };
 
 /**
- * Checks if object is a Khan Academy font object.
- * 
- * @param {Object} obj
- * 
- * @example
- * let f = createFont('Arial');
- * println(isFont(f));
- * // expected output: true 
- * 
- * @example
- * let f = font('monospace');
- * println(isFont(f));
- * // expected output: true
- * 
- * @see font
- */
-isFont = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isFunction(obj.getCSSDefinition);
-};
-
-/**
  * Efficiently inherits properties from the parent class to the child class.
  *
  * @param {Function} subClass Class to be inherited to
@@ -307,20 +283,27 @@ inherit = (subClass, superClass) => {
 };
 
 /**
- * Checks if object is a Khan Academy sound object.
- *
+ * Checks if object is a Khan Academy font object.
+ * 
  * @param {Object} obj
- *
+ * 
  * @example
- * let s = getSound("retro/boom1");
- * println(isSound(s));
+ * let f = createFont('Arial');
+ * println(isFont(f));
+ * // expected output: true 
+ * 
+ * @example
+ * let f = font('monospace');
+ * println(isFont(f));
  * // expected output: true
+ * 
+ * @see font
  */
-isSound = obj => {
+isFont = obj => {
     if (typeof obj != 'object') {
         return false;
     }
-    return _.isObject(obj.audio);
+    return _.isFunction(obj.getCSSDefinition);
 };
 
 /**
@@ -338,6 +321,23 @@ isImage = obj => {
         return false;
     }
     return _.isObject(obj.sourceImg);
+};
+
+/**
+ * Checks if object is a Khan Academy sound object.
+ *
+ * @param {Object} obj
+ *
+ * @example
+ * let s = getSound("retro/boom1");
+ * println(isSound(s));
+ * // expected output: true
+ */
+isSound = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isObject(obj.audio);
 };
 
 /**

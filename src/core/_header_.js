@@ -35,7 +35,7 @@ Copyright \xa9 2021 Bhavjit Chauhan
 https://github.com/bhavjitChauhan/Essentials`,
     `color:transparent;
 font-size:3rem;
-background-image: url("https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true");
+background-image: url('https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true');
 background-position:center;
 background-repeat: no-repeat;
 background-size:contain;`,

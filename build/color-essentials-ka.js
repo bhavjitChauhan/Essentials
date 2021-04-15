@@ -7,59 +7,6 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_color_initialized_) console.info('%cColor Essentials', _console_style_);
 }
 
-circularGradient = function (x, y, width, height, startColor, endColor) {
-  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
-  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
-  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
-  push();
-
-  if (step == 1) {
-    e.strokeWeight(1.5);
-
-    for (var i = angle - 1; i < angle + 180; i += dTheta) {
-      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
-      r = e.radians(i);
-      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
-    }
-
-    for (var _i = angle - 1; _i > angle - 180; _i -= dTheta) {
-      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i - angle) / 180)));
-      r = e.radians(_i);
-      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
-    }
-  } else {
-    e.strokeWeight(1);
-
-    for (var _i2 = angle - 1; _i2 < angle + 180; _i2 += dTheta) {
-      var _c = e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180));
-
-      e.stroke(_c);
-      e.fill(_c);
-      r1 = e.radians(_i2);
-      r2 = e.radians(_i2 - dTheta);
-      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-    }
-
-    r1 = e.radians(angle - 180);
-    r2 = e.radians(angle - 180 - dTheta);
-    e.stroke(endColor);
-    e.fill(endColor);
-    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-
-    for (var _i3 = angle - 1; _i3 > angle - 180; _i3 -= dTheta) {
-      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
-
-      e.stroke(_c2);
-      e.fill(_c2);
-      r1 = e.radians(_i3);
-      r2 = e.radians(_i3 - dTheta);
-      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
-    }
-  }
-
-  pop();
-};
-
 angularGradient = function (x, y, width, height, startColor, endColor) {
   var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
   var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
@@ -78,8 +25,61 @@ angularGradient = function (x, y, width, height, startColor, endColor) {
   } else {
     e.strokeWeight(1);
 
-    for (var _i4 = angle; _i4 < angle + 359; _i4 += dTheta) {
-      var _c3 = e.lerpColor(startColor, endColor, (_i4 - angle) / 360);
+    for (var _i = angle; _i < angle + 359; _i += dTheta) {
+      var _c = e.lerpColor(startColor, endColor, (_i - angle) / 360);
+
+      e.stroke(_c);
+      e.fill(_c);
+      r1 = e.radians(_i);
+      r2 = e.radians(_i - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+  }
+
+  pop();
+};
+
+circularGradient = function (x, y, width, height, startColor, endColor) {
+  var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var step = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 5;
+  var dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
+  push();
+
+  if (step == 1) {
+    e.strokeWeight(1.5);
+
+    for (var i = angle - 1; i < angle + 180; i += dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
+      r = e.radians(i);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+
+    for (var _i2 = angle - 1; _i2 > angle - 180; _i2 -= dTheta) {
+      e.stroke(e.lerpColor(startColor, endColor, Math.abs((_i2 - angle) / 180)));
+      r = e.radians(_i2);
+      e.line(x + width / 2, y + height / 2, e.map(Math.cos(r), -1, 1, x, x + width), e.map(Math.sin(r), -1, 1, y, y + height));
+    }
+  } else {
+    e.strokeWeight(1);
+
+    for (var _i3 = angle - 1; _i3 < angle + 180; _i3 += dTheta) {
+      var _c2 = e.lerpColor(startColor, endColor, Math.abs((_i3 - angle) / 180));
+
+      e.stroke(_c2);
+      e.fill(_c2);
+      r1 = e.radians(_i3);
+      r2 = e.radians(_i3 - dTheta);
+      e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+    }
+
+    r1 = e.radians(angle - 180);
+    r2 = e.radians(angle - 180 - dTheta);
+    e.stroke(endColor);
+    e.fill(endColor);
+    e.triangle(x + width / 2, y + height / 2, e.map(Math.cos(r1), -1, 1, x, x + width), e.map(Math.sin(r1), -1, 1, y, y + height), e.map(Math.cos(r2), -1, 1, x, x + width), e.map(Math.sin(r2), -1, 1, y, y + height));
+
+    for (var _i4 = angle - 1; _i4 > angle - 180; _i4 -= dTheta) {
+      var _c3 = e.lerpColor(startColor, endColor, Math.abs((_i4 - angle) / 180));
 
       e.stroke(_c3);
       e.fill(_c3);

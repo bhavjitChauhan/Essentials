@@ -29,6 +29,29 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_text_initialized_) console.info('%cText Essentials', _console_style_);
 }
 
+fastGradientText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var startColor = arguments.length > 3 ? arguments[3] : undefined;
+  var endColor = arguments.length > 4 ? arguments[4] : undefined;
+  push();
+
+  if (!string.includes('\n')) {
+    for (var i = 0; i < string.length; i++) {
+      e.fill(e.lerpColor(startColor, endColor, i / string.length));
+      e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
+    }
+  } else {
+    var _strings = string.split('\n');
+
+    for (var _i in _strings) {
+      fastGradientText(_strings[_i], x, y + _i * textAscent(), startColor, endColor);
+    }
+  }
+
+  pop();
+};
+
 font = function (family) {
   var properties = Array.from(arguments).slice(1);
   properties.push('');
@@ -76,29 +99,6 @@ font = function (family) {
   return _font;
 };
 
-fastGradientText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var startColor = arguments.length > 3 ? arguments[3] : undefined;
-  var endColor = arguments.length > 4 ? arguments[4] : undefined;
-  push();
-
-  if (!string.includes('\n')) {
-    for (var i = 0; i < string.length; i++) {
-      e.fill(e.lerpColor(startColor, endColor, i / string.length));
-      e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
-    }
-  } else {
-    var _strings = string.split('\n');
-
-    for (var _i in _strings) {
-      fastGradientText(_strings[_i], x, y + _i * textAscent(), startColor, endColor);
-    }
-  }
-
-  pop();
-};
-
 formatDuration = function (ms) {
   if (ms < 0) ms = -ms;
   var time = {
@@ -143,15 +143,6 @@ highlightText = function (string) {
   }
 };
 
-ordinalSuffix = function (n) {
-  var int = parseInt(n, 10),
-      digits = [int % 10, int % 100],
-      oPattern = [1, 2, 3, 4],
-      ordinals = ['st', 'nd', 'rd', 'th'],
-      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
-};
-
 lightOrDarkText = function (backgroundColor) {
   var r, g, b;
 
@@ -171,20 +162,6 @@ lightOrDarkText = function (backgroundColor) {
   }
 
   return BLACK;
-};
-
-pluralize = function (value, word) {
-  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
-
-  var _pluralize = function (num, word) {
-    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
-    return [1, -1].includes(Number(num)) ? word : plural;
-  };
-
-  if (typeof value === 'object') return function (num, word) {
-    return _pluralize(num, word, value[word]);
-  };
-  return _pluralize(value, word, plural);
 };
 
 multicoloredText = function (string) {
@@ -224,6 +201,15 @@ multicoloredText = function (string) {
   pop();
 };
 
+ordinalSuffix = function (n) {
+  var int = parseInt(n, 10),
+      digits = [int % 10, int % 100],
+      oPattern = [1, 2, 3, 4],
+      ordinals = ['st', 'nd', 'rd', 'th'],
+      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+  return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
+};
+
 outlineText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -249,29 +235,18 @@ outlineText = function (string) {
   e.text(string, x, y);
 };
 
-underlineText = function (string) {
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
-  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
-  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
+pluralize = function (value, word) {
+  var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
 
-  if (!/\S/.test(string)) {
-    return;
-  }
+  var _pluralize = function (num, word) {
+    var plural = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : word + 's';
+    return [1, -1].includes(Number(num)) ? word : plural;
+  };
 
-  strings = string.split('\n');
-  push();
-  e.strokeCap(e.SQUARE);
-  e.strokeWeight(underlineWeight);
-  e.stroke(underlineColor);
-
-  for (var i in strings) {
-    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
-  }
-
-  e.textAlign(e.LEFT, e.CORNER);
-  e.text(string, x, y);
-  pop();
+  if (typeof value === 'object') return function (num, word) {
+    return _pluralize(num, word, value[word]);
+  };
+  return _pluralize(value, word, plural);
 };
 
 String.prototype.format = function () {
@@ -350,6 +325,31 @@ String.prototype.toTitleCase = function () {
   return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.charAt(0).toUpperCase() + x.slice(1);
   }).join(' ');
+};
+
+underlineText = function (string) {
+  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
+  var underlineColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BLACK;
+  var underlineWeight = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : e.externals.context.font.match(/\d+/)[0] / 12;
+
+  if (!/\S/.test(string)) {
+    return;
+  }
+
+  strings = string.split('\n');
+  push();
+  e.strokeCap(e.SQUARE);
+  e.strokeWeight(underlineWeight);
+  e.stroke(underlineColor);
+
+  for (var i in strings) {
+    e.line(x, y + e.textAscent() / 4 + e.textAscent() * i * 1.55, x + e.textWidth(strings[i]), y + e.textAscent() / 4 + e.textAscent() * i * 1.55);
+  }
+
+  e.textAlign(e.LEFT, e.CORNER);
+  e.text(string, x, y);
+  pop();
 };
 
 wordWrap = function (str, max) {
