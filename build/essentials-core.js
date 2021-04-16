@@ -283,6 +283,23 @@ inherit = (subClass, superClass) => {
 };
 
 /**
+ * Checks if object is a Khan Academy image object.
+ *
+ * @param {Object} obj
+ *
+ * @example
+ * let i = getImage("avatars/leaf-green");
+ * println(isImage(i));
+ * // expected output: true
+ */
+isImage = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isObject(obj.sourceImg);
+};
+
+/**
  * Checks if object is a Khan Academy font object.
  * 
  * @param {Object} obj
@@ -304,23 +321,6 @@ isFont = obj => {
         return false;
     }
     return _.isFunction(obj.getCSSDefinition);
-};
-
-/**
- * Checks if object is a Khan Academy image object.
- *
- * @param {Object} obj
- *
- * @example
- * let i = getImage("avatars/leaf-green");
- * println(isImage(i));
- * // expected output: true
- */
-isImage = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.sourceImg);
 };
 
 /**
@@ -424,6 +424,22 @@ printf = function(string) {
 };
 
 /**
+ * Generates a random integer in a given range.
+ *
+ * @param {number} [min=0] Minimum value
+ * @param {number} max Maximum value
+ *
+ * @returns {number} Generated integer
+ *
+ * @example
+ * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
+ *
+ * @example
+ * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
+ */
+randomInt = (min, max) => _.random(min, max);
+
+/**
  * Equivalent to using
  * [pushMatrix]{@link http://processingjs.org/reference/pushMatrix_/} and
  * [pushStyle]{@link http://processingjs.org/reference/pushStyle_/}.
@@ -443,22 +459,6 @@ push = () => {
     e.pushMatrix();
     e.pushStyle();
 };
-
-/**
- * Generates a random integer in a given range.
- *
- * @param {number} [min=0] Minimum value
- * @param {number} max Maximum value
- *
- * @returns {number} Generated integer
- *
- * @example
- * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
- *
- * @example
- * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
- */
-randomInt = (min, max) => _.random(min, max);
 
 /**
  * Shows image of graphics created with `createGraphics`.

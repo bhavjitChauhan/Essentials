@@ -31,6 +31,7 @@
     "@babel/plugin-transform-arrow-functions": "^7.13.0",
     "@babel/plugin-transform-block-scoping": "^7.12.13",
     "@babel/plugin-transform-destructuring": "^7.13.0",
+    "@babel/plugin-transform-exponentiation-operator": "^7.12.13",
     "@babel/plugin-transform-parameters": "^7.13.0",
     "@babel/plugin-transform-spread": "^7.13.0",
     "@babel/plugin-transform-template-literals": "^7.13.0",

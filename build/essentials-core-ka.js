@@ -113,20 +113,20 @@ inherit = function (subClass, superClass) {
   if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
 };
 
-isFont = function (obj) {
-  if (typeof obj != 'object') {
-    return false;
-  }
-
-  return _.isFunction(obj.getCSSDefinition);
-};
-
 isImage = function (obj) {
   if (typeof obj != 'object') {
     return false;
   }
 
   return _.isObject(obj.sourceImg);
+};
+
+isFont = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isFunction(obj.getCSSDefinition);
 };
 
 isSound = function (obj) {
@@ -167,13 +167,13 @@ printf = function (string) {
   e.println(string);
 };
 
+randomInt = function (min, max) {
+  return _.random(min, max);
+};
+
 push = function () {
   e.pushMatrix();
   e.pushStyle();
-};
-
-randomInt = function (min, max) {
-  return _.random(min, max);
 };
 
 showGraphics = function (x, y, width, height, fn) {

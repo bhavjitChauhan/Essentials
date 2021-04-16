@@ -37,8 +37,20 @@
                             >
                         </li>
                         <li data-type="method">
+                            <a
+                                href="module-Color.html#~angularGradientBackground"
+                                >angularGradientBackground</a
+                            >
+                        </li>
+                        <li data-type="method">
                             <a href="module-Color.html#~circularGradient"
                                 >circularGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a
+                                href="module-Color.html#~circularGradientBackground"
+                                >circularGradientBackground</a
                             >
                         </li>
                         <li data-type="method">
@@ -53,8 +65,20 @@
                             >
                         </li>
                         <li data-type="method">
+                            <a
+                                href="module-Color.html#~linearGradientBackground"
+                                >linearGradientBackground</a
+                            >
+                        </li>
+                        <li data-type="method">
                             <a href="module-Color.html#~radialGradient"
                                 >radialGradient</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a
+                                href="module-Color.html#~radialGradientBackground"
+                                >radialGradientBackground</a
                             >
                         </li>
                         <li data-type="method">
@@ -506,6 +530,23 @@ inherit = (subClass, superClass) => {
 };
 
 /**
+ * Checks if object is a Khan Academy image object.
+ *
+ * @param {Object} obj
+ *
+ * @example
+ * let i = getImage("avatars/leaf-green");
+ * println(isImage(i));
+ * // expected output: true
+ */
+isImage = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isObject(obj.sourceImg);
+};
+
+/**
  * Checks if object is a Khan Academy font object.
  * 
  * @param {Object} obj
@@ -527,23 +568,6 @@ isFont = obj => {
         return false;
     }
     return _.isFunction(obj.getCSSDefinition);
-};
-
-/**
- * Checks if object is a Khan Academy image object.
- *
- * @param {Object} obj
- *
- * @example
- * let i = getImage("avatars/leaf-green");
- * println(isImage(i));
- * // expected output: true
- */
-isImage = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.sourceImg);
 };
 
 /**
@@ -647,6 +671,22 @@ printf = function(string) {
 };
 
 /**
+ * Generates a random integer in a given range.
+ *
+ * @param {number} [min=0] Minimum value
+ * @param {number} max Maximum value
+ *
+ * @returns {number} Generated integer
+ *
+ * @example
+ * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
+ *
+ * @example
+ * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
+ */
+randomInt = (min, max) => _.random(min, max);
+
+/**
  * Equivalent to using
  * [pushMatrix]{@link http://processingjs.org/reference/pushMatrix_/} and
  * [pushStyle]{@link http://processingjs.org/reference/pushStyle_/}.
@@ -666,22 +706,6 @@ push = () => {
     e.pushMatrix();
     e.pushStyle();
 };
-
-/**
- * Generates a random integer in a given range.
- *
- * @param {number} [min=0] Minimum value
- * @param {number} max Maximum value
- *
- * @returns {number} Generated integer
- *
- * @example
- * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
- *
- * @example
- * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
- */
-randomInt = (min, max) => _.random(min, max);
 
 /**
  * Shows image of graphics created with `createGraphics`.
@@ -753,6 +777,106 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
         _console_style_
     );
 }
+
+/**
+ * @summary
+ * Alias for `linearGradient` that draws a linear gradient from `startColor` to
+ * `endColor` in the form of a rectangle filling the entire canvas.
+ *
+ * @description
+ * For a step size greater than 1, the function draws rectangles of width
+ * `step`. Using a step size greater than 1 is faster for all but diagonal
+ * gradients. It is highly advised to store drawn gradients in images using the
+ * `get` function for use in a draw loop.
+ *
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param
+ * {LEFT|RIGHT|TOP|UP|BOTTOM|DOWN|TOP_LEFT|TOP_RIGHT|BOTTOM_RIGHT|BOTTOM_LEFT}
+ * [direction=RIGHT] direction of gradient
+ * @param {number} [step=5] step size
+ *
+ * @see linearGradient
+ */
+linearGradientBackground = (startColor, endColor, direction = RIGHT, step = 5) => linearGradient(0, 0, WIDTH, HEIGHT, startColor, endColor, direction, step);
+
+/**
+ * @summary
+ * Alias for `radialGradient` that draws a radial gradient from `startColor` to
+ * `endColor` in the form of an ellipse filling the entire canvas.
+ *
+ * @description
+ * For a step size greater than 1, the function draws ellipses of width `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ *
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [step=5] step size
+ *
+ * @see radialGradient
+ */
+radialGradientBackground = (startColor, endColor, step = 5) => {
+    const DIAGONAL = Math.sqrt(Math.max(WIDTH, HEIGHT) ** 2 * 2);
+    radialGradient(HALF_WIDTH, HALF_HEIGHT, DIAGONAL, DIAGONAL, startColor, endColor, step);
+};
+
+/**
+ * @summary
+ * Alias for `angularGradient` that draws an angular gradient from `startColor`
+ * to `endColor` in the form of an ellipse filling the entire canvas.
+ *
+ * @description
+ * For a step size greater than 1, the function draws triangles of base `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ * Use the `smooth` function to prevent jagged edges.
+ *
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
+ *
+ * @see angularGradient
+ */
+angularGradientBackground = (startColor, endColor, angle = 0, step = 5) => {
+    const DIAGONAL = Math.sqrt(Math.max(WIDTH, HEIGHT) ** 2 * 2);
+    angularGradient(
+        (WIDTH - DIAGONAL) / 2,
+        (HEIGHT - DIAGONAL) / 2,
+        DIAGONAL,
+        DIAGONAL,
+        startColor, endColor, angle, step
+    );
+};
+
+/**
+ * @summary
+ * Alias for `circularGradient` that draws an circular gradient from
+ * `startColor` to `endColor` in the form of an ellipse filling the entire
+ * canvas.
+ *
+ * @description
+ * For a step size greater than 1, the function draws triangles of base `step`.
+ * Using a step size greater than 1 is faster. It is highly advised to store
+ * drawn gradients in images using the `get` function for use in a draw loop.
+ * Use the `smooth` function to prevent jagged edges.
+ *
+ * @param {color} startColor starting color
+ * @param {color} endColor ending color
+ * @param {number} [angle=0] start angle of the gradient in degrees
+ * @param {number} [step=5] step size
+ */
+circularGradientBackground = (startColor, endColor, angle = 0, step = 5) => {
+    const DIAGONAL = Math.sqrt(Math.max(WIDTH, HEIGHT) ** 2 * 2);
+    circularGradient(
+        (WIDTH - DIAGONAL) / 2,
+        (HEIGHT - DIAGONAL) / 2,
+        DIAGONAL,
+        DIAGONAL,
+        startColor, endColor, angle, step
+    );
+};
 
 /**
  * @summary
@@ -2660,8 +2784,8 @@ trapezoid = (x, y, height, topBase, bottomBase) => {
 
         <footer>
             Documentation generated by
-            <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Apr
-            14 2021 20:26:07 GMT-0700 (Pacific Daylight Time) using the
+            <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Thu Apr
+            15 2021 20:35:32 GMT-0700 (Pacific Daylight Time) using the
             <a href="https://github.com/clenemt/docdash">docdash</a> theme.
         </footer>
 

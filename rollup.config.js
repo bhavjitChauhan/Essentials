@@ -11,7 +11,7 @@ export default [{
     plugins: [multi()]
 }, {
     context: 'this',
-    input: ['src/color/_header_.js', 'src/color/*.js'],
+    input: ['src/color/_header_.js', 'src/color/_aliases_.js', 'src/color/*.js'],
     output: {
         file: `${dir}/color-essentials.js`
     },

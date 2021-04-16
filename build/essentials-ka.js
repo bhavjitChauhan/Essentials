@@ -121,20 +121,20 @@ inherit = function (subClass, superClass) {
   if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
 };
 
-isFont = function (obj) {
-  if (typeof obj != 'object') {
-    return false;
-  }
-
-  return _.isFunction(obj.getCSSDefinition);
-};
-
 isImage = function (obj) {
   if (typeof obj != 'object') {
     return false;
   }
 
   return _.isObject(obj.sourceImg);
+};
+
+isFont = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isFunction(obj.getCSSDefinition);
 };
 
 isSound = function (obj) {
@@ -175,13 +175,13 @@ printf = function (string) {
   e.println(string);
 };
 
+randomInt = function (min, max) {
+  return _.random(min, max);
+};
+
 push = function () {
   e.pushMatrix();
   e.pushStyle();
-};
-
-randomInt = function (min, max) {
-  return _.random(min, max);
 };
 
 showGraphics = function (x, y, width, height, fn) {
@@ -207,6 +207,32 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   COLOR_ESSENTIALS = true;
   if (!_silent_ && !_color_initialized_) console.info('%cColor Essentials', _console_style_);
 }
+
+linearGradientBackground = function (startColor, endColor) {
+  var direction = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : RIGHT;
+  var step = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 5;
+  return linearGradient(0, 0, WIDTH, HEIGHT, startColor, endColor, direction, step);
+};
+
+radialGradientBackground = function (startColor, endColor) {
+  var step = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
+  var DIAGONAL = Math.sqrt(Math.pow(Math.max(WIDTH, HEIGHT), 2) * 2);
+  radialGradient(HALF_WIDTH, HALF_HEIGHT, DIAGONAL, DIAGONAL, startColor, endColor, step);
+};
+
+angularGradientBackground = function (startColor, endColor) {
+  var angle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var step = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 5;
+  var DIAGONAL = Math.sqrt(Math.pow(Math.max(WIDTH, HEIGHT), 2) * 2);
+  angularGradient((WIDTH - DIAGONAL) / 2, (HEIGHT - DIAGONAL) / 2, DIAGONAL, DIAGONAL, startColor, endColor, angle, step);
+};
+
+circularGradientBackground = function (startColor, endColor) {
+  var angle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var step = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 5;
+  var DIAGONAL = Math.sqrt(Math.pow(Math.max(WIDTH, HEIGHT), 2) * 2);
+  circularGradient((WIDTH - DIAGONAL) / 2, (HEIGHT - DIAGONAL) / 2, DIAGONAL, DIAGONAL, startColor, endColor, angle, step);
+};
 
 angularGradient = function (x, y, width, height, startColor, endColor) {
   var angle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
