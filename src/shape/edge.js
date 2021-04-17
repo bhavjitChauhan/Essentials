@@ -4,7 +4,7 @@
  * @param {number} x x-coordinate of start point
  * @param {number} y y-coordinate of start point
  * @param {number} length length of line
- * @param {number} angle rotation of line
+ * @param {number} [angle=0] rotation of line
  *
  * @example
  * angleMode = 'degrees';
@@ -20,7 +20,7 @@
  * edge(200, 75, 100, PI / 4);
  * // expected outcome: line of length 100 rotated 45 degrees
  */
-edge = (x, y, length, angle) => {
+edge = (x, y, length, angle = 0) => {
     if (angleMode == 'degrees') angle = e.radians(angle);
     const x2 = x + length * Math.cos(angle);
     const y2 = y + length * Math.sin(angle);

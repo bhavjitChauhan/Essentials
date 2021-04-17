@@ -13,7 +13,7 @@
  * @example
  * rhombus(50, 100, 100, 50, 100, 100);
  *
- * @see parallelogram
+ * @see {@link parallelogram}
  */
 rhombus = (ax, ay, bx, by, cx, cy) => {
     const r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);

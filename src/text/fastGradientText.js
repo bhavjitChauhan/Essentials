@@ -18,7 +18,7 @@
  * fastGradientText('Hello\nWorld', 10, textAscent() * 4, PURPLE, PINK);
  * // expected outcome: 'Hello World', bold, with gradient fill from purple to pink in two lines
  *
- * @see font
+ * @see {@link font}
  */
 fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => {
     push();

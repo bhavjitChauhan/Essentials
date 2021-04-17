@@ -236,21 +236,6 @@ generateUUID = () =>
     );
 
 /**
- * Returns a string of the form `HH:MM:SS`.
- *
- * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
- *
- * @returns {string} Formatted time
- *
- * @example
- * println(getColorTime());
- * // expected outcome: Time in the form of `HH:MM:SS`
- */
-getColonTime = function () {
-    return (new Date()).toTimeString().slice(0, 8);
-};
-
-/**
  * Efficiently inherits properties from the parent class to the child class.
  *
  * @param {Function} subClass Class to be inherited to
@@ -280,6 +265,21 @@ inherit = (subClass, superClass) => {
     subClass.prototype.constructor = subClass;
     if (superClass.prototype.constructor === Object)
         superClass.prototype.constructor = superClass;
+};
+
+/**
+ * Returns a string of the form `HH:MM:SS`.
+ *
+ * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
+ *
+ * @returns {string} Formatted time
+ *
+ * @example
+ * println(getColorTime());
+ * // expected outcome: Time in the form of `HH:MM:SS`
+ */
+getColonTime = function () {
+    return (new Date()).toTimeString().slice(0, 8);
 };
 
 /**
@@ -314,7 +314,7 @@ isImage = obj => {
  * println(isFont(f));
  * // expected output: true
  * 
- * @see font
+ * @see {@link font}
  */
 isFont = obj => {
     if (typeof obj != 'object') {
@@ -391,7 +391,7 @@ mostPerformant = (fns, iterations = 1e4) => {
  * // This rectangle will not display the stroke or rotation
  * rect(10, 10, 15, 15);
  *
- * @see push
+ * @see {@link push}
  */
 pop = () => {
     e.popStyle();
@@ -453,7 +453,7 @@ randomInt = (min, max) => _.random(min, max);
  * // This rectangle will not display the stroke or rotation
  * rect(10, 10, 15, 15);
  *
- * @see pop
+ * @see {@link pop}
  */
 push = () => {
     e.pushMatrix();

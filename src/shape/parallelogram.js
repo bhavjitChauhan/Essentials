@@ -13,7 +13,7 @@
  * @example
  * parallelogram(50, 50, 200, 50, 100, 100);
  *
- * @see rhombus
+ * @see {@link rhombus}
  */
 parallelogram = (ax, ay, bx, by, cx, cy) => {
     const dx = bx - ax;

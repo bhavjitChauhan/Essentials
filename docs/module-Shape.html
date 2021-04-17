@@ -108,12 +108,22 @@
                             <a href="module-Shape.html#~cylinder">cylinder</a>
                         </li>
                         <li data-type="method">
+                            <a href="module-Shape.html#~dashedEdge"
+                                >dashedEdge</a
+                            >
+                        </li>
+                        <li data-type="method">
                             <a href="module-Shape.html#~dashedLine"
                                 >dashedLine</a
                             >
                         </li>
                         <li data-type="method">
                             <a href="module-Shape.html#~donut">donut</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Shape.html#~dottedEdge"
+                                >dottedEdge</a
+                            >
                         </li>
                         <li data-type="method">
                             <a href="module-Shape.html#~dottedLine"
@@ -266,8 +276,8 @@
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2021"
-                                        >line 2021</a
+                                    <a href="essentials.js.html#line2023"
+                                        >line 2023</a
                                     >
                                 </li>
                             </ul>
@@ -369,8 +379,8 @@
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2036"
-                                        >line 2036</a
+                                    <a href="essentials.js.html#line2038"
+                                        >line 2038</a
                                     >
                                 </li>
                             </ul>
@@ -452,8 +462,8 @@
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2051"
-                                        >line 2051</a
+                                    <a href="essentials.js.html#line2053"
+                                        >line 2053</a
                                     >
                                 </li>
                             </ul>
@@ -530,6 +540,251 @@
                         </tbody>
                     </table>
 
+                    <h4 class="name" id="~dashedEdge">
+                        <span class="type-signature">(inner) </span
+                        >dashedEdge<span class="signature"
+                            >(x, y, length, angle<span
+                                class="signature-attributes"
+                                >opt</span
+                            >, dashLength<span class="signature-attributes"
+                                >opt</span
+                            >, spacing<span class="signature-attributes"
+                                >opt</span
+                            >, endDash<span class="signature-attributes"
+                                >opt</span
+                            >, endPoint<span class="signature-attributes"
+                                >opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <p class="summary usertext"></p>
+                    <p>
+                        Draws a dashed line of a given length and at a given
+                        angle.
+                    </p>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line2120"
+                                        >line 2120</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+
+                        <dt class="tag-see">See:</dt>
+                        <dd class="tag-see">
+                            <ul>
+                                <li>dottedEdge</li>
+
+                                <li>edge</li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            If <code>endDash</code> is true, a dash will be
+                            drawn of smaller length than defined by
+                            <code>dashLength</code> to finish the line. If
+                            <code>endPoint</code> is true, a point will be drawn
+                            at the end point. Use the
+                            <code>smooth</code> function to prevent jagged
+                            dashes.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>strokeWeight(3);
+dashedEdge(50, 50, 300, 0);
+// expected outcome: straight dashed edge</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>dashedEdge(50, 75, 300, 0, 5, 10);
+// expected outcome: straight dashed edge with a dash length of 5 and spacing of 10</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>dashedEdge(50, 100, 300, 0, 5, 10, false, false);
+// expected outcome: straight dashed edge and no end point</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>dashedEdge(50, 125, 302.5, 0, 10, 5);
+// expected outcome: straight dashed edge and an end dash</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>dashedEdge(50, 150, 302.5, 0, 10, 5, false);
+// expected outcome: straight dashed edge and no end dash</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>x-coordinate of the start point</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>y-coordinate of the start point</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>length</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>length of line</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>angle</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>0</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>angle of line</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>dashLength</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>10</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>length of dash</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>spacing</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>10</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>spacing between points</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>endDash</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">boolean</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>true</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>draw dash at end</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>endPoint</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">boolean</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>true</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>draw point at end point</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                     <h4 class="name" id="~dashedLine">
                         <span class="type-signature">(inner) </span
                         >dashedLine<span class="signature"
@@ -557,8 +812,8 @@
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2117"
-                                        >line 2117</a
+                                    <a href="essentials.js.html#line2168"
+                                        >line 2168</a
                                     >
                                 </li>
                             </ul>
@@ -780,8 +1035,8 @@ dashedLine(50, 50, 350, 50);
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2140"
-                                        >line 2140</a
+                                    <a href="essentials.js.html#line2191"
+                                        >line 2191</a
                                     >
                                 </li>
                             </ul>
@@ -862,6 +1117,198 @@ dashedLine(50, 50, 350, 50);
                         </tbody>
                     </table>
 
+                    <h4 class="name" id="~dottedEdge">
+                        <span class="type-signature">(inner) </span
+                        >dottedEdge<span class="signature"
+                            >(x, y, length, angle<span
+                                class="signature-attributes"
+                                >opt</span
+                            >, spacing<span class="signature-attributes"
+                                >opt</span
+                            >, endPoint<span class="signature-attributes"
+                                >opt</span
+                            >)</span
+                        ><span class="type-signature"></span>
+                    </h4>
+
+                    <p class="summary usertext"></p>
+                    <p>
+                        Draws a dotted line of a given length and at a given
+                        angle.
+                    </p>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line2254"
+                                        >line 2254</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+
+                        <dt class="tag-see">See:</dt>
+                        <dd class="tag-see">
+                            <ul>
+                                <li>dashedEdge</li>
+
+                                <li>edge</li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            If <code>endPoint</code> is true, a point will be
+                            drawn at the end point. Use the
+                            <code>smooth</code> function to prevent jagged
+                            points.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>strokeWeight(4);
+dottedEdge(50, 50, 300, 0);
+// expected outcome: straight dotted edge</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>dottedEdge(50, 75, 300, 0, 14);
+// expected outcome: straight dotted edge with spacing of 14</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>dottedEdge(50, 100, 300, 0, 14, false);
+// expected outcome: straight dotted edge with spacing of 14 and no end point</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>x</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>x-coordinate of the start point</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>y</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>y-coordinate of the start point</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>length</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
+                                <td class="description last">
+                                    <p>length of line</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>angle</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>0</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>angle of line</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>spacing</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>10</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>gap between points</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="name"><code>endPoint</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">boolean</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>true</code>
+                                </td>
+
+                                <td class="description last">
+                                    <p>draw point at end point</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                     <h4 class="name" id="~dottedLine">
                         <span class="type-signature">(inner) </span
                         >dottedLine<span class="signature"
@@ -885,8 +1332,8 @@ dashedLine(50, 50, 350, 50);
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2202"
-                                        >line 2202</a
+                                    <a href="essentials.js.html#line2291"
+                                        >line 2291</a
                                     >
                                 </li>
                             </ul>
@@ -1063,8 +1510,8 @@ dottedLine(50, 50, 350, 50);
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2237"
-                                        >line 2237</a
+                                    <a href="essentials.js.html#line2326"
+                                        >line 2326</a
                                     >
                                 </li>
                             </ul>
@@ -1183,7 +1630,10 @@ drawShape(function() {
                     <h4 class="name" id="~edge">
                         <span class="type-signature">(inner) </span>edge<span
                             class="signature"
-                            >(x, y, length, angle)</span
+                            >(x, y, length, angle<span
+                                class="signature-attributes"
+                                >opt</span
+                            >)</span
                         ><span class="type-signature"></span>
                     </h4>
 
@@ -1195,8 +1645,8 @@ drawShape(function() {
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2266"
-                                        >line 2266</a
+                                    <a href="essentials.js.html#line2355"
+                                        >line 2355</a
                                     >
                                 </li>
                             </ul>
@@ -1231,6 +1681,10 @@ edge(200, 75, 100, PI / 4);
 
                                 <th>Type</th>
 
+                                <th>Attributes</th>
+
+                                <th>Default</th>
+
                                 <th class="last">Description</th>
                             </tr>
                         </thead>
@@ -1242,6 +1696,10 @@ edge(200, 75, 100, PI / 4);
                                 <td class="type">
                                     <span class="param-type">number</span>
                                 </td>
+
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
 
                                 <td class="description last">
                                     <p>x-coordinate of start point</p>
@@ -1255,6 +1713,10 @@ edge(200, 75, 100, PI / 4);
                                     <span class="param-type">number</span>
                                 </td>
 
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
                                 <td class="description last">
                                     <p>y-coordinate of start point</p>
                                 </td>
@@ -1267,6 +1729,10 @@ edge(200, 75, 100, PI / 4);
                                     <span class="param-type">number</span>
                                 </td>
 
+                                <td class="attributes"></td>
+
+                                <td class="default"></td>
+
                                 <td class="description last">
                                     <p>length of line</p>
                                 </td>
@@ -1277,6 +1743,12 @@ edge(200, 75, 100, PI / 4);
 
                                 <td class="type">
                                     <span class="param-type">number</span>
+                                </td>
+
+                                <td class="attributes">&lt;optional><br /></td>
+
+                                <td class="default">
+                                    <code>0</code>
                                 </td>
 
                                 <td class="description last">
@@ -1301,8 +1773,8 @@ edge(200, 75, 100, PI / 4);
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2285"
-                                        >line 2285</a
+                                    <a href="essentials.js.html#line2374"
+                                        >line 2374</a
                                     >
                                 </li>
                             </ul>
@@ -1384,8 +1856,8 @@ edge(200, 75, 100, PI / 4);
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2319"
-                                        >line 2319</a
+                                    <a href="essentials.js.html#line2408"
+                                        >line 2408</a
                                     >
                                 </li>
                             </ul>
@@ -1515,8 +1987,8 @@ edge(200, 75, 100, PI / 4);
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2346"
-                                        >line 2346</a
+                                    <a href="essentials.js.html#line2435"
+                                        >line 2435</a
                                     >
                                 </li>
                             </ul>
@@ -1677,8 +2149,8 @@ polygon(100, 100, 5, 100, PI);</code></pre>
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2398"
-                                        >line 2398</a
+                                    <a href="essentials.js.html#line2487"
+                                        >line 2487</a
                                     >
                                 </li>
                             </ul>
@@ -1902,8 +2374,8 @@ polygon(100, 100, 5, 100, PI);</code></pre>
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2423"
-                                        >line 2423</a
+                                    <a href="essentials.js.html#line2512"
+                                        >line 2512</a
                                     >
                                 </li>
                             </ul>
@@ -2041,8 +2513,8 @@ polygon(100, 100, 5, 100, PI);</code></pre>
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2469"
-                                        >line 2469</a
+                                    <a href="essentials.js.html#line2558"
+                                        >line 2558</a
                                     >
                                 </li>
                             </ul>
@@ -2251,8 +2723,8 @@ polygon(100, 100, 5, 100, PI);</code></pre>
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2494"
-                                        >line 2494</a
+                                    <a href="essentials.js.html#line2583"
+                                        >line 2583</a
                                     >
                                 </li>
                             </ul>
@@ -2396,8 +2868,8 @@ polygon(100, 100, 5, 100, PI);</code></pre>
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line2524"
-                                        >line 2524</a
+                                    <a href="essentials.js.html#line2613"
+                                        >line 2613</a
                                     >
                                 </li>
                             </ul>
@@ -2498,8 +2970,8 @@ polygon(100, 100, 5, 100, PI);</code></pre>
 
         <footer>
             Documentation generated by
-            <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Thu Apr
-            15 2021 20:35:33 GMT-0700 (Pacific Daylight Time) using the
+            <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Apr
+            17 2021 16:09:01 GMT-0700 (Pacific Daylight Time) using the
             <a href="https://github.com/clenemt/docdash">docdash</a> theme.
         </footer>
 

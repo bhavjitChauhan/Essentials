@@ -35,7 +35,7 @@
  * square(150, 150, 50, 10, 10, 0, 10);
  * // expected outcome: Square with radius 10 for all but bottom-right corner
  *
- * @see rectangle
+ * @see {@link rectangle}
  */
 square = (x, y, side, tl, tr, br, bl) => {
     if (tl == undefined) e.rect(x, y, side, side);

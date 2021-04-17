@@ -78,6 +78,55 @@ cylinder = (x, y, width, height) => {
 
 /**
  * @summary
+ * Draws a dashed line of a given length and at a given angle.
+ *
+ * @description
+ * If `endDash` is true, a dash will be drawn of smaller length than defined by
+ * `dashLength` to finish the line. If `endPoint` is true, a point will be drawn
+ * at the end point. Use the `smooth` function to prevent jagged dashes.
+ *
+ * @param {number} x x-coordinate of the start point
+ * @param {number} y y-coordinate of the start point
+ * @param {number} length length of line
+ * @param {number} [angle=0] angle of line
+ * @param {number} [dashLength=10] length of dash
+ * @param {number} [spacing=10] spacing between points
+ * @param {boolean} [endDash=true] draw dash at end
+ * @param {boolean} [endPoint=true] draw point at end point
+ *
+ * @example
+ * strokeWeight(3);
+ * dashedEdge(50, 50, 300, 0);
+ * // expected outcome: straight dashed edge
+ * 
+ * @example
+ * dashedEdge(50, 75, 300, 0, 5, 10);
+ * // expected outcome: straight dashed edge with a dash length of 5 and spacing of 10
+ * 
+ * @example
+ * dashedEdge(50, 100, 300, 0, 5, 10, false, false);
+ * // expected outcome: straight dashed edge and no end point
+ * 
+ * @example
+ * dashedEdge(50, 125, 302.5, 0, 10, 5);
+ * // expected outcome: straight dashed edge and an end dash
+ * 
+ * @example
+ * dashedEdge(50, 150, 302.5, 0, 10, 5, false);
+ * // expected outcome: straight dashed edge and no end dash
+ *
+ * @see {@link dottedEdge}
+ * @see {@link edge}
+ */
+dashedEdge = (x, y, length, angle = 0, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
+    if (angleMode == 'degrees') angle = e.radians(angle);
+    const x2 = x + length * Math.cos(angle);
+    const y2 = y + length * Math.sin(angle);
+    dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);
+};
+
+/**
+ * @summary
  * Draws a dashed line.
  *
  * @description
@@ -115,7 +164,7 @@ cylinder = (x, y, width, height) => {
  * dashedLine(50, 150, 352.5, 150, 10, 5, false);
  * // expected outcome: straight dashed line and no end dash
  *
- * @see dottedLine
+ * @see {@link dottedLine}
  */
 dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
     const length = e.dist(x1, y1, x2, y2);
@@ -174,6 +223,44 @@ donut = (x, y, majorDiameter, minorDiameter) => {
 
 /**
  * @summary
+ * Draws a dotted line of a given length and at a given angle.
+ *
+ * @description
+ * If `endPoint` is true, a point will be drawn at the end point. Use the `smooth`
+ * function to prevent jagged points.
+ *
+ * @param {number} x x-coordinate of the start point
+ * @param {number} y y-coordinate of the start point
+ * @param {number} length length of line
+ * @param {number} [angle=0] angle of line
+ * @param {number} [spacing=10] gap between points
+ * @param {boolean} [endPoint=true] draw point at end point
+ *
+ * @example
+ * strokeWeight(4);
+ * dottedEdge(50, 50, 300, 0);
+ * // expected outcome: straight dotted edge
+ *
+ * @example
+ * dottedEdge(50, 75, 300, 0, 14);
+ * // expected outcome: straight dotted edge with spacing of 14
+ *
+ * @example
+ * dottedEdge(50, 100, 300, 0, 14, false);
+ * // expected outcome: straight dotted edge with spacing of 14 and no end point
+ *
+ * @see {@link dashedEdge}
+ * @see {@link edge}
+ */
+dottedEdge = (x, y, length, angle = 0, spacing = 10, endPoint = true) => {    
+    if (angleMode == 'degrees') angle = e.radians(angle);
+    const x2 = x + length * Math.cos(angle);
+    const y2 = y + length * Math.sin(angle);
+    dottedLine(x, y, x2, y2, spacing, endPoint);
+};
+
+/**
+ * @summary
  * Draws a dotted line.
  *
  * @description
@@ -200,7 +287,7 @@ donut = (x, y, majorDiameter, minorDiameter) => {
  * dottedLine(50, 100, 350, 100, 14, false);
  * // expected outcome: straight dotted line with spacing of 14 and no end point
  *
- * @see dashedLine
+ * @see {@link dashedLine}
  */
 dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
     const length = e.dist(x1, y1, x2, y2);
@@ -250,7 +337,7 @@ drawShape = (fn, close, mode) => {
  * @param {number} x x-coordinate of start point
  * @param {number} y y-coordinate of start point
  * @param {number} length length of line
- * @param {number} angle rotation of line
+ * @param {number} [angle=0] rotation of line
  *
  * @example
  * angleMode = 'degrees';
@@ -266,7 +353,7 @@ drawShape = (fn, close, mode) => {
  * edge(200, 75, 100, PI / 4);
  * // expected outcome: line of length 100 rotated 45 degrees
  */
-edge = (x, y, length, angle) => {
+edge = (x, y, length, angle = 0) => {
     if (angleMode == 'degrees') angle = e.radians(angle);
     const x2 = x + length * Math.cos(angle);
     const y2 = y + length * Math.sin(angle);
@@ -317,7 +404,7 @@ heart = (x, y, radius) => {
  * @example
  * parallelogram(50, 50, 200, 50, 100, 100);
  *
- * @see rhombus
+ * @see {@link rhombus}
  */
 parallelogram = (ax, ay, bx, by, cx, cy) => {
     const dx = bx - ax;
@@ -396,7 +483,7 @@ polygon = (x, y, sides, radius, rotation) => {
  * rectangle(150, 150, 100, 50, 10, 10, 0, 10);
  * // expected outcome: Rectangle with radius 10 for all but bottom-right corner
  *
- * @see square
+ * @see {@link square}
  */
 rectangle = (x, y, width, height = width, tl, tr, br, bl) => {
     if (tl == undefined) e.rect(x, y, width, height);
@@ -421,7 +508,7 @@ rectangle = (x, y, width, height = width, tl, tr, br, bl) => {
  * @example
  * rhombus(50, 100, 100, 50, 100, 100);
  *
- * @see parallelogram
+ * @see {@link parallelogram}
  */
 rhombus = (ax, ay, bx, by, cx, cy) => {
     const r = e.dist(ax, ay, bx, by) / e.dist(ax, ay, cx, cy);
@@ -467,7 +554,7 @@ rhombus = (ax, ay, bx, by, cx, cy) => {
  * square(150, 150, 50, 10, 10, 0, 10);
  * // expected outcome: Square with radius 10 for all but bottom-right corner
  *
- * @see rectangle
+ * @see {@link rectangle}
  */
 square = (x, y, side, tl, tr, br, bl) => {
     if (tl == undefined) e.rect(x, y, side, side);

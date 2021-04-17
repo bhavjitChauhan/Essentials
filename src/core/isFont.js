@@ -13,7 +13,7 @@
  * println(isFont(f));
  * // expected output: true
  * 
- * @see font
+ * @see {@link font}
  */
 isFont = obj => {
     if (typeof obj != 'object') {

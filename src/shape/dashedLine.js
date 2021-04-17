@@ -37,7 +37,7 @@
  * dashedLine(50, 150, 352.5, 150, 10, 5, false);
  * // expected outcome: straight dashed line and no end dash
  *
- * @see dottedLine
+ * @see {@link dottedLine}
  */
 dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
     const length = e.dist(x1, y1, x2, y2);

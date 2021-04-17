@@ -16,7 +16,7 @@
  * [direction=RIGHT] direction of gradient
  * @param {number} [step=5] step size
  *
- * @see linearGradient
+ * @see {@link linearGradient}
  */
 linearGradientBackground = (startColor, endColor, direction = RIGHT, step = 5) => linearGradient(0, 0, WIDTH, HEIGHT, startColor, endColor, direction, step);
 
@@ -34,7 +34,7 @@ linearGradientBackground = (startColor, endColor, direction = RIGHT, step = 5) =
  * @param {color} endColor ending color
  * @param {number} [step=5] step size
  *
- * @see radialGradient
+ * @see {@link radialGradient}
  */
 radialGradientBackground = (startColor, endColor, step = 5) => {
     const DIAGONAL = Math.sqrt(Math.max(WIDTH, HEIGHT) ** 2 * 2);
@@ -57,7 +57,7 @@ radialGradientBackground = (startColor, endColor, step = 5) => {
  * @param {number} [angle=0] start angle of the gradient in degrees
  * @param {number} [step=5] step size
  *
- * @see angularGradient
+ * @see {@link angularGradient}
  */
 angularGradientBackground = (startColor, endColor, angle = 0, step = 5) => {
     const DIAGONAL = Math.sqrt(Math.max(WIDTH, HEIGHT) ** 2 * 2);
@@ -86,6 +86,8 @@ angularGradientBackground = (startColor, endColor, angle = 0, step = 5) => {
  * @param {color} endColor ending color
  * @param {number} [angle=0] start angle of the gradient in degrees
  * @param {number} [step=5] step size
+ * 
+ * @see {@link circularGradient}
  */
 circularGradientBackground = (startColor, endColor, angle = 0, step = 5) => {
     const DIAGONAL = Math.sqrt(Math.max(WIDTH, HEIGHT) ** 2 * 2);

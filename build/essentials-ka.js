@@ -111,14 +111,14 @@ generateUUID = function () {
   });
 };
 
-getColonTime = function () {
-  return new Date().toTimeString().slice(0, 8);
-};
-
 inherit = function (subClass, superClass) {
   Object.setPrototypeOf(subClass.prototype, superClass.prototype);
   subClass.prototype.constructor = subClass;
   if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
+};
+
+getColonTime = function () {
+  return new Date().toTimeString().slice(0, 8);
 };
 
 isImage = function (obj) {
@@ -1176,6 +1176,18 @@ cylinder = function (x, y, width, height) {
   pop();
 };
 
+dashedEdge = function (x, y, length) {
+  var angle = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
+  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);
+};
+
 dashedLine = function (x1, y1, x2, y2) {
   var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
   var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
@@ -1223,6 +1235,16 @@ donut = function (x, y, majorDiameter, minorDiameter) {
   pop();
 };
 
+dottedEdge = function (x, y, length) {
+  var angle = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  var spacing = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var endPoint = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  dottedLine(x, y, x2, y2, spacing, endPoint);
+};
+
 dottedLine = function (x1, y1, x2, y2) {
   var spacing = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
   var endPoint = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
@@ -1242,7 +1264,8 @@ drawShape = function (fn, close, mode) {
   e.endShape(close);
 };
 
-edge = function (x, y, length, angle) {
+edge = function (x, y, length) {
+  var angle = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
   if (angleMode == 'degrees') angle = e.radians(angle);
   var x2 = x + length * Math.cos(angle);
   var y2 = y + length * Math.sin(angle);

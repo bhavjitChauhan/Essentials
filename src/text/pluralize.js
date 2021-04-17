@@ -25,7 +25,7 @@
  * printf('% %.', people, pluralize(people, 'person', 'people'));
  * // expected output: '2 people.'
  *
- * @see printf
+ * @see {@link printf}
  */
 pluralize = (value, word, plural = word + 's') => {
     const _pluralize = (num, word, plural = word + 's') =>

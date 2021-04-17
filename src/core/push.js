@@ -12,7 +12,7 @@
  * // This rectangle will not display the stroke or rotation
  * rect(10, 10, 15, 15);
  *
- * @see pop
+ * @see {@link pop}
  */
 push = () => {
     e.pushMatrix();

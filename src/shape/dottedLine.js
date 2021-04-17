@@ -26,7 +26,7 @@
  * dottedLine(50, 100, 350, 100, 14, false);
  * // expected outcome: straight dotted line with spacing of 14 and no end point
  *
- * @see dashedLine
+ * @see {@link dashedLine}
  */
 dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
     const length = e.dist(x1, y1, x2, y2);
