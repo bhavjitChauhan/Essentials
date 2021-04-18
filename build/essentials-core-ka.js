@@ -103,22 +103,14 @@ generateUUID = function () {
   });
 };
 
-inherit = function (subClass, superClass) {
-  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
-};
-
 getColonTime = function () {
   return new Date().toTimeString().slice(0, 8);
 };
 
-isImage = function (obj) {
-  if (typeof obj != 'object') {
-    return false;
-  }
-
-  return _.isObject(obj.sourceImg);
+inherit = function (subClass, superClass) {
+  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
 };
 
 isFont = function (obj) {
@@ -127,6 +119,14 @@ isFont = function (obj) {
   }
 
   return _.isFunction(obj.getCSSDefinition);
+};
+
+isImage = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isObject(obj.sourceImg);
 };
 
 isSound = function (obj) {

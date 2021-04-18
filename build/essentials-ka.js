@@ -111,22 +111,14 @@ generateUUID = function () {
   });
 };
 
-inherit = function (subClass, superClass) {
-  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
-};
-
 getColonTime = function () {
   return new Date().toTimeString().slice(0, 8);
 };
 
-isImage = function (obj) {
-  if (typeof obj != 'object') {
-    return false;
-  }
-
-  return _.isObject(obj.sourceImg);
+inherit = function (subClass, superClass) {
+  Object.setPrototypeOf(subClass.prototype, superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  if (superClass.prototype.constructor === Object) superClass.prototype.constructor = superClass;
 };
 
 isFont = function (obj) {
@@ -135,6 +127,14 @@ isFont = function (obj) {
   }
 
   return _.isFunction(obj.getCSSDefinition);
+};
+
+isImage = function (obj) {
+  if (typeof obj != 'object') {
+    return false;
+  }
+
+  return _.isObject(obj.sourceImg);
 };
 
 isSound = function (obj) {
@@ -867,6 +867,42 @@ font = function (family) {
   return _font;
 };
 
+format = function (str) {
+  var match = _.first(str.match(/\${.*?}/));
+
+  while (match) {
+    var formatted = void 0;
+
+    try {
+      formatted = _eval("`".concat(match, "`"));
+    } catch (err) {
+      var head = match.match(/(\w+)\(/);
+
+      if (_.isArray(head)) {
+        head = head[1];
+        var args = match.match(/\(([^)]+)\)/);
+
+        if (_.isArray(args)) {
+          var _e;
+
+          args = args[1].split(',');
+          formatted = (_e = e)[head].apply(_e, _toConsumableArray(args));
+        } else {
+          formatted = e[head]();
+        }
+      } else {
+        var property = match.match(/\w+/);
+        formatted = e[property];
+      }
+    }
+
+    str = str.replace(match, formatted);
+    match = _.first(str.match(/\${.*?}/));
+  }
+
+  return str;
+};
+
 formatDuration = function (ms) {
   if (ms < 0) ms = -ms;
   var time = {
@@ -978,6 +1014,30 @@ ordinalSuffix = function (n) {
   return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];
 };
 
+obfuscate = function (str) {
+  var result = '';
+
+  for (var i in _.range(str.length)) {
+    var curr = str.charCodeAt(i).toString(16);
+
+    if (curr.length <= 2) {
+      while (curr.length < 2) {
+        curr = '0' + curr;
+      }
+
+      result += '\\x' + curr;
+    } else {
+      while (curr.length < 4) {
+        curr = '0' + curr;
+      }
+
+      result += '\\u' + curr;
+    }
+  }
+
+  return result;
+};
+
 outlineText = function (string) {
   var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : e.textAscent();
@@ -1017,80 +1077,59 @@ pluralize = function (value, word) {
   return _pluralize(value, word, plural);
 };
 
+removeNonASCII = function (str) {
+  return str.replace(/[^\x20-\x7E]/g, '');
+};
+
 String.prototype.format = function () {
-  var string = this;
-
-  var match = _.first(string.match(/\${.*?}/));
-
-  while (match) {
-    var formatted = void 0;
-
-    try {
-      formatted = _eval("`".concat(match, "`"));
-    } catch (error) {
-      var _e2;
-
-      var head = match.match(/(\w+)\(/)[1];
-      var args = match.match(/\(([^)]+)\)/)[1].split(',');
-      formatted = (_e2 = e)[head].apply(_e2, _toConsumableArray(args));
-    }
-
-    string = string.replace(match, formatted);
-    match = _.first(string.match(/\${.*?}/));
-  }
-
-  return string;
+  return format(this);
 };
 
 String.prototype.obfuscate = function () {
-  var str = '';
-
-  for (var i in _.range(this.length)) {
-    var curr = this.charCodeAt(i).toString(16);
-
-    if (curr.length <= 2) {
-      while (curr.length < 2) {
-        curr = '0' + curr;
-      }
-
-      str += '\\x' + curr;
-    } else {
-      while (curr.length < 4) {
-        curr = '0' + curr;
-      }
-
-      str += '\\u' + curr;
-    }
-  }
-
-  return str;
+  return obfuscate(this);
 };
 
 String.prototype.removeNonASCII = function () {
-  return this.replace(/[^\x20-\x7E]/g, '');
+  return removeNonASCII(this);
+};
+
+String.prototype.toTitleCase = function () {
+  return toTitleCase(this);
 };
 
 String.prototype.toCamelCase = function () {
-  var s = this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
+  return toCamelCase(this);
+};
+
+String.prototype.toKebabCase = function () {
+  return toKebabCase(this);
+};
+
+String.prototype.toSnakeCase = function () {
+  return toSnakeCase(this);
+};
+
+toCamelCase = function (str) {
+  var s = str.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.slice(0, 1).toUpperCase() + x.slice(1).toLowerCase();
   }).join('');
   return s.slice(0, 1).toLowerCase() + s.slice(1);
 };
 
-String.prototype.toKebabCase = function () {
-  return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
+toKebabCase = function (str) {
+  return str.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.toLowerCase();
   }).join('-');
 };
 
-String.prototype.toSnakeCase = function () {
-  return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
+toSnakeCase = function (str) {
+  return str.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.toLowerCase();
   }).join('_');
 };
 
-String.prototype.toTitleCase = function () {
-  return this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
+toTitleCase = function (str) {
+  return str.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(function (x) {
     return x.charAt(0).toUpperCase() + x.slice(1);
   }).join(' ');
 };
@@ -1134,15 +1173,15 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_shape_initialized_) console.info('%cShape Essentials', _console_style_);
 }
 
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
+};
+
 blurRect = function (x, y, width, height, size) {
   if (size <= 0) return;
   size = e.constrain(size, 0, Math.min(width, height));
   e.image(e.get(x, y, width, height), x, y, width / size, height / size);
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
-};
-
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
 };
 
 cylinder = function (x, y, width, height) {
@@ -1176,18 +1215,6 @@ cylinder = function (x, y, width, height) {
   pop();
 };
 
-dashedEdge = function (x, y, length) {
-  var angle = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
-  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
-  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
-  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-  if (angleMode == 'degrees') angle = e.radians(angle);
-  var x2 = x + length * Math.cos(angle);
-  var y2 = y + length * Math.sin(angle);
-  dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);
-};
-
 dashedLine = function (x1, y1, x2, y2) {
   var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
   var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
@@ -1202,6 +1229,18 @@ dashedLine = function (x1, y1, x2, y2) {
 
   if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
   if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
+};
+
+dashedEdge = function (x, y, length) {
+  var angle = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
+  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);
 };
 
 donut = function (x, y, majorDiameter, minorDiameter) {
@@ -1245,6 +1284,13 @@ dottedEdge = function (x, y, length) {
   dottedLine(x, y, x2, y2, spacing, endPoint);
 };
 
+drawShape = function (fn, close, mode) {
+  close = close && e.CLOSE;
+  e.beginShape(mode);
+  fn();
+  e.endShape(close);
+};
+
 dottedLine = function (x1, y1, x2, y2) {
   var spacing = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
   var endPoint = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
@@ -1255,13 +1301,6 @@ dottedLine = function (x1, y1, x2, y2) {
   }
 
   if (endPoint) e.point(x2, y2);
-};
-
-drawShape = function (fn, close, mode) {
-  close = close && e.CLOSE;
-  e.beginShape(mode);
-  fn();
-  e.endShape(close);
 };
 
 edge = function (x, y, length) {
@@ -1288,12 +1327,6 @@ heart = function (x, y, radius) {
   }, true);
 };
 
-parallelogram = function (ax, ay, bx, by, cx, cy) {
-  var dx = bx - ax;
-  var dy = by - ay;
-  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
-};
-
 polygon = function (x, y, sides, radius, rotation) {
   var _TAU = Math.cos(Math.PI) < 0 ? 2 * Math.PI : 360;
 
@@ -1306,6 +1339,12 @@ polygon = function (x, y, sides, radius, rotation) {
     }
   }, true);
   pop();
+};
+
+parallelogram = function (ax, ay, bx, by, cx, cy) {
+  var dx = bx - ax;
+  var dy = by - ay;
+  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 rectangle = function (x, y, width) {

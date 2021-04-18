@@ -176,6 +176,9 @@
                             <a href="module-Text.html#~font">font</a>
                         </li>
                         <li data-type="method">
+                            <a href="module-Text.html#~format">format</a>
+                        </li>
+                        <li data-type="method">
                             <a href="module-Text.html#~formatDuration"
                                 >formatDuration</a
                             >
@@ -196,6 +199,9 @@
                             >
                         </li>
                         <li data-type="method">
+                            <a href="module-Text.html#~obfuscate">obfuscate</a>
+                        </li>
+                        <li data-type="method">
                             <a href="module-Text.html#~ordinalSuffix"
                                 >ordinalSuffix</a
                             >
@@ -207,6 +213,31 @@
                         </li>
                         <li data-type="method">
                             <a href="module-Text.html#~pluralize">pluralize</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~removeNonASCII"
+                                >removeNonASCII</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~toCamelCase"
+                                >toCamelCase</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~toKebabCase"
+                                >toKebabCase</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~toSnakeCase"
+                                >toSnakeCase</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~toTitleCase"
+                                >toTitleCase</a
+                            >
                         </li>
                         <li data-type="method">
                             <a href="module-Text.html#~underlineText"
@@ -539,6 +570,90 @@ text('Hello World', 100, 200);
                         </dd>
                     </dl>
 
+                    <h4 class="name" id="~format">
+                        <span class="type-signature">(inner) </span>format<span
+                            class="signature"
+                            >(str)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1568"
+                                        >line 1568</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Formats string similar to [template literals]<a
+                                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals"
+                                >https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals</a
+                            >
+                            in ES6
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(format('PI is ${Math.PI.toFixed(2)}'))
+// expected output: PI is 3.14</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(format('${millis()}ms elapsed'));
+// expected outcome: value of millis() + 'ms elapsed'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>str</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>formatted string</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
                     <h4 class="name" id="~formatDuration">
                         <span class="type-signature">(inner) </span
                         >formatDuration<span class="signature">(ms)</span
@@ -553,8 +668,8 @@ text('Hello World', 100, 200);
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line1565"
-                                        >line 1565</a
+                                    <a href="essentials.js.html#line1610"
+                                        >line 1610</a
                                     >
                                 </li>
                             </ul>
@@ -633,8 +748,8 @@ console.log(formatDuration(martianDay));
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line1598"
-                                        >line 1598</a
+                                    <a href="essentials.js.html#line1643"
+                                        >line 1643</a
                                     >
                                 </li>
                             </ul>
@@ -760,8 +875,8 @@ highlightText(str, 25, 25, BLACK);</code></pre>
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line1640"
-                                        >line 1640</a
+                                    <a href="essentials.js.html#line1685"
+                                        >line 1685</a
                                     >
                                 </li>
                             </ul>
@@ -851,8 +966,8 @@ draw = function() {
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line1670"
-                                        >line 1670</a
+                                    <a href="essentials.js.html#line1715"
+                                        >line 1715</a
                                     >
                                 </li>
                             </ul>
@@ -924,6 +1039,86 @@ multicoloredText(str, 25, 25);</code></pre>
                         </tbody>
                     </table>
 
+                    <h4 class="name" id="~obfuscate">
+                        <span class="type-signature">(inner) </span
+                        >obfuscate<span class="signature">(str)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1789"
+                                        >line 1789</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Obfuscate strings as hexadecimal and unicode escape
+                            characters.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>let str = 'Hello World';
+let obfuscated = obfuscate(str);
+println(obfuscated);
+// expected output: \x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64
+println('\x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64');
+// expected output: Hello World</code></pre>
+
+                    <pre class="prettyprint"><code>println(str.obfuscate());
+// expected output: \x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64 </code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>str</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>obfuscated string</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
                     <h4 class="name" id="~ordinalSuffix">
                         <span class="type-signature">(inner) </span
                         >ordinalSuffix<span class="signature">(n)</span
@@ -938,8 +1133,8 @@ multicoloredText(str, 25, 25);</code></pre>
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line1712"
-                                        >line 1712</a
+                                    <a href="essentials.js.html#line1757"
+                                        >line 1757</a
                                     >
                                 </li>
                             </ul>
@@ -1018,8 +1213,8 @@ multicoloredText(str, 25, 25);</code></pre>
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line1740"
-                                        >line 1740</a
+                                    <a href="essentials.js.html#line1825"
+                                        >line 1825</a
                                     >
                                 </li>
                             </ul>
@@ -1141,8 +1336,8 @@ outlineText(str, 25, 25, ORANGE);</code></pre>
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line1786"
-                                        >line 1786</a
+                                    <a href="essentials.js.html#line1871"
+                                        >line 1871</a
                                     >
                                 </li>
                             </ul>
@@ -1251,6 +1446,460 @@ printf('% %.', people, pluralize(people, 'person', 'people'));
                         </tbody>
                     </table>
 
+                    <h4 class="name" id="~removeNonASCII">
+                        <span class="type-signature">(inner) </span
+                        >removeNonASCII<span class="signature">(str)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1898"
+                                        >line 1898</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>Removes non-ACII characters from string.</p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre class="prettyprint"><code>let str = 'Hello 😀';
+let strippedStr = removeNonASCII(str);
+println(strippedStr)
+// expected output: 'Hello '</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(str.removeNonASCII());
+// expected output: 'Hello '</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>str</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>formatted string</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~toCamelCase">
+                        <span class="type-signature">(inner) </span
+                        >toCamelCase<span class="signature">(str)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1955"
+                                        >line 1955</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Converts string to
+                            <a
+                                href="https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases"
+                                >camel case</a
+                            >.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toCamelCase('normal text'));
+// expected output: 'normalText'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toCamelCase('kebab-case'));
+// expected output: 'kebabCase'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toCamelCase('snake_case'));
+// expected output: 'snakeCase'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println('normal text'.toCamelCase());
+// expected output: 'normalText'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>str</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>string in camel case</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~toKebabCase">
+                        <span class="type-signature">(inner) </span
+                        >toKebabCase<span class="signature">(str)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line1991"
+                                        >line 1991</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Converts string to
+                            <a
+                                href="https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases"
+                                >kebab case</a
+                            >.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toKebabCase('normal text'));
+// expected output: 'normal-text'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toKebabCase('camelCase'));
+// expected output: 'camel-case'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toKebabCase('snake_case'));
+// expected output: 'snake-case'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println('normal text'.toKebabCase());
+// expected output: 'normal-text'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>str</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>string in kebab case</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~toSnakeCase">
+                        <span class="type-signature">(inner) </span
+                        >toSnakeCase<span class="signature">(str)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line2023"
+                                        >line 2023</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Converts string to
+                            <a
+                                href="https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases"
+                                >snake case</a
+                            >.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toSnakeCase('normal text'));
+// expected output: 'normal_text'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toSnakeCase('camelCase'));
+// expected output: 'camel_case'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toSnakeCase('kebab-case'));
+// expected output: 'kebab_case'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println('normal text'.toSnakeCase());
+// expected output: 'normal_text'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>str</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>string in snake case</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
+                    <h4 class="name" id="~toTitleCase">
+                        <span class="type-signature">(inner) </span
+                        >toTitleCase<span class="signature">(str)</span
+                        ><span class="type-signature"> &rarr; {string}</span>
+                    </h4>
+
+                    <dl class="details">
+                        <dt class="tag-source">Source:</dt>
+                        <dd class="tag-source">
+                            <ul class="dummy">
+                                <li>
+                                    <a href="essentials.js.html"
+                                        >essentials.js</a
+                                    >,
+                                    <a href="essentials.js.html#line2059"
+                                        >line 2059</a
+                                    >
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <div class="description usertext">
+                        <p>
+                            Converts string to
+                            <a
+                                href="https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases"
+                                >title case</a
+                            >.
+                        </p>
+                    </div>
+
+                    <h5>Examples</h5>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toTitleCase('normal text'));
+// expected output: 'Normal Text'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toTitleCase('camelCase'));
+// expected output: 'Camel Case'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toTitleCase('kebab-case'));
+// expected output: 'Kebab Case'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println(toTitleCase('snake_case'));
+// expected output: 'Snake Case'</code></pre>
+
+                    <pre
+                        class="prettyprint"
+                    ><code>println('normal text'.toTitleCase());
+// expected output: 'Normal Text'</code></pre>
+
+                    <h5>Parameters:</h5>
+
+                    <table class="params">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Type</th>
+
+                                <th class="last">Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="name"><code>str</code></td>
+
+                                <td class="type">
+                                    <span class="param-type">string</span>
+                                </td>
+
+                                <td class="description last"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Returns:</h5>
+
+                    <div class="param-desc">
+                        <p>string in title case</p>
+                    </div>
+
+                    <dl class="param-type">
+                        <dt>Type</dt>
+                        <dd>
+                            <span class="param-type">string</span>
+                        </dd>
+                    </dl>
+
                     <h4 class="name" id="~underlineText">
                         <span class="type-signature">(inner) </span
                         >underlineText<span class="signature"
@@ -1271,8 +1920,8 @@ printf('% %.', people, pluralize(people, 'person', 'people'));
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line1957"
-                                        >line 1957</a
+                                    <a href="essentials.js.html#line2085"
+                                        >line 2085</a
                                     >
                                 </li>
                             </ul>
@@ -1416,8 +2065,8 @@ underlineText(str, 25, 25, RED, 5);</code></pre>
                                     <a href="essentials.js.html"
                                         >essentials.js</a
                                     >,
-                                    <a href="essentials.js.html#line1996"
-                                        >line 1996</a
+                                    <a href="essentials.js.html#line2124"
+                                        >line 2124</a
                                     >
                                 </li>
                             </ul>
@@ -1524,7 +2173,7 @@ println(customWrappedStr);
         <footer>
             Documentation generated by
             <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Apr
-            17 2021 16:09:01 GMT-0700 (Pacific Daylight Time) using the
+            17 2021 18:28:19 GMT-0700 (Pacific Daylight Time) using the
             <a href="https://github.com/clenemt/docdash">docdash</a> theme.
         </footer>
 

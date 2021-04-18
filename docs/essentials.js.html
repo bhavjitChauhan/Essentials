@@ -176,6 +176,9 @@
                             <a href="module-Text.html#~font">font</a>
                         </li>
                         <li data-type="method">
+                            <a href="module-Text.html#~format">format</a>
+                        </li>
+                        <li data-type="method">
                             <a href="module-Text.html#~formatDuration"
                                 >formatDuration</a
                             >
@@ -196,6 +199,9 @@
                             >
                         </li>
                         <li data-type="method">
+                            <a href="module-Text.html#~obfuscate">obfuscate</a>
+                        </li>
+                        <li data-type="method">
                             <a href="module-Text.html#~ordinalSuffix"
                                 >ordinalSuffix</a
                             >
@@ -207,6 +213,31 @@
                         </li>
                         <li data-type="method">
                             <a href="module-Text.html#~pluralize">pluralize</a>
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~removeNonASCII"
+                                >removeNonASCII</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~toCamelCase"
+                                >toCamelCase</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~toKebabCase"
+                                >toKebabCase</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~toSnakeCase"
+                                >toSnakeCase</a
+                            >
+                        </li>
+                        <li data-type="method">
+                            <a href="module-Text.html#~toTitleCase"
+                                >toTitleCase</a
+                            >
                         </li>
                         <li data-type="method">
                             <a href="module-Text.html#~underlineText"
@@ -493,6 +524,21 @@ generateUUID = () =>
     );
 
 /**
+ * Returns a string of the form `HH:MM:SS`.
+ *
+ * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
+ *
+ * @returns {string} Formatted time
+ *
+ * @example
+ * println(getColorTime());
+ * // expected outcome: Time in the form of `HH:MM:SS`
+ */
+getColonTime = function () {
+    return (new Date()).toTimeString().slice(0, 8);
+};
+
+/**
  * Efficiently inherits properties from the parent class to the child class.
  *
  * @param {Function} subClass Class to be inherited to
@@ -525,38 +571,6 @@ inherit = (subClass, superClass) => {
 };
 
 /**
- * Returns a string of the form `HH:MM:SS`.
- *
- * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
- *
- * @returns {string} Formatted time
- *
- * @example
- * println(getColorTime());
- * // expected outcome: Time in the form of `HH:MM:SS`
- */
-getColonTime = function () {
-    return (new Date()).toTimeString().slice(0, 8);
-};
-
-/**
- * Checks if object is a Khan Academy image object.
- *
- * @param {Object} obj
- *
- * @example
- * let i = getImage("avatars/leaf-green");
- * println(isImage(i));
- * // expected output: true
- */
-isImage = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.sourceImg);
-};
-
-/**
  * Checks if object is a Khan Academy font object.
  * 
  * @param {Object} obj
@@ -578,6 +592,23 @@ isFont = obj => {
         return false;
     }
     return _.isFunction(obj.getCSSDefinition);
+};
+
+/**
+ * Checks if object is a Khan Academy image object.
+ *
+ * @param {Object} obj
+ *
+ * @example
+ * let i = getImage("avatars/leaf-green");
+ * println(isImage(i));
+ * // expected output: true
+ */
+isImage = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isObject(obj.sourceImg);
 };
 
 /**
@@ -1806,6 +1837,51 @@ font = function (family) {
 };
 
 /**
+ * Formats string similar to [template
+ * literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals}
+ * in ES6
+ *
+ * @param {string} str
+ * 
+ * @returns {string} formatted string
+ *
+ * @example
+ * println(format('PI is ${Math.PI.toFixed(2)}'))
+ * // expected output: PI is 3.14
+ * 
+ * @example
+ * println(format('${millis()}ms elapsed'));
+ * // expected outcome: value of millis() + 'ms elapsed'
+ */
+format = str => {
+    let match = _.first(str.match(/\${.*?}/));
+    while (match) {
+        let formatted;
+        try {
+            formatted = _eval(`\`${match}\``);
+        } catch (err) {
+            let head = match.match(/(\w+)\(/);
+            if (_.isArray(head)) {
+                head = head[1];
+                let args = match.match(/\(([^)]+)\)/);
+                if (_.isArray(args)) {
+                    args = args[1].split(',');
+                    formatted = e[head](...args);
+                } else {
+                    formatted = e[head]();
+                }
+            } else {
+                const property = match.match(/\w+/);
+                formatted = e[property];
+            }
+        }
+        str = str.replace(match, formatted);
+        match = _.first(str.match(/\${.*?}/));
+    }
+    return str;
+};
+
+/**
  * Converts milliseconds to a readable format of duration.
  *
  * @link https://www.30secondsofcode.org/js/s/format-duration
@@ -1978,6 +2054,46 @@ ordinalSuffix = n => {
 };
 
 /**
+ * Obfuscate strings as hexadecimal and unicode escape characters.
+ *
+ * @link https://www.khanacademy.org/cs/-/4812748875104256
+ *
+ * @param {string} str
+ * 
+ * @returns {string} obfuscated string
+ * 
+ * @example
+ * let str = 'Hello World';
+ * let obfuscated = obfuscate(str);
+ * println(obfuscated);
+ * // expected output: \x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64
+ * println('\x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64');
+ * // expected output: Hello World
+ * 
+ * @example
+ * println(str.obfuscate());
+ * // expected output: \x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64 
+ */
+obfuscate = str => {
+    let result = '';
+    for (const i in _.range(str.length)) {
+        let curr = str.charCodeAt(i).toString(16);
+        if (curr.length &lt;= 2) {
+            while (curr.length &lt; 2) {
+                curr = '0' + curr;
+            }
+            result += '\\x' + curr;
+        } else {
+            while (curr.length &lt; 4) {
+                curr = '0' + curr;
+            }
+            result += '\\u' + curr;
+        }
+    }
+    return result;
+};
+
+/**
  * Draws text with an outline.
  *
  * @param {string} string
@@ -2049,93 +2165,84 @@ pluralize = (value, word, plural = word + 's') => {
 };
 
 /**
- * Formats string similar to [template
- * literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals}
- * in ES6
- *
- * @param {string} string Formatted string
- *
- * @example
- * println('PI is ${Math.PI.toFixed(2)}'.format())
- * // expected output: PI is 3.14
- */
-String.prototype.format = function () {
-    let string = this;
-    let match = _.first(string.match(/\${.*?}/));
-    while (match) {
-        let formatted;
-        try {
-            formatted = _eval(`\`${match}\``);
-        } catch (error) {
-            const head = match.match(/(\w+)\(/)[1];
-            const args = match.match(/\(([^)]+)\)/)[1].split(',');
-            formatted = e[head](...args);
-        }
-        string = string.replace(match, formatted);
-        match = _.first(string.match(/\${.*?}/));
-    }
-    return string;
-};
-
-/**
- * Obfuscate strings as hexadecimal and unicode escape characters.
- *
- * @link https://www.khanacademy.org/cs/-/4812748875104256
- *
- * @example
- * let str = 'Hello World';
- * let obfuscated = str.obfuscate();
- * println(obfuscated);
- * // expected output: \x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64
- * println('\x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64');
- * // expected output: Hello World
- */
-String.prototype.obfuscate = function () {
-    let str = '';
-    for (const i in _.range(this.length)) {
-        let curr = this.charCodeAt(i).toString(16);
-        if (curr.length &lt;= 2) {
-            while (curr.length &lt; 2) {
-                curr = '0' + curr;
-            }
-            str += '\\x' + curr;
-        } else {
-            while (curr.length &lt; 4) {
-                curr = '0' + curr;
-            }
-            str += '\\u' + curr;
-        }
-    }
-    return str;
-};
-
-/**
  * Removes non-ACII characters from string.
  *
  * @link https://www.30secondsofcode.org/js/s/remove-non-ascii
  *
+ * @param {string} str
+ * 
+ * @returns {string} formatted string
+ * 
  * @example
  * let str = 'Hello 😀';
- * let strippedStr = str.removeNonASCII();
+ * let strippedStr = removeNonASCII(str);
  * println(strippedStr)
  * // expected output: 'Hello '
+ * 
+ * @example
+ * println(str.removeNonASCII());
+ * // expected output: 'Hello '
  */
+removeNonASCII = str => {
+    return str.replace(/[^\x20-\x7E]/g, '');
+};
+
+String.prototype.format = function() {
+    return format(this);
+};
+
+String.prototype.obfuscate = function () {
+    return obfuscate(this);
+};
+
 String.prototype.removeNonASCII = function () {
-    return this.replace(/[^\x20-\x7E]/g, '');
+    return removeNonASCII(this);
+};
+
+String.prototype.toTitleCase = function () {
+    return toTitleCase(this);
+};
+
+String.prototype.toCamelCase = function () {
+    return toCamelCase(this);
+};
+
+String.prototype.toKebabCase = function () {
+    return toKebabCase(this);
+};
+
+String.prototype.toSnakeCase = function () {
+    return toSnakeCase(this);
 };
 
 /**
- * Converts string to camel case.
+ * Converts string to [camel case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
  *
  * @link https://www.30secondsofcode.org/js/s/to-camel-case
  *
+ * @param {string} str
+ * 
+ * @returns {string} string in camel case
+ * 
  * @example
- * println('lorem ipsum'.toCamelCase());
- * // expected output: 'loremIpsum'
+ * println(toCamelCase('normal text'));
+ * // expected output: 'normalText'
+ * 
+ * @example
+ * println(toCamelCase('kebab-case'));
+ * // expected output: 'kebabCase'
+ * 
+ * @example
+ * println(toCamelCase('snake_case'));
+ * // expected output: 'snakeCase'
+ * 
+ * @example
+ * println('normal text'.toCamelCase());
+ * // expected output: 'normalText'
  */
-String.prototype.toCamelCase = function () {
+toCamelCase = str => {
     const s =
-        this
+        str
             .match(
                 /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
             )
@@ -2145,48 +2252,100 @@ String.prototype.toCamelCase = function () {
 };
 
 /**
- * Converts string to kebab case.
+ * Converts string to [kebab case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
  *
  * @link https://www.30secondsofcode.org/js/s/to-kebab-case
  *
+ * @param {string} str
+ * 
+ * @returns {string} string in kebab case
+ * 
  * @example
- * println('lorem ipsum'.toKebabCase());
- * // expected output: 'lorem-ipsum'
+ * println(toKebabCase('normal text'));
+ * // expected output: 'normal-text'
+ * 
+ * @example
+ * println(toKebabCase('camelCase'));
+ * // expected output: 'camel-case'
+ * 
+ * @example
+ * println(toKebabCase('snake_case'));
+ * // expected output: 'snake-case'
+ * 
+ * @example
+ * println('normal text'.toKebabCase());
+ * // expected output: 'normal-text'
  */
-String.prototype.toKebabCase = function () {
-    return this
+toKebabCase = str => {
+    return str
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map(x => x.toLowerCase())
         .join('-');
 };
 
 /**
- * Converts string to snake case.
+ * Converts string to [snake case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
  *
  * @link https://www.30secondsofcode.org/js/s/to-snake-case
  *
+ * @param {string} str
+ * 
+ * @returns {string} string in snake case
+ * 
  * @example
- * println('lorem ipsum'.toSnakeCase());
- * // expected output: 'lorem_ipsum'
+ * println(toSnakeCase('normal text'));
+ * // expected output: 'normal_text'
+ * 
+ * @example
+ * println(toSnakeCase('camelCase'));
+ * // expected output: 'camel_case'
+ * 
+ * @example
+ * println(toSnakeCase('kebab-case'));
+ * // expected output: 'kebab_case'
+ * 
+ * @example
+ * println('normal text'.toSnakeCase());
+ * // expected output: 'normal_text'
  */
-String.prototype.toSnakeCase = function () {
-    return this
+toSnakeCase = str => {
+    return str
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map(x => x.toLowerCase())
         .join('_');
 };
 
 /**
- * Converts string to title case.
+ * Converts string to [title case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
  *
  * @link https://www.30secondsofcode.org/js/s/to-title-case
  *
+ * @param {string} str
+ * 
+ * @returns {string} string in title case
+ * 
  * @example
- * println('lorem ipsum'.toTitleCase());
- * // expected output: 'Lorem Ipsum'
+ * println(toTitleCase('normal text'));
+ * // expected output: 'Normal Text'
+ * 
+ * @example
+ * println(toTitleCase('camelCase'));
+ * // expected output: 'Camel Case'
+ * 
+ * @example
+ * println(toTitleCase('kebab-case'));
+ * // expected output: 'Kebab Case'
+ * 
+ * @example
+ * println(toTitleCase('snake_case'));
+ * // expected output: 'Snake Case'
+ * 
+ * @example
+ * println('normal text'.toTitleCase());
+ * // expected output: 'Normal Text'
  */
-String.prototype.toTitleCase = function () {
-    return this
+toTitleCase = str => {
+    return str
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map(x => x.charAt(0).toUpperCase() + x.slice(1))
         .join(' ');
@@ -2269,6 +2428,16 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 }
 
 /**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ *
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ *
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+
+/**
  * Faster blur effect on a rectangular selection.
  *
  * @param {number} x x-coordinate of the rectangle
@@ -2283,16 +2452,6 @@ blurRect = (x, y, width, height, size) => {
     e.image(e.get(x, y, width, height), x, y, width / size, height / size);
     e.image(e.get(x, y, width / size, height / size), x, y, width, height);
 };
-
-/**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
- *
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
- *
- */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
  * Draws a 2D cylinder.
@@ -2330,55 +2489,6 @@ cylinder = (x, y, width, height) => {
         }, true);
     }
     pop();
-};
-
-/**
- * @summary
- * Draws a dashed line of a given length and at a given angle.
- *
- * @description
- * If `endDash` is true, a dash will be drawn of smaller length than defined by
- * `dashLength` to finish the line. If `endPoint` is true, a point will be drawn
- * at the end point. Use the `smooth` function to prevent jagged dashes.
- *
- * @param {number} x x-coordinate of the start point
- * @param {number} y y-coordinate of the start point
- * @param {number} length length of line
- * @param {number} [angle=0] angle of line
- * @param {number} [dashLength=10] length of dash
- * @param {number} [spacing=10] spacing between points
- * @param {boolean} [endDash=true] draw dash at end
- * @param {boolean} [endPoint=true] draw point at end point
- *
- * @example
- * strokeWeight(3);
- * dashedEdge(50, 50, 300, 0);
- * // expected outcome: straight dashed edge
- * 
- * @example
- * dashedEdge(50, 75, 300, 0, 5, 10);
- * // expected outcome: straight dashed edge with a dash length of 5 and spacing of 10
- * 
- * @example
- * dashedEdge(50, 100, 300, 0, 5, 10, false, false);
- * // expected outcome: straight dashed edge and no end point
- * 
- * @example
- * dashedEdge(50, 125, 302.5, 0, 10, 5);
- * // expected outcome: straight dashed edge and an end dash
- * 
- * @example
- * dashedEdge(50, 150, 302.5, 0, 10, 5, false);
- * // expected outcome: straight dashed edge and no end dash
- *
- * @see {@link dottedEdge}
- * @see {@link edge}
- */
-dashedEdge = (x, y, length, angle = 0, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
-    if (angleMode == 'degrees') angle = e.radians(angle);
-    const x2 = x + length * Math.cos(angle);
-    const y2 = y + length * Math.sin(angle);
-    dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);
 };
 
 /**
@@ -2430,6 +2540,55 @@ dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, end
     }
     if (endDash &amp;&amp; i &lt; length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
     if (endPoint &amp;&amp; i >= length) e.point(x2 + 0.5, y2 + 0.5);
+};
+
+/**
+ * @summary
+ * Draws a dashed line of a given length and at a given angle.
+ *
+ * @description
+ * If `endDash` is true, a dash will be drawn of smaller length than defined by
+ * `dashLength` to finish the line. If `endPoint` is true, a point will be drawn
+ * at the end point. Use the `smooth` function to prevent jagged dashes.
+ *
+ * @param {number} x x-coordinate of the start point
+ * @param {number} y y-coordinate of the start point
+ * @param {number} length length of line
+ * @param {number} [angle=0] angle of line
+ * @param {number} [dashLength=10] length of dash
+ * @param {number} [spacing=10] spacing between points
+ * @param {boolean} [endDash=true] draw dash at end
+ * @param {boolean} [endPoint=true] draw point at end point
+ *
+ * @example
+ * strokeWeight(3);
+ * dashedEdge(50, 50, 300, 0);
+ * // expected outcome: straight dashed edge
+ * 
+ * @example
+ * dashedEdge(50, 75, 300, 0, 5, 10);
+ * // expected outcome: straight dashed edge with a dash length of 5 and spacing of 10
+ * 
+ * @example
+ * dashedEdge(50, 100, 300, 0, 5, 10, false, false);
+ * // expected outcome: straight dashed edge and no end point
+ * 
+ * @example
+ * dashedEdge(50, 125, 302.5, 0, 10, 5);
+ * // expected outcome: straight dashed edge and an end dash
+ * 
+ * @example
+ * dashedEdge(50, 150, 302.5, 0, 10, 5, false);
+ * // expected outcome: straight dashed edge and no end dash
+ *
+ * @see {@link dottedEdge}
+ * @see {@link edge}
+ */
+dashedEdge = (x, y, length, angle = 0, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
+    if (angleMode == 'degrees') angle = e.radians(angle);
+    const x2 = x + length * Math.cos(angle);
+    const y2 = y + length * Math.sin(angle);
+    dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);
 };
 
 /**
@@ -2516,6 +2675,40 @@ dottedEdge = (x, y, length, angle = 0, spacing = 10, endPoint = true) => {
 };
 
 /**
+ * Alias for `beginShape()`/`endShape()`.
+ *
+ * @param {Function} fn Shape function
+ * @param {CLOSE|boolean} [close] Whether to close the shape
+ * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
+ * [mode] Shape mode
+ *
+ * @example
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, CLOSE);
+ * // expected outcome: square
+ *
+ * @example
+ * strokeWeight(5);
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, false, POINTS);
+ * // expected outcome: points in a square formation
+ */
+drawShape = (fn, close, mode) => {
+    close = close &amp;&amp; e.CLOSE;
+    e.beginShape(mode);
+    fn();
+    e.endShape(close);
+};
+
+/**
  * @summary
  * Draws a dotted line.
  *
@@ -2551,40 +2744,6 @@ dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
         e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
     }
     if (endPoint) e.point(x2, y2);
-};
-
-/**
- * Alias for `beginShape()`/`endShape()`.
- *
- * @param {Function} fn Shape function
- * @param {CLOSE|boolean} [close] Whether to close the shape
- * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
- * [mode] Shape mode
- *
- * @example
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, CLOSE);
- * // expected outcome: square
- *
- * @example
- * strokeWeight(5);
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, false, POINTS);
- * // expected outcome: points in a square formation
- */
-drawShape = (fn, close, mode) => {
-    close = close &amp;&amp; e.CLOSE;
-    e.beginShape(mode);
-    fn();
-    e.endShape(close);
 };
 
 /**
@@ -2646,29 +2805,6 @@ heart = (x, y, radius) => {
 };
 
 /**
- * Draws a parallelogram.
- *
- * @link https://www.khanacademy.org/cs/-/4747962019348480
- *
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- *
- * @example
- * parallelogram(50, 50, 200, 50, 100, 100);
- *
- * @see {@link rhombus}
- */
-parallelogram = (ax, ay, bx, by, cx, cy) => {
-    const dx = bx - ax;
-    const dy = by - ay;
-    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
-};
-
-/**
  * Draws a polygon with _n_ sides.
  *
  * @link https://www.khanacademy.org/cs/-/1304459398
@@ -2700,6 +2836,29 @@ polygon = (x, y, sides, radius, rotation) => {
         }
     }, true);
     pop();
+};
+
+/**
+ * Draws a parallelogram.
+ *
+ * @link https://www.khanacademy.org/cs/-/4747962019348480
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * parallelogram(50, 50, 200, 50, 100, 100);
+ *
+ * @see {@link rhombus}
+ */
+parallelogram = (ax, ay, bx, by, cx, cy) => {
+    const dx = bx - ax;
+    const dy = by - ay;
+    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 /**
@@ -2884,7 +3043,7 @@ trapezoid = (x, y, height, topBase, bottomBase) => {
         <footer>
             Documentation generated by
             <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Apr
-            17 2021 16:09:01 GMT-0700 (Pacific Daylight Time) using the
+            17 2021 18:28:19 GMT-0700 (Pacific Daylight Time) using the
             <a href="https://github.com/clenemt/docdash">docdash</a> theme.
         </footer>
 

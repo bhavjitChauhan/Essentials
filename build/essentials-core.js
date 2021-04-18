@@ -236,6 +236,21 @@ generateUUID = () =>
     );
 
 /**
+ * Returns a string of the form `HH:MM:SS`.
+ *
+ * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
+ *
+ * @returns {string} Formatted time
+ *
+ * @example
+ * println(getColorTime());
+ * // expected outcome: Time in the form of `HH:MM:SS`
+ */
+getColonTime = function () {
+    return (new Date()).toTimeString().slice(0, 8);
+};
+
+/**
  * Efficiently inherits properties from the parent class to the child class.
  *
  * @param {Function} subClass Class to be inherited to
@@ -268,38 +283,6 @@ inherit = (subClass, superClass) => {
 };
 
 /**
- * Returns a string of the form `HH:MM:SS`.
- *
- * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
- *
- * @returns {string} Formatted time
- *
- * @example
- * println(getColorTime());
- * // expected outcome: Time in the form of `HH:MM:SS`
- */
-getColonTime = function () {
-    return (new Date()).toTimeString().slice(0, 8);
-};
-
-/**
- * Checks if object is a Khan Academy image object.
- *
- * @param {Object} obj
- *
- * @example
- * let i = getImage("avatars/leaf-green");
- * println(isImage(i));
- * // expected output: true
- */
-isImage = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.sourceImg);
-};
-
-/**
  * Checks if object is a Khan Academy font object.
  * 
  * @param {Object} obj
@@ -321,6 +304,23 @@ isFont = obj => {
         return false;
     }
     return _.isFunction(obj.getCSSDefinition);
+};
+
+/**
+ * Checks if object is a Khan Academy image object.
+ *
+ * @param {Object} obj
+ *
+ * @example
+ * let i = getImage("avatars/leaf-green");
+ * println(isImage(i));
+ * // expected output: true
+ */
+isImage = obj => {
+    if (typeof obj != 'object') {
+        return false;
+    }
+    return _.isObject(obj.sourceImg);
 };
 
 /**

@@ -150,6 +150,51 @@ font = function (family) {
 };
 
 /**
+ * Formats string similar to [template
+ * literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals}
+ * in ES6
+ *
+ * @param {string} str
+ * 
+ * @returns {string} formatted string
+ *
+ * @example
+ * println(format('PI is ${Math.PI.toFixed(2)}'))
+ * // expected output: PI is 3.14
+ * 
+ * @example
+ * println(format('${millis()}ms elapsed'));
+ * // expected outcome: value of millis() + 'ms elapsed'
+ */
+format = str => {
+    let match = _.first(str.match(/\${.*?}/));
+    while (match) {
+        let formatted;
+        try {
+            formatted = _eval(`\`${match}\``);
+        } catch (err) {
+            let head = match.match(/(\w+)\(/);
+            if (_.isArray(head)) {
+                head = head[1];
+                let args = match.match(/\(([^)]+)\)/);
+                if (_.isArray(args)) {
+                    args = args[1].split(',');
+                    formatted = e[head](...args);
+                } else {
+                    formatted = e[head]();
+                }
+            } else {
+                const property = match.match(/\w+/);
+                formatted = e[property];
+            }
+        }
+        str = str.replace(match, formatted);
+        match = _.first(str.match(/\${.*?}/));
+    }
+    return str;
+};
+
+/**
  * Converts milliseconds to a readable format of duration.
  *
  * @link https://www.30secondsofcode.org/js/s/format-duration
@@ -322,6 +367,46 @@ ordinalSuffix = n => {
 };
 
 /**
+ * Obfuscate strings as hexadecimal and unicode escape characters.
+ *
+ * @link https://www.khanacademy.org/cs/-/4812748875104256
+ *
+ * @param {string} str
+ * 
+ * @returns {string} obfuscated string
+ * 
+ * @example
+ * let str = 'Hello World';
+ * let obfuscated = obfuscate(str);
+ * println(obfuscated);
+ * // expected output: \x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64
+ * println('\x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64');
+ * // expected output: Hello World
+ * 
+ * @example
+ * println(str.obfuscate());
+ * // expected output: \x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64 
+ */
+obfuscate = str => {
+    let result = '';
+    for (const i in _.range(str.length)) {
+        let curr = str.charCodeAt(i).toString(16);
+        if (curr.length <= 2) {
+            while (curr.length < 2) {
+                curr = '0' + curr;
+            }
+            result += '\\x' + curr;
+        } else {
+            while (curr.length < 4) {
+                curr = '0' + curr;
+            }
+            result += '\\u' + curr;
+        }
+    }
+    return result;
+};
+
+/**
  * Draws text with an outline.
  *
  * @param {string} string
@@ -393,93 +478,84 @@ pluralize = (value, word, plural = word + 's') => {
 };
 
 /**
- * Formats string similar to [template
- * literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals}
- * in ES6
- *
- * @param {string} string Formatted string
- *
- * @example
- * println('PI is ${Math.PI.toFixed(2)}'.format())
- * // expected output: PI is 3.14
- */
-String.prototype.format = function () {
-    let string = this;
-    let match = _.first(string.match(/\${.*?}/));
-    while (match) {
-        let formatted;
-        try {
-            formatted = _eval(`\`${match}\``);
-        } catch (error) {
-            const head = match.match(/(\w+)\(/)[1];
-            const args = match.match(/\(([^)]+)\)/)[1].split(',');
-            formatted = e[head](...args);
-        }
-        string = string.replace(match, formatted);
-        match = _.first(string.match(/\${.*?}/));
-    }
-    return string;
-};
-
-/**
- * Obfuscate strings as hexadecimal and unicode escape characters.
- *
- * @link https://www.khanacademy.org/cs/-/4812748875104256
- *
- * @example
- * let str = 'Hello World';
- * let obfuscated = str.obfuscate();
- * println(obfuscated);
- * // expected output: \x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64
- * println('\x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64');
- * // expected output: Hello World
- */
-String.prototype.obfuscate = function () {
-    let str = '';
-    for (const i in _.range(this.length)) {
-        let curr = this.charCodeAt(i).toString(16);
-        if (curr.length <= 2) {
-            while (curr.length < 2) {
-                curr = '0' + curr;
-            }
-            str += '\\x' + curr;
-        } else {
-            while (curr.length < 4) {
-                curr = '0' + curr;
-            }
-            str += '\\u' + curr;
-        }
-    }
-    return str;
-};
-
-/**
  * Removes non-ACII characters from string.
  *
  * @link https://www.30secondsofcode.org/js/s/remove-non-ascii
  *
+ * @param {string} str
+ * 
+ * @returns {string} formatted string
+ * 
  * @example
  * let str = 'Hello 😀';
- * let strippedStr = str.removeNonASCII();
+ * let strippedStr = removeNonASCII(str);
  * println(strippedStr)
  * // expected output: 'Hello '
+ * 
+ * @example
+ * println(str.removeNonASCII());
+ * // expected output: 'Hello '
  */
+removeNonASCII = str => {
+    return str.replace(/[^\x20-\x7E]/g, '');
+};
+
+String.prototype.format = function() {
+    return format(this);
+};
+
+String.prototype.obfuscate = function () {
+    return obfuscate(this);
+};
+
 String.prototype.removeNonASCII = function () {
-    return this.replace(/[^\x20-\x7E]/g, '');
+    return removeNonASCII(this);
+};
+
+String.prototype.toTitleCase = function () {
+    return toTitleCase(this);
+};
+
+String.prototype.toCamelCase = function () {
+    return toCamelCase(this);
+};
+
+String.prototype.toKebabCase = function () {
+    return toKebabCase(this);
+};
+
+String.prototype.toSnakeCase = function () {
+    return toSnakeCase(this);
 };
 
 /**
- * Converts string to camel case.
+ * Converts string to [camel case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
  *
  * @link https://www.30secondsofcode.org/js/s/to-camel-case
  *
+ * @param {string} str
+ * 
+ * @returns {string} string in camel case
+ * 
  * @example
- * println('lorem ipsum'.toCamelCase());
- * // expected output: 'loremIpsum'
+ * println(toCamelCase('normal text'));
+ * // expected output: 'normalText'
+ * 
+ * @example
+ * println(toCamelCase('kebab-case'));
+ * // expected output: 'kebabCase'
+ * 
+ * @example
+ * println(toCamelCase('snake_case'));
+ * // expected output: 'snakeCase'
+ * 
+ * @example
+ * println('normal text'.toCamelCase());
+ * // expected output: 'normalText'
  */
-String.prototype.toCamelCase = function () {
+toCamelCase = str => {
     const s =
-        this
+        str
             .match(
                 /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
             )
@@ -489,48 +565,100 @@ String.prototype.toCamelCase = function () {
 };
 
 /**
- * Converts string to kebab case.
+ * Converts string to [kebab case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
  *
  * @link https://www.30secondsofcode.org/js/s/to-kebab-case
  *
+ * @param {string} str
+ * 
+ * @returns {string} string in kebab case
+ * 
  * @example
- * println('lorem ipsum'.toKebabCase());
- * // expected output: 'lorem-ipsum'
+ * println(toKebabCase('normal text'));
+ * // expected output: 'normal-text'
+ * 
+ * @example
+ * println(toKebabCase('camelCase'));
+ * // expected output: 'camel-case'
+ * 
+ * @example
+ * println(toKebabCase('snake_case'));
+ * // expected output: 'snake-case'
+ * 
+ * @example
+ * println('normal text'.toKebabCase());
+ * // expected output: 'normal-text'
  */
-String.prototype.toKebabCase = function () {
-    return this
+toKebabCase = str => {
+    return str
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map(x => x.toLowerCase())
         .join('-');
 };
 
 /**
- * Converts string to snake case.
+ * Converts string to [snake case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
  *
  * @link https://www.30secondsofcode.org/js/s/to-snake-case
  *
+ * @param {string} str
+ * 
+ * @returns {string} string in snake case
+ * 
  * @example
- * println('lorem ipsum'.toSnakeCase());
- * // expected output: 'lorem_ipsum'
+ * println(toSnakeCase('normal text'));
+ * // expected output: 'normal_text'
+ * 
+ * @example
+ * println(toSnakeCase('camelCase'));
+ * // expected output: 'camel_case'
+ * 
+ * @example
+ * println(toSnakeCase('kebab-case'));
+ * // expected output: 'kebab_case'
+ * 
+ * @example
+ * println('normal text'.toSnakeCase());
+ * // expected output: 'normal_text'
  */
-String.prototype.toSnakeCase = function () {
-    return this
+toSnakeCase = str => {
+    return str
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map(x => x.toLowerCase())
         .join('_');
 };
 
 /**
- * Converts string to title case.
+ * Converts string to [title case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
  *
  * @link https://www.30secondsofcode.org/js/s/to-title-case
  *
+ * @param {string} str
+ * 
+ * @returns {string} string in title case
+ * 
  * @example
- * println('lorem ipsum'.toTitleCase());
- * // expected output: 'Lorem Ipsum'
+ * println(toTitleCase('normal text'));
+ * // expected output: 'Normal Text'
+ * 
+ * @example
+ * println(toTitleCase('camelCase'));
+ * // expected output: 'Camel Case'
+ * 
+ * @example
+ * println(toTitleCase('kebab-case'));
+ * // expected output: 'Kebab Case'
+ * 
+ * @example
+ * println(toTitleCase('snake_case'));
+ * // expected output: 'Snake Case'
+ * 
+ * @example
+ * println('normal text'.toTitleCase());
+ * // expected output: 'Normal Text'
  */
-String.prototype.toTitleCase = function () {
-    return this
+toTitleCase = str => {
+    return str
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map(x => x.charAt(0).toUpperCase() + x.slice(1))
         .join(' ');

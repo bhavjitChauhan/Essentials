@@ -7,15 +7,15 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
   if (!_silent_ && !_shape_initialized_) console.info('%cShape Essentials', _console_style_);
 }
 
+circle = function (x, y, radius) {
+  return e.ellipse(x, y, radius, radius);
+};
+
 blurRect = function (x, y, width, height, size) {
   if (size <= 0) return;
   size = e.constrain(size, 0, Math.min(width, height));
   e.image(e.get(x, y, width, height), x, y, width / size, height / size);
   e.image(e.get(x, y, width / size, height / size), x, y, width, height);
-};
-
-circle = function (x, y, radius) {
-  return e.ellipse(x, y, radius, radius);
 };
 
 cylinder = function (x, y, width, height) {
@@ -46,18 +46,6 @@ cylinder = function (x, y, width, height) {
   pop();
 };
 
-dashedEdge = function (x, y, length) {
-  var angle = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
-  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
-  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
-  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-  if (angleMode == 'degrees') angle = e.radians(angle);
-  var x2 = x + length * Math.cos(angle);
-  var y2 = y + length * Math.sin(angle);
-  dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);
-};
-
 dashedLine = function (x1, y1, x2, y2) {
   var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
   var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
@@ -72,6 +60,18 @@ dashedLine = function (x1, y1, x2, y2) {
 
   if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
   if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
+};
+
+dashedEdge = function (x, y, length) {
+  var angle = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  var dashLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
+  var spacing = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 10;
+  var endDash = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+  var endPoint = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
+  if (angleMode == 'degrees') angle = e.radians(angle);
+  var x2 = x + length * Math.cos(angle);
+  var y2 = y + length * Math.sin(angle);
+  dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);
 };
 
 donut = function (x, y, majorDiameter, minorDiameter) {
@@ -115,6 +115,13 @@ dottedEdge = function (x, y, length) {
   dottedLine(x, y, x2, y2, spacing, endPoint);
 };
 
+drawShape = function (fn, close, mode) {
+  close = close && e.CLOSE;
+  e.beginShape(mode);
+  fn();
+  e.endShape(close);
+};
+
 dottedLine = function (x1, y1, x2, y2) {
   var spacing = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 10;
   var endPoint = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
@@ -125,13 +132,6 @@ dottedLine = function (x1, y1, x2, y2) {
   }
 
   if (endPoint) e.point(x2, y2);
-};
-
-drawShape = function (fn, close, mode) {
-  close = close && e.CLOSE;
-  e.beginShape(mode);
-  fn();
-  e.endShape(close);
 };
 
 edge = function (x, y, length) {
@@ -158,12 +158,6 @@ heart = function (x, y, radius) {
   }, true);
 };
 
-parallelogram = function (ax, ay, bx, by, cx, cy) {
-  var dx = bx - ax;
-  var dy = by - ay;
-  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
-};
-
 polygon = function (x, y, sides, radius, rotation) {
   var _TAU = Math.cos(Math.PI) < 0 ? 2 * Math.PI : 360;
 
@@ -176,6 +170,12 @@ polygon = function (x, y, sides, radius, rotation) {
     }
   }, true);
   pop();
+};
+
+parallelogram = function (ax, ay, bx, by, cx, cy) {
+  var dx = bx - ax;
+  var dy = by - ay;
+  e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 rectangle = function (x, y, width) {

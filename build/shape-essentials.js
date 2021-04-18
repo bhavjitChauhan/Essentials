@@ -13,6 +13,16 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 }
 
 /**
+ * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ *
+ * @param {number} x x-coordinate of the circle
+ * @param {number} y y-coordinate of the circle
+ * @param {number} radius radius of the circle
+ *
+ */
+circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+
+/**
  * Faster blur effect on a rectangular selection.
  *
  * @param {number} x x-coordinate of the rectangle
@@ -27,16 +37,6 @@ blurRect = (x, y, width, height, size) => {
     e.image(e.get(x, y, width, height), x, y, width / size, height / size);
     e.image(e.get(x, y, width / size, height / size), x, y, width, height);
 };
-
-/**
- * Alias for `ellipse()` without the separate `width` and `height` parameters.
- *
- * @param {number} x x-coordinate of the circle
- * @param {number} y y-coordinate of the circle
- * @param {number} radius radius of the circle
- *
- */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
 
 /**
  * Draws a 2D cylinder.
@@ -74,55 +74,6 @@ cylinder = (x, y, width, height) => {
         }, true);
     }
     pop();
-};
-
-/**
- * @summary
- * Draws a dashed line of a given length and at a given angle.
- *
- * @description
- * If `endDash` is true, a dash will be drawn of smaller length than defined by
- * `dashLength` to finish the line. If `endPoint` is true, a point will be drawn
- * at the end point. Use the `smooth` function to prevent jagged dashes.
- *
- * @param {number} x x-coordinate of the start point
- * @param {number} y y-coordinate of the start point
- * @param {number} length length of line
- * @param {number} [angle=0] angle of line
- * @param {number} [dashLength=10] length of dash
- * @param {number} [spacing=10] spacing between points
- * @param {boolean} [endDash=true] draw dash at end
- * @param {boolean} [endPoint=true] draw point at end point
- *
- * @example
- * strokeWeight(3);
- * dashedEdge(50, 50, 300, 0);
- * // expected outcome: straight dashed edge
- * 
- * @example
- * dashedEdge(50, 75, 300, 0, 5, 10);
- * // expected outcome: straight dashed edge with a dash length of 5 and spacing of 10
- * 
- * @example
- * dashedEdge(50, 100, 300, 0, 5, 10, false, false);
- * // expected outcome: straight dashed edge and no end point
- * 
- * @example
- * dashedEdge(50, 125, 302.5, 0, 10, 5);
- * // expected outcome: straight dashed edge and an end dash
- * 
- * @example
- * dashedEdge(50, 150, 302.5, 0, 10, 5, false);
- * // expected outcome: straight dashed edge and no end dash
- *
- * @see {@link dottedEdge}
- * @see {@link edge}
- */
-dashedEdge = (x, y, length, angle = 0, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
-    if (angleMode == 'degrees') angle = e.radians(angle);
-    const x2 = x + length * Math.cos(angle);
-    const y2 = y + length * Math.sin(angle);
-    dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);
 };
 
 /**
@@ -174,6 +125,55 @@ dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, end
     }
     if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
     if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
+};
+
+/**
+ * @summary
+ * Draws a dashed line of a given length and at a given angle.
+ *
+ * @description
+ * If `endDash` is true, a dash will be drawn of smaller length than defined by
+ * `dashLength` to finish the line. If `endPoint` is true, a point will be drawn
+ * at the end point. Use the `smooth` function to prevent jagged dashes.
+ *
+ * @param {number} x x-coordinate of the start point
+ * @param {number} y y-coordinate of the start point
+ * @param {number} length length of line
+ * @param {number} [angle=0] angle of line
+ * @param {number} [dashLength=10] length of dash
+ * @param {number} [spacing=10] spacing between points
+ * @param {boolean} [endDash=true] draw dash at end
+ * @param {boolean} [endPoint=true] draw point at end point
+ *
+ * @example
+ * strokeWeight(3);
+ * dashedEdge(50, 50, 300, 0);
+ * // expected outcome: straight dashed edge
+ * 
+ * @example
+ * dashedEdge(50, 75, 300, 0, 5, 10);
+ * // expected outcome: straight dashed edge with a dash length of 5 and spacing of 10
+ * 
+ * @example
+ * dashedEdge(50, 100, 300, 0, 5, 10, false, false);
+ * // expected outcome: straight dashed edge and no end point
+ * 
+ * @example
+ * dashedEdge(50, 125, 302.5, 0, 10, 5);
+ * // expected outcome: straight dashed edge and an end dash
+ * 
+ * @example
+ * dashedEdge(50, 150, 302.5, 0, 10, 5, false);
+ * // expected outcome: straight dashed edge and no end dash
+ *
+ * @see {@link dottedEdge}
+ * @see {@link edge}
+ */
+dashedEdge = (x, y, length, angle = 0, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
+    if (angleMode == 'degrees') angle = e.radians(angle);
+    const x2 = x + length * Math.cos(angle);
+    const y2 = y + length * Math.sin(angle);
+    dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);
 };
 
 /**
@@ -260,6 +260,40 @@ dottedEdge = (x, y, length, angle = 0, spacing = 10, endPoint = true) => {
 };
 
 /**
+ * Alias for `beginShape()`/`endShape()`.
+ *
+ * @param {Function} fn Shape function
+ * @param {CLOSE|boolean} [close] Whether to close the shape
+ * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
+ * [mode] Shape mode
+ *
+ * @example
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, CLOSE);
+ * // expected outcome: square
+ *
+ * @example
+ * strokeWeight(5);
+ * drawShape(function() {
+ *     vertex(100, 100);
+ *     vertex(200, 100);
+ *     vertex(200, 200);
+ *     vertex(100, 200);
+ * }, false, POINTS);
+ * // expected outcome: points in a square formation
+ */
+drawShape = (fn, close, mode) => {
+    close = close && e.CLOSE;
+    e.beginShape(mode);
+    fn();
+    e.endShape(close);
+};
+
+/**
  * @summary
  * Draws a dotted line.
  *
@@ -295,40 +329,6 @@ dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
         e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
     }
     if (endPoint) e.point(x2, y2);
-};
-
-/**
- * Alias for `beginShape()`/`endShape()`.
- *
- * @param {Function} fn Shape function
- * @param {CLOSE|boolean} [close] Whether to close the shape
- * @param {POINTS|LINES|TRIANGLES|TRIANGLE_FAN|TRIANGLE_STRIP|QUADS|QUAD_STRIP}
- * [mode] Shape mode
- *
- * @example
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, CLOSE);
- * // expected outcome: square
- *
- * @example
- * strokeWeight(5);
- * drawShape(function() {
- *     vertex(100, 100);
- *     vertex(200, 100);
- *     vertex(200, 200);
- *     vertex(100, 200);
- * }, false, POINTS);
- * // expected outcome: points in a square formation
- */
-drawShape = (fn, close, mode) => {
-    close = close && e.CLOSE;
-    e.beginShape(mode);
-    fn();
-    e.endShape(close);
 };
 
 /**
@@ -390,29 +390,6 @@ heart = (x, y, radius) => {
 };
 
 /**
- * Draws a parallelogram.
- *
- * @link https://www.khanacademy.org/cs/-/4747962019348480
- *
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- *
- * @example
- * parallelogram(50, 50, 200, 50, 100, 100);
- *
- * @see {@link rhombus}
- */
-parallelogram = (ax, ay, bx, by, cx, cy) => {
-    const dx = bx - ax;
-    const dy = by - ay;
-    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
-};
-
-/**
  * Draws a polygon with _n_ sides.
  *
  * @link https://www.khanacademy.org/cs/-/1304459398
@@ -444,6 +421,29 @@ polygon = (x, y, sides, radius, rotation) => {
         }
     }, true);
     pop();
+};
+
+/**
+ * Draws a parallelogram.
+ *
+ * @link https://www.khanacademy.org/cs/-/4747962019348480
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * parallelogram(50, 50, 200, 50, 100, 100);
+ *
+ * @see {@link rhombus}
+ */
+parallelogram = (ax, ay, bx, by, cx, cy) => {
+    const dx = bx - ax;
+    const dy = by - ay;
+    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };
 
 /**
