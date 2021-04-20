@@ -13,8 +13,7 @@
     "doc:md": "concurrently \"npx jsdoc2md essentials.js > internal/Essentials-Documentation.md\" \"node scripts/wiki.js\"",
     "doc:ka": "node scripts/showdown.js",
     "doc:format": "node scripts/prettier.js",
-    "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka && npm run doc:format",
-    "prepare": "husky install"
+    "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka && npm run doc:format"
   },
   "repository": {
     "type": "git",
