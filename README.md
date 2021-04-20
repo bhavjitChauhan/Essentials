@@ -102,7 +102,7 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.
 See alternative integration methods on the project Wiki page on [Usage](https://github.com/bhavjitChauhan/Essentials/wiki/Usage).
 
 ### Khan Academy
-Essentials is also available locally via the KA build. This code will run as fast as any Khan Academy code. It is recommended to use the [Essentials Builder](#builder) to generate the boilerplate code but alternatively, you may also copy and paste directly from the [essentials-ka.min.js](https://raw.githubusercontent.com/bhavjitChauhan/Essentials/master/build/essentials-ka.min.js) file.
+Essentials is also available locally via the KA build. This code will run as fast as any Khan Academy code. It is recommended to use the [Essentials Builder](#builder) to generate the boilerplate code.
 
 Wrapping the Essentials library code in `// {` and `// }` allows you to fold the code into one line for aesthetic purposes.
 
