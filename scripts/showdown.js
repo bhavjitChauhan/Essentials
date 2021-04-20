@@ -21,7 +21,7 @@ readFile('internal/Essentials-Documentation.md', 'utf8', (err, data) => {
     const converter = new Converter({ tables: true });
     let html = converter.makeHtml(data);
 
-    readFile('docs/styles/jsdoc-default.css', 'utf8', (err, data) => {
+    readFile('docs/styles/jsdoc.css', 'utf8', (err, data) => {
         const css = data;
         html = header + '\n<style>\n' + css + '</style>\n' + body + html + '\n</body>\n</html>';
         writeFile('internal/Essentials-Documentation.html', html, err => {
