@@ -1,292 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>essentials.js - Documentation</title>
-
-        <script src="scripts/prettify/prettify.js"></script>
-        <script src="scripts/prettify/lang-css.js"></script>
-        <!--[if lt IE 9]>
-            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        <link type="text/css" rel="stylesheet" href="styles/prettify.css" />
-        <link type="text/css" rel="stylesheet" href="styles/jsdoc.css" />
-        <script src="scripts/nav.js" defer></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    </head>
-    <body>
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger" class="navicon-button x">
-            <div class="navicon"></div>
-        </label>
-
-        <label for="nav-trigger" class="overlay"></label>
-
-        <nav>
-            <input type="text" id="nav-search" placeholder="Search" />
-
-            <h2><a href="index.html">Home</a></h2>
-            <h3>Modules</h3>
-            <ul>
-                <li>
-                    <a href="module-Color.html">Color</a>
-                    <ul class="methods">
-                        <li data-type="method">
-                            <a href="module-Color.html#~angularGradient"
-                                >angularGradient</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a
-                                href="module-Color.html#~angularGradientBackground"
-                                >angularGradientBackground</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Color.html#~circularGradient"
-                                >circularGradient</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a
-                                href="module-Color.html#~circularGradientBackground"
-                                >circularGradientBackground</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Color.html#~hexToRGB">hexToRGB</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Color.html#~HSBToRGB">HSBToRGB</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Color.html#~linearGradient"
-                                >linearGradient</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a
-                                href="module-Color.html#~linearGradientBackground"
-                                >linearGradientBackground</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Color.html#~radialGradient"
-                                >radialGradient</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a
-                                href="module-Color.html#~radialGradientBackground"
-                                >radialGradientBackground</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Color.html#~RGBToHex">RGBToHex</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Color.html#~RGBToHSB">RGBToHSB</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Color.html#~toHSB">toHSB</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Color.html#~toRGB">toRGB</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="module-Shape.html">Shape</a>
-                    <ul class="methods">
-                        <li data-type="method">
-                            <a href="module-Shape.html#~blurRect">blurRect</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~circle">circle</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~cylinder">cylinder</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~dashedEdge"
-                                >dashedEdge</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~dashedLine"
-                                >dashedLine</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~donut">donut</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~dottedEdge"
-                                >dottedEdge</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~dottedLine"
-                                >dottedLine</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~drawShape">drawShape</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~edge">edge</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~heart">heart</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~parallelogram"
-                                >parallelogram</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~polygon">polygon</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~rectangle">rectangle</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~rhombus">rhombus</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~square">square</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~star">star</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Shape.html#~trapezoid">trapezoid</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="module-Text.html">Text</a>
-                    <ul class="methods">
-                        <li data-type="method">
-                            <a href="module-Text.html#~fastGradientText"
-                                >fastGradientText</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~font">font</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~format">format</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~formatDuration"
-                                >formatDuration</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~highlightText"
-                                >highlightText</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~lightOrDarkText"
-                                >lightOrDarkText</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~multicoloredText"
-                                >multicoloredText</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~obfuscate">obfuscate</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~ordinalSuffix"
-                                >ordinalSuffix</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~outlineText"
-                                >outlineText</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~pluralize">pluralize</a>
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~removeNonASCII"
-                                >removeNonASCII</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~toCamelCase"
-                                >toCamelCase</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~toKebabCase"
-                                >toKebabCase</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~toSnakeCase"
-                                >toSnakeCase</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~toTitleCase"
-                                >toTitleCase</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~underlineText"
-                                >underlineText</a
-                            >
-                        </li>
-                        <li data-type="method">
-                            <a href="module-Text.html#~wordWrap">wordWrap</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <h3>Global</h3>
-            <ul>
-                <li><a href="global.html#attempt">attempt</a></li>
-                <li><a href="global.html#CANVAS">CANVAS</a></li>
-                <li><a href="global.html#CANVAS_LOG">CANVAS_LOG</a></li>
-                <li><a href="global.html#chainAsync">chainAsync</a></li>
-                <li><a href="global.html#clean">clean</a></li>
-                <li><a href="global.html#clearLogs">clearLogs</a></li>
-                <li><a href="global.html#complement">complement</a></li>
-                <li><a href="global.html#generateUUID">generateUUID</a></li>
-                <li><a href="global.html#getColonTime">getColonTime</a></li>
-                <li><a href="global.html#HALF_HEIGHT">HALF_HEIGHT</a></li>
-                <li><a href="global.html#HALF_WIDTH">HALF_WIDTH</a></li>
-                <li><a href="global.html#HEIGHT">HEIGHT</a></li>
-                <li><a href="global.html#inherit">inherit</a></li>
-                <li><a href="global.html#isFont">isFont</a></li>
-                <li><a href="global.html#isImage">isImage</a></li>
-                <li><a href="global.html#isSound">isSound</a></li>
-                <li><a href="global.html#mostPerformant">mostPerformant</a></li>
-                <li><a href="global.html#noop">noop</a></li>
-                <li><a href="global.html#pop">pop</a></li>
-                <li><a href="global.html#printf">printf</a></li>
-                <li><a href="global.html#push">push</a></li>
-                <li><a href="global.html#randomInt">randomInt</a></li>
-                <li><a href="global.html#restart">restart</a></li>
-                <li><a href="global.html#showGraphics">showGraphics</a></li>
-                <li><a href="global.html#timeTaken">timeTaken</a></li>
-                <li><a href="global.html#WIDTH">WIDTH</a></li>
-            </ul>
-        </nav>
-
-        <div id="main">
-            <h1 class="page-title">essentials.js</h1>
-
-            <section>
-                <article>
-                    <pre class="prettyprint source linenums"><code>/**
+/**
  * Essentials.
  *
  * The Essentials library provides utility functions for the Khan Academy
@@ -312,8 +24,8 @@ _/_/_/_/  _/_/_/    _/_/_/    _/_/_/_/  _/      _/      _/      _/_/_/  _/    _/
 
 `;
 
-_silent_ = typeof _silent_ !== 'undefined' &amp;&amp; _silent_;
-if (!_silent_ &amp;&amp; !_core_initialized_) console.info(
+_silent_ = typeof _silent_ !== 'undefined' && _silent_;
+if (!_silent_ && !_core_initialized_) console.info(
     `%cESSENTIALS
 %cThe Khan Academy utility library.
 
@@ -428,7 +140,7 @@ attempt = (fn, ...args) => {
  *     function(next) {
  *         console.log('Generating array...');
  *         array = [];
- *         for (let i = 0; i &lt; 10000; i++) {
+ *         for (let i = 0; i < 10000; i++) {
  *             array.push(Math.random(0, 100));
  *         }
  *         next();
@@ -468,7 +180,7 @@ chainAsync = fns => {
  *
  * @example
  * const drawEllipses = function() {
- *     for (let i = 0; i &lt; 1e4; i++) {
+ *     for (let i = 0; i < 1e4; i++) {
  *         ellipse(Math.random(0, width), Math.random(0, height), 10, 10);
  *     }
  * };
@@ -476,7 +188,7 @@ chainAsync = fns => {
  *
  * @example
  * const drawEllipses = clean(function() {
- *     for (let i = 0; i &lt; 1e4; i++) {
+ *     for (let i = 0; i < 1e4; i++) {
  *         ellipse(Math.random(0, width), Math.random(0, height), 10, 10);
  *     }
  * });
@@ -500,7 +212,7 @@ generateUUID = () =>
     ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
         (
             c ^
-            (crypto.getRandomValues(new Uint8Array(1))[0] &amp; (15 >> (c / 4)))
+            (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
         ).toString(16)
     );
 
@@ -659,7 +371,7 @@ isSound = obj => {
 mostPerformant = (fns, iterations = 1e4) => {
     const times = fns.map(fn => {
         const before = performance.now();
-        for (let i = 0; i &lt; iterations; i++) fn();
+        for (let i = 0; i < iterations; i++) fn();
         return performance.now() - before;
     });
     return times.indexOf(Math.min(...times));
@@ -705,7 +417,7 @@ printf = function(string) {
     const args = Array.from(arguments)
         .slice(1);
     for (const i in args) {
-        string = string.replace(/(?&lt;!\\)%/, args[i]);
+        string = string.replace(/(?<!\\)%/, args[i]);
     }
     string = string.replaceAll(/\\%/g, '%');
     e.println(string);
@@ -783,17 +495,17 @@ showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
  *
  * @example
  * timeTaken(function() {
- *     for(let i = 0; i &lt; 1e3; i++) { println(i); }
+ *     for(let i = 0; i < 1e3; i++) { println(i); }
  * });
  * // possible output: 'timeTaken#default: 1000.000000000000 ms'
  *
  * @example
  * timeTaken(function() {
- *     for(let i = 0; i &lt; 1e3; i++) { println(i); }
+ *     for(let i = 0; i < 1e3; i++) { println(i); }
  * }, '1000');
  * // possible output: 'timeTaken#1000: 1000.000000000000 ms'
  * timeTaken(function() {
- *     for(let i = 0; i &lt; 1e2; i++) { println(i); }
+ *     for(let i = 0; i < 1e2; i++) { println(i); }
  * }, '100');
  * // possible output: 'timeTaken#100: 100.000000000000 ms'
  *
@@ -813,7 +525,7 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     console.error('Color Essentials depends on the Essentials Core.');
 } else {
     COLOR_ESSENTIALS = true;
-    if (!_silent_ &amp;&amp; !_color_initialized_) console.info(
+    if (!_silent_ && !_color_initialized_) console.info(
         '%cColor Essentials',
         _console_style_
     );
@@ -955,12 +667,12 @@ circularGradientBackground = (startColor, endColor, angle = 0, step = 5) => {
  */
 angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
     angle -= 90;
-    // `atan` could be `asin`. See https://jsbench.me/mmklrhzgra/1 &amp; https://www.khanacademy.org/cs/-/4713637410717696
+    // `atan` could be `asin`. See https://jsbench.me/mmklrhzgra/1 & https://www.khanacademy.org/cs/-/4713637410717696
     const dTheta = Math.ceil(e.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
     push();
     if (step == 1) {
         e.strokeWeight(1.5);
-        for (let i = angle; i &lt; angle + 359; i += dTheta) {
+        for (let i = angle; i < angle + 359; i += dTheta) {
             e.stroke(e.lerpColor(startColor, endColor, (i - angle) / 360));
             r = e.radians(i);
             e.line(x + width / 2, y + height / 2,
@@ -969,7 +681,7 @@ angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 
         }
     } else {
         e.strokeWeight(1);
-        for (let i = angle; i &lt; angle + 359; i += dTheta) {
+        for (let i = angle; i < angle + 359; i += dTheta) {
             const c = e.lerpColor(startColor, endColor, (i - angle) / 360);
             e.stroke(c);
             e.fill(c);
@@ -1022,7 +734,7 @@ circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step =
     push();
     if (step == 1) {
         e.strokeWeight(1.5);
-        for (let i = angle - 1; i &lt; angle + 180; i += dTheta) {
+        for (let i = angle - 1; i < angle + 180; i += dTheta) {
             e.stroke(e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180)));
             r = e.radians(i);
             e.line(x + width / 2, y + height / 2,
@@ -1038,7 +750,7 @@ circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step =
         }
     } else {
         e.strokeWeight(1);
-        for (let i = angle - 1; i &lt; angle + 180; i += dTheta) {
+        for (let i = angle - 1; i < angle + 180; i += dTheta) {
             const c = e.lerpColor(startColor, endColor, Math.abs((i - angle) / 180));
             e.stroke(c);
             e.fill(c);
@@ -1391,12 +1103,12 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
         case RIGHT:
             if (direction == LEFT) [startColor, endColor] = [endColor, startColor];
             if (step == 1) {
-                for (let i = 0; i &lt; width; i++) {
+                for (let i = 0; i < width; i++) {
                     e.stroke(e.lerpColor(startColor, endColor, i / width));
                     e.line(x + i, y, x + i, y + height);
                 }
             } else {
-                for (let i = 0; i &lt; width; i += step) {
+                for (let i = 0; i < width; i += step) {
                     const c = e.lerpColor(startColor, endColor, i / width);
                     e.stroke(c);
                     e.fill(c);
@@ -1411,12 +1123,12 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
         case DOWN:
             if (direction == TOP || direction == UP) [startColor, endColor] = [endColor, startColor];
             if (step == 1) {
-                for (let i = 0; i &lt; height; i++) {
+                for (let i = 0; i < height; i++) {
                     e.stroke(e.lerpColor(startColor, endColor, i / height));
                     e.line(x, y + i, x + width, y + i);
                 }
             } else {
-                for (let i = 0; i &lt; height; i += step) {
+                for (let i = 0; i < height; i += step) {
                     const c = e.lerpColor(startColor, endColor, i / height);
                     e.stroke(c);
                     e.fill(c);
@@ -1429,11 +1141,11 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
         case BOTTOM_RIGHT:
             if (direction == TOP_LEFT) [startColor, endColor] = [endColor, startColor];
             if (step == 1) {
-                for (let i = 0; i &lt; width; i++) {
+                for (let i = 0; i < width; i++) {
                     e.stroke(e.lerpColor(startColor, endColor, i / width / 2));
                     e.line(x + i, y, x, y + e.map(i, 0, width, 0, height));
                 }
-                for (let i = 0; i &lt; width; i++) {
+                for (let i = 0; i < width; i++) {
                     e.stroke(e.lerpColor(startColor, endColor, i / width / 2 + 0.5));
                     e.line(x + i, y + height, x + width, y + e.map(i, 0, width, 0, height));
                 }
@@ -1442,7 +1154,7 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
                 showGraphics(x, y, width, height, function () {
                     this.angleMode = 'degrees';
                     this.rotate(-45);
-                    for (let i = 0; i &lt; side; i += step) {
+                    for (let i = 0; i < side; i += step) {
                         const c = this.lerpColor(startColor, endColor, i / side);
                         this.stroke(c);
                         this.fill(c);
@@ -1456,11 +1168,11 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
         case BOTTOM_LEFT:
             if (direction == TOP_RIGHT) [startColor, endColor] = [endColor, startColor];
             if (step == 1) {
-                for (let i = 0; i &lt; width; i++) {
+                for (let i = 0; i < width; i++) {
                     e.stroke(e.lerpColor(startColor, endColor, i / width / 2));
                     e.line(x + width - i, y, x + width, y + e.map(i, 0, width, 0, height));
                 }
-                for (let i = 0; i &lt; width; i++) {
+                for (let i = 0; i < width; i++) {
                     e.stroke(e.lerpColor(startColor, endColor, i / width / 2 + 0.5));
                     e.line(x + width - i, y + height, x, y + e.map(i, 0, width, 0, height));
                 }
@@ -1469,7 +1181,7 @@ linearGradient = (x, y, width, height, startColor, endColor, direction = RIGHT, 
                 showGraphics(x, y, width, height, function () {
                     this.angleMode = 'degrees';
                     this.rotate(45);
-                    for (let i = 0; i &lt; side; i += step) {
+                    for (let i = 0; i < side; i += step) {
                         const c = this.lerpColor(startColor, endColor, i / side);
                         this.stroke(c);
                         this.fill(c);
@@ -1514,7 +1226,7 @@ radialGradient = (x, y, width, height, startColor, endColor, step = 5) => {
     const maxRadius = Math.max(width, height);
     if (step == 1) {
         e.noFill();
-        for (let i = 0; i &lt; maxRadius; i++) {
+        for (let i = 0; i < maxRadius; i++) {
             e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
             e.arc(x, y,
                 width - e.map(i, 0, maxRadius, 0, width),
@@ -1522,7 +1234,7 @@ radialGradient = (x, y, width, height, startColor, endColor, step = 5) => {
                 0, 360);
         }
     } else {
-        for (let i = 0; i &lt; maxRadius; i += step) {
+        for (let i = 0; i < maxRadius; i += step) {
             const c = e.lerpColor(endColor, startColor, i / maxRadius);
             e.stroke(c);
             e.fill(c);
@@ -1555,9 +1267,9 @@ radialGradient = (x, y, width, height, startColor, endColor, step = 5) => {
 RGBToHex = function(x, g, b) {
     if (arguments.length == 1) {
         c = x;
-        x = c >> 16 &amp; 0xFF, g = c >> 8 &amp; 0xFF, b = c &amp; 0xFF;
+        x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
     }
-    return '#' + ((1 &lt;&lt; 24) + (x &lt;&lt; 16) + (g &lt;&lt; 8) + b).toString(16).slice(1);
+    return '#' + ((1 << 24) + (x << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
 /**
@@ -1580,7 +1292,7 @@ RGBToHex = function(x, g, b) {
 RGBToHSB = function(x, g, b) {
     if (arguments.length == 1) {
         c = x;
-        x = c >> 16 &amp; 0xFF, g = c >> 8 &amp; 0xFF, b = c &amp; 0xFF;
+        x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
     }
 
     x /= 255, g /= 255, b /= 255;
@@ -1596,7 +1308,7 @@ RGBToHSB = function(x, g, b) {
         h = 0;
     } else {
         switch (maxValue) {
-            case x: h = (g - b) / d + (g &lt; b ? 6 : 0); break;
+            case x: h = (g - b) / d + (g < b ? 6 : 0); break;
             case g: h = (b - x) / d + 2; break;
             case b: h = (x - g) / d + 4; break;
         }
@@ -1695,7 +1407,7 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     console.error('Text Essentials depends on Color Essentials.');
 } else {
     TEXT_ESSENTIALS = true;
-    if (!_silent_ &amp;&amp; !_text_initialized_) console.info(
+    if (!_silent_ && !_text_initialized_) console.info(
         '%cText Essentials',
         _console_style_
     );
@@ -1726,7 +1438,7 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
 fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => {
     push();
     if (!string.includes('\n')) {
-        for (let i = 0; i &lt; string.length; i++) {
+        for (let i = 0; i < string.length; i++) {
             e.fill(e.lerpColor(startColor, endColor, i / (string.length)));
             e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
         }
@@ -1795,7 +1507,7 @@ font = function (family) {
     let call = properties.find(function (property) {
         return _.isBoolean(property);
     });
-    call = !_.isBoolean(call) &amp;&amp; true;
+    call = !_.isBoolean(call) && true;
     properties = _.without(properties, true, false);
     let _font;
     let size = properties.find(function (property) { return !isNaN(property); });
@@ -1829,10 +1541,10 @@ font = function (family) {
         size = size || 12;
         _font = e.createFont(family, size);
         properties = _.without(properties, size);
-        _font.css = (!_.isEmpty(properties) &amp;&amp; properties.join(' ') + ' ') + `${size}px/${size + 2}px ${family}`;
-        // font.css = (!_.isEmpty(properties) &amp;&amp; properties.join(' ') + ' ') + size + 'px/' + (size + 2) + 'px ' + family;
+        _font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + `${size}px/${size + 2}px ${family}`;
+        // font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + size + 'px/' + (size + 2) + 'px ' + family;
     }
-    call &amp;&amp; e.textFont(_font);
+    call && e.textFont(_font);
     return _font;
 };
 
@@ -1896,7 +1608,7 @@ format = str => {
  * // expected output: '1 day, 39 minutes, 35 seconds, 244 milliseconds'
  */
 formatDuration = ms => {
-    if (ms &lt; 0) ms = -ms;
+    if (ms < 0) ms = -ms;
     const time = {
         day: Math.floor(ms / 86400000),
         hour: Math.floor(ms / 3600000) % 24,
@@ -1982,7 +1694,7 @@ lightOrDarkText = backgroundColor => {
         g = e.green(backgroundColor);
         b = e.blue(backgroundColor);
     }
-    if ((r + b + g) / 3 &lt; 225) {
+    if ((r + b + g) / 3 < 225) {
         return WHITE;
     }
     return BLACK;
@@ -2053,13 +1765,13 @@ obfuscate = str => {
     let result = '';
     for (const i in _.range(str.length)) {
         let curr = str.charCodeAt(i).toString(16);
-        if (curr.length &lt;= 2) {
-            while (curr.length &lt; 2) {
+        if (curr.length <= 2) {
+            while (curr.length < 2) {
                 curr = '0' + curr;
             }
             result += '\\x' + curr;
         } else {
-            while (curr.length &lt; 4) {
+            while (curr.length < 4) {
                 curr = '0' + curr;
             }
             result += '\\u' + curr;
@@ -2088,7 +1800,7 @@ ordinalSuffix = n => {
         oPattern = [1, 2, 3, 4],
         ordinals = ['st', 'nd', 'rd', 'th'],
         tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
-    return oPattern.includes(digits[0]) &amp;&amp; !tPattern.includes(digits[1])
+    return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
         ? int + ordinals[digits[0] - 1]
         : int + ordinals[3];
 };
@@ -2116,8 +1828,8 @@ outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
     }
     push();
     e.fill(outlineColor);
-    for (let i = -2; i &lt; 3; i++) {
-        for (let j = -1; j &lt; 3; j++) {
+    for (let i = -2; i < 3; i++) {
+        for (let j = -1; j < 3; j++) {
             e.text(string, x + i, y + j);
         }
         e.text(string, x + i, y);
@@ -2405,9 +2117,9 @@ underlineText = (string, x = 0, y = e.textAscent(), underlineColor = BLACK, unde
  * // 'This string should have a
  * // maximum line length of
  * // thirty-two characters.'
- * let customWrappedStr = wordWrap(str, 32, '&lt;br>');
+ * let customWrappedStr = wordWrap(str, 32, '<br>');
  * println(customWrappedStr);
- * // expected output: 'This string should have a&lt;br>maximum line length of&lt;br>thirty-two characters.'
+ * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
  */
 wordWrap = (str, max, br = '\n') => str.replace(
     new RegExp(`(?![^\\n]{1,${max}}$)([^\\n]{1,${max}})\\s`, 'g'), '$1' + br
@@ -2421,7 +2133,7 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
     console.error('Shape Essentials depends on the Essentials Core.');
 } else {
     SHAPE_ESSENTIALS = true;
-    if (!_silent_ &amp;&amp; !_shape_initialized_) console.info(
+    if (!_silent_ && !_shape_initialized_) console.info(
         '%cShape Essentials',
         _console_style_
     );
@@ -2437,7 +2149,7 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
  * @param {number} size intensity of blur
  */
 blurRect = (x, y, width, height, size) => {
-    if (size &lt;= 0) return;
+    if (size <= 0) return;
     size = e.constrain(size, 0, Math.min(width, height));
     e.image(e.get(x, y, width, height), x, y, width / size, height / size);
     e.image(e.get(x, y, width / size, height / size), x, y, width, height);
@@ -2472,7 +2184,7 @@ cylinder = (x, y, width, height) => {
     push();
     e.translate(x, y);
     if (height > width) {
-        const _TAU = (Math.cos(Math.PI) &lt; 0) ? e.TWO_PI : 360;
+        const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
         e.rotate(_TAU / 4);
         cylinder(0, 0, height, width);
     } else {
@@ -2584,11 +2296,11 @@ dashedEdge = (x, y, length, angle = 0, dashLength = 10, spacing = 10, endDash = 
 dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
     const length = e.dist(x1, y1, x2, y2);
     let i = 0;
-    for (; i &lt;= length - dashLength; i += dashLength + 2 * spacing) {
+    for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
         e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
     }
-    if (endDash &amp;&amp; i &lt; length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
-    if (endPoint &amp;&amp; i >= length) e.point(x2 + 0.5, y2 + 0.5);
+    if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
+    if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
 };
 
 /**
@@ -2702,7 +2414,7 @@ dottedEdge = (x, y, length, angle = 0, spacing = 10, endPoint = true) => {
  * // expected outcome: points in a square formation
  */
 drawShape = (fn, close, mode) => {
-    close = close &amp;&amp; e.CLOSE;
+    close = close && e.CLOSE;
     e.beginShape(mode);
     fn();
     e.endShape(close);
@@ -2740,7 +2452,7 @@ drawShape = (fn, close, mode) => {
  */
 dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
     const length = e.dist(x1, y1, x2, y2);
-    for (let i = 0; i &lt; length; i += spacing) {
+    for (let i = 0; i < length; i += spacing) {
         e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
     }
     if (endPoint) e.point(x2, y2);
@@ -2849,12 +2561,12 @@ parallelogram = (ax, ay, bx, by, cx, cy) => {
  * polygon(100, 100, 5, 100, PI);
  */
 polygon = (x, y, sides, radius, rotation) => {
-    const _TAU = (Math.cos(Math.PI) &lt; 0) ? 2 * Math.PI : 360;
+    const _TAU = (Math.cos(Math.PI) < 0) ? 2 * Math.PI : 360;
     push();
     e.translate(x, y);
     e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
     drawShape(() => {
-        for (let theta = 0; theta &lt; _TAU; theta += _TAU / sides) {
+        for (let theta = 0; theta < _TAU; theta += _TAU / sides) {
             e.vertex(radius * Math.cos(theta), radius * Math.sin(theta));
         }
     }, true);
@@ -2997,14 +2709,14 @@ square = (x, y, side, tl, tr, br, bl) => {
  * star(100, 100, 50, 7, 10);
  */
 star = (x, y, externalRadius, spikes = 5, rotation) => {
-    const _TAU = (Math.cos(Math.PI) &lt; 0) ? e.TWO_PI : 360;
+    const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
     const interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
     push();
     e.translate(x, y);
     e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
     drawShape(() => {
         let internalRadius;
-        for (let theta = 0; theta &lt; _TAU; theta += _TAU / (2 * spikes)) {
+        for (let theta = 0; theta < _TAU; theta += _TAU / (2 * spikes)) {
             internalRadius = (internalRadius === externalRadius) ? interior : externalRadius;
             e.vertex(internalRadius * Math.cos(theta), internalRadius * Math.sin(theta));
         }
@@ -3033,26 +2745,3 @@ trapezoid = (x, y, height, topBase, bottomBase) => {
         x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1,
         x + (maxBase - bottomBase) / 2, y + height - 1);
 };
-</code></pre>
-                </article>
-            </section>
-        </div>
-
-        <br class="clear" />
-
-        <footer>
-            Documentation generated by
-            <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon Apr
-            19 2021 21:50:22 GMT-0700 (Pacific Daylight Time) using the
-            <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-        </footer>
-
-        <script>
-            prettyPrint();
-        </script>
-        <script src="scripts/polyfill.js"></script>
-        <script src="scripts/linenumber.js"></script>
-
-        <script src="scripts/search.js" defer></script>
-    </body>
-</html>
