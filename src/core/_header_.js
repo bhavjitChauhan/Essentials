@@ -9,7 +9,7 @@
  * @author Bhavjit Chauhan
  */
 
-_environment_ = this instanceof Processing ? 'CDN' : 'KA';
+_environment_ = this instanceof Window ? 'CDN' : 'KA';
 _console_style_ = 'font-family:system-ui;font-size:0.75rem;';
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 
