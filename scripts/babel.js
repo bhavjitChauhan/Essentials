@@ -4,7 +4,7 @@ const { transformFile } = require('@babel/core');
 const { cyan, green, bold } = require('chalk');
 
 const dir = 'build';
-const input = ['essentials-core.js', 'color-essentials.js', 'text-essentials.js', 'shape-essentials.js', '../essentials.js'];
+const input = ['essentials-core.js', 'color-essentials.js', 'text-essentials.js', 'shape-essentials.js', 'external-essentials.js', '../essentials.js'];
 const header = `/**
  * Essentials.
  *

@@ -12,6 +12,11 @@ const processing = new Processing();
 const _e = processing.createGraphics(100 * 5, 100);
 Processing.instances.push(_e);
 
+const BabyHint = {
+    bannedProperties: {},
+    functionParamCount: {}
+};
+
 // For creating the `canvas` element
 _e.print('Placeholder');
 const getLoggerText = () => {

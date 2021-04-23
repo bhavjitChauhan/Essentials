@@ -4,7 +4,7 @@ const { minify } = require('terser');
 const { cyan, green, bold } = require('chalk');
 
 const dir = 'build';
-const input = ['essentials-core', 'color-essentials', 'text-essentials', 'shape-essentials', 'essentials'];
+const input = ['essentials-core', 'color-essentials', 'text-essentials', 'shape-essentials', 'external-essentials', 'essentials'];
 const options = {
     sourceMap: true,
     compress: {
