@@ -3,7 +3,7 @@
  * Prints HTML to canvas log.
  * 
  * @description
- * Links must be opening while holding the CTRL key.
+ * Links must be opened while holding the CTRL key.
  * 
  * @param {string} data Text to be printed to canvas log
  * 
