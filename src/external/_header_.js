@@ -3,11 +3,11 @@
 _external_initialized_ = typeof EXTERNAL_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {
-    console.error('Essentials X depends on the Essentials Core.');
+    console.error('External Essentials depends on the Essentials Core.');
 } else {
     EXTERNAL_ESSENTIALS = true;
     if (!_silent_ && !_external_initialized_) console.info(
-        '%cEssentials X',
+        '%cExternal Essentials',
         _console_style_
     );
 }

@@ -25,24 +25,6 @@ HALF_WIDTH = WIDTH / 2;
 HALF_HEIGHT = HEIGHT / 2;
 
 /**
- * Canvas jQuery selector.
- *
- * @example
- * // Log canvas element style to browser console
- * console.log($(CANVAS).attr('style)');
- */
-CANVAS = '#output-canvas';
-
-/**
- * Canvas log jQuery selector.
- *
- * @example
- * // Log canvas log text to browser console
- * console.log($(CANVAS_LOG).text());
- */
-CANVAS_LOG = 'body div:first div:nth-child(2) div div';
-
-/**
  * Alias for `_clearLogs()`.
  *
  * @example
