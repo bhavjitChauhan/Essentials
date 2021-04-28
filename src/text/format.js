@@ -1,6 +1,5 @@
 /**
- * Formats string similar to [template
- * literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals}
+ * Formats string similar to [template literals]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals}
  * in ES6
  *
  * @param {string} str

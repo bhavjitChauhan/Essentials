@@ -3,8 +3,7 @@
  *
  * @link https://www.30secondsofcode.org/js/s/detect-language
  *
- * @returns {string} Preferred language as a [language
- * tag]{@link https://en.wikipedia.org/wiki/IETF_language_tag}
+ * @returns {string} Preferred language as a [language tag]{@link https://en.wikipedia.org/wiki/IETF_language_tag}
  *
  * @example
  * println(detectLanguage());
