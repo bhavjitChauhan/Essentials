@@ -41,7 +41,7 @@ clearLogs = () => e._clearLogs();
  * // Prevents an error if an unneeded method is called
  * Element.init = noop;
  */
-noop = () => _.noop;
+noop = function() {};
 
 /**
  * Alias for `Program.restart()`
