@@ -7,4 +7,7 @@
  * 
  * @see prefersDarkColorScheme
  */
-prefersLightColorScheme = complement(prefersDarkColorScheme);
+prefersLightColorScheme = () =>
+    window &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: light)').matches;
