@@ -30,7 +30,7 @@
  * @see {@link edge}
  */
 dottedEdge = (x, y, length, angle = 0, spacing = 10, endPoint = true) => {    
-    if (angleMode == 'degrees') angle = e.radians(angle);
+    if (e.angleMode == 'degrees') angle = e.radians(angle);
     const x2 = x + length * Math.cos(angle);
     const y2 = y + length * Math.sin(angle);
     dottedLine(x, y, x2, y2, spacing, endPoint);
