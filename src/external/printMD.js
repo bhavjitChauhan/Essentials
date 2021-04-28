@@ -46,10 +46,13 @@ printMD = data => {
                     str += `<a href="${URL}">${text}</a>`;
                     i += text.length + URL.length + 3;
                     break;
-                } catch (err) { }
+                } catch (err) {
+                    console.warn(`Markdown error: ${err}`);
+                }
+                break;
             default:
                 str += data[i];
         }
     }
     printHTML(str);
-}
+};
