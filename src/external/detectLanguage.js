@@ -10,6 +10,6 @@
  * // expected outcome: Language tag
  */
 detectLanguage = (defaultLanguage = 'en-US') =>
-  navigator.language ||
-  (Array.isArray(navigator.languages) && navigator.languages[0]) ||
-  defaultLanguage;
+    navigator.language ||
+    (Array.isArray(navigator.languages) && navigator.languages[0]) ||
+    defaultLanguage;
