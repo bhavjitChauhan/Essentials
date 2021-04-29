@@ -11,5 +11,3 @@ if (typeof ESSENTIALS_CORE === 'undefined') {
         _console_style_
     );
 }
-
-BabyHint.bannedProperties = {};
