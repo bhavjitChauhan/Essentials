@@ -1,6 +1,5 @@
 /**
- * Sets font, size and other [CSS font
- * properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
+ * Sets font, size and other [CSS font properties]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/font}.
  *
  * @param {(string|font)}  name  Name of font or font
  * @param {number}  [size]  Font size

@@ -4,7 +4,7 @@ const { minify } = require('terser');
 const { cyan, green, bold } = require('chalk');
 
 const dir = 'build';
-const input = ['essentials-core', 'color-essentials', 'text-essentials', 'shape-essentials', 'essentials'];
+const input = ['essentials-core', 'color-essentials', 'text-essentials', 'shape-essentials', 'external-essentials', 'essentials', 'essentials-x'];
 const options = {
     sourceMap: true,
     compress: {
@@ -34,7 +34,8 @@ for (const file of input) {
     minify(data, options).then(result => {
         console.log(cyan(`${bold(file + '.js')} minifed in ${bold(Math.round(performance.now() - minifyStartTime) + 'ms')}.`));
         const writeStartTime = performance.now();
-        const data = (file == 'essentials-core' || file == 'essentials' ? header : '') + result.code;
+        let data = (file == 'essentials-core' || file == 'essentials' || file == 'essentials-x' ? header : '') + result.code;
+        if (file == 'essentials-x') data = data.replace('Essentials.', 'Essentials X.');
         writeFileSync(file == 'essentials' ? '../essentials.min.js' : `${file}.min.js`, data);
         console.log(green(`${bold(file + '.js')} written in ${bold(Math.round(performance.now() - writeStartTime) + 'ms')}.`));
     });

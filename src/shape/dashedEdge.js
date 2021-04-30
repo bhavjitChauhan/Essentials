@@ -41,7 +41,7 @@
  * @see {@link edge}
  */
 dashedEdge = (x, y, length, angle = 0, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
-    if (angleMode == 'degrees') angle = e.radians(angle);
+    if (e.angleMode == 'degrees') angle = e.radians(angle);
     const x2 = x + length * Math.cos(angle);
     const y2 = y + length * Math.sin(angle);
     dashedLine(x, y, x2, y2, dashLength, spacing, endDash, endPoint);

@@ -4,7 +4,7 @@ const { transformFile } = require('@babel/core');
 const { cyan, green, bold } = require('chalk');
 
 const dir = 'build';
-const input = ['essentials-core.js', 'color-essentials.js', 'text-essentials.js', 'shape-essentials.js', '../essentials.js'];
+const input = ['essentials-core.js', 'color-essentials.js', 'text-essentials.js', 'shape-essentials.js', 'external-essentials.js', '../essentials.js', 'essentials-x.js'];
 const header = `/**
  * Essentials.
  *
@@ -34,10 +34,11 @@ for (const file of input) {
             filename = `${file.slice(0, -3)}-ka.js`;
         }
         console.log(cyan(`${bold(filename)} transformed at ${bold(Math.round(performance.now() - transformStartTime) + 'ms')}`));
-        let data = (file == 'essentials-core.js' || file == '../essentials.js' ? header : '') + result.code + '\n';
+        let data = (file == 'essentials-core.js' || file == '../essentials.js' || file == 'essentials-x.js' ? header : '') + result.code + '\n';
         data = data.replace(/\/\n{3}/g, '/\n')
             .replace(/\/\n{2}/g, '/\n')
             .replace(/\n\//g, '\n\n/');
+            if (file == 'essentials-x.js') data = data.replace('Essentials.', 'Essentials X.');
         const writeStartTime = performance.now();
         writeFile(filename, data, err => {
             if (err) return console.error(err);
@@ -57,8 +58,9 @@ for (const file of input) {
             filename = `${file.slice(0, -3)}-ka.min.js`;
         }
         console.log(cyan(`${bold(filename)} minified at ${bold(Math.round(performance.now() - minifyStartTime) + 'ms')}`));
-        let data = (file == 'essentials-core.js' || file == '../essentials.js' ? header.slice(0, -2) : '') + result.code + '\n';
+        let data = (file == 'essentials-core.js' || file == '../essentials.js' || file == 'essentials-x.js' ? header.slice(0, -2) : '') + result.code + '\n';
         data = data.replace('KA Essentials Build', 'Minified KA Essentials Build');
+        if (file == 'essentials-x.js') data = data.replace('Essentials.', 'Essentials X.');
         const writeStartTime = performance.now();
         writeFile(filename, data, err => {
             if (err) return console.error(err);
