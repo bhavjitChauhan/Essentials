@@ -39,9 +39,16 @@ export default [{
     plugins: [multi()]
 }, {
     context: 'this',
-    input: [`${dir}/essentials-core.js`, `${dir}/color-essentials.js`, `${dir}/text-essentials.js`, `${dir}/shape-essentials.js`, `${dir}/external-essentials.js`],
+    input: [`${dir}/essentials-core.js`, `${dir}/color-essentials.js`, `${dir}/text-essentials.js`, `${dir}/shape-essentials.js`],
     output: {
         file: 'essentials.js'
+    },
+    plugins: [multi()]
+}, {
+    context: 'this',
+    input: ['essentials.js', `${dir}/external-essentials.js`],
+    output: {
+        file: `${dir}/essentials-x.js`
     },
     plugins: [multi()]
 }];
