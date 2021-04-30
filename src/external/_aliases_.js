@@ -24,6 +24,28 @@ CANVAS = '#output-canvas';
 CANVAS_LOG = 'body div:first div:nth-child(2) div div';
 
 /**
+ * Checks if touch events are supported.
+ * 
+ * @link https://www.30secondsofcode.org/js/s/supports-touch-events
+ * 
+ * @returns {boolean}
+ * 
+ * @see detectDeviceType
+ */
+supportsTouchEvents = () => 'ontouchstart' in window;
+
+/**
+ * Gets the currently selected text in the canvas.
+ * 
+ * @link https://www.30secondsofcode.org/js/s/get-selected-text
+ * 
+ * @returns {string}
+ * 
+ * @see drawElement
+ */
+getSelectedText = () => window.getSelection().toString();
+
+/**
  * Prevents page from scrolling when mouse is over canvas.
  * 
  * @see allowScroll
