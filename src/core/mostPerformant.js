@@ -23,7 +23,7 @@
  *     'console.log': console.log
  * };
  * const result = mostPerformant(Object.values(testees));
- * console.log(Object.keys(testees)[test] + ' performed faster.');
+ * console.log(Object.keys(testees)[result] + ' performed faster.');
  * // possible output: 'console.log performed faster.'
  */
 mostPerformant = (fns, iterations = 1e4) => {
