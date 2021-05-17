@@ -3,6 +3,8 @@
  * [UUID]{@link https://en.wikipedia.org/wiki/Universally_unique_identifier}.
  *
  * @returns {string}
+ * 
+ * @see {@link generateID}
  */
 generateUUID = () =>
     ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
