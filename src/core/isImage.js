@@ -8,9 +8,4 @@
  * println(isImage(i));
  * // expected output: true
  */
-isImage = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.sourceImg);
-};
+isImage = obj => obj instanceof e.PImage;

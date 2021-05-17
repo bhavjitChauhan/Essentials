@@ -8,9 +8,4 @@
  * println(isSound(s));
  * // expected output: true
  */
-isSound = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isObject(obj.audio);
-};
+isSound = obj => obj.audio instanceof Audio;

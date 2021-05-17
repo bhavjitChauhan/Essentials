@@ -15,9 +15,4 @@
  * 
  * @see {@link font}
  */
-isFont = obj => {
-    if (typeof obj != 'object') {
-        return false;
-    }
-    return _.isFunction(obj.getCSSDefinition);
-};
+isFont = obj => obj instanceof e.PFont;

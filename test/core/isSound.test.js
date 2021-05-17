@@ -1,7 +1,7 @@
 describe('isSound()', function () {
     it('should return true for instances of sounds', function () {
         const sound = {
-            'audio': {}
+            'audio': new Audio()
         };
         assert.isTrue(isSound(sound));
     });
