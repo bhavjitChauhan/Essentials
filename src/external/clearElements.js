@@ -1,7 +1,7 @@
 /**
  * Deletes all HTML elements from the canvas.
  * 
- * @see deleteElement
- * @see drawElement
+ * @see {@link deleteElement}
+ * @see {@link drawElement}
  */
 clearElements = () => $('#essentials').empty();

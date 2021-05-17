@@ -63,8 +63,8 @@
  * });
  * // expected outcome: 'Hello World' element drawn at the top-left corner in red
  * 
- * @see removeElement
- * @see clearElements
+ * @see {@link removeElement}
+ * @see {@link clearElements}
  */
 drawElement = (el, settings = {}) => {
     if (!(el instanceof jQuery)) settings = el;

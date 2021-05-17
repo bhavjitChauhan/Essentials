@@ -22,8 +22,8 @@
  * removeElement(el);
  * // expected outcome: removed element
  * 
- * @see clearElements
- * @see drawElement
+ * @see {@link clearElements}
+ * @see {@link drawElement}
  */
 removeElement = id => {
     $(`#${id}`).remove();

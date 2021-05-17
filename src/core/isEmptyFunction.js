@@ -19,7 +19,7 @@
  * println(isEmptyFunction(fn));
  * // expected output: true
  * 
- * @see noop
+ * @see {@link noop}
  */
 isEmptyFunction = fn => {
     return _.isFunction(fn) &&

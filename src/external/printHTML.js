@@ -10,7 +10,7 @@
  * @example
  * printHTML('<marquee>Hello World!</marquee>');
  * 
- * @see printMD
+ * @see {@link printMD}
  */
 printHTML = data => {
     data = data.replace(/<a href="([\w+:/.]+)">(?<=>)(.+?)(?=<)<\/a>/g, '<abbr title="Ctrl + Click"><a href="$1" target="_blank">$2</a></abbr>');

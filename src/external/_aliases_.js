@@ -30,7 +30,7 @@ CANVAS_LOG = 'body div:first div:nth-child(2) div div';
  * 
  * @returns {boolean}
  * 
- * @see detectDeviceType
+ * @see {@link detectDeviceType}
  */
 supportsTouchEvents = () => 'ontouchstart' in window;
 
@@ -41,23 +41,23 @@ supportsTouchEvents = () => 'ontouchstart' in window;
  * 
  * @returns {string}
  * 
- * @see drawElement
+ * @see {@link drawElement}
  */
 getSelectedText = () => window.getSelection().toString();
 
 /**
  * Prevents page from scrolling when mouse is over canvas.
  * 
- * @see allowScroll
- * @see forceAllowScroll
+ * @see {@link allowScroll}
+ * @see {@link forceAllowScroll}
  */
 preventScroll = () => $(CANVAS).on('wheel', _preventDefault);
 
 /**
  * Allows page scrolling when mouse is over canvas.
  * 
- * @see forceAllowScroll
- * @see preventScroll
+ * @see {@link forceAllowScroll}
+ * @see {@link preventScroll}
  */
 allowScroll = () => $(CANVAS).off('wheel', _preventDefault);
 
@@ -72,22 +72,22 @@ allowScroll = () => $(CANVAS).off('wheel', _preventDefault);
  * 
  * This function is not intended for production use.
  * 
- * @see allowScroll
- * @see preventScroll
+ * @see {@link allowScroll}
+ * @see {@link preventScroll}
  */
 forceAllowScroll = () => $(CANVAS).off('wheel');
 
 /**
  * Locks pointer to canvas.
  * 
- * @see exitPointerLock
+ * @see {@link exitPointerLock}
  */
 requestPointerLock = () => $(CANVAS)[0].requestPointerLock();
 
 /**
  * Releases pointer.
  * 
- * @see requestPointerLock
+ * @see {@link requestPointerLock}
  */
 exitPointerLock = () => _doc.exitPointerLock();
 

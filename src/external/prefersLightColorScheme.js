@@ -5,7 +5,7 @@
  * 
  * @returns {boolean}
  * 
- * @see prefersDarkColorScheme
+ * @see {@link prefersDarkColorScheme}
  */
 prefersLightColorScheme = () =>
     window &&

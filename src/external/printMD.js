@@ -20,7 +20,7 @@
  * printMD('[link](https://khanacademy.org)');
  * // expected oucome: hyperlink to Khan Academy
  * 
- * @see printHTML
+ * @see {@link printHTML}
  */
 printMD = data => {
     let str = '';
