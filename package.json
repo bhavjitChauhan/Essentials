@@ -10,7 +10,7 @@
     "build:ka": "node scripts/babel.js",
     "build": "npx rollup --config && concurrently \"npm:build:ka\" \"node scripts/terser.js\"",
     "doc:html": "npx jsdoc -c jsdoc.json",
-    "doc:md": "node scripts/wiki.js && npx jsdoc2md essentials.js > internal/Essentials-Documentation.md",
+    "doc:md": "node scripts/wiki.js && npx jsdoc2md build/essentials-x.js > internal/Essentials-Documentation.md",
     "doc:ka": "node scripts/showdown.js",
     "doc:format": "node scripts/prettier.js",
     "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka && npm run doc:format"
