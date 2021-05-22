@@ -83,14 +83,12 @@ Essentials is available via the jsDelivr CDN. This option does not increase your
 
 Use the following [JSHint directive](https://jshint.com/docs/) to allow the use
 of otherwise restricted functionality. See the project Wiki on [Khan Academy and JSHint](https://github.com/bhavjitChauhan/Essentials/wiki/Khan-Academy-and-JSHint) for more information.
-```js
-// jshint ignore: start
-```
 
 Use [jQuery](https://jquery.com/)'s
 [`getScript`](https://api.jquery.com/jQuery.getScript/) method to load the
 library.
 ```js
+// jshint ignore: start
 $.ajaxSetup({ cache: true });
 $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js',
     function() {
@@ -128,8 +126,8 @@ See the [Features](https://github.com/bhavjitChauhan/Essentials/projects/1) proj
 Distributed under the MIT License. See [LICENSE](https://github.com/bhavjitChauhan/Essentials/blob/master/LICENSE) for more information.
 
 ## Contact
-- [GitHub](https://github.com/bhavjitChauhan)
-- [Khan Academy](https://www.khanacademy.org/profile/bhavjitChauhan/projects)
+ - [GitHub](https://github.com/bhavjitChauhan)
+ - [Khan Academy](https://www.khanacademy.org/profile/bhavjitChauhan/projects)
 
 ## Acknowledgements
  - [30 seconds of code](https://www.30secondsofcode.org/js)
