@@ -37,9 +37,9 @@
     "@rollup/plugin-multi-entry": "^4.0.0",
     "chai": "^4.3.4",
     "chalk": "^4.1.1",
-    "concurrently": "^6.1.0",
+    "concurrently": "^6.2.0",
     "docdash": "^1.2.0",
-    "eslint": "^7.26.0",
+    "eslint": "^7.27.0",
     "inline-remote-assets": "^0.7.0",
     "jsdoc": "^3.6.7",
     "jsdoc-to-markdown": "^7.0.1",
@@ -51,7 +51,7 @@
     "karma-requirejs": "^1.1.0",
     "mocha": "^8.4.0",
     "prettier": "^2.3.0",
-    "rollup": "^2.48.0",
+    "rollup": "^2.50.0",
     "showdown": "^1.9.1",
     "terser": "^5.7.0"
   }
