@@ -13,7 +13,8 @@
     "doc:md": "node scripts/wiki.js && npx jsdoc2md build/essentials-x.js > internal/Essentials-Documentation.md",
     "doc:ka": "concurrently \"node scripts/showdown.js\" \"node scripts/inline-remote-assets.js\"",
     "doc:format": "node scripts/prettier.js",
-    "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka && npm run doc:format"
+    "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka && npm run doc:format",
+    "dev": "call dev/start.bat"
   },
   "repository": {
     "type": "git",

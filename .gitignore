@@ -2,5 +2,7 @@
 node_modules
 build
 internal
+live-editor
+
 essentials.js
 essentials.min.js
