@@ -3,7 +3,7 @@
  * Alias for `color(255, 0, 0)`.
  *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * Essentials includes the [CSS color names]{@link https://w3schools.com/colors/colors_names.asp} in the format
  * `COLORNAME`.
  *
  * @example
@@ -22,7 +22,7 @@ RED = e.color(255, 0, 0);
  * Alias for `color(0, 128, 0)`.
  *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * Essentials includes the [CSS color names]{@link https://w3schools.com/colors/colors_names.asp} in the format
  * `COLORNAME`.
  *
  * @example
@@ -41,7 +41,7 @@ GREEN = e.color(0, 128, 0);
  * Alias for `color(0, 0, 255)`.
  *
  * @description
- * Essentials includes the [CSS color names]{@link w3schools.com/colors/colors_names.asp} in the format
+ * Essentials includes the [CSS color names]{@link https://w3schools.com/colors/colors_names.asp} in the format
  * `COLORNAME`.
  *
  * @example
