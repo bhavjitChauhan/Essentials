@@ -8,6 +8,8 @@ _preventDefault = e => e.preventDefault();
 /**
  * Canvas jQuery selector.
  *
+ * @constant {string}
+ * 
  * @example
  * // Log canvas element style to browser console
  * console.log($(CANVAS).attr('style)');
@@ -17,6 +19,8 @@ CANVAS = '#output-canvas';
 /**
  * Canvas log jQuery selector.
  *
+ * @constant {string}
+ * 
  * @example
  * // Log canvas log text to browser console
  * console.log($(CANVAS_LOG).text());
