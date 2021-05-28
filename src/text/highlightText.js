@@ -21,6 +21,7 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
         return;
     }
     string = string.split('\n');
+    push();
     e.noStroke();
     e.rectMode(e.CORNER);
     e.textAlign(e.LEFT, e.TOP);
@@ -32,4 +33,5 @@ highlightText = (string, x = 0, y = e.textAscent(), highlightColor = YELLOW) => 
         pop();
         e.text(string[i], x, y + (i * e.textAscent() * 2));
     }
+    pop();
 };
