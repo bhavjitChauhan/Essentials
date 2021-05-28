@@ -140,7 +140,7 @@ Credit is given to the original authors of functions via links on the documentat
 
 [version-shield]: https://img.shields.io/github/package-json/v/bhavjitChauhan/Essentials?style=flat-square
 [version-url]: https://github.com/bhavjitChauhan/Essentials/releases
-[size-shield]: https://img.shields.io/badge/minified%20size-21.19%20kB-blue?style=flat-square
+[size-shield]: https://img.shields.io/badge/minified%20size-23.07%20kB-blue?style=flat-square
 [size-url]: https://cdn.jsdelivr.net/gh/bhavjitChauhan/Essentials@1/essentials.min.js
 [pr-shield]: https://img.shields.io/github/issues-pr/bhavjitChauhan/Essentials?style=flat-square
 [pr-url]: https://github.com/bhavjitChauhan/Essentials/pulls
