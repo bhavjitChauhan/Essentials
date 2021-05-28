@@ -1,5 +1,10 @@
-const { readFileSync, writeFileSync } = require('fs');
+const { existsSync, readFileSync, writeFileSync } = require('fs');
 const { exec } = require('child_process');
+
+if (!existsSync('docs/builder.html')) {
+    console.warn('builder.html does not exists.');
+    process.exit();
+}
 
 const header = '<a class="navbar-brand" href="#">Essentials Builder</a>';
 const copyButton = '<i class="bi bi-clipboard"></i> Copy';
