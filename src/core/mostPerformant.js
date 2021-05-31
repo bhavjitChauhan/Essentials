@@ -14,8 +14,9 @@
  *
  * @param {Array} fns Functions to be compared
  * @param {number} [iterations=1e4] Number of times function should be called
+ * @param {boolean} [timings=false] Return array of timings
  *
- * @returns {Array} Index of function which performed fastest
+ * @returns {number|Array} Index of fastest function or array of timings
  *
  * @example
  * const testees = {
@@ -25,12 +26,31 @@
  * const result = mostPerformant(Object.values(testees));
  * console.log(Object.keys(testees)[result] + ' performed faster.');
  * // possible output: 'console.log performed faster.'
+ * 
+ * @example
+ * const testees = {
+ *     'ellipse': function() {
+ *         ellipse(100, 100, 100, 100);
+ *     },
+ *     'rect': function() {
+ *         rect(100, 100, 100, 100);
+ *     }
+ * }
+ * const results = mostPerformant(Object.values(testees), 1e3, true)
+ * results.forEach(function(result, i) {
+ *     printf('%: %ms', Object.keys(testees)[i].padEnd(8), result)
+ * });
+ * // example output: `
+ * // ellipse : 3.0350000597536564ms
+ * // rect    : 3.325000172480941ms
+ * // `
  */
-mostPerformant = (fns, iterations = 1e4) => {
+mostPerformant = (fns, iterations = 1e4, timings = false) => {
     const times = fns.map(fn => {
-        const before = performance.now();
+        const startTime = performance.now();
         for (let i = 0; i < iterations; i++) fn();
-        return performance.now() - before;
+        return performance.now() - startTime;
     });
+    if (timings) return times;
     return times.indexOf(Math.min(...times));
 };

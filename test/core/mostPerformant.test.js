@@ -37,4 +37,22 @@ describe('mostPerformant()', function () {
             mostPerformant(Object.values(testees));
         }, TypeError);
     });
+    it('should return a valid timings', function () {
+        const testees = {
+            A: () => {
+                for (let i = 0; i < 1e1; i++) {
+                    noop();
+                }
+            },
+            B: () => {
+                for (let i = 0; i < 1e1; i++) {
+                    noop();
+                }
+            }
+        };
+        const results = mostPerformant(Object.values(testees), 1, true);
+        assert.isTrue(Array.isArray(results));
+        assert.isTrue(results.every(i => !isNaN(i)));
+        assert.equal(results.length, Object.entries(testees).length);
+    });
 });
