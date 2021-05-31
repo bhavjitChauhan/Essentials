@@ -4,5 +4,6 @@ build
 internal
 live-editor
 
+essentials-proto.js
 essentials.js
 essentials.min.js

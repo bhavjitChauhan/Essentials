@@ -14,7 +14,8 @@
     "doc:ka": "concurrently \"node scripts/showdown.js\" \"node scripts/inline-remote-assets.js\"",
     "doc:format": "node scripts/prettier.js",
     "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka && npm run doc:format",
-    "dev": "call dev/start.bat"
+    "dev:build": "npx rollup --config dev/rollup.config.js",
+    "dev": "npm run dev:build && call dev/start.bat"
   },
   "repository": {
     "type": "git",

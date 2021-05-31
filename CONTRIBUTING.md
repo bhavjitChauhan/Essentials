@@ -26,6 +26,12 @@ npm run build:cdn
 npm run build
 ```
 
+### Prototype
+A quick build for development.
+```bash
+npm run dev:build
+```
+
 ## Testing
 ```bash
 npm test
@@ -35,7 +41,7 @@ npm test
 :---: | :---
 
 ## Local Development Environment
-The shell script will clone the necessary files from Khan Academy's [Live Editor](https://github.com/Khan/live-editor) repository and start a local server using Python.
+The shell script will clone the necessary files from Khan Academy's [Live Editor](https://github.com/Khan/live-editor) repository and start a local server using Python. It will also create a prototype build.
 ### Windows
 ```bash
 npm run dev
