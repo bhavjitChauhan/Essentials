@@ -30,7 +30,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/plugin-transform-arrow-functions": "^7.13.0",
-    "@babel/plugin-transform-block-scoping": "^7.14.2",
+    "@babel/plugin-transform-block-scoping": "^7.14.4",
     "@babel/plugin-transform-destructuring": "^7.13.17",
     "@babel/plugin-transform-exponentiation-operator": "^7.12.13",
     "@babel/plugin-transform-parameters": "^7.14.2",
