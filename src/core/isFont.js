@@ -4,13 +4,13 @@
  * @param {Object} obj
  * 
  * @example
- * let f = createFont('Arial');
- * println(isFont(f));
+ * let arial = createFont('Arial');
+ * println(isFont(arial));
  * // expected output: true 
  * 
  * @example
- * let f = font('monospace');
- * println(isFont(f));
+ * let monospace = font('monospace');
+ * println(isFont(monospace));
  * // expected output: true
  * 
  * @see {@link font}

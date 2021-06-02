@@ -14,34 +14,34 @@
  * // expected outcome: 'Hello World' in bold Arial font
  *
  * @example
- * let f = font('Arial', 'bold');
+ * const arialBold = font('Arial', 'bold');
  * textSize(30);
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in normal Arial normal size font
  * // `textSize()` should not be used with `font()`
  *
  * // Instead, use `font()`
- * font(f, 30);
+ * font(arialBold, 30);
  * text('Hello World', 100, 200);
  * // expected outcome: 'Hello World' in bold Arial size 30 font
  *
  * @example
  * // Use the `-call` parameter to prevent the font automatically being set
  * // This functionality is useful when defining font variables
- * let f = font('serif', '-call');
+ * const serif = font('serif', '-call');
  * text('Hello World', 100, 100);
  * // expected outcome: the text will still be in normal Arial font
- * font(f);
+ * font(serif);
  * text('Hello World', 100, 200);
  * // expected outcome: the text will be in serif font
  *
  * @example
- * let f = font('Arial', 'bold', 'italic');
+ * const arialBoldItalic = font('Arial', 'bold', 'italic');
  * text('Hello World', 100, 100);
  * // expected outcome: 'Hello World' in bold and italic Arial font
  *
  * // Use the negate syntax to remove properties from fonts
- * font(f, '-bold');
+ * font(arialBoldItalic, '-bold');
  * text('Hello World', 100, 200);
  * // expected outcome: 'Hello World' in italic Arial font
  */
