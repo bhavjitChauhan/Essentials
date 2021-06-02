@@ -1,7 +1,7 @@
 /**
  * Prints formatted string to canvas console.
  *
- * @param {string} assertion String with format
+ * @param {str} assertion String with format
  * @param {*} arguments Arguments
  *
  * @example
@@ -10,15 +10,14 @@
  *
  * @example
  * // To use the literal '%' character use double backslashes (\\)
- * printf('% \\% %', 'A', 'B');
- * // expected output: 'A % B'
+ * printf('%\\% complete', 50);
+ * // expected output: '50% complete'
  */
-printf = function(string) {
-    const args = Array.from(arguments)
-        .slice(1);
-    for (const i in args) {
-        string = string.replace(/(?<!\\)%/, args[i]);
+printf = function(str, ...args) {
+    str = str.toString();
+    for (const arg of args) {
+        str = str.replace(/(?<!\\)%/, arg);
     }
-    string = string.replaceAll(/\\%/g, '%');
-    e.println(string);
+    str = str.replaceAll(/\\%/g, '%');
+    e.println(str);
 };

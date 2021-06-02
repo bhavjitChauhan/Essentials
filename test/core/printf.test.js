@@ -58,4 +58,11 @@ describe('printf()', function () {
         clearLogger();
         assert.equal(loggerText, `${strA} ${strB}\n`);
     });
+    it('should correctly handle non-string arguments', function () {
+        const n = Math.random();
+        printf(n);
+        const loggerText = getLoggerText();
+        clearLogger();
+        assert.equal(loggerText, n);
+    });
 });
