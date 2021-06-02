@@ -8,6 +8,7 @@ export default [{
         'src/color/_header_.js',
         'src/color/_aliases_.js',
         'src/text/_header_.js',
+        'src/text/_aliases_.js',
         'src/shape/_header_.js',
         'src/external/_header_.js',
         'src/external/_aliases_.js',

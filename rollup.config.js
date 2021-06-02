@@ -18,7 +18,7 @@ export default [{
     plugins: [multi()]
 }, {
     context: 'this',
-    input: ['src/text/_header_.js', 'src/text/*.js'],
+    input: ['src/text/_header_.js', 'src/text/_aliases_.js', 'src/text/*.js'],
     output: {
         file: `${dir}/text-essentials.js`
     },

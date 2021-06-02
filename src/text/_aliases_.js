@@ -1,6 +1,8 @@
 /**
  * Alias for `format`.
  * 
+ * @param {string} str
+ * 
  * @see {@link format}
  */
-f = format;
+f = str => format(str);
