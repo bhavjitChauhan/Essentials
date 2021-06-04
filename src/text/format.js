@@ -15,16 +15,9 @@
  * // example outcome: '100ms elapsed'
  * 
  * @example
- * console.log(f('E is ${Math.E.toFixed(2)}'))
+ * console.log('E is ${Math.E.toFixed(2)}'.format());
  * // expected output: 'E is 2.72'
  * 
  * @see {@link f}
  */
-format = str => {
-    let match = _.first(str.match(/\${.*?}/));
-    while (match) {
-        str = str.replace(match, evalPJS(`\`${match}\``));
-        match = _.first(str.match(/\${.*?}/));
-    }
-    return str;
-};
+format = str => evalPJS(`\`${str}\``);
