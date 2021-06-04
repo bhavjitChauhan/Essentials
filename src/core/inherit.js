@@ -19,7 +19,7 @@
  * };
  * inherit(Button, Element);
  *
- * let b = new Button(100, 100, 150, 50);
+ * const b = new Button(100, 100, 150, 50);
  * b.draw();
  * // expected outcome: rectangle with arguments (100, 100, 150, 50)
  */

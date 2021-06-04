@@ -4,12 +4,12 @@
  * @param {Object} obj
  * 
  * @example
- * let arial = createFont('Arial');
+ * const arial = createFont('Arial');
  * println(isFont(arial));
  * // expected output: true 
  * 
  * @example
- * let monospace = font('monospace');
+ * const monospace = font('monospace');
  * println(isFont(monospace));
  * // expected output: true
  * 

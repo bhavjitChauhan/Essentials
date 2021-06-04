@@ -8,7 +8,7 @@
  * @returns {string}  RGB color value
  *
  * @example
- * let c = HSBToRGB(85, 255, 255);
+ * const c = HSBToRGB(85, 255, 255);
  * println(c);
  * // expected output: -16711936
  * background(c);

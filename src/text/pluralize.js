@@ -21,7 +21,7 @@
  * // expected output: '1 apple.'
  *
  * @example
- * let people = 2;
+ * const people = 2;
  * printf('% %.', people, pluralize(people, 'person', 'people'));
  * // expected output: '2 people.'
  *

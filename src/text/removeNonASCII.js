@@ -8,8 +8,8 @@
  * @returns {string} formatted string
  * 
  * @example
- * let str = 'Hello 😀';
- * let strippedStr = removeNonASCII(str);
+ * const str = 'Hello 😀';
+ * const strippedStr = removeNonASCII(str);
  * println(strippedStr)
  * // expected output: 'Hello '
  * 

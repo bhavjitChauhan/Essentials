@@ -1,8 +1,8 @@
 /**
  * Prints formatted string to canvas console.
  *
- * @param {str} assertion String with format
- * @param {*} arguments Arguments
+ * @param {string} str String with format
+ * @param {...*} args Arguments
  *
  * @example
  * printf('Hello %', 'World');

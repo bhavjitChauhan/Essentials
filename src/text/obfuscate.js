@@ -8,8 +8,8 @@
  * @returns {string} obfuscated string
  * 
  * @example
- * let str = 'Hello World';
- * let obfuscated = obfuscate(str);
+ * const str = 'Hello World';
+ * const obfuscated = obfuscate(str);
  * println(obfuscated);
  * // expected output: \x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64
  * println('\x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64');

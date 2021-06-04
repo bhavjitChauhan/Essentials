@@ -7,11 +7,11 @@
  * @param {color} [outlineColor=BLACK] color of outline
  *
  * @example
- * let str = 'Outlined\nText';
+ * const str = 'Outlined\nText';
  * outlineText(str, 25, 25);
  *
  * @example
- * let str = 'Outlined\nText';
+ * const str = 'Outlined\nText';
  * fill(BLACK);
  * outlineText(str, 25, 25, ORANGE);
  */

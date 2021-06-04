@@ -7,12 +7,12 @@
  * @param {number} [highlightColor=YELLOW] color of highlight background
  *
  * @example
- * let str = 'Highlighted\nText';
+ * const str = 'Highlighted\nText';
  * fill(BLACK);
  * highlightText(str, 25, 25);
  *
  * @example
- * let str = 'Highlighted\nText';
+ * const str = 'Highlighted\nText';
  * fill(LIGHTGREEN);
  * highlightText(str, 25, 25, BLACK);
  */

@@ -9,14 +9,14 @@
  * @param {string} [br='\n'] Custom break character
  *
  * @example
- * let str = 'This string should have a maximum line length of thirty-two characters.';
- * let wrappedStr = wordWrap(str, 32);
+ * const str = 'This string should have a maximum line length of thirty-two characters.';
+ * const wrappedStr = wordWrap(str, 32);
  * println(wrappedStr);
  * // expected output: 
  * // 'This string should have a
  * // maximum line length of
  * // thirty-two characters.'
- * let customWrappedStr = wordWrap(str, 32, '<br>');
+ * const customWrappedStr = wordWrap(str, 32, '<br>');
  * println(customWrappedStr);
  * // expected output: 'This string should have a<br>maximum line length of<br>thirty-two characters.'
  */

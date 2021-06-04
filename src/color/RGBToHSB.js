@@ -8,7 +8,7 @@
  * @returns {string}  HSB color value
  *
  * @example
- * let c = RGBToHSB(255, 0, 0);
+ * const c = RGBToHSB(255, 0, 0);
  * println(c);
  * // expected output: -65536
  * colorMode(HSB);

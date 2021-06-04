@@ -6,7 +6,7 @@
  * @returns {color} RGB color value
  *
  * @example
- * let c = hexToRGB('#fff');
+ * const c = hexToRGB('#fff');
  * println(c);
  * // expected output: -1
  * background(c);

@@ -11,7 +11,7 @@
  * text('Hello World', 25, 25);
  *
  * @example
- * let c = color(RED, 50);
+ * const c = color(RED, 50);
  * fill(c);
  * square(25, 25, 25);
  */
@@ -30,7 +30,7 @@ RED = e.color(255, 0, 0);
  * text('Hello World', 25, 25);
  *
  * @example
- * let c = color(GREEN, 50);
+ * const c = color(GREEN, 50);
  * fill(c);
  * square(25, 25, 25);
  */
@@ -49,7 +49,7 @@ GREEN = e.color(0, 128, 0);
  * text('Hello World', 25, 25);
  *
  * @example
- * let c = color(BLUE, 50);
+ * const c = color(BLUE, 50);
  * fill(c);
  * square(25, 25, 25);
  */

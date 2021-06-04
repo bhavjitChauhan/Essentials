@@ -12,7 +12,7 @@
  * // expected output: #ff0000
  *
  * @example
- * let c = RED;
+ * const c = RED;
  * println(RGBToHex(c));
  * // expected output: #ff0000
  */

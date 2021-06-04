@@ -4,7 +4,7 @@
  * @param {Object} obj
  *
  * @example
- * let s = getSound("retro/boom1");
+ * const s = getSound("retro/boom1");
  * println(isSound(s));
  * // expected output: true
  */

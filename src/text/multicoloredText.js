@@ -6,7 +6,7 @@
  * @param {number} y y-coordinate of text
  *
  * @example
- * let str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
+ * const str = 'Multi-[255,0,0]Colored\n[0,255,0]Text';
  * fill(BLUE);
  * multicoloredText(str, 25, 25);
  */

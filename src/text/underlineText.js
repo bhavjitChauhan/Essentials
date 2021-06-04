@@ -8,12 +8,12 @@
  * @param {number} [underlineWeight] Weight of underline
  *
  * @example
- * let str = 'Underlined\nText';
+ * const str = 'Underlined\nText';
  * fill(BLACK);
  * underlineText(str, 25, 25);
  *
  * @example
- * let str = 'Underlined\nText';
+ * const str = 'Underlined\nText';
  * fill(BLACK);
  * underlineText(str, 25, 25, RED, 5);
  */
