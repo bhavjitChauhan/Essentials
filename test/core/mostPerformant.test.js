@@ -51,7 +51,7 @@ describe('mostPerformant()', function () {
             }
         };
         const results = mostPerformant(Object.values(testees), 1, true);
-        assert.isTrue(Array.isArray(results));
+        assert.isTrue(_.isArray(results));
         assert.isTrue(results.every(i => !isNaN(i)));
         assert.equal(results.length, Object.entries(testees).length);
     });

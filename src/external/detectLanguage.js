@@ -11,5 +11,5 @@
  */
 detectLanguage = (defaultLanguage = 'en-US') =>
     navigator.language ||
-    (Array.isArray(navigator.languages) && navigator.languages[0]) ||
+    (_.isArray(navigator.languages) && navigator.languages[0]) ||
     defaultLanguage;
