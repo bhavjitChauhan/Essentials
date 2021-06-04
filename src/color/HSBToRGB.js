@@ -8,10 +8,10 @@
  * @returns {string}  RGB color value
  *
  * @example
- * const c = HSBToRGB(85, 255, 255);
- * println(c);
+ * const col = HSBToRGB(85, 255, 255);
+ * println(col);
  * // expected output: -16711936
- * background(c);
+ * background(col);
  * // expected outcome: green background
  */
 HSBToRGB = function(x, s, v) {

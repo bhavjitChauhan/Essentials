@@ -6,13 +6,15 @@
  * Essentials includes the [CSS color names]{@link https://w3schools.com/colors/colors_names.asp} in the format
  * `COLORNAME`.
  *
+ * @constant {number}
+ *
  * @example
  * fill(RED);
  * text('Hello World', 25, 25);
  *
  * @example
- * const c = color(RED, 50);
- * fill(c);
+ * const col = color(RED, 50);
+ * fill(col);
  * square(25, 25, 25);
  */
 RED = e.color(255, 0, 0);
@@ -25,13 +27,15 @@ RED = e.color(255, 0, 0);
  * Essentials includes the [CSS color names]{@link https://w3schools.com/colors/colors_names.asp} in the format
  * `COLORNAME`.
  *
+ * @constant {number}
+ *
  * @example
  * fill(GREEN);
  * text('Hello World', 25, 25);
  *
  * @example
- * const c = color(GREEN, 50);
- * fill(c);
+ * const col = color(GREEN, 50);
+ * fill(col);
  * square(25, 25, 25);
  */
 GREEN = e.color(0, 128, 0);
@@ -44,18 +48,21 @@ GREEN = e.color(0, 128, 0);
  * Essentials includes the [CSS color names]{@link https://w3schools.com/colors/colors_names.asp} in the format
  * `COLORNAME`.
  *
+ * @constant {number}
+ *
  * @example
  * fill(BLUE);
  * text('Hello World', 25, 25);
  *
  * @example
- * const c = color(BLUE, 50);
- * fill(c);
+ * const col = color(BLUE, 50);
+ * fill(col);
  * square(25, 25, 25);
  */
 BLUE = e.color(0, 0, 255);
+
 LIGHTSALMON = e.color(255, 160, 122),
-SALMON = e.color(250, 128, 114);
+    SALMON = e.color(250, 128, 114);
 DARKSALMON = e.color(233, 150, 122);
 LIGHTCORAL = e.color(240, 128, 128);
 INDIANRED = e.color(205, 92, 92);

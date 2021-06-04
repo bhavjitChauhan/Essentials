@@ -6,10 +6,10 @@
  * @returns {color} RGB color value
  *
  * @example
- * const c = hexToRGB('#fff');
- * println(c);
+ * const col = hexToRGB('#fff');
+ * println(col);
  * // expected output: -1
- * background(c);
+ * background(col);
  * // expected outcome: white background
  */
 hexToRGB = hex => {

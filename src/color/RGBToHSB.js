@@ -8,11 +8,11 @@
  * @returns {string}  HSB color value
  *
  * @example
- * const c = RGBToHSB(255, 0, 0);
- * println(c);
+ * const col = RGBToHSB(255, 0, 0);
+ * println(col);
  * // expected output: -65536
  * colorMode(HSB);
- * background(c);
+ * background(col);
  * // expected outcome: red background
  */
 RGBToHSB = function(x, g, b) {
