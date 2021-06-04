@@ -58,9 +58,41 @@ clearLogs = () => e._clearLogs();
  * // Prevents an error if an unneeded method is called
  * Element.init = noop;
  */
-noop = function() {};
+noop = function () { };
 
 /**
  * Alias for `Program.restart()`
  */
 restart = () => e.Program.restart();
+
+/**
+ * Alias for `pushSyle`.
+ *
+ * @example
+ * push();
+ * stroke(WHITE);
+ * rotate(90);
+ * rect(10, 10, 15, 15);
+ * pop();
+ * // This rectangle will not display the stroke or rotation
+ * rect(10, 10, 15, 15);
+ *
+ * @see {@link pop}
+ */
+push = () => e.pushStyle();
+
+/**
+* Alias for `popStyle`.
+*
+* @example
+* push();
+* stroke(WHITE);
+* rotate(90);
+* rect(10, 10, 15, 15);
+* pop();
+* // This rectangle will not display the stroke or rotation
+* rect(10, 10, 15, 15);
+*
+* @see {@link push}
+*/
+pop = () => e.popStyle();
