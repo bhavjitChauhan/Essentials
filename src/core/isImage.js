@@ -2,6 +2,8 @@
  * Checks if object is a Khan Academy image object.
  *
  * @param {Object} obj
+ * 
+ * @returns {boolean}
  *
  * @example
  * const i = getImage("avatars/leaf-green");

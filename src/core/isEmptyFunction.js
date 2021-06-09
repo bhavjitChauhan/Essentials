@@ -4,6 +4,8 @@
  * 
  * @param {Function} fn
  * 
+ * @returns {boolean}
+ * 
  * @example
  * const fn = function () {};
  * println(isEmptyFunction(fn));

@@ -3,6 +3,8 @@
  * 
  * @param {Object} obj
  * 
+ * @returns {boolean}
+ * 
  * @example
  * const arial = createFont('Arial');
  * println(isFont(arial));

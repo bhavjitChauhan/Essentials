@@ -2,6 +2,8 @@
  * Checks if object is a Khan Academy sound object.
  *
  * @param {Object} obj
+ * 
+ * @returns {boolean}
  *
  * @example
  * const s = getSound("retro/boom1");
