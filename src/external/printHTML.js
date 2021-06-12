@@ -3,7 +3,7 @@
  * Prints HTML to canvas log.
  * 
  * @description
- * Links must be opened while holding the CTRL key.
+ * Links must be opened while holding the <kbd>CTRL</kbd> key.
  * 
  * @param {string} data Text to be printed to canvas log
  * 
@@ -13,8 +13,10 @@
  * @see {@link printMD}
  */
 printHTML = data => {
-    data = data.replace(/<a href="([\w+:/.]+)">(?<=>)(.+?)(?=<)<\/a>/g, '<abbr title="Ctrl + Click"><a href="$1" target="_blank">$2</a></abbr>');
-    const previousData = $(CANVAS_LOG).html();
-    if (!previousData) e.println('');
-    $(CANVAS_LOG).html((previousData && (previousData + '<br>') || '') + data);
+    data = data.replace(
+        /<a href="([\w+:/.]+)">(?<=>)(.+?)(?=<)<\/a>/g,
+        '<abbr title="Ctrl + Click"><a href="$1" target="_blank">$2</a></abbr>'
+    );
+    e.println('');
+    $(CANVAS_LOG).last().html(data);
 };

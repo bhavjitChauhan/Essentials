@@ -23,7 +23,7 @@ CANVAS = '#output-canvas';
  * 
  * @example
  * // Log canvas log text to browser console
- * console.log($(CANVAS_LOG).text());
+ * console.log($(CANVAS_LOG).last().text());
  */
 CANVAS_LOG = 'body div:first div:nth-child(2) div div';
 
