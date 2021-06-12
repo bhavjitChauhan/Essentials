@@ -38,15 +38,11 @@
         const outputURL = "output.html";
 
         const code = window.localStorage["essentials-test-code"] || `// jshint ignore: start
-function main() {
-    printf(ESSENTIALS_VERSION);
-}
 
-$.getScript('essentials-proto.js',
-    function() {
-        main();
-    }
-);
+$.ajaxSetup({ async: false });
+$.getScript('essentials-proto.js');
+
+printf(ESSENTIALS_VERSION);
 `;
 
         window.liveEditor = new LiveEditor({
