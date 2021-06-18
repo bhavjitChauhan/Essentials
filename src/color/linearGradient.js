@@ -11,7 +11,7 @@
  * @param {number} settings.y y-coordinate of the gradient
  * @param {number} settings.width width of the gradient
  * @param {number} [settings.height] height of the gradient
- * @param {Array.<Array>} settings.stops color stops
+ * @param {Array} settings.stops color stops
  * @param {number} [settings.angle]
  * @param {number} [settings.x0] x-coordinate of gradient start point
  * @param {number} [settings.y0] y-coordinate of gradient start point
@@ -50,7 +50,7 @@
 linearGradient = settings => {
     // eslint-disable-next-line prefer-const
     let { x, y, width, height, stops, angle, x0, y0, x1, y1 } = settings;
-    if (!height) height = width;
+    height = height || width;
     if (_.isNumber(angle)) {
         if (e.angleMode == 'degrees') angle = e.radians(angle);
         const result = _pointOnRect(width, height, angle);
