@@ -10,7 +10,7 @@
  * @param {number} settings.x x-coordinate of the gradient
  * @param {number} settings.y y-coordinate of the gradient
  * @param {number} settings.width width of the gradient
- * @param {number} [settings.height] height of the gradient
+ * @param {number} [settings.height=width] height of the gradient
  * @param {Array} settings.stops color stops
  * @param {number} [settings.angle]
  * @param {number} [settings.x0] x-coordinate of gradient start point

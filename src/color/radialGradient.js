@@ -10,14 +10,14 @@
  * @param {number} settings.x x-coordinate of the gradient
  * @param {number} settings.y y-coordinate of the gradient
  * @param {number} settings.width width of the gradient
- * @param {number} [settings.height] height of the gradient
+ * @param {number} [settings.height=width] height of the gradient
  * @param {Array} settings.stops color stops
- * @param {number} [settings.x0] x-coordinate of gradient start circle
- * @param {number} [settings.y0] y-coordinate of gradient start circle
- * @param {number} [settings.r0] radius of gradient start circle
- * @param {number} [settings.x1] x-coordinate of gradient end circle
- * @param {number} [settings.y1] y-coordinate of gradient end circle
- * @param {number} [settings.r1] radius of gradient end circle
+ * @param {number} [settings.x0=x + width / 2] x-coordinate of gradient start circle
+ * @param {number} [settings.y0=y + height / 2] y-coordinate of gradient start circle
+ * @param {number} [settings.r0=0] radius of gradient start circle
+ * @param {number} [settings.x1=x + width / 2] x-coordinate of gradient end circle
+ * @param {number} [settings.y1=y + height / 2] y-coordinate of gradient end circle
+ * @param {number} [settings.r1=width / 2] radius of gradient end circle
  *
  * @example
  * radialGradient({
@@ -48,13 +48,15 @@
  */
 radialGradient = settings => {
     // eslint-disable-next-line prefer-const
-    let { x, y, width, height, stops, x0, y0, r0, x1, y1, r1} = settings;
+    let { x, y, width, height, stops, x0, y0, r0, x1, y1, r1 } = settings;
     height = height || width;
-    if (!_.isNumber(x0)) x0 = x + width / 2;
-    if (!_.isNumber(y0)) y0 = y + height / 2;
+    const centerX = x + width / 2;
+    const centerY = y + height / 2;
+    if (!_.isNumber(x0)) x0 = centerX;
+    if (!_.isNumber(y0)) y0 = centerY;
     r0 = r0 || 0;
-    if (!_.isNumber(x1)) x1 = x + width / 2;
-    if (!_.isNumber(y1)) y1 = y + height / 2;
+    if (!_.isNumber(x1)) x1 = centerX;
+    if (!_.isNumber(y1)) y1 = centerY;
     r1 = r1 || width / 2;
 
     push();
