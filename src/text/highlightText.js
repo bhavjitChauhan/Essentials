@@ -16,7 +16,7 @@
  * fill(LIGHTGREEN);
  * highlightText(str, 25, 25, BLACK);
  */
-highlightText = (string, x = 0, y = p.textAscent(), highlightColor = YELLOW) => {
+highlightText = (string, x, y, highlightColor = YELLOW) => {
     if (!(/\S/).test(string)) {
         return;
     }

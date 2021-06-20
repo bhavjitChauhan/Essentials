@@ -17,7 +17,7 @@
  * fill(BLACK);
  * underlineText(str, 25, 25, RED, 5);
  */
-underlineText = (string, x = 0, y = p.textAscent(), underlineColor = BLACK, underlineWeight = p.externals.context.font.match(/\d+/)[0] / 12) => {
+underlineText = (string, x, y, underlineColor = BLACK, underlineWeight = p.externals.context.font.match(/\d+/)[0] / 12) => {
     if (!(/\S/).test(string)) {
         return;
     }

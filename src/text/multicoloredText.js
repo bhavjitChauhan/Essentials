@@ -10,7 +10,7 @@
  * fill(BLUE);
  * multicoloredText(str, 25, 25);
  */
-multicoloredText = (string, x = 0, y = p.textAscent()) => {
+multicoloredText = (string, x, y) => {
     if (!(/\S/).test(string)) {
         return;
     }

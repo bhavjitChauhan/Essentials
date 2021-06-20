@@ -15,7 +15,7 @@
  * fill(BLACK);
  * outlineText(str, 25, 25, ORANGE);
  */
-outlineText = (string, x = 0, y = p.textAscent(), outlineColor = BLACK) => {
+outlineText = (string, x, y, outlineColor = BLACK) => {
     if (!(/\S/).test(string)) {
         return;
     }

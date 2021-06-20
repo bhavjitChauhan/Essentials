@@ -20,7 +20,7 @@
  *
  * @see {@link font}
  */
-fastGradientText = (string, x = 0, y = p.textAscent(), startColor, endColor) => {
+fastGradientText = (string, x, y, startColor, endColor) => {
     push();
     if (!string.includes('\n')) {
         for (let i = 0; i < string.length; i++) {
