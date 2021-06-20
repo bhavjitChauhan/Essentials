@@ -40,11 +40,11 @@
  * @see {@link dottedLine}
  */
 dashedLine = (x1, y1, x2, y2, dashLength = 10, spacing = 10, endDash = true, endPoint = true) => {
-    const length = e.dist(x1, y1, x2, y2);
+    const length = p.dist(x1, y1, x2, y2);
     let i = 0;
     for (; i <= length - dashLength; i += dashLength + 2 * spacing) {
-        e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), e.map(i + dashLength, 0, length, x1, x2), e.map(i + dashLength, 0, length, y1, y2));
+        p.line(p.map(i, 0, length, x1, x2), p.map(i, 0, length, y1, y2), p.map(i + dashLength, 0, length, x1, x2), p.map(i + dashLength, 0, length, y1, y2));
     }
-    if (endDash && i < length) e.line(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2), x2, y2);
-    if (endPoint && i >= length) e.point(x2 + 0.5, y2 + 0.5);
+    if (endDash && i < length) p.line(p.map(i, 0, length, x1, x2), p.map(i, 0, length, y1, y2), x2, y2);
+    if (endPoint && i >= length) p.point(x2 + 0.5, y2 + 0.5);
 };

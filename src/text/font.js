@@ -85,11 +85,11 @@ font = function (family) {
         // font.css = properties + ' ' + size + 'px/' + (size + 2) + 'px ' + _.last(previousCSS);
     } else {
         size = size || 12;
-        _font = e.createFont(family, size);
+        _font = p.createFont(family, size);
         properties = _.without(properties, size);
         _font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + `${size}px/${size + 2}px ${family}`;
         // font.css = (!_.isEmpty(properties) && properties.join(' ') + ' ') + size + 'px/' + (size + 2) + 'px ' + family;
     }
-    call && e.textFont(_font);
+    call && p.textFont(_font);
     return _font;
 };

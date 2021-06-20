@@ -23,8 +23,8 @@ hexToRGB = hex => {
         return parseInt(i, 16);
     }) : null;
     push();
-    e.colorMode(e.RGB);
-    result = e.color.apply(e, result);
+    p.colorMode(p.RGB);
+    result = p.color.apply(p, result);
     pop();
     return result;
 };

@@ -29,9 +29,9 @@
  * @see {@link dashedLine}
  */
 dottedLine = (x1, y1, x2, y2, spacing = 10, endPoint = true) => {
-    const length = e.dist(x1, y1, x2, y2);
+    const length = p.dist(x1, y1, x2, y2);
     for (let i = 0; i < length; i += spacing) {
-        e.point(e.map(i, 0, length, x1, x2), e.map(i, 0, length, y1, y2));
+        p.point(p.map(i, 0, length, x1, x2), p.map(i, 0, length, y1, y2));
     }
-    if (endPoint) e.point(x2, y2);
+    if (endPoint) p.point(x2, y2);
 };

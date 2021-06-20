@@ -11,7 +11,7 @@ isLocalStorageEnabled = () => {
         window.localStorage.setItem(key, null);
         window.localStorage.removeItem(key);
         return true;
-    } catch (e) {
+    } catch (err) {
         return false;
     }
 };

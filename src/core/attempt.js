@@ -10,7 +10,7 @@
 attempt = (fn, ...args) => {
     try {
         return fn(...args);
-    } catch (e) {
-        return e instanceof Error ? e : new Error(e);
+    } catch (err) {
+        return err instanceof Error ? err : new Error(err);
     }
 };

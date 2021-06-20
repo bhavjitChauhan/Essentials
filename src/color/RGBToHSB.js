@@ -45,8 +45,8 @@ RGBToHSB = function(x, g, b) {
         return i * 255;
     });
     push();
-    e.colorMode(e.HSB);
-    result = e.color.apply(e, result);
+    p.colorMode(p.HSB);
+    result = p.color.apply(p, result);
     pop();
     return result;
 };

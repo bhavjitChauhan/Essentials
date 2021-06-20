@@ -11,7 +11,7 @@ isSessionStorageEnabled = () => {
         window.sessionStorage.setItem(key, null);
         window.sessionStorage.removeItem(key);
         return true;
-    } catch (e) {
+    } catch (err) {
         return false;
     }
 };

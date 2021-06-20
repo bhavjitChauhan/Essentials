@@ -52,7 +52,7 @@ linearGradient = settings => {
     let { x, y, width, height, stops, angle, x0, y0, x1, y1 } = settings;
     height = height || width;
     if (_.isNumber(angle)) {
-        if (e.angleMode == 'degrees') angle = e.radians(angle);
+        if (p.angleMode == 'degrees') angle = p.radians(angle);
         const result = _pointOnRect(width, height, angle);
         x0 = x0 || x + width - result.x;
         y0 = y0 || y + height - result.y;
@@ -61,7 +61,7 @@ linearGradient = settings => {
     }
     push();
     const gradient = ctx.createLinearGradient(x0, y0, x1, y1);
-    if (!_.every(stops, _.isArray)) stops = stops.map((color, i, arr) => [e.norm(i, 0, arr.length - 1), color]);
+    if (!_.every(stops, _.isArray)) stops = stops.map((color, i, arr) => [p.norm(i, 0, arr.length - 1), color]);
     for (const stop of stops) {
         if (_.isNumber(stop[1])) stop[1] = RGBToHex(stop[1], true, false);
         gradient.addColorStop(...stop);

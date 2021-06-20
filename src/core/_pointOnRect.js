@@ -1,10 +1,10 @@
 _pointOnRect = (width, height, angle) => {
     angle = -angle;
     while (angle < -Math.PI) {
-        angle += e.TAU;
+        angle += p.TAU;
     }
     while (angle > Math.PI) {
-        angle -= e.TAU;
+        angle -= p.TAU;
     }
     const rectAtan = Math.atan2(height, width);
     const tanTheta = Math.tan(angle);

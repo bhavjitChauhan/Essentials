@@ -9,7 +9,7 @@
  */
 blurRect = (x, y, width, height, size) => {
     if (size <= 0) return;
-    size = e.constrain(size, 0, Math.min(width, height));
-    e.image(e.get(x, y, width, height), x, y, width / size, height / size);
-    e.image(e.get(x, y, width / size, height / size), x, y, width, height);
+    size = p.constrain(size, 0, Math.min(width, height));
+    p.image(p.get(x, y, width, height), x, y, width / size, height / size);
+    p.image(p.get(x, y, width / size, height / size), x, y, width, height);
 };

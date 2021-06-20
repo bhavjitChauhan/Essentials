@@ -1,6 +1,6 @@
 describe('isImage()', function () {
     it('should return true for instances of `PImage`', function () {
-        const img = e.get(0, 0, WIDTH, HEIGHT);
+        const img = p.get(0, 0, WIDTH, HEIGHT);
         assert.isTrue(isImage(img));
     });
     it('should return false for empty objects', function () {

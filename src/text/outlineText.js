@@ -15,19 +15,19 @@
  * fill(BLACK);
  * outlineText(str, 25, 25, ORANGE);
  */
-outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
+outlineText = (string, x = 0, y = p.textAscent(), outlineColor = BLACK) => {
     if (!(/\S/).test(string)) {
         return;
     }
     push();
-    e.fill(outlineColor);
+    p.fill(outlineColor);
     for (let i = -2; i < 3; i++) {
         for (let j = -1; j < 3; j++) {
-            e.text(string, x + i, y + j);
+            p.text(string, x + i, y + j);
         }
-        e.text(string, x + i, y);
-        e.text(string, x, y + i);
+        p.text(string, x + i, y);
+        p.text(string, x, y + i);
     }
     pop();
-    e.text(string, x, y);
+    p.text(string, x, y);
 };

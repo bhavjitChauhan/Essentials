@@ -10,28 +10,28 @@
  * fill(BLUE);
  * multicoloredText(str, 25, 25);
  */
-multicoloredText = (string, x = 0, y = e.textAscent()) => {
+multicoloredText = (string, x = 0, y = p.textAscent()) => {
     if (!(/\S/).test(string)) {
         return;
     }
     string = string.split('\n');
     push();
-    e.textAlign(e.LEFT, e.CORNER);
+    p.textAlign(p.LEFT, p.CORNER);
     for (const i in string) {
         string[i] = string[i].split(/\[|]/);
         let splits = 0;
         for (const j in string[i]) {
             if (/\d+,\d+,\d+/.test(string[i][j])) {
                 const rgb = string[i][j].split(',');
-                e.fill.apply(e, rgb);
+                p.fill.apply(p, rgb);
                 delete string[i][j];
                 if (splits === 0) {
                     string[i][j - 1] += ' ';
                 }
                 splits += 1;
             } else {
-                const w = e.textWidth(string[i].slice(0, j));
-                e.text(string[i][j], x + w - (splits * 2 * e.textWidth(' ')), y + (i * e.textAscent() * 2));
+                const w = p.textWidth(string[i].slice(0, j));
+                p.text(string[i][j], x + w - (splits * 2 * p.textWidth(' ')), y + (i * p.textAscent() * 2));
             }
         }
     }

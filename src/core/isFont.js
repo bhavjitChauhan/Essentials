@@ -17,4 +17,4 @@
  * 
  * @see {@link font}
  */
-isFont = obj => obj instanceof e.PFont;
+isFont = obj => obj instanceof p.PFont;

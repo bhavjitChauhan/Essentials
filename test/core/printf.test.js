@@ -21,9 +21,9 @@ describe('printf()', function () {
             strC = generateUUID(),
             strD = generateUUID();
         printf(strA);
-        e.println(strB);
+        p.println(strB);
         printf(strC);
-        e.println(strD);
+        p.println(strD);
         const loggerText = getLoggerText();
         clearLogger();
         assert.equal(loggerText, `${strA}\n${strB}\n${strC}\n${strD}\n`);

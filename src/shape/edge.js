@@ -21,8 +21,8 @@
  * // expected outcome: line of length 100 rotated 45 degrees
  */
 edge = (x, y, length, angle = 0) => {
-    if (e.angleMode == 'degrees') angle = e.radians(angle);
+    if (p.angleMode == 'degrees') angle = p.radians(angle);
     const x2 = x + length * Math.cos(angle);
     const y2 = y + length * Math.sin(angle);
-    e.line(x, y, x2, y2);
+    p.line(x, y, x2, y2);
 };

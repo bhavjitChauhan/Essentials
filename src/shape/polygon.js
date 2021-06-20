@@ -22,11 +22,11 @@
 polygon = (x, y, sides, radius, rotation) => {
     const _TAU = (Math.cos(Math.PI) < 0) ? 2 * Math.PI : 360;
     push();
-    e.translate(x, y);
-    e.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
+    p.translate(x, y);
+    p.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
     drawShape(() => {
         for (let theta = 0; theta < _TAU; theta += _TAU / sides) {
-            e.vertex(radius * Math.cos(theta), radius * Math.sin(theta));
+            p.vertex(radius * Math.cos(theta), radius * Math.sin(theta));
         }
     }, true);
     pop();

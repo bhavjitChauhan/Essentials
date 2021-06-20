@@ -44,8 +44,8 @@ RGBToHex = (...args) => {
     } else if (_.isBoolean(_.last(args))) octothorpe = args.pop();
     switch (args.length) {
         case 1: {
-            const a = e.alpha(args[0]);
-            hexadecimal = e.hex(args[0], 6) + (a != 255 ? a.toString(16).padStart(2, '0') : '');
+            const a = p.alpha(args[0]);
+            hexadecimal = p.hex(args[0], 6) + (a != 255 ? a.toString(16).padStart(2, '0') : '');
             break;
         }
         case 3: {

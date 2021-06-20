@@ -6,4 +6,4 @@
  * @param {number} radius radius of the circle
  *
  */
-circle = (x, y, radius) => e.ellipse(x, y, radius, radius);
+circle = (x, y, radius) => p.ellipse(x, y, radius, radius);

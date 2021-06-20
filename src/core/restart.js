@@ -13,6 +13,6 @@ restart = () => {
         exitPointerLock();
         forceAllowScroll();
     }
-    e.draw = noop;
-    e.Program.restart();
+    p.draw = noop;
+    p.Program.restart();
 };

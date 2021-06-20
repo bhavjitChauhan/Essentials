@@ -61,7 +61,7 @@ radialGradient = settings => {
 
     push();
     const gradient = ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
-    if (!_.every(stops, _.isArray)) stops = stops.map((color, i, arr) => [e.norm(i, 0, arr.length - 1), color]);
+    if (!_.every(stops, _.isArray)) stops = stops.map((color, i, arr) => [p.norm(i, 0, arr.length - 1), color]);
     for (const stop of stops) {
         if (_.isNumber(stop[1])) stop[1] = RGBToHex(stop[1], true, false);
         gradient.addColorStop(...stop);

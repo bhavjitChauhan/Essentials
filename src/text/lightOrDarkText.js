@@ -30,9 +30,9 @@ lightOrDarkText = backgroundColor => {
         g = parseInt(result[2], 16);
         b = parseInt(result[3], 16);
     } else {
-        r = e.red(backgroundColor);
-        g = e.green(backgroundColor);
-        b = e.blue(backgroundColor);
+        r = p.red(backgroundColor);
+        g = p.green(backgroundColor);
+        b = p.blue(backgroundColor);
     }
     if ((r + b + g) / 3 < 225) {
         return WHITE;
