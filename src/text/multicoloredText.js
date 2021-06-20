@@ -15,7 +15,7 @@ multicoloredText = (string, x, y) => {
         return;
     }
     string = string.split('\n');
-    push();
+    p.pushStyle();
     p.textAlign(p.LEFT, p.CORNER);
     for (const i in string) {
         string[i] = string[i].split(/\[|]/);
@@ -35,5 +35,5 @@ multicoloredText = (string, x, y) => {
             }
         }
     }
-    pop();
+    p.popStyle();
 };

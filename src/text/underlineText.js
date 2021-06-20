@@ -22,7 +22,7 @@ underlineText = (string, x, y, underlineColor = BLACK, underlineWeight = p.exter
         return;
     }
     strings = string.split('\n');
-    push();
+    p.pushStyle();
     p.strokeCap(p.SQUARE);
     p.strokeWeight(underlineWeight);
     p.stroke(underlineColor);
@@ -31,5 +31,5 @@ underlineText = (string, x, y, underlineColor = BLACK, underlineWeight = p.exter
     }
     p.textAlign(p.LEFT, p.CORNER);
     p.text(string, x, y);
-    pop();
+    p.popStyle();
 };

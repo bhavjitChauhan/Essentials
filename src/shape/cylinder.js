@@ -14,7 +14,7 @@
 cylinder = (x, y, width, height) => {
     width = Math.abs(width);
     height = Math.abs(height);
-    push();
+    p.pushMatrix();
     p.translate(x, y);
     if (height > width) {
         const _TAU = (Math.cos(Math.PI) < 0) ? p.TWO_PI : 360;
@@ -33,5 +33,5 @@ cylinder = (x, y, width, height) => {
             p.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
         }, true);
     }
-    pop();
+    p.popMatrix();
 };

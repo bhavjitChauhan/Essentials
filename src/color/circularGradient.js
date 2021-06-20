@@ -32,7 +32,7 @@
  */
 circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 5) => {
     const dTheta = Math.ceil(p.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
-    push();
+    p.pushStyle();
     if (step == 1) {
         p.strokeWeight(1.5);
         for (let i = angle - 1; i < angle + 180; i += dTheta) {
@@ -86,5 +86,5 @@ circularGradient = (x, y, width, height, startColor, endColor, angle = 0, step =
                 p.map(Math.sin(r2), -1, 1, y, y + height));
         }
     }
-    pop();
+    p.popStyle();
 };

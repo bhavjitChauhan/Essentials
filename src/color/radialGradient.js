@@ -60,7 +60,6 @@ radialGradient = settings => {
     if (!_.isNumber(x1)) x1 = centerX;
     if (!_.isNumber(y1)) y1 = centerY;
     r1 = r1 || width / 2;
-
     push();
     const gradient = ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
     if (!_.every(stops, _.isArray)) stops = stops.map((color, i, arr) => [p.norm(i, 0, arr.length - 1), color]);

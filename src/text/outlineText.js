@@ -19,7 +19,7 @@ outlineText = (string, x, y, outlineColor = BLACK) => {
     if (!(/\S/).test(string)) {
         return;
     }
-    push();
+    p.pushStyle();
     p.fill(outlineColor);
     for (let i = -2; i < 3; i++) {
         for (let j = -1; j < 3; j++) {
@@ -28,6 +28,6 @@ outlineText = (string, x, y, outlineColor = BLACK) => {
         p.text(string, x + i, y);
         p.text(string, x, y + i);
     }
-    pop();
+    p.popStyle();
     p.text(string, x, y);
 };

@@ -13,9 +13,9 @@
  */
 donut = (x, y, majorDiameter, minorDiameter) => {
     const kappa = 4 / 3 * (Math.sqrt(2) - 1);
-    push();
+    p.pushMatrix();
     p.translate(x, y);
-    push();
+    p.pushStyle();
     p.noStroke();
     drawShape(() => {
         let radius = minorDiameter / 2;
@@ -33,12 +33,12 @@ donut = (x, y, majorDiameter, minorDiameter) => {
         p.bezierVertex(-radius, central, -central, radius, 0, radius);
         p.bezierVertex(central, radius, radius, central, radius, 0);
     }, true);
-    pop();
+    p.popStyle();
 
-    push();
+    p.pushStyle();
     p.noFill();
     circle(0, 0, minorDiameter);
     circle(0, 0, majorDiameter);
-    pop();
-    pop();
+    p.popStyle();
+    p.popMatrix();
 };

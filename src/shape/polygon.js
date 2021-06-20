@@ -21,7 +21,7 @@
  */
 polygon = (x, y, sides, radius, rotation) => {
     const _TAU = (Math.cos(Math.PI) < 0) ? 2 * Math.PI : 360;
-    push();
+    p.pushMatrix();
     p.translate(x, y);
     p.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
     drawShape(() => {
@@ -29,5 +29,5 @@ polygon = (x, y, sides, radius, rotation) => {
             p.vertex(radius * Math.cos(theta), radius * Math.sin(theta));
         }
     }, true);
-    pop();
+    p.popMatrix();
 };

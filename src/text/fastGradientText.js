@@ -21,7 +21,7 @@
  * @see {@link font}
  */
 fastGradientText = (string, x, y, startColor, endColor) => {
-    push();
+    p.pushStyle();
     if (!string.includes('\n')) {
         for (let i = 0; i < string.length; i++) {
             p.fill(p.lerpColor(startColor, endColor, i / (string.length)));
@@ -33,5 +33,5 @@ fastGradientText = (string, x, y, startColor, endColor) => {
             fastGradientText(strings[i], x, y + i * textAscent(), startColor, endColor);
         }
     }
-    pop();
+    p.popStyle();
 };

@@ -21,17 +21,17 @@ highlightText = (string, x, y, highlightColor = YELLOW) => {
         return;
     }
     string = string.split('\n');
-    push();
+    p.pushStyle();
     p.noStroke();
     p.rectMode(p.CORNER);
     p.textAlign(p.LEFT, p.TOP);
     for (const i in string) {
         string[i] = ` ${string[i]} `;
-        push();
+        p.pushStyle();
         p.fill(highlightColor);
         p.rect(x, y + (i * p.textAscent() * 2), p.textWidth(string[i]), p.textAscent() * 1.75);
-        pop();
+        p.popStyle();
         p.text(string[i], x, y + (i * p.textAscent() * 2));
     }
-    pop();
+    p.popStyle();
 };

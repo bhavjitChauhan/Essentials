@@ -18,7 +18,7 @@
 star = (x, y, externalRadius, spikes = 5, rotation) => {
     const _TAU = (Math.cos(Math.PI) < 0) ? p.TWO_PI : 360;
     const interior = externalRadius * Math.sin(1 / 20 * _TAU) / Math.sin(7 / 20 * _TAU);
-    push();
+    p.pushMatrix();
     p.translate(x, y);
     p.rotate((rotation == undefined) ? -_TAU / 4 : rotation);
     drawShape(() => {
@@ -28,6 +28,5 @@ star = (x, y, externalRadius, spikes = 5, rotation) => {
             p.vertex(internalRadius * Math.cos(theta), internalRadius * Math.sin(theta));
         }
     }, true);
-
-    pop();
+    p.popMatrix();
 };

@@ -34,7 +34,7 @@ angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 
     angle -= 90;
     // `atan` could be `asin`. See https://jsbench.me/mmklrhzgra/1 & https://www.khanacademy.org/cs/-/4713637410717696
     const dTheta = Math.ceil(p.degrees(Math.atan(step / Math.max(width, height))) * 10) / 10;
-    push();
+    p.pushStyle();
     if (step == 1) {
         p.strokeWeight(1.5);
         for (let i = angle; i < angle + 359; i += dTheta) {
@@ -59,5 +59,5 @@ angularGradient = (x, y, width, height, startColor, endColor, angle = 0, step = 
                 p.map(Math.sin(r2), -1, 1, y, y + height));
         }
     }
-    pop();
+    p.popStyle();
 };

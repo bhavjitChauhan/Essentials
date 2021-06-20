@@ -22,9 +22,9 @@ hexToRGB = hex => {
     result = result ? result.splice(1).map(function (i) {
         return parseInt(i, 16);
     }) : null;
-    push();
+    p.pushStyle();
     p.colorMode(p.RGB);
     result = p.color.apply(p, result);
-    pop();
+    p.popStyle();
     return result;
 };
