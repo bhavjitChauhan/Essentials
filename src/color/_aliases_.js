@@ -1,3 +1,34 @@
+noShadow = () => shadow(TRANSPARENT);
+
+/**
+ * Sets shadow blur strength.
+ * 
+ * @param {number} radius
+ * 
+ * @example
+ * shadow(BLACK);
+ * shadowBlur(10);
+ * square(100, 100, 100);
+ * // expected outcome: square with a black shadow
+ */
+shadowBlur = radius => ctx.shadowBlur = radius;
+
+getShadow = () => hexToRGB(ctx.shadowColor);
+
+/**
+ * Gets current shadow blur strength.
+ * 
+ * @returns {number}
+ */
+getShadowBlur = () => ctx.shadowBlur;
+
+/**
+ * Gets current shadow offset.
+ * 
+ * @returns {Array.<number>}
+ */
+getShadowOffset = () => [ctx.shadowOffsetX, ctx.shadowOffsetY];
+
 /**
  * Gets the color range for red.
  * 
