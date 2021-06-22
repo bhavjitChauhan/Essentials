@@ -1,4 +1,102 @@
 /**
+ * Gets the color range for red.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(RGB, 1, 1, 1);
+ * println(getRedRange());
+ * // expected output: 1
+ * 
+ * @see {@link getColorRange}
+ */
+getRedRange = () => p.red(WHITE);
+
+/**
+ * Gets the color range for green.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(RGB, 1, 1, 1);
+ * println(getGreenRange());
+ * // expected output: 1
+ * 
+ * @see {@link getColorRange}
+ */
+getGreenRange = () => p.green(WHITE);
+
+/**
+ * Gets the color range for blue.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(RGB, 1, 1, 1);
+ * println(getBlueRange());
+ * // expected output: 1
+ * 
+ * @see {@link getColorRange}
+ */
+getBlueRange = () => p.blue(WHITE);
+
+/**
+ * Gets the color range for alpha.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(RGB, 255, 255, 255, 1);
+ * println(getAlphaRange());
+ * // expected output: 1
+ * 
+ * @see {@link getColorRange}
+ */
+getAlphaRange = () => p.alpha(WHITE);
+
+/**
+ * Gets the rounded color range for hue.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(HSB, 360, 100, 100);
+ * println(getHueRange());
+ * // expected output: 360
+ * 
+ * @see {@link getColorRange}
+ */
+getHueRange = () => Math.round(p.hue(0xFFFF0001));
+
+/**
+ * Gets the color range for saturation.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(HSB, 360, 100, 100);
+ * println(getSaturationRange());
+ * // expected output: 100
+ * 
+ * @see {@link getColorRange}
+ */
+getSaturationRange = () => p.saturation(RED);
+
+/**
+ * Gets the color range for brightness.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(HSB, 360, 100, 100);
+ * println(getBrightnessRange());
+ * // expected output: 100
+ * 
+ * @see {@link getColorRange}
+ */
+getBrightnessRange = () => p.brightness(RED);
+
+/**
  * @summary
  * Alias for `linearGradient` that draws a linear gradient from `startColor` to
  * `endColor` in the form of a rectangle filling the entire canvas.
