@@ -1,33 +1,34 @@
 /**
  * Draws text with an outline.
  *
- * @param {string} string
+ * @param {string} str
  * @param {number} x x-coordinate of text
  * @param {number} y y-coordinate of text
- * @param {color} [outlineColor=BLACK] color of outline
+ * @param {number} weight
+ * @param {color|string} [color=BLACK] color of outline
  *
  * @example
- * const str = 'Outlined\nText';
+ * const str = 'Outlined Text';
  * outlineText(str, 25, 25);
  *
  * @example
- * const str = 'Outlined\nText';
+ * const str = 'Outlined Text';
  * fill(BLACK);
- * outlineText(str, 25, 25, ORANGE);
+ * outlineText(str, 25, 25, 10, ORANGE);
+ * 
+ * @todo Fix multiline strings
+ * @todo Mimic `text$4` and `text$6`
  */
-outlineText = (string, x, y, outlineColor = BLACK) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    p.pushStyle();
-    p.fill(outlineColor);
-    for (let i = -2; i < 3; i++) {
-        for (let j = -1; j < 3; j++) {
-            p.text(string, x + i, y + j);
-        }
-        p.text(string, x + i, y);
-        p.text(string, x, y + i);
-    }
-    p.popStyle();
-    p.text(string, x, y);
+outlineText = (str, x, y, weight = 5, color = BLACK) => {
+    str = str.replace('\n', '');
+    ctx.save();
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = weight;
+    ctx.strokeStyle = _.isNumber(color) ? RGBToHex(color, true, false) : color;
+    ctx.strokeText(str, x, y);
+    ctx.restore();
+    pushStyle();
+    p.textAlign(p.LEFT, p.TOP);
+    p.text(str, x, y);
+    popStyle();
 };
