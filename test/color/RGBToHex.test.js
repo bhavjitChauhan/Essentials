@@ -17,7 +17,7 @@ describe('RGBToHex()', function () {
     });
     it('should respect the octothorpe argument', function () {
         const col = GREEN;
-        assert.equal(RGBToHex(col, false), '008000');
+        assert.equal(RGBToHex(col, true, false), '008000');
     });
     it('should convert RGB to shorthand hexadecimal values', function () {
         const col = RED;
@@ -29,6 +29,6 @@ describe('RGBToHex()', function () {
     });
     it('should respect the shorthand argument', function () {
         const col = RED;
-        assert.equal(RGBToHex(col, true, false), '#FF0000');
+        assert.equal(RGBToHex(col, false), '#FF0000');
     });
 });

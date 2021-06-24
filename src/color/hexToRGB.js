@@ -16,18 +16,19 @@
  * // expected output: [170, 170, 170, 170]
  */
 hexToRGB = (hex, color = true) => {
-    const length = hex.replace('#', '').length;
-    let arr;
-    if (length == 3 || length == 6) {
-        arr = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_m, r, g, b) => '#' + r + r + g + g + b + b)
-            .substring(1)
-            .match(/.{2}/g)
-            .map(x => parseInt(x, 16));
-    } else if (length == 4 || length == 8) {
-        arr = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])([a-f\d])$/i, (_m, r, g, b, a) => '#' + r + r + g + g + b + b + a + a)
-            .substring(1)
-            .match(/.{2}/g)
-            .map(x => parseInt(x, 16));
+    hex = hex.replace('#', '');
+    switch (hex.length) {
+        case 3:
+        case 6:
+            hex = hex.replace(/^([a-f\d])([a-f\d])([a-f\d])$/i, (_m, r, g, b) => r + r + g + g + b + b);
+            break;
+        case 4:
+        case 8:
+            hex = hex.replace(/^([a-f\d])([a-f\d])([a-f\d])([a-f\d])$/i, (_m, r, g, b, a) => r + r + g + g + b + b + a + a);
+            break;
     }
+    const arr = hex
+        .match(/.{2}/g)
+        .map(x => parseInt(x, 16));
     return color ? p.color.apply(null, arr) : arr;
 };

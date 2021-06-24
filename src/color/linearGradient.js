@@ -65,7 +65,7 @@ linearGradient = settings => {
     const gradient = ctx.createLinearGradient(x0, y0, x1, y1);
     if (!_.every(stops, _.isArray)) stops = stops.map((color, i, arr) => [p.norm(i, 0, arr.length - 1), color]);
     for (const stop of stops) {
-        if (_.isNumber(stop[1])) stop[1] = RGBToHex(stop[1], true, false);
+        if (_.isNumber(stop[1])) stop[1] = RGBToHex(stop[1], false);
         gradient.addColorStop(...stop);
     }
     ctx.fillStyle = gradient;

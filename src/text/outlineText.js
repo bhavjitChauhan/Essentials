@@ -24,7 +24,7 @@ outlineText = (str, x, y, weight = 5, color = BLACK) => {
     ctx.save();
     ctx.lineJoin = 'round';
     ctx.lineWidth = weight;
-    ctx.strokeStyle = _.isNumber(color) ? RGBToHex(color, true, false) : color;
+    ctx.strokeStyle = _.isNumber(color) ? RGBToHex(color, false) : color;
     ctx.strokeText(str, x, y);
     ctx.restore();
     pushStyle();

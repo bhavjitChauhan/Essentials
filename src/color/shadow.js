@@ -10,6 +10,6 @@
  * // expected outcome: square with a black shadow
  */
 shadow = color => {
-    if (_.isNumber(color)) color = RGBToHex(color, true, false);
+    if (_.isNumber(color)) color = RGBToHex(color, false);
     ctx.shadowColor = color;
 };
