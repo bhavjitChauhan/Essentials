@@ -1,4 +1,11 @@
 /**
+ * Gets current text size.
+ * 
+ * @returns {number}
+ */
+getTextSize = () => ctx.font.match(/\d+/);
+
+/**
  * Alias for `format`.
  * 
  * @param {string} str
