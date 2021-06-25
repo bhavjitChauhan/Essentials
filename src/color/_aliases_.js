@@ -97,7 +97,7 @@ getAlphaRange = () => p.alpha(WHITE);
  * 
  * @see {@link getColorRange}
  */
-getHueRange = () => Math.round(p.hue(0xFFFF0001));
+getHueRange = () => getRedRange();
 
 /**
  * Gets the color range for saturation.
@@ -111,7 +111,7 @@ getHueRange = () => Math.round(p.hue(0xFFFF0001));
  * 
  * @see {@link getColorRange}
  */
-getSaturationRange = () => p.saturation(RED);
+getSaturationRange = () => getGreenRange();
 
 /**
  * Gets the color range for brightness.
@@ -125,7 +125,12 @@ getSaturationRange = () => p.saturation(RED);
  * 
  * @see {@link getColorRange}
  */
-getBrightnessRange = () => p.brightness(RED);
+getBrightnessRange = () => getBlueRange();
+
+/**
+ * Checks if current color range is the default.
+ */
+isDefaultColorRange = () => _.every(getColorRange(), range => range == 255);
 
 /**
  * @summary
