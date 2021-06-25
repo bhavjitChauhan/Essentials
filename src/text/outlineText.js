@@ -1,5 +1,9 @@
 /**
+ * @summary
  * Draws text with an outline.
+ * 
+ * @description
+ * If Color Essentials is not present, outlines cannot be translucent.
  *
  * @param {string} str
  * @param {number} x x-coordinate of text
@@ -24,7 +28,9 @@ outlineText = (str, x, y, weight = 5, color = BLACK) => {
     ctx.save();
     ctx.lineJoin = 'round';
     ctx.lineWidth = weight;
-    ctx.strokeStyle = _.isNumber(color) ? RGBToHex(color, false) : color;
+    if (_.isNumber(color))
+        color = typeof COLOR_ESSENTIALS != 'undefined' ? RGBToHex(color, false) : '#' + hex(color, 6);
+    ctx.strokeStyle = color;
     ctx.strokeText(str, x, y);
     ctx.restore();
     pushStyle();
