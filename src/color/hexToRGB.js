@@ -14,6 +14,12 @@
  * @example
  * println(hexToRGB('#AAAA', false));
  * // expected output: [170, 170, 170, 170]
+ * 
+ * @example
+ * const hex = '#F00';
+ * colorMode(RGB, 1, 1, 1, 1);
+ * println(hexToRGB(hex, false));
+ * // expected output: [1, 0, 0, 1]
  */
 hexToRGB = (hex, color = true) => {
     hex = hex.replace('#', '');
@@ -27,8 +33,11 @@ hexToRGB = (hex, color = true) => {
             hex = hex.replace(/^([a-f\d])([a-f\d])([a-f\d])([a-f\d])$/i, (_m, r, g, b, a) => r + r + g + g + b + b + a + a);
             break;
     }
-    const arr = hex
+    let arr = hex
         .match(/.{2}/g)
         .map(x => parseInt(x, 16));
+    if (!isDefaultColorRange() && getColorMode() == p.RGB) {
+        arr = mapColorRange(arr);
+    }
     return color ? p.color.apply(null, arr) : arr;
 };

@@ -27,4 +27,11 @@ describe('hexToRGB()', function () {
         assert.sameOrderedMembers(hexToRGB(hexA, false), [255, 0, 0, 170]);
         assert.equal(hexToRGB(hexB), -1426128896);
     });
+    it('should should respect the current color range', function () {
+        const hexA = '#F00';
+        const hexB = 'F00';
+        p.colorMode(p.RGB, 1);
+        assert.sameOrderedMembers(hexToRGB(hexA, false), [1, 0, 0, 1]);
+        assert.sameOrderedMembers(hexToRGB(hexB, false), [1, 0, 0, 1]);
+    });
 });
