@@ -1,52 +1,50 @@
 /**
- * Converts RGB to HSB color type.
+ * Converts RGB to HSB.
+ * 
+ * @link https://stackoverflow.com/a/54070620
  *
- * @param {(number|color)} x Red value or color
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
+ * @param {...number} args
  *
- * @returns {string}  HSB color value
+ * @returns {Array}
  *
  * @example
- * const col = RGBToHSB(255, 0, 0);
- * println(col);
- * // expected output: -65536
- * colorMode(HSB);
- * background(col);
- * // expected outcome: red background
+ * println(RGBToHSB(0, 0, 255));
+ * // expected outcome: [240, 100, 100, 100]
+ * 
+ * @example
+ * println(RGBToHSB(BLUE));
+ * // expected outcome: [240, 100, 100, 100]
  */
-RGBToHSB = function(x, g, b) {
-    if (arguments.length == 1) {
-        c = x;
-        x = c >> 16 & 0xFF, g = c >> 8 & 0xFF, b = c & 0xFF;
-    }
-
-    x /= 255, g /= 255, b /= 255;
-
-    const maxValue = Math.max(x, g, b);
-    const minValue = Math.min(x, g, b);
-    const v = maxValue;
-
-    const d = maxValue - minValue;
-    const s = maxValue === 0 ? 0 : d / maxValue;
-
-    if (maxValue === minValue) {
-        h = 0;
-    } else {
-        switch (maxValue) {
-            case x: h = (g - b) / d + (g < b ? 6 : 0); break;
-            case g: h = (b - x) / d + 2; break;
-            case b: h = (x - g) / d + 4; break;
+RGBToHSB = (...args) => {
+    const currentColorRange = getColorRange();
+    const mapColorRange = getColorMode() == p.HSB ? currentColorRange : HSB_COLOR_RANGE;
+    const fns = [
+        hue => p.map(hue, 0, 6, 0, mapColorRange[0]),
+        saturation => saturation * mapColorRange[1],
+        brightness => brightness * mapColorRange[2],
+        alpha => alpha * mapColorRange[3]
+    ];
+    let r, g, b, a;
+    switch (args.length) {
+        case 1: {
+            const notDefaultColorRange = !isDefaultColorRange();
+            if (notDefaultColorRange) {
+                p.pushStyle();
+                presetColorMode(p.RGB);
+            }
+            [r, g, b, a] = toRGB(args[0]).map((value, i) => value /= RGB_COLOR_RANGE[i]);
+            notDefaultColorRange && p.popStyle();
+            break;
         }
-        h /= 6;
+        case 3:
+        case 4:
+            if (args.length == 4) a = args.pop() / RGB_COLOR_RANGE[3];
+            [r, g, b] = args.map((value, i) => value /= RGB_COLOR_RANGE[i]);
     }
-
-    let result = [h, s, v].map(function (i) {
-        return i * 255;
-    });
-    p.pushStyle();
-    p.colorMode(p.HSB);
-    result = p.color.apply(p, result);
-    p.popStyle();
-    return result;
+    const max = Math.max(r, g, b),
+        chroma = max - Math.min(r, g, b);
+    const hue = chroma && ((max == r) ? (g - b) / chroma : ((max == g) ? 2 + (b - r) / chroma : 4 + (r - g) / chroma));
+    let arr = [hue < 0 ? hue + 6 : hue, max && chroma / max, max, a || 1];
+    arr = arr.map((value, i) => fns[i](value));
+    return arr;
 };
