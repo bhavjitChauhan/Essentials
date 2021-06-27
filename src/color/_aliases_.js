@@ -1,3 +1,17 @@
+/**
+ * Default RGBA color range.
+ * 
+ * @constant {Array.<number>}
+ */
+RGB_COLOR_RANGE = [255, 255, 255, 255];
+
+/**
+ * Default HSBA color range.
+ * 
+ * @constant {Array.<number>}
+ */
+HSB_COLOR_RANGE = [360, 100, 100, 100];
+
 noShadow = () => shadow(TRANSPARENT);
 
 /**
@@ -130,7 +144,7 @@ getBrightnessRange = () => getBlueRange();
 /**
  * Checks if current color range is the default.
  */
-isDefaultColorRange = () => _.every(getColorRange(), range => range == 255);
+isDefaultColorRange = () => getColorRange() == RGB_COLOR_RANGE;
 
 /**
  * @summary
