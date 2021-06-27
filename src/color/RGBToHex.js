@@ -45,13 +45,13 @@ RGBToHex = (...args) => {
     switch (args.length) {
         case 1: {
             const a = p.alpha(args[0]);
-            hexadecimal = p.hex(args[0], 6) + (a != 255 ? a.toString(16).padStart(2, '0') : '');
+            hexadecimal = p.hex(args[0], 6) + (a != RGB_COLOR_RANGE[3] ? a.toString(16).padStart(2, '0') : '');
             break;
         }
         case 3:
         case 4:
             hexadecimal = ((1 << 24) + (args[0] << 16) + (args[1] << 8) + args[2]).toString(16).slice(1);
-            if (args.length == 4) hexadecimal += args[3].toString(16).padStart(2, '0');
+            if (args.length == 4 && args[3] != RGB_COLOR_RANGE[3]) hexadecimal += args[3].toString(16).padStart(2, '0');
     }
     if (shorthand) {
         if (hexadecimal.length == 8) hexadecimal = hexadecimal.replace(/(\w)\1(\w)\2(\w)\3(\w)\4/, '$1$2$3$4');
