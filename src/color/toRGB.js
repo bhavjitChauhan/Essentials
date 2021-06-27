@@ -1,9 +1,7 @@
 /**
- * Converts hex or HSB to RGB color value.
+ * Converts color integers, hex or HSB values to RGB.
  *
- * @param {(string|color)} x Hex, hue or RGB color value
- * @param {number} [s] Saturation value
- * @param {number} [v] Brightness value
+ * @param {...*} args
  *
  * @returns {color|array}  RGB color value or RGB values array
  *
@@ -19,16 +17,24 @@
  * println(toRGB(-1))
  * // expected output: [255, 255, 255]
  */
-toRGB = function() {
-    const args = arguments;
-    if (args.length == 1) {
-        const c = args[0];
-        if (typeof c == 'number') {
-            return [p.red(c), p.green(c), p.blue(c)];
-        } else {
-            return hexToRGB(c);
+toRGB = (...args) => {
+    switch (args.length) {
+        case 1: {
+            const col = args[0];
+            if (_.isNumber(col)) {
+                const isHSB = getColorMode() == p.HSB;
+                if (isHSB) {
+                    p.pushStyle();
+                    presetColorMode(p.RGB);
+                }
+                const arr = [p.red(col), p.green(col), p.blue(col), p.alpha(col)];
+                isHSB && p.popStyle();
+                return arr;
+            }
+            return hexToRGB(col);
         }
-    } else if (args.length == 3) {
-        return HSBToRGB.apply(p, args);
+        case 3:
+        case 4:
+            return HSBToRGB.apply(p, args);
     }
 };
