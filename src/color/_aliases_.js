@@ -1,18 +1,13 @@
+/**
+ * Turns off shadow.
+ */
 noShadow = () => shadow(TRANSPARENT);
 
 /**
- * Sets shadow blur strength.
+ * Gets current shadow color.
  * 
- * @param {number} radius
- * 
- * @example
- * shadow(BLACK);
- * shadowBlur(10);
- * square(100, 100, 100);
- * // expected outcome: square with a black shadow
+ * @returns {color}
  */
-shadowBlur = radius => ctx.shadowBlur = radius;
-
 getShadow = () => hexToRGB(ctx.shadowColor);
 
 /**
@@ -233,3 +228,5 @@ circularGradientBackground = (startColor, endColor, angle = 0, step = 5) => {
         startColor, endColor, angle, step
     );
 };
+
+clearEffects = () => ctx.filter = 'none';
