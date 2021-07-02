@@ -56,6 +56,6 @@
     "prettier": "^2.3.2",
     "rollup": "^2.52.2",
     "showdown": "^1.9.1",
-    "terser": "^5.7.0"
+    "terser": "^5.7.1"
   }
 }
