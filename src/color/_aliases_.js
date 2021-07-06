@@ -1,3 +1,12 @@
+LUMINANCE = BRIGHTNESS = 'brightness',
+    CONTRAST = 'contrast',
+    DROP_SHADOW = 'drop-shadow',
+    GRAYSCALE = p.GRAY,
+    HUE_ROTATE = 'hue-rotate',
+    OPACITY = 'opacity',
+    SATURATE = 'saturate',
+    SEPIA = 'sepia';
+
 /**
  * Turns off shadow.
  */

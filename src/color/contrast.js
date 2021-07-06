@@ -6,9 +6,9 @@
  * @example
  * const img = getImage('landscapes/beach-in-hawaii');
  * push();
- * constrast(150);
+ * contrast(150);
  * image(img, 0, 0, WIDTH, HEIGHT);
  * pop();
  * // expected outcome: contrast increased to 150%
  */
-constrast = amount => _appendFilter(`contrast(${amount}%)`);
+contrast = amount => _appendFilter(`contrast(${amount}%)`);
