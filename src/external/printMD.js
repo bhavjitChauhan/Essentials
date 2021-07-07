@@ -14,11 +14,11 @@
  * 
  * @example
  * printMD('_italic_');
- * // expected oucome: italic test
+ * // expected outcome: italic test
  * 
  * @example
  * printMD('[link](https://khanacademy.org)');
- * // expected oucome: hyperlink to Khan Academy
+ * // expected outcome: hyperlink to Khan Academy
  * 
  * @see {@link printHTML}
  */

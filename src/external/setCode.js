@@ -5,7 +5,7 @@ __setCodeLastCall = typeof __setCodeLastCall !== 'undefined' ? __setCodeLastCall
  * Sets editor code.
  * 
  * @description
- * To prevent a "rague" `setCode` function, if the function is called 25 times
+ * To prevent a "rogue" `setCode` function, if the function is called 25 times
  * in a row it stops itself. Set the `_set_code_limit_` variable to `false` to
  * disable this functionality.
  * 

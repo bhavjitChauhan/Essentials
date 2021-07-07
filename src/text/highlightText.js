@@ -13,7 +13,7 @@
  *
  * @example
  * const str = 'Highlighted\nText';
- * fill(LIGHTGREEN);
+ * fill(LIGHT_GREEN);
  * highlightText(str, 25, 25, BLACK);
  */
 highlightText = (string, x, y, highlightColor = YELLOW) => {

@@ -1,5 +1,5 @@
 /**
- * Converts color intergers, hex or RGB values to HSB.
+ * Converts color integers, hex or RGB values to HSB.
  *
  * @param {...*} args
  *

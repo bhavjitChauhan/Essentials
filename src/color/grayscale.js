@@ -1,5 +1,5 @@
 /**
- * Converst to canvas image to grayscale.
+ * Converts to canvas image to grayscale.
  * 
  * @param {number} [amount=100] percentage
  * 

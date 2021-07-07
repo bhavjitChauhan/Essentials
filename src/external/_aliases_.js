@@ -71,7 +71,7 @@ allowScroll = () => $(CANVAS).off('wheel', _preventDefault);
  * 
  * @description
  * `allowScroll` only removes the event handler that prevents the page from
- * being scrolled, however if the program is editted or restarted this is no
+ * being scrolled, however if the program is edited or restarted this is no
  * longer possible.
  * 
  * This function is not intended for production use.

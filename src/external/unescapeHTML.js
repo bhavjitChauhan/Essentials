@@ -1,5 +1,5 @@
 /**
- * Unescapes an escaped HTML string.
+ * Unescape an escaped HTML string.
  * 
  * @link https://www.30secondsofcode.org/js/s/unescape-html
  * 

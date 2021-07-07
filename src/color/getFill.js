@@ -3,7 +3,7 @@
  * Gets current fill color.
  * 
  * @description
- * Provessing will only update the current fill if specific functions are
+ * Processing will only update the current fill if specific functions are
  * called. To work around this, a "ghost" rectangle will be drawn to update
  * the fill value.
  * 

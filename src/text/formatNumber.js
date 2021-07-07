@@ -3,7 +3,7 @@
  * 
  * @param {number} n
  * @param {string|Array} [locales='en']
- * @param {Objecet} [options]
+ * @param {Object} [options]
  * 
  * @returns {string}
  * 
