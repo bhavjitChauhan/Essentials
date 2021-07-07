@@ -33,7 +33,7 @@
     "@babel/core": "^7.14.6",
     "@babel/plugin-transform-arrow-functions": "^7.14.5",
     "@babel/plugin-transform-block-scoping": "^7.14.5",
-    "@babel/plugin-transform-destructuring": "^7.14.5",
+    "@babel/plugin-transform-destructuring": "^7.14.7",
     "@babel/plugin-transform-exponentiation-operator": "^7.14.5",
     "@babel/plugin-transform-for-of": "^7.14.5",
     "@babel/plugin-transform-parameters": "^7.14.5",
@@ -44,7 +44,7 @@
     "chalk": "^4.1.1",
     "concurrently": "^6.2.0",
     "docdash": "^1.2.0",
-    "eslint": "^7.28.0",
+    "eslint": "^7.30.0",
     "inline-remote-assets": "^0.7.0",
     "jsdoc": "^3.6.7",
     "jsdoc-to-markdown": "^7.0.1",
@@ -54,11 +54,11 @@
     "karma-json-fixtures-preprocessor": "^0.0.6",
     "karma-mocha": "^2.0.1",
     "karma-requirejs": "^1.1.0",
-    "mocha": "^9.0.0",
-    "prettier": "^2.3.1",
-    "rollup": "^2.52.1",
+    "mocha": "^9.0.2",
+    "prettier": "^2.3.2",
+    "rollup": "^2.52.7",
     "showdown": "^1.9.1",
-    "terser": "^5.7.0",
+    "terser": "^5.7.1",
     "watch": "^1.0.2"
   }
 }
