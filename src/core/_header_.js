@@ -9,12 +9,17 @@
  * @author Bhavjit Chauhan
  */
 
+/**
+ * A Processing color integer.
+ * @typedef {number} color
+ */
+
 _environment_ = this instanceof Window ? 'CDN' : 'KA';
 _console_style_ = 'font-family:system-ui;font-size:0.75rem;';
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 
 ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '1.2.0';
+ESSENTIALS_VERSION = '2.0.0beta';
 ESSENTIALS_ASCII = `
     _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
    _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/

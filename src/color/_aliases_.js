@@ -1,4 +1,85 @@
 /**
+ * Constant for the `effect` function.
+ *
+ * @private
+ * 
+ * @constant {string}
+ */
+BRIGHTNESS = 'brightness';
+
+/**
+ * Constant for the `effect` function.
+ *
+ * @private
+ * 
+ * @constant {string}
+ */
+LUMINANCE = 'brightness';
+
+/**
+ * Constant for the `effect` function.
+ *
+ * @private
+ * 
+ * @constant {string}
+ */
+CONTRAST = 'contrast';
+
+/**
+ * Constant for the `effect` function.
+ *
+ * @private
+ * 
+ * @constant {string}
+ */
+DROP_SHADOW = 'drop-shadow';
+
+/**
+ * Constant for the `effect` function.
+ *
+ * @private
+ * 
+ * @constant {string}
+ */
+GRAYSCALE = p.GRAY;
+
+/**
+ * Constant for the `effect` function.
+ *
+ * @private
+ * 
+ * @constant {string}
+ */
+HUE_ROTATE = 'hue-rotate';
+
+/**
+ * Constant for the `effect` function.
+ *
+ * @private
+ * 
+ * @constant {string}
+ */
+OPACITY = 'opacity';
+
+/**
+ * Constant for the `effect` function.
+ *
+ * @private
+ * 
+ * @constant {string}
+ */
+SATURATE = 'saturate';
+
+/**
+ * Constant for the `effect` function.
+ *
+ * @private
+ * 
+ * @constant {string}
+ */
+SEPIA = 'sepia';
+
+/**
  * Default RGBA color range.
  * 
  * @constant {Array.<number>}
@@ -12,21 +93,16 @@ RGB_COLOR_RANGE = [255, 255, 255, 255];
  */
 HSB_COLOR_RANGE = [360, 100, 100, 100];
 
+/**
+ * Turns off shadow.
+ */
 noShadow = () => shadow(TRANSPARENT);
 
 /**
- * Sets shadow blur strength.
+ * Gets current shadow color.
  * 
- * @param {number} radius
- * 
- * @example
- * shadow(BLACK);
- * shadowBlur(10);
- * square(100, 100, 100);
- * // expected outcome: square with a black shadow
+ * @returns {color}
  */
-shadowBlur = radius => ctx.shadowBlur = radius;
-
 getShadow = () => hexToRGB(ctx.shadowColor);
 
 /**
@@ -247,3 +323,5 @@ circularGradientBackground = (startColor, endColor, angle = 0, step = 5) => {
         startColor, endColor, angle, step
     );
 };
+
+clearEffects = () => ctx.filter = 'none';
