@@ -1,36 +1,41 @@
 /**
- * Converts hex or RGB to HSB color value.
+ * Converts color intergers, hex or RGB values to HSB.
  *
- * @param {(string|color)} x Hex, red or HSB color value
- * @param {number} [g] Green value
- * @param {number} [b] Blue value
+ * @param {...*} args
  *
  * @returns {color|array}  RGB color value or RGB values array
  *
  * @example
- * colorMode(HSB);
- * background(toHSB('fff'));
- * // expected outcome: white background
- *
+ * println(toRGB(BLUE));
+ * // expected output: [0, 0, 255, 255]
+ * 
  * @example
- * colorMode(HSB);
- * background(toHSB(255, 0, 0));
- * // expected outcome: red background
- *
+ * const col = toRGB('#F00')
+ * println(hex(col, 6));
+ * // expected output: 'FF0000'
+ * 
  * @example
- * println(toHSB(-1))
- * // expected output: [0, 0, 255]
+ * println(toRGB(0, 100, 100));
+ * // expected output: [255, 0, 0, 255]
  */
-toHSB = function() {
-    const args = arguments;
-    if (args.length == 1) {
-        const c = args[0];
-        if (typeof c == 'number') {
-            return [p.hue(c), p.saturation(c), p.brightness(c)];
-        } else {
-            return RGBToHSB.apply(p, toRGB(hexToRGB(c)));
+toHSB = (...args) => {
+    switch (args.length) {
+        case 1: {
+            const col = args[0];
+            if (_.isNumber(col)) {
+                const isRGB = getColorMode() == p.RGB;
+                if (isRGB) {
+                    p.pushStyle();
+                    presetColorMode(p.HSB);
+                }
+                const arr = [p.hue(col), p.saturation(col), p.brightness(col), p.alpha(col)];
+                isRGB && p.popStyle();
+                return arr;
+            }
+            return hexToHSB(col);
         }
-    } else if (args.length == 3) {
-        return RGBToHSB.apply(p, args);
+        case 3:
+        case 4:
+            return RGBToHSB.apply(p, args);
     }
 };

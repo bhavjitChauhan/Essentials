@@ -22,6 +22,7 @@
  * // expected output: [1, 0, 0, 1]
  */
 hexToRGB = (hex, color = true) => {
+    const currentColorMode = getColorMode();
     hex = hex.replace('#', '');
     switch (hex.length) {
         case 3:
@@ -36,8 +37,11 @@ hexToRGB = (hex, color = true) => {
     let arr = hex
         .match(/.{2}/g)
         .map(x => parseInt(x, 16));
-    if (!isDefaultColorRange() && getColorMode() == p.RGB) {
+    if (arr.length == 3) arr.push(RGB_COLOR_RANGE[3]);
+    if (!isDefaultColorRange() && currentColorMode == p.RGB) {
         arr = mapColorRange(arr);
     }
-    return color ? p.color.apply(null, arr) : arr;
+    let result = arr;
+    if (color) result = _createColor(arr, p.RGB, currentColorMode);
+    return result;
 };
