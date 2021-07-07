@@ -10,4 +10,4 @@
  * println(isImage(i));
  * // expected output: true
  */
-isImage = obj => obj instanceof e.PImage;
+isImage = obj => obj instanceof p.PImage;

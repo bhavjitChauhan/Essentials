@@ -13,7 +13,7 @@
  */
 trapezoid = (x, y, height, topBase, bottomBase) => {
     const maxBase = Math.max(topBase, bottomBase);
-    e.quad(x + (maxBase - topBase) / 2, y,
+    p.quad(x + (maxBase - topBase) / 2, y,
         x + (maxBase - topBase) / 2 + topBase - 1, y,
         x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1,
         x + (maxBase - bottomBase) / 2, y + height - 1);

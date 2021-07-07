@@ -13,6 +13,6 @@
  * @see {@link pop}
  */
 push = () => {
-    e.pushStyle();
+    p.pushStyle();
     ctx.save();
 };

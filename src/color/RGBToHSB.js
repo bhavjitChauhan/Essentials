@@ -44,9 +44,9 @@ RGBToHSB = function(x, g, b) {
     let result = [h, s, v].map(function (i) {
         return i * 255;
     });
-    push();
-    e.colorMode(e.HSB);
-    result = e.color.apply(e, result);
-    pop();
+    p.pushStyle();
+    p.colorMode(p.HSB);
+    result = p.color.apply(p, result);
+    p.popStyle();
     return result;
 };

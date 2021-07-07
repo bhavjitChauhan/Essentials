@@ -1,7 +1,7 @@
 _eval = eval;
-e = Processing.instances[0];
+p = Processing.instances[0];
 
-[LEFT, RIGHT, TOP, BOTTOM, UP, DOWN] = [e.LEFT, e.RIGHT, e.TOP, e.BOTTOM, e.UP, e.DOWN];
+[LEFT, RIGHT, TOP, BOTTOM, UP, DOWN] = [p.LEFT, p.RIGHT, p.TOP, p.BOTTOM, p.UP, p.DOWN];
 TOP_LEFT = 1, TOP_RIGHT = 2, BOTTOM_RIGHT = 3, BOTTOM_LEFT = 4;
 
 /**
@@ -9,14 +9,14 @@ TOP_LEFT = 1, TOP_RIGHT = 2, BOTTOM_RIGHT = 3, BOTTOM_LEFT = 4;
  * 
  * @constant {number}
  */
-WIDTH = e.width;
+WIDTH = p.width;
 
 /**
  * Alias for `height`.
  * 
  * @constant {number}
  */
-HEIGHT = e.height;
+HEIGHT = p.height;
 
 /**
  * Alias for `WIDTH / 2`.
@@ -39,7 +39,7 @@ HALF_HEIGHT = HEIGHT / 2;
  * 
  * @constant {CanvasRenderingContext2D}
  */
-ctx = e.externals.context;
+ctx = p.externals.context;
 
 /**
  * Alias for `_clearLogs()`.
@@ -49,7 +49,7 @@ ctx = e.externals.context;
  * clearLogs();
  * // expected outcome: blank canvas console
  */
-clearLogs = () => e._clearLogs();
+clearLogs = () => p._clearLogs();
 
 /**
  * Literally does nothing. Useful as the default for optional callback arguments.

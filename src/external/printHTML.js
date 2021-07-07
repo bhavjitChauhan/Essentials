@@ -17,6 +17,6 @@ printHTML = data => {
         /<a href="([\w+:/.]+)">(?<=>)(.+?)(?=<)<\/a>/g,
         '<abbr title="Ctrl + Click"><a href="$1" target="_blank">$2</a></abbr>'
     );
-    e.println('');
+    p.println('');
     $(CANVAS_LOG).last().html(data);
 };

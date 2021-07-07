@@ -2,8 +2,8 @@
  * Converts RGB(A) to CSS hexadecimal values.
  *
  * @param {...number} args
- * @param {boolean} [octothorpe=true]
  * @param {boolean} [shorthand=true]
+ * @param {boolean} [octothorpe=true]
  *
  * @returns {string} CSS hexadecimal value
  *
@@ -24,7 +24,7 @@
  * @example
  * const col = RED;
  * console.log(RGBToHex(col), false);
- * // expected output: 'FF0000'
+ * // expected output: '#FF0000'
  * 
  * @example
  * const col = RED;
@@ -33,28 +33,25 @@
  * 
  * @example
  * const col = RED;
- * console.log(RGBToHex(col, true, false));
- * // expected output: '#FF0000'
+ * console.log(RGBToHex(col, false, false));
+ * // expected output: 'FF0000'
  */
 RGBToHex = (...args) => {
-    let hexadecimal, octothorpe = true, shorthand = true;
+    let hexadecimal, shorthand = true, octothorpe = true;
     if (_.every(_.last(args, 2), _.isBoolean)) {
-        shorthand = args.pop();
         octothorpe = args.pop();
-    } else if (_.isBoolean(_.last(args))) octothorpe = args.pop();
+        shorthand = args.pop();
+    } else if (_.isBoolean(_.last(args))) shorthand = args.pop();
     switch (args.length) {
         case 1: {
-            const a = e.alpha(args[0]);
-            hexadecimal = e.hex(args[0], 6) + (a != 255 ? a.toString(16).padStart(2, '0') : '');
+            const a = p.alpha(args[0]);
+            hexadecimal = p.hex(args[0], 6) + (a != 255 ? a.toString(16).padStart(2, '0') : '');
             break;
         }
-        case 3: {
+        case 3:
+        case 4:
             hexadecimal = ((1 << 24) + (args[0] << 16) + (args[1] << 8) + args[2]).toString(16).slice(1);
-            break;
-        }
-        case 4: {
-            hexadecimal = ((1 << 24) + (args[0] << 16) + (args[1] << 8) + args[2]).toString(16).slice(1) + args[3].toString(16).padStart(2, '0');
-        }
+            if (args.length == 4) hexadecimal += args[3].toString(16).padStart(2, '0');
     }
     if (shorthand) {
         if (hexadecimal.length == 8) hexadecimal = hexadecimal.replace(/(\w)\1(\w)\2(\w)\3(\w)\4/, '$1$2$3$4');

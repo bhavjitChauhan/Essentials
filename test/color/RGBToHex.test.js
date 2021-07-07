@@ -12,23 +12,23 @@ describe('RGBToHex()', function () {
         assert.equal(RGBToHex(col), '#008000');
     });
     it('should convert integer colors with transparency', function () {
-        const col = e.color(GREEN, 100);
+        const col = p.color(GREEN, 100);
         assert.equal(RGBToHex(col), '#00800064');
     });
     it('should respect the octothorpe argument', function () {
         const col = GREEN;
-        assert.equal(RGBToHex(col, false), '008000');
+        assert.equal(RGBToHex(col, true, false), '008000');
     });
     it('should convert RGB to shorthand hexadecimal values', function () {
         const col = RED;
         assert.equal(RGBToHex(col), '#F00');
     });
     it('should convert RGBA to shorthand hexadecimal values', function () {
-        const col = e.color(RED, 238);
+        const col = p.color(RED, 238);
         assert.equal(RGBToHex(col), '#F00E');
     });
     it('should respect the shorthand argument', function () {
         const col = RED;
-        assert.equal(RGBToHex(col, true, false), '#FF0000');
+        assert.equal(RGBToHex(col, false), '#FF0000');
     });
 });

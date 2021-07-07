@@ -26,8 +26,8 @@
  * // expected outcome: points in a square formation
  */
 drawShape = (fn, close, mode) => {
-    close = close && e.CLOSE;
-    e.beginShape(mode);
+    close = close && p.CLOSE;
+    p.beginShape(mode);
     fn();
-    e.endShape(close);
+    p.endShape(close);
 };

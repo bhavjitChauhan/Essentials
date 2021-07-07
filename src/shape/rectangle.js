@@ -38,9 +38,9 @@
  * @see {@link square}
  */
 rectangle = (x, y, width, height = width, tl, tr, br, bl) => {
-    if (tl == undefined) e.rect(x, y, width, height);
-    else if (tr == undefined) e.rect(x, y, width, height, tl);
-    else if (br == undefined) e.rect(x, y, width, height, tl, tl, tr, tr);
-    else if (bl == undefined) e.rect(x, y, width, height, tl, tr, br, 0);
-    else e.rect(x, y, width, height, tl, tr, br, bl);
+    if (tl == undefined) p.rect(x, y, width, height);
+    else if (tr == undefined) p.rect(x, y, width, height, tl);
+    else if (br == undefined) p.rect(x, y, width, height, tl, tl, tr, tr);
+    else if (bl == undefined) p.rect(x, y, width, height, tl, tr, br, 0);
+    else p.rect(x, y, width, height, tl, tr, br, bl);
 };

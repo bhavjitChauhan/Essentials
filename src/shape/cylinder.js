@@ -14,24 +14,24 @@
 cylinder = (x, y, width, height) => {
     width = Math.abs(width);
     height = Math.abs(height);
-    push();
-    e.translate(x, y);
+    p.pushMatrix();
+    p.translate(x, y);
     if (height > width) {
-        const _TAU = (Math.cos(Math.PI) < 0) ? e.TWO_PI : 360;
-        e.rotate(_TAU / 4);
+        const _TAU = (Math.cos(Math.PI) < 0) ? p.TWO_PI : 360;
+        p.rotate(_TAU / 4);
         cylinder(0, 0, height, width);
     } else {
         const r = height / 2;
         const z = (width - height) / 2;
         const central = 4 / 3 * (Math.sqrt(2) - 1) * r;
         drawShape(() => {
-            e.vertex(z, -r);
-            e.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
-            e.bezierVertex(z + r, central, z + central, r, z, r);
-            e.vertex(-z, r);
-            e.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
-            e.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
+            p.vertex(z, -r);
+            p.bezierVertex(z + central, -r, z + r, -central, z + r, 0);
+            p.bezierVertex(z + r, central, z + central, r, z, r);
+            p.vertex(-z, r);
+            p.bezierVertex(-z - central, r, -z - r, central, -z - r, 0);
+            p.bezierVertex(-z - r, -central, -z - central, -r, -z, -r);
         }, true);
     }
-    pop();
+    p.popMatrix();
 };

@@ -7,7 +7,7 @@ describe('inherit()', function () {
             this.h = h;
         };
         Element.prototype.draw = function () {
-            e.rect(this.x, this.y, this.w, this.h);
+            p.rect(this.x, this.y, this.w, this.h);
         };
         const Button = function (x, y, w, h) {
             Element.call(this, x, y, w, h);

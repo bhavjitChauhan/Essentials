@@ -19,10 +19,10 @@ heart = (x, y, radius) => {
         c2x = x + 9 * radius / 5;
 
     drawShape(() => {
-        e.vertex(x, ay);
-        e.bezierVertex(c1x, c1y, c2x, c2y, x, by);
+        p.vertex(x, ay);
+        p.bezierVertex(c1x, c1y, c2x, c2y, x, by);
         c1x = 2 * x - c1x;
         c2x = 2 * x - c2x;
-        e.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
+        p.bezierVertex(c2x, c2y, c1x, c1y, x, ay);
     }, true);
 };

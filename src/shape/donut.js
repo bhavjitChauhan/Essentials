@@ -13,32 +13,32 @@
  */
 donut = (x, y, majorDiameter, minorDiameter) => {
     const kappa = 4 / 3 * (Math.sqrt(2) - 1);
-    push();
-    e.translate(x, y);
-    push();
-    e.noStroke();
+    p.pushMatrix();
+    p.translate(x, y);
+    p.pushStyle();
+    p.noStroke();
     drawShape(() => {
         let radius = minorDiameter / 2;
         let central = kappa * radius;
-        e.vertex(radius, 0);
-        e.bezierVertex(radius, central, central, radius, 0, radius);
-        e.bezierVertex(-central, radius, -radius, central, -radius, 0);
-        e.bezierVertex(-radius, -central, -central, -radius, 0, -radius);
-        e.bezierVertex(central, -radius, radius, -central, radius, 0);
+        p.vertex(radius, 0);
+        p.bezierVertex(radius, central, central, radius, 0, radius);
+        p.bezierVertex(-central, radius, -radius, central, -radius, 0);
+        p.bezierVertex(-radius, -central, -central, -radius, 0, -radius);
+        p.bezierVertex(central, -radius, radius, -central, radius, 0);
         radius = majorDiameter / 2;
         central = kappa * radius;
-        e.vertex(radius, 0);
-        e.bezierVertex(radius, -central, central, -radius, 0, -radius);
-        e.bezierVertex(-central, -radius, -radius, -central, -radius, 0);
-        e.bezierVertex(-radius, central, -central, radius, 0, radius);
-        e.bezierVertex(central, radius, radius, central, radius, 0);
+        p.vertex(radius, 0);
+        p.bezierVertex(radius, -central, central, -radius, 0, -radius);
+        p.bezierVertex(-central, -radius, -radius, -central, -radius, 0);
+        p.bezierVertex(-radius, central, -central, radius, 0, radius);
+        p.bezierVertex(central, radius, radius, central, radius, 0);
     }, true);
-    pop();
+    p.popStyle();
 
-    push();
-    e.noFill();
+    p.pushStyle();
+    p.noFill();
     circle(0, 0, minorDiameter);
     circle(0, 0, majorDiameter);
-    pop();
-    pop();
+    p.popStyle();
+    p.popMatrix();
 };

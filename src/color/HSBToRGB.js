@@ -17,7 +17,7 @@
 HSBToRGB = function(x, s, v) {
     if (arguments.length == 1) {
         c = x;
-        x = e.hue(c), s = e.saturation(c), v = e.brightness(c);
+        x = p.hue(c), s = p.saturation(c), v = p.brightness(c);
     }
     x /= 255, s /= 255, v /= 255;
 
@@ -41,5 +41,5 @@ HSBToRGB = function(x, s, v) {
         return i * 255;
     });
 
-    return e.color.apply(e, result);
+    return p.color.apply(p, result);
 };

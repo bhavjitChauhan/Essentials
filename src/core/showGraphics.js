@@ -16,8 +16,8 @@
  * });
  * // expected outcome: red square embedded in black square
  */
-showGraphics = (x, y, width, height, fn, renderer = e.P2D) => {
-    const g = e.createGraphics(width, height, renderer);
+showGraphics = (x, y, width, height, fn, renderer = p.P2D) => {
+    const g = p.createGraphics(width, height, renderer);
     fn.call(g);
-    e.image(g, x, y);
+    p.image(g, x, y);
 };

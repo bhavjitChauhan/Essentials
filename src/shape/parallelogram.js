@@ -18,5 +18,5 @@
 parallelogram = (ax, ay, bx, by, cx, cy) => {
     const dx = bx - ax;
     const dy = by - ay;
-    e.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
+    p.quad(ax, ay, bx, by, cx + dx, cy + dy, cx, cy);
 };

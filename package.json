@@ -1,6 +1,6 @@
 {
   "name": "essentials",
-  "version": "1.2.0",
+  "version": "2.0.0beta",
   "description": "The Khan Academy utility library.",
   "main": "essentials.js",
   "scripts": {
@@ -15,7 +15,9 @@
     "doc:format": "node lib/doc-format.js",
     "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka && npm run doc:format",
     "dev:build": "npx rollup --config dev/rollup.config.js",
-    "dev": "npm run dev:build && call dev/start.bat"
+    "dev:watch": "npx watch \"npm run dev:build\" src",
+    "dev:serve": "call dev/start.bat",
+    "dev": "concurrently \"npm:dev:watch\" \"npm:dev:serve\""
   },
   "repository": {
     "type": "git",
@@ -56,6 +58,7 @@
     "prettier": "^2.3.2",
     "rollup": "^2.52.7",
     "showdown": "^1.9.1",
-    "terser": "^5.7.1"
+    "terser": "^5.7.1",
+    "watch": "^1.0.2"
   }
 }

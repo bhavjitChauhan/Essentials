@@ -1,30 +1,43 @@
 /**
  * Converts hex to RGB color type.
  *
- * @param {string} hex Hex color value, optional `#`; can be shorthand
+ * @param {string} hex hex color value
+ * @param {boolean} [color=true] return color integer or array
  *
- * @returns {color} RGB color value
+ * @returns {color|Array}
  *
  * @example
- * const col = hexToRGB('#fff');
- * println(col);
- * // expected output: -1
- * background(col);
- * // expected outcome: white background
+ * const col = hexToRGB('#006FDE');
+ * println(hex(col, 6));
+ * // expected output: '006FDE'
+ * 
+ * @example
+ * println(hexToRGB('#AAAA', false));
+ * // expected output: [170, 170, 170, 170]
+ * 
+ * @example
+ * const hex = '#F00';
+ * colorMode(RGB, 1, 1, 1, 1);
+ * println(hexToRGB(hex, false));
+ * // expected output: [1, 0, 0, 1]
  */
-hexToRGB = hex => {
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    result = result ? result.splice(1).map(function (i) {
-        return parseInt(i, 16);
-    }) : null;
-    push();
-    e.colorMode(e.RGB);
-    result = e.color.apply(e, result);
-    pop();
-    return result;
+hexToRGB = (hex, color = true) => {
+    hex = hex.replace('#', '');
+    switch (hex.length) {
+        case 3:
+        case 6:
+            hex = hex.replace(/^([a-f\d])([a-f\d])([a-f\d])$/i, (_m, r, g, b) => r + r + g + g + b + b);
+            break;
+        case 4:
+        case 8:
+            hex = hex.replace(/^([a-f\d])([a-f\d])([a-f\d])([a-f\d])$/i, (_m, r, g, b, a) => r + r + g + g + b + b + a + a);
+            break;
+    }
+    let arr = hex
+        .match(/.{2}/g)
+        .map(x => parseInt(x, 16));
+    if (!isDefaultColorRange() && getColorMode() == p.RGB) {
+        arr = mapColorRange(arr);
+    }
+    return color ? p.color.apply(null, arr) : arr;
 };

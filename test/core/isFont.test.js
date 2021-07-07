@@ -1,6 +1,6 @@
 describe('isFont()', function () {
     it('should return true for instances of `PFont`', function () {
-        const sans = e.createFont('sans-serif');
+        const sans = p.createFont('sans-serif');
         assert.isTrue(isFont(sans));
     });
     it('should return false for empty objects', function () {

@@ -19,5 +19,5 @@ printf = function(str, ...args) {
         str = str.replace(/(?<!\\)%/, arg);
     }
     str = str.replaceAll(/\\%/g, '%');
-    e.println(str);
+    p.println(str);
 };

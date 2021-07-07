@@ -34,5 +34,5 @@ clean = fn => {
         .replace(/if \(__env__\.KAInfiniteLoopCount > 1000\) {[\s]+__env__\.KAInfiniteLoopProtect\('[^']*'\);[^}]+}/g, '')
         .replace(/__env__\.PJSOutput\.applyInstance\((__env__\.\S+), '\S+'\)/g,
             'new $1');
-    return Object.constructor(`return (function(__env__) {return ${string};});`)()(e);
+    return Object.constructor(`return (function(__env__) {return ${string};});`)()(p);
 };

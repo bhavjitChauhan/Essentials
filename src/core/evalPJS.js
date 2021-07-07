@@ -5,4 +5,4 @@
  * 
  * @returns {*}
  */
-evalPJS = str => _eval(`with (e) ${str}`);
+evalPJS = str => _eval(`with (p) ${str}`);

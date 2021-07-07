@@ -13,6 +13,6 @@
 * @see {@link push}
 */
 pop = () => {
-    e.popStyle();
+    p.popStyle();
     ctx.restore();
 };

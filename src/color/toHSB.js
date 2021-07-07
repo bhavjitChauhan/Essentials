@@ -26,11 +26,11 @@ toHSB = function() {
     if (args.length == 1) {
         const c = args[0];
         if (typeof c == 'number') {
-            return [e.hue(c), e.saturation(c), e.brightness(c)];
+            return [p.hue(c), p.saturation(c), p.brightness(c)];
         } else {
-            return RGBToHSB.apply(e, toRGB(hexToRGB(c)));
+            return RGBToHSB.apply(p, toRGB(hexToRGB(c)));
         }
     } else if (args.length == 3) {
-        return RGBToHSB.apply(e, args);
+        return RGBToHSB.apply(p, args);
     }
 };

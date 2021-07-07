@@ -24,11 +24,11 @@ toRGB = function() {
     if (args.length == 1) {
         const c = args[0];
         if (typeof c == 'number') {
-            return [e.red(c), e.green(c), e.blue(c)];
+            return [p.red(c), p.green(c), p.blue(c)];
         } else {
             return hexToRGB(c);
         }
     } else if (args.length == 3) {
-        return HSBToRGB.apply(e, args);
+        return HSBToRGB.apply(p, args);
     }
 };

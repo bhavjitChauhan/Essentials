@@ -20,12 +20,12 @@
  *
  * @see {@link font}
  */
-fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => {
-    push();
+fastGradientText = (string, x, y, startColor, endColor) => {
+    p.pushStyle();
     if (!string.includes('\n')) {
         for (let i = 0; i < string.length; i++) {
-            e.fill(e.lerpColor(startColor, endColor, i / (string.length)));
-            e.text(string[i], x + e.textWidth(string.slice(0, i)), y);
+            p.fill(p.lerpColor(startColor, endColor, i / (string.length)));
+            p.text(string[i], x + p.textWidth(string.slice(0, i)), y);
         }
     } else {
         const strings = string.split('\n');
@@ -33,5 +33,5 @@ fastGradientText = (string, x = 0, y = e.textAscent(), startColor, endColor) => 
             fastGradientText(strings[i], x, y + i * textAscent(), startColor, endColor);
         }
     }
-    pop();
+    p.popStyle();
 };

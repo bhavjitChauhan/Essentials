@@ -1,3 +1,141 @@
+LUMINANCE = BRIGHTNESS = 'brightness',
+    CONTRAST = 'contrast',
+    DROP_SHADOW = 'drop-shadow',
+    GRAYSCALE = p.GRAY,
+    HUE_ROTATE = 'hue-rotate',
+    OPACITY = 'opacity',
+    SATURATE = 'saturate',
+    SEPIA = 'sepia';
+
+/**
+ * Turns off shadow.
+ */
+noShadow = () => shadow(TRANSPARENT);
+
+/**
+ * Gets current shadow color.
+ * 
+ * @returns {color}
+ */
+getShadow = () => hexToRGB(ctx.shadowColor);
+
+/**
+ * Gets current shadow blur strength.
+ * 
+ * @returns {number}
+ */
+getShadowBlur = () => ctx.shadowBlur;
+
+/**
+ * Gets current shadow offset.
+ * 
+ * @returns {Array.<number>}
+ */
+getShadowOffset = () => [ctx.shadowOffsetX, ctx.shadowOffsetY];
+
+/**
+ * Gets the color range for red.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(RGB, 1, 1, 1);
+ * println(getRedRange());
+ * // expected output: 1
+ * 
+ * @see {@link getColorRange}
+ */
+getRedRange = () => p.red(WHITE);
+
+/**
+ * Gets the color range for green.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(RGB, 1, 1, 1);
+ * println(getGreenRange());
+ * // expected output: 1
+ * 
+ * @see {@link getColorRange}
+ */
+getGreenRange = () => p.green(WHITE);
+
+/**
+ * Gets the color range for blue.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(RGB, 1, 1, 1);
+ * println(getBlueRange());
+ * // expected output: 1
+ * 
+ * @see {@link getColorRange}
+ */
+getBlueRange = () => p.blue(WHITE);
+
+/**
+ * Gets the color range for alpha.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(RGB, 255, 255, 255, 1);
+ * println(getAlphaRange());
+ * // expected output: 1
+ * 
+ * @see {@link getColorRange}
+ */
+getAlphaRange = () => p.alpha(WHITE);
+
+/**
+ * Gets the rounded color range for hue.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(HSB, 360, 100, 100);
+ * println(getHueRange());
+ * // expected output: 360
+ * 
+ * @see {@link getColorRange}
+ */
+getHueRange = () => getRedRange();
+
+/**
+ * Gets the color range for saturation.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(HSB, 360, 100, 100);
+ * println(getSaturationRange());
+ * // expected output: 100
+ * 
+ * @see {@link getColorRange}
+ */
+getSaturationRange = () => getGreenRange();
+
+/**
+ * Gets the color range for brightness.
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(HSB, 360, 100, 100);
+ * println(getBrightnessRange());
+ * // expected output: 100
+ * 
+ * @see {@link getColorRange}
+ */
+getBrightnessRange = () => getBlueRange();
+
+/**
+ * Checks if current color range is the default.
+ */
+isDefaultColorRange = () => _.every(getColorRange(), range => range == 255);
+
 /**
  * @summary
  * Alias for `linearGradient` that draws a linear gradient from `startColor` to
@@ -99,3 +237,5 @@ circularGradientBackground = (startColor, endColor, angle = 0, step = 5) => {
         startColor, endColor, angle, step
     );
 };
+
+clearEffects = () => ctx.filter = 'none';

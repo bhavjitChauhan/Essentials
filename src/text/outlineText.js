@@ -1,33 +1,40 @@
 /**
+ * @summary
  * Draws text with an outline.
+ * 
+ * @description
+ * If Color Essentials is not present, outlines cannot be translucent.
  *
- * @param {string} string
+ * @param {string} str
  * @param {number} x x-coordinate of text
  * @param {number} y y-coordinate of text
- * @param {color} [outlineColor=BLACK] color of outline
+ * @param {number} weight
+ * @param {color|string} [color=BLACK] color of outline
  *
  * @example
- * const str = 'Outlined\nText';
+ * const str = 'Outlined Text';
  * outlineText(str, 25, 25);
  *
  * @example
- * const str = 'Outlined\nText';
+ * const str = 'Outlined Text';
  * fill(BLACK);
- * outlineText(str, 25, 25, ORANGE);
+ * outlineText(str, 25, 25, 10, ORANGE);
+ * 
+ * @todo Fix multiline strings
+ * @todo Mimic `text$4` and `text$6`
  */
-outlineText = (string, x = 0, y = e.textAscent(), outlineColor = BLACK) => {
-    if (!(/\S/).test(string)) {
-        return;
-    }
-    push();
-    e.fill(outlineColor);
-    for (let i = -2; i < 3; i++) {
-        for (let j = -1; j < 3; j++) {
-            e.text(string, x + i, y + j);
-        }
-        e.text(string, x + i, y);
-        e.text(string, x, y + i);
-    }
-    pop();
-    e.text(string, x, y);
+outlineText = (str, x, y, weight = 5, color = BLACK) => {
+    str = str.replace('\n', '');
+    ctx.save();
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = weight;
+    if (_.isNumber(color))
+        color = typeof COLOR_ESSENTIALS != 'undefined' ? RGBToHex(color, false) : '#' + hex(color, 6);
+    ctx.strokeStyle = color;
+    ctx.strokeText(str, x, y);
+    ctx.restore();
+    pushStyle();
+    p.textAlign(p.LEFT, p.TOP);
+    p.text(str, x, y);
+    popStyle();
 };
