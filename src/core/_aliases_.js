@@ -59,3 +59,8 @@ clearLogs = () => p._clearLogs();
  * Element.init = noop;
  */
 noop = function () { };
+
+/**
+ * Alias for `drawGraphics`.
+ */
+showGraphics = () => drawGraphics();
