@@ -15,7 +15,7 @@ module.exports = config => {
             './node_modules/chai/chai.js',
 
             './test/fixtures/**/*.json',
-            './test/prepare.js',
+            './test/helper.js',
             './build/essentials-x.js',
             './test/**/*.test.js'],
         exclude: [],
