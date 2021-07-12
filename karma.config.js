@@ -6,19 +6,17 @@ module.exports = config => {
         },
         jsonFixturesPreprocessor: {
             stripPrefix: 'test/fixtures/',
-            camelizeFilenames: true,
-            transformPath: path => {
-                return `${path}.js`;
-            }
+            transformPath: path => `${path}.js`
         },
         files: [
+            './test/lib/jquery.min.js',
             './test/lib/underscore.min.js',
             './test/lib/processing.min.js',
             './node_modules/chai/chai.js',
 
             './test/fixtures/**/*.json',
             './test/prepare.js',
-            './essentials.js',
+            './build/essentials-x.js',
             './test/**/*.test.js'],
         exclude: [],
         reporters: ['progress'],
