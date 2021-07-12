@@ -1,30 +1,28 @@
-const popMatrixFixture = window.__fixtures__['pushPop/matrix'];
-const popStyleFixture = window.__fixtures__['pushPop/style'];
-
 describe('push() and pop()', function () {
-    it('should call `pushMatrix()` and `popMatrix()`', function () {
-        const cell = cellIndex++;
-        const x = cell * 100;
-        push();
-        push();
-        p.rotate(45);
-        pop();
-        p.rect(x + 25, 25, 50, 50);
-        const img = p.get(x, 0, 100, 100);
-        pop();
-        assert.sameOrderedMembers(Array.from(img.imageData.data), popMatrixFixture.data);
-    });
+    const fixture = window.__fixtures__['push-pop'];
+    prepare();
+
     it('should call `pushStyle()` and `popStyle()`', function () {
-        const cell = cellIndex++;
-        const x = cell * 100;
+        p.translate(50, 50);
+        p.rotate(45);
+        p.fill(0xFF00FF00);
+        p.stroke(0xFF00FF00);
         push();
-        p.fill(GREEN);
+        p.translate(25, 25);
+        p.rotate(45);
+        p.fill(0xFFFF0000);
+        p.stroke(0xFFFF0000);
+        pop();
+        p.rect(-25, -25, 50, 50);
+        assert.equal(hashImageData(), fixture.style);
+    });
+    it('should call `ctx.save()` and `ctx.restore()`', function () {
+        p.fill(0xFF00FF00);
         push();
-        p.fill(RED);
+        shadow(0xFFFF0000);
+        shadowBlur(10);
         pop();
-        p.rect(x + 25, 25, 50, 50);
-        const img = p.get(x, 0, 100, 100);
-        pop();
-        assert.sameOrderedMembers(Array.from(img.imageData.data), popStyleFixture.data);
+        p.rect(25, 25, 50, 50);
+        assert.equal(hashImageData(), fixture.canvas);
     });
 });
