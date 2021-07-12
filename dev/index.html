@@ -62,7 +62,17 @@ printf(ESSENTIALS_VERSION);
         });
         liveEditor.editor.on("change", () => window.localStorage["essentials-test-code"] = liveEditor.editor.text());
         ScratchpadAutosuggest.init(liveEditor.editor.editor);
+
+        function hashImageData() {
+            const contentWindow = window.frames['output-frame'].contentWindow;
+            const p = contentWindow.p
+            p.Program.restart();
+            const imageData = p.get(0, 0, 100, 100).imageData.data;
+            return contentWindow._hash(imageData);
+        }
     </script>
+
+    <button onclick="console.log(hashImageData())">Image Data</button>
 </body>
 
 </html>
