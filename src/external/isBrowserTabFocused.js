@@ -5,4 +5,4 @@
  * 
  * @returns {boolean}
  */
-isBrowserTabFocused = () => !_doc.hidden;
+isBrowserTabFocused = () => !document.hidden;

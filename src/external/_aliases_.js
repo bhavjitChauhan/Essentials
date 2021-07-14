@@ -1,8 +1,3 @@
-// For minified KA builds, BabyHint scans strings for banned properties as well
-_doc = _eval('documen' + 't');
-
-CREATE_ELEMENT = 'createElemen' + 't';
-
 _preventDefault = e => e.preventDefault();
 
 /**
@@ -93,7 +88,7 @@ requestPointerLock = () => $(CANVAS)[0].requestPointerLock();
  * 
  * @see {@link requestPointerLock}
  */
-exitPointerLock = () => _doc.exitPointerLock();
+exitPointerLock = () => document.exitPointerLock();
 
 /**
  * Resizes the canvas log.

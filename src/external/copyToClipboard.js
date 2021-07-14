@@ -10,21 +10,21 @@
  * // expected outcome: 'Hello World' copied to clipboard
  */
 copyToClipboard = str => {
-    const el = _doc[CREATE_ELEMENT]('textarea');
+    const el = document.createElement('textarea');
     el.value = str;
     el.setAttribute('readonly', '');
     el.style.position = 'absolute';
     el.style.left = '-9999px';
-    _doc.body.appendChild(el);
+    document.body.appendChild(el);
     const selected =
-        _doc.getSelection().rangeCount > 0
-            ? _doc.getSelection().getRangeAt(0)
+        document.getSelection().rangeCount > 0
+            ? document.getSelection().getRangeAt(0)
             : false;
     el.select();
-    _doc.execCommand('copy');
-    _doc.body.removeChild(el);
+    document.execCommand('copy');
+    document.body.removeChild(el);
     if (selected) {
-        _doc.getSelection().removeAllRanges();
-        _doc.getSelection().addRange(selected);
+        document.getSelection().removeAllRanges();
+        document.getSelection().addRange(selected);
     }
 };
