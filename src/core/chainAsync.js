@@ -6,22 +6,14 @@
  * @param {Array}  fns  Array containing functions to call
  *
  * @example
- * let array;
  * chainAsync([
  *     function(next) {
- *         console.log('Generating array...');
- *         array = [];
- *         for (let i = 0; i < 10000; i++) {
- *             array.push(Math.random(0, 100));
- *         }
- *         next();
- *     }, function(next) {
- *         console.log('Sorting array...');
- *         array.sort();
- *         next();
- *     }, function() {
- *         console.log(array);
- *     }
+ *         $.getScript('. . .', next);
+ *     },
+ *     function(next) {
+ *         $.getScript('. . .', next);
+ *     },
+ *     main
  * ]);
  */
 chainAsync = fns => {

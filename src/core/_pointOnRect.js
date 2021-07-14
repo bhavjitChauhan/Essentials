@@ -1,3 +1,14 @@
+/**
+ * Gets point on rectangle edge at specified angle.
+ * 
+ * @param {number} width
+ * @param {number} height
+ * @param {number} angle radians
+ * 
+ * @returns {Object} obj
+ * @returns {number} obj.x
+ * @returns {number} obj.y 
+ */
 _pointOnRect = (width, height, angle) => {
     angle = -angle;
     while (angle < -Math.PI) {

@@ -4,12 +4,12 @@
  * @private
  * 
  * @param {Array|number} arr
- * @param {number} colorMode
- * @param {number} [currentColorMode=getColorMode()]
+ * @param {number} [colorMode=getColorMode()]
+ * @param {number} [currentColorMode=colorMode]
  * 
  * @returns {number}
  */
-_createColor = (arr, colorMode, currentColorMode = getColorMode()) => {
+_createColor = (arr, colorMode = getColorMode(), currentColorMode = colorMode) => {
     const oppositeColorMode = colorMode == p.RGB ? p.HSB : p.RGB;
     const isDifferentColorMode = currentColorMode == oppositeColorMode;
     let defaultAlpha = getAlphaRange();
