@@ -56,7 +56,7 @@
     "karma-requirejs": "^1.1.0",
     "mocha": "^9.0.2",
     "prettier": "^2.3.2",
-    "rollup": "^2.52.8",
+    "rollup": "^2.53.1",
     "showdown": "^1.9.1",
     "terser": "^5.7.1",
     "watch": "^1.0.2"
