@@ -5,6 +5,8 @@
  * @description
  * Markdown features are limited to bold, italics and hyperlinks. Links must be
  * opened while holding the CTRL key.
+ * 
+ * @category External
  *
  * @param {string} data Text to be printed to canvas log
  * 

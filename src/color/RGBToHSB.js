@@ -2,6 +2,8 @@
  * Converts RGB to HSB.
  * 
  * @link https://stackoverflow.com/a/54070620
+ * 
+ * @category Color
  *
  * @param {...number} args
  *

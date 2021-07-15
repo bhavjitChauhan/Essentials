@@ -1,5 +1,7 @@
 /**
  * Checks if object is a Khan Academy sound object.
+ * 
+ * @category Core
  *
  * @param {Object} obj
  * 

@@ -6,6 +6,8 @@
  * Colors may be a Processing color or a
  * [CSS color value]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/color_value}.
  * 
+ * @category Color
+ * 
  * @link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
  *
  * @param {Object} settings

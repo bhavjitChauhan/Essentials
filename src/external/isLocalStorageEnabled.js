@@ -3,6 +3,8 @@
  * 
  * @link https://www.30secondsofcode.org/js/s/is-local-storage-enabled
  * 
+ * @category External
+ * 
  * @returns {boolean}
  */
 isLocalStorageEnabled = () => {

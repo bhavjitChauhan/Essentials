@@ -1,5 +1,7 @@
 /**
  * Draws image of graphics created with `createGraphics`.
+ * 
+ * @category Core
  *
  * @param {number} x x-coordinate of image
  * @param {number} y y-coordinate of image

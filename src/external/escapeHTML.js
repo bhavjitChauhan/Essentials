@@ -3,6 +3,8 @@
  * 
  * @link https://www.30secondsofcode.org/js/s/escape-html
  * 
+ * @category External
+ * 
  * @param {string} str
  * 
  * @returns {string} escaped HTML

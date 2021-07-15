@@ -1,5 +1,7 @@
 /**
  * Draws a string with a highlight background.
+ * 
+ * @category Text
  *
  * @param {string} string
  * @param {number} x x-coordinate of text

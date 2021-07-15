@@ -1,6 +1,8 @@
 /**
  * Generates an ID.
  * 
+ * @category Core
+ * 
  * @param {number} [length=8]
  *
  * @returns {string}

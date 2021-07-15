@@ -7,6 +7,8 @@
  * [CSS color value]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/color_value}.
  * 
  * @link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
+ * 
+ * @category Color
  *
  * @param {Object} settings
  * @param {number} settings.x x-coordinate of the gradient

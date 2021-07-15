@@ -4,6 +4,8 @@
  * 
  * @description
  * The program will be restarted for changes to take effect.
+ * 
+ * @category External
  */
 disableLoopProtector = () => {
     if (!isEmptyFunction(LoopProtector.prototype.leave)) {

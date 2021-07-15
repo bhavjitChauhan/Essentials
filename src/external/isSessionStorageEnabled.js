@@ -3,6 +3,8 @@
  * 
  * @link https://www.30secondsofcode.org/js/s/is-session-storage-enabled
  * 
+ * @category External
+ * 
  * @returns {boolean}
  */
 isSessionStorageEnabled = () => {

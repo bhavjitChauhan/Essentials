@@ -1,6 +1,8 @@
 /**
  * Applies a drop shadow to all objects.
  * 
+ * @category Color
+ * 
  * @param {number} x x offset
  * @param {number} [y=x] y offset
  * @param {number} [radius=5] blur radius

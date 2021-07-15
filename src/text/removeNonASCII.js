@@ -1,5 +1,7 @@
 /**
  * Removes non-ASCII characters from string.
+ * 
+ * @category Text
  *
  * @link https://www.30secondsofcode.org/js/s/remove-non-ascii
  *

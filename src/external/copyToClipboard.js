@@ -3,6 +3,8 @@
  * 
  * @link https://www.30secondsofcode.org/js/s/copy-to-clipboard
  * 
+ * @category External
+ * 
  * @param {string} str String to be copied
  * 
  * @example

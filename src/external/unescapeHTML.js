@@ -1,6 +1,8 @@
 /**
  * Unescape an escaped HTML string.
  * 
+ * @category External
+ * 
  * @link https://www.30secondsofcode.org/js/s/unescape-html
  * 
  * @param {string} str escaped HTML

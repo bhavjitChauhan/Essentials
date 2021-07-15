@@ -1,6 +1,8 @@
 /**
  * Gets canvas log text and times.
  * 
+ * @category External
+ * 
  * @returns {Array.<{string: string, time: Date}>}
  * 
  * @example

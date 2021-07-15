@@ -1,6 +1,8 @@
 /**
  * Set log data.
  * 
+ * @category External
+ * 
  * @param {number} i index of log
  * @param {*} data
  * @param {boolean} [update=true] update log time

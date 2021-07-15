@@ -13,6 +13,8 @@
  * To use CSS properties directly, see the MDN documentation on
  * [CanvasRenderingContext2D.filter]{@link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter#browser_compatibility}.
  * 
+ * @category Color
+ * 
  * @param {string} filter Either `BLUR`, `BRIGHTNESS`, `LUMINANCE`, `CONTRAST`, `DROP_SHADOW`, `GRAY`, `GRAY_SCALE`, `HUE_ROTATE`, `INVERT`, `OPACITY`, `SATURATE` or `SEPIA`.
  * @param {...*} args
  */

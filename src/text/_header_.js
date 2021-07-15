@@ -1,5 +1,3 @@
-/** @module Text */
-
 _text_initialized_ = typeof TEXT_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {

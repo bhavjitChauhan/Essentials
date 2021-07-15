@@ -4,6 +4,8 @@
  * 
  * @description
  * If Color Essentials is not present, outlines cannot be translucent.
+ * 
+ * @category Text
  *
  * @param {string} str
  * @param {number} x x-coordinate of text

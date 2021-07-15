@@ -6,6 +6,8 @@
  * Calls functions that interact with the Canvas if the appropriate Essentials
  * component is present.
  * 
+ * @category Core
+ * 
  * @todo Add other functions that alter the Canvas
  */
 restart = () => {

@@ -1,5 +1,7 @@
 /**
  * Converts hex to RGB color type.
+ * 
+ * @category Color
  *
  * @param {string} hex hex color value
  * @param {boolean} [color=true] return color integer or array

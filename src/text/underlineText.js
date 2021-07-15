@@ -1,5 +1,7 @@
 /**
  * Draws text underlined.
+ * 
+ * @category Text
  *
  * @param {string} string Text to be underlined
  * @param {number} x x-coordinate value

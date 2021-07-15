@@ -1,6 +1,8 @@
 /**
  * Sets the line dash offset.
  * 
+ * @category Shape
+ * 
  * @param {number} offset
  * 
  * @example

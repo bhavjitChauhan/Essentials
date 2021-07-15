@@ -1,6 +1,8 @@
 /**
  * Gets canvas log text and time.
  * 
+ * @category External
+ * 
  * @param {number} i index of log
  * 
  * @returns {Object} obj

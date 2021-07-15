@@ -1,6 +1,8 @@
 /**
  * Gets the color mode.
  * 
+ * @category Color
+ * 
  * @example
  * colorMode(RGB);
  * println(getColorMode() == RGB);

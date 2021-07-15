@@ -1,6 +1,8 @@
 /**
  * Remove element from canvas.
  * 
+ * @category External
+ * 
  * @param {string} id HTML id attribute
  * 
  * @example

@@ -61,6 +61,8 @@ BLACK = 0xFF000000;
  * [Colors]{@link https://github.com/bhavjitChauhan/Essentials/wiki/Colors}.
  *
  * @constant {color}
+ * 
+ * @category Core
  *
  * @example
  * fill(RED);
@@ -132,6 +134,8 @@ LIME = 0xFF00FF00;
  * [Colors]{@link https://github.com/bhavjitChauhan/Essentials/wiki/Colors}.
  *
  * @constant {color}
+ * 
+ * @category Core
  *
  * @example
  * fill(GREEN);
@@ -176,6 +180,8 @@ TEAL = 0xFF008080;
  * [Colors]{@link https://github.com/bhavjitChauhan/Essentials/wiki/Colors}.
  *
  * @constant {color}
+ * 
+ * @category Core
  *
  * @example
  * fill(BLUE);

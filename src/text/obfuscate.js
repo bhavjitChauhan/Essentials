@@ -1,5 +1,7 @@
 /**
  * Obfuscate strings as hexadecimal and unicode escape characters.
+ * 
+ * @category Text
  *
  * @link https://www.khanacademy.org/cs/-/4812748875104256
  *

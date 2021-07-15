@@ -1,7 +1,11 @@
 /**
  * Draws a star with _n_ spikes.
+ * 
+ * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
  *
  * @link https://www.khanacademy.org/cs/-/1171581918
+ * 
+ * @category Shape
  *
  * @param {number} x x-coordinate of star
  * @param {number} y y-coordinate of star

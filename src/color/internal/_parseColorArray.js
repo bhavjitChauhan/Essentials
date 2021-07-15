@@ -1,3 +1,12 @@
+/**
+ * Parses color array.
+ * 
+ * @private
+ * 
+ * @param {Array} arr
+ * @param {number} [defaultAlpha=getAlphaRange()]
+ * @param {boolean} [range=false]
+ */
 _parseColorArray = (arr, defaultAlpha = getAlphaRange(), range = false) => {
     if (_.isNumber(arr)) arr = [arr];
     switch (arr.length) {

@@ -1,5 +1,7 @@
 /**
  * Draws text with multiple colors that are passed in using special syntax.
+ * 
+ * @category Text
  *
  * @param {string} string
  * @param {number} x x-coordinate of text

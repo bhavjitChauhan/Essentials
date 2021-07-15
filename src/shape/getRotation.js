@@ -1,6 +1,8 @@
 /**
  * Gets current rotation transformation.
  * 
+ * @category Shape
+ * 
  * @param {boolean} [degrees=p.angleMode == 'degrees'] convert to degrees
  * @param {DOMMatrix} [matrix=ctx.getTransform()]
  * 

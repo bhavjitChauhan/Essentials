@@ -1,6 +1,10 @@
 /**
  * Draws a trapezoid.
  * 
+ * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
+ * 
+ * @category Shape
+ * 
  * @param {number} x x-coordinate of trapezoid
  * @param {number} y y-coordinate of trapezoid
  * @param {number} height height of trapezoid

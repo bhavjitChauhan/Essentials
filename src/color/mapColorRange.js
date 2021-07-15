@@ -1,6 +1,8 @@
 /**
  * Maps color range array to current or a custom color range.
  * 
+ * @category Color
+ * 
  * @param {Array.<number>|number} values
  * @param {Array.<number>|number} [colorRange] custom color range
  * 

@@ -1,6 +1,8 @@
 /**
  * Gets canvas log strings.
  * 
+ * @category External
+ * 
  * @param number [i] index of log
  * 
  * @returns {string[]|string}

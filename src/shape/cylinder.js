@@ -1,7 +1,11 @@
 /**
  * Draws a 2D cylinder.
+ * 
+ * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
  *
  * @link https://www.khanacademy.org/cs/-/5157537806548992
+ * 
+ * @category Shape
  *
  * @param {number} x x-coordinate of cylinder
  * @param {number} y y-coordinate of cylinder

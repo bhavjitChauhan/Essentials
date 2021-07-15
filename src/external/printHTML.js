@@ -5,6 +5,8 @@
  * @description
  * Links must be opened while holding the <kbd>CTRL</kbd> key.
  * 
+ * @category External
+ * 
  * @param {string} data Text to be printed to canvas log
  * 
  * @example

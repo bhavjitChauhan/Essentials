@@ -1,6 +1,8 @@
 /**
  * Sets shadow blur strength.
  * 
+ * @category Color
+ * 
  * @param {number} radius
  * 
  * @example

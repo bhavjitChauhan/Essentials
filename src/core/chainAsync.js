@@ -2,6 +2,8 @@
  * Calls multiple functions asynchronously.
  *
  * @link https://www.30secondsofcode.org/js/s/chain-async
+ * 
+ * @category Core
  *
  * @param {Array}  fns  Array containing functions to call
  *

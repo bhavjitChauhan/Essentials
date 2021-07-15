@@ -1,5 +1,7 @@
 /**
  * Checks if object is a Khan Academy image object.
+ * 
+ * @category Core
  *
  * @param {Object} obj
  * 

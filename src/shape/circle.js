@@ -1,5 +1,7 @@
 /**
  * Alias for `ellipse()` without the separate `width` and `height` parameters.
+ * 
+ * @category Shape
  *
  * @param {number} x x-coordinate of the circle
  * @param {number} y y-coordinate of the circle

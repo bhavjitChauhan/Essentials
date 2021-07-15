@@ -1,6 +1,8 @@
 /**
  * Inverts the canvas image.
  * 
+ * @category Color
+ * 
  * @param {number} [amount=100] percentage
  * 
  * @example

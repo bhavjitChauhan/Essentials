@@ -1,5 +1,7 @@
 /**
  * Converts color integers, hex or HSB values to RGB.
+ * 
+ * @category Color
  *
  * @param {...*} args
  *

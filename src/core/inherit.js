@@ -1,5 +1,7 @@
 /**
  * Efficiently inherits properties from the parent class to the child class.
+ * 
+ * @category Core
  *
  * @param {Function} subClass Class to be inherited to
  * @param {Function} superClass Class to inherit from

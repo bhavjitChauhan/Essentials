@@ -1,6 +1,8 @@
 /**
  * Gets current code in editor.
  * 
+ * @category External
+ * 
  * @returns {string}
  */
 getCode = function () {

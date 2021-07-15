@@ -1,5 +1,7 @@
 /**
  * Converts RGB(A) to CSS hexadecimal values.
+ * 
+ * @category Color
  *
  * @param {...number} args
  * @param {boolean} [shorthand=true]

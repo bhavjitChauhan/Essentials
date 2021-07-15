@@ -7,6 +7,8 @@
  * called. To work around this, a "ghost" rectangle will be drawn to update
  * the stroke value.
  * 
+ * @category Color
+ * 
  * @param {boolean} [draw=true] draw ghost rectangle
  * 
  * @returns {color}

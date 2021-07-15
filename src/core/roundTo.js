@@ -2,6 +2,8 @@
 /**
  * Round number to nearest value.
  * 
+ * @category Core
+ * 
  * @param {number} n
  * @param {number} precision
  * 
@@ -13,6 +15,11 @@
  * @example
  * console.log(roundTo(Math.E, 1e-3));
  * // expected output: 2.718
+ * 
+ * @example
+ * const megabytes = 2000;
+ * printf('~% MB', roundTo(megabytes, 1024));
+ * // expected output: '~2048 MB'
  */
 roundTo = (n, precision) => {
     if (!precision) return n;

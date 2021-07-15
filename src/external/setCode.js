@@ -9,6 +9,8 @@ __setCodeLastCall = typeof __setCodeLastCall !== 'undefined' ? __setCodeLastCall
  * in a row it stops itself. Set the `_set_code_limit_` variable to `false` to
  * disable this functionality.
  * 
+ * @category External
+ * 
  * @param {*} code
  */
 setCode = code => {

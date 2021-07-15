@@ -1,6 +1,8 @@
 /**
  * Returns the singular or plural form of the word based on the input number,
  * using an optional dictionary if supplied.
+ * 
+ * @category Text
  *
  * @link https://www.30secondsofcode.org/js/s/pluralize
  *

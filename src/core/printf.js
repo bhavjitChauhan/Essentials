@@ -1,5 +1,7 @@
 /**
  * Prints formatted string to canvas console.
+ * 
+ * @category Core
  *
  * @param {string} str String with format
  * @param {...*} args Arguments

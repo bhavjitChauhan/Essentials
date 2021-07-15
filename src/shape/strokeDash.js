@@ -3,6 +3,8 @@
  * 
  * @link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash
  * 
+ * @category Shape
+ * 
  * @param {...number} segment distances to alternately draw a line and a gap
  * 
  * @example

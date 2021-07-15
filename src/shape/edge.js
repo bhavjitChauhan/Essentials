@@ -1,5 +1,7 @@
 /**
  * Draws a line of a given length and at a given angle.
+ * 
+ * @category Shape
  *
  * @param {number} x x-coordinate of start point
  * @param {number} y y-coordinate of start point

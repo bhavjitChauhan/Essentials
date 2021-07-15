@@ -1,6 +1,8 @@
 /**
  * Adjusts the contrast of the canvas image.
  * 
+ * @category Color
+ * 
  * @param {number} amount percentage
  * 
  * @example

@@ -1,6 +1,8 @@
 /**
  * Applies a hue rotation on the canvas image.
  * 
+ * @category Color
+ * 
  * @param {number} angle
  * 
  * @example
