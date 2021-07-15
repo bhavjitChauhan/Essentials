@@ -2,8 +2,8 @@
 node_modules
 build
 docs
-internal
 live-editor
+out
 
 essentials-proto.js
 essentials.js
