@@ -1,6 +1,7 @@
 .vscode
 node_modules
 build
+docs
 internal
 live-editor
 
