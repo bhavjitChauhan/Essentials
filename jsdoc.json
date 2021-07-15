@@ -1,17 +1,50 @@
 {
-    "plugins": [
-        "plugins/markdown"
-    ],
+    "tags": {
+        "allowUnknownTags": true
+    },
     "source": {
-        "include": ["build/essentials-x.js"]
+        "include": [
+            "./build/essentials-x.js"
+        ],
+        "includePattern": ".js$",
+        "excludePattern": "(node_modules/|docs)"
     },
+    "plugins": [
+        "plugins/markdown",
+        "jsdoc-mermaid",
+        "node_modules/better-docs/category"
+    ],
     "opts": {
-        "template": "node_modules/docdash",
-        "destination": "docs",
+        "encoding": "utf8",
+        "destination": "docs/",
+        "readme": "README.md",
         "recurse": true,
-        "readme": "README.md"
+        "verbose": true,
+        "tutorials": "./docs-src/tutorials",
+        "template": "./node_modules/better-docs"
     },
-    "docdash": {
-        "search": true
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "search": true,
+        "default": {
+            "staticFiles": {
+                "include": [
+                    "./docs-src/statics"
+                ]
+            }
+        },
+        "better-docs": {
+            "name": "Essentials Documentation",
+            "title": "Essentials Documentation",
+            "css": "style.css",
+            "hideGenerator": false,
+            "navLinks": [
+                {
+                    "label": "Github",
+                    "href": "https://github.com/bhavjitChauhan/Essentials"
+                }
+            ]
+        }
     }
 }

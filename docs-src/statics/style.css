@@ -1,0 +1,30 @@
+html,
+body {
+    overflow: hidden;
+}
+
+.tag-source span a {
+    color: #4a4a4a;
+}
+
+#side-nav {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: .4em;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+    overflow: visible;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, .5);
+}
