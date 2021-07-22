@@ -10,10 +10,8 @@
     "build:ka": "node lib/build-ka.js",
     "build": "npx rollup --config && concurrently \"npm:build:ka\" \"node lib/build-cdn-compress.js\"",
     "doc:html": "npx jsdoc -c jsdoc.json",
-    "doc:md": "node lib/doc-wiki.js && npx jsdoc2md build/essentials-x.js > internal/Essentials-Documentation.md",
-    "doc:ka": "concurrently \"node lib/doc-ka.js\" \"node lib/doc-ka-builder.js\"",
     "doc:format": "node lib/doc-format.js",
-    "doc": "concurrently \"npm:doc:html\" \"npm:doc:md\" && npm run doc:ka && npm run doc:format",
+    "doc": "npm run doc:html && npm run doc:format",
     "dev:build": "npx rollup --config dev/rollup.config.js",
     "dev:watch": "npx watch \"npm run dev:build\" src",
     "dev:serve": "call dev/start.bat",
@@ -57,7 +55,6 @@
     "mocha": "^9.0.2",
     "prettier": "^2.3.2",
     "rollup": "^2.53.1",
-    "showdown": "^1.9.1",
     "terser": "^5.7.1",
     "watch": "^1.0.2"
   }
