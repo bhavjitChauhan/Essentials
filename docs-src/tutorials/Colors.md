@@ -8,8 +8,6 @@
 </style>
 
 - [Usage](#usage)
-    - [Standard](#standard)
-    - [Transparency](#transparency)
 - [Basic Colors](#basic_colors)
 - [Extended Colors](#extended_colors)
 - [Technical](#technical)
@@ -21,23 +19,11 @@
 The Essentials library is bundled with color constants. The constants names' follow the `SCREAMING_SNAKE_CONVENTION`. All Essentials builds include basic colors (see [Basic Colors](#Basic_Colors)). With Color Essentials, all of the named colors in CSS (see [Extended Colors](#Extended_Colors)).
 
 <h2 id="usage">Usage</h2>
+
 Using color constants is straightforward: replace any arguments for a function (i.e. `background`, `stroke`, `fill`) that accepts RGBA or HSBA parameters with the constant.
 
-<h3 id="standard">Standard</h3>
-
-```js
-background(BLACK);
-fill(RED);
-square(100, 100, 100);
-```
-
-<h3 id="transparency">Transparency</h3>
-
-```js
-background(BLACK);
-fill(RED, 50);
-square(100, 100, 100);
-```
+#### Live Example
+<script src="https://www.khanacademy.org/computer-programming/essentials-example-standard-color-usage/4902040224350208/embed.js?editor=yes&buttons=yes&author=no&embed=yes"></script>
 
 <h2 id="basic_colors">Basic Colors</h2>
 The Essentials Core is bundled with the 16 basic HTML colors and the transparent "color" placeholder.
