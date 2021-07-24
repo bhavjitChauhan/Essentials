@@ -13,7 +13,7 @@
 </p>
 <p align="center">
     <a href="https://github.com/bhavjitChauhan/Essentials/releases">
-        <img src="https://img.shields.io/github/package-json/v/bhavjitChauhan/Essentials?style=flat-square" alt="Version">
+        <img src="https://img.shields.io/github/v/release/bhavjitChauhan/Essentials?style=flat-square" alt="Release">
     </a>
     <a href="https://cdn.jsdelivr.net/gh/bhavjitChauhan/Essentials@2/essentials.min.js">
         <img src="https://img.shields.io/badge/minified%20size-26.91%20kB-blue?style=flat-square" alt="Size">
