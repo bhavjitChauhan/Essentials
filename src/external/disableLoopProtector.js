@@ -12,5 +12,6 @@ disableLoopProtector = () => {
         console.warn('Restarting program to disable loop protector...');
         LoopProtector.prototype.leave = noop;
         restart();
+        throw 'Restarting program to disable loop protector...';
     }
 };

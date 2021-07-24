@@ -26,5 +26,6 @@ allowBannedProperties = () => {
         console.warn('Restarting program to allow banned properties...');
         BabyHint.bannedProperties = {};
         restart();
+        throw 'Restarting program to allow banned properties...';
     }
 };
