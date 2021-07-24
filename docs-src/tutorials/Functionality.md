@@ -19,11 +19,11 @@ Essentials offers the means to exploit the Khan Academy environment and lift som
 
 ---
 
-<h2 id="workarounds">Workarounds</h3>
+<h2 id="workarounds">Workarounds</h2>
 
 The KA builds include the JSHint and BabyHint workarounds.
 
-<h3 id="jshint">JSHint</h4>
+<h3 id="jshint">JSHint</h3>
 
 Khan Academy employs JSHint to enforce a certain code style (i.e. semicolons). Using the `ignore` JSHint directive disabled this functionality:
 
@@ -31,7 +31,7 @@ Khan Academy employs JSHint to enforce a certain code style (i.e. semicolons). U
 // jshint ignore: start
 ```
 
-<h3 id="babyhint">BabyHint</h4>
+<h3 id="babyhint">BabyHint</h3>
 
 BabyHint is a project made specifically for Khan Academy to "provide more helpful hints". BabyHint is also used to restrict the usage of certain keywords (i.e. `document`). BabyHint uses regular expressions to "parse" code which leads to it making incorrect assumptions. [Ben Burrill](https://khanacademy.org/cs/-/6623480075124736) originally found a method of completely disabling BabyHint using a certain regular expression:
 
@@ -39,7 +39,7 @@ BabyHint is a project made specifically for Khan Academy to "provide more helpfu
 (/\/*/);
 ```
 
-<h3 id="loop_protector">Loop Protector</h4>
+<h3 id="loop_protector">Loop Protector</h3>
 
 To avoid programs from crashing the webpage, Khan Academy injects it's own code into loops that kill the program if it tries to call more than 1000 iterations. This is an understandable concern but more often than not comes into play when it's not needed. The `disableLoopProtector` function disables this functionality:
 
@@ -47,7 +47,7 @@ To avoid programs from crashing the webpage, Khan Academy injects it's own code 
 disableLoopProtector();
 ```
 
-<h2 id="modern_syntax">Modern Syntax</h3>
+<h2 id="modern_syntax">Modern Syntax</h2>
 
 Although most of the major syntax changes introduces ES5 are impossible to use in a program, variable declarations are an exception. For the most part, however, Khan treats `var`, `let` and `const` as the same.
 ```js
@@ -56,11 +56,11 @@ let a = 0;
 const b = 1;
 ```
 
-<h2 id="global_objects">Global Objects</h3>
+<h2 id="global_objects">Global Objects</h2>
 
 JavaScript includes [standard built-in objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) some of which are not accessible in the default Khan environment.
 
-<h3 id="browser_console">Browser Console</h4>
+<h3 id="browser_console">Browser Console</h3>
 
 [Documentation](https://developer.mozilla.org/en-US/docs/Web/API/console)
 
@@ -83,7 +83,7 @@ const obj = {
     b: 2
 }
 ```
-The traditional method of debugging in the KAPE environment is by calling the
+The traditional method of debugging in the Khan Academy environment is by calling the
 `println` function:
 ```js
 println(obj);
@@ -113,7 +113,7 @@ and Firefox has its [Developer Tools](https://developer.mozilla.org/en-US/docs/T
 #### Live Example
 <script src="https://www.khanacademy.org/computer-programming/essentials-example-browser-console/5716490644832256/embed.js?editor=yes&buttons=yes&author=no&embed=yes"></script>
 
-<h3 id="big_integers">Big Integers</h4>
+<h3 id="big_integers">Big Integers</h3>
 
 [Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
 
@@ -122,13 +122,13 @@ A solution for working with large numbers. The `MAX_SAFE_INTEGER` in JavaScript 
 #### Live Example
 <script src="https://www.khanacademy.org/computer-programming/essentials-example-big-integers/5576171899011072/embed.js?editor=yes&buttons=yes&author=no&embed=yes"></script>
 
-<h3 id="json">JSON</h4>
+<h3 id="json">JSON</h3>
 
 [Documentation](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON)
 
 A convenient solution when working with transferring data into and out of Khan Academy, specifically the [`parse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) and [`stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) methods.
 
-<h2 id="libraries">Libraries</h3>
+<h2 id="libraries">Libraries</h2>
 
 The following libraries are dependencies for the Khan Academy website, there
 are no additional wait times or boilerplate code to use them.
@@ -139,7 +139,7 @@ libraries. Some "newer" features may be missing.
 #### Live Example
 <script src="https://www.khanacademy.org/computer-programming/essentials-example-preloaded-libraries/5087622709329920/embed.js?editor=yes&buttons=yes&author=no&embed=yes"></script>
 
-<h3 id="jquery">jQuery</h4>
+<h3 id="jquery">jQuery</h3>
 
 Version 2.1.1 |
 [Website](https://jquery.com/) |
@@ -148,7 +148,7 @@ Version 2.1.1 |
 
 jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers
 
-<h3 id="underscore">Underscore</h4>
+<h3 id="underscore">Underscore</h3>
 
 Version 1.4.4 |
 [Documentation](https://cdn.rawgit.com/jashkenas/underscore/1.4.4/index.html) |
@@ -157,7 +157,7 @@ Version 1.4.4 |
 Underscore is a JavaScript library that provides a whole mess of useful
 functional programming helpers without extending any built-in objects.
 
-<h3 id="backbone">Backbone</h4>
+<h3 id="backbone">Backbone</h3>
 
 Version 1.0.0 |
 [Documentation](https://cdn.rawgit.com/jashkenas/backbone/1.0.0/index.html) |
@@ -168,7 +168,7 @@ key-value binding and custom events, collections with a rich API of enumerable
 functions views with declarative event handling and connects it all to your
 existing API over a RESTful JSON interface.
 
-<h2 id="banned_properties">Banned Properties</h3>
+<h2 id="banned_properties">Banned Properties</h2>
 
 Using the [BabyHint workaround](#babyhint) allows direct access to the following APIs:
  - [`createElement`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
@@ -180,7 +180,7 @@ Using the [BabyHint workaround](#babyhint) allows direct access to the following
 
 <script src="https://www.khanacademy.org/computer-programming/essentials-example-babyhint-workaround/5997745303142400/embed.js?editor=yes&buttons=yes&author=no&embed=yes"></script>
 
-<h2 id="storage">Storage</h3>
+<h2 id="storage">Storage</h2>
 
 The Essentials library does not include a wrapper for the Storage API as it's straightforward. Both Local and Session storage work inside the Khan Academy environment although External Essentials includes the `isLocalStorageEnabled` and `isSessionStorageEnabled` functions to conduct sanity checks.
 
