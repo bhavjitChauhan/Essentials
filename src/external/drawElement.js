@@ -10,6 +10,8 @@
  * directly under them. Set the `interactive` settings to `false` to allow for
  * click-through canvas interaction instead.
  * 
+ * @category External
+ * 
  * @param {jQuery} [el] jQuery object
  * @param {Object} [settings]
  * @param {string} [settings.data] HTML

@@ -1,5 +1,7 @@
 /**
  * Generates a random integer in a given range.
+ * 
+ * @category Core
  *
  * @param {number} [min=0] Minimum value
  * @param {number} max Maximum value

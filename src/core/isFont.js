@@ -1,6 +1,8 @@
 /**
  * Checks if object is a Khan Academy font object.
  * 
+ * @category Core
+ * 
  * @param {Object} obj
  * 
  * @returns {boolean}

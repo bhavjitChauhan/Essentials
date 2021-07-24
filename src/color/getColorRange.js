@@ -1,6 +1,8 @@
 /**
  * Gets current color range.
  * 
+ * @category Color
+ * 
  * @returns {Array.<number>}
  * 
  * @example

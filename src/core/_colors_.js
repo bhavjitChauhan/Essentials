@@ -1,13 +1,4 @@
 /**
- * Alias for `color(255, 0)`.
- *
- * @private
- * 
- * @constant {color}
- */
-TRANSPARENT = 0x00FFFFFF;
-
-/**
  * Alias for `color(255)`.
  *
  * @private
@@ -61,6 +52,8 @@ BLACK = 0xFF000000;
  * [Colors]{@link https://github.com/bhavjitChauhan/Essentials/wiki/Colors}.
  *
  * @constant {color}
+ * 
+ * @category Core
  *
  * @example
  * fill(RED);
@@ -132,6 +125,8 @@ LIME = 0xFF00FF00;
  * [Colors]{@link https://github.com/bhavjitChauhan/Essentials/wiki/Colors}.
  *
  * @constant {color}
+ * 
+ * @category Core
  *
  * @example
  * fill(GREEN);
@@ -176,6 +171,8 @@ TEAL = 0xFF008080;
  * [Colors]{@link https://github.com/bhavjitChauhan/Essentials/wiki/Colors}.
  *
  * @constant {color}
+ * 
+ * @category Core
  *
  * @example
  * fill(BLUE);
@@ -214,3 +211,12 @@ FUCHSIA = 0xFFFF00FF;
  * @constant {color}
  */
 PURPLE = 0xFF800080;
+
+/**
+ * Alias for `color(255, 0)`.
+ *
+ * @private
+ * 
+ * @constant {color}
+ */
+ TRANSPARENT = 0x00FFFFFF;

@@ -3,6 +3,8 @@
  * the result or an error.
  *
  * @link https://www.30secondsofcode.org/js/s/attempt
+ * 
+ * @category Core
  *
  * @param {} fn Function to attempt.
  * @param {...*} args Functions arguments.

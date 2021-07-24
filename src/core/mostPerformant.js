@@ -11,6 +11,8 @@
  * This can be can bypassed using the {@link clean} function.
  *
  * @link https://www.30secondsofcode.org/js/s/most-performant
+ * 
+ * @category Core
  *
  * @param {Array} fns Functions to be compared
  * @param {number} [iterations=1e4] Number of times function should be called

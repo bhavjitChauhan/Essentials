@@ -1,6 +1,8 @@
 /**
  * Converts the canvas image to sepia.
  * 
+ * @category Color
+ * 
  * @param {number} [amount=100] percentage
  * 
  * @example

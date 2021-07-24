@@ -1,6 +1,8 @@
 /**
  * Converts a number to a more readable format.
  * 
+ * @category Text
+ * 
  * @param {number} n
  * @param {string|Array} [locales='en']
  * @param {Object} [options]

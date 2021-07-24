@@ -1,5 +1,7 @@
 /**
  * Saves Processing and Canvas state.
+ * 
+ * @category Core
  *
  * @example
  * push();

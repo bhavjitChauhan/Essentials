@@ -1,5 +1,7 @@
 /**
  * Faster blur on a rectangular selection.
+ * 
+ * @category Color
  *
  * @param {number} [strength=10]
  * @param {number} [x=0] x-coordinate of the rectangle

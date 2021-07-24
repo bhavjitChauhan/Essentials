@@ -1,5 +1,7 @@
 /**
- * Alias for `beginShape()`/`endShape()`.
+ * Alternative for `beginShape()`/`endShape()`.
+ * 
+ * @category Shape
  *
  * @param {Function} fn Shape function
  * @param {CLOSE|boolean} [close] Whether to close the shape

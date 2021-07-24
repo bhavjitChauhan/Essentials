@@ -1,6 +1,8 @@
 /**
  * Adjusts brightness of the canvas image by applying a linear multiplier.
  * 
+ * @category Color
+ * 
  * @param {number} amount percentage
  * 
  * @example

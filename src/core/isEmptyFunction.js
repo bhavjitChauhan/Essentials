@@ -2,6 +2,8 @@
  * Checks if function is empty. Does not work for
  * [arrow function expressions]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions}.
  * 
+ * @category Core
+ * 
  * @param {Function} fn
  * 
  * @returns {boolean}

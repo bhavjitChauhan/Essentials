@@ -1,7 +1,11 @@
 /**
  * Draws a heart.
+ * 
+ * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
  *
  * @link https://www.khanacademy.org/cs/-/2085250861
+ * 
+ * @category Shape
  *
  * @param {number} x x-coordinate of the heart
  * @param {number} y y-coordinate of the heart

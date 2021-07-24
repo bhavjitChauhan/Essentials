@@ -1,6 +1,8 @@
 /**
  * Fast gradient by filling each character with a different color as opposed to
  * masking the text with the gradient.
+ * 
+ * @category Text
  *
  * @param {string} string
  * @param {number} x x-coordinate of text

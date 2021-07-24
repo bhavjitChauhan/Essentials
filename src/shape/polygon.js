@@ -1,7 +1,11 @@
 /**
  * Draws a polygon with _n_ sides.
+ * 
+ * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
  *
  * @link https://www.khanacademy.org/cs/-/1304459398
+ * 
+ * @category Shape
  *
  * @param {number} x x-coordinate of polygon's circumcircle
  * @param {number} y y-coordinate of polygon's circumcircle

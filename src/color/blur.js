@@ -1,6 +1,8 @@
 /**
  * Applies a Gaussian blur of the canvas image.
  * 
+ * @category Color
+ * 
  * @param {number} [radius=5]
  * 
  * @example

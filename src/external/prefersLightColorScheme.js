@@ -3,6 +3,8 @@
  * 
  * @link https://www.30secondsofcode.org/js/s/prefers-light-color-scheme
  * 
+ * @category External
+ * 
  * @returns {boolean}
  * 
  * @see {@link prefersDarkColorScheme}

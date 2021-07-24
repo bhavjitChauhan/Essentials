@@ -3,6 +3,8 @@
  * console.
  *
  * @link https://www.30secondsofcode.org/js/s/time-taken
+ * 
+ * @category Core
  *
  * @param {Function} callback Function to be measured
  * @param {string} [id] Custom ID for multiple consecutive tests

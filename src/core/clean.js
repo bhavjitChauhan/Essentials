@@ -8,6 +8,8 @@
  * resource-intensive code.
  *
  * @link https://khanacademy.org/cs/-/5594326276014080
+ * 
+ * @category Core
  *
  * @param {Function} fn Function to be cleaned
  *

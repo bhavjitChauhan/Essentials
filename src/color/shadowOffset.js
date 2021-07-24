@@ -1,6 +1,8 @@
 /**
  * Sets shadow offset.
  * 
+ * @category Color
+ * 
  * @param {number} x
  * @param {number} [y=x]
  * 

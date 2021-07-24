@@ -1,5 +1,3 @@
-/** @module Color */
-
 _color_initialized_ = typeof COLOR_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {

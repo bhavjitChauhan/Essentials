@@ -1,6 +1,8 @@
 /**
  * Sets shadow color.
  * 
+ * @category Color
+ * 
  * @param {...number|color|string} args
  * 
  * @example

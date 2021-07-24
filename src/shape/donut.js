@@ -1,7 +1,11 @@
 /**
  * Draws a donut.
+ * 
+ * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
  *
  * @link https://www.khanacademy.org/cs/-/4693526445719552
+ * 
+ * @category Shape
  *
  * @param {number} x x-coordinate of the donut
  * @param {number} y y-coordinate of the donut

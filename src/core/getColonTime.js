@@ -2,6 +2,8 @@
  * Returns a string of the form `HH:MM:SS`.
  *
  * @link https://www.30secondsofcode.org/js/s/get-colon-time-from-date
+ * 
+ * @category Core
  *
  * @returns {string} Formatted time
  *

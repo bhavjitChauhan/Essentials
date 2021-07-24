@@ -1,6 +1,8 @@
 /**
  * Gets canvas log times.
  * 
+ * @category External
+ * 
  * @param number [i] index of log
  * 
  * @returns {Date[]|Date}

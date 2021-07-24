@@ -10,6 +10,8 @@
  * bottom two, the second. If three arguments are provided, the last
  * argument--bottom-left corner--is defaulted to 0. If all four radius arguments
  * are provided each corner will be set to it's corresponding parameter.
+ * 
+ * @category Shape
  *
  * @param {number} x x-coordinate of the square
  * @param {number} y y-coordinate of the square

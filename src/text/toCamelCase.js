@@ -1,5 +1,7 @@
 /**
  * Converts string to [camel case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
+ * 
+ * @category Text
  *
  * @link https://www.30secondsofcode.org/js/s/to-camel-case
  *

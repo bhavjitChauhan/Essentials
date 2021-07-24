@@ -1,5 +1,7 @@
 /**
  * Converts milliseconds to a readable format of duration.
+ * 
+ * @category Text
  *
  * @link https://www.30secondsofcode.org/js/s/format-duration
  *

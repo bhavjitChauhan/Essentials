@@ -1,7 +1,11 @@
 /**
  * Draws a parallelogram.
+ * 
+ * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
  *
  * @link https://www.khanacademy.org/cs/-/4747962019348480
+ * 
+ * @category Shape
  *
  * @param {number} ax x-coordinate of the first vertex
  * @param {number} ay y-coordinate of the first vertex

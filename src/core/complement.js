@@ -4,6 +4,8 @@
  * function
  *
  * @link https://www.30secondsofcode.org/js/s/complement
+ * 
+ * @category Core
  *
  * @param {Function} fn Given function
  *

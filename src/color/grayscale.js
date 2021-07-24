@@ -1,6 +1,8 @@
 /**
  * Converts to canvas image to grayscale.
  * 
+ * @category Color
+ * 
  * @param {number} [amount=100] percentage
  * 
  * @example

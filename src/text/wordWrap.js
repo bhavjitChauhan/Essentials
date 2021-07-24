@@ -1,6 +1,8 @@
 /**
  * Wraps a string to a given number of characters using a string break
  * character.
+ * 
+ * @category Text
  *
  * @link https://www.30secondsofcode.org/js/s/word-wrap
  *

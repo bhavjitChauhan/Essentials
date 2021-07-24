@@ -1,5 +1,7 @@
 /**
  * Determines if text should be black or white based on background color.
+ * 
+ * @category Text
  *
  * @param {number} backgroundColor Color of background
  *

@@ -1,6 +1,8 @@
 /**
  * Gets point on rectangle edge at specified angle.
  * 
+ * @private
+ * 
  * @param {number} width
  * @param {number} height
  * @param {number} angle radians

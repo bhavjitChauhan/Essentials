@@ -8,6 +8,8 @@ TOP_LEFT = 1, TOP_RIGHT = 2, BOTTOM_RIGHT = 3, BOTTOM_LEFT = 4;
  * Alias for `width`.
  * 
  * @constant {number}
+ * 
+ * @category Core
  */
 WIDTH = p.width;
 
@@ -15,6 +17,8 @@ WIDTH = p.width;
  * Alias for `height`.
  * 
  * @constant {number}
+ * 
+ * @category Core
  */
 HEIGHT = p.height;
 
@@ -22,6 +26,8 @@ HEIGHT = p.height;
  * Alias for `WIDTH / 2`.
  * 
  * @constant {number}
+ * 
+ * @category Core
  */
 HALF_WIDTH = WIDTH / 2;
 
@@ -29,6 +35,8 @@ HALF_WIDTH = WIDTH / 2;
  * Alias for `HEIGHT / 2`.
  * 
  * @constant {number}
+ * 
+ * @category Core
  */
 HALF_HEIGHT = HEIGHT / 2;
 
@@ -38,29 +46,7 @@ HALF_HEIGHT = HEIGHT / 2;
  * used by Processing.
  * 
  * @constant {CanvasRenderingContext2D}
+ * 
+ * @category Core
  */
 ctx = p.externals.context;
-
-/**
- * Alias for `_clearLogs()`.
- *
- * @example
- * println('Hello World');
- * clearLogs();
- * // expected outcome: blank canvas console
- */
-clearLogs = () => p._clearLogs();
-
-/**
- * Literally does nothing. Useful as the default for optional callback arguments.
- *
- * @example
- * // Prevents an error if an unneeded method is called
- * Element.init = noop;
- */
-noop = function () { };
-
-/**
- * Alias for `drawGraphics`.
- */
-showGraphics = () => drawGraphics();

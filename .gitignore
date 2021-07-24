@@ -1,8 +1,9 @@
 .vscode
 node_modules
 build
-internal
+docs
 live-editor
+out
 
 essentials-proto.js
 essentials.js

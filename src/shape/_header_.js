@@ -1,5 +1,3 @@
-/** @module Shape */
-
 _shape_initialized_ = typeof SHAPE_ESSENTIALS !== 'undefined';
 
 if (typeof ESSENTIALS_CORE === 'undefined') {

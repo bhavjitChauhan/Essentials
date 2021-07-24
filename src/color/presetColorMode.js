@@ -1,6 +1,8 @@
 /**
  * Sets the color mode to selected preset.
  * 
+ * @category Color
+ * 
  * @param {number} [mode] `RGB` or `HSB`
  * 
  * @example

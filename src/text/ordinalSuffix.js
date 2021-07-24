@@ -1,6 +1,8 @@
 /**
  * Takes a number and returns it as a string with the correct ordinal indicator
  * suffix.
+ * 
+ * @category Text
  *
  * @link https://www.30secondsofcode.org/js/s/to-ordinal-suffix
  *
