@@ -51,7 +51,7 @@
 The Essentials library delivers functionality, performance and pushes the limits of what is possible with Khan Academy's Processing.js environment. Essentials is a one-of-a-kind library designed to make the programming experience on Khan less about working around it's restrictions and more about transforming your ideas into reality.
 
 ### Why
-Khan Academy doesn't offer an equivalent of modules, leaving it to programmers to reinvent the wheel for themselves even for the most trivial of tasks. Not to mention the [countless](https://khanacademy.org/cs/-/5836386270134272) [bugs](https://ka-hearth.learnerpages.com/posts/new-memory-leak) that Khan's port of Processing.js has been [riddled](https://github.com/Khan/live-editor/issues) with. Most of which, mind you, have been long patched on the original repository. Although most of these are completely irrepairable, others have workarounds which are included with the library.
+Khan Academy doesn't offer an equivalent of modules, leaving it to programmers to reinvent the wheel for themselves even for the most trivial of tasks. Not to mention the [countless](https://khanacademy.org/cs/-/5836386270134272) [bugs](https://ka-hearth.learnerpages.com/posts/new-memory-leak) that Khan's port of Processing.js has been [riddled](https://github.com/Khan/live-editor/issues) with. Most of which, mind you, have been long patched on the original repository. Although most of these are completely irreparable, others have workarounds which are included with the library.
 
 ### Technologies
 The Essentials library uses the following open-source projects:
