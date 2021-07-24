@@ -1,13 +1,4 @@
 /**
- * Alias for `color(255, 0)`.
- *
- * @private
- * 
- * @constant {color}
- */
-TRANSPARENT = 0x00FFFFFF;
-
-/**
  * Alias for `color(255)`.
  *
  * @private
@@ -220,3 +211,12 @@ FUCHSIA = 0xFFFF00FF;
  * @constant {color}
  */
 PURPLE = 0xFF800080;
+
+/**
+ * Alias for `color(255, 0)`.
+ *
+ * @private
+ * 
+ * @constant {color}
+ */
+ TRANSPARENT = 0x00FFFFFF;
