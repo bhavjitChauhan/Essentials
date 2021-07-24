@@ -1,5 +1,5 @@
 /**
- * Converts string to [camel case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
+ * Converts string to `camelCase`.
  * 
  * @category Text
  *

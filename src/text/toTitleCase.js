@@ -1,5 +1,5 @@
 /**
- * Converts string to [title case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
+ * Converts string to `Title Case`.
  * 
  * @category Text
  *

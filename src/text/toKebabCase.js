@@ -1,5 +1,5 @@
 /**
- * Converts string to [kebab case](https://github.com/bhavjitChauhan/Essentials/wiki/Text-Cases).
+ * Converts string to `kebab-case`.
  * 
  * @category Text
  *

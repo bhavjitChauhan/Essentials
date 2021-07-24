@@ -48,8 +48,9 @@ BLACK = 0xFF000000;
  * in the [Screaming Snake Case]{@link https://en.wikipedia.org/wiki/Snake_case}
  * convention (`COLOR_NAME`).
  * 
- * See the wiki page on
- * [Colors]{@link https://github.com/bhavjitChauhan/Essentials/wiki/Colors}.
+ * See the
+ * [Colors]{@link https://bhavjitchauhan.github.io/Essentials/tutorial-Colors}
+ * tutorial.
  *
  * @constant {color}
  * 
@@ -121,8 +122,9 @@ LIME = 0xFF00FF00;
  * in the [Screaming Snake Case]{@link https://en.wikipedia.org/wiki/Snake_case}
  * convention (`COLOR_NAME`).
  * 
- * See the wiki page on
- * [Colors]{@link https://github.com/bhavjitChauhan/Essentials/wiki/Colors}.
+ * See the
+ * [Colors]{@link https://bhavjitchauhan.github.io/Essentials/tutorial-Colors}
+ * tutorial.
  *
  * @constant {color}
  * 
@@ -167,8 +169,9 @@ TEAL = 0xFF008080;
  * in the [Screaming Snake Case]{@link https://en.wikipedia.org/wiki/Snake_case}
  * convention (`COLOR_NAME`).
  * 
- * See the wiki page on
- * [Colors]{@link https://github.com/bhavjitChauhan/Essentials/wiki/Colors}.
+ * See the
+ * [Colors]{@link https://bhavjitchauhan.github.io/Essentials/tutorial-Colors}
+ * tutorial.
  *
  * @constant {color}
  * 

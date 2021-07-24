@@ -28,13 +28,6 @@
         <img src="https://data.jsdelivr.com/v1/package/gh/bhavjitChauhan/Essentials/badge" alt="jsDelivr">
     </a>
 </p>
-<p align="center">
-    <a href="https://github.com/bhavjitChauhan/Essentials/wiki/">Wiki</a>
-    &#183;
-    <a href="https://bhavjitchauhan.github.io/Essentials/builder">Builder</a>
-    &#183;
-    <a href="https://github.com/bhavjitChauhan/Essentials/projects/1">Roadmap</a>
-</p>
 <hr>
 <br>
 <details open="open">
