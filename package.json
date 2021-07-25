@@ -1,6 +1,6 @@
 {
   "name": "essentials",
-  "version": "2.0.0beta",
+  "version": "2.0.0",
   "description": "The Khan Academy utility library.",
   "main": "essentials.js",
   "scripts": {

@@ -19,7 +19,7 @@ _console_style_ = 'font-family:system-ui;font-size:0.75rem;';
 _core_initialized_ = typeof ESSENTIALS_CORE !== 'undefined';
 
 ESSENTIALS_CORE = true;
-ESSENTIALS_VERSION = '2.0.0beta';
+ESSENTIALS_VERSION = '2.0.0';
 ESSENTIALS_ASCII = `
     _/_/_/_/    _/_/_/    _/_/_/  _/_/_/_/  _/      _/  _/_/_/_/_/  _/_/_/    _/_/    _/          _/_/_/
    _/        _/        _/        _/        _/_/    _/      _/        _/    _/    _/  _/        _/
