@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Essentials Documentation Builder</title>
+
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="./build/entry.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+            integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+            crossorigin="anonymous"
+        />
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css"
+        />
+        <link type="text/css" rel="stylesheet" href="styles/app.min.css" />
+        <link type="text/css" rel="stylesheet" href="styles/iframe.css" />
+        <link type="text/css" rel="stylesheet" href="style.css" />
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+    </head>
+
+    <body class="layout small-header">
+        <div id="stickyNavbarOverlay"></div>
+
+        <div class="top-nav">
+            <div class="inner">
+                <a
+                    id="hamburger"
+                    role="button"
+                    class="navbar-burger"
+                    aria-label="menu"
+                    aria-expanded="false"
+                >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+                <div class="logo">
+                    <a href="index.html">
+                        <h1 class="navbar-item">Essentials Documentation</h1>
+                    </a>
+                </div>
+                <div class="menu">
+                    <div class="navigation">
+                        <a href="index.html" class="link">
+                            API Documentation
+                        </a>
+
+                        <div class="dropdown is-hoverable is-right">
+                            <a class="dropdown-trigger link">
+                                Tutorials
+                                <i class="fas fa-chevron-down fa-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-content">
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Builder.html"
+                                    >
+                                        Builder
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Colors.html"
+                                    >
+                                        Colors
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Customize.html"
+                                    >
+                                        Customize
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Functionality.html"
+                                    >
+                                        Functionality
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Integration.html"
+                                    >
+                                        Integration
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a
+                            class="link user-link"
+                            href="https://github.com/bhavjitChauhan/Essentials"
+                        >
+                            Github
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <div class="sidebar tutorials" id="sidebarNav">
+                <div class="search-wrapper">
+                    <input
+                        id="search"
+                        type="text"
+                        placeholder="Search docs..."
+                        class="input"
+                    />
+                </div>
+
+                <nav>
+                    <div class="category">
+                        <h3>Tutorials</h3>
+                        <ul>
+                            <li><a href="tutorial-Builder.html">Builder</a></li>
+                            <li><a href="tutorial-Colors.html">Colors</a></li>
+                            <li>
+                                <a href="tutorial-Customize.html">Customize</a>
+                            </li>
+                            <li>
+                                <a href="tutorial-Functionality.html"
+                                    >Functionality</a
+                                >
+                            </li>
+                            <li>
+                                <a href="tutorial-Integration.html"
+                                    >Integration</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="core" id="main-content-wrapper">
+                <div class="content">
+                    <header class="page-title">
+                        <p>Tutorial</p>
+                        <h1>Builder</h1>
+                    </header>
+                    <section>
+                        <article>
+                            <!DOCTYPE html>
+                            <html lang="en">
+                                <head>
+                                    <link
+                                        rel="stylesheet"
+                                        href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css"
+                                    />
+                                    <style>
+                                        fieldset {
+                                            margin-bottom: 1em;
+                                        }
+
+                                        fieldset > legend {
+                                            font-size: 20px;
+                                            font-weight: bold;
+                                        }
+
+                                        label {
+                                            color: #4a4a4a;
+                                        }
+
+                                        select {
+                                            margin-top: 10px;
+                                        }
+
+                                        .column {
+                                            float: left;
+                                            padding: 0;
+                                        }
+
+                                        .left {
+                                            width: 60%;
+                                        }
+
+                                        .right {
+                                            width: 40%;
+                                            padding: 10px;
+                                        }
+
+                                        .row:after {
+                                            content: "";
+                                            display: table;
+                                            clear: both;
+                                        }
+
+                                        @media screen and (max-width: 600px) {
+                                            .column {
+                                                width: 100%;
+                                            }
+                                        }
+
+                                        .primary {
+                                            background-color: #4268f6;
+                                            color: white;
+                                        }
+
+                                        .primary:hover {
+                                            background-color: #3258a8;
+                                        }
+
+                                        .components-table {
+                                            width: auto !important;
+                                            margin: 0.5em 0 !important;
+                                        }
+
+                                        .components-table > thead > tr > th {
+                                            border: none;
+                                            padding: 0.5em 0.25em;
+                                        }
+
+                                        .components-table > tbody > tr > td {
+                                            padding: 0 0.25em;
+                                        }
+
+                                        #output {
+                                            position: sticky;
+                                            padding: 40px;
+                                            border-radius: 4px;
+                                            box-shadow: 0 0 40px 0
+                                                rgb(115 134 160 / 24%);
+                                        }
+
+                                        #heading {
+                                            margin: auto !important;
+                                        }
+
+                                        #header {
+                                            font-size: 13px;
+                                            margin: 0 0 5px;
+                                            text-transform: uppercase;
+                                        }
+
+                                        #button-checkbox-group > button,
+                                        #button-checkbox-group > input,
+                                        #button-checkbox-group > label {
+                                            vertical-align: middle;
+                                        }
+
+                                        #build-name {
+                                            color: #4a4a4a;
+                                        }
+                                    </style>
+                                </head>
+
+                                <body>
+                                    <div class="row">
+                                        <div class="column left">
+                                            <h2 id="heading">Usage</h2>
+                                            <p>
+                                                Select the Type and what
+                                                components of the Essentials
+                                                library you need, then click the
+                                                Submit button for your generated
+                                                code.
+                                            </p>
+                                            <p>
+                                                The included JSHint directive
+                                                must be present before any
+                                                Essentials code, see the
+                                                <a
+                                                    href="https://bhavjitchauhan.github.io/Essentials/tutorial-Functionality"
+                                                    target="_blank"
+                                                    >functionality</a
+                                                >
+                                                tutorial for more information.
+                                            </p>
+                                            <h2 id="heading"></h2>
+                                            <div>
+                                                <form id="form">
+                                                    <div>
+                                                        <fieldset>
+                                                            <legend>
+                                                                Type
+                                                            </legend>
+                                                            <select
+                                                                id="buildTypeSelect"
+                                                                class="select"
+                                                            >
+                                                                <option
+                                                                    value="CDN"
+                                                                    selected
+                                                                >
+                                                                    Content
+                                                                    Delivery
+                                                                    Network
+                                                                </option>
+                                                                <option
+                                                                    value="KA"
+                                                                >
+                                                                    Khan Academy
+                                                                </option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div
+                                                        id="components-container"
+                                                    >
+                                                        <fieldset>
+                                                            <legend>
+                                                                Components
+                                                            </legend>
+                                                            <table
+                                                                class="
+                                                                    components-table
+                                                                "
+                                                            >
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            <input
+                                                                                id="coreCheckbox"
+                                                                                type="checkbox"
+                                                                                checked
+                                                                                disabled
+                                                                            />
+                                                                        </th>
+                                                                        <th>
+                                                                            <label
+                                                                                for="coreCheckbox"
+                                                                                >Essentials
+                                                                                Core</label
+                                                                            >
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <p>
+                                                                                Core
+                                                                                functionality.
+                                                                                Required
+                                                                                for
+                                                                                other
+                                                                                components.
+                                                                            </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table
+                                                                class="
+                                                                    components-table
+                                                                "
+                                                            >
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            <input
+                                                                                id="colorCheckbox"
+                                                                                type="checkbox"
+                                                                                checked
+                                                                            />
+                                                                        </th>
+                                                                        <th>
+                                                                            <label
+                                                                                for="colorCheckbox"
+                                                                                >Color
+                                                                                Essentials</label
+                                                                            >
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <p>
+                                                                                Color
+                                                                                variables,
+                                                                                conversion
+                                                                                and
+                                                                                gradient
+                                                                                functions.
+                                                                                Required
+                                                                                by
+                                                                                Text
+                                                                                Essentials.
+                                                                            </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table
+                                                                class="
+                                                                    components-table
+                                                                "
+                                                            >
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            <input
+                                                                                id="textCheckbox"
+                                                                                type="checkbox"
+                                                                                checked
+                                                                            />
+                                                                        </th>
+                                                                        <th>
+                                                                            <label
+                                                                                for="textCheckbox"
+                                                                                >Text
+                                                                                Essentials</label
+                                                                            >
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <p>
+                                                                                String
+                                                                                manipulation,
+                                                                                various
+                                                                                text
+                                                                                draw
+                                                                                functions
+                                                                                and
+                                                                                the
+                                                                                font
+                                                                                function.
+                                                                            </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table
+                                                                class="
+                                                                    components-table
+                                                                "
+                                                            >
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            <input
+                                                                                id="shapeCheckbox"
+                                                                                type="checkbox"
+                                                                                checked
+                                                                            />
+                                                                        </th>
+                                                                        <th>
+                                                                            <label
+                                                                                for="shapeCheckbox"
+                                                                                >Shape
+                                                                                Essentials</label
+                                                                            >
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <p>
+                                                                                Additional
+                                                                                shape
+                                                                                functions.
+                                                                            </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table
+                                                                class="
+                                                                    components-table
+                                                                "
+                                                            >
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            <input
+                                                                                id="externalCheckbox"
+                                                                                type="checkbox"
+                                                                            />
+                                                                        </th>
+                                                                        <th>
+                                                                            <label
+                                                                                for="externalCheckbox"
+                                                                                >External
+                                                                                Essentials</label
+                                                                            >
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <p>
+                                                                                Pushing
+                                                                                Khan
+                                                                                Academy
+                                                                                to
+                                                                                its
+                                                                                limits.
+                                                                            </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div
+                                                        id="button-checkbox-group"
+                                                    >
+                                                        <button
+                                                            class="button"
+                                                            id="submitButton"
+                                                        >
+                                                            Generate
+                                                        </button>
+                                                        &nbsp;
+                                                        <input
+                                                            class="
+                                                                form-check-input
+                                                            "
+                                                            type="checkbox"
+                                                            value=""
+                                                            id="minifiedCheckbox"
+                                                            checked
+                                                        />
+                                                        <div class="tooltip">
+                                                            <label
+                                                                class="
+                                                                    form-check-label
+                                                                "
+                                                                for="minifiedCheckbox"
+                                                            >
+                                                                Minified
+                                                            </label>
+                                                            <span
+                                                                class="
+                                                                    tooltiptext
+                                                                "
+                                                                >Lower file
+                                                                sizes and load
+                                                                times</span
+                                                            >
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div id="output" class="column right">
+                                            <span id="header">Output</span>
+                                            <h2 id="heading">
+                                                <span id="build-type"
+                                                    >CDN Build</span
+                                                >
+                                                <small id="build-name"
+                                                    >Essentials</small
+                                                >
+                                            </h2>
+                                            <p
+                                                id="directions"
+                                                class="card-text"
+                                            >
+                                                Paste the following code into
+                                                your program:
+                                            </p>
+                                            <div id="code-container">
+                                                <pre
+                                                    style="overflow: hidden"
+                                                    id="code"
+                                                ><code class="language-js">// jshint ignore: start
+$.ajaxSetup({ cache: true });
+$.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@2/essentials.min.js',
+    function() {
+        // your code here
+    }
+);</code></pre>
+                                            </div>
+                                            <div>
+                                                <div class="tooltip">
+                                                    <button
+                                                        type="button"
+                                                        id="copyButton"
+                                                        class="button primary"
+                                                    >
+                                                        Copy
+                                                    </button>
+                                                    <span class="tooltiptext"
+                                                        >Copy code to
+                                                        clipboard</span
+                                                    >
+                                                </div>
+                                                <div class="tooltip">
+                                                    <a
+                                                        id="rawLink"
+                                                        class="button"
+                                                        href="https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@2/essentials.min.js"
+                                                        target="_blank"
+                                                        role="button"
+                                                    >
+                                                        <span>Raw&nbsp;</span>
+                                                        <i
+                                                            class="
+                                                                fas
+                                                                fa-external-link-square-alt
+                                                            "
+                                                        ></i>
+                                                    </a>
+                                                    <span class="tooltiptext"
+                                                        >Generated build
+                                                        file</span
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
+                                    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+                                    <script>
+                                        const checkboxes =
+                                            $(".list-group-item").toArray();
+
+                                        const copyToClipboard = (str) => {
+                                            const el =
+                                                document.createElement(
+                                                    "textarea"
+                                                );
+                                            el.value = str;
+                                            el.setAttribute("readonly", "");
+                                            el.style.position = "absolute";
+                                            el.style.left = "-9999px";
+                                            document.body.appendChild(el);
+                                            el.select();
+                                            document.execCommand("copy");
+                                            document.body.removeChild(el);
+                                        };
+
+                                        const baseURL =
+                                            "https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/";
+                                        const basePath =
+                                            ",gh/bhavjitChauhan/Essentials@1/build/";
+                                        const generateURL = (path) =>
+                                            `${baseURL}${path}` +
+                                            (buildTypeSelected == "CDN"
+                                                ? ""
+                                                : "-ka") +
+                                            (minifiedSelected
+                                                ? ".min.js"
+                                                : ".js");
+                                        const generatePath = (file) =>
+                                            `${basePath}${file}` +
+                                            (buildTypeSelected == "CDN"
+                                                ? ""
+                                                : "-ka") +
+                                            (minifiedSelected
+                                                ? ".min.js"
+                                                : ".js");
+                                        const generateCodeCDN =
+                                            () => `// jshint ignore: start
+$.ajaxSetup({ cache: true });
+$.getScript('${URL}',
+    function() {
+        // your code here
+    }
+);`;
+                                        const jsDelivrHeader = `/**
+ * Combined by jsDelivr.
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+`;
+
+                                        let buildTypeSelected = "CDN";
+                                        let minifiedSelected = true;
+                                        let URL = generateURL("essentials");
+                                        let code = null;
+                                        $("#form").submit((e) =>
+                                            e.preventDefault()
+                                        );
+                                        $("#submitButton").click(function () {
+                                            buildTypeSelected =
+                                                $("#buildTypeSelect").val();
+                                            minifiedSelected =
+                                                $("#minifiedCheckbox").is(
+                                                    ":checked"
+                                                );
+                                            $("#build-type").text(
+                                                `${buildTypeSelected} Build`
+                                            );
+                                            const components = [
+                                                $("#colorCheckbox").is(
+                                                    ":checked"
+                                                ),
+                                                $("#textCheckbox").is(
+                                                    ":checked"
+                                                ),
+                                                $("#shapeCheckbox").is(
+                                                    ":checked"
+                                                ),
+                                                $("#externalCheckbox").is(
+                                                    ":checked"
+                                                ),
+                                            ];
+                                            if (components.every(Boolean)) {
+                                                URL =
+                                                    generateURL(
+                                                        "build/essentials-x"
+                                                    );
+                                                URL = URL.replace(
+                                                    "combine/",
+                                                    ""
+                                                );
+                                                $("#build-name").text(
+                                                    "Essentials X"
+                                                );
+                                            } else if (
+                                                components
+                                                    .slice(0, 3)
+                                                    .every(Boolean) &&
+                                                !components[3]
+                                            ) {
+                                                URL = generateURL(
+                                                    (buildTypeSelected == "CDN"
+                                                        ? ""
+                                                        : "build/") +
+                                                        "essentials"
+                                                );
+                                                URL = URL.replace(
+                                                    "combine/",
+                                                    ""
+                                                );
+                                                $("#build-name").text(
+                                                    "Essentials"
+                                                );
+                                            } else {
+                                                URL = generateURL(
+                                                    "build/essentials-core"
+                                                );
+                                                let options = [
+                                                    generatePath(
+                                                        "color-essentials"
+                                                    ),
+                                                    generatePath(
+                                                        "text-essentials"
+                                                    ),
+                                                    generatePath(
+                                                        "shape-essentials"
+                                                    ),
+                                                    generatePath(
+                                                        "external-essentials"
+                                                    ),
+                                                ];
+                                                options = options.filter(
+                                                    (_, i) => components[i]
+                                                );
+                                                URL += options.join("");
+                                                if (
+                                                    components.every(
+                                                        (component) =>
+                                                            !component
+                                                    )
+                                                ) {
+                                                    $("#build-name").text(
+                                                        "Core"
+                                                    );
+                                                    URL = URL.replace(
+                                                        "combine/",
+                                                        ""
+                                                    );
+                                                } else {
+                                                    $("#build-name").text(
+                                                        "Custom"
+                                                    );
+                                                }
+                                            }
+                                            if (buildTypeSelected == "CDN") {
+                                                $(".language-js").text(
+                                                    generateCodeCDN()
+                                                );
+                                                Prism.highlightElement(
+                                                    document.querySelector(
+                                                        ".language-js"
+                                                    )
+                                                );
+                                                $("#code").show();
+                                                $("#copyButton").show();
+                                            } else {
+                                                code = null;
+                                                $(".language-js").text(
+                                                    "Loading..."
+                                                );
+                                                $.get(URL, (data) => {
+                                                    let code = data.replace(
+                                                        jsDelivrHeader,
+                                                        ""
+                                                    );
+                                                    code =
+                                                        /(.*?\n){10}/g.exec(
+                                                            code
+                                                        )[0] + ". . .";
+                                                    $(".language-js").text(
+                                                        code
+                                                    );
+                                                });
+                                            }
+                                            $("#rawLink").attr("href", URL);
+                                        });
+
+                                        $("#copyButton").on(
+                                            "click",
+                                            function () {
+                                                if (
+                                                    buildTypeSelected == "CDN"
+                                                ) {
+                                                    copyToClipboard(
+                                                        generateCodeCDN()
+                                                    );
+                                                } else {
+                                                    copyToClipboard(code);
+                                                }
+                                            }
+                                        );
+                                    </script>
+                                </body>
+                            </html>
+                        </article>
+                    </section>
+                </div>
+
+                <footer class="footer">
+                    <div class="content has-text-centered">
+                        <p>
+                            Documentation generated by
+                            <a href="https://github.com/jsdoc3/jsdoc"
+                                >JSDoc 3.6.7</a
+                            >
+                        </p>
+                        <p class="sidebar-created-by">
+                            <a
+                                href="https://github.com/SoftwareBrothers/better-docs"
+                                target="_blank"
+                                >BetterDocs theme</a
+                            >
+                            provided with <i class="fas fa-heart"></i> by
+                            <a href="http://softwarebrothers.co" target="_blank"
+                                >SoftwareBrothers - JavaScript Development
+                                Agency</a
+                            >
+                        </p>
+                    </div>
+                </footer>
+            </div>
+            <div id="side-nav" class="side-nav"></div>
+        </div>
+        <script src="scripts/app.min.js"></script>
+        <script>
+            PR.prettyPrint();
+        </script>
+        <script src="scripts/linenumber.js"></script>
+
+        <script src="scripts/search.js"></script>
+    </body>
+</html>

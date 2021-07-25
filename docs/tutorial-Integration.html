@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Essentials Documentation Integration</title>
+
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="./build/entry.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+            integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+            crossorigin="anonymous"
+        />
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css"
+        />
+        <link type="text/css" rel="stylesheet" href="styles/app.min.css" />
+        <link type="text/css" rel="stylesheet" href="styles/iframe.css" />
+        <link type="text/css" rel="stylesheet" href="style.css" />
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+    </head>
+
+    <body class="layout small-header">
+        <div id="stickyNavbarOverlay"></div>
+
+        <div class="top-nav">
+            <div class="inner">
+                <a
+                    id="hamburger"
+                    role="button"
+                    class="navbar-burger"
+                    aria-label="menu"
+                    aria-expanded="false"
+                >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+                <div class="logo">
+                    <a href="index.html">
+                        <h1 class="navbar-item">Essentials Documentation</h1>
+                    </a>
+                </div>
+                <div class="menu">
+                    <div class="navigation">
+                        <a href="index.html" class="link">
+                            API Documentation
+                        </a>
+
+                        <div class="dropdown is-hoverable is-right">
+                            <a class="dropdown-trigger link">
+                                Tutorials
+                                <i class="fas fa-chevron-down fa-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-content">
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Builder.html"
+                                    >
+                                        Builder
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Colors.html"
+                                    >
+                                        Colors
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Customize.html"
+                                    >
+                                        Customize
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Functionality.html"
+                                    >
+                                        Functionality
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Integration.html"
+                                    >
+                                        Integration
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a
+                            class="link user-link"
+                            href="https://github.com/bhavjitChauhan/Essentials"
+                        >
+                            Github
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <div class="sidebar tutorials" id="sidebarNav">
+                <div class="search-wrapper">
+                    <input
+                        id="search"
+                        type="text"
+                        placeholder="Search docs..."
+                        class="input"
+                    />
+                </div>
+
+                <nav>
+                    <div class="category">
+                        <h3>Tutorials</h3>
+                        <ul>
+                            <li><a href="tutorial-Builder.html">Builder</a></li>
+                            <li><a href="tutorial-Colors.html">Colors</a></li>
+                            <li>
+                                <a href="tutorial-Customize.html">Customize</a>
+                            </li>
+                            <li>
+                                <a href="tutorial-Functionality.html"
+                                    >Functionality</a
+                                >
+                            </li>
+                            <li>
+                                <a href="tutorial-Integration.html"
+                                    >Integration</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="core" id="main-content-wrapper">
+                <div class="content">
+                    <header class="page-title">
+                        <p>Tutorial</p>
+                        <h1>Integration</h1>
+                    </header>
+                    <section>
+                        <article>
+                            <ul>
+                                <li>
+                                    <a href="#standard">Standard</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#draw_loop">Draw Loop</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#alternative">Alternative</a></li>
+                                <li>
+                                    <a href="#khan_academy_builds"
+                                        >Khan Academy Builds</a
+                                    >
+                                </li>
+                            </ul>
+                            <hr />
+                            <h2 id="standard">Standard</h2>
+                            <p>
+                                To get Essentials up and running, copy the
+                                boilerplate provided in the
+                                <a
+                                    href="https://github.com/bhavjitChauhan/Essentials/blob/master/README.md"
+                                    >README</a
+                                >:
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>$.ajaxSetup({ cache: true });
+$.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@2/essentials.min.js',
+    function() {
+        // your code here
+    }
+);
+</code></pre>
+                            <p>
+                                Alternatively, code can be stored in a
+                                <code>main</code> function which is called when
+                                the library is loaded:
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>function main() {
+    // your code here
+}
+$.ajaxSetup({ cache: true });
+$.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@2/essentials.min.js', main);
+</code></pre>
+                            <h3 id="draw_loop">Draw Loop</h3>
+                            <p>
+                                To use Essentials with a program that utilizes
+                                the draw loop, a <code>main</code> function is
+                                suggested.
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>function main() {
+   // your code here
+}
+</code></pre>
+                            <p>
+                                In the <code>getScript</code> method, set the
+                                <code>draw</code> variable to the
+                                <code>main</code> function.
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>$.ajaxSetup({ cache: true });
+$.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js',
+    function() {
+        draw = main;
+    }
+);
+</code></pre>
+                            <h3>Live Example</h3>
+                            <script src="https://www.khanacademy.org/computer-programming/essentials-example-draw-function/6197911349575680/embed.js?editor=yes&buttons=yes&author=yes&embed=yes"></script>
+                            <h2 id="alternative">Alternative</h2>
+                            <p>
+                                For an easier and simpler approach to
+                                integrating the Essentials library with
+                                pre-existing code, the following approach can be
+                                used.
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>$.ajaxSetup({ cache: true });
+$.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@1/essentials.min.js',
+    function() {
+        if (!_core_initialized_) Program.restart();
+    }
+);
+
+// your code here
+</code></pre>
+                            <h4>Live Example</h4>
+                            <script src="https://www.khanacademy.org/computer-programming/essentials-example-alternative-integration/4787689963864064/embed.js?editor=yes&buttons=yes&author=yes&embed=yes"></script>
+                            <p>
+                                This approach is not recommended as it might
+                                fall into a continuous feedback loop if Khan
+                                Academy disables this functionality, the
+                                jsDelivr service goes down, or a problem with
+                                Essentials arises.
+                            </p>
+                            <h2 id="khan_academy_builds">
+                                Khan Academy Builds
+                            </h2>
+                            <p>
+                                To use the local builds simply copy the code
+                                directly from the
+                                <a
+                                    href="https://bhavjitchauhan.github.io/Essentials/tutorial-Builder"
+                                    >Builder</a
+                                >.
+                            </p>
+                        </article>
+                    </section>
+                </div>
+
+                <footer class="footer">
+                    <div class="content has-text-centered">
+                        <p>
+                            Documentation generated by
+                            <a href="https://github.com/jsdoc3/jsdoc"
+                                >JSDoc 3.6.7</a
+                            >
+                        </p>
+                        <p class="sidebar-created-by">
+                            <a
+                                href="https://github.com/SoftwareBrothers/better-docs"
+                                target="_blank"
+                                >BetterDocs theme</a
+                            >
+                            provided with <i class="fas fa-heart"></i> by
+                            <a href="http://softwarebrothers.co" target="_blank"
+                                >SoftwareBrothers - JavaScript Development
+                                Agency</a
+                            >
+                        </p>
+                    </div>
+                </footer>
+            </div>
+            <div id="side-nav" class="side-nav"></div>
+        </div>
+        <script src="scripts/app.min.js"></script>
+        <script>
+            PR.prettyPrint();
+        </script>
+        <script src="scripts/linenumber.js"></script>
+
+        <script src="scripts/search.js"></script>
+    </body>
+</html>

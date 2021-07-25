@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Essentials Documentation Home</title>
+
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="./build/entry.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+            integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+            crossorigin="anonymous"
+        />
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css"
+        />
+        <link type="text/css" rel="stylesheet" href="styles/app.min.css" />
+        <link type="text/css" rel="stylesheet" href="styles/iframe.css" />
+        <link type="text/css" rel="stylesheet" href="style.css" />
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+    </head>
+
+    <body class="layout small-header">
+        <div id="stickyNavbarOverlay"></div>
+
+        <div class="top-nav">
+            <div class="inner">
+                <a
+                    id="hamburger"
+                    role="button"
+                    class="navbar-burger"
+                    aria-label="menu"
+                    aria-expanded="false"
+                >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+                <div class="logo">
+                    <a href="index.html">
+                        <h1 class="navbar-item">Essentials Documentation</h1>
+                    </a>
+                </div>
+                <div class="menu">
+                    <div class="navigation">
+                        <a href="index.html" class="link">
+                            API Documentation
+                        </a>
+
+                        <div class="dropdown is-hoverable is-right">
+                            <a class="dropdown-trigger link">
+                                Tutorials
+                                <i class="fas fa-chevron-down fa-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-content">
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Builder.html"
+                                    >
+                                        Builder
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Colors.html"
+                                    >
+                                        Colors
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Customize.html"
+                                    >
+                                        Customize
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Functionality.html"
+                                    >
+                                        Functionality
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Integration.html"
+                                    >
+                                        Integration
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a
+                            class="link user-link"
+                            href="https://github.com/bhavjitChauhan/Essentials"
+                        >
+                            Github
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <div class="sidebar" id="sidebarNav">
+                <div class="search-wrapper">
+                    <input
+                        id="search"
+                        type="text"
+                        placeholder="Search docs..."
+                        class="input"
+                    />
+                </div>
+
+                <nav>
+                    <h2><a href="index.html">Documentation</a></h2>
+                    <div class="category">
+                        <h3><a href="global.html">Global</a></h3>
+                    </div>
+                    <div class="category">
+                        <h2>Color</h2>
+                        <h3>Global</h3>
+                        <ul>
+                            <li>
+                                <a href="global.html#angularGradient"
+                                    >angularGradient</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#circularGradient"
+                                    >circularGradient</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#clearEffects"
+                                    >clearEffects</a
+                                >
+                            </li>
+                            <li><a href="global.html#contrast">contrast</a></li>
+                            <li>
+                                <a href="global.html#dropShadow">dropShadow</a>
+                            </li>
+                            <li><a href="global.html#effect">effect</a></li>
+                            <li><a href="global.html#fastBlur">fastBlur</a></li>
+                            <li>
+                                <a href="global.html#getAlphaRange"
+                                    >getAlphaRange</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getBlueRange"
+                                    >getBlueRange</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getBrightnessRange"
+                                    >getBrightnessRange</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getColorMode"
+                                    >getColorMode</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getColorRange"
+                                    >getColorRange</a
+                                >
+                            </li>
+                            <li><a href="global.html#getFill">getFill</a></li>
+                            <li>
+                                <a href="global.html#getGreenRange"
+                                    >getGreenRange</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getHueRange"
+                                    >getHueRange</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getRedRange"
+                                    >getRedRange</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getSaturationRange"
+                                    >getSaturationRange</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getShadow">getShadow</a>
+                            </li>
+                            <li>
+                                <a href="global.html#getShadowBlur"
+                                    >getShadowBlur</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getShadowOffset"
+                                    >getShadowOffset</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getStroke">getStroke</a>
+                            </li>
+                            <li>
+                                <a href="global.html#grayscale">grayscale</a>
+                            </li>
+                            <li><a href="global.html#hexToHSB">hexToHSB</a></li>
+                            <li><a href="global.html#hexToRGB">hexToRGB</a></li>
+                            <li>
+                                <a href="global.html#HSB_COLOR_RANGE"
+                                    >HSB_COLOR_RANGE</a
+                                >
+                            </li>
+                            <li><a href="global.html#HSBToHex">HSBToHex</a></li>
+                            <li><a href="global.html#HSBToRGB">HSBToRGB</a></li>
+                            <li>
+                                <a href="global.html#hueRotate">hueRotate</a>
+                            </li>
+                            <li><a href="global.html#invert">invert</a></li>
+                            <li>
+                                <a href="global.html#isDefaultColorRange"
+                                    >isDefaultColorRange</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#linearGradient"
+                                    >linearGradient</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#linearGradientOld"
+                                    >linearGradientOld</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#luminance">luminance</a>
+                            </li>
+                            <li>
+                                <a href="global.html#mapColorRange"
+                                    >mapColorRange</a
+                                >
+                            </li>
+                            <li><a href="global.html#noShadow">noShadow</a></li>
+                            <li><a href="global.html#opacity">opacity</a></li>
+                            <li>
+                                <a href="global.html#presetColorMode"
+                                    >presetColorMode</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#radialGradient"
+                                    >radialGradient</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#radialGradientOld"
+                                    >radialGradientOld</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#RGB_COLOR_RANGE"
+                                    >RGB_COLOR_RANGE</a
+                                >
+                            </li>
+                            <li><a href="global.html#RGBToHex">RGBToHex</a></li>
+                            <li><a href="global.html#RGBToHSB">RGBToHSB</a></li>
+                            <li><a href="global.html#saturate">saturate</a></li>
+                            <li><a href="global.html#sepia">sepia</a></li>
+                            <li><a href="global.html#shadow">shadow</a></li>
+                            <li>
+                                <a href="global.html#shadowBlur">shadowBlur</a>
+                            </li>
+                            <li>
+                                <a href="global.html#shadowOffset"
+                                    >shadowOffset</a
+                                >
+                            </li>
+                            <li><a href="global.html#toHSB">toHSB</a></li>
+                            <li><a href="global.html#toRGB">toRGB</a></li>
+                        </ul>
+                    </div>
+                    <div class="category">
+                        <h2>Core</h2>
+                        <h3>Global</h3>
+                        <ul>
+                            <li><a href="global.html#attempt">attempt</a></li>
+                            <li><a href="global.html#BLUE">BLUE</a></li>
+                            <li>
+                                <a href="global.html#chainAsync">chainAsync</a>
+                            </li>
+                            <li><a href="global.html#clean">clean</a></li>
+                            <li>
+                                <a href="global.html#clearLogs">clearLogs</a>
+                            </li>
+                            <li>
+                                <a href="global.html#complement">complement</a>
+                            </li>
+                            <li><a href="global.html#ctx">ctx</a></li>
+                            <li>
+                                <a href="global.html#drawGraphics"
+                                    >drawGraphics</a
+                                >
+                            </li>
+                            <li><a href="global.html#evalPJS">evalPJS</a></li>
+                            <li>
+                                <a href="global.html#generateID">generateID</a>
+                            </li>
+                            <li>
+                                <a href="global.html#generateUUID"
+                                    >generateUUID</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getColonTime"
+                                    >getColonTime</a
+                                >
+                            </li>
+                            <li><a href="global.html#GREEN">GREEN</a></li>
+                            <li>
+                                <a href="global.html#HALF_HEIGHT"
+                                    >HALF_HEIGHT</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#HALF_WIDTH">HALF_WIDTH</a>
+                            </li>
+                            <li><a href="global.html#HEIGHT">HEIGHT</a></li>
+                            <li><a href="global.html#inherit">inherit</a></li>
+                            <li>
+                                <a href="global.html#isEmptyFunction"
+                                    >isEmptyFunction</a
+                                >
+                            </li>
+                            <li><a href="global.html#isFont">isFont</a></li>
+                            <li><a href="global.html#isImage">isImage</a></li>
+                            <li><a href="global.html#isSound">isSound</a></li>
+                            <li>
+                                <a href="global.html#mostPerformant"
+                                    >mostPerformant</a
+                                >
+                            </li>
+                            <li><a href="global.html#noop">noop</a></li>
+                            <li><a href="global.html#pop">pop</a></li>
+                            <li><a href="global.html#printf">printf</a></li>
+                            <li><a href="global.html#push">push</a></li>
+                            <li>
+                                <a href="global.html#randomInt">randomInt</a>
+                            </li>
+                            <li><a href="global.html#RED">RED</a></li>
+                            <li><a href="global.html#restart">restart</a></li>
+                            <li><a href="global.html#roundTo">roundTo</a></li>
+                            <li>
+                                <a href="global.html#showGraphics"
+                                    >showGraphics</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#timeTaken">timeTaken</a>
+                            </li>
+                            <li><a href="global.html#WIDTH">WIDTH</a></li>
+                        </ul>
+                    </div>
+                    <div class="category">
+                        <h2>External</h2>
+                        <h3>Global</h3>
+                        <ul>
+                            <li>
+                                <a href="global.html#allowBannedProperties"
+                                    >allowBannedProperties</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#allowScroll"
+                                    >allowScroll</a
+                                >
+                            </li>
+                            <li><a href="global.html#CANVAS">CANVAS</a></li>
+                            <li>
+                                <a href="global.html#CANVAS_LOG">CANVAS_LOG</a>
+                            </li>
+                            <li>
+                                <a href="global.html#clearElements"
+                                    >clearElements</a
+                                >
+                            </li>
+                            <li><a href="global.html#closeLog">closeLog</a></li>
+                            <li>
+                                <a href="global.html#copyToClipboard"
+                                    >copyToClipboard</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#detectDeviceType"
+                                    >detectDeviceType</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#detectLanguage"
+                                    >detectLanguage</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#disableLoopProtector"
+                                    >disableLoopProtector</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#drawElement"
+                                    >drawElement</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#escapeHTML">escapeHTML</a>
+                            </li>
+                            <li>
+                                <a href="global.html#exitPointerLock"
+                                    >exitPointerLock</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#forceAllowScroll"
+                                    >forceAllowScroll</a
+                                >
+                            </li>
+                            <li><a href="global.html#getCode">getCode</a></li>
+                            <li><a href="global.html#getLog">getLog</a></li>
+                            <li><a href="global.html#getLogs">getLogs</a></li>
+                            <li>
+                                <a href="global.html#getLogsText"
+                                    >getLogsText</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getLogsTime"
+                                    >getLogsTime</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getSelectedText"
+                                    >getSelectedText</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#isBrowserTabFocused"
+                                    >isBrowserTabFocused</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#isLocalStorageEnabled"
+                                    >isLocalStorageEnabled</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#isSessionStorageEnabled"
+                                    >isSessionStorageEnabled</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#prefersDarkColorScheme"
+                                    >prefersDarkColorScheme</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#prefersLightColorScheme"
+                                    >prefersLightColorScheme</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#preventScroll"
+                                    >preventScroll</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#printHTML">printHTML</a>
+                            </li>
+                            <li><a href="global.html#printMD">printMD</a></li>
+                            <li>
+                                <a href="global.html#removeElement"
+                                    >removeElement</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#requestPointerLock"
+                                    >requestPointerLock</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#resizeLog">resizeLog</a>
+                            </li>
+                            <li><a href="global.html#setCode">setCode</a></li>
+                            <li><a href="global.html#setLog">setLog</a></li>
+                            <li>
+                                <a href="global.html#supportsTouchEvents"
+                                    >supportsTouchEvents</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#unescapeHTML"
+                                    >unescapeHTML</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="category">
+                        <h2>Shape</h2>
+                        <h3>Global</h3>
+                        <ul>
+                            <li><a href="global.html#circle">circle</a></li>
+                            <li><a href="global.html#cylinder">cylinder</a></li>
+                            <li><a href="global.html#donut">donut</a></li>
+                            <li>
+                                <a href="global.html#drawShape">drawShape</a>
+                            </li>
+                            <li><a href="global.html#edge">edge</a></li>
+                            <li>
+                                <a href="global.html#getRotation"
+                                    >getRotation</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getStrokeCap"
+                                    >getStrokeCap</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getStrokeJoin"
+                                    >getStrokeJoin</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getStrokeWeight"
+                                    >getStrokeWeight</a
+                                >
+                            </li>
+                            <li><a href="global.html#heart">heart</a></li>
+                            <li>
+                                <a href="global.html#noStrokeDash"
+                                    >noStrokeDash</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#parallelogram"
+                                    >parallelogram</a
+                                >
+                            </li>
+                            <li><a href="global.html#polygon">polygon</a></li>
+                            <li>
+                                <a href="global.html#rectangle">rectangle</a>
+                            </li>
+                            <li><a href="global.html#rhombus">rhombus</a></li>
+                            <li><a href="global.html#square">square</a></li>
+                            <li><a href="global.html#star">star</a></li>
+                            <li>
+                                <a href="global.html#strokeDash">strokeDash</a>
+                            </li>
+                            <li>
+                                <a href="global.html#strokeDashOffset"
+                                    >strokeDashOffset</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#trapezoid">trapezoid</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="category">
+                        <h2>Text</h2>
+                        <h3>Global</h3>
+                        <ul>
+                            <li><a href="global.html#f">f</a></li>
+                            <li>
+                                <a href="global.html#fastGradientText"
+                                    >fastGradientText</a
+                                >
+                            </li>
+                            <li><a href="global.html#font">font</a></li>
+                            <li><a href="global.html#format">format</a></li>
+                            <li>
+                                <a href="global.html#formatDuration"
+                                    >formatDuration</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#formatNumber"
+                                    >formatNumber</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#getTextSize"
+                                    >getTextSize</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#highlightText"
+                                    >highlightText</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#lightOrDarkText"
+                                    >lightOrDarkText</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#multicoloredText"
+                                    >multicoloredText</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#obfuscate">obfuscate</a>
+                            </li>
+                            <li>
+                                <a href="global.html#ordinalSuffix"
+                                    >ordinalSuffix</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#outlineText"
+                                    >outlineText</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#outlineTextOld"
+                                    >outlineTextOld</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#pluralize">pluralize</a>
+                            </li>
+                            <li>
+                                <a href="global.html#removeNonASCII"
+                                    >removeNonASCII</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#toCamelCase"
+                                    >toCamelCase</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#toKebabCase"
+                                    >toKebabCase</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#toSnakeCase"
+                                    >toSnakeCase</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#toTitleCase"
+                                    >toTitleCase</a
+                                >
+                            </li>
+                            <li>
+                                <a href="global.html#underlineText"
+                                    >underlineText</a
+                                >
+                            </li>
+                            <li><a href="global.html#wordWrap">wordWrap</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="core" id="main-content-wrapper">
+                <div class="content">
+                    <header class="page-title">
+                        <p></p>
+                        <h1>Home</h1>
+                    </header>
+
+                    <h3></h3>
+
+                    <section>
+                        <article>
+                            <br />
+                            <p align="center">
+                                <a
+                                    href="https://github.com/bhavjitChauhan/Essentials"
+                                >
+                                    <img
+                                        src="https://github.com/bhavjitChauhan/Essentials/blob/master/logo.png?raw=true"
+                                        alt="Logo"
+                                        width="50%"
+                                    />
+                                </a>
+                            </p>
+                            <p align="center">
+                                The Khan Academy utility library.
+                                <br />
+                                <a
+                                    href="https://bhavjitchauhan.github.io/Essentials/"
+                                    ><strong>Explore the docs »</strong></a
+                                >
+                            </p>
+                            <p align="center">
+                                <a
+                                    href="https://github.com/bhavjitChauhan/Essentials/releases"
+                                >
+                                    <img
+                                        src="https://img.shields.io/github/v/release/bhavjitChauhan/Essentials?style=flat-square"
+                                        alt="Release"
+                                    />
+                                </a>
+                                <a
+                                    href="https://cdn.jsdelivr.net/gh/bhavjitChauhan/Essentials@2/essentials.min.js"
+                                >
+                                    <img
+                                        src="https://img.shields.io/badge/minified%20size-26.91%20kB-blue?style=flat-square"
+                                        alt="Size"
+                                    />
+                                </a>
+                                <a
+                                    href="https://github.com/bhavjitChauhan/Essentials/pulls"
+                                >
+                                    <img
+                                        src="https://img.shields.io/github/issues-pr/bhavjitChauhan/Essentials?style=flat-square"
+                                        alt="Pull Requests"
+                                    />
+                                </a>
+                                <a
+                                    href="https://github.com/bhavjitChauhan/Essentials/commits"
+                                >
+                                    <img
+                                        src="https://img.shields.io/github/last-commit/bhavjitChauhan/Essentials?style=flat-square"
+                                        alt="Last Commit"
+                                    />
+                                </a>
+                                <a
+                                    href="https://www.jsdelivr.com/package/gh/bhavjitChauhan/Essentials?path=build"
+                                >
+                                    <img
+                                        src="https://data.jsdelivr.com/v1/package/gh/bhavjitChauhan/Essentials/badge"
+                                        alt="jsDelivr"
+                                    />
+                                </a>
+                            </p>
+                            <hr />
+                            <br />
+                            <details open="open">
+                                <summary>Table of Contents</summary>
+                                <ol>
+                                    <li>
+                                        <a href="#about">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="#getting-started"
+                                            >Getting Started</a
+                                        >
+                                    </li>
+                                    <li><a href="#usage">Usage</a></li>
+                                    <li>
+                                        <a href="#documentation"
+                                            >Documentation</a
+                                        >
+                                    </li>
+                                    <li><a href="#license">License</a></li>
+                                    <li><a href="#contact">Contact</a></li>
+                                    <li>
+                                        <a href="#acknowledgements"
+                                            >Acknowledgements</a
+                                        >
+                                    </li>
+                                </ol>
+                            </details>
+                            <h2>About</h2>
+                            <p>
+                                The Essentials library delivers functionality,
+                                performance and pushes the limits of what is
+                                possible with Khan Academy's Processing.js
+                                environment. Essentials is a one-of-a-kind
+                                library designed to make the programming
+                                experience on Khan less about working around
+                                it's restrictions and more about transforming
+                                your ideas into reality.
+                            </p>
+                            <h3>Why</h3>
+                            <p>
+                                Khan Academy doesn't offer an equivalent of
+                                modules, leaving it to programmers to reinvent
+                                the wheel for themselves even for the most
+                                trivial of tasks. Not to mention the
+                                <a
+                                    href="https://khanacademy.org/cs/-/5836386270134272"
+                                    >countless</a
+                                >
+                                <a
+                                    href="https://ka-hearth.learnerpages.com/posts/new-memory-leak"
+                                    >bugs</a
+                                >
+                                that Khan's port of Processing.js has been
+                                <a
+                                    href="https://github.com/Khan/live-editor/issues"
+                                    >riddled</a
+                                >
+                                with. Most of which, mind you, have been long
+                                patched on the original repository. Although
+                                most of these are completely irreparable, others
+                                have workarounds which are included with the
+                                library.
+                            </p>
+                            <h3>Technologies</h3>
+                            <p>
+                                The Essentials library uses the following
+                                open-source projects:
+                            </p>
+                            <ul>
+                                <li>
+                                    <a href="https://www.jsdelivr.com/"
+                                        >jsDelivr</a
+                                    >
+                                </li>
+                                <li><a href="https://babeljs.io/">Babel</a></li>
+                                <li>
+                                    <a href="https://rollupjs.org/">Rollup</a>
+                                </li>
+                                <li>
+                                    <a href="https://terser.org/">Terser</a>
+                                </li>
+                            </ul>
+                            <p>
+                                A list of all dependencies defined in
+                                <a
+                                    href="https://github.com/bhavjitChauhan/Essentials/blob/master/package.json"
+                                    >package.json</a
+                                >
+                                and
+                                <a
+                                    href="https://github.com/bhavjitChauhan/Essentials/blob/master/package-lock.json"
+                                    >package-lock.json</a
+                                >
+                                is available in the
+                                <a
+                                    href="https://github.com/bhavjitChauhan/Essentials/network/dependencies"
+                                    >Dependency graph</a
+                                >.
+                            </p>
+                            <h2>Getting Started</h2>
+                            <p>
+                                Create a
+                                <a href="https://www.khanacademy.org/cs/new/"
+                                    >new program</a
+                                >
+                                on Khan Academy or use an existing project and
+                                paste the following boilerplate code:
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>// jshint ignore: start
+$.ajaxSetup({ cache: true });
+$.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@2/essentials.min.js',
+    function() {
+        // your code here
+    }
+);
+</code></pre>
+                            <p>
+                                See alternative methods in the
+                                <a
+                                    href="https://bhavjitchauhan.github.io/Essentials/tutorial-Integration"
+                                    >Integration</a
+                                >
+                                tutorial.
+                            </p>
+                            <h3>Customize</h3>
+                            <p>
+                                The recommended method to generate any
+                                boilerplate code for the Essentials library is
+                                to use the
+                                <a
+                                    href="https://bhavjitchauhan.github.io/Essentials/builder"
+                                    >Builder</a
+                                >. See other ways of reducing file sizes and
+                                load times in the
+                                <a
+                                    href="https://bhavjitchauhan.github.io/Essentials/tutorial-Customize"
+                                    >Customize</a
+                                >
+                                tutorial.
+                            </p>
+                            <h2>Usage</h2>
+                            <p>
+                                After loading the Essentials library its
+                                functions and constants are defined in the
+                                global scope, they can be called directly.
+                            </p>
+                            <p>
+                                For live examples, please refer the
+                                <a
+                                    href="https://bhavjitchauhan.github.io/Essentials/tutorial-Integration"
+                                    >Integration</a
+                                >
+                                tutorial.
+                            </p>
+                            <h2>Documentation</h2>
+                            <p>
+                                Documentation is generated using JSDoc, using
+                                the BetterDocs theme and hosted on
+                                <a
+                                    href="https://bhavjitchauhan.github.io/Essentials"
+                                    >GitHub Pages</a
+                                >.
+                            </p>
+                            <h2>License</h2>
+                            <p>
+                                Distributed under the MIT License. See
+                                <a
+                                    href="https://github.com/bhavjitChauhan/Essentials/blob/master/LICENSE"
+                                    >LICENSE</a
+                                >
+                                for more information.
+                            </p>
+                            <h2>Contact</h2>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/bhavjitChauhan"
+                                        >GitHub</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://www.khanacademy.org/profile/bhavjitChauhan/projects"
+                                        >Khan Academy</a
+                                    >
+                                </li>
+                            </ul>
+                            <h2>Acknowledgements</h2>
+                            <ul>
+                                <li>
+                                    <a href="https://www.30secondsofcode.org/js"
+                                        >30 seconds of code</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://www.khanacademy.org/profile/BobLyon/"
+                                        >Bob Lyon</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="https://github.com/lodash/lodash"
+                                        >lodash</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="https://underscorejs.org/"
+                                        >Underscore.js</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://www.khanacademy.org/cs/-/6070976254115840"
+                                        >BMS</a
+                                    >
+                                </li>
+                            </ul>
+                            <p>
+                                Credit is given to the original authors of
+                                functions via links in the
+                                <a
+                                    href="https://bhavjitchauhan.github.io/Essentials"
+                                    >documentation</a
+                                >.
+                            </p>
+                        </article>
+                    </section>
+
+                    <section>
+                        <header>
+                            <h2>essentials-x.js</h2>
+                        </header>
+
+                        <article>
+                            <div class="container-overview">
+                                <div class="description">
+                                    <script
+                                        type="text/javascript"
+                                        src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"
+                                    ></script>
+                                    <p>CDN Essentials Build</p>
+                                </div>
+
+                                <dl class="details">
+                                    <dt class="tag-author">Author:</dt>
+                                    <dd class="tag-author">
+                                        <ul>
+                                            <li>Bhavjit Chauhan</li>
+                                        </ul>
+                                    </dd>
+
+                                    <p class="tag-source">
+                                        <a
+                                            href="essentials-x.js.html"
+                                            class="button"
+                                            >View Source</a
+                                        >
+                                        <span>
+                                            <a href="essentials-x.js.html"
+                                                >essentials-x.js</a
+                                            >,
+                                            <a href="essentials-x.js.html#line1"
+                                                >line 1</a
+                                            >
+                                        </span>
+                                    </p>
+                                </dl>
+                            </div>
+                        </article>
+                    </section>
+                </div>
+
+                <footer class="footer">
+                    <div class="content has-text-centered">
+                        <p>
+                            Documentation generated by
+                            <a href="https://github.com/jsdoc3/jsdoc"
+                                >JSDoc 3.6.7</a
+                            >
+                        </p>
+                        <p class="sidebar-created-by">
+                            <a
+                                href="https://github.com/SoftwareBrothers/better-docs"
+                                target="_blank"
+                                >BetterDocs theme</a
+                            >
+                            provided with <i class="fas fa-heart"></i> by
+                            <a href="http://softwarebrothers.co" target="_blank"
+                                >SoftwareBrothers - JavaScript Development
+                                Agency</a
+                            >
+                        </p>
+                    </div>
+                </footer>
+            </div>
+            <div id="side-nav" class="side-nav"></div>
+        </div>
+        <script src="scripts/app.min.js"></script>
+        <script>
+            PR.prettyPrint();
+        </script>
+        <script src="scripts/linenumber.js"></script>
+
+        <script src="scripts/search.js"></script>
+    </body>
+</html>

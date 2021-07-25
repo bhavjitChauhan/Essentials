@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Essentials Documentation Functionality</title>
+
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="./build/entry.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+            integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+            crossorigin="anonymous"
+        />
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css"
+        />
+        <link type="text/css" rel="stylesheet" href="styles/app.min.css" />
+        <link type="text/css" rel="stylesheet" href="styles/iframe.css" />
+        <link type="text/css" rel="stylesheet" href="style.css" />
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+    </head>
+
+    <body class="layout small-header">
+        <div id="stickyNavbarOverlay"></div>
+
+        <div class="top-nav">
+            <div class="inner">
+                <a
+                    id="hamburger"
+                    role="button"
+                    class="navbar-burger"
+                    aria-label="menu"
+                    aria-expanded="false"
+                >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+                <div class="logo">
+                    <a href="index.html">
+                        <h1 class="navbar-item">Essentials Documentation</h1>
+                    </a>
+                </div>
+                <div class="menu">
+                    <div class="navigation">
+                        <a href="index.html" class="link">
+                            API Documentation
+                        </a>
+
+                        <div class="dropdown is-hoverable is-right">
+                            <a class="dropdown-trigger link">
+                                Tutorials
+                                <i class="fas fa-chevron-down fa-xs"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-content">
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Builder.html"
+                                    >
+                                        Builder
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Colors.html"
+                                    >
+                                        Colors
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Customize.html"
+                                    >
+                                        Customize
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Functionality.html"
+                                    >
+                                        Functionality
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="tutorial-Integration.html"
+                                    >
+                                        Integration
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a
+                            class="link user-link"
+                            href="https://github.com/bhavjitChauhan/Essentials"
+                        >
+                            Github
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <div class="sidebar tutorials" id="sidebarNav">
+                <div class="search-wrapper">
+                    <input
+                        id="search"
+                        type="text"
+                        placeholder="Search docs..."
+                        class="input"
+                    />
+                </div>
+
+                <nav>
+                    <div class="category">
+                        <h3>Tutorials</h3>
+                        <ul>
+                            <li><a href="tutorial-Builder.html">Builder</a></li>
+                            <li><a href="tutorial-Colors.html">Colors</a></li>
+                            <li>
+                                <a href="tutorial-Customize.html">Customize</a>
+                            </li>
+                            <li>
+                                <a href="tutorial-Functionality.html"
+                                    >Functionality</a
+                                >
+                            </li>
+                            <li>
+                                <a href="tutorial-Integration.html"
+                                    >Integration</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="core" id="main-content-wrapper">
+                <div class="content">
+                    <header class="page-title">
+                        <p>Tutorial</p>
+                        <h1>Functionality</h1>
+                    </header>
+                    <section>
+                        <article>
+                            <p>
+                                Essentials offers the means to exploit the Khan
+                                Academy environment and lift some of the
+                                restrictions in place.
+                            </p>
+                            <ul>
+                                <li>
+                                    <a href="#workarounds">Workarounds</a>
+                                    <ul>
+                                        <li><a href="#jshint">JSHint</a></li>
+                                        <li>
+                                            <a href="#babyhint">BabyHint</a>
+                                        </li>
+                                        <li>
+                                            <a href="#loop_protector"
+                                                >Loop Protector</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#modern_syntax">Modern Syntax</a>
+                                </li>
+                                <li>
+                                    <a href="#global_objects">Global Objects</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#browser_console"
+                                                >Browser Console</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a href="#big_integers"
+                                                >Big Integers</a
+                                            >
+                                        </li>
+                                        <li><a href="#json">JSON</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#libraries">Libraries</a>
+                                    <ul>
+                                        <li><a href="#jquery">jQuery</a></li>
+                                        <li>
+                                            <a href="#underscore">Underscore</a>
+                                        </li>
+                                        <li>
+                                            <a href="#backbone">Backbone</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#banned_properties"
+                                        >Banned Properties</a
+                                    >
+                                </li>
+                                <li><a href="#storage">Storage</a></li>
+                            </ul>
+                            <hr />
+                            <h2 id="workarounds">Workarounds</h2>
+                            <p>
+                                The KA builds include the JSHint and BabyHint
+                                workarounds.
+                            </p>
+                            <h3 id="jshint">JSHint</h3>
+                            <p>
+                                Khan Academy employs JSHint to enforce a certain
+                                code style (i.e. semicolons). Using the
+                                <code>ignore</code> JSHint directive disabled
+                                this functionality:
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>// jshint ignore: start
+</code></pre>
+                            <h3 id="babyhint">BabyHint</h3>
+                            <p>
+                                BabyHint is a project made specifically for Khan
+                                Academy to &quot;provide more helpful
+                                hints&quot;. BabyHint is also used to restrict
+                                the usage of certain keywords (i.e.
+                                <code>document</code>). BabyHint uses regular
+                                expressions to &quot;parse&quot; code which
+                                leads to it making incorrect assumptions.
+                                <a
+                                    href="https://khanacademy.org/cs/-/6623480075124736"
+                                    >Ben Burrill</a
+                                >
+                                originally found a method of completely
+                                disabling BabyHint using a certain regular
+                                expression:
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>(/\/*/);
+</code></pre>
+                            <h3 id="loop_protector">Loop Protector</h3>
+                            <p>
+                                To avoid programs from crashing the webpage,
+                                Khan Academy injects it's own code into loops
+                                that kill the program if it tries to call more
+                                than 1000 iterations. This is an understandable
+                                concern but more often than not comes into play
+                                when it's not needed. The
+                                <code>disableLoopProtector</code> function
+                                disables this functionality:
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>disableLoopProtector();
+</code></pre>
+                            <h2 id="modern_syntax">Modern Syntax</h2>
+                            <p>
+                                Although most of the major syntax changes
+                                introduces ES5 are impossible to use in a
+                                program, variable declarations are an exception.
+                                For the most part, however, Khan treats
+                                <code>var</code>, <code>let</code> and
+                                <code>const</code> as the same.
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>// jshint ignore: start
+let a = 0;
+const b = 1;
+</code></pre>
+                            <h2 id="global_objects">Global Objects</h2>
+                            <p>
+                                JavaScript includes
+                                <a
+                                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects"
+                                    >standard built-in objects</a
+                                >
+                                some of which are not accessible in the default
+                                Khan environment.
+                            </p>
+                            <h3 id="browser_console">Browser Console</h3>
+                            <p>
+                                <a
+                                    href="https://developer.mozilla.org/en-US/docs/Web/API/console"
+                                    >Documentation</a
+                                >
+                            </p>
+                            <p>
+                                A more powerful alternative to the
+                                <code>println</code> function. The
+                                <code>console</code> object provides access to
+                                the browser's debugging console. The browser
+                                console can be opened with keyboard shortcuts:
+                            </p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Windows</th>
+                                        <th>macOS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <abbr title="Chrome DevTools"
+                                                ><a
+                                                    href="https://developers.google.com/web/tools/chrome-devtools"
+                                                    >Chrome</a
+                                                ></abbr
+                                            >
+                                        </td>
+                                        <td>
+                                            <kbd>Ctrl</kbd> + <kbd>Shift</kbd> +
+                                            <kbd>J</kbd>
+                                        </td>
+                                        <td>
+                                            <kbd>⌘</kbd> + <kbd>⌥</kbd> +
+                                            <kbd>J</kbd>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <abbr
+                                                title="Firefox Developer Tools"
+                                                ><a
+                                                    href="https://developer.mozilla.org/en-US/docs/Tools"
+                                                    >Firefox</a
+                                                ></abbr
+                                            >
+                                        </td>
+                                        <td>
+                                            <kbd>Ctrl</kbd> + <kbd>Shift</kbd> +
+                                            <kbd>K</kbd>
+                                        </td>
+                                        <td>
+                                            <kbd>⌘</kbd> + <kbd>⌥</kbd> +
+                                            <kbd>K</kbd>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <abbr title="Safari Developer Tools"
+                                                ><a
+                                                    href="https://support.apple.com/en-ca/guide/safari-developer/dev073038698/mac"
+                                                    >Safari</a
+                                                ></abbr
+                                            >
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <kbd>⌘</kbd> + <kbd>⌥</kbd> +
+                                            <kbd>C</kbd>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <abbr title="F12 Developer Tools"
+                                                ><a
+                                                    href="https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/hh968260(v=vs.85)"
+                                                    >Internet Explorer</a
+                                                ></abbr
+                                            >
+                                        </td>
+                                        <td><kbd>F12</kbd></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>
+                                Microsoft Edge and Opera are both chromium-based
+                                browsers, refer to Chrome. Linux users should
+                                already know how to open the browser console.
+                            </p>
+                            <h4>Example</h4>
+                            <p>Given an object <code>obj</code>:</p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>const obj = {
+    a: 1,
+    b: 2
+}
+</code></pre>
+                            <p>
+                                The traditional method of debugging in the Khan
+                                Academy environment is by calling the
+                                <code>println</code> function:
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>println(obj);
+</code></pre>
+                            <p>
+                                <img
+                                    src="https://i.ibb.co/zHKK9JQ/chrome-oqa-GDhp-G7m.png"
+                                    alt="Canvas Console output"
+                                />
+                            </p>
+                            <p>
+                                The output of <code>console.log</code> is more
+                                useful, especially with more complex objects.
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>console.log(obj);
+</code></pre>
+                            <p>
+                                <img
+                                    src="https://i.ibb.co/DptxXFj/chrome-t-Gt-An-Rw-O7a.png"
+                                    alt="Chrome DevTools Consoleoutput"
+                                />
+                            </p>
+                            <pre
+                                class="prettyprint source lang-js"
+                            ><code>console.table(obj);
+</code></pre>
+                            <p>
+                                <img
+                                    src="https://i.ibb.co/hHhZnZH/chrome-UCfvw-Ru1-AZ.png"
+                                    alt="Chrome DevTools Consoleoutput"
+                                />
+                            </p>
+                            <p>
+                                Google Chrome and Firefox both offer their own
+                                suite of developer tools; Chrome offers
+                                <a
+                                    href="https://developers.google.com/web/tools/chrome-devtools/?utm_source=devtools"
+                                    >Chrome DevTools</a
+                                >, and Firefox has its
+                                <a
+                                    href="https://developer.mozilla.org/en-US/docs/Tools"
+                                    >Developer Tools</a
+                                >.
+                            </p>
+                            <h4>Live Example</h4>
+                            <script src="https://www.khanacademy.org/computer-programming/essentials-example-browser-console/5716490644832256/embed.js?editor=yes&buttons=yes&author=no&embed=yes"></script>
+                            <h3 id="big_integers">Big Integers</h3>
+                            <p>
+                                <a
+                                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt"
+                                    >Documentation</a
+                                >
+                            </p>
+                            <p>
+                                A solution for working with large numbers. The
+                                <code>MAX_SAFE_INTEGER</code> in JavaScript is
+                                <code>2 ^ 53 - 1</code>, after which the results
+                                are inconsistent or wrong.
+                            </p>
+                            <h4>Live Example</h4>
+                            <script src="https://www.khanacademy.org/computer-programming/essentials-example-big-integers/5576171899011072/embed.js?editor=yes&buttons=yes&author=no&embed=yes"></script>
+                            <h3 id="json">JSON</h3>
+                            <p>
+                                <a
+                                    href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON"
+                                    >Documentation</a
+                                >
+                            </p>
+                            <p>
+                                A convenient solution when working with
+                                transferring data into and out of Khan Academy,
+                                specifically the
+                                <a
+                                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse"
+                                    ><code>parse</code></a
+                                >
+                                and
+                                <a
+                                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"
+                                    ><code>stringify</code></a
+                                >
+                                methods.
+                            </p>
+                            <h2 id="libraries">Libraries</h2>
+                            <p>
+                                The following libraries are dependencies for the
+                                Khan Academy website, there are no additional
+                                wait times or boilerplate code to use them.
+                            </p>
+                            <p>
+                                The only caveat being that Khan Academy doesn't
+                                use the latest version of these libraries. Some
+                                &quot;newer&quot; features may be missing.
+                            </p>
+                            <h4>Live Example</h4>
+                            <script src="https://www.khanacademy.org/computer-programming/essentials-example-preloaded-libraries/5087622709329920/embed.js?editor=yes&buttons=yes&author=no&embed=yes"></script>
+                            <h3 id="jquery">jQuery</h3>
+                            <p>
+                                Version 2.1.1 |
+                                <a href="https://jquery.com/">Website</a> |
+                                <a href="https://api.jquery.com/"
+                                    >Documentation</a
+                                >
+                                |
+                                <a
+                                    href="https://github.com/jquery/jquery/tree/4dec426aa2a6cbabb1b064319ba7c272d594a688"
+                                    >Source</a
+                                >
+                            </p>
+                            <p>
+                                jQuery is a fast, small, and feature-rich
+                                JavaScript library. It makes things like HTML
+                                document traversal and manipulation, event
+                                handling, animation, and Ajax much simpler with
+                                an easy-to-use API that works across a multitude
+                                of browsers
+                            </p>
+                            <h3 id="underscore">Underscore</h3>
+                            <p>
+                                Version 1.4.4 |
+                                <a
+                                    href="https://cdn.rawgit.com/jashkenas/underscore/1.4.4/index.html"
+                                    >Documentation</a
+                                >
+                                |
+                                <a
+                                    href="https://github.com/jashkenas/underscore/tree/484bdb43ec4a9dd6a40e60a2d25317bec7aeb43f"
+                                    >Source</a
+                                >
+                            </p>
+                            <p>
+                                Underscore is a JavaScript library that provides
+                                a whole mess of useful functional programming
+                                helpers without extending any built-in objects.
+                            </p>
+                            <h3 id="backbone">Backbone</h3>
+                            <p>
+                                Version 1.0.0 |
+                                <a
+                                    href="https://cdn.rawgit.com/jashkenas/backbone/1.0.0/index.html"
+                                    >Documentation</a
+                                >
+                                |
+                                <a
+                                    href="https://github.com/jashkenas/backbone/tree/699fe3271262043bb137bae97bd0003d6d193f27"
+                                    >Source</a
+                                >
+                            </p>
+                            <p>
+                                Backbone.js gives structure to web applications
+                                by providing models with key-value binding and
+                                custom events, collections with a rich API of
+                                enumerable functions views with declarative
+                                event handling and connects it all to your
+                                existing API over a RESTful JSON interface.
+                            </p>
+                            <h2 id="banned_properties">Banned Properties</h2>
+                            <p>
+                                Using the
+                                <a href="#babyhint">BabyHint workaround</a>
+                                allows direct access to the following APIs:
+                            </p>
+                            <ul>
+                                <li>
+                                    <a
+                                        href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement"
+                                        ><code>createElement</code></a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://developer.mozilla.org/en-US/docs/Web/API/Document"
+                                        ><code>document</code></a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://developer.mozilla.org/en-US/docs/Web/API/Location"
+                                        ><code>location</code></a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument"
+                                        ><code>ownerDocument</code></a
+                                    >
+                                </li>
+                            </ul>
+                            <h4>Live Example</h4>
+                            <script src="https://www.khanacademy.org/computer-programming/essentials-example-babyhint-workaround/5997745303142400/embed.js?editor=yes&buttons=yes&author=no&embed=yes"></script>
+                            <h2 id="storage">Storage</h2>
+                            <p>
+                                The Essentials library does not include a
+                                wrapper for the Storage API as it's
+                                straightforward. Both Local and Session storage
+                                work inside the Khan Academy environment
+                                although External Essentials includes the
+                                <code>isLocalStorageEnabled</code> and
+                                <code>isSessionStorageEnabled</code> functions
+                                to conduct sanity checks.
+                            </p>
+                            <h4>Live Example</h4>
+                            <script src="https://www.khanacademy.org/computer-programming/essentials-example-local-storage/4842015170707456/embed.js?editor=yes&buttons=yes&author=yes&embed=yes"></script>
+                        </article>
+                    </section>
+                </div>
+
+                <footer class="footer">
+                    <div class="content has-text-centered">
+                        <p>
+                            Documentation generated by
+                            <a href="https://github.com/jsdoc3/jsdoc"
+                                >JSDoc 3.6.7</a
+                            >
+                        </p>
+                        <p class="sidebar-created-by">
+                            <a
+                                href="https://github.com/SoftwareBrothers/better-docs"
+                                target="_blank"
+                                >BetterDocs theme</a
+                            >
+                            provided with <i class="fas fa-heart"></i> by
+                            <a href="http://softwarebrothers.co" target="_blank"
+                                >SoftwareBrothers - JavaScript Development
+                                Agency</a
+                            >
+                        </p>
+                    </div>
+                </footer>
+            </div>
+            <div id="side-nav" class="side-nav"></div>
+        </div>
+        <script src="scripts/app.min.js"></script>
+        <script>
+            PR.prettyPrint();
+        </script>
+        <script src="scripts/linenumber.js"></script>
+
+        <script src="scripts/search.js"></script>
+    </body>
+</html>
