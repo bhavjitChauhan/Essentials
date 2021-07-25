@@ -266,11 +266,22 @@
                                         <div class="column left">
                                             <h2 id="heading">Usage</h2>
                                             <p>
-                                                Select the Type and what
-                                                components of the Essentials
-                                                library you need, then click the
-                                                Submit button for your generated
-                                                code.
+                                                To generate a custom build of
+                                                Essentials:
+                                            </p>
+                                            <ol>
+                                                <li>Select build type</li>
+                                                <li>Select modules</li>
+                                                <li>Generate</li>
+                                            </ol>
+                                            <p>
+                                                See the
+                                                <a
+                                                    href="https://bhavjitchauhan.github.io/Essentials/tutorial-Customize"
+                                                    target="_blank"
+                                                    >Customize</a
+                                                >
+                                                tutorial for more information.
                                             </p>
                                             <p>
                                                 The included JSHint directive
@@ -279,7 +290,7 @@
                                                 <a
                                                     href="https://bhavjitchauhan.github.io/Essentials/tutorial-Functionality"
                                                     target="_blank"
-                                                    >functionality</a
+                                                    >Functionality</a
                                                 >
                                                 tutorial for more information.
                                             </p>
@@ -349,10 +360,7 @@
                                                                             <p>
                                                                                 Core
                                                                                 functionality.
-                                                                                Required
-                                                                                for
-                                                                                other
-                                                                                components.
+                                                                                Required.
                                                                             </p>
                                                                         </td>
                                                                     </tr>
@@ -387,15 +395,11 @@
                                                                         <td>
                                                                             <p>
                                                                                 Color
-                                                                                variables,
+                                                                                constants,
                                                                                 conversion
                                                                                 and
                                                                                 gradient
                                                                                 functions.
-                                                                                Required
-                                                                                by
-                                                                                Text
-                                                                                Essentials.
                                                                             </p>
                                                                         </td>
                                                                     </tr>
@@ -431,14 +435,11 @@
                                                                             <p>
                                                                                 String
                                                                                 manipulation,
-                                                                                various
                                                                                 text
-                                                                                draw
-                                                                                functions
+                                                                                conversion
                                                                                 and
-                                                                                the
                                                                                 font
-                                                                                function.
+                                                                                functions.
                                                                             </p>
                                                                         </td>
                                                                     </tr>
@@ -472,7 +473,8 @@
                                                                         <td></td>
                                                                         <td>
                                                                             <p>
-                                                                                Additional
+                                                                                Line
+                                                                                and
                                                                                 shape
                                                                                 functions.
                                                                             </p>
@@ -507,12 +509,11 @@
                                                                         <td></td>
                                                                         <td>
                                                                             <p>
-                                                                                Pushing
-                                                                                Khan
-                                                                                Academy
-                                                                                to
-                                                                                its
-                                                                                limits.
+                                                                                DOM
+                                                                                manipulation
+                                                                                and
+                                                                                helper
+                                                                                functions.
                                                                             </p>
                                                                         </td>
                                                                     </tr>
@@ -652,9 +653,9 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@2/essentials.
                                         };
 
                                         const baseURL =
-                                            "https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@1/";
+                                            "https://cdn.jsdelivr.net/combine/gh/bhavjitChauhan/Essentials@2/";
                                         const basePath =
-                                            ",gh/bhavjitChauhan/Essentials@1/build/";
+                                            ",gh/bhavjitChauhan/Essentials@2/build/";
                                         const generateURL = (path) =>
                                             `${baseURL}${path}` +
                                             (buildTypeSelected == "CDN"
