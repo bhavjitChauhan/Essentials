@@ -1,6 +1,7 @@
 .vscode
 node_modules
-live-editor
 out
+
+/live-editor
 
 essentials-proto.js
