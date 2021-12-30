@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Live Editor</title>
+    <link rel="stylesheet" href="./build/css/live-editor.core_deps.css" />
+    <link rel="stylesheet" href="./build/css/live-editor.audio.css" />
+    <link rel="stylesheet" href="./build/css/live-editor.tooltips.css" />
+    <link rel="stylesheet" href="./build/css/live-editor.ui.css" />
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        h1 {
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        #live-editor {
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="live-editor"></div>
+
+    <script src="./build/js/live-editor.core_deps.js"></script>
+    <script src="./build/js/live-editor.editor_ace_deps.js"></script>
+    <script src="./build/js/live-editor.audio.js"></script>
+    <script src="./build/js/live-editor.shared.js"></script>
+    <script src="./build/js/live-editor.tooltips.js"></script>
+    <script src="./build/js/live-editor.ui.js"></script>
+    <script src="./build/js/live-editor.editor_ace.js"></script>
+
+    <script>
+        const code = window.localStorage['test-webpage-code']
+            || `<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>New webpage</title>
+    </head>
+    <body>
+
+
+    </body>
+</html>
+`;
+
+        const paramsString = window.location.search;
+        const searchParams = new URLSearchParams(paramsString);
+        const width = searchParams.get('width');
+        const height = searchParams.get('height');
+
+        window.liveEditor = new LiveEditor({
+            editorType: 'ace_webpage',
+            outputType: 'webpage',
+            el: $('#live-editor'),
+            code: code,
+            width: width || 400,
+            height: height || 400,
+            editorHeight: '100%',
+            autoFocus: true,
+            workersDir: './build/workers/',
+            externalsDir: './build/external/',
+            imagesDir: './assets/images/',
+            execFile: 'output-webpage.html'
+        });
+        liveEditor.editor.on('change', function () {
+            window.localStorage['test-webpage-code'] = liveEditor.editor.text();
+        });
+    </script>
+</body>
+
+</html>
