@@ -241,15 +241,15 @@ complement = function (fn) {
   };
 };
 
+evalPJS = function (str) {
+  return _eval("with (p) ".concat(str));
+};
+
 drawGraphics = function (x, y, width, height, fn) {
   var renderer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : p.P2D;
   var g = p.createGraphics(width, height, renderer);
   fn.call(g);
   p.image(g, x, y);
-};
-
-evalPJS = function (str) {
-  return _eval("with (p) ".concat(str));
 };
 
 generateID = function () {
@@ -334,13 +334,13 @@ printf = function (str) {
   p.println(str);
 };
 
+randomInt = function (min, max) {
+  return _.random(min, max);
+};
+
 push = function () {
   p.pushStyle();
   ctx.save();
-};
-
-randomInt = function (min, max) {
-  return _.random(min, max);
 };
 
 restart = function () {

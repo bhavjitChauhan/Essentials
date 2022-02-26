@@ -427,22 +427,6 @@ escapeHTML = str =>
     );
 
 /**
- * Gets current code in editor.
- * 
- * @category External
- * 
- * @returns {string}
- */
-getCode = function () {
-    let obj = arguments.callee;
-    while (!(obj.arguments[0] instanceof Processing)) {
-        obj = obj.caller;
-        if (obj.arguments[0] instanceof MouseEvent || obj.arguments[0] instanceof KeyboardEvent) return console.warn('`getCode` is not supported in Processing event functions.');
-    }
-    return obj.caller.arguments[0];
-};
-
-/**
  * Gets canvas log text and time.
  * 
  * @category External
@@ -467,6 +451,22 @@ getLog = i => {
     const keys = ['text', 'time'];
     const pair = [getLogsText(i), getLogsTime(i)];
     return _.object(keys, pair);
+};
+
+/**
+ * Gets current code in editor.
+ * 
+ * @category External
+ * 
+ * @returns {string}
+ */
+getCode = function () {
+    let obj = arguments.callee;
+    while (!(obj.arguments[0] instanceof Processing)) {
+        obj = obj.caller;
+        if (obj.arguments[0] instanceof MouseEvent || obj.arguments[0] instanceof KeyboardEvent) return console.warn('`getCode` is not supported in Processing event functions.');
+    }
+    return obj.caller.arguments[0];
 };
 
 /**

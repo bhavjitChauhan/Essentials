@@ -601,6 +601,17 @@ clean = fn => {
 complement = fn => (...args) => !fn(...args);
 
 /**
+ * Evaluate Processing.js code represented as a string.
+ * 
+ * @category Core
+ * 
+ * @param {string} str
+ * 
+ * @returns {*}
+ */
+evalPJS = str => _eval(`with (p) ${str}`);
+
+/**
  * Draws image of graphics created with `createGraphics`.
  * 
  * @category Core
@@ -625,17 +636,6 @@ drawGraphics = (x, y, width, height, fn, renderer = p.P2D) => {
     fn.call(g);
     p.image(g, x, y);
 };
-
-/**
- * Evaluate Processing.js code represented as a string.
- * 
- * @category Core
- * 
- * @param {string} str
- * 
- * @returns {*}
- */
-evalPJS = str => _eval(`with (p) ${str}`);
 
 /**
  * Generates an ID.
@@ -920,6 +920,24 @@ printf = function(str, ...args) {
 };
 
 /**
+ * Generates a random integer in a given range.
+ * 
+ * @category Core
+ *
+ * @param {number} [min=0] Minimum value
+ * @param {number} max Maximum value
+ *
+ * @returns {number} Generated integer
+ *
+ * @example
+ * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
+ *
+ * @example
+ * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
+ */
+randomInt = (min, max) => _.random(min, max);
+
+/**
  * Saves Processing and Canvas state.
  * 
  * @category Core
@@ -939,24 +957,6 @@ push = () => {
     p.pushStyle();
     ctx.save();
 };
-
-/**
- * Generates a random integer in a given range.
- * 
- * @category Core
- *
- * @param {number} [min=0] Minimum value
- * @param {number} max Maximum value
- *
- * @returns {number} Generated integer
- *
- * @example
- * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
- *
- * @example
- * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
- */
-randomInt = (min, max) => _.random(min, max);
 
 /**
  * @summary
@@ -2455,18 +2455,6 @@ LIGHT_GRAY = LIGHT_GREY = 0xFFD3D3D3;
 GAINSBORO = 0xFFDCDCDC;
 
 /**
- * Appends Canvas filter.
- * 
- * @private
- * 
- * @param {string} filter
- */
-_appendFilter = filter => {
-    if (ctx.filter == 'none') return ctx.filter = filter;
-    ctx.filter += filter;
-};
-
-/**
  * Create color in given color mode.
  * 
  * @private
@@ -2493,6 +2481,18 @@ _createColor = (arr, colorMode = getColorMode(), currentColorMode = colorMode) =
     result = p.color.apply(null, arr);
     isDifferentColorMode && p.popStyle();
     return result;
+};
+
+/**
+ * Appends Canvas filter.
+ * 
+ * @private
+ * 
+ * @param {string} filter
+ */
+_appendFilter = filter => {
+    if (ctx.filter == 'none') return ctx.filter = filter;
+    ctx.filter += filter;
 };
 
 /**
@@ -2527,22 +2527,6 @@ _parseColorArray = (arr, defaultAlpha = getAlphaRange(), range = false) => {
 clearEffects = () => ctx.filter = 'none';
 
 /**
- * Gets the color range for blue.
- * 
- * @category Color
- * 
- * @returns {number}
- * 
- * @example
- * colorMode(RGB, 1, 1, 1);
- * println(getBlueRange());
- * // expected output: 1
- * 
- * @see {@link getColorRange}
- */
-getBlueRange = () => p.blue(WHITE);
-
-/**
  * Gets the color range for alpha.
  * 
  * @category Color
@@ -2557,6 +2541,22 @@ getBlueRange = () => p.blue(WHITE);
  * @see {@link getColorRange}
  */
 getAlphaRange = () => p.alpha(WHITE);
+
+/**
+ * Gets the color range for blue.
+ * 
+ * @category Color
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(RGB, 1, 1, 1);
+ * println(getBlueRange());
+ * // expected output: 1
+ * 
+ * @see {@link getColorRange}
+ */
+getBlueRange = () => p.blue(WHITE);
 
 /**
  * Gets the color range for brightness.
@@ -2639,15 +2639,6 @@ getRedRange = () => p.red(WHITE);
 getSaturationRange = () => getGreenRange();
 
 /**
- * Gets current shadow blur strength.
- * 
- * @category Color
- * 
- * @returns {number}
- */
-getShadowBlur = () => ctx.shadowBlur;
-
-/**
  * Gets current shadow color.
  * 
  * @category Color
@@ -2657,11 +2648,27 @@ getShadowBlur = () => ctx.shadowBlur;
 getShadow = () => hexToRGB(ctx.shadowColor);
 
 /**
+ * Gets current shadow blur strength.
+ * 
+ * @category Color
+ * 
+ * @returns {number}
+ */
+getShadowBlur = () => ctx.shadowBlur;
+
+/**
  * Checks if current color range is the default.
  * 
  * @category Color
  */
 isDefaultColorRange = () => getColorRange() == RGB_COLOR_RANGE;
+
+/**
+ * Turns off shadow.
+ * 
+ * @category Color
+ */
+noShadow = () => shadow(TRANSPARENT);
 
 /**
  * Gets current shadow offset.
@@ -2671,13 +2678,6 @@ isDefaultColorRange = () => getColorRange() == RGB_COLOR_RANGE;
  * @returns {Array.<number>}
  */
 getShadowOffset = () => [ctx.shadowOffsetX, ctx.shadowOffsetY];
-
-/**
- * Turns off shadow.
- * 
- * @category Color
- */
-noShadow = () => shadow(TRANSPARENT);
 
 /**
  * @summary
@@ -3018,6 +3018,26 @@ getFill = (draw = true) => {
 };
 
 /**
+ * @summary
+ * Gets current stroke color.
+ * 
+ * @description
+ * Processing will only update the current stroke if specific functions are
+ * called. To work around this, a "ghost" rectangle will be drawn to update
+ * the stroke value.
+ * 
+ * @category Color
+ * 
+ * @param {boolean} [draw=true] draw ghost rectangle
+ * 
+ * @returns {color}
+ */
+getStroke = (draw = true) => {
+    draw && p.rect(0, 0, '%');
+    return hexToRGB(ctx.strokeStyle);
+};
+
+/**
  * Converts to canvas image to grayscale.
  * 
  * @category Color
@@ -3041,26 +3061,6 @@ getFill = (draw = true) => {
  * // expected outcome: 50% grayscale
  */
 grayscale = (amount = 100) => _appendFilter(`grayscale(${amount}%)`);
-
-/**
- * @summary
- * Gets current stroke color.
- * 
- * @description
- * Processing will only update the current stroke if specific functions are
- * called. To work around this, a "ghost" rectangle will be drawn to update
- * the stroke value.
- * 
- * @category Color
- * 
- * @param {boolean} [draw=true] draw ghost rectangle
- * 
- * @returns {color}
- */
-getStroke = (draw = true) => {
-    draw && p.rect(0, 0, '%');
-    return hexToRGB(ctx.strokeStyle);
-};
 
 /**
  * Converts hex to RGB color type.
@@ -3336,38 +3336,6 @@ linearGradient = settings => {
 luminance = amount => _appendFilter(`brightness(${amount}%)`);
 
 /**
- * Maps color range array to current or a custom color range.
- * 
- * @category Color
- * 
- * @param {Array.<number>|number} values
- * @param {Array.<number>|number} [colorRange] custom color range
- * 
- * @returns {Array.<number>}
- * 
- * @example
- * colorMode(HSB, 360, 100, 100, 100);
- * println(mapColorRange([255, 0, 0]));
- * // expected output: [360, 0, 0, 100]
- * 
- * @example
- * println(mapColorRange([255, 0, 0], [360, 100, 100, 100]));
- * // expected output: [360, 0, 0, 100]
- */
-mapColorRange = (values, colorRange) => {
-    const currentColorRange = getColorRange();
-    if (colorRange) {
-        colorRange = _parseColorArray(colorRange, currentColorRange[3], true);
-        values = _parseColorArray(values, currentColorRange[3])
-            .map((value, i) => p.map(value, 0, currentColorRange[i], 0, colorRange[i]));
-    } else {
-        values = _parseColorArray(values, 255)
-            .map((value, i) => p.map(value, 0, 255, 0, currentColorRange[i]));
-    }
-    return values;
-};
-
-/**
  * Applies transparency to the canvas image.
  * 
  * @category Color
@@ -3411,6 +3379,38 @@ presetColorMode = mode => {
         case p.HSB:
             p.colorMode(p.HSB, 360, 100, 100, 100);
     }
+};
+
+/**
+ * Maps color range array to current or a custom color range.
+ * 
+ * @category Color
+ * 
+ * @param {Array.<number>|number} values
+ * @param {Array.<number>|number} [colorRange] custom color range
+ * 
+ * @returns {Array.<number>}
+ * 
+ * @example
+ * colorMode(HSB, 360, 100, 100, 100);
+ * println(mapColorRange([255, 0, 0]));
+ * // expected output: [360, 0, 0, 100]
+ * 
+ * @example
+ * println(mapColorRange([255, 0, 0], [360, 100, 100, 100]));
+ * // expected output: [360, 0, 0, 100]
+ */
+mapColorRange = (values, colorRange) => {
+    const currentColorRange = getColorRange();
+    if (colorRange) {
+        colorRange = _parseColorArray(colorRange, currentColorRange[3], true);
+        values = _parseColorArray(values, currentColorRange[3])
+            .map((value, i) => p.map(value, 0, currentColorRange[i], 0, colorRange[i]));
+    } else {
+        values = _parseColorArray(values, 255)
+            .map((value, i) => p.map(value, 0, 255, 0, currentColorRange[i]));
+    }
+    return values;
 };
 
 /**
@@ -4501,10 +4501,10 @@ outlineText = (str, x, y, weight = 5, color = BLACK) => {
     ctx.strokeStyle = color;
     ctx.strokeText(str, x, y);
     ctx.restore();
-    pushStyle();
+    p.pushStyle();
     p.textAlign(p.LEFT, p.TOP);
     p.text(str, x, y);
-    popStyle();
+    p.popStyle();
 };
 
 /**
@@ -5251,6 +5251,34 @@ rectangle = (x, y, width, height = width, tl, tr, br, bl) => {
 };
 
 /**
+ * Draws a rhombus.
+ * 
+ * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
+ *
+ * @link https://khanacademy.org/cs/-/4747962019348480
+ * 
+ * @category Shape
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * rhombus(50, 100, 100, 50, 100, 100);
+ *
+ * @see {@link parallelogram}
+ */
+rhombus = (ax, ay, bx, by, cx, cy) => {
+    const r = p.dist(ax, ay, bx, by) / p.dist(ax, ay, cx, cy);
+    cx = ax + r * (cx - ax);
+    cy = ay + r * (cy - ay);
+    parallelogram(ax, ay, bx, by, cx, cy);
+};
+
+/**
  * @summary
  * Alias for `rect` with smart radius parameter defaults and one `side`
  * parameter.
@@ -5297,34 +5325,6 @@ square = (x, y, side, tl, tr, br, bl) => {
     else if (br == undefined) p.rect(x, y, side, side, tl, tl, tr, tr);
     else if (bl == undefined) p.rect(x, y, side, side, tl, tr, br, 0);
     else p.rect(x, y, side, side, tl, tr, br, bl);
-};
-
-/**
- * Draws a rhombus.
- * 
- * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
- *
- * @link https://khanacademy.org/cs/-/4747962019348480
- * 
- * @category Shape
- *
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- *
- * @example
- * rhombus(50, 100, 100, 50, 100, 100);
- *
- * @see {@link parallelogram}
- */
-rhombus = (ax, ay, bx, by, cx, cy) => {
-    const r = p.dist(ax, ay, bx, by) / p.dist(ax, ay, cx, cy);
-    cx = ax + r * (cx - ax);
-    cy = ay + r * (cy - ay);
-    parallelogram(ax, ay, bx, by, cx, cy);
 };
 
 /**
@@ -5393,6 +5393,24 @@ star = (x, y, externalRadius, spikes = 5, rotation) => {
 strokeDash = (...segments) => ctx.setLineDash(segments);
 
 /**
+ * Sets the line dash offset.
+ * 
+ * @category Shape
+ * 
+ * @param {number} offset
+ * 
+ * @example
+ * strokeDashOffset(0);
+ * strokeDash(10, 10);
+ * line(50, 50, 350, 50);
+ * // expected outcome: dashed line
+ * strokeDashOffset(5);
+ * line(50, 100, 350, 100);
+ * // expected outcome: dashed line offset by 5 pixels
+ */
+strokeDashOffset = offset => ctx.lineDashOffset = offset;
+
+/**
  * Draws a trapezoid.
  * 
  * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
@@ -5416,21 +5434,3 @@ trapezoid = (x, y, height, topBase, bottomBase) => {
         x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1,
         x + (maxBase - bottomBase) / 2, y + height - 1);
 };
-
-/**
- * Sets the line dash offset.
- * 
- * @category Shape
- * 
- * @param {number} offset
- * 
- * @example
- * strokeDashOffset(0);
- * strokeDash(10, 10);
- * line(50, 50, 350, 50);
- * // expected outcome: dashed line
- * strokeDashOffset(5);
- * line(50, 100, 350, 100);
- * // expected outcome: dashed line offset by 5 pixels
- */
-strokeDashOffset = offset => ctx.lineDashOffset = offset;

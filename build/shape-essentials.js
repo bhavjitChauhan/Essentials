@@ -401,6 +401,34 @@ rectangle = (x, y, width, height = width, tl, tr, br, bl) => {
 };
 
 /**
+ * Draws a rhombus.
+ * 
+ * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
+ *
+ * @link https://khanacademy.org/cs/-/4747962019348480
+ * 
+ * @category Shape
+ *
+ * @param {number} ax x-coordinate of the first vertex
+ * @param {number} ay y-coordinate of the first vertex
+ * @param {number} bx x-coordinate of the second vertex
+ * @param {number} by y-coordinate of the second vertex
+ * @param {number} cx x-coordinate of the third vertex
+ * @param {number} cy y-coordinate of the third vertex
+ *
+ * @example
+ * rhombus(50, 100, 100, 50, 100, 100);
+ *
+ * @see {@link parallelogram}
+ */
+rhombus = (ax, ay, bx, by, cx, cy) => {
+    const r = p.dist(ax, ay, bx, by) / p.dist(ax, ay, cx, cy);
+    cx = ax + r * (cx - ax);
+    cy = ay + r * (cy - ay);
+    parallelogram(ax, ay, bx, by, cx, cy);
+};
+
+/**
  * @summary
  * Alias for `rect` with smart radius parameter defaults and one `side`
  * parameter.
@@ -447,34 +475,6 @@ square = (x, y, side, tl, tr, br, bl) => {
     else if (br == undefined) p.rect(x, y, side, side, tl, tl, tr, tr);
     else if (bl == undefined) p.rect(x, y, side, side, tl, tr, br, 0);
     else p.rect(x, y, side, side, tl, tr, br, bl);
-};
-
-/**
- * Draws a rhombus.
- * 
- * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
- *
- * @link https://khanacademy.org/cs/-/4747962019348480
- * 
- * @category Shape
- *
- * @param {number} ax x-coordinate of the first vertex
- * @param {number} ay y-coordinate of the first vertex
- * @param {number} bx x-coordinate of the second vertex
- * @param {number} by y-coordinate of the second vertex
- * @param {number} cx x-coordinate of the third vertex
- * @param {number} cy y-coordinate of the third vertex
- *
- * @example
- * rhombus(50, 100, 100, 50, 100, 100);
- *
- * @see {@link parallelogram}
- */
-rhombus = (ax, ay, bx, by, cx, cy) => {
-    const r = p.dist(ax, ay, bx, by) / p.dist(ax, ay, cx, cy);
-    cx = ax + r * (cx - ax);
-    cy = ay + r * (cy - ay);
-    parallelogram(ax, ay, bx, by, cx, cy);
 };
 
 /**
@@ -543,6 +543,24 @@ star = (x, y, externalRadius, spikes = 5, rotation) => {
 strokeDash = (...segments) => ctx.setLineDash(segments);
 
 /**
+ * Sets the line dash offset.
+ * 
+ * @category Shape
+ * 
+ * @param {number} offset
+ * 
+ * @example
+ * strokeDashOffset(0);
+ * strokeDash(10, 10);
+ * line(50, 50, 350, 50);
+ * // expected outcome: dashed line
+ * strokeDashOffset(5);
+ * line(50, 100, 350, 100);
+ * // expected outcome: dashed line offset by 5 pixels
+ */
+strokeDashOffset = offset => ctx.lineDashOffset = offset;
+
+/**
  * Draws a trapezoid.
  * 
  * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
@@ -566,21 +584,3 @@ trapezoid = (x, y, height, topBase, bottomBase) => {
         x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1,
         x + (maxBase - bottomBase) / 2, y + height - 1);
 };
-
-/**
- * Sets the line dash offset.
- * 
- * @category Shape
- * 
- * @param {number} offset
- * 
- * @example
- * strokeDashOffset(0);
- * strokeDash(10, 10);
- * line(50, 50, 350, 50);
- * // expected outcome: dashed line
- * strokeDashOffset(5);
- * line(50, 100, 350, 100);
- * // expected outcome: dashed line offset by 5 pixels
- */
-strokeDashOffset = offset => ctx.lineDashOffset = offset;

@@ -154,15 +154,15 @@ rectangle = function (x, y, width) {
   if (tl == undefined) p.rect(x, y, width, height);else if (tr == undefined) p.rect(x, y, width, height, tl);else if (br == undefined) p.rect(x, y, width, height, tl, tl, tr, tr);else if (bl == undefined) p.rect(x, y, width, height, tl, tr, br, 0);else p.rect(x, y, width, height, tl, tr, br, bl);
 };
 
-square = function (x, y, side, tl, tr, br, bl) {
-  if (tl == undefined) p.rect(x, y, side, side);else if (tr == undefined) p.rect(x, y, side, side, tl);else if (br == undefined) p.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) p.rect(x, y, side, side, tl, tr, br, 0);else p.rect(x, y, side, side, tl, tr, br, bl);
-};
-
 rhombus = function (ax, ay, bx, by, cx, cy) {
   var r = p.dist(ax, ay, bx, by) / p.dist(ax, ay, cx, cy);
   cx = ax + r * (cx - ax);
   cy = ay + r * (cy - ay);
   parallelogram(ax, ay, bx, by, cx, cy);
+};
+
+square = function (x, y, side, tl, tr, br, bl) {
+  if (tl == undefined) p.rect(x, y, side, side);else if (tr == undefined) p.rect(x, y, side, side, tl);else if (br == undefined) p.rect(x, y, side, side, tl, tl, tr, tr);else if (bl == undefined) p.rect(x, y, side, side, tl, tr, br, 0);else p.rect(x, y, side, side, tl, tr, br, bl);
 };
 
 star = function (x, y, externalRadius) {
@@ -194,11 +194,11 @@ strokeDash = function () {
   return ctx.setLineDash(segments);
 };
 
+strokeDashOffset = function (offset) {
+  return ctx.lineDashOffset = offset;
+};
+
 trapezoid = function (x, y, height, topBase, bottomBase) {
   var maxBase = Math.max(topBase, bottomBase);
   p.quad(x + (maxBase - topBase) / 2, y, x + (maxBase - topBase) / 2 + topBase - 1, y, x + (maxBase - bottomBase) / 2 + bottomBase - 1, y + height - 1, x + (maxBase - bottomBase) / 2, y + height - 1);
-};
-
-strokeDashOffset = function (offset) {
-  return ctx.lineDashOffset = offset;
 };

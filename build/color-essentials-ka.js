@@ -182,11 +182,6 @@ SILVER = 0xFFC0C0C0;
 LIGHT_GRAY = LIGHT_GREY = 0xFFD3D3D3;
 GAINSBORO = 0xFFDCDCDC;
 
-_appendFilter = function (filter) {
-  if (ctx.filter == 'none') return ctx.filter = filter;
-  ctx.filter += filter;
-};
-
 _createColor = function (arr) {
   var colorMode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : getColorMode();
   var currentColorMode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : colorMode;
@@ -208,6 +203,11 @@ _createColor = function (arr) {
   result = p.color.apply(null, arr);
   isDifferentColorMode && p.popStyle();
   return result;
+};
+
+_appendFilter = function (filter) {
+  if (ctx.filter == 'none') return ctx.filter = filter;
+  ctx.filter += filter;
 };
 
 _parseColorArray = function (arr) {
@@ -235,12 +235,12 @@ clearEffects = function () {
   return ctx.filter = 'none';
 };
 
-getBlueRange = function () {
-  return p.blue(WHITE);
-};
-
 getAlphaRange = function () {
   return p.alpha(WHITE);
+};
+
+getBlueRange = function () {
+  return p.blue(WHITE);
 };
 
 getBrightnessRange = function () {
@@ -263,24 +263,24 @@ getSaturationRange = function () {
   return getGreenRange();
 };
 
-getShadowBlur = function () {
-  return ctx.shadowBlur;
-};
-
 getShadow = function () {
   return hexToRGB(ctx.shadowColor);
+};
+
+getShadowBlur = function () {
+  return ctx.shadowBlur;
 };
 
 isDefaultColorRange = function () {
   return getColorRange() == RGB_COLOR_RANGE;
 };
 
-getShadowOffset = function () {
-  return [ctx.shadowOffsetX, ctx.shadowOffsetY];
-};
-
 noShadow = function () {
   return shadow(TRANSPARENT);
+};
+
+getShadowOffset = function () {
+  return [ctx.shadowOffsetX, ctx.shadowOffsetY];
 };
 
 angularGradient = function (x, y, width, height, startColor, endColor) {
@@ -468,15 +468,15 @@ getFill = function () {
   return hexToRGB(ctx.fillStyle);
 };
 
-grayscale = function () {
-  var amount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 100;
-  return _appendFilter("grayscale(".concat(amount, "%)"));
-};
-
 getStroke = function () {
   var draw = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   draw && p.rect(0, 0, '%');
   return hexToRGB(ctx.strokeStyle);
+};
+
+grayscale = function () {
+  var amount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 100;
+  return _appendFilter("grayscale(".concat(amount, "%)"));
 };
 
 hexToHSB = function (hex) {
@@ -665,23 +665,6 @@ luminance = function (amount) {
   return _appendFilter("brightness(".concat(amount, "%)"));
 };
 
-mapColorRange = function (values, colorRange) {
-  var currentColorRange = getColorRange();
-
-  if (colorRange) {
-    colorRange = _parseColorArray(colorRange, currentColorRange[3], true);
-    values = _parseColorArray(values, currentColorRange[3]).map(function (value, i) {
-      return p.map(value, 0, currentColorRange[i], 0, colorRange[i]);
-    });
-  } else {
-    values = _parseColorArray(values, 255).map(function (value, i) {
-      return p.map(value, 0, 255, 0, currentColorRange[i]);
-    });
-  }
-
-  return values;
-};
-
 opacity = function (amount) {
   return _appendFilter("opacity(".concat(amount, "%)"));
 };
@@ -697,6 +680,23 @@ presetColorMode = function (mode) {
     case p.HSB:
       p.colorMode(p.HSB, 360, 100, 100, 100);
   }
+};
+
+mapColorRange = function (values, colorRange) {
+  var currentColorRange = getColorRange();
+
+  if (colorRange) {
+    colorRange = _parseColorArray(colorRange, currentColorRange[3], true);
+    values = _parseColorArray(values, currentColorRange[3]).map(function (value, i) {
+      return p.map(value, 0, currentColorRange[i], 0, colorRange[i]);
+    });
+  } else {
+    values = _parseColorArray(values, 255).map(function (value, i) {
+      return p.map(value, 0, 255, 0, currentColorRange[i]);
+    });
+  }
+
+  return values;
 };
 
 radialGradient = function (settings) {

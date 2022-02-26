@@ -515,10 +515,10 @@ outlineText = (str, x, y, weight = 5, color = BLACK) => {
     ctx.strokeStyle = color;
     ctx.strokeText(str, x, y);
     ctx.restore();
-    pushStyle();
+    p.pushStyle();
     p.textAlign(p.LEFT, p.TOP);
     p.text(str, x, y);
-    popStyle();
+    p.popStyle();
 };
 
 /**

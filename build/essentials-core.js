@@ -601,6 +601,17 @@ clean = fn => {
 complement = fn => (...args) => !fn(...args);
 
 /**
+ * Evaluate Processing.js code represented as a string.
+ * 
+ * @category Core
+ * 
+ * @param {string} str
+ * 
+ * @returns {*}
+ */
+evalPJS = str => _eval(`with (p) ${str}`);
+
+/**
  * Draws image of graphics created with `createGraphics`.
  * 
  * @category Core
@@ -625,17 +636,6 @@ drawGraphics = (x, y, width, height, fn, renderer = p.P2D) => {
     fn.call(g);
     p.image(g, x, y);
 };
-
-/**
- * Evaluate Processing.js code represented as a string.
- * 
- * @category Core
- * 
- * @param {string} str
- * 
- * @returns {*}
- */
-evalPJS = str => _eval(`with (p) ${str}`);
 
 /**
  * Generates an ID.
@@ -920,6 +920,24 @@ printf = function(str, ...args) {
 };
 
 /**
+ * Generates a random integer in a given range.
+ * 
+ * @category Core
+ *
+ * @param {number} [min=0] Minimum value
+ * @param {number} max Maximum value
+ *
+ * @returns {number} Generated integer
+ *
+ * @example
+ * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
+ *
+ * @example
+ * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
+ */
+randomInt = (min, max) => _.random(min, max);
+
+/**
  * Saves Processing and Canvas state.
  * 
  * @category Core
@@ -939,24 +957,6 @@ push = () => {
     p.pushStyle();
     ctx.save();
 };
-
-/**
- * Generates a random integer in a given range.
- * 
- * @category Core
- *
- * @param {number} [min=0] Minimum value
- * @param {number} max Maximum value
- *
- * @returns {number} Generated integer
- *
- * @example
- * printf('Random integer between 1 and 5 (inclusive): %', randomInt(1, 5));
- *
- * @example
- * printf('Random integer between 0 and 5 (inclusive): %', randomInt(5));
- */
-randomInt = (min, max) => _.random(min, max);
 
 /**
  * @summary

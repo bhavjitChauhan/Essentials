@@ -1400,18 +1400,6 @@ LIGHT_GRAY = LIGHT_GREY = 0xFFD3D3D3;
 GAINSBORO = 0xFFDCDCDC;
 
 /**
- * Appends Canvas filter.
- * 
- * @private
- * 
- * @param {string} filter
- */
-_appendFilter = filter => {
-    if (ctx.filter == 'none') return ctx.filter = filter;
-    ctx.filter += filter;
-};
-
-/**
  * Create color in given color mode.
  * 
  * @private
@@ -1438,6 +1426,18 @@ _createColor = (arr, colorMode = getColorMode(), currentColorMode = colorMode) =
     result = p.color.apply(null, arr);
     isDifferentColorMode && p.popStyle();
     return result;
+};
+
+/**
+ * Appends Canvas filter.
+ * 
+ * @private
+ * 
+ * @param {string} filter
+ */
+_appendFilter = filter => {
+    if (ctx.filter == 'none') return ctx.filter = filter;
+    ctx.filter += filter;
 };
 
 /**
@@ -1472,22 +1472,6 @@ _parseColorArray = (arr, defaultAlpha = getAlphaRange(), range = false) => {
 clearEffects = () => ctx.filter = 'none';
 
 /**
- * Gets the color range for blue.
- * 
- * @category Color
- * 
- * @returns {number}
- * 
- * @example
- * colorMode(RGB, 1, 1, 1);
- * println(getBlueRange());
- * // expected output: 1
- * 
- * @see {@link getColorRange}
- */
-getBlueRange = () => p.blue(WHITE);
-
-/**
  * Gets the color range for alpha.
  * 
  * @category Color
@@ -1502,6 +1486,22 @@ getBlueRange = () => p.blue(WHITE);
  * @see {@link getColorRange}
  */
 getAlphaRange = () => p.alpha(WHITE);
+
+/**
+ * Gets the color range for blue.
+ * 
+ * @category Color
+ * 
+ * @returns {number}
+ * 
+ * @example
+ * colorMode(RGB, 1, 1, 1);
+ * println(getBlueRange());
+ * // expected output: 1
+ * 
+ * @see {@link getColorRange}
+ */
+getBlueRange = () => p.blue(WHITE);
 
 /**
  * Gets the color range for brightness.
@@ -1584,15 +1584,6 @@ getRedRange = () => p.red(WHITE);
 getSaturationRange = () => getGreenRange();
 
 /**
- * Gets current shadow blur strength.
- * 
- * @category Color
- * 
- * @returns {number}
- */
-getShadowBlur = () => ctx.shadowBlur;
-
-/**
  * Gets current shadow color.
  * 
  * @category Color
@@ -1602,11 +1593,27 @@ getShadowBlur = () => ctx.shadowBlur;
 getShadow = () => hexToRGB(ctx.shadowColor);
 
 /**
+ * Gets current shadow blur strength.
+ * 
+ * @category Color
+ * 
+ * @returns {number}
+ */
+getShadowBlur = () => ctx.shadowBlur;
+
+/**
  * Checks if current color range is the default.
  * 
  * @category Color
  */
 isDefaultColorRange = () => getColorRange() == RGB_COLOR_RANGE;
+
+/**
+ * Turns off shadow.
+ * 
+ * @category Color
+ */
+noShadow = () => shadow(TRANSPARENT);
 
 /**
  * Gets current shadow offset.
@@ -1616,13 +1623,6 @@ isDefaultColorRange = () => getColorRange() == RGB_COLOR_RANGE;
  * @returns {Array.<number>}
  */
 getShadowOffset = () => [ctx.shadowOffsetX, ctx.shadowOffsetY];
-
-/**
- * Turns off shadow.
- * 
- * @category Color
- */
-noShadow = () => shadow(TRANSPARENT);
 
 /**
  * @summary
@@ -1963,6 +1963,26 @@ getFill = (draw = true) => {
 };
 
 /**
+ * @summary
+ * Gets current stroke color.
+ * 
+ * @description
+ * Processing will only update the current stroke if specific functions are
+ * called. To work around this, a "ghost" rectangle will be drawn to update
+ * the stroke value.
+ * 
+ * @category Color
+ * 
+ * @param {boolean} [draw=true] draw ghost rectangle
+ * 
+ * @returns {color}
+ */
+getStroke = (draw = true) => {
+    draw && p.rect(0, 0, '%');
+    return hexToRGB(ctx.strokeStyle);
+};
+
+/**
  * Converts to canvas image to grayscale.
  * 
  * @category Color
@@ -1986,26 +2006,6 @@ getFill = (draw = true) => {
  * // expected outcome: 50% grayscale
  */
 grayscale = (amount = 100) => _appendFilter(`grayscale(${amount}%)`);
-
-/**
- * @summary
- * Gets current stroke color.
- * 
- * @description
- * Processing will only update the current stroke if specific functions are
- * called. To work around this, a "ghost" rectangle will be drawn to update
- * the stroke value.
- * 
- * @category Color
- * 
- * @param {boolean} [draw=true] draw ghost rectangle
- * 
- * @returns {color}
- */
-getStroke = (draw = true) => {
-    draw && p.rect(0, 0, '%');
-    return hexToRGB(ctx.strokeStyle);
-};
 
 /**
  * Converts hex to RGB color type.
@@ -2281,38 +2281,6 @@ linearGradient = settings => {
 luminance = amount => _appendFilter(`brightness(${amount}%)`);
 
 /**
- * Maps color range array to current or a custom color range.
- * 
- * @category Color
- * 
- * @param {Array.<number>|number} values
- * @param {Array.<number>|number} [colorRange] custom color range
- * 
- * @returns {Array.<number>}
- * 
- * @example
- * colorMode(HSB, 360, 100, 100, 100);
- * println(mapColorRange([255, 0, 0]));
- * // expected output: [360, 0, 0, 100]
- * 
- * @example
- * println(mapColorRange([255, 0, 0], [360, 100, 100, 100]));
- * // expected output: [360, 0, 0, 100]
- */
-mapColorRange = (values, colorRange) => {
-    const currentColorRange = getColorRange();
-    if (colorRange) {
-        colorRange = _parseColorArray(colorRange, currentColorRange[3], true);
-        values = _parseColorArray(values, currentColorRange[3])
-            .map((value, i) => p.map(value, 0, currentColorRange[i], 0, colorRange[i]));
-    } else {
-        values = _parseColorArray(values, 255)
-            .map((value, i) => p.map(value, 0, 255, 0, currentColorRange[i]));
-    }
-    return values;
-};
-
-/**
  * Applies transparency to the canvas image.
  * 
  * @category Color
@@ -2356,6 +2324,38 @@ presetColorMode = mode => {
         case p.HSB:
             p.colorMode(p.HSB, 360, 100, 100, 100);
     }
+};
+
+/**
+ * Maps color range array to current or a custom color range.
+ * 
+ * @category Color
+ * 
+ * @param {Array.<number>|number} values
+ * @param {Array.<number>|number} [colorRange] custom color range
+ * 
+ * @returns {Array.<number>}
+ * 
+ * @example
+ * colorMode(HSB, 360, 100, 100, 100);
+ * println(mapColorRange([255, 0, 0]));
+ * // expected output: [360, 0, 0, 100]
+ * 
+ * @example
+ * println(mapColorRange([255, 0, 0], [360, 100, 100, 100]));
+ * // expected output: [360, 0, 0, 100]
+ */
+mapColorRange = (values, colorRange) => {
+    const currentColorRange = getColorRange();
+    if (colorRange) {
+        colorRange = _parseColorArray(colorRange, currentColorRange[3], true);
+        values = _parseColorArray(values, currentColorRange[3])
+            .map((value, i) => p.map(value, 0, currentColorRange[i], 0, colorRange[i]));
+    } else {
+        values = _parseColorArray(values, 255)
+            .map((value, i) => p.map(value, 0, 255, 0, currentColorRange[i]));
+    }
+    return values;
 };
 
 /**

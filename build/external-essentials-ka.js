@@ -177,6 +177,13 @@ escapeHTML = function (str) {
   });
 };
 
+getLog = function (i) {
+  if (!Number.isInteger(i)) return;
+  var keys = ['text', 'time'];
+  var pair = [getLogsText(i), getLogsTime(i)];
+  return _.object(keys, pair);
+};
+
 getCode = function () {
   var obj = arguments.callee;
 
@@ -186,13 +193,6 @@ getCode = function () {
   }
 
   return obj.caller.arguments[0];
-};
-
-getLog = function (i) {
-  if (!Number.isInteger(i)) return;
-  var keys = ['text', 'time'];
-  var pair = [getLogsText(i), getLogsTime(i)];
-  return _.object(keys, pair);
 };
 
 getLogs = function () {

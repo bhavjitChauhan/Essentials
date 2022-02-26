@@ -255,10 +255,10 @@ outlineText = function (str, x, y) {
   ctx.strokeStyle = color;
   ctx.strokeText(str, x, y);
   ctx.restore();
-  pushStyle();
+  p.pushStyle();
   p.textAlign(p.LEFT, p.TOP);
   p.text(str, x, y);
-  popStyle();
+  p.popStyle();
 };
 
 pluralize = function (value, word) {
