@@ -78,7 +78,7 @@ $.getScript('https://cdn.jsdelivr.net/gh/bhavjitChauhan/essentials@2/essentials.
 See alternative methods in the [Integration](https://bhavjitchauhan.github.io/Essentials/tutorial-Integration) tutorial.
 
 ### Customize
-The recommended method to generate any boilerplate code for the Essentials library is to use the [Builder](https://bhavjitchauhan.github.io/Essentials/builder). See other ways of reducing file sizes and load times in the [Customize](https://bhavjitchauhan.github.io/Essentials/tutorial-Customize) tutorial.
+The recommended method to generate any boilerplate code for the Essentials library is to use the [Builder](https://bhavjitchauhan.github.io/Essentials/tutorial-Builder). See other ways of reducing file sizes and load times in the [Customize](https://bhavjitchauhan.github.io/Essentials/tutorial-Customize) tutorial.
 
 ## Usage
 After loading the Essentials library its functions and constants are defined in the global scope, they can be called directly.
