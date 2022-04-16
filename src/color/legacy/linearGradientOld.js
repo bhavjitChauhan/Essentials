@@ -35,25 +35,25 @@
  * linearGradient(275, 25, 100, 100, GREEN, LIGHTBLUE, BOTTOM_RIGHT, 10);
  * // expected outcome: linear gradient from top-left to bottom-right; green to light blue in strips of thickness 10
  */
- linearGradientOld = (x, y, width, height, startColor, endColor, direction = RIGHT, step = 5) => {
+linearGradientOld = (x, y, width, height, startColor, endColor, direction = RIGHT, step = 5) => {
     push();
-    e.strokeWeight(1);
+    p.strokeWeight(1);
     switch (direction) {
         case LEFT:
         case RIGHT:
             if (direction == LEFT) [startColor, endColor] = [endColor, startColor];
             if (step == 1) {
                 for (let i = 0; i < width; i++) {
-                    e.stroke(e.lerpColor(startColor, endColor, i / width));
-                    e.line(x + i, y, x + i, y + height);
+                    p.stroke(p.lerpColor(startColor, endColor, i / width));
+                    p.line(x + i, y, x + i, y + height);
                 }
             } else {
                 for (let i = 0; i < width; i += step) {
-                    const c = e.lerpColor(startColor, endColor, i / width);
-                    e.stroke(c);
-                    e.fill(c);
-                    if (i + step > width) { e.rect(x + i, y, width - i, height); }
-                    else { e.rect(x + i, y, step, height); }
+                    const c = p.lerpColor(startColor, endColor, i / width);
+                    p.stroke(c);
+                    p.fill(c);
+                    if (i + step > width) { p.rect(x + i, y, width - i, height); }
+                    else { p.rect(x + i, y, step, height); }
                 }
             }
             break;
@@ -64,16 +64,16 @@
             if (direction == TOP || direction == UP) [startColor, endColor] = [endColor, startColor];
             if (step == 1) {
                 for (let i = 0; i < height; i++) {
-                    e.stroke(e.lerpColor(startColor, endColor, i / height));
-                    e.line(x, y + i, x + width, y + i);
+                    p.stroke(p.lerpColor(startColor, endColor, i / height));
+                    p.line(x, y + i, x + width, y + i);
                 }
             } else {
                 for (let i = 0; i < height; i += step) {
-                    const c = e.lerpColor(startColor, endColor, i / height);
-                    e.stroke(c);
-                    e.fill(c);
-                    if (i + step > width) { e.rect(x, y + i, width, height - i); }
-                    else { e.rect(x, y + i, width, step); }
+                    const c = p.lerpColor(startColor, endColor, i / height);
+                    p.stroke(c);
+                    p.fill(c);
+                    if (i + step > width) { p.rect(x, y + i, width, height - i); }
+                    else { p.rect(x, y + i, width, step); }
                 }
             }
             break;
@@ -82,12 +82,12 @@
             if (direction == TOP_LEFT) [startColor, endColor] = [endColor, startColor];
             if (step == 1) {
                 for (let i = 0; i < width; i++) {
-                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2));
-                    e.line(x + i, y, x, y + e.map(i, 0, width, 0, height));
+                    p.stroke(p.lerpColor(startColor, endColor, i / width / 2));
+                    p.line(x + i, y, x, y + p.map(i, 0, width, 0, height));
                 }
                 for (let i = 0; i < width; i++) {
-                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2 + 0.5));
-                    e.line(x + i, y + height, x + width, y + e.map(i, 0, width, 0, height));
+                    p.stroke(p.lerpColor(startColor, endColor, i / width / 2 + 0.5));
+                    p.line(x + i, y + height, x + width, y + p.map(i, 0, width, 0, height));
                 }
             } else {
                 const side = Math.max(width, height) * Math.sqrt(2);
@@ -109,12 +109,12 @@
             if (direction == TOP_RIGHT) [startColor, endColor] = [endColor, startColor];
             if (step == 1) {
                 for (let i = 0; i < width; i++) {
-                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2));
-                    e.line(x + width - i, y, x + width, y + e.map(i, 0, width, 0, height));
+                    p.stroke(p.lerpColor(startColor, endColor, i / width / 2));
+                    p.line(x + width - i, y, x + width, y + p.map(i, 0, width, 0, height));
                 }
                 for (let i = 0; i < width; i++) {
-                    e.stroke(e.lerpColor(startColor, endColor, i / width / 2 + 0.5));
-                    e.line(x + width - i, y + height, x, y + e.map(i, 0, width, 0, height));
+                    p.stroke(p.lerpColor(startColor, endColor, i / width / 2 + 0.5));
+                    p.line(x + width - i, y + height, x, y + p.map(i, 0, width, 0, height));
                 }
             } else {
                 const side = Math.max(width, height) * Math.sqrt(2);

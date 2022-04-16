@@ -28,27 +28,27 @@
  * radialGradient(250, 100, 100, 100, PURPLE, PINK, 10);
  * // expected outcome: radial gradient from purple to pink with step size 10
  */
- radialGradientOld = (x, y, width, height, startColor, endColor, step = 5) => {
+radialGradientOld = (x, y, width, height, startColor, endColor, step = 5) => {
     push();
-    e.strokeWeight(1);
+    p.strokeWeight(1);
     const maxRadius = Math.max(width, height);
     if (step == 1) {
-        e.noFill();
+        p.noFill();
         for (let i = 0; i < maxRadius; i++) {
-            e.stroke(e.lerpColor(endColor, startColor, i / maxRadius));
-            e.arc(x, y,
-                width - e.map(i, 0, maxRadius, 0, width),
-                height - e.map(i, 0, maxRadius, 0, height),
+            p.stroke(p.lerpColor(endColor, startColor, i / maxRadius));
+            p.arc(x, y,
+                width - p.map(i, 0, maxRadius, 0, width),
+                height - p.map(i, 0, maxRadius, 0, height),
                 0, 360);
         }
     } else {
         for (let i = 0; i < maxRadius; i += step) {
-            const c = e.lerpColor(endColor, startColor, i / maxRadius);
-            e.stroke(c);
-            e.fill(c);
-            e.ellipse(x, y,
-                width - e.map(i, 0, maxRadius, 0, width),
-                height - e.map(i, 0, maxRadius, 0, height));
+            const c = p.lerpColor(endColor, startColor, i / maxRadius);
+            p.stroke(c);
+            p.fill(c);
+            p.ellipse(x, y,
+                width - p.map(i, 0, maxRadius, 0, width),
+                height - p.map(i, 0, maxRadius, 0, height));
         }
     }
     pop();
