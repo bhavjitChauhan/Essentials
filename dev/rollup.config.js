@@ -5,6 +5,7 @@ export default [{
     input: [
         'src/core/_header_.js',
         'src/core/_aliases_.js',
+        'src/core/**/*.js',
         'src/color/_header_.js',
         'src/color/_aliases_.js',
         'src/text/_header_.js',
@@ -12,7 +13,8 @@ export default [{
         'src/shape/_header_.js',
         'src/external/_header_.js',
         'src/external/_aliases_.js',
-        'src/**/*.js'],
+        'src/**/*.js'
+    ],
     output: {
         file: 'dev/essentials-proto.js'
     },
