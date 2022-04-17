@@ -3,7 +3,8 @@
  * Draws text with an outline.
  * 
  * @description
- * If Color Essentials is not present, outlines cannot be translucent.
+ * Does not respect `textAlign`. If Color Essentials is not present, outlines
+ * cannot be translucent.
  * 
  * @category Text
  *
@@ -22,11 +23,17 @@
  * fill(BLACK);
  * outlineText(str, 25, 25, 10, ORANGE);
  * 
- * @todo Fix multiline strings
  * @todo Mimic `text$4` and `text$6`
  */
 outlineText = (str, x, y, weight = 5, color = BLACK) => {
-    str = str.replace('\n', '');
+    if (str.includes('\n')) {
+        const lines = str.split('\n');
+        const lineHeight = p.textAscent() + p.textDescent();
+        for (let i = 0; i < lines.length; i++) {
+            outlineText(lines[i], x, y + i * lineHeight, weight, color);
+        }
+        return;
+    }
     ctx.save();
     ctx.lineJoin = 'round';
     ctx.lineWidth = weight;
@@ -35,8 +42,6 @@ outlineText = (str, x, y, weight = 5, color = BLACK) => {
     ctx.strokeStyle = color;
     ctx.strokeText(str, x, y);
     ctx.restore();
-    p.pushStyle();
-    p.textAlign(p.LEFT, p.TOP);
-    p.text(str, x, y);
-    p.popStyle();
+    _updateStrokeFill();
+    ctx.fillText(str, x, y);
 };
