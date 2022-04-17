@@ -4,7 +4,7 @@ const dir = 'build';
 
 export default [{
     context: 'this',
-    input: ['src/core/_header_.js', 'src/core/_constants_.js', 'src/core/_colors_.js', 'src/core/internal/*.js', 'src/core/aliases/*.js', 'src/core/**/*.js'],
+    input: ['src/core/_header_.js', 'src/core/_constants_.js', 'src/core/_colors_.js', 'src/core/internal/*.js', 'src/core/aliases/*.js', 'src/core/injections/*.js', 'src/core/**/*.js'],
     output: {
         file: `${dir}/essentials-core.js`,
     },
