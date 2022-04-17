@@ -13,6 +13,7 @@
  *    console.log('Interacted');
  * }
  */
+var interacted = interacted;
 p.interacted = noop;
 
 /**
@@ -30,6 +31,7 @@ p.interacted = noop;
  *    console.log('Restarted');
  * }
  */
+var restarted = restarted;
 p.restarted = noop;
 
 _code_ = typeof _code_ == 'undefined' ? '' : _code_;
