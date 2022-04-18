@@ -7,6 +7,7 @@
         "@babel/plugin-transform-exponentiation-operator",
         "@babel/plugin-transform-for-of",
         "@babel/plugin-transform-parameters",
+        "@babel/plugin-transform-shorthand-properties",
         "@babel/plugin-transform-spread",
         "@babel/plugin-transform-template-literals"
     ]
