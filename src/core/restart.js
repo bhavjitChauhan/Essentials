@@ -11,6 +11,8 @@
  * @todo Add other functions that alter the Canvas
  */
 restart = () => {
+    if (_interval_ids_.length > 0) _interval_ids_.forEach(intervalID => clearInterval(intervalID));
+    if (_request_ids_.length > 0) _request_ids_.forEach(requestID => cancelAnimationFrame(requestID));
     if (typeof COLOR_ESSENTIALS != 'undefined') {
         noShadow();
         shadowBlur(0);
