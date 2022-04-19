@@ -1,4 +1,6 @@
 /**
+ * @function interacted
+ * 
  * @summary
  * Editor message event handler.
  * 
@@ -13,10 +15,11 @@
  *    console.log('Interacted');
  * }
  */
-var interacted = interacted;
 p.interacted = noop;
 
 /**
+ * @function restarted
+ * 
  * @summary
  * Restart event handler.
  * 
@@ -31,7 +34,6 @@ p.interacted = noop;
  *    console.log('Restarted');
  * }
  */
-var restarted = restarted;
 p.restarted = noop;
 
 _code_ = typeof _code_ == 'undefined' ? '' : _code_;

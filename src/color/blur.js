@@ -1,4 +1,6 @@
 /**
+ * @function blur
+ * 
  * Applies a Gaussian blur of the canvas image.
  * 
  * @category Color
@@ -13,7 +15,6 @@
  * pop();
  * // expected outcome: a Gaussian blur of radius 5 pixels
  */
-var blur = blur;
 p.blur = (radius = 5) => {
     if (_.isNumber(radius)) radius = `${radius}px`;
     _appendFilter(`blur(${radius})`);
