@@ -1,7 +1,7 @@
 /**
  * Checks if touch events are supported.
  * 
- * @link https://www.30secondsofcode.org/js/s/supports-touch-events
+ * @see {@link https://www.30secondsofcode.org/js/s/supports-touch-events}
  * 
  * @category External
  * 

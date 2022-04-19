@@ -1,7 +1,7 @@
 /**
  * Checks if the user color scheme preference is dark.
  * 
- * @link https://www.30secondsofcode.org/js/s/prefers-dark-color-scheme
+ * @see {@link https://www.30secondsofcode.org/js/s/prefers-dark-color-scheme}
  * 
  * @category External
  * 

@@ -3,7 +3,7 @@
  * 
  * @author {@link https://www.khanacademy.org/profile/BobLyon/projects Bob Lyon}
  *
- * @link https://www.khanacademy.org/cs/-/4747962019348480
+ * @see {@link https://www.khanacademy.org/cs/-/4747962019348480}
  * 
  * @category Shape
  *

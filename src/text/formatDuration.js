@@ -3,7 +3,7 @@
  * 
  * @category Text
  *
- * @link https://www.30secondsofcode.org/js/s/format-duration
+ * @see {@link https://www.30secondsofcode.org/js/s/format-duration}
  *
  * @param {number} ms duration in milliseconds
  * @param {number} [precision=1e-3] nearest number to round to in terms of milliseconds

@@ -4,7 +4,7 @@
  * 
  * @category Text
  *
- * @link https://www.30secondsofcode.org/js/s/pluralize
+ * @see {@link https://www.30secondsofcode.org/js/s/pluralize}
  *
  * @param {number} value Number of items
  * @param {string} word Word to pluralize

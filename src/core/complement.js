@@ -3,7 +3,7 @@
  * [negation]{@link https://en.wikipedia.org/wiki/Negation} of the given
  * function
  *
- * @link https://www.30secondsofcode.org/js/s/complement
+ * @see {@link https://www.30secondsofcode.org/js/s/complement}
  * 
  * @category Core
  *

@@ -1,7 +1,7 @@
 /**
  * Checks if [Session Storage]{https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage} is enabled.
  * 
- * @link https://www.30secondsofcode.org/js/s/is-session-storage-enabled
+ * @see {@link https://www.30secondsofcode.org/js/s/is-session-storage-enabled}
  * 
  * @category External
  * 

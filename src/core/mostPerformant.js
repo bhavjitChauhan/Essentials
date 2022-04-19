@@ -10,7 +10,7 @@
  * Running resource-intensive function may result in an infinite loop error.
  * This can be can bypassed using the {@link clean} function.
  *
- * @link https://www.30secondsofcode.org/js/s/most-performant
+ * @see {@link https://www.30secondsofcode.org/js/s/most-performant}
  * 
  * @category Core
  *

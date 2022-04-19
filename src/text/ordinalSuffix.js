@@ -4,7 +4,7 @@
  * 
  * @category Text
  *
- * @link https://www.30secondsofcode.org/js/s/to-ordinal-suffix
+ * @see {@link https://www.30secondsofcode.org/js/s/to-ordinal-suffix}
  *
  * @param {(number|string)} n Number
  *

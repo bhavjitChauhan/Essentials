@@ -1,7 +1,7 @@
 /**
  * Calls multiple functions asynchronously.
  *
- * @link https://www.30secondsofcode.org/js/s/chain-async
+ * @see {@link https://www.30secondsofcode.org/js/s/chain-async}
  * 
  * @category Core
  *

@@ -1,7 +1,7 @@
 /**
  * Checks if [Local Storage]{https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage} is enabled.
  * 
- * @link https://www.30secondsofcode.org/js/s/is-local-storage-enabled
+ * @see {@link https://www.30secondsofcode.org/js/s/is-local-storage-enabled}
  * 
  * @category External
  * 

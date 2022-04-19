@@ -1,7 +1,7 @@
 /**
  * Complementary function of `prefersDarkColorScheme`.
  * 
- * @link https://www.30secondsofcode.org/js/s/prefers-light-color-scheme
+ * @see {@link https://www.30secondsofcode.org/js/s/prefers-light-color-scheme}
  * 
  * @category External
  * 

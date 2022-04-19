@@ -3,7 +3,7 @@
  * 
  * @category Text
  *
- * @link https://www.30secondsofcode.org/js/s/remove-non-ascii
+ * @see {@link https://www.30secondsofcode.org/js/s/remove-non-ascii}
  *
  * @param {string} str
  * 

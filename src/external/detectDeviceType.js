@@ -1,7 +1,7 @@
 /**
  * Detects whether the page is being viewed on a mobile device or a desktop.
  *
- * @link https://www.30secondsofcode.org/js/s/detect-device-type
+ * @see {@link https://www.30secondsofcode.org/js/s/detect-device-type}
  * 
  * @category External
  *

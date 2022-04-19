@@ -1,7 +1,7 @@
 /**
  * Detects the preferred language of the current user.
  *
- * @link https://www.30secondsofcode.org/js/s/detect-language
+ * @see {@link https://www.30secondsofcode.org/js/s/detect-language}
  * 
  * @category External
  *

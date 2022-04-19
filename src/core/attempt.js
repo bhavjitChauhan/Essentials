@@ -2,7 +2,7 @@
  * Attempts to invoke a function with the provided arguments, returning either
  * the result or an error.
  *
- * @link https://www.30secondsofcode.org/js/s/attempt
+ * @see {@link https://www.30secondsofcode.org/js/s/attempt}
  * 
  * @category Core
  *

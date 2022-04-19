@@ -7,7 +7,7 @@
  * the webpage from freezing. This can be a hinderance when running more
  * resource-intensive code.
  *
- * @link https://khanacademy.org/cs/-/5594326276014080
+ * @see {@link https://khanacademy.org/cs/-/5594326276014080}
  * 
  * @category Core
  *

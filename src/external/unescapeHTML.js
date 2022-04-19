@@ -3,7 +3,7 @@
  * 
  * @category External
  * 
- * @link https://www.30secondsofcode.org/js/s/unescape-html
+ * @see {@link https://www.30secondsofcode.org/js/s/unescape-html}
  * 
  * @param {string} str escaped HTML
  * 

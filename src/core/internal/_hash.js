@@ -1,7 +1,7 @@
 /** 
  * Hashes typed array using the xxHash hash algorithm.
  * 
- * @link https://github.com/Jason3S/xxhash
+ * @see {@link https://github.com/Jason3S/xxhash}
  * 
  * @private
  * 

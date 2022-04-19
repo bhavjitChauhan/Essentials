@@ -4,7 +4,7 @@
  * 
  * @category Text
  *
- * @link https://www.30secondsofcode.org/js/s/word-wrap
+ * @see {@link https://www.30secondsofcode.org/js/s/word-wrap}
  *
  * @param {string} str String to be wrapped
  * @param {number} max Maximum number of characters per line

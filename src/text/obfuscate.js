@@ -3,7 +3,7 @@
  * 
  * @category Text
  *
- * @link https://www.khanacademy.org/cs/-/4812748875104256
+ * @see {@link https://www.khanacademy.org/cs/-/4812748875104256}
  *
  * @param {string} str
  * 

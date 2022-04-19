@@ -1,7 +1,7 @@
 /**
  * Copies a string to the clipboard.
  * 
- * @link https://www.30secondsofcode.org/js/s/copy-to-clipboard
+ * @see {@link https://www.30secondsofcode.org/js/s/copy-to-clipboard}
  * 
  * @category External
  * 

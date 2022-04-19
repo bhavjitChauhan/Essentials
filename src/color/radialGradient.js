@@ -6,7 +6,7 @@
  * Colors may be a Processing color or a
  * [CSS color value]{@link https://developer.mozilla.org/en-US/docs/Web/CSS/color_value}.
  * 
- * @link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient}
  * 
  * @category Color
  *

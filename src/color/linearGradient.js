@@ -8,7 +8,7 @@
  * 
  * @category Color
  * 
- * @link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient}
  *
  * @param {Object} settings
  * @param {number} settings.x x-coordinate of the gradient

@@ -4,7 +4,7 @@
  * The Essentials library provides utility functions for the Khan Academy
  * Processing Environment.
  *
- * @link https://github.com/bhavjitChauhan/Essentials
+ * @see {@link https://github.com/bhavjitChauhan/Essentials}
  * @file CDN Essentials Build
  * @author Bhavjit Chauhan
  */

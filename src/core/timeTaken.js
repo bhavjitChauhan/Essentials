@@ -2,7 +2,7 @@
  * Measures the time it takes for a function to execute and logs to browser
  * console.
  *
- * @link https://www.30secondsofcode.org/js/s/time-taken
+ * @see {@link https://www.30secondsofcode.org/js/s/time-taken}
  * 
  * @category Core
  *

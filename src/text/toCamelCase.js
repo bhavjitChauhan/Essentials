@@ -3,7 +3,7 @@
  * 
  * @category Text
  *
- * @link https://www.30secondsofcode.org/js/s/to-camel-case
+ * @see {@link https://www.30secondsofcode.org/js/s/to-camel-case}
  *
  * @param {string} str
  * 

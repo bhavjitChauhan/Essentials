@@ -3,7 +3,7 @@
  * 
  * @category Text
  *
- * @link https://www.30secondsofcode.org/js/s/to-kebab-case
+ * @see {@link https://www.30secondsofcode.org/js/s/to-kebab-case}
  *
  * @param {string} str
  * 

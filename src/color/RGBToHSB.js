@@ -1,7 +1,7 @@
 /**
  * Converts RGB to HSB.
  * 
- * @link https://stackoverflow.com/a/54070620
+ * @see {@link https://stackoverflow.com/a/54070620}
  * 
  * @category Color
  *

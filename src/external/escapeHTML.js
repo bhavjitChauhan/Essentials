@@ -1,7 +1,7 @@
 /**
  * Escapes a string for use in HTML.
  * 
- * @link https://www.30secondsofcode.org/js/s/escape-html
+ * @see {@link https://www.30secondsofcode.org/js/s/escape-html}
  * 
  * @category External
  * 

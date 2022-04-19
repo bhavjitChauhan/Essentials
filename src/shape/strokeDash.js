@@ -1,7 +1,7 @@
 /**
  * Sets the line dash pattern.
  * 
- * @link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash}
  * 
  * @category Shape
  * 
