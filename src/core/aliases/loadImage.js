@@ -35,7 +35,7 @@
  */
 p.loadImage = (filename, extension, callback) => {
     filename = filename.replace(/\.(png|gif|jpg|tga|svg)$/, '');
-    var img = DUMMY_INSTANCE.loadImage(filename, extension, () => {
+    const img = DUMMY_INSTANCE.loadImage(filename, extension, () => {
         return callback(img);
     });
 };
