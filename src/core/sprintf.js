@@ -1,27 +1,31 @@
 /**
- * Prints formatted string to canvas console.
+ * Returns formatted string.
  * 
  * @category Core
  *
  * @param {string} str String with format
  * @param {...*} args Arguments
+ * 
+ * @returns {string}
  *
  * @example
- * printf('Hello %', 'World');
+ * const str = sprintf('Hello %', 'World');
+ * println(str);
  * // expected output: 'Hello World'
  *
  * @example
  * // To use the literal '%' character use double backslashes (\\)
- * printf('%\\% complete', 50);
+ * const str = sprintf('%\\% complete', 50);
+ * println(str);
  * // expected output: '50% complete'
  * 
- * @see {@link sprintf}
+ * @see {@link printf}
  */
-printf = function(str, ...args) {
+sprintf = (str, ...args) => {
     str = str.toString();
     for (const arg of args) {
         str = str.replace(/(?<!\\)%/, arg);
     }
     str = str.replace(/\\%/g, '%');
-    p.println(str);
+    return str;
 };
