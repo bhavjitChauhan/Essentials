@@ -59,7 +59,7 @@ if (!ESSENTIALS_MESSAGE_LISTENER) {
             typeof p.interacted == 'function' && p.interacted(event);
         }
         if ('code' in data || 'restart' in data) {
-            restart();
+            _handleRestart();
             typeof p.restarted == 'function' && p.restarted(event);
         }
     });
