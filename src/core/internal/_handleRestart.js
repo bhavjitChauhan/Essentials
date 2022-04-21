@@ -6,7 +6,7 @@ _handleRestart = () => {
     if (_request_id_ != null) {
         cancelAnimationFrame(_request_id_);
         _request_id_ = null;
-    }    
+    }
     if (typeof COLOR_ESSENTIALS != 'undefined') {
         noShadow();
         shadowBlur(0);
