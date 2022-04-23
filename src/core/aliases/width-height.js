@@ -5,7 +5,7 @@
  * 
  * @category Core
  */
-Object.defineProperty(this, 'WIDTH', { get: () => { return canvas.width; } });
+WIDTH = canvas.width;
 
 /**
  * @constant {number} HEIGHT
@@ -14,7 +14,7 @@ Object.defineProperty(this, 'WIDTH', { get: () => { return canvas.width; } });
  * 
  * @category Core
  */
-Object.defineProperty(this, 'HEIGHT', { get: () => { return canvas.height; } });
+HEIGHT = canvas.height;
 
 /**
  * @constant {number} HALF_WIDTH
@@ -23,7 +23,7 @@ Object.defineProperty(this, 'HEIGHT', { get: () => { return canvas.height; } });
  * 
  * @category Core
  */
-Object.defineProperty(this, 'HALF_WIDTH', { get: () => { return canvas.width / 2; } });
+HALF_WIDTH = canvas.width / 2;
 
 /**
  * @constant {number} HALF_HEIGHT
@@ -32,4 +32,4 @@ Object.defineProperty(this, 'HALF_WIDTH', { get: () => { return canvas.width / 2
  * 
  * @category Core
  */
-Object.defineProperty(this, 'HALF_HEIGHT', { get: () => { return canvas.height / 2; } });
+HALF_HEIGHT = canvas.height / 2;
