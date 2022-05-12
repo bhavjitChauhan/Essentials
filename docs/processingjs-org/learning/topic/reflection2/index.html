@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Processing.js</title>
+    <link rel="stylesheet" href="/processingjs-org/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/syntax.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/processing-js.css" type="text/css" />
+    <script src="/processingjs-org/js/processing.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/jquery.tweet.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/tabselector.js" type="text/javascript"></script>
+    <script src="http://cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
+    <script type="text/javascript">
+      // Only do tracking on the actual site
+      if (document.location.host === "processingjs.org") {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-8565070-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        }());
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <a href="/processingjs-org/"><img src="/processingjs-org/images/header.png" width="177" height="42"></a>
+      </div>
+      <span class="tagline">a port of the Processing Visualization Language</span>
+
+      <div class="navbar">
+        <canvas width="940px" height="78px" data-processing-sources="/processingjs-org/sketches/bannerSketch.pde"></canvas>
+        <ul>
+          <li><a href="/processingjs-org/"><span>home</span></a></li>
+          <li><a href="/processingjs-org/download/"><span>download</span></a></li>
+          <li><a href="/processingjs-org/reference/"><span>reference</span></a></li>
+          <li><a href="/processingjs-org/exhibition/"><span>exhibition</span></a></li>
+          <li><a href="/processingjs-org/learning/"><span>learning</span></a></li>
+          <li><a href="/processingjs-org/articles/"><span>articles</span></a></li>
+          <li><a href="/processingjs-org/community/"><span>community</span></a></li>
+          <li><a href="/processingjs-org/blog/"><span>blog</span></a></li>
+        </ul>
+        <a class="viewsource" href="/processingjs-org/sketches/bannerSketch.pde">view source</a>
+      </div>
+
+      <div class="page row">
+        <div class="span11">
+<h3>Reflection2</h3>
+
+
+
+<p>by Ira Greenberg. 
+
+
+
+Based on Keith Peter's Solution in
+
+Foundation Actionscript Animation: Making Things Move!
+
+http://www.friendsofed.com/book.html?isbn=1590597915</p>
+
+
+
+<p><a href="http://processing.org/learning/topics/reflection2.html"><b>Original Processing.org Example:</b> Reflection2</a><br>
+
+<div class="learning-demo"><script type="application/processing">
+
+Orb orb;
+
+Vect2D velocity;
+
+float gravity = .05, damping = 0.8;
+
+int segments = 40;
+
+Ground[] ground = new Ground[segments];
+
+float[] peakHeights = new float[segments+1];
+
+
+
+void setup(){
+
+  size(200, 200);
+
+  smooth();
+
+  orb = new Orb(50, 50, 3);
+
+  velocity = new Vect2D(.5, 0);
+
+
+
+  // calculate ground peak heights 
+
+  for (int i=0; i<peakHeights.length; i++){
+
+    peakHeights[i] = random(height-40, height-30);
+
+  }
+
+
+
+  /* float value required for segment width (segs)
+
+   calculations so the ground spans the entire 
+
+   display window, regardless of segment number. */
+
+  float segs = segments;
+
+  for (int i=0; i<segments; i++){
+
+    ground[i]  = new Ground(width/segs*i, peakHeights[i],
+
+    width/segs*(i+1), peakHeights[i+1]);
+
+  }
+
+}
+
+
+
+
+
+void draw(){
+
+  // background
+
+  noStroke();
+
+  fill(0, 15);
+
+  rect(0, 0, width, height);
+
+
+
+  // move orb
+
+  orb.x += velocity.vx;
+
+  velocity.vy += gravity;
+
+  orb.y += velocity.vy;
+
+
+
+  // draw ground
+
+  fill(127);
+
+  beginShape();
+
+  for (int i=0; i<segments; i++){
+
+    vertex(ground[i].x1, ground[i].y1);
+
+    vertex(ground[i].x2, ground[i].y2);
+
+  }
+
+  vertex(ground[segments-1].x2, height);
+
+  vertex(ground[0].x1, height);
+
+  endShape(CLOSE);
+
+
+
+  // draw orb
+
+  noStroke();
+
+  fill(200);
+
+  ellipse(orb.x, orb.y, orb.r*2, orb.r*2);
+
+
+
+  // collision detection
+
+  checkWallCollision();
+
+  for (int i=0; i<segments; i++){
+
+    checkGroundCollision(ground[i]);
+
+  }
+
+}
+
+
+
+
+
+void checkWallCollision(){
+
+  if (orb.x > width-orb.r){
+
+    orb.x = width-orb.r;
+
+    velocity.vx *= -1;
+
+    velocity.vx *= damping;
+
+  } 
+
+  else if (orb.x < orb.r){
+
+    orb.x = orb.r;
+
+    velocity.vx *= -1;
+
+    velocity.vx *= damping;
+
+  }
+
+}
+
+
+
+
+
+void checkGroundCollision(Ground groundSegment) {
+
+
+
+  // get difference between orb and ground
+
+  float deltaX = orb.x - groundSegment.x;
+
+  float deltaY = orb.y - groundSegment.y;
+
+
+
+  // precalculate trig values
+
+  float cosine = cos(groundSegment.rot);
+
+  float sine = sin(groundSegment.rot);
+
+
+
+  /* rotate ground and velocity to allow 
+
+   orthogonal collision calculations */
+
+  float groundXTemp = cosine * deltaX + sine * deltaY;
+
+  float groundYTemp = cosine * deltaY - sine * deltaX;
+
+  float velocityXTemp = cosine * velocity.vx + sine * velocity.vy;
+
+  float velocityYTemp = cosine * velocity.vy - sine * velocity.vx;
+
+
+
+  /* ground collision - check for surface 
+
+   collision and also that orb is within 
+
+   left/rights bounds of ground segment */
+
+  if (groundYTemp > -orb.r &&
+
+    orb.x > groundSegment.x1 &&
+
+    orb.x < groundSegment.x2 ){
+
+    // keep orb from going into ground
+
+    groundYTemp = -orb.r;
+
+    // bounce and slow down orb
+
+    velocityYTemp *= -1.0;
+
+    velocityYTemp *= damping;
+
+  }
+
+
+
+  // reset ground, velocity and orb
+
+  deltaX = cosine * groundXTemp - sine * groundYTemp;
+
+  deltaY = cosine * groundYTemp + sine * groundXTemp;
+
+  velocity.vx = cosine * velocityXTemp - sine * velocityYTemp;
+
+  velocity.vy = cosine * velocityYTemp + sine * velocityXTemp;
+
+  orb.x = groundSegment.x + deltaX;
+
+  orb.y = groundSegment.y + deltaY;
+
+}
+
+
+
+
+
+class Ground {
+
+  float x1, y1, x2, y2;  
+
+  float x, y, len, rot;
+
+
+
+  // default constructor
+
+  Ground(){
+
+  }
+
+
+
+  // constructor
+
+  Ground(float x1, float y1, float x2, float y2) {
+
+    this.x1 = x1;
+
+    this.y1 = y1;
+
+    this.x2 = x2;
+
+    this.y2 = y2;
+
+    x = (x1+x2)/2;
+
+    y = (y1+y2)/2;
+
+    len = dist(x1, y1, x2, y2);
+
+    rot = atan2((y2-y1), (x2-x1));
+
+  }
+
+}
+
+
+
+
+
+class Orb{
+
+  float x, y, r;
+
+
+
+  // default constructor
+
+  Orb() {
+
+  }
+
+
+
+  Orb(float x, float y, float r) {
+
+    this.x = x;
+
+    this.y = y;
+
+    this.r = r;
+
+  }
+
+}
+
+
+
+class Vect2D{
+
+  float vx, vy;
+
+
+
+  // default constructor
+
+  Vect2D() {
+
+  }
+
+
+
+  Vect2D(float vx, float vy) {
+
+    this.vx = vx;
+
+    this.vy = vy;
+
+  }
+
+}
+
+</script><canvas width="200" height="200"></canvas></div></p>
+
+<div style="height:0px;width:0px;overflow:hidden;"></div>
+
+
+
+<div class="code"><pre name="code" class="processing">// All Examples Written by Casey Reas and Ben Fry
+
+// unless otherwise stated.
+
+Orb orb;
+
+Vect2D velocity;
+
+float gravity = .05, damping = 0.8;
+
+int segments = 40;
+
+Ground[] ground = new Ground[segments];
+
+float[] peakHeights = new float[segments+1];
+
+
+
+void setup(){
+
+  size(200, 200);
+
+  smooth();
+
+  orb = new Orb(50, 50, 3);
+
+  velocity = new Vect2D(.5, 0);
+
+
+
+  // calculate ground peak heights 
+
+  for (int i=0; i&lt;peakHeights.length; i++){
+
+    peakHeights[i] = random(height-40, height-30);
+
+  }
+
+
+
+  /* float value required for segment width (segs)
+
+   calculations so the ground spans the entire 
+
+   display window, regardless of segment number. */
+
+  float segs = segments;
+
+  for (int i=0; i&lt;segments; i++){
+
+    ground[i]  = new Ground(width/segs*i, peakHeights[i],
+
+    width/segs*(i+1), peakHeights[i+1]);
+
+  }
+
+}
+
+
+
+
+
+void draw(){
+
+  // background
+
+  noStroke();
+
+  fill(0, 15);
+
+  rect(0, 0, width, height);
+
+
+
+  // move orb
+
+  orb.x += velocity.vx;
+
+  velocity.vy += gravity;
+
+  orb.y += velocity.vy;
+
+
+
+  // draw ground
+
+  fill(127);
+
+  beginShape();
+
+  for (int i=0; i&lt;segments; i++){
+
+    vertex(ground[i].x1, ground[i].y1);
+
+    vertex(ground[i].x2, ground[i].y2);
+
+  }
+
+  vertex(ground[segments-1].x2, height);
+
+  vertex(ground[0].x1, height);
+
+  endShape(CLOSE);
+
+
+
+  // draw orb
+
+  noStroke();
+
+  fill(200);
+
+  ellipse(orb.x, orb.y, orb.r*2, orb.r*2);
+
+
+
+  // collision detection
+
+  checkWallCollision();
+
+  for (int i=0; i&lt;segments; i++){
+
+    checkGroundCollision(ground[i]);
+
+  }
+
+}
+
+
+
+
+
+void checkWallCollision(){
+
+  if (orb.x &gt; width-orb.r){
+
+    orb.x = width-orb.r;
+
+    velocity.vx *= -1;
+
+    velocity.vx *= damping;
+
+  } 
+
+  else if (orb.x &lt; orb.r){
+
+    orb.x = orb.r;
+
+    velocity.vx *= -1;
+
+    velocity.vx *= damping;
+
+  }
+
+}
+
+
+
+
+
+void checkGroundCollision(Ground groundSegment) {
+
+
+
+  // get difference between orb and ground
+
+  float deltaX = orb.x - groundSegment.x;
+
+  float deltaY = orb.y - groundSegment.y;
+
+
+
+  // precalculate trig values
+
+  float cosine = cos(groundSegment.rot);
+
+  float sine = sin(groundSegment.rot);
+
+
+
+  /* rotate ground and velocity to allow 
+
+   orthogonal collision calculations */
+
+  float groundXTemp = cosine * deltaX + sine * deltaY;
+
+  float groundYTemp = cosine * deltaY - sine * deltaX;
+
+  float velocityXTemp = cosine * velocity.vx + sine * velocity.vy;
+
+  float velocityYTemp = cosine * velocity.vy - sine * velocity.vx;
+
+
+
+  /* ground collision - check for surface 
+
+   collision and also that orb is within 
+
+   left/rights bounds of ground segment */
+
+  if (groundYTemp &gt; -orb.r &&
+
+    orb.x &gt; groundSegment.x1 &&
+
+    orb.x &lt; groundSegment.x2 ){
+
+    // keep orb from going into ground
+
+    groundYTemp = -orb.r;
+
+    // bounce and slow down orb
+
+    velocityYTemp *= -1.0;
+
+    velocityYTemp *= damping;
+
+  }
+
+
+
+  // reset ground, velocity and orb
+
+  deltaX = cosine * groundXTemp - sine * groundYTemp;
+
+  deltaY = cosine * groundYTemp + sine * groundXTemp;
+
+  velocity.vx = cosine * velocityXTemp - sine * velocityYTemp;
+
+  velocity.vy = cosine * velocityYTemp + sine * velocityXTemp;
+
+  orb.x = groundSegment.x + deltaX;
+
+  orb.y = groundSegment.y + deltaY;
+
+}
+
+
+
+
+
+class Ground {
+
+  float x1, y1, x2, y2;  
+
+  float x, y, len, rot;
+
+
+
+  // default constructor
+
+  Ground(){
+
+  }
+
+
+
+  // constructor
+
+  Ground(float x1, float y1, float x2, float y2) {
+
+    this.x1 = x1;
+
+    this.y1 = y1;
+
+    this.x2 = x2;
+
+    this.y2 = y2;
+
+    x = (x1+x2)/2;
+
+    y = (y1+y2)/2;
+
+    len = dist(x1, y1, x2, y2);
+
+    rot = atan2((y2-y1), (x2-x1));
+
+  }
+
+}
+
+
+
+
+
+class Orb{
+
+  float x, y, r;
+
+
+
+  // default constructor
+
+  Orb() {
+
+  }
+
+
+
+  Orb(float x, float y, float r) {
+
+    this.x = x;
+
+    this.y = y;
+
+    this.r = r;
+
+  }
+
+}
+
+
+
+class Vect2D{
+
+  float vx, vy;
+
+
+
+  // default constructor
+
+  Vect2D() {
+
+  }
+
+
+
+  Vect2D(float vx, float vy) {
+
+    this.vx = vx;
+
+    this.vy = vy;
+
+  }
+
+}</pre></div>
+
+
+
+
+
+
+        </div>
+        <div class="sidebar span4">
+          <h3><a href="/processingjs-org/download/">Downloads</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/download/">Download the latest version of Processing.js!</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/articles/">Articles</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/articles/jsQuickStart.html">Quick Start - JavaScript Developer</a></li>
+            <li><a href="/processingjs-org/articles/p5QuickStart.html">Quick Start - Processing Developer</a></li>
+            <li><a href="/processingjs-org/articles/RenderingModes.html">Rendering Modes</a></li>
+            <li><a href="/processingjs-org/articles/PomaxGuide.html">Pomax's Guide to processing-js</a></li>
+          </ul>
+
+          <h3><a>Web IDEs</a></h3>
+          <ul>
+            <li><a href="http://sketchpad.cc">Sketchpad.cc</a></li>
+            <li><a href="/processingjs-org/tools/processing-helper.html">Processing.js Helper</a></li>
+            <li><a href="http://www.openprocessing.org">OpenProcessing.org</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/community/">Community</a></h3>
+          <ul>
+            <li><a href="irc://irc.mozilla.org/processing.js">IRC Channel</a></li>
+            <li><a href="http://processing-js.lighthouseapp.com/">Bug Tracker</a></li>
+            <li><a href="http://github.com/processing-js/processing-js/">Github Repository</a></li>
+            <li><a href="http://groups.google.com/group/processingjs">Google Group</a></li>
+            <li><a href="http://zenit.senecac.on.ca/wiki/index.php/">Open Source @ Seneca</a></li>
+          </ul>
+
+          <h3><a href="http://twitter.com/processingjs">Twitter Feed</a></h3>
+          <div class="twitter"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Processing is an open visualization language developed by
+        <a href="http://benfry.com/">Ben Fry</a> &amp; <a href="http://reas.com/">Casey Reas</a>,
+        and originally ported to Javascript by
+        <a href="http://ejohn.org/blog/processingjs/">John Resig</a>.
+        Processing.js is maintained by the Processing.js team.
+      </div>
+    </div>
+    <a href="http://github.com/processing-js/processing-js/">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="/processingjs-org/images/forkme-right-orange.png" alt="Fork me on GitHub">
+    </a>
+  </body>
+</html>

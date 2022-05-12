@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Processing.js</title>
+    <link rel="stylesheet" href="/processingjs-org/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/syntax.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/processing-js.css" type="text/css" />
+    <script src="/processingjs-org/js/processing.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/jquery.tweet.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/tabselector.js" type="text/javascript"></script>
+    <script src="http://cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
+    <script type="text/javascript">
+      // Only do tracking on the actual site
+      if (document.location.host === "processingjs.org") {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-8565070-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        }());
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <a href="/processingjs-org/"><img src="/processingjs-org/images/header.png" width="177" height="42"></a>
+      </div>
+      <span class="tagline">a port of the Processing Visualization Language</span>
+
+      <div class="navbar">
+        <canvas width="940px" height="78px" data-processing-sources="/processingjs-org/sketches/bannerSketch.pde"></canvas>
+        <ul>
+          <li><a href="/processingjs-org/"><span>home</span></a></li>
+          <li><a href="/processingjs-org/download/"><span>download</span></a></li>
+          <li><a href="/processingjs-org/reference/"><span>reference</span></a></li>
+          <li><a href="/processingjs-org/exhibition/"><span>exhibition</span></a></li>
+          <li><a href="/processingjs-org/learning/"><span>learning</span></a></li>
+          <li><a href="/processingjs-org/articles/"><span>articles</span></a></li>
+          <li><a href="/processingjs-org/community/"><span>community</span></a></li>
+          <li><a href="/processingjs-org/blog/"><span>blog</span></a></li>
+        </ul>
+        <a class="viewsource" href="/processingjs-org/sketches/bannerSketch.pde">view source</a>
+      </div>
+
+      <div class="page row">
+        <div class="span11">
+<h3>Spore2</h3>
+
+
+
+<p>by Mike Davis. 
+
+
+
+A short program for alife experiments. Click in the window to restart. 
+
+Each cell is represented by a pixel on the display as well as an entry in
+
+the array 'cells'. Each cell has a run() method, which performs actions
+
+based on the cell's surroundings.  Cells run one at a time (to avoid conflicts
+
+like wanting to move to the same space) and in random order.</p>
+
+
+
+<p><a href="http://processing.org/learning/topics/spore2.html"><b>Original Processing.org Example:</b> Spore2</a><br>
+
+<div class="learning-demo"><script type="application/processing">
+
+World w;
+
+int maxcells = 4000;
+
+int numcells;
+
+Cell[] cells = new Cell[maxcells];
+
+color spore1, spore2, spore3, spore4;
+
+color black = color(0, 0, 0);
+
+// set lower for smoother animation, higher for faster simulation
+
+int runs_per_loop = 100;
+
+
+
+void setup()
+
+{
+
+  size(200, 200);
+
+  frameRate(24);
+
+  clearscr();
+
+  w = new World();
+
+  spore1 = color(128, 172, 255);
+
+  spore2 = color(64, 128, 255);
+
+  spore3 = color(255, 128, 172);
+
+  spore4 = color(255, 64, 128);
+
+  numcells = 0;
+
+  seed();
+
+}
+
+
+
+void seed()
+
+{
+
+  // Add cells at random places
+
+  for (int i = 0; i < maxcells; i++)
+
+  {
+
+    int cX = int(random(width));
+
+    int cY = int(random(height));
+
+    int c;
+
+    float r = random(1);
+
+    if (r < 0.25) c = spore1;
+
+    else if (r < 0.5) c = spore2;
+
+    else if (r < 0.75) c = spore3;
+
+    else c = spore4;
+
+    if (w.getpix(cX, cY) == black)
+
+    {
+
+      w.setpix(cX, cY, c);
+
+      cells[numcells] = new Cell(cX, cY);
+
+      numcells++;
+
+    }
+
+  }
+
+}
+
+
+
+void draw()
+
+{
+
+  // Run cells in random order
+
+  for (int i = 0; i < runs_per_loop; i++) {
+
+    int selected = min((int)random(numcells), numcells - 1);
+
+    cells[selected].run();
+
+  }
+
+}
+
+
+
+void clearscr()
+
+{
+
+  for (int y = 0; y < height; y++) {
+
+    for (int x = 0; x < width; x++) {
+
+      set(x, y, color(0));
+
+    }
+
+  }
+
+}
+
+
+
+class Cell
+
+{
+
+  int x, y;
+
+  Cell(int xin, int yin)
+
+  {
+
+    x = xin;
+
+    y = yin;
+
+  }
+
+  // Perform action based on surroundings
+
+  void run()
+
+  {
+
+    // Fix cell coordinates
+
+    while(x < 0) {
+
+      x+=width;
+
+    }
+
+    while(x > width - 1) {
+
+      x-=width;
+
+    }
+
+    while(y < 0) {
+
+      y+=height;
+
+    }
+
+    while(y > height - 1) {
+
+      y-=height;
+
+    }
+
+
+
+    // Cell instructions
+
+    int myColor = w.getpix(x, y);
+
+    if (myColor == spore1) {
+
+      if (w.getpix(x - 1, y + 1) == black && w.getpix(x + 1, y + 1) == black && w.getpix(x, y + 1) == black) move(0, 1);
+
+      else if (w.getpix(x - 1, y) == spore2 && w.getpix(x - 1, y - 1) != black) move(0, -1);
+
+      else if (w.getpix(x - 1, y) == spore2 && w.getpix(x - 1, y - 1) == black) move(-1, -1);
+
+      else if (w.getpix(x + 1, y) == spore1 && w.getpix(x + 1, y - 1) != black) move(0, -1);
+
+      else if (w.getpix(x + 1, y) == spore1 && w.getpix(x + 1, y - 1) == black) move(1, -1);
+
+      else move((int)random(3) - 1, 0);
+
+    } else if (myColor == spore2) {
+
+      if (w.getpix(x - 1, y + 1) == black && w.getpix(x + 1, y + 1) == black && w.getpix(x, y + 1) == black) move(0, 1);
+
+      else if (w.getpix(x + 1, y) == spore1 && w.getpix(x + 1, y - 1) != black) move(0, -1);
+
+      else if (w.getpix(x + 1, y) == spore1 && w.getpix(x + 1, y - 1) == black) move(1, -1);
+
+      else if (w.getpix(x - 1, y) == spore2 && w.getpix(x - 1, y - 1) != black) move(0, -1);
+
+      else if (w.getpix(x - 1, y) == spore2 && w.getpix(x - 1, y - 1) == black) move(-1, -1);
+
+      else move((int)random(3) - 1, 0);
+
+    }
+
+    else if (myColor == spore3)
+
+    {
+
+      if (w.getpix(x - 1, y - 1) == black && w.getpix(x + 1, y - 1) == black && w.getpix(x, y - 1) == black) move(0, -1);
+
+      else if (w.getpix(x - 1, y) == spore4 && w.getpix(x - 1, y + 1) != black) move(0, 1);
+
+      else if (w.getpix(x - 1, y) == spore4 && w.getpix(x - 1, y + 1) == black) move(-1, 1);
+
+      else if (w.getpix(x + 1, y) == spore3 && w.getpix(x + 1, y + 1) != black) move(0, 1);
+
+      else if (w.getpix(x + 1, y) == spore3 && w.getpix(x + 1, y + 1) == black) move(1, 1);
+
+      else move((int)random(3) - 1, 0);
+
+    }
+
+    else if (myColor == spore4)
+
+    {
+
+      if (w.getpix(x - 1, y - 1) == black && w.getpix(x + 1, y - 1) == black && w.getpix(x, y - 1) == black) move(0, -1);
+
+      else if (w.getpix(x + 1, y) == spore3 && w.getpix(x + 1, y + 1) != black) move(0, 1);
+
+      else if (w.getpix(x + 1, y) == spore3 && w.getpix(x + 1, y + 1) == black) move(1, 1);
+
+      else if (w.getpix(x - 1, y) == spore4 && w.getpix(x - 1, y + 1) != black) move(0, 1);
+
+      else if (w.getpix(x - 1, y) == spore4 && w.getpix(x - 1, y + 1) == black) move(-1, 1);
+
+      else move((int)random(3) - 1, 0);
+
+    }
+
+  }
+
+  
+
+  // Will move the cell (dx, dy) units if that space is empty
+
+  void move(int dx, int dy) {
+
+    if (w.getpix(x + dx, y + dy) == black) {
+
+      w.setpix(x + dx, y + dy, w.getpix(x, y));
+
+      w.setpix(x, y, color(0));
+
+      x += dx;
+
+      y += dy;
+
+    }
+
+  }
+
+}
+
+
+
+//  The World class simply provides two functions, get and set, which access the
+
+//  display in the same way as getPixel and setPixel.  The only difference is that
+
+//  the World class's get and set do screen wraparound ("toroidal coordinates").
+
+class World
+
+{
+
+  void setpix(int x, int y, int c) {
+
+    while(x < 0) x+=width;
+
+    while(x > width - 1) x-=width;
+
+    while(y < 0) y+=height;
+
+    while(y > height - 1) y-=height;
+
+    set(x, y, c);
+
+  }
+
+  
+
+  color getpix(int x, int y) {
+
+    while(x < 0) x+=width;
+
+    while(x > width - 1) x-=width;
+
+    while(y < 0) y+=height;
+
+    while(y > height - 1) y-=height;
+
+    return get(x, y);
+
+  }
+
+}
+
+
+
+void mousePressed()
+
+{
+
+  setup();
+
+}
+
+</script><canvas width="200" height="200"></canvas></div></p>
+
+<div style="height:0px;width:0px;overflow:hidden;"></div>
+
+
+
+<div class="code"><pre name="code" class="processing">// All Examples Written by Casey Reas and Ben Fry
+
+// unless otherwise stated.
+
+World w;
+
+int maxcells = 4000;
+
+int numcells;
+
+Cell[] cells = new Cell[maxcells];
+
+color spore1, spore2, spore3, spore4;
+
+color black = color(0, 0, 0);
+
+// set lower for smoother animation, higher for faster simulation
+
+int runs_per_loop = 100;
+
+
+
+void setup()
+
+{
+
+  size(200, 200);
+
+  frameRate(24);
+
+  clearscr();
+
+  w = new World();
+
+  spore1 = color(128, 172, 255);
+
+  spore2 = color(64, 128, 255);
+
+  spore3 = color(255, 128, 172);
+
+  spore4 = color(255, 64, 128);
+
+  numcells = 0;
+
+  seed();
+
+}
+
+
+
+void seed()
+
+{
+
+  // Add cells at random places
+
+  for (int i = 0; i &lt; maxcells; i++)
+
+  {
+
+    int cX = int(random(width));
+
+    int cY = int(random(height));
+
+    int c;
+
+    float r = random(1);
+
+    if (r &lt; 0.25) c = spore1;
+
+    else if (r &lt; 0.5) c = spore2;
+
+    else if (r &lt; 0.75) c = spore3;
+
+    else c = spore4;
+
+    if (w.getpix(cX, cY) == black)
+
+    {
+
+      w.setpix(cX, cY, c);
+
+      cells[numcells] = new Cell(cX, cY);
+
+      numcells++;
+
+    }
+
+  }
+
+}
+
+
+
+void draw()
+
+{
+
+  // Run cells in random order
+
+  for (int i = 0; i &lt; runs_per_loop; i++) {
+
+    int selected = min((int)random(numcells), numcells - 1);
+
+    cells[selected].run();
+
+  }
+
+}
+
+
+
+void clearscr()
+
+{
+
+  for (int y = 0; y &lt; height; y++) {
+
+    for (int x = 0; x &lt; width; x++) {
+
+      set(x, y, color(0));
+
+    }
+
+  }
+
+}
+
+
+
+class Cell
+
+{
+
+  int x, y;
+
+  Cell(int xin, int yin)
+
+  {
+
+    x = xin;
+
+    y = yin;
+
+  }
+
+  // Perform action based on surroundings
+
+  void run()
+
+  {
+
+    // Fix cell coordinates
+
+    while(x &lt; 0) {
+
+      x+=width;
+
+    }
+
+    while(x &gt; width - 1) {
+
+      x-=width;
+
+    }
+
+    while(y &lt; 0) {
+
+      y+=height;
+
+    }
+
+    while(y &gt; height - 1) {
+
+      y-=height;
+
+    }
+
+
+
+    // Cell instructions
+
+    int myColor = w.getpix(x, y);
+
+    if (myColor == spore1) {
+
+      if (w.getpix(x - 1, y + 1) == black && w.getpix(x + 1, y + 1) == black && w.getpix(x, y + 1) == black) move(0, 1);
+
+      else if (w.getpix(x - 1, y) == spore2 && w.getpix(x - 1, y - 1) != black) move(0, -1);
+
+      else if (w.getpix(x - 1, y) == spore2 && w.getpix(x - 1, y - 1) == black) move(-1, -1);
+
+      else if (w.getpix(x + 1, y) == spore1 && w.getpix(x + 1, y - 1) != black) move(0, -1);
+
+      else if (w.getpix(x + 1, y) == spore1 && w.getpix(x + 1, y - 1) == black) move(1, -1);
+
+      else move((int)random(3) - 1, 0);
+
+    } else if (myColor == spore2) {
+
+      if (w.getpix(x - 1, y + 1) == black && w.getpix(x + 1, y + 1) == black && w.getpix(x, y + 1) == black) move(0, 1);
+
+      else if (w.getpix(x + 1, y) == spore1 && w.getpix(x + 1, y - 1) != black) move(0, -1);
+
+      else if (w.getpix(x + 1, y) == spore1 && w.getpix(x + 1, y - 1) == black) move(1, -1);
+
+      else if (w.getpix(x - 1, y) == spore2 && w.getpix(x - 1, y - 1) != black) move(0, -1);
+
+      else if (w.getpix(x - 1, y) == spore2 && w.getpix(x - 1, y - 1) == black) move(-1, -1);
+
+      else move((int)random(3) - 1, 0);
+
+    }
+
+    else if (myColor == spore3)
+
+    {
+
+      if (w.getpix(x - 1, y - 1) == black && w.getpix(x + 1, y - 1) == black && w.getpix(x, y - 1) == black) move(0, -1);
+
+      else if (w.getpix(x - 1, y) == spore4 && w.getpix(x - 1, y + 1) != black) move(0, 1);
+
+      else if (w.getpix(x - 1, y) == spore4 && w.getpix(x - 1, y + 1) == black) move(-1, 1);
+
+      else if (w.getpix(x + 1, y) == spore3 && w.getpix(x + 1, y + 1) != black) move(0, 1);
+
+      else if (w.getpix(x + 1, y) == spore3 && w.getpix(x + 1, y + 1) == black) move(1, 1);
+
+      else move((int)random(3) - 1, 0);
+
+    }
+
+    else if (myColor == spore4)
+
+    {
+
+      if (w.getpix(x - 1, y - 1) == black && w.getpix(x + 1, y - 1) == black && w.getpix(x, y - 1) == black) move(0, -1);
+
+      else if (w.getpix(x + 1, y) == spore3 && w.getpix(x + 1, y + 1) != black) move(0, 1);
+
+      else if (w.getpix(x + 1, y) == spore3 && w.getpix(x + 1, y + 1) == black) move(1, 1);
+
+      else if (w.getpix(x - 1, y) == spore4 && w.getpix(x - 1, y + 1) != black) move(0, 1);
+
+      else if (w.getpix(x - 1, y) == spore4 && w.getpix(x - 1, y + 1) == black) move(-1, 1);
+
+      else move((int)random(3) - 1, 0);
+
+    }
+
+  }
+
+  
+
+  // Will move the cell (dx, dy) units if that space is empty
+
+  void move(int dx, int dy) {
+
+    if (w.getpix(x + dx, y + dy) == black) {
+
+      w.setpix(x + dx, y + dy, w.getpix(x, y));
+
+      w.setpix(x, y, color(0));
+
+      x += dx;
+
+      y += dy;
+
+    }
+
+  }
+
+}
+
+
+
+//  The World class simply provides two functions, get and set, which access the
+
+//  display in the same way as getPixel and setPixel.  The only difference is that
+
+//  the World class's get and set do screen wraparound ("toroidal coordinates").
+
+class World
+
+{
+
+  void setpix(int x, int y, int c) {
+
+    while(x &lt; 0) x+=width;
+
+    while(x &gt; width - 1) x-=width;
+
+    while(y &lt; 0) y+=height;
+
+    while(y &gt; height - 1) y-=height;
+
+    set(x, y, c);
+
+  }
+
+  
+
+  color getpix(int x, int y) {
+
+    while(x &lt; 0) x+=width;
+
+    while(x &gt; width - 1) x-=width;
+
+    while(y &lt; 0) y+=height;
+
+    while(y &gt; height - 1) y-=height;
+
+    return get(x, y);
+
+  }
+
+}
+
+
+
+void mousePressed()
+
+{
+
+  setup();
+
+}</pre></div>
+
+
+
+
+
+
+        </div>
+        <div class="sidebar span4">
+          <h3><a href="/processingjs-org/download/">Downloads</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/download/">Download the latest version of Processing.js!</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/articles/">Articles</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/articles/jsQuickStart.html">Quick Start - JavaScript Developer</a></li>
+            <li><a href="/processingjs-org/articles/p5QuickStart.html">Quick Start - Processing Developer</a></li>
+            <li><a href="/processingjs-org/articles/RenderingModes.html">Rendering Modes</a></li>
+            <li><a href="/processingjs-org/articles/PomaxGuide.html">Pomax's Guide to processing-js</a></li>
+          </ul>
+
+          <h3><a>Web IDEs</a></h3>
+          <ul>
+            <li><a href="http://sketchpad.cc">Sketchpad.cc</a></li>
+            <li><a href="/processingjs-org/tools/processing-helper.html">Processing.js Helper</a></li>
+            <li><a href="http://www.openprocessing.org">OpenProcessing.org</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/community/">Community</a></h3>
+          <ul>
+            <li><a href="irc://irc.mozilla.org/processing.js">IRC Channel</a></li>
+            <li><a href="http://processing-js.lighthouseapp.com/">Bug Tracker</a></li>
+            <li><a href="http://github.com/processing-js/processing-js/">Github Repository</a></li>
+            <li><a href="http://groups.google.com/group/processingjs">Google Group</a></li>
+            <li><a href="http://zenit.senecac.on.ca/wiki/index.php/">Open Source @ Seneca</a></li>
+          </ul>
+
+          <h3><a href="http://twitter.com/processingjs">Twitter Feed</a></h3>
+          <div class="twitter"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Processing is an open visualization language developed by
+        <a href="http://benfry.com/">Ben Fry</a> &amp; <a href="http://reas.com/">Casey Reas</a>,
+        and originally ported to Javascript by
+        <a href="http://ejohn.org/blog/processingjs/">John Resig</a>.
+        Processing.js is maintained by the Processing.js team.
+      </div>
+    </div>
+    <a href="http://github.com/processing-js/processing-js/">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="/processingjs-org/images/forkme-right-orange.png" alt="Fork me on GitHub">
+    </a>
+  </body>
+</html>

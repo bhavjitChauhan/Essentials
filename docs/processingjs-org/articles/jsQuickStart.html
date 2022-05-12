@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>JavaScript Quick Start | Processing.js</title>
+    <link rel="stylesheet" href="/processingjs-org/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/syntax.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/processing-js.css" type="text/css" />
+    <script src="/processingjs-org/js/processing.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/jquery.tweet.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/tabselector.js" type="text/javascript"></script>
+    <script src="http://cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
+    <script type="text/javascript">
+      // Only do tracking on the actual site
+      if (document.location.host === "processingjs.org") {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-8565070-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        }());
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <a href="/processingjs-org/"><img src="/processingjs-org/images/header.png" width="177" height="42"></a>
+      </div>
+      <span class="tagline">a port of the Processing Visualization Language</span>
+
+      <div class="navbar">
+        <canvas width="940px" height="78px" data-processing-sources="/processingjs-org/sketches/bannerSketch.pde"></canvas>
+        <ul>
+          <li><a href="/processingjs-org/"><span>home</span></a></li>
+          <li><a href="/processingjs-org/download/"><span>download</span></a></li>
+          <li><a href="/processingjs-org/reference/"><span>reference</span></a></li>
+          <li><a href="/processingjs-org/exhibition/"><span>exhibition</span></a></li>
+          <li><a href="/processingjs-org/learning/"><span>learning</span></a></li>
+          <li><a href="/processingjs-org/articles/"><span>articles</span></a></li>
+          <li><a href="/processingjs-org/community/"><span>community</span></a></li>
+          <li><a href="/processingjs-org/blog/"><span>blog</span></a></li>
+        </ul>
+        <a class="viewsource" href="/processingjs-org/sketches/bannerSketch.pde">view source</a>
+      </div>
+
+      <div class="page row">
+        <div class="span11">
+<div>
+    <h3>
+        Processing.js Quick Start - JavaScript Developer Edition</h3>
+    <h4>
+        Introduction</h4>
+    <p>
+        This quick start guide is written from the standpoint of a JavaScript developer.
+        The document assumes you know JavaScript and web programming, but only very basic
+        Processing knowledge is assumed.</p>
+    <h4>
+        Index</h4>
+    <ol>
+        <li style="margin-bottom: 0px;"><a href="#quickstart">For the Impatient</a></li>
+        <li style="margin-bottom: 0px;"><a href="#whyprocessingjs">Why Processing.js?</a>
+            <ol>
+                <li style="margin-bottom: 0px;"><a href="#whatisprocessing">What is Processing?</a></li>
+                <li style="margin-bottom: 0px;"><a href="#whatdoesprocessingbrintotheweb">What does Processing bring to the web?</a></li>
+                <li style="margin-bottom: 0px;"><a href="#learnprocessing">How much work is it to learn Processing?</a></li>
+            </ol>
+        </li>
+        <li style="margin-bottom: 0px;"><a href="#waystouseprocessingjs">Ways to use Processing.js</a>
+            <ol>
+                <li style="margin-bottom: 0px;"><a href="#writingpureprocessingcode">Writing Pure Processing Code</a></li>
+                <li style="margin-bottom: 0px;"><a href="#processingcodetojavascript">Pre-compiling Processing code to JavaScript</a></li>
+                <li style="margin-bottom: 0px;"><a href="#javascriptonlyprocessingcode">Writing JavaScript-only Processing.js code</a></li>
+                <li style="margin-bottom: 0px;"><a href="#combineprocessingandjavascript">Writing Documents that Combine Processing and JavaScript Code</a>
+                    <ol>
+                        <li style="margin-bottom: 0px;"><a href="#accessingjsobjectsfrompjs">Accessing JavaScript Objects from Processing</a></li>
+                        <li style="margin-bottom: 0px;"><a href="#mixingjsandprocessing">Mixing JavaScript and Processing</a></li>
+                        <li style="margin-bottom: 0px;"><a href="#accessingprocessingfromjs">Accessing Processing from JavaScript</a></li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li style="margin-bottom: 0px;"><a href="#thingstoknowusingpjs">Things to Know as a JavaScript Developer using Processing.js</a>
+            <ol>
+                <li style="margin-bottom: 0px;"><a href="#externalsproperty">Processing.js provides access to various DOM/JavaScript objects via the externals property</a></li>
+                <li style="margin-bottom: 0px;"><a href="#explicitcasting">Division which is expected to produce an integer might need explicit casting</a></li>
+                <li style="margin-bottom: 0px;"><a href="#nochartype">JavaScript, and as such Processing.js, has no "char" datatype</a></li>
+                <li style="margin-bottom: 0px;"><a href="#synchronousIO">Processing.js has to cheat to simulate Processing's synchronous I/O</a></li>
+                <li style="margin-bottom: 0px;"><a href="#variablenamingcare">Processing.js requires more care with variable naming than Processing</a></li>
+                <li style="margin-bottom: 0px;"><a href="#methodoverriding">Processing.js needs your help when overriding overloaded superclass methods</a></li>
+                <li style="margin-bottom: 0px;"><a href="#processingcodeinwebpage">It is possible to put Processing code directly in your web page</a></li>
+            </ol>
+        </li>
+    </ol>
+    <h4>
+        <b><a name="quickstart">For the Impatient</a></b></h4>
+    <p>
+        If you're in a rush, here's what you need to know:</p>
+    <ol>
+        <li>Processing.js converts Processing code to JavaScript and runs it in the browser,
+            using &lt;canvas&gt; for a drawing surface.</li>
+        <li>To use it, download Processing.js here: <a href="http://processingjs.org/download">
+            downloads</a></li>
+        <li>Make your Processing *.pde files as you normally would, for example hello-web.pde</li>
+        <li>Create a web page that includes Processing.js as well as a &lt;canvas&gt; with info
+            about where to get your sketch file (you can specify multiple *.pde files, separating
+            them with spaces):</li>
+    </ol>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"processing-1.3.6.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;canvas</span> <span class="na">data-processing-sources=</span><span class="s">"/processingjs-org/sketches/hello-web.pde"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        Load your web page, and it will parse, translate, and run your sketch in the browser.</p>
+    <h3>
+        <a name="whyprocessingjs">Why Processing.js?</a></h3>
+    <h4>
+        <b><a name="whatisprocessing">What is Processing?</a></b></h4>
+    <p>
+        The Processing language was originally created at MIT as part of the Media lab and
+        Aesthetics and Computation group. They needed a way to bridge the gap between software
+        developers, artists, data visualizers, etc., and to do so in a way that allowed
+        new programmers (or non-programmers) to do complex visual work easily. Processing
+        was built using Java, and can be thought of as a simplified Java, with a simplified
+        Java API for drawing and graphics.</p>
+    <h4>
+        <b><a name="whatdoesprocessingbrintotheweb">What does Processing bring to the web?</a></b></h4>
+    <p>
+        Processing has a large and vibrant community, who are good at creating 2D and 3D
+        graphics, visualizing data sets, audio, video, etc. With HTML5 the web gained canvas,
+        audio, and video--things which had previously only been available via plugins like
+        Flash or Java. At the same time, advances in JavaScript engines have made it possible
+        to do things in script that were previously too slow.</p>
+    <p>
+        By porting the Processing language to the web, both the Processing and web communities
+        benefit. For Processing, this means that code which used to only work on the desktop
+        now "just works" in the browser. For the web, this means that a new but mature and
+        full-featured approach to graphics programming becomes available. The &lt;canvas&gt;
+        element is too low-level for most developers to use directly--JavaScript libraries
+        are necessary. Processing.js can be thought of as just such a library, simplifying
+        the use of the 2D and 3D canvas operations.</p>
+    <h4>
+        <b><a name="learnprocessing">How much work is it to learn Processing?</a></b></h4>
+    <p>
+        The Processing language was designed to be small but complete, and easy to learn.
+        This document does not attempt to teach you Processing, and you are encouraged to
+        seek out Processing specific tutorials, books, and examples. Any Processing code
+        or concepts should map to Processing.js (the exceptions are listed below). You can
+        also use pure JavaScript to work with the Processing drawing API, skipping the Java
+        syntax of Processing in favour of JavaScript.</p>
+    <h3>
+        <a name="waystouseprocessingjs">Ways to Use Processing.js</a></h3>
+    <p>
+        Processing.js was originally created in order to allow existing Processing developers
+        and existing Processing code (often referred to as <i>sketches</i>) to work unmodified
+        on the web. As a result, the recommend way to use Processing.js is to write Processing
+        code, and have Processing.js convert it to JavaScript before running it.</p>
+    <p>
+        Over time, many web developers have begun using Processing.js, and asked that we
+        design a way for the API to be used separate from the Processing language itself.
+        Therefore, we have provided a way for JavaScript developers to write pure JavaScript
+        code and still use the Processing.js functions and objects. NOTE: Processing.js
+        is first and foremost a port of Processing to the open web, with design decisions
+        favouring compatibility with Processing. It was not designed as a general purpose
+        HTML drawing library. Having said that, it can be used as a high-level drawing API
+        for canvas.</p>
+    <p>
+        Below we discuss the various methods for using Processing.js in your web pages.</p>
+    <h4>
+        <b><a name="writingpureprocessingcode">Writing Pure Processing Code</a></b></h4>
+    <p>
+        This is the preferred method for using Processing.js, and has been dealt with at
+        length in the <a href="http://processingjs.org/reference/articles/p5QuickStart">Processing.js
+            for Processing Devs quick start guide</a>. To summarize:</p>
+    <ol>
+        <li>Download Processing.js from <a href="http://processingjs.org/download">here</a></li>
+        <li>Create a separate Processing file or files, naming them whatever you want, as long as they have a
+            *.pde extension.</li>
+        <li>Create a web page that includes Processing.js as well as a &lt;canvas&gt; with info
+            about where to get your sketch file(s), and include Processing filenames as a space-separated
+            list in a data-processing-sources attribute on the canvas:</li>
+    </ol>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Hello Web - Processing.js Test<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"processing-1.3.6.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Processing.js Test<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;p&gt;</span>This is my first Processing.js web-based sketch:<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;canvas</span> <span class="na">data-processing-sources=</span><span class="s">"/processingjs-org/sketches/hello-web.pde"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        Processing.js will automatically scan the document on page load for &lt;canvas&gt;
+        elements with <b>data-processing-sources</b> attributes, download the files using
+        XMLHTTPRequest, and feed them to the Processing-to-JavaScript translator. The resulting
+        JavaScript is run using eval.</p>
+    <h4>
+        <b><a name="processingcodetojavascript">Pre-compiling Processing code to JavaScript</a></b></h4>
+    <p>
+        Processing.js automatically downloads and converts any Processing code to JavaScript.
+        It does this using the Processing.compile() method, and those interested in building
+        tools or utilities for Processing.js can do the same.</p>
+    <p>
+        In order to obtain "compiled" code (i.e., JavaScript suitable for use by the Processing.js
+        runtime) from Processing code, do the following:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="c1">// hard-coded Processing code, text from an HTML widget, downloaded text, etc.</span>
+<span class="kd">var</span> <span class="nx">processingCode</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">...</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">jsCode</span> <span class="o">=</span> <span class="nx">Processing</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">processingCode</span><span class="p">).</span><span class="nx">sourceCode</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        For example, converting the following Processing code produces the "compiled" JavaScript
+        underneath:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="c1">// Processing code</span>
+<span class="k">void</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+  <span class="nx">background</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="nx">stroke</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="nx">ellipse</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+  <span class="nx">println</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello web!</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// "Comiled" JavaScript code</span>
+<span class="c1">// this code was autogenerated from PJS</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">processing</span><span class="p">,</span> <span class="nx">$constants</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">processing</span><span class="p">.</span><span class="nx">size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+    <span class="nx">processing</span><span class="p">.</span><span class="nx">background</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    <span class="nx">processing</span><span class="p">.</span><span class="nx">stroke</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+    <span class="nx">processing</span><span class="p">.</span><span class="nx">ellipse</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+    <span class="nx">processing</span><span class="p">.</span><span class="nx">println</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello web!</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">processing</span><span class="p">.</span><span class="nx">setup</span> <span class="o">=</span> <span class="nx">setup</span><span class="p">;</span>
+<span class="p">})</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <h4>
+        <b><a name="javascriptonlyprocessingcode">Writing JavaScript-only Processing.js code</a></b></h4>
+    <p>
+        The previous method produced JavaScript code from Processing, but you can also write
+        JavaScript on its own. The Processing.js parser turns Processing code into a JavaScript
+        function, then runs it. As a result, it's possible to skip the Processing code altogether,
+        and simply write a JavaScript function, passing this to your Processing instance.
+        Here's an example:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre></td><td class="code"><pre><span class="kd">function</span> <span class="nx">sketchProc</span><span class="p">(</span><span class="nx">processing</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Override draw function, by default it will be called 60 times per second</span>
+  <span class="nx">processing</span><span class="p">.</span><span class="nx">draw</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// determine center and max clock arm length</span>
+    <span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">processing</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">processing</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">maxArmLength</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">);</span>
+
+    <span class="kd">function</span> <span class="nx">drawArm</span><span class="p">(</span><span class="nx">position</span><span class="p">,</span> <span class="nx">lengthScale</span><span class="p">,</span> <span class="nx">weight</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">processing</span><span class="p">.</span><span class="nx">strokeWeight</span><span class="p">(</span><span class="nx">weight</span><span class="p">);</span>
+      <span class="nx">processing</span><span class="p">.</span><span class="nx">line</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">,</span>
+        <span class="nx">centerX</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">position</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span> <span class="o">*</span> <span class="nx">lengthScale</span> <span class="o">*</span> <span class="nx">maxArmLength</span><span class="p">,</span>
+        <span class="nx">centerY</span> <span class="o">-</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">position</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span> <span class="o">*</span> <span class="nx">lengthScale</span> <span class="o">*</span> <span class="nx">maxArmLength</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// erase background</span>
+    <span class="nx">processing</span><span class="p">.</span><span class="nx">background</span><span class="p">(</span><span class="mi">224</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+
+    <span class="c1">// Moving hours arm by small increments</span>
+    <span class="kd">var</span> <span class="nx">hoursPosition</span> <span class="o">=</span> <span class="p">(</span><span class="nx">now</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span> <span class="o">%</span> <span class="mi">12</span> <span class="o">+</span> <span class="nx">now</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span> <span class="o">/</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="nx">drawArm</span><span class="p">(</span><span class="nx">hoursPosition</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+    <span class="c1">// Moving minutes arm by small increments</span>
+    <span class="kd">var</span> <span class="nx">minutesPosition</span> <span class="o">=</span> <span class="p">(</span><span class="nx">now</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span> <span class="o">+</span> <span class="nx">now</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span> <span class="o">/</span> <span class="mi">60</span><span class="p">;</span>
+    <span class="nx">drawArm</span><span class="p">(</span><span class="nx">minutesPosition</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+
+    <span class="c1">// Moving hour arm by second increments</span>
+    <span class="kd">var</span> <span class="nx">secondsPosition</span> <span class="o">=</span> <span class="nx">now</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">60</span><span class="p">;</span>
+    <span class="nx">drawArm</span><span class="p">(</span><span class="nx">secondsPosition</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">canvas1</span><span class="dl">"</span><span class="p">);</span>
+<span class="c1">// attaching the sketchProc function to the canvas</span>
+<span class="kd">var</span> <span class="nx">processingInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Processing</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span> <span class="nx">sketchProc</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        Here a sketch function is created, similar to what the parser would produce. This
+        function should take 1 argument, a reference to a processing object (i.e., the Processing
+        runtime), which will be created by the Processing constructor. Any Processing functions
+        or objects are accessible as properties of this object.</p>
+    <p>
+        Once that function is complete, pass it, along with a reference to a canvas, to
+        the Processing constructor (remember to use <i>new</i>).</p>
+    <h4>
+        <b><a name="combineprocessingandjavascript">Writing Documents that Combine Processing and JavaScript Code</a></b></h4>
+    <p>
+        One of the first questions people ask with Processing.js is whether they can read
+        values from the document in which the Processing sketch is running, or vice versa.
+        The answer is yes.</p>
+    <p>
+        Processing.js converts Processing code into JavaScript contained in a function closure.
+        The variables and functions you create are not attached to the global object (i.e.,
+        window). However, you can still get access to them.</p>
+    <h4>
+        <a name="accessingjsobjectsfrompjs">Accessing JavaScript Objects from Processing</a></h4>
+    <p>
+        Since Processing code gets converted to JavaScript and run like any other function,
+        all Processing code has access to the global object. This means that if you create
+        a variable or function in a global script block, they are automatically accessible
+        to Processing. Consider this example:</p>
+    <p>
+        First the Processing file, mixing.pde:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="nc">String</span> <span class="n">processingString</span> <span class="o">=</span> <span class="s">"Hello from Processing!"</span><span class="o">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">printMessage</span><span class="o">(</span><span class="n">jsString</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">processingString</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        Next the web page:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Hello Web - Accessing JavaScript from Processing<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"processing-1.3.6.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"msg"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;canvas</span> <span class="na">data-processing-sources=</span><span class="s">"/processingjs-org/sketches/mixing.pde"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/javascript"</span><span class="nt">&gt;</span>
+        <span class="kd">var</span> <span class="nx">jsString</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello from JavaScript!</span><span class="dl">"</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">printMessage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">msg</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Message: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">msg</span><span class="p">;</span>
+        <span class="p">};</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        Here Processing.js allows the use of a variable and function declared outside the
+        Processing code.</p>
+    <h4>
+        <a name="mixingjsandprocessing">Mixing JavaScript and Processing</a></h4>
+    <p>
+        The previous example kept a clean separation between the JavaScript and Processing
+        code, while loosening the boundary between the two. Because Processing.js converts
+        Processing code to JavaScript, it's also possible to mix them directly. The Processing.js
+        parser will leave JavaScript it finds within the Processing code unaltered, allowing
+        developers to write a hybrid of Processing and JavaScript (NOTE: this is why we
+        don't use a pure Processing parser approach in processing.js). Here is the previous
+        example rewritten using this method:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="kd">var</span> <span class="nx">jsString</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello from JavaScript!</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">printMessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">msg</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Message: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">msg</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nb">String</span> <span class="nx">processingString</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello from Processing!</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">printMessage</span><span class="p">(</span><span class="nx">jsString</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">processingString</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+    <p>
+        There is some JavaScript syntax that can't be easily mixed this way (e.g., regex
+        literals). In those cases you can simply move your pure JavaScript to a &lt;script&gt;
+        block and access it using the method described above.</p>
+    <h4>
+        <a name="accessingprocessingfromjs">Accessing Processing from JavaScript</a></h4>
+    <p>
+        Reaching out from the Processing code to JavaScript is easier than going the other
+        way, since the JavaScript created by the Processing.js parser is not exposed directly
+        on the global object. Instead, you gain access using the Processing.instances property.</p>
+    <p>
+        The Processing constructor keeps track of instances it creates, and makes them available
+        using the getInstanceById() method. By default, when a &lt;canvas&gt; has a data-processing-sources
+        attribute, its id is used as a unique identifier for the Processing instance. If
+        no id attribute is provided, you can use Processing.instances[0].</p>
+    <p>
+        After you have a reference to the appropriate Processing instance, you can call
+        into it like so:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Hello Web - Controlling Processing from JavaScript<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"processing-1.3.6.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"sketch"</span> <span class="na">data-processing-sources=</span><span class="s">"/processingjs-org/sketches/controlling.pde"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"startSketch();"</span><span class="nt">&gt;</span>
+        Start<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"stopSketch();"</span><span class="nt">&gt;</span>
+        Stop<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/javascript"</span><span class="nt">&gt;</span>
+        <span class="kd">var</span> <span class="nx">processingInstance</span><span class="p">;</span>
+
+        <span class="kd">function</span> <span class="nx">startSketch</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">switchSketchState</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kd">function</span> <span class="nx">stopSketch</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">switchSketchState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kd">function</span> <span class="nx">switchSketchState</span><span class="p">(</span><span class="nx">on</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">processingInstance</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">processingInstance</span> <span class="o">=</span> <span class="nx">Processing</span><span class="p">.</span><span class="nx">getInstanceById</span><span class="p">(</span><span class="dl">'</span><span class="s1">sketch</span><span class="dl">'</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">on</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">processingInstance</span><span class="p">.</span><span class="nx">loop</span><span class="p">();</span>  <span class="c1">// call Processing loop() function</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">processingInstance</span><span class="p">.</span><span class="nx">noLoop</span><span class="p">();</span> <span class="c1">// stop animation, call noLoop()</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        Here two buttons in the DOM are used to allow the user to start or stop a running
+        Processing sketch. They control the Processing instance (you might have several
+        in a page, or hidden in divs) directly from JavaScript, calling Processing functions:
+        loop() and noLoop(). The Processing functions are well documented elsewhere.</p>
+    <h3>
+        <a name="thingstoknowusingpjs">Things to Know as a JavaScript Developer using Processing.js</a></h3>
+    <p>
+        While Processing.js tries to be fully compatible with Processing, there are some
+        things which are different or require workarounds. We have also added some web-specific
+        features to make Processing.js easier to use. Here are some tricks and tips as you
+        start working on more complex sketches in Processing.js.</p>
+    <h4>
+        <b><a name="externalsproperty">Processing.js provides access to various DOM/JavaScript objects via the externals
+            property</a></b></h4>
+    <p>
+        Each Processing instance (i.e., Processing.instances) has an <b>externals</b> property,
+        which is an object containing references to various non-Processing DOM/JavaScript
+        objects that can be useful. For example:</p>
+    <ul>
+        <li>canvas - the canvas to which the sketch is bound</li>
+        <li>context - the canvas' context</li>
+        <li>onblur and onfocus - event handlers</li>
+    </ul>
+    <h4>
+        <b><a name="explicitcasting">Division which is expected to produce an integer might need explicit casting</a></b></h4>
+    <p>
+        There are a class of bugs that arise when converting Processing code to Processing.js
+        that involve integer vs. floating point division. What was straight-up integer division
+        in Processing code, when converted to Processing.js, can sometimes become problematic,
+        as numbers become doubles, and introduce a fractional part. The fix is to explicitly
+        cast any division to an integer that exhibits this behaviour:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="c1">// before</span>
+<span class="kt">int</span> <span class="n">g</span> <span class="o">=</span> <span class="n">mouseX</span> <span class="o">/</span> <span class="n">i</span><span class="o">;</span>
+
+<span class="c1">// after</span>
+<span class="kt">int</span> <span class="n">g</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">mouseX</span> <span class="o">/</span> <span class="n">i</span><span class="o">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        See <a href="https://processing-js.lighthouseapp.com/projects/41284/tickets/532-drawing-artifacts-in-processingjs-not-in-processing-with-this-code">
+            lighthouse bug</a></p>
+
+
+    <h4 id="nochartype"><b>JavaScript, and as such Processing.js, has no "char" datatype</b></h4>
+    <p> JavaScript only knows about numbers, and strings, unlike Java, which also knows about "char"
+        data types. The char is a 16 bit unsigned integer value, that can also pretend to be a letter
+        (from the ISO8859-1 codepage for the first 256 numbers, and basically magic after that).
+        Unfortunately, as JavaScript has no equivalent, relying on char comparisons to be either numbers
+        or letters is quite likely to cause problems. If you have Processing code where you're comparing
+        chars, you will either have to perform int casting, or string casting, using the <b>int()</b>
+        and <b>str()</b> functions, so that you know you're explicitly comparing datatypes that
+        JavaScript can deal with.</p>
+
+
+    <h4><b><a name="synchronousIO">Processing.js has to cheat to simulate Processing's synchronous I/O</a></b></h4>
+    <p>
+        Processing uses a synchronous I/O model, which means that functions like <b>loadImage()</b>
+        take time to execute, and while they are running, nothing else happens: the program
+        waits until <b>loadImage()</b> is done before moving on to the next statement. This
+        means that you can count on the value returned by a function like <b>loadImage()</b>
+        being usable in the next line of code.</p>
+    <p>
+        Web browsers don't work like this. The web uses an asynchronous I/O model, which
+        means that functions which load external resources can't make the program wait until
+        they finish. In order to replicate Processing's load* functions, you have to use
+        a special Processing.js Directive.</p>
+    <p>
+        The Processing.js Directives are hints to the browser that are written in comments
+        rather than in the Processing code itself. Here's a typical Processing sketch that
+        loads an image synchronously and then draws it:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="nc">PImage</span> <span class="n">img</span><span class="o">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">img</span> <span class="o">=</span> <span class="n">loadImage</span><span class="o">(</span><span class="s">"picture.jpg"</span><span class="o">);</span>
+  <span class="n">image</span><span class="o">(</span><span class="n">img</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        This code will not work in the browser with Processing.js, because the call to <b>image()</b>
+        will happen before the file <b>picture.jpg</b> has been downloaded. The fix is to
+        ask Processing.js to download the image before the sketch starts, and cache it--a
+        technique known as preloading. Here is the modified code:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="cm">/* @pjs preload="picture.jpg"; */</span>
+<span class="nc">PImage</span> <span class="n">img</span><span class="o">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">img</span> <span class="o">=</span> <span class="n">loadImage</span><span class="o">(</span><span class="s">"picture.jpg"</span><span class="o">);</span>
+  <span class="n">image</span><span class="o">(</span><span class="n">img</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        Notice the extra comment line at the top of the code. The <b>@pjs</b> directive
+        is for Processing.js, and not the developer. Think of it as an extra line of code
+        that will be executed before the program begins.</p>
+    <p>
+        If you have multiple images to load, use a list like so:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="cm">/* @pjs preload="picture.jpg,picture2.jpg,picture3.png"; */</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <h4>
+        <b><a name="variablenamingcare">Processing.js requires more care with variable naming than Processing</a></b></h4>
+    <p>
+        One of the powerful features of JavaScript is its dynamic, typeless nature. Where
+        typed languages like Java, and therefore Processing, can reuse names without fear
+        of ambiguity (e.g., method overloading), Processing.js cannot. Without getting into
+        the inner-workings of JavaScript, the best advice for Processing developers is to
+        not use function/class/etc. names from Processing as variable names. For example,
+        a variable named <b>line</b> might seem reasonable, but it will cause issues with
+        the similarly named <b>line()</b> function built-into Processing and Processing.js.</p>
+
+    <h4>
+      <b><a name="methodoverriding">Processing.js needs your help when overriding overloaded superclass methods</a></b></h4>
+    <p>
+        If your code uses subclasses that override one or more overloaded methods in the superclass, you
+        will need "dummy" overrides for every method signature that you'd normally leave untouched:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="code"><pre><span class="kd">class</span> <span class="nc">X</span>
+<span class="o">{</span>
+  <span class="kt">void</span> <span class="nf">doSomething</span><span class="o">()</span>
+  <span class="o">{</span>
+    <span class="o">...</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">doSomething</span><span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">)</span>
+  <span class="o">{</span>
+    <span class="o">...</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Y</span> <span class="kd">extends</span> <span class="no">X</span>
+<span class="o">{</span>
+  <span class="kt">void</span> <span class="nf">doSomething</span><span class="o">()</span>
+  <span class="o">{</span>
+    <span class="c1">// different code from compared to the super class</span>
+  <span class="o">}</span>
+
+  <span class="c1">// even though we don't override this method,</span>
+  <span class="c1">// its signature must be added to prevent Pjs</span>
+  <span class="c1">// from getting the method chain wrong:</span>
+  <span class="kt">void</span> <span class="nf">doSomething</span><span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">)</span>
+  <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">doSomething</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        Even though in Processing you will not need to implement the fallthrough method for doSomethign with a
+        (float,float) signature, doing so is almost always necessary to make sure Processing.js doesn't get
+        confused about which class's method to call.</p>
+
+    <h4>
+        <b><a name="processingcodeinwebpage">It is possible to put Processing code directly in your web page</a></b></h4>
+    <p>
+        Using the data-processing-sources attribute on the canvas, and having Processing.js
+        load an external file is the preferred and recommended way to include scripts in
+        a web page. However, it is also possible to write in-line Processing code.</p>
+    <p>
+        A few changes are necessary to make the example above work with inline Processing
+        code:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"processing-1.3.6.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/processing"</span> <span class="na">data-processing-target=</span><span class="s">"pjs"</span><span class="nt">&gt;</span>
+<span class="k">void</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+  <span class="nx">background</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="nx">stroke</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="nx">ellipse</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+  <span class="nx">println</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello web!</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"pjs"</span><span class="nt">&gt;</span> <span class="nt">&lt;/canvas&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    <p>
+        This code is more complex because it has to figure out which canvas goes with which
+        script (i.e., you can have multiple Processing sketches living in the same page,
+        and therefore, multiple canvases). Also note that the scripts include a <b>type</b>
+        attribute, which distinguishes between JavaScript and Processing code (the browser
+        will ignore Processing scripts). Finally, note the use of the <b>id</b> and <b>target</b>
+        attributes to connect the Processing script with the associated canvas.</p>
+</div>
+
+        </div>
+        <div class="sidebar span4">
+          <h3><a href="/processingjs-org/download/">Downloads</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/download/">Download the latest version of Processing.js!</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/articles/">Articles</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/articles/jsQuickStart.html">Quick Start - JavaScript Developer</a></li>
+            <li><a href="/processingjs-org/articles/p5QuickStart.html">Quick Start - Processing Developer</a></li>
+            <li><a href="/processingjs-org/articles/RenderingModes.html">Rendering Modes</a></li>
+            <li><a href="/processingjs-org/articles/PomaxGuide.html">Pomax's Guide to processing-js</a></li>
+          </ul>
+
+          <h3><a>Web IDEs</a></h3>
+          <ul>
+            <li><a href="http://sketchpad.cc">Sketchpad.cc</a></li>
+            <li><a href="/processingjs-org/tools/processing-helper.html">Processing.js Helper</a></li>
+            <li><a href="http://www.openprocessing.org">OpenProcessing.org</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/community/">Community</a></h3>
+          <ul>
+            <li><a href="irc://irc.mozilla.org/processing.js">IRC Channel</a></li>
+            <li><a href="http://processing-js.lighthouseapp.com/">Bug Tracker</a></li>
+            <li><a href="http://github.com/processing-js/processing-js/">Github Repository</a></li>
+            <li><a href="http://groups.google.com/group/processingjs">Google Group</a></li>
+            <li><a href="http://zenit.senecac.on.ca/wiki/index.php/">Open Source @ Seneca</a></li>
+          </ul>
+
+          <h3><a href="http://twitter.com/processingjs">Twitter Feed</a></h3>
+          <div class="twitter"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Processing is an open visualization language developed by
+        <a href="http://benfry.com/">Ben Fry</a> &amp; <a href="http://reas.com/">Casey Reas</a>,
+        and originally ported to Javascript by
+        <a href="http://ejohn.org/blog/processingjs/">John Resig</a>.
+        Processing.js is maintained by the Processing.js team.
+      </div>
+    </div>
+    <a href="http://github.com/processing-js/processing-js/">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="/processingjs-org/images/forkme-right-orange.png" alt="Fork me on GitHub">
+    </a>
+  </body>
+</html>

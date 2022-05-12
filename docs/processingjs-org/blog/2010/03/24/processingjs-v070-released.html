@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Processing.js v0.7.0 Released | Processing.js</title>
+    <link rel="stylesheet" href="/processingjs-org/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/syntax.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/processing-js.css" type="text/css" />
+    <script src="/processingjs-org/js/processing.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/jquery.tweet.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/tabselector.js" type="text/javascript"></script>
+    <script src="http://cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
+    <script type="text/javascript">
+      // Only do tracking on the actual site
+      if (document.location.host === "processingjs.org") {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-8565070-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        }());
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <a href="/processingjs-org/"><img src="/processingjs-org/images/header.png" width="177" height="42"></a>
+      </div>
+      <span class="tagline">a port of the Processing Visualization Language</span>
+
+      <div class="navbar">
+        <canvas width="940px" height="78px" data-processing-sources="/processingjs-org/sketches/bannerSketch.pde"></canvas>
+        <ul>
+          <li><a href="/processingjs-org/"><span>home</span></a></li>
+          <li><a href="/processingjs-org/download/"><span>download</span></a></li>
+          <li><a href="/processingjs-org/reference/"><span>reference</span></a></li>
+          <li><a href="/processingjs-org/exhibition/"><span>exhibition</span></a></li>
+          <li><a href="/processingjs-org/learning/"><span>learning</span></a></li>
+          <li><a href="/processingjs-org/articles/"><span>articles</span></a></li>
+          <li><a href="/processingjs-org/community/"><span>community</span></a></li>
+          <li><a href="/processingjs-org/blog/"><span>blog</span></a></li>
+        </ul>
+        <a class="viewsource" href="/processingjs-org/sketches/bannerSketch.pde">view source</a>
+      </div>
+
+      <div class="page row">
+        <div class="span11">
+<div class="post">
+  <h3><a href="/processingjs-org/blog/2010/03/24/processingjs-v070-released.html">Processing.js v0.7.0 Released</a></h3>
+  <div>24 Mar 2010</div>
+<p><a href="http://processingjs.org/download">Download Processing.js 0.7</a></p>
+
+<p><strong>We are very pleased to announce the release of Processing.js 0.7!</strong></p>
+
+<p>The students at Seneca and the community at large, have been working hard to get some
+awesome code into the repository. Many smaller fixes and features have been added. Some
+exiting addition to the implementation include PImage with asynchronous image loading,
+reference (ref) tests, and lighting.</p>
+
+<h3>Get involved!</h3>
+
+<p>If you would like to get involved with Processing.js development, or have general usage
+questions about Processing.js, we would love meet you on IRC:
+<a href="irc://irc.mozilla.org/processing.js">irc://irc.mozilla.org/processing.js</a></p>
+
+<h3><a name="Changelog"></a>Changelog</h3>
+
+<ul>
+	<li>Added custom @pjs directive parser</li>
+	<li>Added endCamera()</li>
+	<li>Added beginCamera()</li>
+	<li>Added custom mouseScrolled event</li>
+	<li>Added requestImage()</li>
+	<li>Added byte()</li>
+	<li>Added split()</li>
+	<li>Added PImage</li>
+	<li>Added String.toCharArray()</li>
+	<li>Added long data type</li>
+	<li>Added ArrayList.contains()</li>
+	<li>Added curveVertex() 3D</li>
+	<li>Added dist() 3D</li>
+	<li>Added curve() 3D</li>
+	<li>Added ambientLight()</li>
+	<li>Added curveDetail()</li>
+	<li>Added createImage()</li>
+	<li>Added noLights()</li>
+	<li>Added loadImage() preloading</li>
+	<li>Added directionalLight</li>
+	<li>Added Hashmap</li>
+	<li>Added loadBytes()</li>
+	<li>Added pointLight()</li>
+	<li>Added text()</li>
+	<li>Fixed date()</li>
+	<li>Fixed month()</li>
+	<li>Fixed failing PMatrix3D tests</li>
+	<li>Fixed _checkEquals() to add epsilon value</li>
+	<li>Fixed String.prototype.equals</li>
+	<li>Fixed background() for PImage support</li>
+	<li>Fixed image() for PImage support</li>
+	<li>Fixed set() for PImage support</li>
+	<li>Fixed parser test runner bug</li>
+	<li>Fixed parsing of tab characters</li>
+	<li>Fixed parsing of array declarations with spaces</li>
+	<li>Fixed parsing of multiple catch blocks</li>
+	<li>Fixed get() for PImage support</li>
+	<li>Fixed Char to properly distinguish Char from numbers/strings</li>
+	<li>Fixed Rhino parsing of processing.js</li>
+	<li>Fixed parser/unit tests to work on Windows</li>
+	<li>Fixed arrayCopy()</li>
+	<li>Fixed box()</li>
+	<li>Fixed min(), max() error handling for invalid arguments</li>
+	<li>Fixed bug in seneca/hex example</li>
+	<li>Fixed background() 3D when called outside of draw()</li>
+	<li>Fixed link() to respect target</li>
+	<li>Removed invalid tests</li>
+	<li>Switched from Packer to YUI Compressor</li>
+	<li>Build system improvements for release, testing</li>
+	<li>Added Automated Ref Tests</li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="sidebar span4">
+          <h3><a href="/processingjs-org/download/">Downloads</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/download/">Download the latest version of Processing.js!</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/articles/">Articles</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/articles/jsQuickStart.html">Quick Start - JavaScript Developer</a></li>
+            <li><a href="/processingjs-org/articles/p5QuickStart.html">Quick Start - Processing Developer</a></li>
+            <li><a href="/processingjs-org/articles/RenderingModes.html">Rendering Modes</a></li>
+            <li><a href="/processingjs-org/articles/PomaxGuide.html">Pomax's Guide to processing-js</a></li>
+          </ul>
+
+          <h3><a>Web IDEs</a></h3>
+          <ul>
+            <li><a href="http://sketchpad.cc">Sketchpad.cc</a></li>
+            <li><a href="/processingjs-org/tools/processing-helper.html">Processing.js Helper</a></li>
+            <li><a href="http://www.openprocessing.org">OpenProcessing.org</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/community/">Community</a></h3>
+          <ul>
+            <li><a href="irc://irc.mozilla.org/processing.js">IRC Channel</a></li>
+            <li><a href="http://processing-js.lighthouseapp.com/">Bug Tracker</a></li>
+            <li><a href="http://github.com/processing-js/processing-js/">Github Repository</a></li>
+            <li><a href="http://groups.google.com/group/processingjs">Google Group</a></li>
+            <li><a href="http://zenit.senecac.on.ca/wiki/index.php/">Open Source @ Seneca</a></li>
+          </ul>
+
+          <h3><a href="http://twitter.com/processingjs">Twitter Feed</a></h3>
+          <div class="twitter"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Processing is an open visualization language developed by
+        <a href="http://benfry.com/">Ben Fry</a> &amp; <a href="http://reas.com/">Casey Reas</a>,
+        and originally ported to Javascript by
+        <a href="http://ejohn.org/blog/processingjs/">John Resig</a>.
+        Processing.js is maintained by the Processing.js team.
+      </div>
+    </div>
+    <a href="http://github.com/processing-js/processing-js/">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="/processingjs-org/images/forkme-right-orange.png" alt="Fork me on GitHub">
+    </a>
+  </body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Processing.js v1.2 Released | Processing.js</title>
+    <link rel="stylesheet" href="/processingjs-org/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/syntax.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/processing-js.css" type="text/css" />
+    <script src="/processingjs-org/js/processing.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/jquery.tweet.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/tabselector.js" type="text/javascript"></script>
+    <script src="http://cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
+    <script type="text/javascript">
+      // Only do tracking on the actual site
+      if (document.location.host === "processingjs.org") {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-8565070-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        }());
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <a href="/processingjs-org/"><img src="/processingjs-org/images/header.png" width="177" height="42"></a>
+      </div>
+      <span class="tagline">a port of the Processing Visualization Language</span>
+
+      <div class="navbar">
+        <canvas width="940px" height="78px" data-processing-sources="/processingjs-org/sketches/bannerSketch.pde"></canvas>
+        <ul>
+          <li><a href="/processingjs-org/"><span>home</span></a></li>
+          <li><a href="/processingjs-org/download/"><span>download</span></a></li>
+          <li><a href="/processingjs-org/reference/"><span>reference</span></a></li>
+          <li><a href="/processingjs-org/exhibition/"><span>exhibition</span></a></li>
+          <li><a href="/processingjs-org/learning/"><span>learning</span></a></li>
+          <li><a href="/processingjs-org/articles/"><span>articles</span></a></li>
+          <li><a href="/processingjs-org/community/"><span>community</span></a></li>
+          <li><a href="/processingjs-org/blog/"><span>blog</span></a></li>
+        </ul>
+        <a class="viewsource" href="/processingjs-org/sketches/bannerSketch.pde">view source</a>
+      </div>
+
+      <div class="page row">
+        <div class="span11">
+<div class="post">
+  <h3><a href="/processingjs-org/blog/2011/05/31/processingjs-v12-released.html">Processing.js v1.2 Released</a></h3>
+  <div>31 May 2011</div>
+<p>The Processing.js team is pleased to announce the
+<a href="http://processingjs.org/download">release of Processing.js version 1.2</a>. This
+is one of our largest releases to date, and focuses on performance, compatibility, 3D, and
+bug fixes. More people than ever are using Processing.js, from professional design houses
+to video game developers to fashion designers, and as the demand and uses continue to
+grow, we are excited to be able to bring you an even better Processing.js.</p>
+
+<p>Since our last release, exciting things have been happening in browser development.
+WebGL, the 3D extension of the HTML5 canvas element, has now shipped in Firefox and Chrome,
+and is being tested in nightly builds of Safari and Opera.  Processing.js has been fully
+WebGL compatible for more than a year, and version 1.2 includes some great 3D performance
+and bug fixes. We've also
+<a href="http://processingjs.org/reference/articles/RenderingModes">written a guide</a> to
+help explain how Processing.js uses canvas and WebGL to support the various Processing
+render modes.  Processing.js is a great way to get started with 2D and 3D graphics on the
+web, without having to understand all of the underlying technologies. With several guides for
+<a href="http://processingjs.org/reference/articles/PomaxGuide">people new to Processing</a>,
+<a href="http://processingjs.org/reference/articles/jsQuickStart">JavaScript developers</a>
+and <a href="http://processingjs.org/reference/articles/p5QuickStart">Processing developers</a>,
+there has never been a better time to jump in!</p>
+
+<p>This release also includes some important changes to ensure better compatibility with
+Processing 1.5. First, we've altered our default frame rate to match Processing's (i.e.,
+60 fps). Developers who are upgrading from previous versions of Processing.js, and who
+don't explicitly set a frame rate, may notice that sketches seem to run more slowly. Don't
+worry, Processing.js is faster than ever!  Your sketch is just drawing at 60fps.  It's
+possible to make things as fast as the browsers will allow by setting a higher frame rate,
+but this will of course consume more CPU, and actually
+<a href="http://weblogs.mozillazine.org/roc/archives/2010/08/the_mozrequesta.html">not
+provide any real gain</a> other than bigger deltas between visible frames.</p>
+
+<p>We had many requests from our users to follow Processing's lead and add support for Java
+Generics, and we're happy to report that as of Processing 1.2 this is fully supported!
+We've also improved our compatibility in key classes and functions like ArrayList and
+XMLElement, and arc() and beginShape(), etc.  If you find that your Processing code isn't
+compatible with Processing.js, please make sure you tell us.</p>
+
+<p>While we've been developing 1.2, we've seen some great examples of Processing.js in the
+wild.  Here are some of our favorites:</p>
+
+<ul>
+	<li><a href="http://apps.facebook.com/viriongame/">Winners of Zynga's Facebook Game competition</a></li>
+	<li><a href="http://heff2011.wordpress.com/2011/04/03/continuum/ ">Using Processing.js to design tomorrow's fashion</a></li>
+	<li><a href="http://numberpicture.com">A fantastic collaborative data visualization tool</a></li>
+	<li><a href="http://n96.org/">A real-time Twitter visualizer</a></li>
+	<li><a href="http://neoformix.com/2011/TweetTopicExplorer.html">Another great Twitter visualization tool</a></li>
+	<li><a href="http://labs.lucastswick.com/circle-art/">An experiment in painting with circles</a></li>
+	<li><a href="http://fathom.info/macrecipes/">Visualizing MacGyver episodes</a></li>
+	<li><a href="http://www.atzombies.com/">@Zombies, a Social Network Story Telling experiment</a></li>
+	<li><a href="http://www.reddit.com/r/programming/comments/h9ynx/while_my_boss_wasnt_looking_an_html5_wave/">One of many interesting Processing.js and CoffeeScript experiments we've seen lately</a></li>
+	<li><a href="http://zepadovani.info/">Using Processing.js as dynamic website background</a></li>
+	<li><a href="http://asalga.wordpress.com/2011/04/03/">A virtual museum</a></li>
+	<li><a href="http://scotland.proximity.on.ca/sdowne/physics/physicsSubtitles/">popcorn.js + processing.js + box2d.js</a><a> </a></li>
+	<li><a href="http://www.atelierbinturong.com/2011/04/spring-and-processingjs.html">Drawing flowers</a></li>
+	<li><a href="http://www.youtube.com/watch?v=WK3zc8XDxuI">Video showing the iPad with Arduino + Processing.js</a></li>
+	<li><a href="http://vocamus.net/dave/?p=1166">Creating video game sounds and visualizing the waveforms</a></li>
+	<li><a href="http://processingjs.nihongoresources.com/graphs/ ">A graph visualization tutorial</a></li>
+	<li><a href="http://www.analogpixel.org/pages/mouseMaze/">A simple but fun mouse maze game</a></li>
+	<li><a href="http://www.upfade.com/">Graffiti drawing demo</a></li>
+</ul>
+
+<p>One of the things we love most is seeing all the creative and unexpected ways that
+people use Processing.js.  If you have a cool example, let us know about it, and we might
+showcase it on the site and in our blog posts.</p>
+
+<p>Finally, we want to take this release as an opportunity to acknowledge one of our team
+members who will be leaving us. <a href="https://annasob.wordpress.com/">Anna Sobiepanek</a>
+has been a full-time developer and researcher at
+<a href="http://zenit.senecac.on.ca/wiki/index.php/Main_Page">Seneca's Centre for
+Development of Open Technology (CDOT)</a> for more than a year. She's helped develop and
+lead the Processing.js project, and been our main git master
+(<a href="https://github.com/annasob/processing-js/network">Anna's github graph</a> is often
+used as an example of a complex git  project).  Anna's been a passionate contributor and
+great leader in the Processing.js project, and we'll miss her daily work with us.  Lots of
+people bemoan the lack of women in open source, and we've been blessed to have such a great
+developer and amazing woman working on our team.  We wish her well in her new job, and look
+forward to her continued contributions as a volunteer.</p>
+
+<p>We hope you enjoy using Processing.js 1.2. We enjoyed making it for you, and are already
+working on 1.3!</p>
+
+<h3><a name="Changelog">Changelog</a></h3>
+
+<ul>
+  <li>Aligned default frameRate to match Processing (e.g., 60fps). NOTE: if your sketch seems slower than before, frameRate(1000) will yield the old behavior.</li>
+  <li>Added Performance Tests</li>
+  <li>Added lazy loading sketch extension</li>
+  <li>Added XMLElement toString() function</li>
+  <li>Added loadShape() testing</li>
+  <li>Added support for Java Generics</li>
+  <li>Added ArrayList addAll()</li>
+  <li>Fixed stroke being applied in endShape()</li>
+  <li>Fixed the key variable to hold the proper data type</li>
+  <li>Fixed string functions split(), contains()</li>
+  <li>Fixed background() when called with image different size from sketch</li>
+  <li>Fixed IE9 loading issues</li>
+  <li>Fixed mouseX/mouseY to be computed with canvas scaling taken into account</li></li>
+  <li>Fixed text string's height to not ignore textLeading()</li>
+  <li>Fixed copy() to handle transparency</li>
+  <li>Fixed ellipse 3D to take noStroke and noFill values into account</li>
+  <li>Fixed regression in specular() defaults to be same as 1.1.0</li>
+  <li>Fixed screenX()</li>
+  <li>Fixed arc() 3D fill</li>
+  <li>Fixed endShape(CLOSE) so the shape doesn't disappear</li>
+  <li>Fix for 3D PGraphics always drawing below 2D shapes</li>
+  <li>Fixed noStroke() on P3D endShape()</li>
+  <li>Fixed 3D ref tests</li>
+  <li>Fixed rect() for 3D when used with lights</li>
+  <li>Fixed param()</li>
+  <li>Fixed leak of global typed array variables</li>
+  <li>Fixed rendering of println() so it's more usable</li>
+  <li>Fixed Scaling/Light problem in 3D</li>
+  <li>Fixed reverseTransform()</li>
+  <li>Fixed line(x,y,x,y) so that it draws a point</li>
+  <li>Fixed Processing constructor to take a single argument</li>
+  <li>Fixed Iterator for Map's EntrySet to iterate through the entire set</li>
+  <li>Fixed dir vector transforms in directionalLight() and spotLight()</li>
+  <li>Fixed arrayList remove() to take an object argument</li>
+  <li>Fixed light/shadowing failures in ref tests for 3D</li>
+  <li>Fixed strokeWeight to not get reset in draw()</li>
+  <li>Fixed image cache to set loaded property for images inserted from js</li>
+  <li>Fixed parser bug with negative values</li>
+  <li>Fixed parser bug with static variables</li>
+  <li>Fixed textWidth to work with newlines</li>
+  <li>Fixed beginShape() and endShape() to work with bezierVertex()</li>
+  <li>Fixed arc() when covering 0 radians</li>
+  <li>Fixed unit tests that caused UTF-8 errors in newer JSSHELL</li>
+  <li>Fixed linting errors</li>
+  <li>Fixed arc() regressions</li>
+  <li>Fixed XML API to be Processing 1.5 compatible</li>
+  <li>Fixed subset(array, offset) bug</li>
+  <li>Converted all XMLElement tests to unit tests</li>
+  <li>Converted endShape() ref tests to be part of the regular 2D/3D ref tests</li>
+  <li>Documented rotate() to explain direction</li>
+  <li>Documentation fixes and corrections on website</li>
+  <li>Improved minification</li>
+  <li>Improved the performance of arc()</li>
+  <li>Improved the performance of blur()</li>
+  <li>Improve the performance of blend()'s ADD mode</li>
+  <li>Implemented ArrayList indexOf()</li>
+  <li>Improve the performance and output of ref tests</li>
+  <li>Improved compatibility of WebGL context creation</li>
+  <li>Moved colors object out of Processing instances to save memory</li>
+  <li>Reduced calls to uniformMatrix()</li>
+  <li>Removed test/unit/braces.js</li>
+  <li>Removed clear()</li>
+  <li>Removed transform matrix calculations if there are no lights</li>
+  <li>Removed dependency on init.js, and init.js from examples</li>
+  <li>Removed all uses of use3DContext from compiled sketches</li>
+  <li>Rewrote build system, switched to closure</li>
+  <li>Removed Bespin IDE</li>
+  <li>Removed unused tools and minifiers</li>
+  <li>Removed uses of constructor.name</li>
+  <li>Renamed internal uses of int(), boolean(), etc. to parseInt(), parseBoolean(), etc</li>
+  <li>Updated README, LICENSE, AUTHORS, CHANGELOG</li>
+  <li>Add known failures to ref tests </li>
+  <li>Convert test-suite tests to REF tests </li>
+  <li>Fixed inheritance for certain (js object) methods still broken (1.1)</li>
+  <li>Fixed more extra semi-colon breaking </li>
+  <li>Fixed createImage for RGB format produces image with transparent background </li>
+  <li>Removed String.prototype.match and .replace in IE9 </li>
+  <li>Removed static beginCamera/endCamera examples from repo </li>
+  <li>Re-factor 3D and 2D drawing functions into separate objects </li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="sidebar span4">
+          <h3><a href="/processingjs-org/download/">Downloads</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/download/">Download the latest version of Processing.js!</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/articles/">Articles</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/articles/jsQuickStart.html">Quick Start - JavaScript Developer</a></li>
+            <li><a href="/processingjs-org/articles/p5QuickStart.html">Quick Start - Processing Developer</a></li>
+            <li><a href="/processingjs-org/articles/RenderingModes.html">Rendering Modes</a></li>
+            <li><a href="/processingjs-org/articles/PomaxGuide.html">Pomax's Guide to processing-js</a></li>
+          </ul>
+
+          <h3><a>Web IDEs</a></h3>
+          <ul>
+            <li><a href="http://sketchpad.cc">Sketchpad.cc</a></li>
+            <li><a href="/processingjs-org/tools/processing-helper.html">Processing.js Helper</a></li>
+            <li><a href="http://www.openprocessing.org">OpenProcessing.org</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/community/">Community</a></h3>
+          <ul>
+            <li><a href="irc://irc.mozilla.org/processing.js">IRC Channel</a></li>
+            <li><a href="http://processing-js.lighthouseapp.com/">Bug Tracker</a></li>
+            <li><a href="http://github.com/processing-js/processing-js/">Github Repository</a></li>
+            <li><a href="http://groups.google.com/group/processingjs">Google Group</a></li>
+            <li><a href="http://zenit.senecac.on.ca/wiki/index.php/">Open Source @ Seneca</a></li>
+          </ul>
+
+          <h3><a href="http://twitter.com/processingjs">Twitter Feed</a></h3>
+          <div class="twitter"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Processing is an open visualization language developed by
+        <a href="http://benfry.com/">Ben Fry</a> &amp; <a href="http://reas.com/">Casey Reas</a>,
+        and originally ported to Javascript by
+        <a href="http://ejohn.org/blog/processingjs/">John Resig</a>.
+        Processing.js is maintained by the Processing.js team.
+      </div>
+    </div>
+    <a href="http://github.com/processing-js/processing-js/">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="/processingjs-org/images/forkme-right-orange.png" alt="Fork me on GitHub">
+    </a>
+  </body>
+</html>

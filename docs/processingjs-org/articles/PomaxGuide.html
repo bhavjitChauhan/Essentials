@@ -1,0 +1,2376 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Pomax Guide | Processing.js</title>
+    <link rel="stylesheet" href="/processingjs-org/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/syntax.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/processing-js.css" type="text/css" />
+    <script src="/processingjs-org/js/processing.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/jquery.tweet.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/tabselector.js" type="text/javascript"></script>
+    <script src="http://cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
+    <script type="text/javascript">
+      // Only do tracking on the actual site
+      if (document.location.host === "processingjs.org") {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-8565070-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        }());
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <a href="/processingjs-org/"><img src="/processingjs-org/images/header.png" width="177" height="42"></a>
+      </div>
+      <span class="tagline">a port of the Processing Visualization Language</span>
+
+      <div class="navbar">
+        <canvas width="940px" height="78px" data-processing-sources="/processingjs-org/sketches/bannerSketch.pde"></canvas>
+        <ul>
+          <li><a href="/processingjs-org/"><span>home</span></a></li>
+          <li><a href="/processingjs-org/download/"><span>download</span></a></li>
+          <li><a href="/processingjs-org/reference/"><span>reference</span></a></li>
+          <li><a href="/processingjs-org/exhibition/"><span>exhibition</span></a></li>
+          <li><a href="/processingjs-org/learning/"><span>learning</span></a></li>
+          <li><a href="/processingjs-org/articles/"><span>articles</span></a></li>
+          <li><a href="/processingjs-org/community/"><span>community</span></a></li>
+          <li><a href="/processingjs-org/blog/"><span>blog</span></a></li>
+        </ul>
+        <a class="viewsource" href="/processingjs-org/sketches/bannerSketch.pde">view source</a>
+      </div>
+
+      <div class="page row">
+        <div class="span11">
+<script type="text/javascript">
+  function toggleContent(id) {
+    var e = document.getElementById(id);
+    if (e.style.display!="block") {
+      e.style.display = "block";
+    } else {
+      e.style.display = "none";
+    }
+  }
+
+  // sketch 1
+  function stop(id) {
+    var pjs = Processing.getInstanceById(id);
+    pjs.stop();
+  }
+
+  function play(id) {
+    var pjs = Processing.getInstanceById(id);
+    pjs.playSketch();
+  }
+
+  // sketch 2
+  function drawText(id) {
+    var pjs = Processing.getInstanceById(id);
+    var text = document.getElementById('ms2text').value;
+    pjs.drawText(text);
+  }
+
+  // sketch 3
+  function showXYCoordinates(x, y) {
+    document.getElementById('xcoord').value = x;
+    document.getElementById('ycoord').value = y;
+  }
+
+  // sketch 4
+  var bound = false;
+
+  function bindJavascript() {
+    var pjs = Processing.getInstanceById('mysketch3');
+    if(pjs != null) {
+      pjs.bindJavascript(this);
+      bound = true;
+    }
+    if (!bound) {
+      setTimeout(bindJavascript, 250);
+    }
+  }
+
+  bindJavascript();
+
+  // sketch 5
+  function loadPointsJS(id, button) {
+    button.disabled = "disabled";
+    var pjs = Processing.getInstanceById(id);
+    var points = pjs.getPoints();
+    points.add(new pjs.Point(10,10));
+    points.add(new pjs.Point(10,190));
+    points.add(new pjs.Point(190,190));
+    points.add(new pjs.Point(190,10));
+    pjs.draw();
+  }
+
+  // sketch 6
+  function loadPointsJSON(id, button) {
+    button.disabled = "disabled";
+    var pjs = Processing.getInstanceById(id);
+    var json = "{'points' : [{'x': 10, 'y': 10}, {'x': 190, 'y': 10}, {'x': 190, 'y': 190}, {'x': 10, 'y': 190}]}";
+    var data = eval("("+json+")");
+    if (data) {
+      for (p=0, end=data.points.length; p<end; p++) {
+        var point = data.points[p];
+        pjs.addPoint(point.x, point.y);
+      }
+    }
+  }
+
+  // sketch 7
+  function loadPointsXML(id, button) {
+    button.disabled = "disabled";
+    var pjs = Processing.getInstanceById(id);
+    var xml = "<xml><point x='10' y='10'/><point x='190' y='50'/><point x='10' y='90'/><point x='190' y='140'/><point x='10' y='190'/></xml>";
+    pjs.buildFromXML(xml);
+  }
+</script>
+
+<div>
+  <h2>Pomax's guide to Processing.js</h2>
+
+  <ul id="idx">
+    <li><a href="#faq">what is Processing</a></li>
+    <li><a href="#onpage">putting a sketch on the page</a></li>
+    <li><a href="#inpage">putting a sketch inline on the page</a></li>
+    <li><a href="#interface">making your sketch and your page see each other</a>
+        <ul>
+          <li><a href="#jstosketch">making javascript see your sketch</a></li>
+          <li><a href="#sketchtojs">making your sketch "see" javascript</a></li>
+        </ul>
+    </li>
+    <li><a href="#jsobj">passing complex objects from javascript to your sketch</a>
+        <ul>
+          <li><a href="#pobj">passing data using Processing itself</a></li>
+          <li><a href="#json">passing data using JSON</a></li>
+          <li><a href="#xml">passing data using XML</a></li>
+          <li><a href="#svg">passing SVG data</a></li>
+          <li><a href="#jobjs">passing genuine javascript objects</a></li>
+        </ul>
+    </li>
+    <li><a href="#graphic">Processing.js as javascript graphics library</a></li>
+    <li><a href="#more">more information</a></li>
+  </ul>
+
+  <p>This page tries to explain how to quickly and (as) correctly (as possible) use
+  Processing sketches on webpages. The information is based on the work done by
+  the <a href="/processingjs-org/">processing.js</a> group.</p>
+
+  <p>This information on this page reflects the best of my knowledge anno November
+  2010, and processing.js becomes more and more complete, so it is possible that the
+  information on this page changes over time. Should you spot any incompletenesses
+  or blatant mistakes, please contact me at
+
+  <!-- ah, the wonder of making a scrape-proof email address -->
+  <a href="http://www.nihongoresources.com/general/contact.html">pomax<i> at
+  </i>nihongoresources.<i>com,</i></a>
+
+  with the obvious substitutions in place to make it a legal email address.</p>
+
+  <h3 id="faq" onclick="toggleContent('faq')">What is Processing?</h3>
+
+  <p>The "Processing" language (also referred to as "P5") is a programming language
+  with a focus on data visualisation. Of course, "data" is a loose concept, and
+  Processing can be used for anything from drawing a few lines and circles on a
+  screen, to full blown interactive animations. In fact, a basic Processing program
+  is two lines of code, and will already play an animation:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre>  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span> <span class="n">size</span><span class="o">(...,</span> <span class="o">...);</span> <span class="o">}</span>
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>Of course this program doesn't show you anything, because all it does is set up
+  the visual context to have a certain width and height (indicated in the setup
+  method as the size(...,...) instruction) and then calls draw() every few milliseconds.
+  Of course, draw() is empty, so it won't actually show you anything. A more useful
+  minimal program would be a "hello world" program, but I hate those because they only
+  show a programming language can write text, and that's pretty much the least interesting
+  feature of any programming language. Instead let's look at a minimal program that makes
+  sense for a data visualisation language:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre>  <span class="kt">float</span> <span class="n">framerate</span> <span class="o">=</span> <span class="mi">24</span><span class="o">;</span> <span class="c1">// our "sketch" will have a framerate of 24 frames per second.</span>
+
+  <span class="kt">int</span> <span class="n">ball_x</span><span class="o">;</span>           <span class="c1">// ball administration: x coordinate</span>
+  <span class="kt">int</span> <span class="n">ball_y</span><span class="o">;</span>           <span class="c1">// ball administration: y coordinate</span>
+  <span class="kt">int</span> <span class="n">ball_radius</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span> <span class="c1">// ball administration: ball radius</span>
+
+  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">size</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">);</span>        <span class="c1">// set draw area size</span>
+    <span class="n">frameRate</span><span class="o">(</span><span class="n">framerate</span><span class="o">);</span> <span class="c1">// set animation framerate</span>
+    <span class="n">ball_x</span> <span class="o">=</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>     <span class="c1">// set the initial ball coordinates</span>
+    <span class="n">ball_y</span> <span class="o">=</span> <span class="n">ball_radius</span><span class="o">;</span> <span class="c1">// set the initial ball coordinates</span>
+    <span class="n">stroke</span><span class="o">(</span><span class="err">#</span><span class="mo">003300</span><span class="o">);</span>      <span class="c1">// set the default shape outline colour</span>
+    <span class="n">fill</span><span class="o">(</span><span class="err">#</span><span class="mo">0000</span><span class="no">FF</span><span class="o">);</span>        <span class="c1">// set the default shape fill colour</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// compute the ball height for this frame</span>
+    <span class="kt">float</span> <span class="n">bounce_height</span> <span class="o">=</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">abs</span><span class="o">(</span><span class="n">sin</span><span class="o">(</span><span class="no">PI</span><span class="o">*</span><span class="n">frameCount</span><span class="o">/</span><span class="n">framerate</span><span class="o">));</span>
+    <span class="c1">// because the top of the screen is 0, and the bottom is "height",</span>
+    <span class="kt">float</span> <span class="n">ball_height</span> <span class="o">=</span> <span class="n">height</span> <span class="o">-</span> <span class="o">(</span><span class="n">bounce_height</span><span class="o">+</span><span class="n">ball_radius</span><span class="o">);</span>
+    <span class="c1">// clear the drawing area</span>
+    <span class="n">background</span><span class="o">(</span><span class="err">#</span><span class="no">FFFFEE</span><span class="o">);</span>
+    <span class="c1">// set the new ball y position</span>
+    <span class="n">ball_y</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">ball_height</span><span class="o">);</span>
+    <span class="c1">// draw the ball</span>
+    <span class="n">ellipse</span><span class="o">(</span><span class="n">ball_x</span><span class="o">,</span><span class="n">ball_y</span><span class="o">,</span><span class="n">ball_radius</span><span class="o">,</span><span class="n">ball_radius</span><span class="o">);</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="sketch1" data-processing-sources="/processingjs-org/sketches/sketch1.pde" style="border: 1px solid blue;"></canvas>
+
+  <div>
+    <span style="font-size:80%">play controls:</span>
+    <button type="button" onclick="stop('sketch1')" class="Pomax">&#9632;</button>
+    <button type="button" onclick="play('sketch1')" class="Pomax">&#9654;</button>
+  </div>
+
+  <p>This looks a bit long for a minimal program, but then again, this actually <em>does</em>
+  something: it shows us a ball that bounces up and down, taking one second for each
+  bounce. It shows a few aspects of Processing too: every variable is strongly typed.
+  So you have to indicate what you'll be using a variable for, and you can choose from:</p>
+
+  <ul>
+    <li>boolean, a binary value that can be either true or false</li>
+    <li>byte, an 8-bit value</li>
+    <li>char, a byte representing an ascii character</li>
+    <li>color, a type specific to Processing, representing an on-screen color</li>
+    <li>int, a 32 bit signed integer number</li>
+    <li>long, a 64 bit signed integer number</li>
+    <li>float, a 32 bit signed decimal number</li>
+    <li>double, a 64 bit signed decimal number</li>
+  </ul>
+
+  <p>And of course there are also the typical complex data types:</p>
+
+  <ul>
+    <li>Object, a catch-all data type for things that are complex data types.</li>
+    <li>String, a text string (stored as UTF-16).</li>
+    <li>ArrayList, a list structure for arbitrary values with add/remove functionality.</li>
+    <li>HashMap, a structure that can store {<unique key>, <arbitrary value>} pairs.</li>
+    <li>XMLElement, a convenient XML-mirroring object.</li>
+  </ul>
+
+  <p>You'll see why this last one turns out to be really useful later on.</p>
+
+  <p>Coming back to the minimally functional example of a Processing program, or "sketch",
+  there are also some examples of Processing' own API at work. The following methods are
+  native Processing calls:</p>
+
+  <ul>
+    <li>size(int, int), sets the drawing area dimensions, and the global "width" and "height" values.</li>
+    <li>frameRate(int), sets the refresh rate for the drawing area, and the frameRate value.</li>
+    <li>stroke(color), sets the shape outline color.</li>
+    <li>fill(color), sets the shape fill color.</li>
+    <li>abs(number), computes the absolute value of any number.</li>
+    <li>sin(number), computes the sinoid value based on any number (treated as radians).</li>
+    <li>background(color), sets every pixel of the drawing area to the specified color.</li>
+    <li>ellipse(int, int, int, int), draws an ellipse on the drawing area.</li>
+  </ul>
+
+  <p>The Processing API is in fact quite expansive (See
+  <a href="http://processing.org/reference">http://processing.org/reference</a> for the full
+  list), but it can't cover everything. Luckily it supports object oriented programming, so
+  that our previous example can also be written as an object oriented sketch:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+</pre></td><td class="code"><pre>  <span class="nc">Bouncer</span> <span class="n">bouncer</span><span class="o">;</span>
+
+  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">size</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">);</span>
+    <span class="n">frameRate</span><span class="o">(</span><span class="mi">24</span><span class="o">);</span>
+    <span class="n">stroke</span><span class="o">(</span><span class="err">#</span><span class="mo">003300</span><span class="o">);</span>
+    <span class="n">fill</span><span class="o">(</span><span class="err">#</span><span class="mo">0000</span><span class="no">FF</span><span class="o">);</span>
+    <span class="n">bouncer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Ball</span><span class="o">(</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">bouncer</span><span class="o">.</span><span class="na">computeNextStep</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">frameRate</span><span class="o">);</span>
+    <span class="n">background</span><span class="o">(</span><span class="err">#</span><span class="no">FFFFEE</span><span class="o">);</span>
+    <span class="n">bouncer</span><span class="o">.</span><span class="na">draw</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kd">interface</span> <span class="nc">Bouncer</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">computeNextStep</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">framerate</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">draw</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kd">class</span> <span class="nc">Ball</span> <span class="kd">implements</span> <span class="nc">Bouncer</span>
+  <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">,</span><span class="n">radius</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="nc">Ball</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">r</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">computeNextStep</span><span class="o">(</span><span class="kt">int</span> <span class="n">sketch_width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sketch_height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">frame_rate</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">step</span><span class="o">++;</span>
+      <span class="kt">float</span> <span class="n">sin_value</span> <span class="o">=</span> <span class="n">abs</span><span class="o">(</span><span class="n">sin</span><span class="o">(</span><span class="no">PI</span><span class="o">*</span><span class="n">step</span><span class="o">/(</span><span class="kt">float</span><span class="o">)</span><span class="n">frame_rate</span><span class="o">));</span>
+      <span class="kt">float</span> <span class="n">bounce_height</span> <span class="o">=</span> <span class="n">sketch_height</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sin_value</span><span class="o">;</span>
+      <span class="kt">float</span> <span class="n">ball_height</span> <span class="o">=</span> <span class="n">sketch_height</span> <span class="o">-</span> <span class="o">(</span><span class="n">bounce_height</span> <span class="o">+</span> <span class="n">radius</span><span class="o">);</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">ball_height</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">ellipse</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">,</span><span class="n">radius</span><span class="o">,</span><span class="n">radius</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="sketch2" data-processing-sources="/processingjs-org/sketches/sketch2.pde" style="border: 1px solid blue;"></canvas>
+
+  <div>
+    <span style="font-size:80%">play controls:</span>
+    <button type="button" onclick="stop('sketch2')" class="Pomax">&#9632;</button>
+    <button type="button" onclick="play('sketch2')" class="Pomax">&#9654;</button>
+  </div>
+
+  <p>Instead of doing everything in the draw() function, the object oriented approach
+  tucks all the code that relates to computing the ball's position in the definition
+  for what we consider a "Ball". To be good object oriented programmers, we've also said
+  that things that are a Ball are also a Bouncer, and this lets us extend our sketch very
+  easily to instead of a bouncing ball, have a bouncing box by keeping almost everything
+  the same, and adding a new class Box that's a Bouncer:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="code"><pre>  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="n">bouncer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Box</span><span class="o">(</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">class</span> <span class="nc">Box</span> <span class="kd">implements</span> <span class="nc">Bouncer</span>
+  <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">,</span><span class="n">w</span><span class="o">,</span><span class="n">h</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">step</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+
+    <span class="nc">Box</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">w</span><span class="o">,</span> <span class="kt">int</span> <span class="n">h</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">w</span> <span class="o">=</span> <span class="n">w</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">computeNextStep</span><span class="o">(</span><span class="kt">int</span> <span class="n">sketch_width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sketch_height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">frame_rate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">step</span><span class="o">++;</span>
+    <span class="kt">float</span> <span class="n">sin_value</span> <span class="o">=</span> <span class="n">abs</span><span class="o">(</span><span class="n">sin</span><span class="o">(</span><span class="no">PI</span><span class="o">/</span><span class="mf">2.0</span> <span class="o">+</span> <span class="o">(</span><span class="no">PI</span><span class="o">*</span><span class="n">step</span><span class="o">/(</span><span class="kt">float</span><span class="o">)</span><span class="n">frame_rate</span><span class="o">)));</span>
+    <span class="kt">float</span> <span class="n">bounce_height</span> <span class="o">=</span> <span class="n">sketch_height</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sin_value</span><span class="o">;</span>
+    <span class="kt">float</span> <span class="n">ball_height</span> <span class="o">=</span> <span class="n">sketch_height</span> <span class="o">-</span> <span class="o">(</span><span class="n">bounce_height</span> <span class="o">+</span> <span class="n">h</span><span class="o">);</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">ball_height</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">rect</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">,</span><span class="n">w</span><span class="o">,</span><span class="n">h</span><span class="o">);</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="sketch3" data-processing-sources="/processingjs-org/sketches/sketch3.pde" style="border: 1px solid blue;"></canvas>
+
+  <div>
+    <span style="font-size:80%">play controls:</span>
+    <button type="button" onclick="stop('sketch3')" class="Pomax">&#9632;</button>
+    <button type="button" onclick="play('sketch3')" class="Pomax">&#9654;</button>
+  </div>
+
+  <p>All of a sudden we have a bouncing box, that starts from a falling position instead
+  of from the ground, and we didn't have to modify the master draw() function for it!
+  In fact, let's just use a group of bouncing things:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre>  <span class="nc">Bouncer</span><span class="o">[]</span> <span class="n">bouncer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bouncer</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+
+  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="n">bouncer</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Ball</span><span class="o">(</span><span class="n">width</span><span class="o">/</span><span class="mi">3</span><span class="o">-</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">);</span>
+    <span class="n">bouncer</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Box</span><span class="o">(</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">10</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">);</span>
+    <span class="n">bouncer</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Ball</span><span class="o">((</span><span class="mi">2</span><span class="o">*</span><span class="n">width</span><span class="o">/</span><span class="mi">3</span><span class="o">)+</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">bouncer</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">b</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span><span class="n">b</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">computeNextStep</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">frameRate</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">background</span><span class="o">(</span><span class="err">#</span><span class="no">FFFFEE</span><span class="o">);</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">bouncer</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">b</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span><span class="n">b</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">draw</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="o">...</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="sketch4" data-processing-sources="/processingjs-org/sketches/sketch4.pde" style="border: 1px solid blue;"></canvas>
+
+  <div>
+    <span style="font-size:80%">play controls:</span>
+    <button type="button" onclick="stop('sketch4')" class="Pomax">&#9632;</button>
+    <button type="button" onclick="play('sketch4')" class="Pomax">&#9654;</button>
+  </div>
+
+  <p>Fantastic, two bouncing balls and a bouncing box, bouncing counter-point to each
+  other. But it's not very interactive yet. Let's change it so that we can "hang on"
+  to bouncing things until we let go of them again. Processing allows interaction with
+  the keyboard and mouse, using what are known as "event handlers", methods that Processing
+  automatically calls for you when you use the keyboard or mouse. In this case we care
+  about mouse interaction, so we'll look at mousePressed and mouseReleased events:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+</pre></td><td class="code"><pre>  <span class="kt">void</span> <span class="nf">mousePressed</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">bouncer</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">b</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span><span class="n">b</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">mouseOver</span><span class="o">(</span><span class="n">mouseX</span><span class="o">,</span> <span class="n">mouseY</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">mousePressed</span><span class="o">();</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">mouseReleased</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">bouncer</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">b</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span><span class="n">b</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">mouseReleased</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Bouncer</span>
+  <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">canmove</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">computeNextStep</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">framerate</span><span class="o">);</span>
+    <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">draw</span><span class="o">();</span>
+    <span class="kd">abstract</span> <span class="kt">boolean</span> <span class="nf">mouseOver</span><span class="o">(</span><span class="kt">int</span> <span class="n">mx</span><span class="o">,</span> <span class="kt">int</span> <span class="n">my</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">mousePressed</span><span class="o">()</span> <span class="o">{</span> <span class="n">canmove</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kt">void</span> <span class="nf">mouseReleased</span><span class="o">()</span> <span class="o">{</span> <span class="n">canmove</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kd">class</span> <span class="nc">Ball</span> <span class="kd">extends</span> <span class="nc">Bouncer</span>
+  <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">radius</span><span class="o">;</span>
+
+    <span class="nc">Ball</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">r</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kt">void</span> <span class="nf">computeNextStep</span><span class="o">(</span><span class="kt">int</span> <span class="n">sketch_width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sketch_height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">frame_rate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">canmove</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">step</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)((</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">%</span> <span class="n">frame_rate</span><span class="o">);</span>
+      <span class="kt">float</span> <span class="n">sin_value</span> <span class="o">=</span> <span class="n">abs</span><span class="o">(</span><span class="n">sin</span><span class="o">(</span><span class="no">PI</span><span class="o">*</span><span class="n">step</span><span class="o">/(</span><span class="kt">float</span><span class="o">)</span><span class="n">frame_rate</span><span class="o">));</span>
+      <span class="kt">float</span> <span class="n">bounce_height</span> <span class="o">=</span> <span class="n">sketch_height</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sin_value</span><span class="o">;</span>
+      <span class="kt">float</span> <span class="n">ball_height</span> <span class="o">=</span> <span class="n">sketch_height</span> <span class="o">-</span> <span class="o">(</span><span class="n">bounce_height</span> <span class="o">+</span> <span class="n">radius</span><span class="o">);</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">ball_height</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span> <span class="n">ellipse</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">,</span><span class="n">radius</span><span class="o">,</span><span class="n">radius</span><span class="o">);</span> <span class="o">}</span>
+
+  <span class="kt">boolean</span> <span class="nf">mouseOver</span><span class="o">(</span><span class="kt">int</span> <span class="n">mx</span><span class="o">,</span> <span class="kt">int</span> <span class="n">my</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nf">sqrt</span><span class="o">((</span><span class="n">x</span><span class="o">-</span><span class="n">mx</span><span class="o">)*(</span><span class="n">x</span><span class="o">-</span><span class="n">mx</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">y</span><span class="o">-</span><span class="n">my</span><span class="o">)*(</span><span class="n">y</span><span class="o">-</span><span class="n">my</span><span class="o">))</span> <span class="o">&lt;=</span> <span class="n">radius</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">class</span> <span class="nc">Box</span> <span class="kd">extends</span> <span class="nc">Bouncer</span>
+  <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">w</span><span class="o">,</span><span class="n">h</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">step</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+
+    <span class="nc">Box</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">w</span><span class="o">,</span> <span class="kt">int</span> <span class="n">h</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">w</span> <span class="o">=</span> <span class="n">w</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">computeNextStep</span><span class="o">(</span><span class="kt">int</span> <span class="n">sketch_width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sketch_height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">frame_rate</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">canmove</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)((</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">%</span> <span class="n">frame_rate</span><span class="o">);</span>
+        <span class="kt">float</span> <span class="n">sin_value</span> <span class="o">=</span> <span class="n">abs</span><span class="o">(</span><span class="n">sin</span><span class="o">(</span><span class="no">PI</span><span class="o">/</span><span class="mf">2.0</span> <span class="o">+</span> <span class="o">(</span><span class="no">PI</span><span class="o">*</span><span class="n">step</span><span class="o">/(</span><span class="kt">float</span><span class="o">)</span><span class="n">frame_rate</span><span class="o">)));</span>
+        <span class="kt">float</span> <span class="n">bounce_height</span> <span class="o">=</span> <span class="n">sketch_height</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sin_value</span><span class="o">;</span>
+        <span class="kt">float</span> <span class="n">ball_height</span> <span class="o">=</span> <span class="n">sketch_height</span> <span class="o">-</span> <span class="o">(</span><span class="n">bounce_height</span> <span class="o">+</span> <span class="n">h</span><span class="o">);</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">ball_height</span><span class="o">);</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span> <span class="n">rect</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span><span class="n">w</span><span class="o">,</span><span class="n">h</span><span class="o">);</span> <span class="o">}</span>
+
+    <span class="kt">boolean</span> <span class="nf">mouseOver</span><span class="o">(</span><span class="kt">int</span> <span class="n">mx</span><span class="o">,</span> <span class="kt">int</span> <span class="n">my</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">x</span><span class="o">&lt;=</span><span class="n">mx</span> <span class="o">&amp;&amp;</span> <span class="n">mx</span><span class="o">&lt;=</span><span class="n">x</span><span class="o">+</span><span class="n">w</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">y</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">)&lt;=</span><span class="n">my</span> <span class="o">&amp;&amp;</span> <span class="n">my</span><span class="o">&lt;=(</span><span class="n">y</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="sketch5" data-processing-sources="/processingjs-org/sketches/sketch5.pde" style="border: 1px solid blue;"></canvas>
+
+  <div>
+    <span style="font-size:80%">play controls:</span>
+    <button type="button" onclick="stop('sketch5')" class="Pomax">&#9632;</button>
+    <button type="button" onclick="play('sketch5')" class="Pomax">&#9654;</button>
+  </div>
+
+  <p>Because the Ball and Box classes will do the same thing on mouse interaction,
+  the interface Bouncer has been changed to an actual class too, to take care of some of
+  the shared functionality. Now if you click on anything that's a Bouncer it'll stop
+  moving until you let it go. Let's go one step further an just allow us to move the
+  bouncing things around, too.</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+</pre></td><td class="code"><pre>  <span class="nc">Bouncer</span><span class="o">[]</span> <span class="n">bouncer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bouncer</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+
+  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">size</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">);</span>
+    <span class="n">frameRate</span><span class="o">(</span><span class="mi">24</span><span class="o">);</span>
+    <span class="n">stroke</span><span class="o">(</span><span class="err">#</span><span class="mo">003300</span><span class="o">);</span>
+    <span class="n">fill</span><span class="o">(</span><span class="err">#</span><span class="mo">0000</span><span class="no">FF</span><span class="o">);</span>
+    <span class="n">bouncer</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Ball</span><span class="o">(</span><span class="n">width</span><span class="o">/</span><span class="mi">3</span><span class="o">-</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">);</span>
+    <span class="n">bouncer</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Box</span><span class="o">(</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">10</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">);</span>
+    <span class="n">bouncer</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Ball</span><span class="o">((</span><span class="mi">2</span><span class="o">*</span><span class="n">width</span><span class="o">/</span><span class="mi">3</span><span class="o">)+</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">20</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">bouncer</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">b</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span><span class="n">b</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">computeNextStep</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">frameRate</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">background</span><span class="o">(</span><span class="err">#</span><span class="no">FFFFEE</span><span class="o">);</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">bouncer</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">b</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span><span class="n">b</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">draw</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">mousePressed</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">bouncer</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">b</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span><span class="n">b</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">mouseOver</span><span class="o">(</span><span class="n">mouseX</span><span class="o">,</span> <span class="n">mouseY</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">mousePressed</span><span class="o">();</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">mouseReleased</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">bouncer</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">b</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span><span class="n">b</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">mouseReleased</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">mouseDragged</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">bouncer</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">b</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span><span class="n">b</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">bouncer</span><span class="o">[</span><span class="n">b</span><span class="o">].</span><span class="na">mouseDragged</span><span class="o">(</span><span class="n">mouseX</span><span class="o">,</span> <span class="n">mouseY</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Bouncer</span>
+  <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">canmove</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">xoffset</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">yoffset</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kt">void</span> <span class="nf">computeNextStep</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">framerate</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">canmove</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">reallyComputeNextStep</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">framerate</span><span class="o">);</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">reallyComputeNextStep</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">framerate</span><span class="o">);</span>
+
+    <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">draw</span><span class="o">();</span>
+
+    <span class="kd">abstract</span> <span class="kt">boolean</span> <span class="nf">mouseOver</span><span class="o">(</span><span class="kt">int</span> <span class="n">mx</span><span class="o">,</span> <span class="kt">int</span> <span class="n">my</span><span class="o">);</span>
+
+    <span class="kt">void</span> <span class="nf">mousePressed</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">canmove</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">mouseReleased</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">canmove</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+      <span class="n">x</span> <span class="o">+=</span> <span class="n">xoffset</span><span class="o">;</span>
+      <span class="n">y</span> <span class="o">+=</span> <span class="n">yoffset</span><span class="o">;</span>
+      <span class="n">xoffset</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+      <span class="n">yoffset</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">mouseDragged</span><span class="o">(</span><span class="kt">int</span> <span class="n">mx</span><span class="o">,</span> <span class="kt">int</span> <span class="n">my</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">if</span><span class="o">(!</span><span class="n">canmove</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">xoffset</span> <span class="o">=</span> <span class="n">mx</span><span class="o">-</span><span class="n">x</span><span class="o">;</span>
+        <span class="n">yoffset</span> <span class="o">=</span> <span class="n">my</span><span class="o">-</span><span class="n">y</span><span class="o">;</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kd">class</span> <span class="nc">Ball</span> <span class="kd">extends</span> <span class="nc">Bouncer</span>
+  <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">radius</span><span class="o">;</span>
+
+    <span class="nc">Ball</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">r</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">reallyComputeNextStep</span><span class="o">(</span><span class="kt">int</span> <span class="n">sketch_width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sketch_height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">frame_rate</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">step</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)((</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">%</span> <span class="n">frame_rate</span><span class="o">);</span>
+      <span class="kt">float</span> <span class="n">sin_value</span> <span class="o">=</span> <span class="n">abs</span><span class="o">(</span><span class="n">sin</span><span class="o">(</span><span class="no">PI</span><span class="o">*</span><span class="n">step</span><span class="o">/(</span><span class="kt">float</span><span class="o">)</span><span class="n">frame_rate</span><span class="o">));</span>
+      <span class="kt">float</span> <span class="n">bounce_height</span> <span class="o">=</span> <span class="n">sketch_height</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sin_value</span><span class="o">;</span>
+      <span class="kt">float</span> <span class="n">ball_height</span> <span class="o">=</span> <span class="n">sketch_height</span> <span class="o">-</span> <span class="o">(</span><span class="n">bounce_height</span> <span class="o">+</span> <span class="n">radius</span><span class="o">);</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">ball_height</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span> <span class="n">ellipse</span><span class="o">(</span><span class="n">x</span><span class="o">+</span><span class="n">xoffset</span><span class="o">,</span><span class="n">y</span><span class="o">+</span><span class="n">yoffset</span><span class="o">,</span><span class="n">radius</span><span class="o">,</span><span class="n">radius</span><span class="o">);</span> <span class="o">}</span>
+
+    <span class="kt">boolean</span> <span class="nf">mouseOver</span><span class="o">(</span><span class="kt">int</span> <span class="n">mx</span><span class="o">,</span> <span class="kt">int</span> <span class="n">my</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="nf">sqrt</span><span class="o">((</span><span class="n">x</span><span class="o">-</span><span class="n">mx</span><span class="o">)*(</span><span class="n">x</span><span class="o">-</span><span class="n">mx</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">y</span><span class="o">-</span><span class="n">my</span><span class="o">)*(</span><span class="n">y</span><span class="o">-</span><span class="n">my</span><span class="o">))</span> <span class="o">&lt;=</span> <span class="n">radius</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kd">class</span> <span class="nc">Box</span> <span class="kd">extends</span> <span class="nc">Bouncer</span>
+  <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">w</span><span class="o">,</span><span class="n">h</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">step</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+
+    <span class="nc">Box</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">w</span><span class="o">,</span> <span class="kt">int</span> <span class="n">h</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">w</span> <span class="o">=</span> <span class="n">w</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">reallyComputeNextStep</span><span class="o">(</span><span class="kt">int</span> <span class="n">sketch_width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sketch_height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">frame_rate</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">step</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)((</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">%</span> <span class="n">frame_rate</span><span class="o">);</span>
+      <span class="kt">float</span> <span class="n">sin_value</span> <span class="o">=</span> <span class="n">abs</span><span class="o">(</span><span class="n">sin</span><span class="o">(</span><span class="no">PI</span><span class="o">/</span><span class="mf">2.0</span> <span class="o">+</span> <span class="o">(</span><span class="no">PI</span><span class="o">*</span><span class="n">step</span><span class="o">/(</span><span class="kt">float</span><span class="o">)</span><span class="n">frame_rate</span><span class="o">)));</span>
+      <span class="kt">float</span> <span class="n">bounce_height</span> <span class="o">=</span> <span class="n">sketch_height</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sin_value</span><span class="o">;</span>
+      <span class="kt">float</span> <span class="n">ball_height</span> <span class="o">=</span> <span class="n">sketch_height</span> <span class="o">-</span> <span class="o">(</span><span class="n">bounce_height</span> <span class="o">+</span> <span class="n">h</span><span class="o">);</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">ball_height</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span> <span class="n">rect</span><span class="o">(</span><span class="n">x</span><span class="o">+</span><span class="n">xoffset</span><span class="o">,(</span><span class="n">y</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">)+</span><span class="n">yoffset</span><span class="o">,</span><span class="n">w</span><span class="o">,</span><span class="n">h</span><span class="o">);</span> <span class="o">}</span>
+
+    <span class="kt">boolean</span> <span class="nf">mouseOver</span><span class="o">(</span><span class="kt">int</span> <span class="n">mx</span><span class="o">,</span> <span class="kt">int</span> <span class="n">my</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">x</span><span class="o">&lt;=</span><span class="n">mx</span> <span class="o">&amp;&amp;</span> <span class="n">mx</span><span class="o">&lt;=</span><span class="n">x</span><span class="o">+</span><span class="n">w</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">y</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">)&lt;=</span><span class="n">my</span> <span class="o">&amp;&amp;</span> <span class="n">my</span><span class="o">&lt;=(</span><span class="n">y</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="sketch6" data-processing-sources="/processingjs-org/sketches/mysketch.pde" style="border: 1px solid blue;"></canvas>
+
+  <div>
+    <span style="font-size:80%">play controls:</span>
+    <button type="button" onclick="stop('sketch6')" class="Pomax">&#9632;</button>
+    <button type="button" onclick="play('sketch6')" class="Pomax">&#9654;</button>
+  </div>
+
+  <p>And with that, on to the original topic of this article: using Processing on web pages</p>
+
+  <h3 id="onpage" onclick="toggleContent('onpage')">Putting a sketch on the page</h3>
+
+  <p>The great thing about Processing is that it can be used on webpages. Traditionally,
+  you would convert your sketch to a java applet, and embed that on a page, but the
+  processing.js project has changed this: you can now use your sketches directly without
+  turning it into an applet at all. In the same way that you include a javascript file,
+  or a CSS stylesheet, you can simply link to your sketch and magic happens.</p>
+
+  <p>Let's say we save the previous sketch, with the bouncing and the mouse interaction,
+  as "mysketch.pde", and we want to show this on a webpage. Using processing.js, this is
+  a trivially simple trick:</p>
+
+  <figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>  <span class="cp">&lt;!DOCTYPE html&gt;</span>
+  <span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+      <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;title&gt;</span>My Processing Page<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"processing.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+      <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"mysketch"</span> <span class="na">data-processing-sources=</span><span class="s">"/processingjs-org/sketches/mysketch.pde"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;/html&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="mysketch1" data-processing-sources="/processingjs-org/sketches/mysketch.pde" style="border: 1px solid blue;"></canvas>
+
+  <div>
+    <span style="font-size:80%">play controls:</span>
+    <button type="button" onclick="stop('mysketch1')" class="Pomax">&#9632;</button>
+    <button type="button" onclick="play('mysketch1')" class="Pomax">&#9654;</button>
+  </div>
+
+  <p>And we're done. In fact, I went ahead and made sure this page already uses processing.js,
+  and that there is a mysketch.pde to load. If you click on the play control for the sketch
+  above, it will start running, and do exactly what you would expect it to do based on what
+  it does when you run it from the Processing environment.</p>
+
+  <h3 id="inpage" onclick="toggleContent('inpage')">Putting a sketch inline on the page</h3>
+
+  <p>While not recommended, you can also put your sketch directly on a page, much like how
+  you can put javascript or CSS styles directly on a page. However, in order for processing.js
+  to properly load your code, you'll need some extra help in the form of the "init.js" file
+  that is included with the processing.js examples archive from the processing.js downloads page</p>
+
+  <figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre>  <span class="cp">&lt;!DOCTYPE html&gt;</span>
+  <span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+      <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;title&gt;</span>My Processing Page<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"processing.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/processing"</span> <span class="na">target=</span><span class="s">"mysketch"</span><span class="nt">&gt;</span>
+      <span class="k">void</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+      <span class="k">void</span> <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+      <span class="kd">class</span> <span class="nx">SomeClass</span> <span class="p">{</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+      <span class="nt">&lt;/script&gt;</span>
+      <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"mysketch"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;/html&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>There are several reasons for why this is not a very good practice, but the most important
+  one is that this way you can't be sure whether or not you've written a bug-free sketch. By
+  writing it directly on the page, you might in fact have written some buggy code, which you
+  will then find is terribly hard to debug because the browser is not equiped with a debugger
+  for Processing code. In fact, processing.js rewrites your sketch into pure javascript (using
+  some terribly clever tricks that we won't go into), so even if when it tells you where the
+  error is in a javascript debugger, it will tell you where it went wrong in the converted
+  javascript object, not the actual place in your source code. So keep it as a separate file,
+  and make sure to test your code in the Processing IDE!</p>
+
+  <h3 id="interface" onclick="toggleContent('interface')">Making your sketch and your page see each other</h3>
+
+  <p>Just running a sketch on a page is fine, but the benefit of a webpage is that it offers
+  the kind of user interaction that you can't get from within the sketch itself. Pretty buttons,
+  text areas that fold away, pop up, etc. make it very attractive to have your sketch do all
+  the animation graphicsy work, but have all the information about the sketch, as well as
+  controls for it, on the webpage. This is entirely possible - in fact, the "stop" and "play"
+  buttons for the sketch above are examples of javascript telling the sketch what to do. Because
+  a webpage offers more than a plain sketch can, processing.js has a few special tricks up its
+  sleeve, so that you can get the most out of your creative work. Arguably the most important of
+  these is the "get the sketch" function:</p>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>  <span class="kd">var</span> <span class="nx">mysketch</span> <span class="o">=</span> <span class="nx">Processing</span><span class="p">.</span><span class="nx">getInstanceById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mysketchid</span><span class="dl">'</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>This is the pivotal function on the javascript side of things. It gives you a direct reference
+  to your sketch, and everything in it, so that you can call any function and examine and modify
+  any variable that is in the sketch.</p>
+
+  <h3 id="jstosketch" onclick="toggleContent('jstosketch')">Making javascript see your sketch</h3>
+
+  <p>Let's say we have the following sketch:<p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre>  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">size</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">);</span>
+    <span class="n">noLoop</span><span class="o">();</span>						<span class="c1">// turn off animation, since we won't need it</span>
+    <span class="n">stroke</span><span class="o">(</span><span class="err">#</span><span class="no">FFEE88</span><span class="o">);</span>
+    <span class="n">fill</span><span class="o">(</span><span class="err">#</span><span class="no">FFEE88</span><span class="o">);</span>
+    <span class="n">background</span><span class="o">(</span><span class="err">#</span><span class="mo">000033</span><span class="o">);</span>
+    <span class="n">text</span><span class="o">(</span><span class="s">""</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>					<span class="c1">// force Processing to load a font</span>
+    <span class="n">textSize</span><span class="o">(</span><span class="mi">24</span><span class="o">);</span>					<span class="c1">// set the font size to something big</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">drawText</span><span class="o">(</span><span class="nc">String</span> <span class="n">t</span><span class="o">)</span>
+  <span class="o">{</span>
+    <span class="n">background</span><span class="o">(</span><span class="err">#</span><span class="mo">000033</span><span class="o">);</span>
+    <span class="c1">// get the width for the text</span>
+    <span class="kt">float</span> <span class="n">twidth</span> <span class="o">=</span> <span class="n">textWidth</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
+    <span class="c1">// place the text centered on the drawing area</span>
+    <span class="n">text</span><span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="n">width</span> <span class="o">-</span> <span class="n">twidth</span><span class="o">)/</span><span class="mi">2</span><span class="o">,</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>We can make this sketch draw a different text based on some text we have on our webpage,
+  using javascript. This is in fact really easy: first, let's save this processing code as
+  mysketch2.pde, and load it onto a page in the same way as earlier in the article. Then, we
+  use javascript to ask for our sketch instance, after which we call the "drawText" function
+  with some text that we get from the web page that the sketch is running on:</p>
+
+  <figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre>  <span class="cp">&lt;!DOCTYPE html&gt;</span>
+  <span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+      <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;title&gt;</span>My Processing Page<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"processing.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+      <span class="kd">function</span> <span class="nx">drawSomeText</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">pjs</span> <span class="o">=</span> <span class="nx">Processing</span><span class="p">.</span><span class="nx">getInstanceById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">inputtext</span><span class="dl">'</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+        <span class="nx">pjs</span><span class="p">.</span><span class="nx">drawText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span> <span class="p">}</span>
+      <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+      <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"mysketch2"</span> <span class="na">data-processing-sources=</span><span class="s">"/processingjs-org/sketches/mysketch2.pde"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"textfield"</span> <span class="na">value=</span><span class="s">"my text"</span> <span class="na">id=</span><span class="s">"inputtext"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">onclick=</span><span class="s">"drawSomeText('mysketch2')"</span><span class="nt">&gt;</span>place<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;/html&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>This has the same effect as the sketch that's running below. Simply fill in a bit
+  of text, and hit the &#9654; button to see the sketch render it on the drawing area.</p>
+
+  <canvas id="mysketch2" data-processing-sources="/processingjs-org/sketches/mysketch2.pde" style="border: 1px solid blue;"></canvas>
+
+  <div>
+    <span style="font-size:80%">set text:</span>
+    <input type="textfield" style="width: 6em;" value="My Text Here" id="ms2text">
+    <button type="button" onclick="drawText('mysketch2')" class="Pomax">&#9654;</button>
+  </div>
+
+  <p>So far so good, but what if we also want to make Processing code call javascript?
+  In order for us to so, while making sure the sketch keeps running both on your page an
+  in the Processing environment, we have to do a bit more work</p>
+
+  <h3 id="sketchtojs" onclick="toggleContent('sketchtojs')">Making your sketch "see" javascript</h3>
+
+  <p>You can't just stick plain javascript in your sketch and hope everything goes well
+  because it's "on a web page". A better approach is to neatly separate your sketch and
+  your on-page javascript, and ensure that whatever you want to do on your page runs
+  through a javascript function. How do we do that? Let's say we have the following page:</p>
+
+  <figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre>  <span class="cp">&lt;!DOCTYPE html&gt;</span>
+  <span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+      <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;title&gt;</span>My Processing Page<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"processing.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+      <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"mysketch3"</span> <span class="na">data-processing-sources=</span><span class="s">"/processingjs-org/sketches/mysketch3.pde"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"coordinates"</span><span class="nt">&gt;</span>
+        x/y: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"textfield"</span> <span class="na">id=</span><span class="s">"xcoord"</span><span class="nt">&gt;</span>/<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"textfield"</span> <span class="na">id=</span><span class="s">"ycoord"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;/html&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>And say we have the following sketch, which we'll save as mysketch3.pde:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre>  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">size</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">);</span>
+    <span class="n">stroke</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span>
+    <span class="n">background</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="n">noLoop</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">fill</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">40</span><span class="o">);</span>
+    <span class="n">rect</span><span class="o">(-</span><span class="mi">1</span><span class="o">,-</span><span class="mi">1</span><span class="o">,</span><span class="n">width</span><span class="o">+</span><span class="mi">2</span><span class="o">,</span><span class="n">height</span><span class="o">+</span><span class="mi">2</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="kt">void</span> <span class="nf">mouseMoved</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">line</span><span class="o">(</span><span class="n">mouseX</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">mouseX</span><span class="o">,</span><span class="n">height</span><span class="o">);</span>
+    <span class="n">line</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="n">mouseY</span><span class="o">,</span><span class="n">width</span><span class="o">,</span><span class="n">mouseY</span><span class="o">);</span>
+    <span class="n">redraw</span><span class="o">();</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>As an exercise, let's try to get the mouse coordinates from that mouseMoved event
+  onto the page. This means we'll need to define a javascript function that will do this for us:</p>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre>  <span class="kd">function</span> <span class="nx">showXYCoordinates</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">xcoord</span><span class="dl">'</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">ycoord</span><span class="dl">'</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+  <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>And we'll need to make the sketch know that there is such a thing as javascript,
+  and that it has this function:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre>  <span class="kd">interface</span> <span class="nc">JavaScript</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">showXYCoordinates</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">bindJavascript</span><span class="o">(</span><span class="nc">JavaScript</span> <span class="n">js</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">javascript</span> <span class="o">=</span> <span class="n">js</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="nc">JavaScript</span> <span class="n">javascript</span><span class="o">;</span>
+
+  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span> <span class="o">...}</span>
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+  <span class="kt">void</span> <span class="nf">mouseMoved</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">javascript</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>
+      <span class="n">javascript</span><span class="o">.</span><span class="na">showXYCoordinates</span><span class="o">(</span><span class="n">mouseX</span><span class="o">,</span> <span class="n">mouseY</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>What we've done is we've told Processing: <i>"There are things that follow the
+  JavaScript interface. This means that whatever else they can do, they'll have a
+  function called "showXYCoordinates" and that function takes two arguments, both of type int."</i>
+  - of course, the sketch will not magically know our on-page javascript, so we also
+  define a function that lets us tell the sketch what actually counts as javascript,
+  which is what the bindJavascript(...) function is for.</p>
+
+  <p>This leaves us with needing to make sure that we really do tell the sketch what
+  Javascript is, which we'll do as follows on the page:</p>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre>  <span class="kd">var</span> <span class="nx">bound</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">bindJavascript</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pjs</span> <span class="o">=</span> <span class="nx">Processing</span><span class="p">.</span><span class="nx">getInstanceById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mysketch3</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">pjs</span><span class="o">!=</span><span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">pjs</span><span class="p">.</span><span class="nx">bindJavascript</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+      <span class="nx">bound</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">bound</span><span class="p">)</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">bindJavascript</span><span class="p">,</span> <span class="mi">250</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">bindJavascript</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>This defines a function that checks whether processing.js has loaded our sketch yet.
+  If not, it tries again 250ms later. If the sketch is loaded, the reference to the sketch
+  is used to tell it what "javascript" should be. This is achieved by virtue of processing.js
+  trusting that you wrote valid code. As such, as long as you're on the javascript side of
+  things, you can pass the sketch whatever you like, and the sketch will trust that it conforms
+  to what the method says the type should be. In this case we pass the javascript "this" value
+  (which refers to the global javascript environment for the current window), and tell processing
+  <i>"this thing conforms to your JavaScript interface, so it has loads of things but the only
+  thing you need to be concerned about is whether or not it has a showXYCoordinates(int, int)
+  function, which it does."</i></p>
+
+  <p>So, our final sketch behaves like the sketch below, and our final page source looks like the following:</p>
+
+  <figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre></td><td class="code"><pre>  <span class="cp">&lt;!DOCTYPE html&gt;</span>
+  <span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+      <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;title&gt;</span>My Processing Page<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"processing.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+      <span class="kd">var</span> <span class="nx">bound</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+      <span class="kd">function</span> <span class="nx">bindJavascript</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">pjs</span> <span class="o">=</span> <span class="nx">Processing</span><span class="p">.</span><span class="nx">getInstanceById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mysketch3</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">pjs</span><span class="o">!=</span><span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">bindJavascript</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+          <span class="nx">bound</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">bound</span><span class="p">)</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">bindJavascript</span><span class="p">,</span> <span class="mi">250</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="nx">bindJavascript</span><span class="p">();</span>
+
+      <span class="kd">function</span> <span class="nx">showXYCoordinates</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">xcoord</span><span class="dl">'</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">ycoord</span><span class="dl">'</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+      <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"mysketch3"</span> <span class="na">data-processing-sources=</span><span class="s">"/processingjs-org/sketches/mysketch3.pde"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"coordinates"</span><span class="nt">&gt;</span>
+        x/y: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"textfield"</span> <span class="na">id=</span><span class="s">"xcoord"</span><span class="nt">&gt;</span>/<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"textfield"</span> <span class="na">id=</span><span class="s">"ycoord"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;/html&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="mysketch3" data-processing-sources="/processingjs-org/sketches/mysketch3.pde"></canvas>
+
+  <div>
+    x/y coordinates: <input type="textfield" id="xcoord" style="width: 3em;">/<input type="textfield" id="ycoord" style="width: 3em;">
+  </div>
+
+  <h3 name="jsobj" onclick="toggleContent('jsobj')">Passing complex objects from javascript to your sketch</h3>
+
+  <p>This leaves us with one last topic that we need to cover, simply because it's so common:
+  using an AJAX approach to get some data, and then passing that data, properly formatted, to your sketch.</p>
+
+  <h3 id="pobj" onclick="toggleContent('pobj')">Actually using Processing objects</h3>
+
+  <p>One interesting thing that processing.js allows us to do is to create objects as we defined them in
+  our sketch, in javascript, and then hand them over to the sketch to deal with. To give an example, let's
+  use the following sketch, which lets you draw points by clicking with the mouse, and links up all the
+  points with lines:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="code"><pre>  <span class="nc">ArrayList</span> <span class="n">points</span><span class="o">;</span>
+
+  <span class="nc">ArrayList</span> <span class="nf">getPoints</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">points</span><span class="o">;</span> <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">size</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">);</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">();</span>
+    <span class="n">noLoop</span><span class="o">();</span>
+    <span class="n">stroke</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
+    <span class="n">fill</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">background</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">,</span><span class="mi">255</span><span class="o">);</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">p</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">points</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">end</span><span class="o">;</span> <span class="n">p</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="nc">Point</span> <span class="n">pt</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Point</span><span class="o">)</span> <span class="n">points</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">p</span> <span class="o">&lt;</span> <span class="n">end</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">Point</span> <span class="n">next</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Point</span><span class="o">)</span> <span class="n">points</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+      <span class="n">line</span><span class="o">(</span><span class="n">pt</span><span class="o">.</span><span class="na">x</span><span class="o">,</span><span class="n">pt</span><span class="o">.</span><span class="na">y</span><span class="o">,</span><span class="n">next</span><span class="o">.</span><span class="na">x</span><span class="o">,</span><span class="n">next</span><span class="o">.</span><span class="na">y</span><span class="o">);</span> <span class="o">}</span>
+      <span class="n">pt</span><span class="o">.</span><span class="na">draw</span><span class="o">();</span> <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">mouseClicked</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">points</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="n">mouseX</span><span class="o">,</span><span class="n">mouseY</span><span class="o">));</span>
+    <span class="n">redraw</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kd">class</span> <span class="nc">Point</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">;</span>
+    <span class="nc">Point</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span><span class="o">=</span><span class="n">x</span><span class="o">;</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span><span class="o">=</span><span class="n">y</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span> <span class="n">ellipse</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">,</span><span class="mi">10</span><span class="o">,</span><span class="mi">10</span><span class="o">);</span> <span class="o">}</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="mysketch4" data-processing-sources="/processingjs-org/sketches/mysketch4.pde" style="border: 1px solid black;"></canvas>
+
+  <div>click to place points</div>
+
+  <p>We can also make javascript place some points for us, automatically, by using the following javascript:</p>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>  <span class="kd">function</span> <span class="nx">loadPoints</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">button</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pjs</span> <span class="o">=</span> <span class="nx">Processing</span><span class="p">.</span><span class="nx">getInstanceById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">pjs</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">();</span>
+    <span class="nx">points</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">pjs</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span>
+    <span class="nx">points</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">pjs</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">190</span><span class="p">));</span>
+    <span class="nx">points</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">pjs</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">190</span><span class="p">,</span><span class="mi">190</span><span class="p">));</span>
+    <span class="nx">points</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">pjs</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">190</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span>
+    <span class="nx">pjs</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+  <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="mysketch5" data-processing-sources="/processingjs-org/sketches/mysketch5.pde" style="border: 1px solid black;"></canvas>
+
+  <div>load points: <button type="button" id="loadPoints" onclick="loadPointsJS('mysketch5', this)">load</button></div>
+
+  <p>Because processing.js turns the sketch into actual javascript, every class we defined in it
+  can be created using <em>new pjs.ClassName(arguments,...)</em>.</p>
+
+  <h3 id="json" onclick="toggleContent('json')">JSON</h3>
+
+  <p>Another way to get data from javascript into a sketch is by way of a JSON description. JSON
+  is particulary interesting because javascript can read a JSON text string and immediately turn
+  it into a full-fledged javascript object. Let's look at our point-drawing sketch again, this
+  time with a dedicated "addPoint" method:<p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre></td><td class="code"><pre>  <span class="nc">ArrayList</span> <span class="n">points</span><span class="o">;</span>
+
+  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">size</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">);</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">background</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">,</span><span class="mi">255</span><span class="o">);</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">p</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">points</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">p</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span> <span class="n">p</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="nc">Point</span> <span class="n">pt</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Point</span><span class="o">)</span> <span class="n">points</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">p</span><span class="o">&lt;</span><span class="n">end</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Point</span> <span class="n">next</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Point</span><span class="o">)</span> <span class="n">points</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">line</span><span class="o">(</span><span class="n">pt</span><span class="o">.</span><span class="na">x</span><span class="o">,</span><span class="n">pt</span><span class="o">.</span><span class="na">y</span><span class="o">,</span><span class="n">next</span><span class="o">.</span><span class="na">x</span><span class="o">,</span><span class="n">next</span><span class="o">.</span><span class="na">y</span><span class="o">);</span> <span class="o">}</span>
+      <span class="n">pt</span><span class="o">.</span><span class="na">draw</span><span class="o">();</span> <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">mouseClicked</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">addPoint</span><span class="o">(</span><span class="n">mouseX</span><span class="o">,</span><span class="n">mouseY</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="nc">Point</span> <span class="nf">addPoint</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Point</span> <span class="n">pt</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">);</span>
+    <span class="n">points</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pt</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">pt</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">class</span> <span class="nc">Point</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">;</span>
+    <span class="nc">Point</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span><span class="o">=</span><span class="n">x</span><span class="o">;</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span><span class="o">=</span><span class="n">y</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">stroke</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
+      <span class="n">fill</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span>
+      <span class="n">ellipse</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">,</span><span class="mi">10</span><span class="o">,</span><span class="mi">10</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>Now what if -- instead of using mouse clicks, or predetermined javascript -- we want to
+  load points based on some data on a remote server? We change our web page so that it can deal
+  with JSON data from a remote server, and then make our javascript tell the sketch what to do:</p>
+
+  <figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre>  <span class="cp">&lt;!DOCTYPE html&gt;</span>
+  <span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+      <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;title&gt;</span>My Processing Page<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"processing.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+      <span class="kd">function</span> <span class="nx">drawPoints</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">pjs</span> <span class="o">=</span> <span class="nx">Processing</span><span class="p">.</span><span class="nx">getInstanceById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://thatfunkysite.com/serving/json.asp</span><span class="dl">"</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="dl">"</span><span class="s2">(</span><span class="dl">"</span><span class="o">+</span><span class="nx">json</span><span class="o">+</span><span class="dl">"</span><span class="s2">)</span><span class="dl">"</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// we know the JSON is an array of points, called "points"</span>
+          <span class="k">for</span><span class="p">(</span><span class="nx">p</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">end</span><span class="o">=</span><span class="nx">data</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">p</span><span class="o">&lt;</span><span class="nx">end</span><span class="p">;</span> <span class="nx">p</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">p</span><span class="p">];</span>
+            <span class="nx">pjs</span><span class="p">.</span><span class="nx">addPoint</span><span class="p">(</span><span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">point</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+      <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"mysketch5"</span> <span class="na">data-processing-sources=</span><span class="s">"/processingjs-org/sketches/mysketch5.pde"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"controller"</span><span class="nt">&gt;&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"loadPoints"</span> <span class="na">onclick=</span><span class="s">"loadPoints('mysketch5')"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;/html&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <canvas id="mysketch6" data-processing-sources="/processingjs-org/sketches/mysketch6.pde" style="border: 1px solid black;"></canvas>
+
+  <div>load points: <button type="button" id="loadPoints" onclick="loadPointsJSON('mysketch6', this)">load</button></div>
+
+  <p>The JSON that gets loaded in the example sketch in this section is the following:</p>
+
+  <pre>{ 'points' : [ {'x': 10 , 'y': 10},
+               {'x': 190 , 'y': 10},
+               {'x': 190 , 'y': 190},
+               {'x': 10, 'y': 190} ] }</pre>
+
+  <h3 id="xml" onclick="toggleContent('xml')">XML</h3>
+
+  <p>Another favourite is the XML document. This is where the Processing data type "XMLElement"
+  comes into play. Rather than trying to use javascript to parse the XML, we pass the xml data
+  straight on to our sketch, which will know exactly what to do with it:</p>
+
+  <canvas id="mysketch7" data-processing-sources="/processingjs-org/sketches/mysketch7.pde" style="border: 1px solid black;"></canvas>
+
+  <div>load points: <button type="button" id="loadPoints" onclick="loadPointsXML('mysketch7', this)">load</button></div>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>  <span class="kd">function</span> <span class="nx">loadPoints</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">button</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">button</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">disabled</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">pjs</span> <span class="o">=</span> <span class="nx">Processing</span><span class="p">.</span><span class="nx">getInstanceById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">xml</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://thatfunkysite.com/serving/getxml.php</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">pjs</span><span class="p">.</span><span class="nx">buildFromXML</span><span class="p">(</span><span class="nx">xml</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>And the handling in our sketch will look like this:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>  <span class="kt">void</span> <span class="nf">buildFromXML</span><span class="o">(</span><span class="nc">String</span> <span class="n">xml</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">XMLElement</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">XMLElement</span><span class="o">(</span><span class="n">xml</span><span class="o">);</span>
+    <span class="nc">XMLElement</span><span class="o">[]</span> <span class="n">xmlpoints</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="na">getChildren</span><span class="o">();</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">p</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="o">=</span><span class="n">xmlpoints</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">p</span><span class="o">&lt;</span><span class="n">end</span><span class="o">;</span> <span class="n">p</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="nc">XMLElement</span> <span class="n">xmlpoint</span> <span class="o">=</span> <span class="n">xmlpoints</span><span class="o">[</span><span class="n">p</span><span class="o">];</span>
+      <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">xmlpoint</span><span class="o">.</span><span class="na">getIntAttribute</span><span class="o">(</span><span class="s">"x"</span><span class="o">);</span>
+      <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">xmlpoint</span><span class="o">.</span><span class="na">getIntAttribute</span><span class="o">(</span><span class="s">"y"</span><span class="o">);</span>
+      <span class="n">points</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">));</span>
+    <span class="o">}</span>
+    <span class="n">redraw</span><span class="o">();</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>If the xml thus loaded looks like the following snippet, the sketch will behave in
+  the way the sketch below does:</p>
+
+  <figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>  <span class="nt">&lt;xml&gt;</span>
+    <span class="nt">&lt;point</span> <span class="na">x=</span><span class="s">'10'</span> <span class="na">y=</span><span class="s">'10'</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;point</span> <span class="na">x=</span><span class="s">'190'</span> <span class="na">y=</span><span class="s">'50'</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;point</span> <span class="na">x=</span><span class="s">'10'</span> <span class="na">y=</span><span class="s">'90'</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;point</span> <span class="na">x=</span><span class="s">'190'</span> <span class="na">y=</span><span class="s">'140'</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;point</span> <span class="na">x=</span><span class="s">'10'</span> <span class="na">y=</span><span class="s">'190'</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/xml&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <h3 id="svg" onclick="toggleContent('svg')">SVG</h3>
+
+  <p>A special kind of XML document is the SVG Scalable Vector Graphics document. What's
+  special about it is that it already represents visual data, and Processing can load SVG
+  XML natively.</p>
+
+  <canvas id="mysketch8" data-processing-sources="/processingjs-org/sketches/mysketch8.pde"></canvas>
+
+  <div>drawing with SVG</div>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+</pre></td><td class="code"><pre>  <span class="nc">XMLElement</span> <span class="n">svgxml</span><span class="o">;</span>
+  <span class="nc">PShape</span> <span class="n">ps</span><span class="o">;</span>
+  <span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+  <span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+  <span class="kt">int</span> <span class="n">xoffset</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+  <span class="kt">int</span> <span class="n">yoffset</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+  <span class="kt">int</span> <span class="n">xmark</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+  <span class="kt">int</span> <span class="n">ymark</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+
+  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">size</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">);</span>
+    <span class="n">noLoop</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">background</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span>
+    <span class="n">stroke</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">px</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">px</span><span class="o">&lt;</span><span class="n">width</span><span class="o">;</span> <span class="n">px</span><span class="o">+=</span><span class="mi">10</span><span class="o">)</span> <span class="o">{</span> <span class="n">line</span><span class="o">(</span><span class="n">px</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">px</span><span class="o">);</span> <span class="o">}</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">py</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">py</span><span class="o">&lt;</span><span class="n">height</span><span class="o">;</span> <span class="n">py</span><span class="o">+=</span><span class="mi">10</span><span class="o">)</span> <span class="o">{</span> <span class="n">line</span><span class="o">(</span><span class="n">width</span><span class="o">,</span><span class="n">py</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">py</span><span class="o">+</span><span class="n">height</span><span class="o">);</span> <span class="o">}</span>
+    <span class="n">stroke</span><span class="o">(</span><span class="err">#</span><span class="mo">000066</span><span class="o">);</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">py</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">py</span><span class="o">&lt;</span><span class="n">height</span><span class="o">;</span><span class="n">py</span><span class="o">+=</span><span class="mi">10</span><span class="o">)</span> <span class="o">{</span> <span class="n">line</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="n">py</span><span class="o">,</span><span class="n">width</span><span class="o">,</span><span class="n">py</span><span class="o">);</span> <span class="o">}</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">ps</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="n">shape</span><span class="o">(</span><span class="n">ps</span><span class="o">,</span><span class="n">x</span><span class="o">-</span><span class="n">xoffset</span><span class="o">,</span><span class="n">y</span><span class="o">-</span><span class="n">yoffset</span><span class="o">,</span><span class="mi">200</span><span class="o">,</span><span class="mi">200</span><span class="o">);</span> <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">mousePressed</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">xmark</span> <span class="o">=</span> <span class="n">mouseX</span><span class="o">;</span>
+    <span class="n">ymark</span> <span class="o">=</span> <span class="n">mouseY</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">mouseDragged</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">xoffset</span> <span class="o">=</span> <span class="n">xmark</span><span class="o">-</span><span class="n">mouseX</span><span class="o">;</span>
+    <span class="n">yoffset</span> <span class="o">=</span> <span class="n">ymark</span><span class="o">-</span><span class="n">mouseY</span><span class="o">;</span>
+    <span class="n">redraw</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">mouseReleased</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">xoffset</span><span class="o">!=</span><span class="mi">0</span> <span class="o">||</span> <span class="n">yoffset</span><span class="o">!=</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">x</span> <span class="o">-=</span> <span class="n">xoffset</span><span class="o">;</span>
+      <span class="n">y</span> <span class="o">-=</span> <span class="n">yoffset</span><span class="o">;</span>
+      <span class="n">xoffset</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+      <span class="n">yoffset</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+      <span class="nc">XMLElement</span> <span class="n">path</span> <span class="o">=</span> <span class="n">svgxml</span><span class="o">.</span><span class="na">getChild</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+      <span class="n">path</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"fill"</span><span class="o">,</span><span class="n">getNextColor</span><span class="o">());</span>
+      <span class="n">bindSVG</span><span class="o">(</span><span class="n">svgxml</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="nc">String</span><span class="o">[]</span> <span class="n">colors</span> <span class="o">=</span> <span class="o">{</span><span class="s">"#f0f8ff"</span><span class="o">,</span><span class="s">"#faebd7"</span><span class="o">,</span><span class="s">"#00ffff"</span><span class="o">,</span><span class="s">"..."</span><span class="o">,</span> <span class="o">...,</span> <span class="o">...</span> <span class="o">};</span>
+  <span class="kt">int</span> <span class="n">color_len</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+  <span class="kt">int</span> <span class="n">current_color</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+  <span class="nc">String</span> <span class="nf">getNextColor</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">current_color</span> <span class="o">=</span> <span class="o">(</span><span class="n">current_color</span><span class="o">+</span><span class="mi">1</span><span class="o">)%</span><span class="n">color_len</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">colors</span><span class="o">[</span><span class="n">current_color</span><span class="o">];</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">buildFromSVG</span><span class="o">(</span><span class="nc">String</span> <span class="n">svg</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">svgxml</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">XMLElement</span><span class="o">(</span><span class="n">svg</span><span class="o">);</span>
+    <span class="n">bindSVG</span><span class="o">(</span><span class="n">svgxml</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">bindSVG</span><span class="o">(</span><span class="nc">XMLElement</span> <span class="n">svg</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ps</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PShapeSVG</span><span class="o">(</span><span class="n">svgxml</span><span class="o">);</span>
+    <span class="n">redraw</span><span class="o">();</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>This sketch will load the following SVG code, and allows you to click on the shape to
+  change its color, or click-drag it to move it around:</p>
+
+  <figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre>  <span class="nt">&lt;svg</span> <span class="na">width=</span><span class="s">'200'</span> <span class="na">height=</span><span class="s">'200'</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">'M 10 10 L 190 10 L 140 100 L 190 190 L 10 190 L 50 100 L 10 10 M 100 80 L 140 30 L 50 30 L 100 80 M 100 120 L 50 170 L 140 170 Z'</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/svg&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <h3 id="jobjs" onclick="toggleContent('jobjs')">Javascript Objects</h3>
+
+  <p>One last thing you may want to pass to a sketch is a real javascript object. Say we have
+  a physics library that we want to take advantage of in our sketch, and for Processing it's a
+  .jar file, but there's a javascript version too. This thing lets us create a javascript "Physics"
+  object that we can call functions on for computing momentum and force transfer when we make
+  two things hit each other. Since processing.js does not support .jar libraries (because it's
+  precompiled binary java class code, and pjs cannot unpack a jar file, reverse engineer the
+  .java source, transform it to Processing API calls, then confirm all calls are supported) we'll
+  use this convenient javascript library. But how to do this cleanly? </p>
+
+  <p>We have to do three things:</p>
+
+  <ol>
+    <li>Write an interface for the object we're using, so our sketch will know what it even is,</li>
+    <li>use a javascript binding so that we can ask javascript to make these objects for us, and</li>
+    <li>write a javascript function to make these objects for us.</li>
+  </ol>
+
+  <p>So let's get cracking! First we determine which functions in the javascript Physics object
+  we actually make use of. We could write an interface that has correct method signatures for
+  every function in the library, but this would be overkill. After reviewing our code we see
+  that we actually only make use of three of the objects functions: collide_objects(forcevector1,
+  forcevector2, collisionangle), get_force_vector(startpoint, distancevector, accelleration) and
+  get_trajectory(startpoint, objectmass, initialvector, gravityvector, gravitystrength).
+  Let's build our interface:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>  <span class="kd">interface</span> <span class="nc">Physics</span>
+  <span class="o">{</span>
+    <span class="c1">// collision modifies the two force vectors in place. Nothing is returned.</span>
+    <span class="kt">void</span> <span class="nf">collide_objects</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">forcevector1</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">forcevector2</span><span class="o">,</span> <span class="kt">float</span> <span class="n">collisionangle</span><span class="o">);</span>
+
+    <span class="c1">// get force vector returns a force vector</span>
+    <span class="kt">float</span><span class="o">[]</span> <span class="nf">get_force_vector</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">startpoint</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">distancevector</span><span class="o">,</span> <span class="kt">float</span> <span class="n">accelleration</span><span class="o">);</span>
+
+    <span class="c1">// trajectory calculation returns a curve, represented as a lest of 2D coordinates</span>
+    <span class="kt">float</span><span class="o">[][]</span> <span class="nf">get_trajectory</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">startpoint</span><span class="o">,</span> <span class="kt">float</span> <span class="n">objectmass</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">initialvector</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">gravityvector</span><span class="o">,</span> <span class="kt">float</span> <span class="n">gravitystrength</span><span class="o">);</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>First job done. Now to bind javascript. We've already looked at how to do this, so just follow
+  the standard procedure and job's a good'n. In addition to whatever javascript functions you want
+  to expose, however, we must add one more:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>  <span class="kd">interface</span> <span class="nc">JavaScript</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="nc">Physics</span> <span class="nf">buildPhysicsObject</span><span class="o">([</span><span class="n">properly</span> <span class="n">typed</span> <span class="n">variables</span> <span class="n">to</span> <span class="n">match</span> <span class="n">the</span> <span class="n">javascript</span> <span class="n">constructor</span><span class="o">]);</span>
+    <span class="o">...</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>Finally, we now make use of our purely javascript library in our js file(s):</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre>  <span class="n">function</span> <span class="nf">buildPhysicsObject</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">someothervar</span><span class="o">)</span>
+  <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">Physics</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">,</span><span class="n">someothervar</span><span class="o">);</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>This last step seems silly, but we have to delegate the task of building a javascript object
+  to javascript. If we tried to do this inside our sketch, processing.js will not complain, but
+  Processing will. To make matters worse, it also obscures the point of failure: if something
+  goes wrong in the sketch, did it go wrong because processing.js has a bug, or because you were
+  sloppy with javascript inside a Processing sketch? Golden rule: keep the different languages
+  separated as much as possible.</p>
+
+  <p>We're almost set to use our javascript library for Processing purposes now. The only thing
+  left is to create these objects and then use them in our sketch:</p>
+
+  <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+</pre></td><td class="code"><pre>  <span class="kd">class</span> <span class="nc">MassBody</span>
+  <span class="o">{</span>
+    <span class="c1">// a class for bodies with mass that travel with some speed and are located at some x/y position</span>
+    <span class="kt">float</span><span class="o">[]</span> <span class="n">forceVector</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span> <span class="c1">// 2 dimensional vector;</span>
+    <span class="kt">int</span> <span class="no">XDIM</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">// index constant</span>
+    <span class="kt">int</span> <span class="no">YDIM</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>  <span class="c1">// index constant</span>
+    <span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">// position</span>
+    <span class="kt">float</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">// position</span>
+    <span class="nc">MassBody</span><span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span> <span class="n">forceVector</span><span class="o">[</span><span class="no">XDIM</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">forceVector</span><span class="o">[</span><span class="no">YDIM</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span><span class="o">=</span><span class="n">x</span><span class="o">;</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span><span class="o">=</span><span class="n">y</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span> <span class="cm">/* draws the body */</span> <span class="o">}</span>
+    <span class="kt">float</span><span class="o">[]</span> <span class="nf">getForce</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">forceVector</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kt">void</span> <span class="nf">impartForce</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">stimulus</span><span class="o">)</span> <span class="o">{</span> <span class="n">forceVector</span><span class="o">[</span><span class="no">XDIM</span><span class="o">]</span> <span class="o">+=</span> <span class="n">stimulus</span><span class="o">[</span><span class="no">XDIM</span><span class="o">];</span> <span class="n">forceVector</span><span class="o">[</span><span class="no">YDIM</span><span class="o">]</span> <span class="o">+=</span> <span class="n">stimulus</span><span class="o">[</span><span class="no">YDIM</span><span class="o">];</span> <span class="o">}</span>
+    <span class="kt">void</span> <span class="nf">updatePosition</span><span class="o">()</span> <span class="o">{</span> <span class="n">x</span><span class="o">+=...;</span> <span class="n">y</span><span class="o">+=...;</span> <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="nc">MassBody</span> <span class="n">body1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MassBody</span><span class="o">(...);</span>
+  <span class="nc">MassBody</span> <span class="n">body2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MassBody</span><span class="o">(...);</span>
+
+  <span class="nc">Phsyics</span> <span class="n">physicsObject</span>
+
+  <span class="kt">void</span> <span class="nf">bindJavascript</span><span class="o">(</span><span class="nc">JavaScript</span> <span class="n">js</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">javascript</span> <span class="o">=</span> <span class="n">js</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">float</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">9</span><span class="o">;</span>
+    <span class="nc">String</span><span class="o">[]</span> <span class="n">somevalues</span> <span class="o">=</span> <span class="o">{</span><span class="s">"scalar"</span><span class="o">,</span> <span class="s">"vector"</span><span class="o">,</span> <span class="s">"tensor"</span><span class="o">};</span>
+    <span class="n">physicsObject</span> <span class="o">=</span> <span class="n">javascript</span><span class="o">.</span><span class="na">buildPhysicsObject</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">,</span><span class="n">somevalues</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span>
+  <span class="o">{</span>
+  <span class="o">...</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span>
+  <span class="o">{</span>
+    <span class="c1">// if the two bodies collide, compute the resultant forces</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">body1</span><span class="o">.</span><span class="na">collides</span><span class="o">(</span><span class="n">body2</span><span class="o">))</span>
+    <span class="o">{</span>
+      <span class="c1">// forces are recomputed in place</span>
+      <span class="kt">float</span> <span class="n">angle_12</span> <span class="o">=</span> <span class="n">body1</span><span class="o">.</span><span class="na">getAngleTo</span><span class="o">(</span><span class="n">body2</span><span class="o">);</span>
+      <span class="n">physicsObject</span><span class="o">.</span><span class="na">collide_objects</span><span class="o">(</span><span class="n">body1</span><span class="o">.</span><span class="na">getForce</span><span class="o">(),</span> <span class="n">body2</span><span class="o">.</span><span class="na">getForce</span><span class="o">(),</span> <span class="n">angle_12</span><span class="o">);</span>
+      <span class="n">body1</span><span class="o">.</span><span class="na">updatePosition</span><span class="o">();</span>
+      <span class="n">body2</span><span class="o">.</span><span class="na">updatePosition</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="n">body1</span><span class="o">.</span><span class="na">draw</span><span class="o">();</span>
+    <span class="n">body2</span><span class="o">.</span><span class="na">draw</span><span class="o">();</span>
+  <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>And we're done! </p>
+
+  <h3 id="graphic" onclick="toggleContent('graphic')">Processing.js as javascript graphics library</h3>
+
+  <p>As last point of business, you can of course also use Processing.js as a pure graphics
+  library, by invoking it for some canvas and then calling Processing API calls directly. Let's
+  jump right in! The following code is what you would write on-page, although of course as ever
+  it's far better practice to link to your source files, so you should really place what's in
+  the script tags in a file myPjsSketch.js and link to it using src="..." instead.</p>
+
+  <p>The following code is split up into multiple (numbered) sections.</p>
+
+  <ol>
+    <li>
+      <p>First, bind a new Processing instance to the indicated canvas.</p>
+
+      <figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>      <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"glibcanvas"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+      <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">glibcanvas</span><span class="dl">'</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">pjs</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Processing</span><span class="p">(</span><span class="nx">canvas</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+    </li>
+
+    <li>
+      <p>The setup() function defines the entry point for our sketch. It sizes the canvas, and
+      tells it not to animate by default.</p>
+
+      <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>        <span class="c1">// let's write a sketch</span>
+        <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="c1">// Definition for the initial entry point</span>
+        <span class="nx">pjs</span><span class="p">.</span><span class="nx">setup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+          <span class="c1">// we want to turn off animation, because this is a demo page and it</span>
+          <span class="c1">// would use cpu while not being looked at. Only draw on mousemoves</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">noLoop</span><span class="p">();</span>
+        <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+    </li>
+
+    <li>
+      <p>The draw() function defines the main draw function, which is called whenever a frame
+      update is requested (either because the sketch is looping, or because redraw() is called manually)</p>
+
+      <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre>        <span class="c1">// Draw a "sine wave" using two bezier curves, with an undulating amplitude.</span>
+        <span class="nx">pjs</span><span class="p">.</span><span class="nx">draw</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="c1">// partially clear, by overlaying a semi-transparent rect</span>
+          <span class="c1">// with background color</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">noStroke</span><span class="p">();</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">75</span><span class="p">);</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+          <span class="c1">// draw the "sine wave"</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">stroke</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">noFill</span><span class="p">();</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">bezier</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span><span class="mi">100</span><span class="o">+</span><span class="nx">value</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span><span class="mi">100</span><span class="o">+</span><span class="nx">value</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">bezier</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span><span class="mi">100</span><span class="o">+-</span><span class="nx">value</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span><span class="mi">100</span><span class="o">+-</span><span class="nx">value</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+        <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+    </li>
+
+    <li>
+      <p>The mouseMoved() function is a Processing event handler that is triggered by the
+      mouse moving around over the canvas. It is far more convenient to
+      use the built-in event handler than to write our own.</p>
+
+      <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre>        <span class="nx">pjs</span><span class="p">.</span><span class="nx">mouseMoved</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">value</span> <span class="o">=</span> <span class="p">(</span> <span class="nx">pjs</span><span class="p">.</span><span class="nx">mouseY</span><span class="o">-</span><span class="mi">100</span><span class="p">);</span>
+          <span class="nx">pjs</span><span class="p">.</span><span class="nx">redraw</span><span class="p">();</span>
+        <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+    </li>
+
+    <li>
+      <p>This is all we need in our sketch, so there's only one call left to make:</p>
+
+      <figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre>        // Finally, calling setup() will kickstart the sketch
+        pjs.setup();
+      }());
+      <span class="nt">&lt;/script&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+    </li>
+  </ol>
+
+  <p>So let's see that in action - the code that we just ran through is supposed to draw
+  a sinewave, with an amplitude that depends on where the mouse is on the canvas. If all
+  went well, it will look like this:</p>
+
+  <canvas id="glibcanvas" style="border: 1px solid black;"></canvas>
+
+  <script type="text/javascript">
+  (function(){
+
+    var canvas = document.getElementById('glibcanvas');
+    var pjs = new Processing(canvas, function(p) {});
+
+    // let's write a sketch
+    var value=0;
+    // Definition for the initial entry point
+    pjs.setup = function() {
+     pjs.size(200,200);
+     // we want to turn off animation, because this is a demo page and it
+     // would use cpu while not being looked at. Only draw on mousemoves
+     pjs.noLoop();
+     pjs.background(255);
+     pjs.fill(0,150);
+     var s = "mouseOver to make things happen";
+     pjs.text(s, (200-pjs.textWidth(s))/2, 100); }
+     // Definition of the frame drawing function This will draw a
+     // "sine wave" using two bezier curves, with an undulating amplitude.
+     pjs.draw = function() {
+       pjs.beginDraw();
+       // partially clear, by overlaying a semi-transparent rect
+       // with background color
+       pjs.noStroke();
+       pjs.fill(255,75);
+       pjs.rect(0,0,200,200);
+       // draw the "sine wave"
+       pjs.stroke(100,100,200);
+       pjs.noFill();
+       pjs.bezier(0,100, 33,100+value, 66,100+value, 100,100);
+       pjs.bezier(100,100, 133,100+-value, 166,100+-value, 200,100);
+       pjs.endDraw();
+     }
+
+     pjs.mouseMoved = function() {
+       value = (pjs.mouseY-100);
+       pjs.redraw();
+     }
+
+     // Finally, calling setup() will kickstart the sketch
+     pjs.setup();
+     })();
+  </script>
+
+  <h3 id="more" onclick="toggleContent('more')">More information</h3>
+
+  <p> This guide was brought to you by Mike "Pomax" Kamermans.</b>
+
+  <p>For more information, you can visit the following websites, or visit us in the
+  #processing.js IRC channel on irc.mozilla.org.</p>
+
+  <ul>
+    <li><a href="/processingjs-org/learning/">learning</li>
+    <li><a href="/processingjs-org/articles/jsQuickStart.html">Processing.js Quick Start - JavaScript Developer Edition</a></li>
+    <li><a href="/processingjs-org/articles/p5QuickStart.html">Processing.js Quick Start - Processing Developer Edition</a></li>
+  </ul>
+
+</div>
+
+        </div>
+        <div class="sidebar span4">
+          <h3><a href="/processingjs-org/download/">Downloads</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/download/">Download the latest version of Processing.js!</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/articles/">Articles</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/articles/jsQuickStart.html">Quick Start - JavaScript Developer</a></li>
+            <li><a href="/processingjs-org/articles/p5QuickStart.html">Quick Start - Processing Developer</a></li>
+            <li><a href="/processingjs-org/articles/RenderingModes.html">Rendering Modes</a></li>
+            <li><a href="/processingjs-org/articles/PomaxGuide.html">Pomax's Guide to processing-js</a></li>
+          </ul>
+
+          <h3><a>Web IDEs</a></h3>
+          <ul>
+            <li><a href="http://sketchpad.cc">Sketchpad.cc</a></li>
+            <li><a href="/processingjs-org/tools/processing-helper.html">Processing.js Helper</a></li>
+            <li><a href="http://www.openprocessing.org">OpenProcessing.org</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/community/">Community</a></h3>
+          <ul>
+            <li><a href="irc://irc.mozilla.org/processing.js">IRC Channel</a></li>
+            <li><a href="http://processing-js.lighthouseapp.com/">Bug Tracker</a></li>
+            <li><a href="http://github.com/processing-js/processing-js/">Github Repository</a></li>
+            <li><a href="http://groups.google.com/group/processingjs">Google Group</a></li>
+            <li><a href="http://zenit.senecac.on.ca/wiki/index.php/">Open Source @ Seneca</a></li>
+          </ul>
+
+          <h3><a href="http://twitter.com/processingjs">Twitter Feed</a></h3>
+          <div class="twitter"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Processing is an open visualization language developed by
+        <a href="http://benfry.com/">Ben Fry</a> &amp; <a href="http://reas.com/">Casey Reas</a>,
+        and originally ported to Javascript by
+        <a href="http://ejohn.org/blog/processingjs/">John Resig</a>.
+        Processing.js is maintained by the Processing.js team.
+      </div>
+    </div>
+    <a href="http://github.com/processing-js/processing-js/">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="/processingjs-org/images/forkme-right-orange.png" alt="Fork me on GitHub">
+    </a>
+  </body>
+</html>

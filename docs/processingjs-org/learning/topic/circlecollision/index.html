@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Processing.js</title>
+    <link rel="stylesheet" href="/processingjs-org/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/syntax.css" type="text/css" />
+    <link rel="stylesheet" href="/processingjs-org/css/processing-js.css" type="text/css" />
+    <script src="/processingjs-org/js/processing.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/jquery.tweet.min.js" type="text/javascript"></script>
+    <script src="/processingjs-org/js/tabselector.js" type="text/javascript"></script>
+    <script src="http://cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
+    <script type="text/javascript">
+      // Only do tracking on the actual site
+      if (document.location.host === "processingjs.org") {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-8565070-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        }());
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <a href="/processingjs-org/"><img src="/processingjs-org/images/header.png" width="177" height="42"></a>
+      </div>
+      <span class="tagline">a port of the Processing Visualization Language</span>
+
+      <div class="navbar">
+        <canvas width="940px" height="78px" data-processing-sources="/processingjs-org/sketches/bannerSketch.pde"></canvas>
+        <ul>
+          <li><a href="/processingjs-org/"><span>home</span></a></li>
+          <li><a href="/processingjs-org/download/"><span>download</span></a></li>
+          <li><a href="/processingjs-org/reference/"><span>reference</span></a></li>
+          <li><a href="/processingjs-org/exhibition/"><span>exhibition</span></a></li>
+          <li><a href="/processingjs-org/learning/"><span>learning</span></a></li>
+          <li><a href="/processingjs-org/articles/"><span>articles</span></a></li>
+          <li><a href="/processingjs-org/community/"><span>community</span></a></li>
+          <li><a href="/processingjs-org/blog/"><span>blog</span></a></li>
+        </ul>
+        <a class="viewsource" href="/processingjs-org/sketches/bannerSketch.pde">view source</a>
+      </div>
+
+      <div class="page row">
+        <div class="span11">
+<h3>CircleCollision</h3>
+
+
+
+<p>by Ira Greenberg. 
+
+
+
+Based on Keith Peter's Solution in
+
+Foundation Actionscript Animation:
+
+Making Things Move!
+
+http://www.friendsofed.com/book.html?isbn=1590597915</p>
+
+
+
+<p><a href="http://processing.org/learning/topics/circlecollision.html"><b>Original Processing.org Example:</b> CircleCollision</a><br>
+
+<div class="learning-demo"><script type="application/processing">
+
+Ball[] balls =  { 
+
+  new Ball(100, 400, 10), 
+
+  new Ball(700, 400, 40) 
+
+  };
+
+
+
+Vect2D[] vels = { 
+
+  new Vect2D(2.15, -1.35), 
+
+  new Vect2D(-1.65, .42) 
+
+  };
+
+
+
+void setup(){
+
+  size(200, 200);
+
+  smooth();
+
+  noStroke();
+
+}
+
+
+
+void draw(){
+
+  background(51);
+
+  fill(204);
+
+  for (int i=0; i< 2; i++){
+
+    balls[i].x += vels[i].vx;
+
+    balls[i].y += vels[i].vy;
+
+    ellipse(balls[i].x, balls[i].y, balls[i].r*2, balls[i].r*2);
+
+    checkBoundaryCollision(balls[i], vels[i]);
+
+  }
+
+  checkObjectCollision(balls, vels);
+
+}
+
+
+
+void checkObjectCollision(Ball[] b, Vect2D[] v){
+
+
+
+  // get distances between the balls components
+
+  Vect2D bVect = new Vect2D();
+
+  bVect.vx = b[1].x - b[0].x;
+
+  bVect.vy = b[1].y - b[0].y;
+
+
+
+  // calculate magnitude of the vector separating the balls
+
+  float bVectMag = sqrt(bVect.vx * bVect.vx + bVect.vy * bVect.vy);
+
+  if (bVectMag < b[0].r + b[1].r){
+
+    // get angle of bVect
+
+    float theta  = atan2(bVect.vy, bVect.vx);
+
+    // precalculate trig values
+
+    float sine = sin(theta);
+
+    float cosine = cos(theta);
+
+
+
+    /* bTemp will hold rotated ball positions. You 
+
+     just need to worry about bTemp[1] position*/
+
+    Ball[] bTemp = {  
+
+      new Ball(), new Ball()      };
+
+    /* b[1]'s position is relative to b[0]'s
+
+     so you can use the vector between them (bVect) as the 
+
+     reference point in the rotation expressions.
+
+     bTemp[0].x and bTemp[0].y will initialize
+
+     automatically to 0.0, which is what you want
+
+     since b[1] will rotate around b[0] */
+
+    bTemp[1].x  = cosine * bVect.vx + sine * bVect.vy;
+
+    bTemp[1].y  = cosine * bVect.vy - sine * bVect.vx;
+
+
+
+    // rotate Temporary velocities
+
+    Vect2D[] vTemp = { 
+
+      new Vect2D(), new Vect2D()     };
+
+    vTemp[0].vx  = cosine * v[0].vx + sine * v[0].vy;
+
+    vTemp[0].vy  = cosine * v[0].vy - sine * v[0].vx;
+
+    vTemp[1].vx  = cosine * v[1].vx + sine * v[1].vy;
+
+    vTemp[1].vy  = cosine * v[1].vy - sine * v[1].vx;
+
+
+
+    /* Now that velocities are rotated, you can use 1D
+
+     conservation of momentum equations to calculate 
+
+     the final velocity along the x-axis. */
+
+    Vect2D[] vFinal = {  
+
+      new Vect2D(), new Vect2D()      };
+
+    // final rotated velocity for b[0]
+
+    vFinal[0].vx = ((b[0].m - b[1].m) * vTemp[0].vx + 2 * b[1].m * 
+
+      vTemp[1].vx) / (b[0].m + b[1].m);
+
+    vFinal[0].vy = vTemp[0].vy;
+
+    // final rotated velocity for b[0]
+
+    vFinal[1].vx = ((b[1].m - b[0].m) * vTemp[1].vx + 2 * b[0].m * 
+
+      vTemp[0].vx) / (b[0].m + b[1].m);
+
+    vFinal[1].vy = vTemp[1].vy;
+
+
+
+    // hack to avoid clumping
+
+    bTemp[0].x += vFinal[0].vx;
+
+    bTemp[1].x += vFinal[1].vx;
+
+
+
+    /* Rotate ball positions and velocities back
+
+     Reverse signs in trig expressions to rotate 
+
+     in the opposite direction */
+
+    // rotate balls
+
+    Ball[] bFinal = { 
+
+      new Ball(), new Ball()     };
+
+    bFinal[0].x = cosine * bTemp[0].x - sine * bTemp[0].y;
+
+    bFinal[0].y = cosine * bTemp[0].y + sine * bTemp[0].x;
+
+    bFinal[1].x = cosine * bTemp[1].x - sine * bTemp[1].y;
+
+    bFinal[1].y = cosine * bTemp[1].y + sine * bTemp[1].x;
+
+
+
+    // update balls to screen position
+
+    b[1].x = b[0].x + bFinal[1].x;
+
+    b[1].y = b[0].y + bFinal[1].y;
+
+    b[0].x = b[0].x + bFinal[0].x;
+
+    b[0].y = b[0].y + bFinal[0].y;
+
+
+
+    // update velocities
+
+    v[0].vx = cosine * vFinal[0].vx - sine * vFinal[0].vy;
+
+    v[0].vy = cosine * vFinal[0].vy + sine * vFinal[0].vx;
+
+    v[1].vx = cosine * vFinal[1].vx - sine * vFinal[1].vy;
+
+    v[1].vy = cosine * vFinal[1].vy + sine * vFinal[1].vx;
+
+  }
+
+}
+
+
+
+class Ball{
+
+  float x, y, r, m;
+
+
+
+  // default constructor
+
+  Ball() {
+
+  }
+
+
+
+  Ball(float x, float y, float r) {
+
+    this.x = x;
+
+    this.y = y;
+
+    this.r = r;
+
+    m = r*.1;
+
+  }
+
+}
+
+
+
+class Vect2D{
+
+  float vx, vy;
+
+
+
+  // default constructor
+
+  Vect2D() {
+
+  }
+
+
+
+  Vect2D(float vx, float vy) {
+
+    this.vx = vx;
+
+    this.vy = vy;
+
+  }
+
+}
+
+
+
+// checkBoundaryCollision() function:
+
+void checkBoundaryCollision(Ball ball, Vect2D vel){
+
+  if (ball.x > width-ball.r){
+
+    ball.x = width-ball.r;
+
+    vel.vx *= -1;
+
+  } 
+
+  else if (ball.x < ball.r){
+
+    ball.x = ball.r;
+
+    vel.vx *= -1;
+
+  } 
+
+  else if (ball.y > height-ball.r){
+
+    ball.y = height-ball.r;
+
+    vel.vy *= -1;
+
+  } 
+
+  else if (ball.y < ball.r){
+
+    ball.y = ball.r;
+
+    vel.vy *= -1;
+
+  }
+
+}
+
+</script><canvas width="200" height="200"></canvas></div></p>
+
+<div style="height:0px;width:0px;overflow:hidden;"></div>
+
+
+
+<div class="code"><pre name="code" class="processing">// All Examples Written by Casey Reas and Ben Fry
+
+// unless otherwise stated.
+
+Ball[] balls =  { 
+
+  new Ball(100, 400, 10), 
+
+  new Ball(700, 400, 40) 
+
+  };
+
+
+
+Vect2D[] vels = { 
+
+  new Vect2D(2.15, -1.35), 
+
+  new Vect2D(-1.65, .42) 
+
+  };
+
+
+
+void setup(){
+
+  size(200, 200);
+
+  smooth();
+
+  noStroke();
+
+}
+
+
+
+void draw(){
+
+  background(51);
+
+  fill(204);
+
+  for (int i=0; i&lt; 2; i++){
+
+    balls[i].x += vels[i].vx;
+
+    balls[i].y += vels[i].vy;
+
+    ellipse(balls[i].x, balls[i].y, balls[i].r*2, balls[i].r*2);
+
+    checkBoundaryCollision(balls[i], vels[i]);
+
+  }
+
+  checkObjectCollision(balls, vels);
+
+}
+
+
+
+void checkObjectCollision(Ball[] b, Vect2D[] v){
+
+
+
+  // get distances between the balls components
+
+  Vect2D bVect = new Vect2D();
+
+  bVect.vx = b[1].x - b[0].x;
+
+  bVect.vy = b[1].y - b[0].y;
+
+
+
+  // calculate magnitude of the vector separating the balls
+
+  float bVectMag = sqrt(bVect.vx * bVect.vx + bVect.vy * bVect.vy);
+
+  if (bVectMag &lt; b[0].r + b[1].r){
+
+    // get angle of bVect
+
+    float theta  = atan2(bVect.vy, bVect.vx);
+
+    // precalculate trig values
+
+    float sine = sin(theta);
+
+    float cosine = cos(theta);
+
+
+
+    /* bTemp will hold rotated ball positions. You 
+
+     just need to worry about bTemp[1] position*/
+
+    Ball[] bTemp = {  
+
+      new Ball(), new Ball()      };
+
+    /* b[1]'s position is relative to b[0]'s
+
+     so you can use the vector between them (bVect) as the 
+
+     reference point in the rotation expressions.
+
+     bTemp[0].x and bTemp[0].y will initialize
+
+     automatically to 0.0, which is what you want
+
+     since b[1] will rotate around b[0] */
+
+    bTemp[1].x  = cosine * bVect.vx + sine * bVect.vy;
+
+    bTemp[1].y  = cosine * bVect.vy - sine * bVect.vx;
+
+
+
+    // rotate Temporary velocities
+
+    Vect2D[] vTemp = { 
+
+      new Vect2D(), new Vect2D()     };
+
+    vTemp[0].vx  = cosine * v[0].vx + sine * v[0].vy;
+
+    vTemp[0].vy  = cosine * v[0].vy - sine * v[0].vx;
+
+    vTemp[1].vx  = cosine * v[1].vx + sine * v[1].vy;
+
+    vTemp[1].vy  = cosine * v[1].vy - sine * v[1].vx;
+
+
+
+    /* Now that velocities are rotated, you can use 1D
+
+     conservation of momentum equations to calculate 
+
+     the final velocity along the x-axis. */
+
+    Vect2D[] vFinal = {  
+
+      new Vect2D(), new Vect2D()      };
+
+    // final rotated velocity for b[0]
+
+    vFinal[0].vx = ((b[0].m - b[1].m) * vTemp[0].vx + 2 * b[1].m * 
+
+      vTemp[1].vx) / (b[0].m + b[1].m);
+
+    vFinal[0].vy = vTemp[0].vy;
+
+    // final rotated velocity for b[0]
+
+    vFinal[1].vx = ((b[1].m - b[0].m) * vTemp[1].vx + 2 * b[0].m * 
+
+      vTemp[0].vx) / (b[0].m + b[1].m);
+
+    vFinal[1].vy = vTemp[1].vy;
+
+
+
+    // hack to avoid clumping
+
+    bTemp[0].x += vFinal[0].vx;
+
+    bTemp[1].x += vFinal[1].vx;
+
+
+
+    /* Rotate ball positions and velocities back
+
+     Reverse signs in trig expressions to rotate 
+
+     in the opposite direction */
+
+    // rotate balls
+
+    Ball[] bFinal = { 
+
+      new Ball(), new Ball()     };
+
+    bFinal[0].x = cosine * bTemp[0].x - sine * bTemp[0].y;
+
+    bFinal[0].y = cosine * bTemp[0].y + sine * bTemp[0].x;
+
+    bFinal[1].x = cosine * bTemp[1].x - sine * bTemp[1].y;
+
+    bFinal[1].y = cosine * bTemp[1].y + sine * bTemp[1].x;
+
+
+
+    // update balls to screen position
+
+    b[1].x = b[0].x + bFinal[1].x;
+
+    b[1].y = b[0].y + bFinal[1].y;
+
+    b[0].x = b[0].x + bFinal[0].x;
+
+    b[0].y = b[0].y + bFinal[0].y;
+
+
+
+    // update velocities
+
+    v[0].vx = cosine * vFinal[0].vx - sine * vFinal[0].vy;
+
+    v[0].vy = cosine * vFinal[0].vy + sine * vFinal[0].vx;
+
+    v[1].vx = cosine * vFinal[1].vx - sine * vFinal[1].vy;
+
+    v[1].vy = cosine * vFinal[1].vy + sine * vFinal[1].vx;
+
+  }
+
+}
+
+
+
+class Ball{
+
+  float x, y, r, m;
+
+
+
+  // default constructor
+
+  Ball() {
+
+  }
+
+
+
+  Ball(float x, float y, float r) {
+
+    this.x = x;
+
+    this.y = y;
+
+    this.r = r;
+
+    m = r*.1;
+
+  }
+
+}
+
+
+
+class Vect2D{
+
+  float vx, vy;
+
+
+
+  // default constructor
+
+  Vect2D() {
+
+  }
+
+
+
+  Vect2D(float vx, float vy) {
+
+    this.vx = vx;
+
+    this.vy = vy;
+
+  }
+
+}
+
+
+
+// checkBoundaryCollision() function:
+
+void checkBoundaryCollision(Ball ball, Vect2D vel){
+
+  if (ball.x &gt; width-ball.r){
+
+    ball.x = width-ball.r;
+
+    vel.vx *= -1;
+
+  } 
+
+  else if (ball.x &lt; ball.r){
+
+    ball.x = ball.r;
+
+    vel.vx *= -1;
+
+  } 
+
+  else if (ball.y &gt; height-ball.r){
+
+    ball.y = height-ball.r;
+
+    vel.vy *= -1;
+
+  } 
+
+  else if (ball.y &lt; ball.r){
+
+    ball.y = ball.r;
+
+    vel.vy *= -1;
+
+  }
+
+}</pre></div>
+
+
+
+
+
+
+        </div>
+        <div class="sidebar span4">
+          <h3><a href="/processingjs-org/download/">Downloads</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/download/">Download the latest version of Processing.js!</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/articles/">Articles</a></h3>
+          <ul>
+            <li><a href="/processingjs-org/articles/jsQuickStart.html">Quick Start - JavaScript Developer</a></li>
+            <li><a href="/processingjs-org/articles/p5QuickStart.html">Quick Start - Processing Developer</a></li>
+            <li><a href="/processingjs-org/articles/RenderingModes.html">Rendering Modes</a></li>
+            <li><a href="/processingjs-org/articles/PomaxGuide.html">Pomax's Guide to processing-js</a></li>
+          </ul>
+
+          <h3><a>Web IDEs</a></h3>
+          <ul>
+            <li><a href="http://sketchpad.cc">Sketchpad.cc</a></li>
+            <li><a href="/processingjs-org/tools/processing-helper.html">Processing.js Helper</a></li>
+            <li><a href="http://www.openprocessing.org">OpenProcessing.org</a></li>
+          </ul>
+
+          <h3><a href="/processingjs-org/community/">Community</a></h3>
+          <ul>
+            <li><a href="irc://irc.mozilla.org/processing.js">IRC Channel</a></li>
+            <li><a href="http://processing-js.lighthouseapp.com/">Bug Tracker</a></li>
+            <li><a href="http://github.com/processing-js/processing-js/">Github Repository</a></li>
+            <li><a href="http://groups.google.com/group/processingjs">Google Group</a></li>
+            <li><a href="http://zenit.senecac.on.ca/wiki/index.php/">Open Source @ Seneca</a></li>
+          </ul>
+
+          <h3><a href="http://twitter.com/processingjs">Twitter Feed</a></h3>
+          <div class="twitter"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Processing is an open visualization language developed by
+        <a href="http://benfry.com/">Ben Fry</a> &amp; <a href="http://reas.com/">Casey Reas</a>,
+        and originally ported to Javascript by
+        <a href="http://ejohn.org/blog/processingjs/">John Resig</a>.
+        Processing.js is maintained by the Processing.js team.
+      </div>
+    </div>
+    <a href="http://github.com/processing-js/processing-js/">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="/processingjs-org/images/forkme-right-orange.png" alt="Fork me on GitHub">
+    </a>
+  </body>
+</html>
