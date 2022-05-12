@@ -55,7 +55,7 @@ located in `/exhibition/_posts/`. I've created a template exhibition in
 
     <span>
       <a href="linktodemo">
-        <img src="/processingjs-org/images/exhibition/linktoimage.png" width="180" height="75" />
+        <img src="/Essentials/processingjs-org/images/exhibition/linktoimage.png" width="180" height="75" />
       </a>
       <br /><a href="linktodemo">Demoname</a><br />by<br />
       <p><a href="linktotwitter">Authors</a></p>
