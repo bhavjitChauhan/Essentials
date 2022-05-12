@@ -2,6 +2,6 @@
 node_modules
 out
 
-/live-editor
+/dev/live-editor
 
 essentials-proto.js
