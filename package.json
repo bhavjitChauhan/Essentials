@@ -43,7 +43,7 @@
     "chai": "^4.3.4",
     "chalk": "^4.1.1",
     "concurrently": "^6.2.0",
-    "eslint": "^7.31.0",
+    "eslint": "^8.15.0",
     "inline-remote-assets": "^0.7.0",
     "jsdoc": "^3.6.7",
     "jsdoc-mermaid": "^1.0.0",
