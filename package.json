@@ -41,7 +41,7 @@
     "@rollup/plugin-multi-entry": "^4.1.0",
     "better-docs": "^2.7.2",
     "chai": "^4.3.6",
-    "chalk": "^4.1.1",
+    "chalk": "^4.1.2",
     "concurrently": "^6.2.0",
     "eslint": "^7.31.0",
     "inline-remote-assets": "^0.7.0",
